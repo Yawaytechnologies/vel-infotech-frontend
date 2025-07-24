@@ -8,8 +8,8 @@ function App() {
 
   return (
     <div className="bg-white">
-      <MultiRowHeader />
-    {/* <Header/> */}
+      {/* <MultiRowHeader /> */}
+    <Header/>
     <Home/>
       
     </div>
