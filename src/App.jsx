@@ -1,16 +1,18 @@
-import { useState } from "react";
-
-
+import React from "react";
+import Home from "./pages/Home";
+import Header from "./components/common/header";
+import MultiRowHeader from "../src/components/common/MultiHeader";
 
 function App() {
 
 
   return (
-    <>
-      <div class="bg-background text-green-800 border-l-4 text-bold border-green-500 mt-50 text-center p-2 rounded">
-        ✅ Success: I am Sridhar. created by sowjanya
-      </div>
-    </>
+    <div className="bg-white">
+      <MultiRowHeader />
+    {/* <Header/> */}
+    <Home/>
+      
+    </div>
   );
 }
 
