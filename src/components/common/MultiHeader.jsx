@@ -3,7 +3,7 @@ import {
   FaInstagram, FaLinkedin, FaYoutube, FaFacebookF, FaPhoneAlt, FaUserCircle, FaBars, FaSearch, FaTimes,
 } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-
+import logobr from "../../assets/logbr.png";
 // --- MENU ITEMS FOR SIDEBAR ---
 const menuItems = [
   { name: "Recommended Courses", expandable: true },
@@ -61,14 +61,14 @@ export default function ResponsiveHeader() {
         {/* 3. Logo + Search + Phone */}
         <div className="w-full bg-white px-4 py-4 flex flex-wrap items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="ACTE Logo" className="h-12 w-auto object-contain" />
+           <img src={logobr} alt="ACTE Logo" className="h-12 w-auto object-contain" />
           </div>
           <div className="flex items-center flex-1 max-w-xl mx-6">
             <select className="border border-gray-300 bg-gray-100 rounded-l px-3 py-2 outline-none text-gray-700 font-medium">
               <option>Chennai</option>
               <option>Bangalore</option>
               <option>Hyderabad</option>
-              <option>Mumbai</option>
+             
             </select>
             <input
               type="text"
@@ -78,9 +78,9 @@ export default function ResponsiveHeader() {
           </div>
           <div className="flex items-center gap-8">
             <div className="flex flex-col items-center">
-              <FaPhoneAlt className="text-blue-700 mb-1" size={22} />
+              <FaPhoneAlt className="text-blue-700 mb-1" size={10} />
               <span className="font-bold text-gray-700">Online Enquiry</span>
-              <span className="text-blue-700 font-semibold text-lg">+91-7669 100 251</span>
+              <span className="text-blue-700 font-semibold text-lg">+919600593838</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="font-bold text-gray-700">Chennai</span>
@@ -95,7 +95,7 @@ export default function ResponsiveHeader() {
 
         {/* 4. Menu Bar */}
         <nav className="w-full bg-[#1b5c3c] px-4 py-3">
-          <ul className="flex flex-wrap gap-6 items-center justify-center text-white font-semibold text-lg">
+          <ul className="flex flex-wrap gap-12 items-center justify-center text-white font-semibold text-md">
            
             <li className="hover:underline hover:text-[#ffda3c] cursor-pointer">All Courses</li>
             <li className="hover:underline hover:text-[#ffda3c] cursor-pointer">Corporate Training</li>
