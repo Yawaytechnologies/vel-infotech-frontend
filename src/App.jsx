@@ -9,13 +9,14 @@ import PlacedStudents from "./pages/placedStudents";
 
 import MultiRowHeader from "../src/components/common/MultiHeader";
 
+import Footer from "./components/common/Footer";
 function App() {
 
 
   return (
     <Router>
     <div className="bg-white">
-      {/* <MultiRowHeader /> */}
+    
     <Header/>
 
     <Routes>
