@@ -1,16 +1,16 @@
 import React from "react";
 import Home from "./pages/Home";
 import Header from "./components/common/header";
-import MultiRowHeader from "../src/components/common/MultiHeader";
-
+import Footer from "./components/common/Footer";
 function App() {
 
 
   return (
     <div className="bg-white">
-      {/* <MultiRowHeader /> */}
+    
     <Header/>
     <Home/>
+    <Footer/>
       
     </div>
   );
