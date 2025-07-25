@@ -3,6 +3,9 @@ import HeroSection from '../components/home/Hero'
 import WhyChooseUs from '../components/home/Whychooseus'
 import LanguageStack from '../components/home/LanguageStack'
 import AboutUs from '../components/home/AboutUs'
+import PopularCoursesSection from '../components/home/PopularCourses'
+import FAQSection from '../components/home/Faq'
+
 function Home () {
   return (
     <div className='bg-white'>
@@ -10,7 +13,8 @@ function Home () {
       <AboutUs />
       <WhyChooseUs />
       <LanguageStack />
-      
+      <PopularCoursesSection />
+      <FAQSection />
     </div>
   )
 }
