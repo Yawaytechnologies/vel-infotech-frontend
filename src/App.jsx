@@ -15,7 +15,7 @@ function App() {
       {/* <MultiRowHeader /> */}
     <Header/>
     <Home/>
-      
+      <PlacedStudents />
     </div>
   );
 }
