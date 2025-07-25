@@ -16,7 +16,7 @@ const roleDataColumns = [
     { role: "Data Analysts", count: "532+" },
     { role: "Fullstack Developers", count: "680+" },
     { role: "Python Developers", count: "440+" },
-    { role: "Java Developers", count: "250+", },
+    { role: "Java Developers", count: "250+" },
     { role: "Software Testers", count: "623+" },
     { role: "Data Scientists", count: "701+" },
     { role: "AWS Engineers", count: "378+" },
@@ -66,9 +66,9 @@ const PlacedStudents = () => {
             <p className="text-gray-700 mt-4 leading-relaxed">
               With the growing number of graduates and the insufficient demand
               in IT field, candidates now need to learn techniques and usage of
-              upcoming technologies that are utilized by these MNC’s...
-              With the growing number of graduates and the insufficient demand
-              in IT field, candidates now need to learn techniques and usage of
+              upcoming technologies that are utilized by these MNC’s... With the
+              growing number of graduates and the insufficient demand in IT
+              field, candidates now need to learn techniques and usage of
               upcoming technologies that are utilized by these MNC’s...
             </p>
           </div>
@@ -79,49 +79,48 @@ const PlacedStudents = () => {
             <p className="text-gray-700 mt-4 leading-relaxed">
               At Vel infotech , we have trainers that are experts in the
               corresponding field. Our trainers are major professionals, who
-              have worked or are still working in a well-reputed MNC...
-              With the growing number of graduates and the insufficient demand
-              in IT field, candidates now need to learn techniques and usage of
+              have worked or are still working in a well-reputed MNC... With the
+              growing number of graduates and the insufficient demand in IT
+              field, candidates now need to learn techniques and usage of
               upcoming technologies that are utilized by these MNC’s...
             </p>
           </div>
         </div>
       </div>
 
-     {/* Category Cards Section with Framer Motion */}
-<div className="max-w-6xl mx-auto px-4 pb-16">
-  <h2 className="text-2xl sm:text-3xl font-semibold text-center text-green-800 mb-8">
-    Placement Categories
-  </h2>
+      {/* Category Cards Section with Framer Motion */}
+      <div className="max-w-6xl mx-auto px-4 pb-16">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-center text-green-800 mb-8">
+          Placement Categories
+        </h2>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    {categoryData.map((item, index) => (
-      <motion.div
-        key={item.id}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{
-          duration: 0.5,
-          delay: index * 0.1,
-          ease: "easeOut",
-        }}
-        whileHover={{ scale: 1.05 }}
-        className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 text-center cursor-pointer"
-      >
-        <h3 className="text-lg font-semibold text-gray-800 mb-3">
-          {item.label}
-        </h3>
-        <div className="flex justify-center">
-          <span className="inline-block px-3 py-1 rounded-full bg-yellow-300 text-sm font-bold text-gray-800">
-            {item.count}
-          </span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {categoryData.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 text-center cursor-pointer"
+            >
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                {item.label}
+              </h3>
+              <div className="flex justify-center">
+                <span className="inline-block px-3 py-1 rounded-full bg-yellow-300 text-sm font-bold text-gray-800">
+                  {item.count}
+                </span>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
-    ))}
-  </div>
-</div>
-
+      </div>
 
       {/* Role-based Placements */}
       <div className="max-w-6xl mx-auto px-4 pb-20">
