@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiChevronDown, FiChevronRight } from "react-icons/fi";
-import Logo from "../../assets/infotech.png";
+import Logo from "../../assets/infotech.svg";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -54,16 +54,17 @@ export default function Header() {
 
   return (
     <>
-      {/* Main Header */}
-      <header className="fixed top-0 w-full z-50 bg-background  border-b border-white/20">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center h-18">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="h-15 w-auto object-contain"
-            />
+     {/* Main Header */}
+<header className="fixed top-0 w-full z-50 bg-background border-b border-white/20">
+  <div className="flex items-center justify-between">
+    {/* Logo */}
+    <div className="flex items-center h-18 pt-2">
+      <img
+        src={Logo}
+        alt="Logo"
+        className="h-20 w-auto object-contain"
+      />
+
             <span className="text-2xl font-bold text-primary font-poppins tracking-widest ml-2 select-none">
               Vel <span className="text-[#005BAC]">InfoTech</span>
             </span>

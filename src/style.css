@@ -46,3 +46,76 @@ body {
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .animate-fadeIn { animation: fadeIn 0.3s; }
+
+/* BANNER SECTION */
+
+@layer utilities {
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-up {
+    animation: fade-up 1s ease-out forwards;
+  }
+
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  @keyframes blink {
+    0%, 100% {
+      border-color: transparent;
+    }
+    50% {
+      border-color: black;
+    }
+  }
+
+  .typewriter {
+    overflow: hidden;
+    border-right: 2px solid black;
+    white-space: nowrap;
+    animation: typewriter 4s steps(60, end) 1s 1 normal both, blink 0.7s step-end infinite;
+  }
+
+  @keyframes signature {
+    0% {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-signature {
+    animation: signature 1.2s ease-out 4.5s forwards;
+    transform-origin: left;
+    opacity: 0;
+    transform: scaleX(0);
+  }
+}
+
