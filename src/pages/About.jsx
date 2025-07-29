@@ -1,5 +1,5 @@
 import React from 'react';
-import tr from "../assets/training.jpg";
+import tr from "../assets/training1.png";
 
 const About = () => {
   return (
@@ -14,7 +14,7 @@ const About = () => {
       Welcome to Vel InfoTech
     </h1>
     <div className="flex flex-col md:flex-row items-center justify-between">
-  <p className="text-lg sm:text-xl mb-8 md:mb-0 md:w-1/2">
+   <p className="text-lg sm:text-xl mb-8 md:mb-0 md:w-1/2">
       Founded with a vision to bridge the gap between ambition and achievement, Vel InfoTech is a leading training institute dedicated to equipping individuals with the skills, knowledge, and confidence to succeed in today's competitive world.
     </p>
     <img
@@ -30,7 +30,7 @@ const About = () => {
 
       <section className="py-16 bg-[#e0f7fa]">
   <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-3xl font-semibold text-gray-800 mb-6">Our Achievements</h2>
+    <h2 className="text-3xl font-semibold text-gray-800 mb-6">Why Choose Us</h2>
     <p className="text-lg text-gray-600 mb-12">
       We are proud of the impact we’ve made and the milestones we've achieved over the years. Here's a glimpse into what we’ve accomplished so far:
     </p>
@@ -38,32 +38,32 @@ const About = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
       {/* Accomplishment 1 */}
       <div className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-  <h3 className="text-2xl font-bold text-white">10,000+</h3>
-  <p className="text-gray-200">Students Trained</p>
+  <h3 className="text-2xl font-bold text-white">Expert Trainers with Real-World Experience</h3>
+  
 </div>
 
       {/* Accomplishment 2 */}
        <div className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-  <h3 className="text-2xl font-bold text-white">10,000+</h3>
-  <p className="text-gray-200">Industry Awards</p>
+  <h3 className="text-2xl font-bold text-white">Flexible Learning Modes (Classroom / Online )</h3>
+  
 </div>
 
       {/* Accomplishment 3 */}
        <div className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-  <h3 className="text-2xl font-bold text-white">10,000+</h3>
-  <p className="text-gray-200">Corporate Par</p>
+  <h3 className="text-2xl font-bold text-white">Practical, Job-Ready Curriculum</h3>
+  
 </div>
 
       {/* Accomplishment 4 */}
        <div className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-  <h3 className="text-2xl font-bold text-white">10,000+</h3>
-  <p className="text-gray-200">Students Placed in Top Tech Companies</p>
+  <h3 className="text-2xl font-bold text-white">Resume Building & Interview Preparation</h3>
+  
 </div>
     </div>
 
     <div className="mt-12">
       <p className="text-xl text-gray-600">
-        "We’ve trained over 10,000 students and partnered with leading tech companies like Microsoft and Google to bring industry-specific certifications to our courses."
+        All our courses are led by industry experts and backed by practical training, hands-on projects, and career support.
       </p>
     </div>
   </div>
@@ -79,7 +79,7 @@ const About = () => {
 
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
       {/* Impact 1 */}
-      <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+      <div className="bg-gradient-to-r from-orange-400 via-yellow-300 to-yellow-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
         <h3 className="text-4xl font-bold text-[#0066cc]">90%</h3>
         <p className="text-xl text-gray-700 mt-2">Graduates Secured Jobs</p>
         <p className="text-gray-600 mt-4">
@@ -88,7 +88,7 @@ const About = () => {
       </div>
 
       {/* Impact 2 */}
-      <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+      <div className="bg-gradient-to-r from-orange-400 via-yellow-300 to-yellow-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
         <h3 className="text-4xl font-bold text-[#0066cc]">40%</h3>
         <p className="text-xl text-gray-700 mt-2">Average Salary Increase</p>
         <p className="text-gray-600 mt-4">
@@ -97,7 +97,7 @@ const About = () => {
       </div>
 
       {/* Impact 3 */}
-      <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+      <div className="bg-gradient-to-r from-orange-400 via-yellow-300 to-yellow-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
         <h3 className="text-4xl font-bold text-[#0066cc]">100+</h3>
         <p className="text-xl text-gray-700 mt-2">Top Tech Companies Hiring</p>
         <p className="text-gray-600 mt-4">
@@ -267,14 +267,18 @@ const About = () => {
         </p>
       </div>
 
+      <div className="hidden lg:block"></div>
+
       {/* Culture Point 4 */}
-      <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+      <div className="bg-white p-8  rounded-lg shadow-lg hover:shadow-xl transition duration-300">
         <h3 className="text-xl font-semibold text-[#005BAC] mb-4">Passion for Helping Others</h3>
         <p className="text-gray-700 mb-4">
           Our mission is simple – to help individuals build their careers and achieve their goals. We take pride in seeing our students succeed in the tech industry.
         </p>
       </div>
     </div>
+
+   
 
     <div className="mt-12">
       <p className="text-xl text-gray-700">
@@ -298,11 +302,7 @@ const About = () => {
             We strive to provide the latest skills that are required to thrive in the ever-evolving technology sector.
           </p>
           <div className="flex justify-center">
-            <img
-              src="https://via.placeholder.com/800x400"  // Replace with relevant image
-              alt="Mission"
-              className="rounded-lg shadow-xl"
-            />
+            
           </div>
         </div>
       </section>
