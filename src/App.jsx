@@ -3,6 +3,8 @@ import React from "react";
 import Home from "./pages/Home";
 import Header from "./components/common/header";
 import PlacedStudents from "./pages/placedStudents";
+import Interview from "./pages/interview";
+import InterviewDetail from "./pages/InterviewDetail";
 import Footer from "./components/common/Footer";
 import AdminDashboard from "../src/pages/Admin";
 
@@ -30,7 +32,9 @@ function App() {
           {/* User routes */}
           <Route path="/" element={<Home />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
-
+          <Route path="/placed-students" element={<PlacedStudents />} />
+       <Route path="/interview-questions" element={<Interview />} />
+       <Route path="/interview/:id" element={<InterviewDetail />} />
           {/* Admin routes */}
           {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
