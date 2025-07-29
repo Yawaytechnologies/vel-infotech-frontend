@@ -27,10 +27,10 @@ export default function HeroSection() {
    
   }}
 >
-      <div className="relative z-10 w-full max-w-7xl flex flex-col md:flex-row items-center justify-between px-6 py-0 gap-6 mx-auto">
+      <div className="relative z-10 w-full max-w-7xl flex flex-col mt-10 md:flex-row items-center justify-between px-6 py-0 gap-6 mx-auto">
         {/* LEFT: Text & Stats */}
         <div className="flex-1 flex flex-col items-start text-left max-w-xl">
-          <div className="text-[#005BAC]/90 uppercase tracking-wider text-sm mb-1 font-semibold">
+          <div className="text-[#005BAC]/90 uppercase tracking-wider text-lg mb-1 font-semibold">
             TRANSFORMING ASPIRATIONS
           </div>
           <h1 className="text-white text-3xl font-extrabold leading-tight mb-2">
