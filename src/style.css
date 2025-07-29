@@ -119,3 +119,12 @@ body {
   }
 }
 
+
+/* Fully hides the scrollbar for any element with .scrollbar-hide */
+.scrollbar-hide {
+  scrollbar-width: none !important;           /* Firefox */
+  -ms-overflow-style: none !important;        /* Internet Explorer and Edge */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;                   /* Chrome, Safari, Opera */
+}
