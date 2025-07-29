@@ -1,35 +1,50 @@
-import { useState } from "react";
-import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
-
-
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import React from "react";
 import Home from "./pages/Home";
 import Header from "./components/common/header";
 import PlacedStudents from "./pages/placedStudents";
 import Interview from "./pages/interview";
 import InterviewDetail from "./pages/InterviewDetail";
-
-import MultiRowHeader from "../src/components/common/MultiHeader";
-
 import Footer from "./components/common/Footer";
+import AdminDashboard from "../src/pages/Admin";
+
+// Wrapper component to use useLocation
+function Layout({ children }) {
+  const location = useLocation();
+  // List all admin paths here
+  const adminPaths = ["/admin/login", "/admin/dashboard"];
+  const isAdmin = adminPaths.includes(location.pathname);
+
+  return (
+    <div className="bg-white min-h-screen flex flex-col">
+      {!isAdmin && <Header />}
+      <div className="flex-1">{children}</div>
+      {!isAdmin && <Footer />}
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
-    <div className="bg-white">
-    
-    <Header/>
-
-    <Routes>
-      <Route path="/" element={<Home />} />
-       <Route path="/placed-students" element={<PlacedStudents />} />
-       <Route path="/interview-questions" element={<Interview />} />
-       <Route path="/interview/:id" element={<InterviewDetail />} />
-    </Routes>
-
-<Footer />
-    
-      
-    </div>
+      <Layout>
+        <Routes>
+          {/* User routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/placed-students" element={<PlacedStudents />} />
+          <Route path="/placed-students" element={<PlacedStudents />} />
+          <Route path="/interview-questions" element={<Interview />} />
+          <Route path="/interview/:id" element={<InterviewDetail />} />
+          {/* Admin routes */}
+          {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        </Routes>
+      </Layout>
     </Router>
   );
 }
