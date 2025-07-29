@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import React from "react";
 import Home from "./pages/Home";
 import Header from "./components/common/header";
@@ -33,8 +38,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
-       <Route path="/interview-questions" element={<Interview />} />
-       <Route path="/interview/:id" element={<InterviewDetail />} />
+          <Route path="/interview-questions" element={<Interview />} />
+          <Route path="/interview/:id" element={<InterviewDetail />} />
           {/* Admin routes */}
           {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
