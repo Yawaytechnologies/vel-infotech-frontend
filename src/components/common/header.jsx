@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FiMenu, FiX, FiChevronDown, FiChevronRight, FiPhone } from "react-icons/fi";
-import Logo from "../../assets/infotech.png";
+import { FiMenu, FiX, FiChevronDown, FiChevronRight } from "react-icons/fi";
+import Logo from "../../assets/infotech.svg";
 
 const navLinks = [
   { name: "Home", href: "/" },

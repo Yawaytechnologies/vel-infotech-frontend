@@ -12,6 +12,10 @@ import Interview from "./pages/interview";
 import InterviewDetail from "./pages/InterviewDetail";
 import Footer from "./components/common/Footer";
 import AdminDashboard from "../src/pages/Admin";
+import AllCourses from "./pages/AllCourses";
+import Java from './components/Courses/Java';
+import Python from './components/Courses/Python';
+
 
 // Wrapper component to use useLocation
 function Layout({ children }) {
@@ -29,7 +33,7 @@ function Layout({ children }) {
   );
 }
 
-function App() {
+export default function App() {
   return (
     <Router>
       <Layout>
@@ -40,13 +44,19 @@ function App() {
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
+  <Route path="/all-courses" element={<AllCourses />} />
+        <Route path="/all-courses/Java" element={<Java />} />
+        <Route path="/all-courses/Python" element={<Python />} />
+       
+
           {/* Admin routes */}
           {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </Layout>
     </Router>
+    
   );
 }
 
-export default App;
+
