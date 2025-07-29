@@ -145,9 +145,9 @@ export default function ElementsMarqueeSection() {
       </h2>
       <style>{marqueeStyle}</style>
       <div className="max-w-7xl mx-auto flex flex-col  gap-1 relative z-10">
-        <MarqueeRow items={rows[0]} reverse={false} duration={40} />
-        <MarqueeRow items={rows[1]} reverse={true} duration={40} />
-        <MarqueeRow items={rows[2]} reverse={false} duration={40} />
+        <MarqueeRow items={rows[0]} reverse={false} duration={130} />
+        <MarqueeRow items={rows[1]} reverse={true} duration={130} />
+        <MarqueeRow items={rows[2]} reverse={false} duration={130} />
       </div>
     </section>
   );
