@@ -31,6 +31,22 @@ const Interview = () => {
         route="/interview/genpact"
         image={telephoneImg}
       />
+
+      <InterviewCard
+        title="Behavioural Interview Questions and Answers"
+        date="November 6, 2024"
+        description="Behavioral examples focus on how you've handled situations in the past to understand your skills and decision-making. They look at how you approached challenges, worked with others, and made decisions. Sharing real-life examples helps demonstrate your abilities in action. Using specific situations makes it easier to see how you respond under..."
+        route="/interview/behavioural"
+        image={telephoneImg}
+      />
+
+      <InterviewCard
+        title="Personal Interview Questions and Answers"
+        date="November 6, 2024"
+        description="The Personal section of an interview delves into a candidate's character, strengths, motivations, and work approach. These questions offer insight into how well an individual might integrate with a team, tackle challenges, and grow within the organization. By preparing for personal interview questions, candidates can highlight their personality..."
+        route="/interview/personal"
+        image={telephoneImg}
+      />
     </motion.div>
   );
 };
