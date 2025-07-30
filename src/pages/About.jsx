@@ -1,6 +1,16 @@
 import React from 'react';
 import tr from "../assets/training1.png";
-
+import ts from "../assets/Thennarasu S.png";
+import ba from "../assets/benjamin Andrew.png";
+import ss from "../assets/Sudha Selvarajan.png";
+import wave from "../assets/wave-bg.svg";
+import theory from "../assets/theory.svg";
+import practical from "../assets/practicals.svg";
+import assignment from "../assets/assignment.svg";
+import certification from "../assets/Groupcertification-61553.svg";
+import resume from "../assets/resume.svg";
+import interview from "../assets/interview.svg";
+import job from "../assets/job.svg";
 const About = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -32,30 +42,30 @@ const About = () => {
   <div className="max-w-7xl mx-auto px-6 text-center">
     <h2 className="text-3xl font-semibold text-gray-800 mb-6">Why Choose Us</h2>
     <p className="text-lg text-gray-600 mb-12">
-      We are proud of the impact we’ve made and the milestones we've achieved over the years. Here's a glimpse into what we’ve accomplished so far:
+      We are proud of the impact we’ve made and the milestones we've achieved over the years.
     </p>
 
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
       {/* Accomplishment 1 */}
-      <div className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+      <div className="bg-[#005BAC] text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
   <h3 className="text-2xl font-bold text-white">Expert Trainers with Real-World Experience</h3>
   
 </div>
 
       {/* Accomplishment 2 */}
-       <div className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+       <div className="bg-[#005BAC] text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
   <h3 className="text-2xl font-bold text-white">Flexible Learning Modes (Classroom / Online )</h3>
   
 </div>
 
       {/* Accomplishment 3 */}
-       <div className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+       <div className="bg-[#005BAC] text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
   <h3 className="text-2xl font-bold text-white">Practical, Job-Ready Curriculum</h3>
   
 </div>
 
       {/* Accomplishment 4 */}
-       <div className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+       <div className="bg-[#005BAC] text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
   <h3 className="text-2xl font-bold text-white">Resume Building & Interview Preparation</h3>
   
 </div>
@@ -68,9 +78,61 @@ const About = () => {
     </div>
   </div>
 </section>
+{/*training methodology */}
+<section className="py-24 px-4 sm:px-8 md:px-16 lg:px-32 bg-gradient-to-br from-sky-100 to-blue-50">
+  <div className="max-w-7xl mx-auto text-center">
+    <h2 className="text-3xl font-semibold text-gray-800 mb-12">
+      Our Training Methodology
+    </h2>
+
+    {/* Optional: Background Wave */}
+    <img src={wave} alt="wave" className="mx-auto mb-12" />
+
+    {/* Grid of Steps */}
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-y-12 gap-x-6 items-start justify-items-center">
+      
+      <div className="flex flex-col items-center">
+        <img src={theory} alt="Theory" className="w-16 h-16 mb-2" />
+        <h2 className="font-bold text-sm sm:text-base">Theory</h2>
+      </div>
+
+      <div className="flex flex-col items-center">
+        <img src={practical} alt="Practicals" className="w-16 h-16 mb-2" />
+        <h2 className="font-bold text-sm sm:text-base">Practicals</h2>
+      </div>
+
+      <div className="flex flex-col items-center">
+        <img src={assignment} alt="Assignments" className="w-16 h-16 mb-2" />
+        <h2 className="font-bold text-sm sm:text-base">Assignments</h2>
+      </div>
+
+      <div className="flex flex-col items-center">
+        <img src={certification} alt="Certification" className="w-16 h-16 mb-2" />
+        <h2 className="font-bold text-sm sm:text-base">Certification</h2>
+      </div>
+
+      <div className="flex flex-col items-center">
+        <img src={resume} alt="Resume" className="w-16 h-16 mb-2" />
+        <h2 className="font-bold text-sm sm:text-base text-center">Resume<br/>Preparation</h2>
+      </div>
+
+      <div className="flex flex-col items-center">
+        <img src={interview} alt="Interview" className="w-16 h-16 mb-2" />
+        <h2 className="font-bold text-sm sm:text-base text-center">Attending<br/>Interview</h2>
+      </div>
+
+      <div className="flex flex-col items-center">
+        <img src={job} alt="Job" className="w-16 h-16 mb-2" />
+        <h2 className="font-bold text-sm sm:text-base">Job</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
 {/*Our impact */}
-<section className="py-16 bg-[#f0f8ff]">
+<section className="py-50 bg-[#f0f8ff]">
   <div className="max-w-7xl mx-auto px-6 text-center">
     <h2 className="text-3xl font-semibold text-gray-800 mb-6">Our Impact</h2>
     <p className="text-lg text-gray-600 mb-12">
@@ -125,17 +187,17 @@ const About = () => {
       {/* Testimonial 1 */}
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
         <p className="text-lg text-gray-700 italic">
-          "Vel InfoTech changed my career. Thanks to their expert guidance, I transitioned from a junior developer to a senior role in just 12 months!"
+          "Good place for job seekers. 💯 placement."
         </p>
         <div className="mt-6 flex items-center">
           <img
-            src="https://via.placeholder.com/50"
+            src={ts}
             alt="John Doe"
             className="h-12 w-12 rounded-full object-cover"
           />
           <div className="ml-4">
-            <h4 className="text-lg font-semibold text-gray-800">John Doe</h4>
-            <p className="text-sm text-gray-500">Full Stack Developer</p>
+            <h4 className="text-lg font-semibold text-gray-800">Thennarasu S</h4>
+            <p className="text-sm text-gray-500"></p>
           </div>
         </div>
       </div>
@@ -143,17 +205,17 @@ const About = () => {
       {/* Testimonial 2 */}
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
         <p className="text-lg text-gray-700 italic">
-          "The data analytics course was a game-changer. I was able to land a job at a top tech company with a 30% pay hike!"
+          Good service and trusted Organisation
         </p>
         <div className="mt-6 flex items-center">
           <img
-            src="https://via.placeholder.com/50"
-            alt="Jane Smith"
+            src={ba}
+            alt="benjamin Andrew"
             className="h-12 w-12 rounded-full object-cover"
           />
           <div className="ml-4">
-            <h4 className="text-lg font-semibold text-gray-800">Jane Smith</h4>
-            <p className="text-sm text-gray-500">Data Analyst</p>
+            <h4 className="text-lg font-semibold text-gray-800">benjamin Andrew</h4>
+            <p className="text-sm text-gray-500"></p>
           </div>
         </div>
       </div>
@@ -161,17 +223,17 @@ const About = () => {
       {/* Testimonial 3 */}
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
         <p className="text-lg text-gray-700 italic">
-          "The full-stack Python course at Vel InfoTech gave me the skills and confidence to start my own tech business!"
+          Best Consultancy for the people who seek jobs.100 percentage placement guaranteed.
         </p>
         <div className="mt-6 flex items-center">
           <img
-            src="https://via.placeholder.com/50"
+            src={ss}
             alt="Mark Johnson"
             className="h-12 w-12 rounded-full object-cover"
           />
           <div className="ml-4">
-            <h4 className="text-lg font-semibold text-gray-800">Mark Johnson</h4>
-            <p className="text-sm text-gray-500">Founder & CEO, TechStart</p>
+            <h4 className="text-lg font-semibold text-gray-800">Sudha Selvarajan</h4>
+            <p className="text-sm text-gray-500"></p>
           </div>
         </div>
       </div>
@@ -334,46 +396,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-12 px-6 sm:px-12 md:px-24">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold text-primary mb-6">Meet Our Team</h2>
-          <div className="flex justify-center gap-6 flex-wrap">
-            {/* Team Member 1 */}
-            <div className="bg-white p-6 rounded-lg shadow-lg w-64 mb-8 hover:shadow-2xl transition duration-300">
-              <img
-                src="https://via.placeholder.com/150"  // Replace with actual team member image
-                alt="Team Member"
-                className="rounded-full w-32 h-32 mx-auto mb-4"
-              />
-              <h4 className="text-xl font-bold text-primary">John Doe</h4>
-              <p className="text-gray-700">CEO & Founder</p>
-            </div>
-
-            {/* Team Member 2 */}
-            <div className="bg-white p-6 rounded-lg shadow-lg w-64 mb-8 hover:shadow-2xl transition duration-300">
-              <img
-                src="https://via.placeholder.com/150"  // Replace with actual team member image
-                alt="Team Member"
-                className="rounded-full w-32 h-32 mx-auto mb-4"
-              />
-              <h4 className="text-xl font-bold text-primary">Jane Smith</h4>
-              <p className="text-gray-700">Chief Technology Officer</p>
-            </div>
-
-            {/* Team Member 3 */}
-            <div className="bg-white p-6 rounded-lg shadow-lg w-64 mb-8 hover:shadow-2xl transition duration-300">
-              <img
-                src="https://via.placeholder.com/150"  // Replace with actual team member image
-                alt="Team Member"
-                className="rounded-full w-32 h-32 mx-auto mb-4"
-              />
-              <h4 className="text-xl font-bold text-primary">Samuel Lee</h4>
-              <p className="text-gray-700">Lead Instructor</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Contact Section */}
       <section className="bg-gray-100 py-12 px-6 sm:px-12 md:px-24">
