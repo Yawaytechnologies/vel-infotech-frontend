@@ -128,3 +128,12 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none !important;                   /* Chrome, Safari, Opera */
 }
+
+/* Hide scrollbars for all modern browsers */
+.scrollbar-none {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;     /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none !important;             /* Chrome, Safari, Opera */
+}

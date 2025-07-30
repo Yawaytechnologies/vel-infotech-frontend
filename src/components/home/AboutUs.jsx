@@ -15,10 +15,17 @@ export default function AboutSection() {
         backgroundSize: "40px 40px",
         backgroundPosition: "0 0, 20px 20px",
       }}
-    >      <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row gap-12 items-stretch z-10">
+    >     
+       <div
+  className="pointer-events-none absolute top-0 left-0 w-full h-16 z-10"
+  style={{
+    background: "linear-gradient(to bottom, #f4f7fd 60%, #fff0 100%)",
+  }}
+/>
+     <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row gap-12 items-stretch z-10">
         {/* LEFT: Clean Content (No Card) */}
         <div className="flex-1 flex flex-col justify-center pl-0 md:pl-2 lg:pl-8">
-          <h2 className="text-[2.2rem] md:text-[2.rem] font-black text-[#171717] mb-3 text-center  leading-tight">
+          <h2 className="text-[2.2rem] md:text-[1.8rem] font-black text-[#171717] mb-3 text-center  leading-tight">
             Vel InfoTech <span className="text-[#171717]">— India’s No.1 IT Training Institute</span>
           </h2>
           <p className="text-gray-700 text-xl mb-7 leading-relaxed">
@@ -62,7 +69,7 @@ export default function AboutSection() {
             <div className="flex justify-center mb-7 gap-2">
               <button
                 onClick={() => setMode("classroom")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-lg font-semibold shadow
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-xs sm:text-base lg:text-lg font-base shadow
                   ${mode === "classroom"
                     ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
                     : "bg-white/60 text-black border border-[#a7f3d0]/40"} transition-all duration-200`}
@@ -71,7 +78,7 @@ export default function AboutSection() {
               </button>
               <button
                 onClick={() => setMode("online")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-lg font-semibold shadow
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full  text-xs sm:text-base lg:text-lg font-base shadow
                   ${mode === "online"
                     ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
                     : "bg-white/60 text-black border border-[#a7f3d0]/40"
@@ -85,21 +92,21 @@ export default function AboutSection() {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none shadow"
+                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
               />
               <input
                 type="email"
                 placeholder="Your Email"
-                className="rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none shadow"
+                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
               />
               <div className="flex gap-3">
                 <input
                   type="tel"
                   placeholder="Mobile Number"
-                  className="rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#16bca7] outline-none shadow"
+                  className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
                 />
                 <select
-                  className="rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#16bca7] outline-none shadow"
+                  className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
                   defaultValue=""
                 >
                   <option value="" disabled>
@@ -113,11 +120,11 @@ export default function AboutSection() {
               <input
                 type="text"
                 placeholder="Type Course"
-                className="rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none shadow"
+                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
               />
               <textarea
                 placeholder="Your Message"
-                className="rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none resize-none shadow"
+                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none resize-none shadow"
                 rows={2}
               />
               <button className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-extrabold py-3 rounded-xl hover:from-[#0891b2] hover:to-[#16bca7] transition shadow-lg mt-1">
