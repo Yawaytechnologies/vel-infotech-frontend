@@ -197,11 +197,11 @@ const [mobileCategory, setMobileCategory] = useState(null);
     {/* All Courses Dropdown */}
 <div className="relative group">
       <button className="transition flex items-center gap-1 focus:outline-none">
-        All Courses <FiChevronDown className="ml-1" />
+        All Courses ▾
       </button>
       {/* Main Category Menu */}
       <div
-  className="absolute left-0 top-full mt-1 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-50 hidden group-hover:flex flex-row  overflow-visible"
+  className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-50 hidden group-hover:flex flex-row  overflow-visible"
   onMouseLeave={() => setActiveCategory(null)}
   onMouseEnter={() => {}} // (optional, can omit)
 >
@@ -273,7 +273,7 @@ const [mobileCategory, setMobileCategory] = useState(null);
     {/* More Dropdown */}
     <div className="relative group">
       <button className="transition">More ▾</button>
-      <div className="absolute left-0 top-full mt-1 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
+      <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
         <a href="/interview-questions" className="px-4 py-2 hover:bg-gray-100">Interview Questions</a>
         <a href="/resources" className="px-4 py-2 hover:bg-gray-100">Tutorials</a>
         <a href="/branches" className="px-4 py-2 hover:bg-gray-100">Sample Resume</a>
