@@ -30,7 +30,7 @@ export default function AdminSidebar({
   open,
   mobileOpen,
   onCloseMobile,
-  onToggleSidebar,
+ 
 }) {
   const [hoveredIdx, setHoveredIdx] = useState(null);
   return (
