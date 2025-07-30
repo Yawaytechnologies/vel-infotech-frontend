@@ -41,7 +41,7 @@ export default function App() {
           {/* User routes */}
           <Route path="/" element={<Home />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
-          <Route path="/placed-students" element={<PlacedStudents />} />
+          
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
   <Route path="/all-courses" element={<AllCourses />} />
