@@ -2,7 +2,6 @@
 import React from "react";
 import internshipBg from "../assets/internship.jpg";
 import background from "../assets/background.jpg";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import dataScienceIcon from "../assets/datascience.png";
 import pythonIcon from "../assets/python.png";
@@ -11,15 +10,14 @@ import javaIcon from "../assets/java.png";
 
 const Internship = () => {
   return (
-    <div className=" bg-gray-200 pb-10">
+    <div className="bg-gray-200 pb-10">
       {/* Hero Banner */}
       <div
-        className="relative mt-[110px] w-full h-100 bg-cover bg-center flex items-center justify-start text-left text-blue-900 px-6 md:px-60"
+        className="relative mt-[110px] w-full h-[300px] bg-cover bg-center flex items-center justify-start text-left text-blue-900 px-6 md:px-60"
         style={{
           backgroundImage: `url(${background})`,
         }}
       >
-        {/* Main Heading */}
         <h1 className="relative z-10 text-4xl md:text-6xl font-bold">
           Internship
         </h1>
@@ -27,10 +25,10 @@ const Internship = () => {
 
       {/* Main Content */}
       <div className="max-w-8xl mx-auto py-10 px-2">
-        <div className="w-full  bg-[#f0f6ff] py-10 px-2 ">
+        <div className="w-full bg-[#f0f6ff] py-10 px-2">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             {/* Left Text Card */}
-            <div className="bg-white p-8  border border-blue-100 relative z-10">
+            <div className="bg-white p-8 border border-blue-100 relative z-10">
               <h6 className="text-xl font-bold text-blue-900 mb-4">
                 Best Online Training Institute in Chennai & Bangalore
               </h6>
@@ -49,27 +47,24 @@ const Internship = () => {
               </p>
             </div>
 
-            {/* Right Full-Height Image */}
+            {/* Right Image */}
             <div className="flex justify-center items-center">
               <img
                 src={internshipBg}
                 alt="Internship Illustration"
-                className="w-full h-80   hover:scale-105 transition-transform duration-300"
+                className="w-full h-80 hover:scale-105 transition-transform duration-300"
               />
             </div>
           </div>
 
+          {/* Internship Icons Grid */}
           <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {[
               { title: "Dotnet", color: "bg-blue-500", icon: "🌀" },
               { title: "Cyber Security", color: "bg-blue-500", icon: "🔐" },
               { title: "Networking", color: "bg-blue-500", icon: "🌐" },
               { title: "Java", color: "bg-blue-500", icon: "☕" },
-              {
-                title: "Artificial Intelligence",
-                color: "bg-blue-500",
-                icon: "🤖",
-              },
+              { title: "Artificial Intelligence", color: "bg-blue-500", icon: "🤖" },
               { title: "Cloud Computing", color: "bg-blue-500", icon: "☁️" },
               { title: "Python", color: "bg-blue-500", icon: "🐍" },
               { title: "Data Science", color: "bg-blue-500", icon: "📊" },
@@ -80,29 +75,34 @@ const Internship = () => {
             ].map((item, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.05, rotate: 1 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
                 className={`flex flex-col justify-center items-center text-center min-h-[160px] w-full px-4 py-6 rounded-xl shadow-md cursor-pointer ${item.color} text-white`}
               >
-                <div className="text-4xl mb-2">{item.icon}</div>
+                <motion.div
+                  whileHover={{ scale: 1.3 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="text-4xl mb-2"
+                >
+                  {item.icon}
+                </motion.div>
                 <h4 className="font-bold text-lg">{item.title}</h4>
                 <p className="text-md text-white/90">Internship</p>
               </motion.div>
             ))}
           </div>
         </div>
+
         {/* Section 2 */}
         <div className="grid md:grid-cols-2 gap-6 mt-10">
-          {/* Image */}
           <div className="flex justify-center items-center">
             <img
               src={internshipBg}
               alt="Internship Illustration"
-              className="w-full h-100   hover:scale-105 transition-transform duration-300"
+              className="w-full h-100 hover:scale-105 transition-transform duration-300"
             />
           </div>
-          {/* Text */}
-          <div className="bg-white p-4 rounded-md shadow  text-gray-700 text-sm leading-relaxed">
+          <div className="bg-white p-4 rounded-md shadow text-gray-700 text-sm leading-relaxed">
             <h4 className="text-md font-bold text-blue-800 mb-4">
               Now, why you should do an internship?
             </h4>
@@ -116,33 +116,20 @@ const Internship = () => {
                 qualifications while recruiting.
               </li>
               <li>
-                <strong>
-                  Because it allows you to apply classroom knowledge in
-                  real-life situations –
-                </strong>{" "}
-                Internships give you a way to utilize your knowledge base and
-                expand it.
+                <strong>Because it allows you to apply classroom knowledge in real-life situations –</strong>{" "}
+                Internships give you a way to utilize your knowledge base and expand it.
               </li>
               <li>
-                <strong>
-                  Because many students don’t know what they want –
-                </strong>{" "}
-                Internships can be used as tools to discover what you’re good
-                at.
+                <strong>Because many students don’t know what they want –</strong>{" "}
+                Internships can be used as tools to discover what you’re good at.
               </li>
               <li>
-                <strong>Because they help you build a network –</strong> The
-                professional contacts you make during internships can help you
-                land a full-time role.
+                <strong>Because they help you build a network –</strong> The professional contacts you make during internships can help you land a full-time role.
               </li>
               <li>
-                <strong>Because they might lead to a job –</strong> Many
-                companies use internships to evaluate and recruit future
-                employees.
+                <strong>Because they might lead to a job –</strong> Many companies use internships to evaluate and recruit future employees.
               </li>
             </ol>
-
-            {/* CTA Button */}
             <div className="mt-3">
               <a
                 href="#apply"
@@ -166,7 +153,7 @@ const Internship = () => {
             {
               title: "Data Science Internship",
               image: dataScienceIcon,
-              gradient: "from-red-800 to-indigo-00",
+              gradient: "from-red-800 to-indigo-400",
             },
             {
               title: "Python Internship",
@@ -213,7 +200,7 @@ const Internship = () => {
       </div>
 
       {/* Application Form */}
-      <div id="apply" className="bg-gray-100 ">
+      <div id="apply" className="bg-gray-100">
         <div className="max-w-3xl mx-auto bg-white shadow rounded-lg px-6 py-8 pb-2 mt-10">
           <h3 className="text-2xl font-bold mb-6 text-center text-blue-800">
             Internship Application Form
