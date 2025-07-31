@@ -7,7 +7,7 @@ const navLinks = [
   { name: "About Us", href: "/about" },
   { name: "Courses", href: "/courses" },
   { name: "Clients", href: "/clients" },
-  { name: "Contact", href: "/contact" },
+  { name: "Contact", href: "/contact-us" },
 ];
 
 const sidebarLinks = [

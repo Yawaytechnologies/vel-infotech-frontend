@@ -6,6 +6,7 @@ import React from "react";
 import Home from "./pages/Home";
 import Header from "./components/common/header";
 import PlacedStudents from "./pages/placedStudents";
+import Contact from "./pages/contactUs";
 
 import MultiRowHeader from "../src/components/common/MultiHeader";
 
@@ -22,6 +23,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
        <Route path="/placed-students" element={<PlacedStudents />} />
+       <Route path="/contact-us" element={<Contact/>} />
        
     </Routes>
 
