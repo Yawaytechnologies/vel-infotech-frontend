@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContactHeader = () => {
   return (
-    <div className="w-full bg-white flex flex-col items-center justify-center text-center p-6">
+    <div className="w-full bg-[#e6ebf7] flex flex-col items-center justify-center text-center p-6">
       <h1 className="text-[#005BAC] text-4xl font-bold mb-5">
         Contact Us
       </h1>

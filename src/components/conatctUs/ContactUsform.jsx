@@ -97,9 +97,7 @@ function ContactForm() {
         </button>
       </form>
     </div>
-    <h1 className="text-[#005BAC] text-4xl font-bold mt-14 text-center mx-auto">
-  Reach Us Directly
-</h1>
+    
 
   </>);
 }
