@@ -1,8 +1,9 @@
 import React from "react";
 import InterviewCard from "../components/common/InterviewCard";
 import telephoneImg from "../assets/telephone.jpg";
-
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+
 
 const Interview = () => {
   return (
