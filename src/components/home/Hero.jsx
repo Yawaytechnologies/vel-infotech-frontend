@@ -6,7 +6,7 @@ import { FiChevronLeft, FiChevronRight, FiChevronDown } from "react-icons/fi";
 import img1 from "../../assets/Slider1.png";
 import img2 from "../../assets/Slider2.png";
 import img3 from "../../assets/Slider3.png";
-import img4 from "../../assets/vell.png";
+import img4 from "../../assets/Vell.png";
 
 const slides = [
   {
