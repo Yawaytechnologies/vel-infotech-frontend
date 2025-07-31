@@ -14,8 +14,9 @@ import InterviewDetail from "./pages/InterviewDetail";
 import Footer from "./components/common/Footer";
 import AdminDashboard from "../src/pages/Admin";
 import AllCourses from "./pages/AllCourses";
-import Java from "./components/Courses/Java";
-import Python from "./components/Courses/Python";
+import Java from './components/Courses/Java';
+import Python from './components/Courses/Python';
+import AdminLogin from "./components/admin/AdminLogin";
 
 // Wrapper component to use useLocation
 function Layout({ children }) {
@@ -49,7 +50,7 @@ export default function App() {
           <Route path="/all-courses/Python" element={<Python />} />
 
           {/* Admin routes */}
-          {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
+          <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </Layout>
