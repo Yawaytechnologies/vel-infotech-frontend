@@ -128,3 +128,26 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none !important;                   /* Chrome, Safari, Opera */
 }
+
+/* Carosal in java */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+/* Optional: slower scroll on mobile */
+@media (max-width: 768px) {
+  .animate-scroll {
+    animation-duration: 45s;
+  }
+}
+
