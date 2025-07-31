@@ -14,7 +14,7 @@ export default function Footer() {
                           alt="Logo"
                             className="h-15 w-auto object-contain"
                         />
-                        <span className="text-2xl font-bold text-primary font-poppins tracking-widest ml-2 select-none">
+                        <span className="text-2xl font-bold text-text-text-primary font-poppins tracking-widest ml-2 select-none">
                           Vel <span className="text-[#005BAC]">InfoTech</span>
                         </span>
                       </div>
@@ -34,20 +34,20 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-bold text-lg mb-3">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-[#41e392] transition">Courses</a></li>
-              <li><a href="#" className="hover:text-[#41e392] transition">About</a></li>
-              <li><a href="#" className="hover:text-[#41e392] transition">FAQ</a></li>
-              <li><a href="#" className="hover:text-[#41e392] transition">Contact</a></li>
+              <li><a href="/all-courses" className="hover:text-[#005BAC] transition">Courses</a></li>
+              <li><a href="/about-us" className="hover:text-[#005BAC] transition">About</a></li>
+              <li><a href="/clients" className="hover:text-[#005BAC] transition">Clients</a></li>
+              <li><a href="/contact" className="hover:text-[#005BAC] transition">Contact</a></li>
             </ul>
           </div>
           {/* Popular Courses */}
           <div>
             <h3 className="text-white font-bold text-lg mb-3">Popular Courses</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-[#41e392] transition">Full Stack Python</a></li>
-              <li><a href="#" className="hover:text-[#41e392] transition">Data Analytics</a></li>
-              <li><a href="#" className="hover:text-[#41e392] transition">Cloud Computing</a></li>
-              <li><a href="#" className="hover:text-[#41e392] transition">Artificial Intelligence</a></li>
+              <li><a href="#" className="hover:text-[#005BAC] transition">Full Stack Python</a></li>
+              <li><a href="#" className="hover:text-[#005BAC] transition">Data Analytics</a></li>
+              <li><a href="#" className="hover:text-[#005BAC] transition">Cloud Computing</a></li>
+              <li><a href="#" className="hover:text-[#005BAC] transition">Artificial Intelligence</a></li>
             </ul>
           </div>
           {/* Contact */}
@@ -60,13 +60,13 @@ export default function Footer() {
                 <span className="block text-gray-400">Ekkatuthangal, Chennai, Tamil Nadu 600032</span>
               </li>
               <li>
-                <a href="mailto:info@velinfotech.com" className="hover:text-[#41e392] transition">
+                <a href="mailto:info@velinfotech.com" className="hover:text-[#005BAC] transition">
                   info@velinfotech.com
                 </a>
               </li>
               <li>
-                <a href="tel:+917669100251" className="hover:text-[#41e392] transition">
-                  +91-7669 100 251
+                <a href="tel:+917669100251" className="hover:text-[#005BAC] transition">
+                  +91-9600593838
                 </a>
               </li>
             </ul>

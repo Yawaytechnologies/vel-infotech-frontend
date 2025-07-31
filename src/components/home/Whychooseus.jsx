@@ -74,12 +74,12 @@ export default function WhyChooseUs() {
                 flex flex-col items-center text-center
                 p-5 md:p-6 transition-all duration-200 cursor-pointer group
                 bg-white
-                hover:bg-[#]/10
+                hover:bg-[#005BAC]/10
                 ${!isLastCol ? "border-r border-gray-200" : ""}
                 ${!isLastRow ? "border-b border-gray-200" : ""}
               `}
             >
-              <span className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-3 shadow ${item.bg} transition-all duration-200 group-hover:bg-[#41e392]`}>
+              <span className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-3 shadow ${item.bg} transition-all duration-200 group-hover:bg-[#005BAC]`}>
                 {item.icon}
               </span>
               <h3 className="text-lg  font-semibold mb-1 text-gray-800">{item.title}</h3>
