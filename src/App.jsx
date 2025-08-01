@@ -17,6 +17,7 @@ import AllCourses from "./pages/AllCourses";
 import Java from './components/Courses/Java';
 import Python from './components/Courses/Python';
 import AdminLogin from "./components/admin/AdminLogin";
+import Clientpage from "./pages/Clientpage";
 
 // Wrapper component to use useLocation
 function Layout({ children }) {
@@ -42,6 +43,9 @@ export default function App() {
           {/* User routes */}
           <Route path="/" element={<Home />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
+          <Route path="/contact-us" element={<Contact/>} />
+          <Route path="/client" element={<Clientpage/>} />
+
           
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
