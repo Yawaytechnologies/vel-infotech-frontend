@@ -11,6 +11,7 @@ import certification from "../assets/Groupcertification-61553.svg";
 import resume from "../assets/resume.svg";
 import interview from "../assets/interview.svg";
 import job from "../assets/job.svg";
+import aboutus from "../assets/AboutUs.jpg"
 
 import { CheckCircle, BookOpenCheck, Laptop2, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -20,31 +21,47 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Background from "../assets/Background.jpg"
 const About = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
 
-      <div className="bg-gradient-to-br from-[#f0f4ff] to-white min-h-screen font-sans">
+      {/* <div className="bg-gradient-to-br from-[#f0f4ff] to-white min-h-screen font-sans"> */}
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-[#0077cc] to-[#005BAC] text-white py-24 px-8 sm:px-16 md:px-32 relative overflow-hidden">
-        <div className="relative z-10 mt-20">
-          <h1 className="text-5xl font-bold mb-6 font-heading">Welcome to Vel InfoTech</h1>
-          <p className="text-lg sm:text-xl mb-8 max-w-3xl">
-            Founded with a vision to bridge the gap between ambition and achievement, Vel InfoTech equips individuals with the skills and confidence to succeed.
-          </p>
-        </div>
-      </section>
-      </div>
+      <section
+  className="min-h-screen w-full bg-sky-500 bg-cover bg-center bg-no-repeat text-white px-8 sm:px-16 md:px-32 py-16 relative overflow-hidden"
+  style={{
+    backgroundImage: `url(${Background})`,
+    backgroundSize: 'contain',         // ensures full coverage
+    backgroundPosition: 'center',    // keeps it centered
+    backgroundRepeat: 'no-repeat',   // prevents tiling
+  }}
+>
+  <div className="relative z-10 mt-20 p-8 rounded-md flex flex-col md:flex-row items-center md:items-start gap-10 -translate-x-8">
+    
+    {/* Text Content */}
+    <div className="flex-1">
+      <h1 className="text-5xl font-bold mb-6 font-heading">Welcome to Vel InfoTech</h1>
+      <p className="text-lg sm:text-xl mb-8 max-w-3xl">
+        Founded with a vision to bridge the gap between ambition and achievement, Vel InfoTech equips individuals with the skills and confidence to succeed.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+     {/*  </div> */}
 
    
-        <section className="py-20 px-6 bg-gradient-to-br from-[#ccf2ff] via-[#e0f7fa] to-[#f0fcff] text-gray-800">
+        <section className="py-12 px-6 bg-gradient-to-br from-[#ccf2ff] via-[#e0f7fa] to-[#f0fcff] text-gray-800">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-heading font-semibold text-[#005BAC] mb-6">Why Choose Us</h2>
           <p className="text-lg text-gray-700 mb-12">
             We are proud of the impact we’ve made and the milestones we've achieved over the years.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#0077cc]">
               <CheckCircle className="text-[#0077cc] w-6 h-6 mb-2 mx-auto" />
               <h3 className="text-lg font-bold text-[#005BAC]">Expert Trainers with Real-World Experience</h3>
@@ -191,17 +208,17 @@ const About = () => {
  */}
 
 
-<section className="py-24 bg-gradient-to-br from-[#fffaf0] via-[#fef5e5] to-[#fff7cc]">
+<section className="py-12 bg-gradient-to-br from-[#E6F2FF] via-[#A0CFFF] to-[#66B2FF]">
   <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-4xl font-bold text-[#FF6F00] mb-4">Our Impact</h2>
-    <p className="text-lg text-gray-700 mb-12">
+    <h2 className="text-4xl font-bold text-[#003366] mb-4">Our Impact</h2>
+    <p className="text-lg text-gray-700 mb-6">
       We are proud of the lives we've changed and the success stories we’ve created through our training programs.
     </p>
 
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
       {/* Impact 1 */}
-      <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-[#FF6F00]">
-        <div className="text-5xl font-extrabold text-[#FF6F00] mb-2">90%</div>
+      <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-[#005BAC]">
+        <div className="text-5xl font-extrabold text-[#005BAC] mb-2">90%</div>
         <h3 className="text-xl font-semibold text-gray-800 mb-2">Job Placement Rate</h3>
         <p className="text-gray-600">
           90% of our students get placed within 6 months of completing the program.
@@ -209,8 +226,8 @@ const About = () => {
       </div>
 
       {/* Impact 2 */}
-      <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-[#FFA000]">
-        <div className="text-5xl font-extrabold text-[#FFA000] mb-2">40%</div>
+      <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-[#00ACC1]">
+        <div className="text-5xl font-extrabold text-[#00ACC1] mb-2">40%</div>
         <h3 className="text-xl font-semibold text-gray-800 mb-2">Average Salary Hike</h3>
         <p className="text-gray-600">
           On average, graduates see a 40% increase in salary within the first year.
@@ -218,8 +235,8 @@ const About = () => {
       </div>
 
       {/* Impact 3 */}
-      <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-[#FFC107]">
-        <div className="text-5xl font-extrabold text-[#FFC107] mb-2">100+</div>
+      <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-[#66B2FF]">
+        <div className="text-5xl font-extrabold text-[#66B2FF] mb-2">100+</div>
         <h3 className="text-xl font-semibold text-gray-800 mb-2">Hiring Partners</h3>
         <p className="text-gray-600">
           We’ve partnered with 100+ leading companies to hire our talented graduates.
@@ -349,54 +366,50 @@ const About = () => {
   </div>
 </section> */}
 {/*company culture*/}
-<section className="py-16 bg-[#e0f7fa]">
+<section className="py-20 bg-gradient-to-br from-[#d0f4ff] via-[#e6faff] to-[#ffffff]">
   <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-3xl font-semibold text-gray-800 mb-8">Our Company Culture</h2>
-    <p className="text-lg text-gray-600 mb-12">
-      At Vel InfoTech, we believe in creating a supportive and dynamic environment where our team can thrive, collaborate, and innovate. Here’s what drives us:
+    <h2 className="text-4xl font-bold text-[#003366] mb-6 tracking-tight">Our Company Culture</h2>
+    <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+      At Vel InfoTech, we create a supportive and dynamic space where our team thrives, collaborates, and constantly innovates.
     </p>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {/* Culture Point 1 */}
-      <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-        <h3 className="text-xl font-semibold text-[#005BAC] mb-4">Collaboration</h3>
-        <p className="text-gray-700 mb-4">
-          We believe that teamwork is the key to success. Our team works closely together to solve problems, brainstorm new ideas, and deliver exceptional results.
+      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#0077cc] hover:scale-105 transform">
+        <h3 className="text-xl font-semibold text-[#005BAC] mb-3">🤝 Collaboration</h3>
+        <p className="text-gray-600">
+          Teamwork fuels our success. We solve challenges together and celebrate wins as one.
         </p>
       </div>
 
       {/* Culture Point 2 */}
-      <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-        <h3 className="text-xl font-semibold text-[#005BAC] mb-4">Continuous Learning</h3>
-        <p className="text-gray-700 mb-4">
-          We are committed to growth and innovation. We encourage our employees to continuously learn and stay updated with the latest industry trends.
+      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#00acc1] hover:scale-105 transform">
+        <h3 className="text-xl font-semibold text-[#005BAC] mb-3">📚 Continuous Learning</h3>
+        <p className="text-gray-600">
+          Growth is our mindset. We promote lifelong learning and staying ahead in tech.
         </p>
       </div>
 
       {/* Culture Point 3 */}
-      <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-        <h3 className="text-xl font-semibold text-[#005BAC] mb-4">Innovation</h3>
-        <p className="text-gray-700 mb-4">
-          We foster a culture of creativity and forward-thinking. We constantly look for new ways to innovate in our training programs, technology, and services.
+      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#66bb6a] hover:scale-105 transform">
+        <h3 className="text-xl font-semibold text-[#005BAC] mb-3">💡 Innovation</h3>
+        <p className="text-gray-600">
+          We thrive on fresh ideas and pushing boundaries in everything we do.
         </p>
       </div>
 
-      <div className="hidden lg:block"></div>
-
       {/* Culture Point 4 */}
-      <div className="bg-white p-8  rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-        <h3 className="text-xl font-semibold text-[#005BAC] mb-4">Passion for Helping Others</h3>
-        <p className="text-gray-700 mb-4">
-          Our mission is simple – to help individuals build their careers and achieve their goals. We take pride in seeing our students succeed in the tech industry.
+      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#ffa726] hover:scale-105 transform">
+        <h3 className="text-xl font-semibold text-[#005BAC] mb-3">🎯 Passion for Impact</h3>
+        <p className="text-gray-600">
+          Our true reward is seeing our students transform their lives through learning.
         </p>
       </div>
     </div>
 
-   
-
-    <div className="mt-12">
-      <p className="text-xl text-gray-700">
-        At Vel InfoTech, we foster a culture of collaboration, continuous learning, and innovation. Our team is passionate about making a difference and helping individuals achieve their career goals.
+    <div className="mt-14">
+      <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+        At Vel InfoTech, our culture is rooted in teamwork, growth, innovation, and impact. We're united by a shared mission to empower futures and spark careers.
       </p>
     </div>
   </div>
@@ -406,47 +419,56 @@ const About = () => {
 
 
 
+<section className="py-20 bg-gradient-to-br from-[#d0e8ff] via-[#a3cfff] to-[#74b6ff]">
+  <div className="max-w-7xl mx-auto px-6 text-center">
+    <h2 className="text-4xl font-bold text-[#002b66] mb-6 tracking-tight">Our Core Values</h2>
+    <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+      At Vel InfoTech, our values drive our mission and shape the way we work and grow together.
+    </p>
 
-      {/* Our Mission Section */}
-      <section className="py-12 px-6 sm:px-12 md:px-24">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold text-primary mb-6">Our Mission</h2>
-          <p className="text-lg sm:text-xl text-gray-700 mb-8">
-            At Vel InfoTech, we aim to bridge the gap between education and the real-world tech industry. 
-            We strive to provide the latest skills that are required to thrive in the ever-evolving technology sector.
-          </p>
-          <div className="flex justify-center">
-            
-          </div>
-        </div>
-      </section>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* Core Value 1 */}
+      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#0d47a1] hover:scale-105 transform">
+        <h3 className="text-xl font-semibold text-[#0d47a1] mb-3">🔷 Integrity</h3>
+        <p className="text-gray-600">
+          We act with honesty and transparency in everything we do—no compromises.
+        </p>
+      </div>
 
-      {/* Core Values Section */}
-      <section className="bg-blue-100 py-12 px-6 sm:px-12 md:px-24">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold text-primary mb-6">Our Core Values</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300">
-              <h3 className="text-xl font-bold text-primary mb-4">Excellence</h3>
-              <p className="text-gray-700">
-                We believe in excellence and strive to deliver the best quality training and career opportunities for our students.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300">
-              <h3 className="text-xl font-bold text-primary mb-4">Innovation</h3>
-              <p className="text-gray-700">
-                Embracing change and technological advancements, we focus on the innovative methods that drive results.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300">
-              <h3 className="text-xl font-bold text-primary mb-4">Integrity</h3>
-              <p className="text-gray-700">
-                Integrity is at the core of our approach. We maintain transparency and honesty in all our interactions.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Core Value 2 */}
+      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#1976d2] hover:scale-105 transform">
+        <h3 className="text-xl font-semibold text-[#1976d2] mb-3">🌊 Growth</h3>
+        <p className="text-gray-600">
+          We grow ourselves so we can help others grow—both personally and professionally.
+        </p>
+      </div>
+
+      {/* Core Value 3 */}
+      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#2196f3] hover:scale-105 transform">
+        <h3 className="text-xl font-semibold text-[#2196f3] mb-3">🚀 Excellence</h3>
+        <p className="text-gray-600">
+          We strive for excellence in everything—from training to technology to service.
+        </p>
+      </div>
+
+      {/* Core Value 4 */}
+      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#64b5f6] hover:scale-105 transform">
+        <h3 className="text-xl font-semibold text-[#64b5f6] mb-3">💬 Empathy</h3>
+        <p className="text-gray-600">
+          We listen, understand, and respond with compassion—our students come first.
+        </p>
+      </div>
+    </div>
+
+    <div className="mt-14">
+      <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+        These values guide us every day as we build an inclusive, empowering, and forward-thinking learning environment.
+      </p>
+    </div>
+  </div>
+</section>
+
+
 
       {/* Team Members Section */}
 {/* <section className="py-16 bg-white">
@@ -485,20 +507,27 @@ const About = () => {
       
 
       {/* Contact Section */}
-      <section className="bg-gray-100 py-12 px-6 sm:px-12 md:px-24">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold text-primary mb-6">Get in Touch</h2>
-          <p className="text-lg sm:text-xl text-gray-700 mb-8">
-            Have any questions? Want to know more about our courses? We're here to help!
-          </p>
-          <p className="text-lg text-blue-600 hover:text-blue-800 mb-4">
-            <a href="mailto:info@velinfotech.com">info@velinfotech.com</a>
-          </p>
-          <p className="text-lg text-blue-600 hover:text-blue-800">
-            <a href="tel:+917669100251">+91-7669 100 251</a>
-          </p>
-        </div>
-      </section>
+      <section className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 py-16 px-6 sm:px-12 md:px-24 rounded-lg shadow-lg max-w-7xl mx-auto text-center text-white">
+  <h2 className="text-4xl font-extrabold mb-6 drop-shadow-md">Get in Touch</h2>
+  <p className="text-lg sm:text-xl mb-8 max-w-3xl mx-auto drop-shadow-sm">
+    Have any questions? Want to know more about our courses? We're here to help!
+  </p>
+  <div className="space-y-4">
+    <a
+      href="mailto:info@velinfotech.com"
+      className="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow-md hover:bg-gray-100 transition"
+    >
+      info@velinfotech.com
+    </a>
+    <br />
+    <a
+      href="tel:+917669100251"
+      className="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow-md hover:bg-gray-100 transition"
+    >
+      +91-7669 100 251
+    </a>
+  </div>
+</section>
 
 
      
