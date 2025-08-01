@@ -21,7 +21,8 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import Background from "../assets/Background.jpg"
+import Background from "../assets/Background1.jpg"
+
 const About = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
