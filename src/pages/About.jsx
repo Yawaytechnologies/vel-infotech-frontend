@@ -6,10 +6,10 @@ import ss from "../assets/Sudha Selvarajan.png";
 
 
 import { Briefcase, TrendingUp, Users, BookOpenCheck, Laptop2, Award } from 'lucide-react';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
