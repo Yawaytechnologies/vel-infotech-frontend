@@ -13,15 +13,20 @@ import InterviewDetail from "./pages/InterviewDetail";
 import Footer from "./components/common/Footer";
 import AdminDashboard from "../src/pages/Admin";
 import AllCourses from "./pages/AllCourses";
-import Java from './components/Courses/Java';
-import Python from './components/Courses/Python';
+import Java from "./components/Courses/Java";
+import Python from "./components/Courses/Python";
 import AdminLogin from "./components/admin/AdminLogin";
-
+import StudentTable from "./components/admin/CourseEnquired";
+import AdminLayout from "./components/admin/AdminLayout";
 // Wrapper component to use useLocation
 function Layout({ children }) {
   const location = useLocation();
   // List all admin paths here
-  const adminPaths = ["/admin/login", "/admin/dashboard"];
+  const adminPaths = [
+    "/admin/login",
+    "/admin/dashboard",
+    "/admin/course-enquired",
+  ];
   const isAdmin = adminPaths.includes(location.pathname);
 
   return (
@@ -41,22 +46,23 @@ export default function App() {
           {/* User routes */}
           <Route path="/" element={<Home />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
-          
+
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
-  <Route path="/all-courses" element={<AllCourses />} />
-        <Route path="/all-courses/Java" element={<Java />} />
-        <Route path="/all-courses/Python" element={<Python />} />
-       
+          <Route path="/all-courses" element={<AllCourses />} />
+          <Route path="/all-courses/Java" element={<Java />} />
+          <Route path="/all-courses/Python" element={<Python />} />
 
           {/* Admin routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="course-enquired" element={<StudentTable />} />
+            {/* ...more nested admin routes... */}
+          </Route>
+
+          {/* Catch-all route */}
         </Routes>
       </Layout>
     </Router>
-    
   );
 }
-
-
