@@ -8,51 +8,51 @@ const groupedCourses = [
   {
     category: "Software Development",
     items: [
-      { name: "Java", href: "/java" },
-      { name: "Python", href: "/python" },
-      { name: "Full Stack Development", href: "/full-stack-development" },
-      { name: "PL SQL", href: "/pl-sql" },
-      { name: "SQL", href: "/sql" },
+      { name: "Java", href: "/all-courses/Java" },
+      { name: "Python", href: "/all-courses/Python" },
+      { name: "Full Stack Development", href: "/all-courses/FullStackDevelopement" },
+      { name: "PL SQL", href: "/all-courses/plsql" },
+      { name: "SQL", href: "/all-courses/Sql" },
     ],
   },
   {
     category: "Data Science & Analytics",
     items: [
-      { name: "Data Science", href: "/data-science" },
-      { name: "Business Analytics", href: "/business-analytics" },
-      { name: "Data Science & AI", href: "/data-science-ai" },
-      { name: "Big Data Developer", href: "/big-data-developer" },
+      { name: "Data Science", href: "/all-courses/DataScience" },
+      { name: "Business Analytics", href: "/all-courses/BusinessAnalytics" },
+      { name: "Data Science & AI", href: "/all-courses/DataScienceAi" },
+      { name: "Big Data Developer", href: "/all-courses/BigDataDeveloper" },
     ],
   },
   {
     category: "Testing",
     items: [
-      { name: "Software Testing", href: "/software-testing" },
-      { name: "Selenium Testing", href: "/selenium-testing" },
-      { name: "ETL Testing", href: "/etl-testing" },
+      { name: "Software Testing", href: "/all-courses/SoftwareTesting" },
+      { name: "Selenium Testing", href: "all-courses/SeleniumTesting" },
+      { name: "ETL Testing", href: "/all-courses/EtlTesting" },
     ],
   },
   {
     category: "Cloud Computing",
     items: [
-      { name: "AWS Training", href: "/aws-training" },
-      { name: "DevOps", href: "/devops" },
+      { name: "AWS Training", href: "/all-courses/AwsTraining" },
+      { name: "DevOps", href: "/all-courses/DevOps" },
     ],
   },
   {
     category: "IT Infrastructure",
     items: [
-      { name: "Hardware Networking", href: "/hardware-networking" },
-      { name: "Cyber Security", href: "/cyber-security" },
+      { name: "Hardware Networking", href: "/all-courses/HardwareNetworking" },
+      { name: "Cyber Security", href: "/all-courses/CyberSecurity" },
     ],
   },
   {
     category: "Business Solutions",
     items: [
-      { name: "SAP", href: "/sap" },
-      { name: "Salesforce", href: "/salesforce" },
-      { name: "ServiceNow", href: "/servicenow" },
-      { name: "RPA (Robotic Process Automation)", href: "/rpa" },
+      { name: "SAP", href: "/all-courses/Sap" },
+      { name: "Salesforce", href: "/all-courses/SalesForce" },
+      { name: "ServiceNow", href: "/all-courses/ServiceNow" },
+      { name: "RPA (Robotic Process Automation)", href: "/all-courses/RPA" },
     ],
   },
   {
