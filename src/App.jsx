@@ -111,12 +111,7 @@ export default function App() {
     
     <Header/>
 
-    <Routes>
-      <Route path="/" element={<Home />} />
-       <Route path="/placed-students" element={<PlacedStudents />} />
-       
-       
-    </Routes>
+    
 
 
     
