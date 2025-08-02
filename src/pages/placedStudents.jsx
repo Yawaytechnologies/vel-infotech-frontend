@@ -9,55 +9,55 @@ const categoryData = [
     id: 1,
     label: "Non-IT to IT (Career Transition)",
     count: "2455+",
-    gradient: "from-blue-600 to-blue-500",
+    gradient: "from-[#005BAC] to-[#0078D7]",
   },
   {
     id: 2,
     label: "Diploma Candidates",
     count: "2947+",
-    gradient: "from-blue-400 to-blue-500",
+    gradient: "from-[#005BAC] to-[#0078D7]",
   },
   {
     id: 3,
     label: "Non-Engineering  (Arts & Science)",
     count: "3018+",
-    gradient: "from-blue-600 to-blue-500",
+    gradient: "from-[#005BAC] to-[#0078D7]",
   },
   {
     id: 4,
     label: "Engineering Students",
     count: "4207+",
-    gradient: "from-blue-400 to-blue-500",
+    gradient: "from-[#005BAC] to-[#0078D7]",
   },
   {
     id: 5,
     label: "CTC Greater than 5 LPA",
     count: "4478+",
-    gradient: "from-blue-600 to-blue-500",
+    gradient: "from-[#005BAC] to-[#0078D7]",
   },
   {
     id: 6,
     label: "Academic Percentage Less than 60%",
     count: "5236+",
-    gradient: "from-blue-400 to-blue-500",
+    gradient: "from-[#005BAC] to-[#0078D7]",
   },
   {
     id: 7,
     label: "Career Break / Gap Students",
     count: "2359+",
-    gradient: "from-blue-600 to-blue-500",
+    gradient: "from-[#005BAC] to-[#0078D7]",
   },
   {
     id: 8,
     label: "Freshers Hired",
     count: "3120+",
-    gradient: "from-blue-400 to-blue-500",
+    gradient: "from-[#005BAC] to-[#0078D7]",
   },
   {
     id: 9,
     label: "Working Professionals Upskilled",
     count: "1980+",
-    gradient: "from-blue-600 to-blue-500",
+    gradient: "from-[#005BAC] to-[#0078D7]",
   },
 ];
 
@@ -97,12 +97,12 @@ const PlacedStudents = () => {
     <div className="bg-background">
       {/* Hero Section */}
       <div
-        className="relative mt-[100px] w-full h-84 sm:h-90 bg-cover bg-center flex items-center justify-start px-4 sm:px-10 md:px-20 text-blue-800  md:px-40"
+        className="relative mt-[108px] w-full h-75 sm:h-[300px] md:h-[390px] bg-cover bg-center flex items-center justify-start px-4 sm:px-10 md:px-20 lg:px-40 text-blue-800"
         style={{
           backgroundImage: `url(${bgPlacement})`,
         }}
       >
-        <h1 className="relative z-10 text-2xl sm:text-3xl md:text-4xl text-white font-bold leading-sung leading-relaxed sm:px-10 md:px-15">
+        <h1 className="relative z-10 text-2xl sm:text-3xl md:text-4xl text-white font-bold leading-snug sm:px-10 md:px-0">
           Placed Students List
         </h1>
       </div>
@@ -186,7 +186,7 @@ const PlacedStudents = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-white-900 rounded-lg shadow-md bg-blue-800 p-4"
+              className="bg-white-900 rounded-lg shadow-md bg-blue-700 p-4"
             >
               <h3 className="text-xl font-bold text-center text-white mb-4">
                 Role-based Placements
@@ -348,13 +348,23 @@ const PlacedStudents = () => {
             Placement Highlights
           </h2>
           <p className="text-gray-700 text-lg mb-6">
-            With the growing number of graduates and the insufficient demand in IT field,
-            candidates now need to learn techniques and technologies utilized by MNCs.
+            With the growing number of graduates and the insufficient demand in
+            IT field, candidates now need to learn techniques and technologies
+            utilized by MNCs.
           </p>
           <ul className="list-disc list-inside text-gray-800 space-y-2">
-            <li><strong>Industry Trend:</strong> Real-time skills required by top companies</li>
-            <li><strong>Top Domains:</strong> Fullstack, Cloud, Testing, Data Science</li>
-            <li><strong>Freshers & Experienced:</strong> Placement support for all levels</li>
+            <li>
+              <strong>Industry Trend:</strong> Real-time skills required by top
+              companies
+            </li>
+            <li>
+              <strong>Top Domains:</strong> Fullstack, Cloud, Testing, Data
+              Science
+            </li>
+            <li>
+              <strong>Freshers & Experienced:</strong> Placement support for all
+              levels
+            </li>
           </ul>
         </div>
 
@@ -368,36 +378,65 @@ const PlacedStudents = () => {
               <button
                 onClick={() => setMode("classroom")}
                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-xs sm:text-base lg:text-lg shadow
-                  ${mode === "classroom"
-                    ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                    : "bg-white/60 text-black border border-[#a7f3d0]/40"} transition-all duration-200`}
+                  ${
+                    mode === "classroom"
+                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                      : "bg-white/60 text-black border border-[#a7f3d0]/40"
+                  } transition-all duration-200`}
               >
                 <FaChalkboardTeacher className="text-xl" /> Class Room
               </button>
               <button
                 onClick={() => setMode("online")}
                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-xs sm:text-base lg:text-lg shadow
-                  ${mode === "online"
-                    ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                    : "bg-white/60 text-black border border-[#a7f3d0]/40"} transition-all duration-200`}
+                  ${
+                    mode === "online"
+                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                      : "bg-white/60 text-black border border-[#a7f3d0]/40"
+                  } transition-all duration-200`}
               >
                 <FaLaptop className="text-xl" /> Online
               </button>
             </div>
             <form className="flex flex-col gap-4">
-              <input type="text" placeholder="Your Name" className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow" />
-              <input type="email" placeholder="Your Email" className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow" />
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+              />
+              <input
+                type="email"
+                placeholder="Your Email"
+                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+              />
               <div className="flex gap-3">
-                <input type="tel" placeholder="Mobile Number" className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow" />
-                <select defaultValue="" className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow">
-                  <option value="" disabled>How & Where</option>
+                <input
+                  type="tel"
+                  placeholder="Mobile Number"
+                  className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+                />
+                <select
+                  defaultValue=""
+                  className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+                >
+                  <option value="" disabled>
+                    How & Where
+                  </option>
                   <option>Morning Batch</option>
                   <option>Evening Batch</option>
                   <option>Weekend</option>
                 </select>
               </div>
-              <input type="text" placeholder="Type Course" className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow" />
-              <textarea placeholder="Your Message" rows={2} className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none resize-none shadow" />
+              <input
+                type="text"
+                placeholder="Type Course"
+                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+              />
+              <textarea
+                placeholder="Your Message"
+                rows={2}
+                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none resize-none shadow"
+              />
               <button className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-extrabold py-3 rounded-xl hover:from-[#0891b2] hover:to-[#16bca7] transition shadow-lg mt-1">
                 Submit
               </button>
