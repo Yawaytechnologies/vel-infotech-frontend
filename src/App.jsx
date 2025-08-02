@@ -7,6 +7,7 @@ import {
 import React from "react";
 import Home from "./pages/Home";
 import Header from "./components/common/header";
+import Internship from "./pages/internship";
 import PlacedStudents from "./pages/placedStudents";
 import Interview from "./pages/interview";
 import InterviewDetail from "./pages/InterviewDetail";
@@ -59,7 +60,7 @@ export default function App() {
           {/* User routes */}
           <Route path="/" element={<Home />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
-
+<Route path="/internship" element={<Internship />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
           <Route path="/all-courses" element={<AllCourses />} />
@@ -93,5 +94,3 @@ export default function App() {
 
   );
 }
-
-
