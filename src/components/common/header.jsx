@@ -126,7 +126,7 @@ const [mobileCategory, setMobileCategory] = useState(null);
           </div>
 
           {/* Nav links: Take up remaining space, push to right */}
-          <nav className="hidden md:flex items-center gap-2 lg:gap-15 lg:ml-30 h-full">
+          <nav className="hidden md:flex items-center gap-2 lg:gap-10 lg:ml-30 h-full">
             {navLinks.map((link) => (
               <a
                 key={link.name}

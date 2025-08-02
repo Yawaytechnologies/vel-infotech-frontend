@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import AdminHeader from "./AdminHeader";
 import AdminSidebar from "./AdminSidebar";
+import { Outlet } from "react-router-dom";
 
-export default function AdminLayout({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true); // desktop expand/collapse
-  const [mobileSidebar, setMobileSidebar] = useState(false); // mobile open/close
+export default function AdminLayout() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [mobileSidebar, setMobileSidebar] = useState(false);
 
-  // Closes mobile sidebar on overlay click
   const handleMobileOverlay = () => setMobileSidebar(false);
 
   return (
     <div className="min-h-screen bg-[#f6f7fb]">
       <AdminHeader
-  sidebarOpen={sidebarOpen}
-  onToggleSidebar={() => setSidebarOpen((v) => !v)}
-  mobileOpen={mobileSidebar}
-  onOpenMobileSidebar={() => setMobileSidebar(true)}
-  onCloseMobileSidebar={() => setMobileSidebar(false)}
-/>
-
+        sidebarOpen={sidebarOpen}
+        onToggleSidebar={() => setSidebarOpen((v) => !v)}
+        mobileOpen={mobileSidebar}
+        onOpenMobileSidebar={() => setMobileSidebar(true)}
+        onCloseMobileSidebar={() => setMobileSidebar(false)}
+      />
       <div className="flex">
         <AdminSidebar
           open={sidebarOpen}
@@ -26,10 +25,12 @@ export default function AdminLayout({ children }) {
           onCloseMobile={handleMobileOverlay}
           onToggleSidebar={() => setSidebarOpen((v) => !v)}
         />
-        <main className={`flex-1 min-h-[calc(100vh-72px)] p-6 transition-all duration-300
-          ${sidebarOpen ? "md:ml-[260px]" : "md:ml-[72px]"}
-        `}>
-          {children}
+        <main
+          className={`flex-1 min-h-[calc(100vh-72px)] p-6 transition-all duration-300 ${
+            sidebarOpen ? "md:ml-[260px]" : "md:ml-[72px]"
+          }`}
+        >
+          <Outlet />
         </main>
       </div>
       {/* Mobile Overlay */}
