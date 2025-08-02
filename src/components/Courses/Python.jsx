@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
-import java from "../../assets/java.jpg";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-
 
 
 export default function JavaCoursePage() {
