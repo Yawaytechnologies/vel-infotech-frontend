@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Header from "./components/common/header";
 import Internship from "./pages/internship";
 import PlacedStudents from "./pages/placedStudents";
+import Contact from "./pages/contactUs";
 import Interview from "./pages/interview";
 import About from "./pages/About";
 
@@ -37,6 +38,8 @@ import SalesForce from "../src/components/Courses/SalesForce";
 import ServiceNow from "../src/components/Courses/ServiceNow";
 import RPA from "../src/components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
+import Clientpage from "./pages/Clientpage";
+
 import StudentTable from "./components/admin/CourseEnquired";
 import AdminLayout from "./components/admin/AdminLayout";
 // Wrapper component to use useLocation
@@ -68,6 +71,10 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
+          <Route path="/contact-us" element={<Contact/>} />
+          <Route path="/client" element={<Clientpage/>} />
+
+          
 <Route path="/internship" element={<Internship />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
@@ -103,6 +110,16 @@ export default function App() {
           {/* Catch-all route */}
         </Routes>
       </Layout>
+    <div className="bg-white">
+    
+    <Header/>
+
+    
+
+
+    
+      
+    </div>
     </Router>
   );
 }
