@@ -37,11 +37,16 @@ import RPA from "../src/components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
 import StudentTable from "./components/admin/CourseEnquired";
 import AdminLayout from "./components/admin/AdminLayout";
+import ProductionSupportPage from "./components/Courses/ProductionSupport";
+import DigitalMarketingPage from "./components/Courses/DigitalMarketing";
+import SoftSkillPage from "./components/Courses/SoftSkillsTraining";
+
 // Wrapper component to use useLocation
 function Layout({ children }) {
   const location = useLocation();
   // List all admin paths here
   const adminPaths = [
+    "/admin",
     "/admin/login",
     "/admin/dashboard",
     "/admin/course-enquired",
@@ -65,7 +70,7 @@ export default function App() {
           {/* User routes */}
           <Route path="/" element={<Home />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
-<Route path="/internship" element={<Internship />} />
+          <Route path="/internship" element={<Internship />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
           <Route path="/all-courses" element={<AllCourses />} />
@@ -89,11 +94,14 @@ export default function App() {
           <Route path="/all-courses/SalesForce" element={<SalesForce />} />
           <Route path="/all-courses/ServiceNow" element={<ServiceNow />} />
           <Route path="/all-courses/RPA" element={<RPA />} />
-
+          <Route path="/all-courses/ProductionSupport" element={<ProductionSupportPage />} />
+          <Route path="/all-courses/DigitalMarketing" element={<DigitalMarketingPage />} />
+          <Route path="/all-courses/SoftSkillsTraining" element={<SoftSkillPage />} />
           {/* Admin routes */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="course-enquired" element={<StudentTable />} />
+            
             {/* ...more nested admin routes... */}
           </Route>
 
