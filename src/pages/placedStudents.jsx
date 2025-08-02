@@ -341,18 +341,18 @@ const PlacedStudents = () => {
           </table>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center   pt-2 px-2 pb-2">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-7 items-center pl-20 pt-2 px-2 pb-2">
         {/* Left Side - Text Content */}
         <div className="relative backdrop-blur-[4px] bg-white/30 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-7 ml-19">
+          <h2 className="text-xl md:text-2xl font-extrabold text-gray-800 mb-7 ml-19">
             Placement Highlights
           </h2>
-          <p className="text-gray-700 text-lg mb-6">
+          <p className="text-gray-700 text-md mb-6">
             With the growing number of graduates and the insufficient demand in
             IT field, candidates now need to learn techniques and technologies
             utilized by MNCs.
           </p>
-          <ul className="list-disc list-inside text-gray-800 space-y-2">
+          <ul className="list-disc list-inside text-gray-800 space-2">
             <li>
               <strong>Industry Trend:</strong> Real-time skills required by top
               companies
@@ -369,15 +369,15 @@ const PlacedStudents = () => {
         </div>
 
         {/* Right Side - Enquiry Form */}
-        <div className="w-full max-w-lg mx-auto">
+        <div className="w-full max-w-md mx-auto">
           <div className="relative backdrop-blur-[4px] bg-white/30 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
-            <h5 className="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
+            <h5 className="text-xl font-bold mb-4 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
               Get a Free Training Quote
             </h5>
-            <div className="flex justify-center mb-5 gap-2">
+            <div className="flex justify-center  mb-5 gap-2">
               <button
                 onClick={() => setMode("classroom")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-xs sm:text-base lg:text-lg shadow
+                className={`flex-1 flex items-center justify-center gap-2 py-1.5 md:py-2 rounded-full text-xs sm:text-base lg:text-lg shadow
                   ${
                     mode === "classroom"
                       ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
@@ -388,7 +388,7 @@ const PlacedStudents = () => {
               </button>
               <button
                 onClick={() => setMode("online")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-xs sm:text-base lg:text-lg shadow
+                className={`flex-1 flex items-center justify-center gap-2 py-1.5 md:py-2 rounded-full text-xs sm:text-base lg:text-lg shadow
                   ${
                     mode === "online"
                       ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
@@ -402,22 +402,22 @@ const PlacedStudents = () => {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+                className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
               />
               <input
                 type="email"
                 placeholder="Your Email"
-                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+                className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
               />
               <div className="flex gap-3">
                 <input
                   type="tel"
                   placeholder="Mobile Number"
-                  className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+                  className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
                 />
                 <select
                   defaultValue=""
-                  className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+                  className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
                 >
                   <option value="" disabled>
                     How & Where
@@ -430,14 +430,14 @@ const PlacedStudents = () => {
               <input
                 type="text"
                 placeholder="Type Course"
-                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
+                className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
               />
               <textarea
                 placeholder="Your Message"
-                rows={2}
-                className="rounded-xl bg-background px-5 py-3 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none resize-none shadow"
+                rows={1}
+                className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none resize-none shadow"
               />
-              <button className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-extrabold py-3 rounded-xl hover:from-[#0891b2] hover:to-[#16bca7] transition shadow-lg mt-1">
+              <button className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-extrabold px-3 py-2 rounded-xl hover:from-[#0891b2] hover:to-[#16bca7] transition shadow-lg mt-1">
                 Submit
               </button>
             </form>
