@@ -78,9 +78,7 @@ export default function App() {
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/contact-us" element={<Contact/>} />
           <Route path="/client" element={<Clientpage/>} />
-
-          
-<Route path="/internship" element={<Internship />} />
+          <Route path="/internship" element={<Internship />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
           <Route path="/all-courses" element={<AllCourses />} />
