@@ -102,7 +102,7 @@ const PlacedStudents = () => {
           backgroundImage: `url(${bgPlacement})`,
         }}
       >
-        <h1 className="relative z-10 text-2xl sm:text-3xl md:text-4xl font-bold leading-sung leading-relaxed sm:px-10 md:px-40">
+        <h1 className="relative z-10 text-2xl sm:text-3xl md:text-4xl text-white font-bold leading-sung leading-relaxed sm:px-10 md:px-15">
           Placed Students List
         </h1>
       </div>
