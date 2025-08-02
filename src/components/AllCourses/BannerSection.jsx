@@ -6,24 +6,26 @@ export default function BannerSection() {
     <section
       className="w-full mt-12 md:mt-20 flex flex-col md:flex-row items-center justify-between px-6 md:px-16 pb-12 text-gray-900"
       style={{
-        background: "linear-gradient(to right, #f0f4ff, #dbeafe)",
+        background: "linear-gradient(to right, #005BAC, #003c6a)",
       }}
     >
-      {/* LEFT: Text Content */}
-      <div className="w-full md:w-1/2 flex flex-col gap-6 animate-fade-up">
-        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900">
-          Good <span className="text-[#00b4d8]">coaching</span> is
-          <br /> good teaching & <br /> nothing else.
-        </h1>
+     {/* LEFT: Text Content */}
+<div className="w-full md:w-1/2 flex flex-col gap-6 animate-fade-up">
+  <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white">
+    Good <span className="text-[#00b4d8]">coaching</span> is
+    <br /> good teaching & <br /> nothing else.
+  </h1>
 
-        {/* Sub-heading */}
-        <p className="text-sm tracking-wide text-gray-500 uppercase">
-          Successful Coaches Are Visionaries
-        </p>
+
+       {/* Sub-heading */}
+<p className="text-sm tracking-wide text-white uppercase">
+  Successful Coaches Are Visionaries
+</p>
+
 
         {/* Buttons */}
         <div className="flex gap-4 flex-wrap">
-          <button className="px-6 py-2 border border-gray-800 text-gray-800 rounded-md hover:bg-gray-900 hover:text-white transition">
+          <button className="px-6 py-2 border border-white text-white rounded-md hover:bg-gray-900 hover:text-white transition">
             View Courses
           </button>
           <button className="px-6 py-2 bg-[#00b4d8] text-white rounded-md font-semibold hover:bg-[#0096c7] transition">
@@ -72,17 +74,17 @@ export default function BannerSection() {
         <div className="flex items-center justify-center gap-6 md:gap-10 flex-wrap text-center text-sm font-semibold mt-10">
           <div className="flex flex-col items-center">
             <span className="text-[28px] text-pink-500 font-extrabold">10000+</span>
-            <span className="text-gray-700 uppercase text-xs">Students</span>
+           <span className="text-white uppercase text-xs">Students</span>
           </div>
           <div className="w-[1px] h-10 bg-gray-300 hidden md:block"></div>
           <div className="flex flex-col items-center">
             <span className="text-[28px] text-green-600 font-extrabold">600+</span>
-            <span className="text-gray-700 uppercase text-xs">Companies</span>
+            <span className="text-white uppercase text-xs">Companies</span>
           </div>
           <div className="w-[1px] h-10 bg-gray-300 hidden md:block"></div>
           <div className="flex flex-col items-center">
             <span className="text-[28px] text-blue-600 font-extrabold">30+</span>
-            <span className="text-gray-700 uppercase text-xs">Countries</span>
+            <span className="text-white uppercase text-xs">Countries</span>
           </div>
         </div>
       </div>
