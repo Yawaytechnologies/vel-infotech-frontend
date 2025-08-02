@@ -13,7 +13,7 @@ import interview from "../assets/interview.svg";
 import job from "../assets/job.svg";
 import aboutus from "../assets/AboutUs.jpg"
 
-import { CheckCircle, BookOpenCheck, Laptop2, Award } from 'lucide-react';
+import { Briefcase, TrendingUp, Users, BookOpenCheck, Laptop2, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -21,7 +21,31 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import Background from "../assets/Background1.jpg"
+import Background from "../assets/Background1.png";
+import { FaUsers, FaLightbulb, FaHandsHelping, FaAward } from 'react-icons/fa';
+const cultureData = [
+  {
+    title: 'Collaboration',
+    description: 'We achieve great things together.',
+    icon: <FaUsers className="text-blue-600 text-6xl" />,
+  },
+  {
+    title: 'Innovation',
+    description: 'Creative solutions are at the heart of our success.',
+    icon: <FaLightbulb className="text-yellow-500 text-6xl" />,
+  },
+  {
+    title: 'Integrity',
+    description: 'We uphold the highest standards of integrity.',
+    icon: <FaHandsHelping className="text-green-600 text-6xl" />,
+  },
+  {
+    title: 'Excellence',
+    description: 'Excellence is our culture, not our goal.',
+    icon: <FaAward className="text-red-600 text-6xl" />,
+  },
+];
+
 
 const About = () => {
   return (
@@ -54,40 +78,53 @@ const About = () => {
 
      {/*  </div> */}
 
-   
-        <section className="py-12 px-6 bg-gradient-to-br from-[#ccf2ff] via-[#e0f7fa] to-[#f0fcff] text-gray-800">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl font-heading font-semibold text-[#005BAC] mb-6">Why Choose Us</h2>
-          <p className="text-lg text-gray-700 mb-12">
-            We are proud of the impact we’ve made and the milestones we've achieved over the years.
-          </p>
+   <section className="py-20 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800">
+  <div className="max-w-6xl mx-auto px-6">
+    <h2 className="text-4xl font-bold text-center text-[#005BAC] mb-12">Why Choose Us</h2>
 
-          <div className="grid grid-cols-1 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#0077cc]">
-              <CheckCircle className="text-[#0077cc] w-6 h-6 mb-2 mx-auto" />
-              <h3 className="text-lg font-bold text-[#005BAC]">Expert Trainers with Real-World Experience</h3>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#00acc1]">
-              <CheckCircle className="text-[#00acc1] w-6 h-6 mb-2 mx-auto" />
-              <h3 className="text-lg font-bold text-[#005BAC]">Flexible Learning Modes (Classroom / Online)</h3>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#ff7043]">
-              <CheckCircle className="text-[#ff7043] w-6 h-6 mb-2 mx-auto" />
-              <h3 className="text-lg font-bold text-[#005BAC]">Practical, Job-Ready Curriculum</h3>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#66bb6a]">
-              <CheckCircle className="text-[#66bb6a] w-6 h-6 mb-2 mx-auto" />
-              <h3 className="text-lg font-bold text-[#005BAC]">Resume Building & Interview Preparation</h3>
-            </div>
-          </div>
+    <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
+      
+      {/* Step 1 */}
+      <div className="relative">
+        <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+        <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
+        <p className="text-gray-600">
+          Our mentors come from real industry backgrounds and bring hands-on insights.
+        </p>
+      </div>
 
-          <div className="mt-12">
-            <p className="text-xl text-gray-700">
-              All our courses are led by industry experts and backed by hands-on projects and career guidance.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Step 2 */}
+      <div className="relative">
+        <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+        <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Flexible Learning Modes</h3>
+        <p className="text-gray-600">
+          Attend classes online or in person at your convenience.
+        </p>
+      </div>
+
+      {/* Step 3 */}
+      <div className="relative">
+        <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+        <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Job-Ready Curriculum</h3>
+        <p className="text-gray-600">
+          Learn what employers want through real-world projects and practical labs.
+        </p>
+      </div>
+
+      {/* Step 4 */}
+      <div className="relative">
+        <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+        <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Career Support</h3>
+        <p className="text-gray-600">
+          We provide resume building, mock interviews, and direct placement help.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 
 
 
@@ -208,50 +245,78 @@ const About = () => {
 </section> 
  */}
 
+<section className="relative py-20 bg-gradient-to-br from-[#F0F8FF] to-[#D6E9FF]">
+  {/* Vertical timeline line */}
+  <div className="hidden lg:block absolute left-24 top-0 h-full border-l-4 border-gradient-to-b from-[#005BAC] via-[#00ACC1] to-[#338DFF]"></div>
 
-<section className="py-12 bg-gradient-to-br from-[#E6F2FF] via-[#A0CFFF] to-[#66B2FF]">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-4xl font-bold text-[#003366] mb-4">Our Impact</h2>
-    <p className="text-lg text-gray-700 mb-6">
-      We are proud of the lives we've changed and the success stories we’ve created through our training programs.
-    </p>
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-      {/* Impact 1 */}
-      <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-[#005BAC]">
-        <div className="text-5xl font-extrabold text-[#005BAC] mb-2">90%</div>
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">Job Placement Rate</h3>
-        <p className="text-gray-600">
-          90% of our students get placed within 6 months of completing the program.
-        </p>
+  <div className="max-w-5xl mx-auto px-6 flex flex-col gap-24">
+    {/* Impact 1 */}
+    <div className="flex items-center gap-8 relative">
+      {/* Left vertical gradient bar */}
+      <div className="flex-shrink-0 w-16 h-40 rounded-l-xl bg-gradient-to-b from-[#005BAC] to-[#003366] flex items-center justify-center">
+       
       </div>
 
-      {/* Impact 2 */}
-      <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-[#00ACC1]">
-        <div className="text-5xl font-extrabold text-[#00ACC1] mb-2">40%</div>
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">Average Salary Hike</h3>
-        <p className="text-gray-600">
-          On average, graduates see a 40% increase in salary within the first year.
-        </p>
-      </div>
-
-      {/* Impact 3 */}
-      <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border-l-4 border-[#66B2FF]">
-        <div className="text-5xl font-extrabold text-[#66B2FF] mb-2">100+</div>
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">Hiring Partners</h3>
-        <p className="text-gray-600">
-          We’ve partnered with 100+ leading companies to hire our talented graduates.
+      {/* Right content */}
+      <div className="flex-1 bg-white rounded-xl shadow-lg px-8 py-6 relative">
+        {/* Icon bubble */}
+        <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#005BAC] flex items-center justify-center shadow-lg">
+          <Briefcase className="w-8 h-8 text-white" />
+        </div>
+        <h3 className="text-2xl font-bold text-[#003366]">Job Placement Rate</h3>
+        <p className="mt-2 text-gray-700 max-w-xl">
+          90% of our students secure jobs within 6 months after graduating.
         </p>
       </div>
     </div>
 
-    <div className="mt-12">
-      <p className="text-xl text-gray-700 font-medium italic">
-        "Our training isn’t just about education—it’s about transformation."
-      </p>
+    {/* Impact 2 */}
+    <div className="flex items-center gap-8 relative">
+      <div className="flex-shrink-0 w-16 h-40 rounded-l-xl bg-gradient-to-b from-[#00ACC1] to-[#007B8A] flex items-center justify-center">
+        
+      </div>
+
+      <div className="flex-1 bg-white rounded-xl shadow-lg px-8 py-6 relative">
+        <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#00ACC1] flex items-center justify-center shadow-lg">
+          <TrendingUp className="w-8 h-8 text-white" />
+        </div>
+        <h3 className="text-2xl font-bold text-[#005B66]">Average Salary Hike</h3>
+        <p className="mt-2 text-gray-700 max-w-xl">
+          Graduates report a 40% average salary increase in their first role after training.
+        </p>
+      </div>
+    </div>
+
+    {/* Impact 3 */}
+    <div className="flex items-center gap-8 relative">
+      <div className="flex-shrink-0 w-16 h-40 rounded-l-xl bg-gradient-to-b from-[#338DFF] to-[#004C99] flex items-center justify-center">
+       
+      </div>
+
+      <div className="flex-1 bg-white rounded-xl shadow-lg px-8 py-6 relative">
+        <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#338DFF] flex items-center justify-center shadow-lg">
+          <Users className="w-8 h-8 text-white" />
+        </div>
+        <h3 className="text-2xl font-bold text-[#002F66]">Hiring Partners</h3>
+        <p className="mt-2 text-gray-700 max-w-xl">
+          Trusted by 100+ leading tech companies for skilled talent.
+        </p>
+      </div>
     </div>
   </div>
+
+  {/* Quote */}
+  <div className="mt-28 text-center px-6 max-w-3xl mx-auto">
+    <p className="text-xl italic text-[#003366] font-semibold leading-relaxed">
+      “We’re not just teaching tech — we’re transforming futures.”
+    </p>
+  </div>
 </section>
+
+
+
+
+
 
 {/*Customer testemonials */}
 <section className="py-16 bg-[#fafafa]">
@@ -319,6 +384,8 @@ const About = () => {
   </div>
 </section>
 
+
+
 {/* Core services or offerings*/}
 {/* <section className="py-16 bg-[#f5f5f5]">
   <div className="max-w-7xl mx-auto px-6 text-center">
@@ -367,54 +434,40 @@ const About = () => {
   </div>
 </section> */}
 {/*company culture*/}
-<section className="py-20 bg-gradient-to-br from-[#d0f4ff] via-[#e6faff] to-[#ffffff]">
-  <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-4xl font-bold text-[#003366] mb-6 tracking-tight">Our Company Culture</h2>
-    <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
-      At Vel InfoTech, we create a supportive and dynamic space where our team thrives, collaborates, and constantly innovates.
-    </p>
+<div className="bg-gray-50 py-16">
+      {/* Split Layout - Left and Right of Line */}
+      <div className="container mx-auto px-6">
+        <h2 className="text-3xl font-bold mb-10 text-center">Our Culture</h2>
+        <div className="flex justify-between items-center relative">
+          {/* Left Side */}
+          <div className="w-1/2 flex flex-col items-center">
+            {cultureData.slice(0, 2).map((item, index) => (
+              <div key={index} className="text-center mb-16">
+                <div className="text-6xl">{item.icon}</div>
+                <h3 className="text-2xl font-semibold text-gray-800 mt-4">{item.title}</h3>
+                <p className="text-gray-600 mt-2">{item.description}</p>
+              </div>
+            ))}
+          </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      {/* Culture Point 1 */}
-      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#0077cc] hover:scale-105 transform">
-        <h3 className="text-xl font-semibold text-[#005BAC] mb-3">🤝 Collaboration</h3>
-        <p className="text-gray-600">
-          Teamwork fuels our success. We solve challenges together and celebrate wins as one.
-        </p>
-      </div>
+          {/* Vertical Line */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-gray-300"></div>
 
-      {/* Culture Point 2 */}
-      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#00acc1] hover:scale-105 transform">
-        <h3 className="text-xl font-semibold text-[#005BAC] mb-3">📚 Continuous Learning</h3>
-        <p className="text-gray-600">
-          Growth is our mindset. We promote lifelong learning and staying ahead in tech.
-        </p>
-      </div>
-
-      {/* Culture Point 3 */}
-      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#66bb6a] hover:scale-105 transform">
-        <h3 className="text-xl font-semibold text-[#005BAC] mb-3">💡 Innovation</h3>
-        <p className="text-gray-600">
-          We thrive on fresh ideas and pushing boundaries in everything we do.
-        </p>
-      </div>
-
-      {/* Culture Point 4 */}
-      <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#ffa726] hover:scale-105 transform">
-        <h3 className="text-xl font-semibold text-[#005BAC] mb-3">🎯 Passion for Impact</h3>
-        <p className="text-gray-600">
-          Our true reward is seeing our students transform their lives through learning.
-        </p>
+          {/* Right Side */}
+          <div className="w-1/2 flex flex-col items-center">
+            {cultureData.slice(2).map((item, index) => (
+              <div key={index} className="text-center mb-16">
+                <div className="text-6xl">{item.icon}</div>
+                <h3 className="text-2xl font-semibold text-gray-800 mt-4">{item.title}</h3>
+                <p className="text-gray-600 mt-2">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
 
-    <div className="mt-14">
-      <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-        At Vel InfoTech, our culture is rooted in teamwork, growth, innovation, and impact. We're united by a shared mission to empower futures and spark careers.
-      </p>
-    </div>
-  </div>
-</section>
+   
 
   
 
@@ -548,3 +601,4 @@ const About = () => {
 };
 
 export default About;
+

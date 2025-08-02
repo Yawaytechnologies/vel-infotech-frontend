@@ -1,7 +1,7 @@
 // src/pages/Internship.jsx
 import React from "react";
 import internshipBg from "../assets/internship.jpg";
-import background from "../assets/background.jpg";
+import background from "../assets/background.jpeg";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import dotnetIcon from "../assets/dotnet.png";
