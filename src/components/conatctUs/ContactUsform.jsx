@@ -42,8 +42,9 @@ function ContactForm() {
   };
 
   return (
-    <div className="w-[85%] mx-auto px-4 sm:px-6 p-6 bg-gradient-to-r mt-10">
-      <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
+    <div className="w-100vw max-h-full bg-white">
+    <div className="w-[85%] mx-auto px-4 sm:px-6 p-6 bg-white mt-10">
+      <h2 className="text-4xl font-bold mb-8 text-center bg-[#005BAC] bg-clip-text text-transparent tracking-tight">
         Contact Form
       </h2>
 
@@ -176,6 +177,7 @@ function ContactForm() {
         </div>
       </form>
     </div>
+  </div>
   );
 }
 

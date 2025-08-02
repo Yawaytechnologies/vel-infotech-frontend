@@ -103,11 +103,11 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
        <Route path="/placed-students" element={<PlacedStudents />} />
-       <Route path="/contact-us" element={<Contact/>} />
+       
        
     </Routes>
 
-<Footer />
+
     
       
     </div>

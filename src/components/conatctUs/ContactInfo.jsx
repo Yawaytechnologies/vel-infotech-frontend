@@ -5,6 +5,7 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 const ContactInfo = () => {
   return (
     <div className="w-full px-4 py-10 bg-white">
+      <hr className="border-t-2 border-[#005BAC] my-6" />
       <h1 className="bg-white text-[#005BAC] text-4xl font-bold mt-2 text-center mx-auto">
   Reach Us Directly
 </h1>

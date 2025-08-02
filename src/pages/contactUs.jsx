@@ -8,7 +8,7 @@ function Contact() {
     return (
       <div className='bg-[#e6ebf7] pb-0 mt-30'>
         <ContactHeader/>
-        <div className='bg-[#e6ebf7] px-8 py-4 pt-0'>
+        <div className='bg-white w-full max-h-full'>
         <ContactForm/>
         </div>
         <ContactInfo/>
