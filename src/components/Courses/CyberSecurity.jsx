@@ -9,25 +9,25 @@ export default function JavaCoursePage() {
   const [mode, setMode] = useState("classroom");
 
   return (
-    <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-        {/* LEFT: Content */}
-        <div className="flex-1">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Join Our 100% Job Guaranteed <br />
-            <span className="text-yellow-400">Java Full Stack Developer Course</span>
-          </h2>
+ <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
+  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+    {/* LEFT: Content */}
+    <div className="flex-1">
+      <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+        Join Our 100% Job Guaranteed <br />
+        <span className="text-yellow-400">Cyber Security Program</span>
+      </h2>
 
-          <ul className="space-y-3 mt-6 text-lg">
-            <li>✅ Join the <strong>Best Java Training Institute</strong> to master Core & Advanced Java.</li>
-            <li>✅ Learn Java Full Stack – <strong>Spring Boot, Hibernate, React, Node.js</strong>.</li>
-            <li>✅ Build real-world projects with hands-on <strong>coding experience</strong>.</li>
-            <li>✅ Choose <strong>flexible learning modes</strong> – Weekday / Weekend / Fast-track.</li>
-            <li>✅ Earn an industry-accepted <strong>Java Developer Certification</strong>.</li>
-            <li>✅ Career support: Resume building, mock interviews & job referrals.</li>
-          </ul>
+      <ul className="space-y-3 mt-6 text-lg">
+        <li>✅ Enroll in the <strong>Top Cyber Security Institute</strong> to launch your career in ethical hacking and information security.</li>
+        <li>✅ Learn core topics – <strong>Network Security, Ethical Hacking, Firewalls, Malware Analysis, Cryptography</strong>.</li>
+        <li>✅ Build practical skills through <strong>real-time threat simulations, vulnerability scanning, and risk assessment labs</strong>.</li>
+        <li>✅ Get deep insights into <strong>penetration testing, SOC operations, and incident response strategies</strong>.</li>
+        <li>✅ Earn a globally recognized <strong>Cyber Security Certification</strong> like CEH or CompTIA Security+.</li>
+        <li>✅ Career support: Live projects, resume building, mock interviews & placement assistance.</li>
+      </ul>
 
-         <button
+      <button
         className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
                 mt-8
                 before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
@@ -40,20 +40,20 @@ export default function JavaCoursePage() {
         <div>
           <span className="text-lg font-extrabold text-violet-400 block">Freshers Salary:</span>
           ₹3 LPA to ₹8 LPA <br />
-          <span className="text-sm text-gray-300">| Duration: 3 Months</span>
+          <span className="text-sm text-gray-300">| ETL Testing | Duration: 3 Months</span>
+
         </div>
       </button>
-
     </div>
 
+    {/* RIGHT: Call to Action */}
+    <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
+      <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
+     <p className="mb-4 text-lg">Become a Cyber Security Expert in Just 3 Months</p>
 
 
-        {/* RIGHT: Call to Action */}
-        <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-          <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-          <p className="mb-4 text-lg">Become a Java Full Stack Developer in 3 Months</p>
 
-          <button
+     <button
   type="button"
   onClick={() => {
     const formSection = document.getElementById("enquiry-form");
@@ -83,6 +83,7 @@ export default function JavaCoursePage() {
     </svg>
   </span>
 </button>
+
 
 
         </div>
@@ -171,50 +172,49 @@ export default function JavaCoursePage() {
 
 
 
-
-{/* JAVA overview */}
+{/* Cyber Security Overview */}
 <section className="px-0 py-16 bg-">
   <div className="max-w-[100%] mx-auto px-4 md:px-10">
     <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
       {/* Heading */}
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
-        Overview of Java Full Stack Course
+        Overview of Cyber Security Program
       </h2>
       <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
       {/* Description */}
       <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-        Our Java Full Stack Training equips you with the knowledge and hands-on experience required to become an industry-ready developer. This course covers both frontend and backend development using technologies like Core Java, Spring Boot, REST APIs, MySQL, HTML, CSS, JavaScript, React.js, and more. You’ll also participate in real-world projects, learn deployment techniques, and gain interview preparation support.
+        Our Cyber Security Training program is designed to equip you with the skills to defend digital systems and networks from threats. Learn ethical hacking, vulnerability assessment, and security best practices to prepare for roles like Security Analyst, Penetration Tester, or SOC Engineer.
       </p>
 
       {/* What You’ll Learn */}
       <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-        What You’ll Learn From Java Full Stack Training
+        What You’ll Learn From Cyber Security Training
       </h3>
       <ul className="space-y-4 text-gray-800 text-base md:text-lg">
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Get a solid foundation in Core Java concepts including OOPs, collections, exception handling, and multithreading.
+          Understand the fundamentals of information security and threat landscapes.
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Build RESTful APIs using Spring Boot and integrate with MySQL databases for backend logic and persistence.
+          Learn ethical hacking, penetration testing, and vulnerability scanning techniques.
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Master frontend development with HTML, CSS, JavaScript, and React.js to create interactive user interfaces.
+          Explore tools like Kali Linux, Wireshark, Metasploit, and Burp Suite.
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Learn deployment strategies using Git, GitHub, and cloud platforms like Heroku or Render.
+          Gain hands-on experience with firewalls, IDS/IPS, and endpoint protection.
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Participate in capstone projects that simulate real business challenges to strengthen your job-readiness.
+          Learn about SOC operations, incident response, and digital forensics.
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Get placement support including resume building, mock interviews, and technical assessments.
+          Get career support with resume building, certification prep, and placement assistance.
         </li>
       </ul>
     </div>
@@ -222,15 +222,18 @@ export default function JavaCoursePage() {
 </section>
 
 
-{/* ss */}
+
+
+
+{/* Cyber Security Training Section */}
 <section className="w-full px-6 py-20 bg-gradient-to-b from-[#] to-[#] text-black">
   {/* Header */}
   <div className="max-w-7xl mx-auto text-center mb-16">
     <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
-      Become a Full Stack Java Developer
+      Become a Certified Cyber Security Professional
     </h2>
-    <p className="text-lg md:text-xl text-gray-700 mb-6 text-white">
-      Master Java, Spring Boot, REST APIs, React, and more through practical, expert-led training.
+    <p className="text-lg md:text-xl text-white mb-6">
+      Learn Ethical Hacking, Vulnerability Assessment, Network Defense, Security Tools, and Incident Handling with real-time labs and industry-focused training.
     </p>
     <div className="flex justify-center gap-4 flex-wrap">
       <button className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all">
@@ -241,56 +244,50 @@ export default function JavaCoursePage() {
 
   {/* Cards */}
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-    
-    {/* Card 1 */}
+
+    {/* Card 1 - Course Highlights */}
     <div
       data-aos="fade-up"
       data-aos-delay="0"
       className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <div className="mb-4">
-       <img
-  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-  alt="Course Highlights"
-  className="w-10 h-10 mb-4"
-/>
-
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+          alt="Course Highlights"
+          className="w-10 h-10 mb-4"
+        />
         <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
-       <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-          <li>✓ Java, Spring Boot, REST APIs, Full Stack</li>
-          <li>✓ Placement prep & resume support</li>
-          <li>✓ Live projects + session recordings</li>
-          <li>✓ Learn from 10+ yrs experienced mentors</li>
+        <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
+          <li>✓ Ethical Hacking & Network Security Training</li>
+          <li>✓ Real-time practical attack & defense simulations</li>
+          <li>✓ Resume prep & mock interviews</li>
+          <li>✓ Job-oriented modules with certification guidance</li>
         </ul>
       </div>
-    
     </div>
 
-    {/* Card 2 */}
+    {/* Card 2 - Tools */}
     <div
       data-aos="fade-up"
       data-aos-delay="100"
       className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300">
       <div className="mb-4">
-    <img
-  src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
-  alt="Tools You’ll Master"
-  className="w-10 h-10 mb-4"
-/>
-
-
-
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+          alt="Tools You’ll Master"
+          className="w-10 h-10 mb-4"
+        />
         <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
         <div className="flex flex-wrap gap-2">
-          {["Java", "Spring", "MySQL", "React", "GitHub"].map((tool, i) => (
+          {["Kali Linux", "Wireshark", "Nmap", "Metasploit", "Burp Suite", "Snort", "Splunk", "OWASP ZAP"].map((tool, i) => (
             <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{tool}</span>
           ))}
         </div>
       </div>
-     
     </div>
 
-    {/* Card 3 */}
+    {/* Card 3 - Topics Covered */}
     <div
       data-aos="fade-up"
       data-aos-delay="200"
@@ -298,55 +295,43 @@ export default function JavaCoursePage() {
     >
       <div className="mb-4">
         <img
-  src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
-  alt="Frameworks Covered"
-  className="w-10 h-10 mb-4"
-/>
-
-        <h3 className="text-lg font-extrabold text-black mb-2">Frameworks Covered</h3>
+          src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
+          alt="Topics Covered"
+          className="w-10 h-10 mb-4"
+        />
+        <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
         <div className="flex flex-wrap gap-2">
-          {["Spring", "Hibernate", "Spring Security", "JPA", "Maven", "JUnit", "Mockito"].map((fw, i) => (
-            <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{fw}</span>
+          {["Cyber Threats", "Ethical Hacking", "Network Security", "Incident Response", "SOC Operations", "Vulnerability Scanning"].map((topic, i) => (
+            <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{topic}</span>
           ))}
         </div>
       </div>
-      
     </div>
 
-    {/* Card 4 */}
+    {/* Card 4 - Key Skills */}
     <div
       data-aos="fade-up"
       data-aos-delay="300"
       className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <div className="mb-4">
-       <img
-  src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
-  alt="Key Skills You’ll Gain"
-  className="w-10 h-10 mb-4"
-/>
-
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
+          alt="Key Skills You’ll Gain"
+          className="w-10 h-10 mb-4"
+        />
         <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
         <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-          <li>Debugging & deployment practices</li>
-          <li>Version control, CI/CD pipelines</li>
-          <li>REST API integration & testing</li>
-          <li>Client communication, hosting apps</li>
+          <li>Identify & mitigate cyber threats and vulnerabilities</li>
+          <li>Conduct penetration testing & ethical hacking</li>
+          <li>Monitor networks & analyze security events</li>
+          <li>Respond to incidents and secure digital assets</li>
         </ul>
       </div>
-     
     </div>
 
   </div>
 </section>
-
-
-
-
-
-
-
-
 
 
 
@@ -446,3 +431,4 @@ export default function JavaCoursePage() {
     </section>
   );
 }
+

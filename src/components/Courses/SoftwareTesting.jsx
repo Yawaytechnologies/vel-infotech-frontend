@@ -9,25 +9,25 @@ export default function JavaCoursePage() {
   const [mode, setMode] = useState("classroom");
 
   return (
-    <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-        {/* LEFT: Content */}
-        <div className="flex-1">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Join Our 100% Job Guaranteed <br />
-            <span className="text-yellow-400">Java Full Stack Developer Course</span>
-          </h2>
+  <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
+  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+    {/* LEFT: Content */}
+    <div className="flex-1">
+      <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+        Join Our 100% Job Guaranteed <br />
+        <span className="text-yellow-400">Software Testing Program</span>
+      </h2>
 
-          <ul className="space-y-3 mt-6 text-lg">
-            <li>✅ Join the <strong>Best Java Training Institute</strong> to master Core & Advanced Java.</li>
-            <li>✅ Learn Java Full Stack – <strong>Spring Boot, Hibernate, React, Node.js</strong>.</li>
-            <li>✅ Build real-world projects with hands-on <strong>coding experience</strong>.</li>
-            <li>✅ Choose <strong>flexible learning modes</strong> – Weekday / Weekend / Fast-track.</li>
-            <li>✅ Earn an industry-accepted <strong>Java Developer Certification</strong>.</li>
-            <li>✅ Career support: Resume building, mock interviews & job referrals.</li>
-          </ul>
+      <ul className="space-y-3 mt-6 text-lg">
+        <li>✅ Join the <strong>Top Software Testing Institute</strong> to master manual and automation testing skills.</li>
+        <li>✅ Learn core tools – <strong>Selenium, Java, TestNG, JIRA, Postman, SQL, API Testing</strong>.</li>
+        <li>✅ Work on real-time projects with <strong>end-to-end functional, regression, and automation testing</strong>.</li>
+        <li>✅ Choose <strong>flexible learning paths</strong> – Weekday / Weekend / Fast-track options.</li>
+        <li>✅ Earn an industry-recognized <strong>Software Testing Certification</strong>.</li>
+        <li>✅ Career support: Mock interviews, resume building, job referrals & hands-on assignments.</li>
+      </ul>
 
-         <button
+      <button
         className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
                 mt-8
                 before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
@@ -43,17 +43,16 @@ export default function JavaCoursePage() {
           <span className="text-sm text-gray-300">| Duration: 3 Months</span>
         </div>
       </button>
-
     </div>
 
+    {/* RIGHT: Call to Action */}
+    <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
+      <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
+      <p className="mb-4 text-lg">Become a Software Testing Expert in 3 Months</p>
 
 
-        {/* RIGHT: Call to Action */}
-        <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-          <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-          <p className="mb-4 text-lg">Become a Java Full Stack Developer in 3 Months</p>
 
-          <button
+     <button
   type="button"
   onClick={() => {
     const formSection = document.getElementById("enquiry-form");
@@ -83,6 +82,7 @@ export default function JavaCoursePage() {
     </svg>
   </span>
 </button>
+
 
 
         </div>
@@ -171,50 +171,49 @@ export default function JavaCoursePage() {
 
 
 
-
-{/* JAVA overview */}
+{/* SOFTWARE TESTING overview */}
 <section className="px-0 py-16 bg-">
   <div className="max-w-[100%] mx-auto px-4 md:px-10">
     <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
       {/* Heading */}
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
-        Overview of Java Full Stack Course
+        Overview of Software Testing Course
       </h2>
       <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
       {/* Description */}
       <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-        Our Java Full Stack Training equips you with the knowledge and hands-on experience required to become an industry-ready developer. This course covers both frontend and backend development using technologies like Core Java, Spring Boot, REST APIs, MySQL, HTML, CSS, JavaScript, React.js, and more. You’ll also participate in real-world projects, learn deployment techniques, and gain interview preparation support.
+        Our Software Testing Training program is designed to provide end-to-end knowledge of manual and automation testing. Learn how to ensure software quality through testing methodologies, tools, and real-world project simulations covering both web and mobile applications.
       </p>
 
       {/* What You’ll Learn */}
       <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-        What You’ll Learn From Java Full Stack Training
+        What You’ll Learn From Software Testing Training
       </h3>
       <ul className="space-y-4 text-gray-800 text-base md:text-lg">
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Get a solid foundation in Core Java concepts including OOPs, collections, exception handling, and multithreading.
+          Understand the fundamentals of manual testing and software development life cycle (SDLC).
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Build RESTful APIs using Spring Boot and integrate with MySQL databases for backend logic and persistence.
+          Write effective test cases and perform test execution and defect tracking.
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Master frontend development with HTML, CSS, JavaScript, and React.js to create interactive user interfaces.
+          Gain hands-on experience with automation tools like Selenium and TestNG.
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Learn deployment strategies using Git, GitHub, and cloud platforms like Heroku or Render.
+          Learn API testing using Postman and test automation using frameworks.
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Participate in capstone projects that simulate real business challenges to strengthen your job-readiness.
+          Get exposure to Agile testing practices, JIRA, and bug lifecycle management.
         </li>
         <li className="flex items-start gap-3">
           <span className="text-purple-600 mt-1">➤</span>
-          Get placement support including resume building, mock interviews, and technical assessments.
+          Receive career guidance with resume prep, mock interviews, and job assistance.
         </li>
       </ul>
     </div>
@@ -222,15 +221,18 @@ export default function JavaCoursePage() {
 </section>
 
 
-{/* ss */}
+
+
+
+{/* Software Testing Section */}
 <section className="w-full px-6 py-20 bg-gradient-to-b from-[#] to-[#] text-black">
   {/* Header */}
   <div className="max-w-7xl mx-auto text-center mb-16">
     <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
-      Become a Full Stack Java Developer
+      Become a Certified Software Testing Engineer
     </h2>
-    <p className="text-lg md:text-xl text-gray-700 mb-6 text-white">
-      Master Java, Spring Boot, REST APIs, React, and more through practical, expert-led training.
+    <p className="text-lg md:text-xl text-white mb-6">
+      Learn Manual Testing, Selenium, TestNG, API Testing, and Automation Frameworks from industry experts.
     </p>
     <div className="flex justify-center gap-4 flex-wrap">
       <button className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all">
@@ -241,56 +243,50 @@ export default function JavaCoursePage() {
 
   {/* Cards */}
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-    
-    {/* Card 1 */}
+
+    {/* Card 1 - Course Highlights */}
     <div
       data-aos="fade-up"
       data-aos-delay="0"
       className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <div className="mb-4">
-       <img
-  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-  alt="Course Highlights"
-  className="w-10 h-10 mb-4"
-/>
-
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+          alt="Course Highlights"
+          className="w-10 h-10 mb-4"
+        />
         <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
-       <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-          <li>✓ Java, Spring Boot, REST APIs, Full Stack</li>
-          <li>✓ Placement prep & resume support</li>
-          <li>✓ Live projects + session recordings</li>
-          <li>✓ Learn from 10+ yrs experienced mentors</li>
+        <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
+          <li>✓ Manual + Automation Testing</li>
+          <li>✓ Real-time live projects</li>
+          <li>✓ Resume & mock interview support</li>
+          <li>✓ Job-oriented, industry-backed curriculum</li>
         </ul>
       </div>
-    
     </div>
 
-    {/* Card 2 */}
+    {/* Card 2 - Tools */}
     <div
       data-aos="fade-up"
       data-aos-delay="100"
       className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300">
       <div className="mb-4">
-    <img
-  src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
-  alt="Tools You’ll Master"
-  className="w-10 h-10 mb-4"
-/>
-
-
-
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+          alt="Tools You’ll Master"
+          className="w-10 h-10 mb-4"
+        />
         <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
         <div className="flex flex-wrap gap-2">
-          {["Java", "Spring", "MySQL", "React", "GitHub"].map((tool, i) => (
+          {["Selenium", "TestNG", "Postman", "JIRA", "Git", "Java Basics", "Maven", "Cypress"].map((tool, i) => (
             <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{tool}</span>
           ))}
         </div>
       </div>
-     
     </div>
 
-    {/* Card 3 */}
+    {/* Card 3 - Topics Covered */}
     <div
       data-aos="fade-up"
       data-aos-delay="200"
@@ -298,47 +294,46 @@ export default function JavaCoursePage() {
     >
       <div className="mb-4">
         <img
-  src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
-  alt="Frameworks Covered"
-  className="w-10 h-10 mb-4"
-/>
-
-        <h3 className="text-lg font-extrabold text-black mb-2">Frameworks Covered</h3>
+          src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
+          alt="Topics Covered"
+          className="w-10 h-10 mb-4"
+        />
+        <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
         <div className="flex flex-wrap gap-2">
-          {["Spring", "Hibernate", "Spring Security", "JPA", "Maven", "JUnit", "Mockito"].map((fw, i) => (
-            <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{fw}</span>
+          {["Manual Testing", "Automation Testing", "API Testing", "Bug Reporting", "Agile & Scrum", "Testing Frameworks"].map((topic, i) => (
+            <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{topic}</span>
           ))}
         </div>
       </div>
-      
     </div>
 
-    {/* Card 4 */}
+    {/* Card 4 - Key Skills */}
     <div
       data-aos="fade-up"
       data-aos-delay="300"
       className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300"
     >
       <div className="mb-4">
-       <img
-  src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
-  alt="Key Skills You’ll Gain"
-  className="w-10 h-10 mb-4"
-/>
-
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
+          alt="Key Skills You’ll Gain"
+          className="w-10 h-10 mb-4"
+        />
         <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
         <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-          <li>Debugging & deployment practices</li>
-          <li>Version control, CI/CD pipelines</li>
-          <li>REST API integration & testing</li>
-          <li>Client communication, hosting apps</li>
+          <li>Test case writing & execution</li>
+          <li>Automation with Selenium & Java</li>
+          <li>API test automation with Postman</li>
+          <li>Bug tracking & reporting</li>
         </ul>
       </div>
-     
     </div>
 
   </div>
 </section>
+
+
+
 
 
 
