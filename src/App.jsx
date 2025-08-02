@@ -11,6 +11,8 @@ import Internship from "./pages/internship";
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
 import Interview from "./pages/interview";
+import About from "./pages/About";
+
 import InterviewDetail from "./pages/InterviewDetail";
 import Footer from "./components/common/Footer";
 import AdminDashboard from "../src/pages/Admin";
@@ -67,6 +69,7 @@ export default function App() {
         <Routes>
           {/* User routes */}
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/contact-us" element={<Contact/>} />
           <Route path="/client" element={<Clientpage/>} />
