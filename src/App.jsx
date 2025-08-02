@@ -118,16 +118,6 @@ export default function App() {
           {/* Catch-all route */}
         </Routes>
       </Layout>
-    <div className="bg-white">
-    
-    <Header/>
-
-    
-
-
-    
-      
-    </div>
     </Router>
   );
 }
