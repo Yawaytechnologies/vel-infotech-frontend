@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+/*  import axios from 'axios';*/
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ function ContactForm() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  /*  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -40,7 +40,7 @@ function ContactForm() {
       alert("Message failed to send!");
     }
   };
-
+*/
   return (
     <div className="w-100vw max-h-full bg-white">
     <div className="w-[85%] mx-auto px-4 sm:px-6 p-6 bg-white mt-10">
@@ -48,7 +48,7 @@ function ContactForm() {
         Contact Form
       </h2>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <form className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Left Column */}
         <div className="space-y-4">
           <div>

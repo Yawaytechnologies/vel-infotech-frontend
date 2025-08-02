@@ -112,7 +112,6 @@ export default function App() {
             
             {/* ...more nested admin routes... */}
           </Route>
-
           {/* Catch-all route */}
         </Routes>
       </Layout>
