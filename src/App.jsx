@@ -17,6 +17,24 @@ import AdminDashboard from "../src/pages/Admin";
 import AllCourses from "./pages/AllCourses";
 import Java from './components/Courses/Java';
 import Python from './components/Courses/Python';
+import FullStackDevelopement from "../src/components/Courses/FullStackDevelopement";
+import Plsql from "../src/components/Courses/Plsql";
+import Sql from "../src/components/Courses/Sql";
+import DataScience from "../src/components/Courses/DataScience";
+import BusinessAnalytics from "../src/components/Courses/BusinessAnalytics";
+import DataScienceAi from "../src/components/Courses/DataScienceAi";
+import BigDataDeveloper from "../src/components/Courses/BigDataDeveloper";
+import SoftwareTesting from "../src/components/Courses/SoftwareTesting";
+import SeleniumTesting from "../src/components/Courses/SeleniumTesting";
+import EtlTesting from "../src/components/Courses/EtlTesting";
+import AwsTraining from "../src/components/Courses/AwsTraining";
+import DevOps from "../src/components/Courses/DevOps";
+import HardwareNetworking from "../src/components/Courses/HardwareNetworking";
+import CyberSecurity from "../src/components/Courses/CyberSecurity";
+import Sap from "../src/components/Courses/Sap";
+import SalesForce from "../src/components/Courses/SalesForce";
+import ServiceNow from "../src/components/Courses/ServiceNow";
+import RPA from "../src/components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
 
 // Wrapper component to use useLocation
@@ -42,15 +60,32 @@ export default function App() {
         <Routes>
           {/* User routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/about" element={<About/>} />
-       
-       <Route path="/internship" element={<Internship />} />
+          <Route path="/placed-students" element={<PlacedStudents />} />
+<Route path="/internship" element={<Internship />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
           <Route path="/all-courses" element={<AllCourses />} />
           <Route path="/all-courses/Java" element={<Java />} />
           <Route path="/all-courses/Python" element={<Python />} />
+          <Route path="/all-courses/FullStackDevelopement" element={<FullStackDevelopement />} />
+          <Route path="/all-courses/Plsql" element={<Plsql />} />
+          <Route path="/all-courses/Sql" element={<Sql />} />
+          <Route path="/all-courses/DataScience" element={<DataScience />} />
+          <Route path="/all-courses/BusinessAnalytics" element={<BusinessAnalytics />} />
+          <Route path="/all-courses/DataScienceAi" element={<DataScienceAi />} />
+          <Route path="/all-courses/BigDataDeveloper" element={<BigDataDeveloper />} />
+          <Route path="/all-courses/SoftwareTesting" element={<SoftwareTesting />} />
+          <Route path="/all-courses/SeleniumTesting" element={<SeleniumTesting />} />
+          <Route path="/all-courses/EtlTesting" element={<EtlTesting />} />
+          <Route path="/all-courses/AwsTraining" element={<AwsTraining />} />
+          <Route path="/all-courses/DevOps" element={<DevOps />} />
+          <Route path="/all-courses/HardwareNetworking" element={<HardwareNetworking />} />
+          <Route path="/all-courses/CyberSecurity" element={<CyberSecurity />} />
+          <Route path="/all-courses/Sap" element={<Sap />} />
+          <Route path="/all-courses/SalesForce" element={<SalesForce />} />
+          <Route path="/all-courses/ServiceNow" element={<ServiceNow />} />
+          <Route path="/all-courses/RPA" element={<RPA />} />
 
           {/* Admin routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -58,5 +93,6 @@ export default function App() {
         </Routes>
       </Layout>
     </Router>
+
   );
 }
