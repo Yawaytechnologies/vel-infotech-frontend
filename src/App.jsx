@@ -47,6 +47,7 @@ function Layout({ children }) {
   const location = useLocation();
   // List all admin paths here
   const adminPaths = [
+    "/admin",
     "/admin/login",
     "/admin/dashboard",
     "/admin/course-enquired",
@@ -73,9 +74,7 @@ export default function App() {
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/contact-us" element={<Contact/>} />
           <Route path="/client" element={<Clientpage/>} />
-
-          
-<Route path="/internship" element={<Internship />} />
+          <Route path="/internship" element={<Internship />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
           <Route path="/all-courses" element={<AllCourses />} />
@@ -106,20 +105,9 @@ export default function App() {
             <Route path="course-enquired" element={<StudentTable />} />
             {/* ...more nested admin routes... */}
           </Route>
-
           {/* Catch-all route */}
         </Routes>
       </Layout>
-    <div className="bg-white">
-    
-    <Header/>
-
-    
-
-
-    
-      
-    </div>
     </Router>
   );
 }
