@@ -37,15 +37,17 @@ import SalesForce from "../src/components/Courses/SalesForce";
 import ServiceNow from "../src/components/Courses/ServiceNow";
 import RPA from "../src/components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
-
-
-
-
+import StudentTable from "./components/admin/CourseEnquired";
+import AdminLayout from "./components/admin/AdminLayout";
 // Wrapper component to use useLocation
 function Layout({ children }) {
   const location = useLocation();
   // List all admin paths here
-  const adminPaths = ["/admin/login", "/admin/dashboard"];
+  const adminPaths = [
+    "/admin/login",
+    "/admin/dashboard",
+    "/admin/course-enquired",
+  ];
   const isAdmin = adminPaths.includes(location.pathname);
 
   return (
@@ -92,11 +94,15 @@ export default function App() {
           <Route path="/all-courses/RPA" element={<RPA />} />
 
           {/* Admin routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="course-enquired" element={<StudentTable />} />
+            {/* ...more nested admin routes... */}
+          </Route>
+
+          {/* Catch-all route */}
         </Routes>
       </Layout>
     </Router>
-
   );
 }

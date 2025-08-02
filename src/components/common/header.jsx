@@ -71,8 +71,9 @@ const groupedCourses = [
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
-
+  { name: "About", href: "/about" },
+  { name: "Courses", href: "/all-courses" },
+  
   { name: "Clients", href: "/clients" },
   { name: "Contact", href: "/contact" },
 ];
@@ -126,7 +127,7 @@ const [mobileCategory, setMobileCategory] = useState(null);
           </div>
 
           {/* Nav links: Take up remaining space, push to right */}
-          <nav className="hidden md:flex items-center gap-2 lg:gap-15 lg:ml-30 h-full">
+          <nav className="hidden md:flex items-center gap-2 lg:gap-10 lg:ml-30 h-full">
             {navLinks.map((link) => (
               <a
                 key={link.name}
