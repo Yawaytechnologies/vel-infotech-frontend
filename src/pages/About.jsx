@@ -1,17 +1,9 @@
 import React from 'react';
-import tr from "../assets/training1.png";
+
 import ts from "../assets/Thennarasu S.png";
 import ba from "../assets/benjamin Andrew.png";
 import ss from "../assets/Sudha Selvarajan.png";
-import wave from "../assets/wave-bg.svg";
-import theory from "../assets/theory.svg";
-import practical from "../assets/practicals.svg";
-import assignment from "../assets/assignment.svg";
-import certification from "../assets/Groupcertification-61553.svg";
-import resume from "../assets/resume.svg";
-import interview from "../assets/interview.svg";
-import job from "../assets/job.svg";
-import aboutus from "../assets/AboutUs.jpg"
+
 
 import { Briefcase, TrendingUp, Users, BookOpenCheck, Laptop2, Award } from 'lucide-react';
 import { motion } from 'framer-motion';

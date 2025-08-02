@@ -9,7 +9,8 @@ import Home from "./pages/Home";
 import Header from "./components/common/header";
 import Internship from "./pages/internship";
 import PlacedStudents from "./pages/placedStudents";
-import Interview from "./pages/interview";import About from "./pages/About";
+import Interview from "./pages/interview";
+import About from "./pages/About";
 
 import InterviewDetail from "./pages/InterviewDetail";
 import Footer from "./components/common/Footer";
@@ -37,6 +38,9 @@ import ServiceNow from "../src/components/Courses/ServiceNow";
 import RPA from "../src/components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
 
+
+
+
 // Wrapper component to use useLocation
 function Layout({ children }) {
   const location = useLocation();
@@ -60,7 +64,7 @@ export default function App() {
         <Routes>
           {/* User routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About/>} />
+          <Route path="/about" element={<About />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
 <Route path="/internship" element={<Internship />} />
           <Route path="/interview-questions" element={<Interview />} />
