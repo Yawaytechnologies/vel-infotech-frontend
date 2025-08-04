@@ -368,59 +368,84 @@ export default function JavaCoursePage() {
     </div>
 
     {/* RIGHT: Form (unchanged) */}
-    <div className="w-full lg:w-1/2 flex justify-end">
-      <div className="w-full max-w-lg">
-        <div className="relative backdrop-blur-[6px] bg-white/70 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
-          <h3 className="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
-            Get a Free Training Quote
-          </h3>
-
-          {/* Mode Toggle */}
-          <div className="flex justify-center mb-7 gap-2">
-            <button
-              onClick={() => setMode("classroom")}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-lg font-semibold shadow transition-all duration-200
-                ${mode === "classroom"
-                  ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                  : "bg-white/60 text-black border border-[#a7f3d0]/40"
-                }`}
-            >
-              <FaChalkboardTeacher className="text-xl" /> Class Room
-            </button>
-            <button
-              onClick={() => setMode("online")}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-lg font-semibold shadow transition-all duration-200
-                ${mode === "online"
-                  ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                  : "bg-white/60 text-black border border-[#a7f3d0]/40"
-                }`}
-            >
-              <FaLaptop className="text-xl" /> Online
-            </button>
-          </div>
-
-          {/* Form */}
-          <form id="enquiry-form" className="flex flex-col gap-4">
-            <input type="text" placeholder="Your Name" className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none shadow" />
-            <input type="email" placeholder="Your Email" className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none shadow" />
-            <div className="flex gap-3">
-              <input type="tel" placeholder="Mobile Number" className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#16bca7] outline-none shadow" />
-              <select className="rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#16bca7] outline-none shadow text-black" defaultValue="">
-                <option value="" disabled>How & Where</option>
-                <option>Morning Batch</option>
-                <option>Evening Batch</option>
-                <option>Weekend</option>
-              </select>
-            </div>
-            <input type="text" placeholder="Type Course" className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none shadow" />
-            <textarea placeholder="Your Message" rows={2} className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none resize-none shadow" />
-            <button className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-extrabold py-3 rounded-xl hover:from-[#0891b2] hover:to-[#16bca7] transition shadow-lg mt-1">
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+   <div className="w-full max-w-lg">
+     <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
+       {/* Heading */}
+       <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+         Get a Free Training Quote
+       </h3>
+   
+       {/* Toggle Buttons */}
+       <div className="flex justify-center gap-3 mb-6">
+         <button
+           onClick={() => setMode("classroom")}
+           className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm
+             ${mode === "classroom"
+               ? "bg-[#003c6a] text-white"
+               : "bg-white text-[#003c6a] border border-[#003c6a]"}
+           `}
+         >
+           <FaChalkboardTeacher className="text-base" /> Class Room
+         </button>
+         <button
+           onClick={() => setMode("online")}
+           className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm
+             ${mode === "online"
+               ? "bg-[#003c6a] text-white"
+               : "bg-white text-[#003c6a] border border-[#003c6a]"}
+           `}
+         >
+           <FaLaptop className="text-base" /> Online
+         </button>
+       </div>
+   
+       {/* Form Fields */}
+       <form id="enquiry-form" className="flex flex-col gap-4">
+         <input
+           type="text"
+           placeholder="Your Name"
+           className="rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
+         />
+         <input
+           type="email"
+           placeholder="Your Email"
+           className="rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
+         />
+         <div className="flex flex-col sm:flex-row gap-3">
+           <input
+             type="tel"
+             placeholder="Mobile Num"
+             className="w-full sm:w-1/2 rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
+           />
+           <select
+             defaultValue=""
+             className="w-full sm:w-1/2 rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] text-sm text-gray-700 focus:ring-2 focus:ring-[#003c6a] outline-none"
+           >
+             <option value="" disabled>How & Where</option>
+             <option>Morning Batch</option>
+             <option>Evening Batch</option>
+             <option>Weekend</option>
+           </select>
+         </div>
+         <input
+           type="text"
+           placeholder="Type Course"
+           className="rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
+         />
+         <textarea
+           rows={2}
+           placeholder="Your Message"
+           className="rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none resize-none"
+         />
+         <button
+           type="submit"
+           className="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-base hover:from-[#0891b2] hover:to-[#16bca7] transition"
+         >
+           Submit
+         </button>
+       </form>
+     </div>
+   </div>
   </div>
 </section>
 
