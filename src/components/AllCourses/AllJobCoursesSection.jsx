@@ -13,55 +13,51 @@ const courses = [
     image: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
   },
   {
-    title: "Software Testing",
-    image: "https://cdn-icons-png.flaticon.com/512/1828/1828919.png",
+    title: "SoftwareTesting",
+    image: "https://cdn-icons-png.flaticon.com/512/5429/5429613.png",
   },
   {
-    title: "Selenium Testing",
-    image: "https://cdn-icons-png.flaticon.com/512/919/919831.png",
+    title: "SeleniumTesting",
+    image: "https://cdn-icons-png.flaticon.com/512/9431/9431234.png",
   },
   {
-    title: "Full Stack Development",
+    title: "FullStackDevelopement",
     image: "https://cdn-icons-png.flaticon.com/512/11333/11333060.png",
   },
   {
-    title: "Data Science",
+    title: "DataScience",
     image: "https://cdn-icons-png.flaticon.com/512/3011/3011270.png",
   },
   {
-    title: "AWS Training",
-    image: "https://cdn-icons-png.flaticon.com/512/919/919827.png",
-  },
-  {
-    title: "Digital Marketing",
-    image: "https://cdn-icons-png.flaticon.com/512/953/953830.png",
+    title: "AwsTraining",
+    image: "https://cdn-icons-png.flaticon.com/512/873/873120.png",
   },
   {
     title: "DevOps",
     image: "https://cdn-icons-png.flaticon.com/512/1828/1828940.png",
   },
   {
-    title: "Hardware Networking",
+    title: "HardwareNetworking",
     image: "https://cdn-icons-png.flaticon.com/512/6509/6509196.png",
   },
   {
-    title: "ETL Testing",
-    image: "https://cdn-icons-png.flaticon.com/512/5977/5977590.png",
+    title: "EtlTesting",
+    image: "https://cdn-icons-png.flaticon.com/512/6556/6556211.png",
   },
   {
-    title: "Cyber Security",
+    title: "CyberSecurity",
     image: "https://cdn-icons-png.flaticon.com/512/9846/9846388.png",
   },
   {
-    title: "Business Analytics",
+    title: "BusinessAnalytics",
     image: "https://cdn-icons-png.flaticon.com/512/2344/2344070.png",
   },
   {
-    title: "SAP",
+    title: "Sap",
     image: "https://cdn-icons-png.flaticon.com/512/5968/5968249.png",
   },
   {
-    title: "Salesforce",
+    title: "SalesForce",
     image: "https://cdn-icons-png.flaticon.com/512/919/919830.png",
   },
   {
@@ -69,31 +65,23 @@ const courses = [
     image: "https://cdn-icons-png.flaticon.com/512/8353/8353875.png",
   },
   {
-    title: "Data Science & AI",
+    title: "DataScienceAi",
     image: "https://cdn-icons-png.flaticon.com/512/4366/4366843.png",
   },
   {
-    title: "Production Support",
-    image: "https://cdn-icons-png.flaticon.com/512/1055/1055646.png",
-  },
-  {
-    title: "PL SQL",
+    title: "Plsql",
     image: "https://cdn-icons-png.flaticon.com/512/603/603201.png",
   },
   {
-    title: "SQL",
-    image: "https://cdn-icons-png.flaticon.com/512/528/528101.png",
+    title: "Sql",
+    image: "https://cdn-icons-png.flaticon.com/512/4248/4248449.png",
   },
   {
-    title: "Big Data Developer",
+    title: "BigDataDeveloper",
     image: "https://cdn-icons-png.flaticon.com/512/2150/2150480.png",
   },
   {
-    title: "Soft Skill Training",
-    image: "https://cdn-icons-png.flaticon.com/512/8756/8756461.png",
-  },
-  {
-    title: "RPA (Robotic Process Automation)",
+    title: "RPA",
     image: "https://cdn-icons-png.flaticon.com/512/4116/4116122.png",
   },
 ];
