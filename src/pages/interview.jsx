@@ -1,9 +1,11 @@
+// ✅ Interview.jsx — Updated with AWS, Selenium, Python, Java cards
 import React from "react";
 import InterviewCard from "../components/common/InterviewCard";
-import telephoneImg from "../assets/telephone.jpg";
+import interviewImg from "../assets/interview.png";
+import interviewImg1 from "../assets/interview1.png";
+import interviewImg2 from "../assets/interview2.png";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-
 
 const Interview = () => {
   return (
@@ -11,43 +13,49 @@ const Interview = () => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="max-full mx-auto px-4 py-8 pt-[140px] bg-background-to-br from-[#e5f1ff] to-white min-h-screen"
+      className="bg-background min-h-screen"
     >
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-3 text-[#1a2650]">
-        Explore Interview Guides
-      </h1>
+      {/* Hero Banner */}
+      <div
+        className="relative mt-[108px] w-full h-[220px] sm:h-[300px] md:h-[390px] bg-cover bg-center flex items-center justify-start px-4 sm:px-10 md:px-20 lg:px-40 text-blue-800"
+        style={{ backgroundImage: `url(${interviewImg})` }}
+      >
+        <h1 className="relative z-10 text-2xl sm:text-3xl md:text-4xl text-white font-bold leading-snug sm:px-10 md:px-0">
+          Explore Interview Guides
+        </h1>
+      </div>
 
-      <InterviewCard
-        title="Telephone Interview Questions and Answers"
-        date="November 7, 2024"
-        description="Telephone Interview Questions and Answers provides key insights and strategies for acing phone interviews. It covers common questions, tips for clear communication, and best practices for handling remote job screenings. The guide helps candidates prepare for everything from technical queries to behavioral assessments. With these tips, job..."
-        route="/interview/telephone"
-        image={telephoneImg}
-      />
-
-      <InterviewCard
-        title="Genpact Interview Questions and Answers"
-        date="November 6, 2024"
-        description="Genpact interview questions typically focus on assessing a candidate's technical skills, problem-solving abilities, and cultural fit within the organization. Expect questions on your past experiences, how you handle challenges, and your ability to work in teams or under pressure. They may also inquire about your knowledge of the company's"
-        route="/interview/genpact"
-        image={telephoneImg}
-      />
-
-      <InterviewCard
-        title="Behavioural Interview Questions and Answers"
-        date="November 6, 2024"
-        description="Behavioral examples focus on how you've handled situations in the past to understand your skills and decision-making. They look at how you approached challenges, worked with others, and made decisions. Sharing real-life examples helps demonstrate your abilities in action. Using specific situations makes it easier to see how you respond under..."
-        route="/interview/behavioural"
-        image={telephoneImg}
-      />
-
-      <InterviewCard
-        title="Personal Interview Questions and Answers"
-        date="November 6, 2024"
-        description="The Personal section of an interview delves into a candidate's character, strengths, motivations, and work approach. These questions offer insight into how well an individual might integrate with a team, tackle challenges, and grow within the organization. By preparing for personal interview questions, candidates can highlight their personality..."
-        route="/interview/personal"
-        image={telephoneImg}
-      />
+      {/* Interview Cards */}
+      <div className="max-w-6xl mx-auto px-4 py-10">
+        <InterviewCard
+          title="AWS Interview Questions and Answers"
+          date="August 1, 2025"
+          description="Master AWS basics, services, and deployment strategies with common interview Q&A."
+          route="/interview/aws"
+          image={interviewImg2}
+        />
+        <InterviewCard
+          title="Selenium Interview Questions and Answers"
+          date="August 1, 2025"
+          description="Covers Selenium tools, frameworks, and real-time automation test scenarios."
+          route="/interview/selenium"
+          image={interviewImg1}
+        />
+        <InterviewCard
+          title="Python Interview Questions and Answers"
+          date="August 1, 2025"
+          description="Essential Python coding, logic, OOPs, and real-time project questions."
+          route="/interview/python"
+          image={interviewImg2}
+        />
+        <InterviewCard
+          title="Java Interview Questions and Answers"
+          date="August 1, 2025"
+          description="Core Java concepts, OOP principles, collections, and memory management."
+          route="/interview/java"
+          image={interviewImg1}
+        />
+      </div>
     </motion.div>
   );
 };
