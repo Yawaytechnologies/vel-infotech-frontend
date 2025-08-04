@@ -43,6 +43,10 @@ import Clientpage from "./pages/Clientpage";
 
 import StudentTable from "./components/admin/CourseEnquired";
 import AdminLayout from "./components/admin/AdminLayout";
+import ProductionSupportPage from "./components/Courses/ProductionSupport";
+import DigitalMarketingPage from "./components/Courses/DigitalMarketing";
+import SoftSkillPage from "./components/Courses/SoftSkillsTraining";
+
 // Wrapper component to use useLocation
 function Layout({ children }) {
   const location = useLocation();
@@ -100,11 +104,14 @@ export default function App() {
           <Route path="/all-courses/SalesForce" element={<SalesForce />} />
           <Route path="/all-courses/ServiceNow" element={<ServiceNow />} />
           <Route path="/all-courses/RPA" element={<RPA />} />
-
+          <Route path="/all-courses/ProductionSupport" element={<ProductionSupportPage />} />
+          <Route path="/all-courses/DigitalMarketing" element={<DigitalMarketingPage />} />
+          <Route path="/all-courses/SoftSkillsTraining" element={<SoftSkillPage />} />
           {/* Admin routes */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="course-enquired" element={<StudentTable />} />
+            
             {/* ...more nested admin routes... */}
           </Route>
           {/* Catch-all route */}

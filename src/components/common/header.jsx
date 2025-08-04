@@ -57,22 +57,22 @@ const groupedCourses = [
   },
   {
     category: "IT Operations",
-    items: [{ name: "Production Support", href: "/production-support" }],
+    items: [{ name: "Production Support", href: "/all-courses/ProductionSupport" }],
   },
   {
     category: "Business & Marketing",
-    items: [{ name: "Digital Marketing", href: "/digital-marketing" }],
+    items: [{ name: "Digital Marketing", href: "/all-courses/DigitalMarketing" }],
   },
   {
     category: "Professional Development",
-    items: [{ name: "Soft Skill Training", href: "/soft-skill-training" }],
+    items: [{ name: "Soft Skill Training", href: "/all-courses/SoftSkillsTraining" }],
   },
 ];
 
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-
+  { name: "Courses", href: "/all-courses" },
   { name: "Clients", href: "/client" },
   { name: "Contact", href: "/contact-us" },
 ];
