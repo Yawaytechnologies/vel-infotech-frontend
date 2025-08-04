@@ -610,47 +610,48 @@ const InterviewDetail = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f4ff] to-white pt-[140px] px-4 pb-12 text-center">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl md:text-3xl font-bold text-blue-800 mb-6">
+      <div className="max-w-5xl mx-auto">
+        {/* Title */}
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-6 underline decoration-blue-700 underline-offset-4">
           {selected?.title || "Not Found"}
         </h1>
 
+        {/* Toggle Buttons */}
         {selected?.fresher && selected?.experience && (
-          <div className="flex justify-center gap-4 mb-8">
-            <button
-              onClick={() => setLevel("fresher")}
-              className={`px-5 py-2 rounded-full text-sm sm:text-md font-medium shadow transition ${
-                level === "fresher"
-                  ? "bg-blue-700 text-white"
-                  : "bg-white text-blue-700 border border-blue-700 hover:bg-blue-50"
-              }`}
-            >
-              Fresher
-            </button>
-            <button
-              onClick={() => setLevel("experience")}
-              className={`px-5 py-2 rounded-full text-sm sm:text-md font-medium shadow transition ${
-                level === "experience"
-                  ? "bg-blue-700 text-white"
-                  : "bg-white text-blue-700 border border-blue-700 hover:bg-blue-50"
-              }`}
-            >
-              Experience
-            </button>
+          <div className="flex justify-center gap-4 mb-10">
+            {["fresher", "experience"].map((type) => (
+              <button
+                key={type}
+                onClick={() => setLevel(type)}
+                className={`px-6 py-2 rounded-full text-sm sm:text-md font-semibold border transition-all duration-300
+                  ${
+                    level === type
+                      ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-md scale-105"
+                      : "bg-white text-blue-700 border-blue-700 hover:bg-blue-50"
+                  }`}
+              >
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </button>
+            ))}
           </div>
         )}
 
+        {/* Questions Section */}
         {selected?.[level] && (
-          <div className="bg-white border rounded-xl shadow-lg p-6 text-left space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800 capitalize border-b pb-2">
+          <div className="bg-white border border-gray-300 rounded-2xl shadow-xl p-6 md:p-10 text-left space-y-6">
+            <h2 className="text-2xl font-bold text-gray-800 capitalize border-b pb-4">
               {level} Interview Questions & Answers
             </h2>
+
             {selected[level].map((item, index) => (
-              <div key={index} className="bg-gray-50 border rounded p-4">
-                <p className="font-semibold text-gray-900 mb-1">
+              <div
+                key={index}
+                className="bg-gradient-to-r from-white via-[#f1f6ff] to-white border-l-4 border-blue-700 p-4 rounded-xl shadow-sm hover:shadow-lg transition"
+              >
+                <p className="font-semibold text-lg text-blue-900 mb-1">
                   Q{index + 1}. {item.question}
                 </p>
-                <p className="text-blue-900">Ans: {item.answer}</p>
+                <p className="text-gray-800 text-base">Ans: {item.answer}</p>
               </div>
             ))}
           </div>

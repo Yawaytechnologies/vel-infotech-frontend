@@ -17,10 +17,21 @@ const Interview = () => {
     >
       {/* Hero Banner */}
       <div
-        className="relative mt-[108px] w-full h-[220px] sm:h-[300px] md:h-[390px] bg-cover bg-center flex items-center justify-start px-4 sm:px-10 md:px-20 lg:px-40 text-blue-800"
-        style={{ backgroundImage: `url(${interviewImg})` }}
+        className="relative w-full mt-[54px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px]
+             flex items-center justify-start px-3 sm:px-4 md:px-10 lg:px-10"
+        style={{
+          backgroundImage: `url(${interviewImg})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "100% 100%", // 💡 key line to stretch full width + height
+        }}
       >
-        <h1 className="relative z-10 text-2xl sm:text-3xl md:text-4xl text-white font-bold leading-snug sm:px-10 md:px-0">
+        <h1
+          className="relative z-10 text-white font-bold leading-snug
+             text-[13px] sm:text-[20px] md:text-[28px] lg:text-[36px]
+             max-w-[95%] sm:max-w-[80%] md:max-w-[600px]
+             tracking-wide text-left"
+        >
           Explore Interview Guides
         </h1>
       </div>
