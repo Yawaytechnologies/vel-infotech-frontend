@@ -97,12 +97,16 @@ const PlacedStudents = () => {
     <div className="bg-background">
       {/* Hero Section */}
       <div
-        className="relative mt-[108px] w-full h-75 sm:h-[300px] md:h-[390px] bg-cover bg-center flex items-center justify-start px-4 sm:px-10 md:px-20 lg:px-40 text-blue-800"
-        style={{
-          backgroundImage: `url(${bgPlacement})`,
-        }}
+        className="relative w-full mt-[54px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px]
+                     flex items-center justify-start px-3 sm:px-4 md:px-10 lg:px-10"
+                style={{
+                  backgroundImage: `url(${bgPlacement})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  backgroundSize: "100% 100%", // 💡 key line to stretch full width + height
+                }}
       >
-        <h1 className="relative z-10 text-2xl sm:text-3xl md:text-4xl text-white font-bold leading-snug sm:px-10 md:px-0">
+        <h1 className="relative z-10 text-xl sm:text-3xl md:text-4xl text-white font-bold leading-snug text-center sm:text-left sm:px-8 md:px-0">
           Placed Students List
         </h1>
       </div>
@@ -341,7 +345,7 @@ const PlacedStudents = () => {
           </table>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-7 items-center pl-20 pt-2 px-2 pb-2">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-7 items-center pl-5 pt-2 px-2 pb-2">
         {/* Left Side - Text Content */}
         <div className="relative backdrop-blur-[4px] bg-white/30 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
           <h2 className="text-xl md:text-2xl font-extrabold text-gray-800 mb-7 ml-19">
