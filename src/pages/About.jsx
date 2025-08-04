@@ -45,26 +45,27 @@ const About = () => {
 
       {/* <div className="bg-gradient-to-br from-[#f0f4ff] to-white min-h-screen font-sans"> */}
       {/* Hero Section */}
-      <section
-  className="min-h-screen w-full bg-sky-500 bg-cover bg-center bg-no-repeat text-white px-8 sm:px-16 md:px-32 py-16 relative overflow-hidden"
+     <section
+  className="min-h-screen w-full bg-center bg-no-repeat text-white px-8 sm:px-16 md:px-32 py-16 relative overflow-hidden bg-cover sm:bg-contain lg:bg-contain"
   style={{
     backgroundImage: `url(${Background})`,
-    backgroundSize: 'contain',         // ensures full coverage
-    backgroundPosition: 'center',    // keeps it centered
-    backgroundRepeat: 'no-repeat',   // prevents tiling
   }}
 >
-  <div className="relative z-10 mt-20 p-8 rounded-md flex flex-col md:flex-row items-center md:items-start gap-10 -translate-x-8">
-    
-    {/* Text Content */}
-    <div className="flex-1">
-      <h1 className="text-5xl font-bold mb-6 font-heading">Welcome to Vel InfoTech</h1>
-      <p className="text-lg sm:text-xl mb-8 max-w-3xl">
-        Founded with a vision to bridge the gap between ambition and achievement, Vel InfoTech equips individuals with the skills and confidence to succeed.
-      </p>
-    </div>
 
+ <div className="relative z-10 mt-20 p-6 sm:p-8 md:p-12 lg:p-16 rounded-md flex flex-col md:flex-row items-center md:items-start gap-10 -translate-x-8">
+
+  {/* Text Content */}
+  <div className="flex-1 text-center md:text-left">
+    <div className="flex-1 ml-6"> {/* Adds left margin */}
+  <h1 className="text-5xl font-bold mb-6 font-heading">Welcome to Vel InfoTech</h1>
+  <p className="text-lg sm:text-xl mb-8 max-w-2xl">
+    Founded with a vision to bridge the gap between ambition and achievement, Vel InfoTech equips individuals with the skills and confidence to succeed.
+  </p>
+</div>
   </div>
+
+</div>
+
 </section>
 
 
@@ -427,37 +428,44 @@ const About = () => {
 </section> */}
 {/*company culture*/}
 <div className="bg-gray-50 py-16">
-      {/* Split Layout - Left and Right of Line */}
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-10 text-center">Our Culture</h2>
-        <div className="flex justify-between items-center relative">
-          {/* Left Side */}
-          <div className="w-1/2 flex flex-col items-center">
-            {cultureData.slice(0, 2).map((item, index) => (
-              <div key={index} className="text-center mb-16">
-                <div className="text-6xl">{item.icon}</div>
-                <h3 className="text-2xl font-semibold text-gray-800 mt-4">{item.title}</h3>
-                <p className="text-gray-600 mt-2">{item.description}</p>
-              </div>
-            ))}
+  {/* Split Layout - Left and Right of Line */}
+  <div className="container mx-auto px-6">
+    <h2 className="text-3xl font-bold mb-10 text-center">Our Culture</h2>
+    <div className="flex flex-col md:flex-row justify-between items-start relative">
+      
+      {/* Left Side (Mobile - Left aligned) */}
+      <div className="w-full md:w-1/2 flex flex-col items-start md:items-center mb-8 md:mb-0">
+        {cultureData.slice(0, 2).map((item, index) => (
+          <div key={index} className="text-left mb-16">
+            {/* Responsive Icon size for Certification */}
+            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">{item.icon}</div>
+            <h3 className="text-2xl font-semibold text-gray-800 mt-4">{item.title}</h3>
+            <p className="text-gray-600 mt-2">{item.description}</p>
           </div>
+        ))}
+      </div>
 
-          {/* Vertical Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-gray-300"></div>
+      {/* Vertical Line (for larger screens) */}
+      <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-gray-300"></div>
 
-          {/* Right Side */}
-          <div className="w-1/2 flex flex-col items-center">
-            {cultureData.slice(2).map((item, index) => (
-              <div key={index} className="text-center mb-16">
-                <div className="text-6xl">{item.icon}</div>
-                <h3 className="text-2xl font-semibold text-gray-800 mt-4">{item.title}</h3>
-                <p className="text-gray-600 mt-2">{item.description}</p>
-              </div>
-            ))}
+      {/* Right Side */}
+      <div className="w-full md:w-1/2 flex flex-col items-start md:items-center">
+        {cultureData.slice(2).map((item, index) => (
+          <div key={index} className="text-left mb-16">
+            {/* Responsive Icon size for Certification */}
+            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">{item.icon}</div>
+            <h3 className="text-2xl font-semibold text-gray-800 mt-4">{item.title}</h3>
+            <p className="text-gray-600 mt-2">{item.description}</p>
           </div>
-        </div>
+        ))}
       </div>
     </div>
+  </div>
+</div>
+
+
+
+
 
    
 

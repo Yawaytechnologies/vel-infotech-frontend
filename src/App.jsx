@@ -5,6 +5,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import React from "react";
+import ScrollToTop from "./components/common/ScrollToTop";
 import Home from "./pages/Home";
 import Header from "./components/common/header";
 import Internship from "./pages/internship";
@@ -71,6 +72,7 @@ export default function App() {
   return (
     <Router>
       <Layout>
+        <ScrollToTop />
         <Routes>
           {/* User routes */}
           <Route path="/" element={<Home />} />
