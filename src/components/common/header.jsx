@@ -72,7 +72,7 @@ const groupedCourses = [
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-
+  { name: "Courses", href: "/all-courses" },
   { name: "Clients", href: "/client" },
   { name: "Contact", href: "/contact-us" },
 ];
