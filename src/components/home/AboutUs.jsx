@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function AboutSection() {
   const [mode, setMode] = useState("classroom");
@@ -52,12 +53,17 @@ export default function AboutSection() {
               &nbsp;Faster onboarding, productivity gains, cost-effective upskilling, and global recognition.
             </div>
           </div>
-          <div className="flex flex-wrap gap-3 mt-4">
-            <button className="px-6 py-3 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-bold rounded-2xl shadow hover:shadow-xl hover:from-[#0891b2] hover:to-[#16bca7] transition-all duration-200 text-lg tracking-wide">
-              View All Courses
-            </button>
-            
-          </div>
+          
+
+<div className="flex flex-wrap gap-3 mt-4">
+  <Link
+    to="/all-courses"
+    className="px-6 py-3 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-bold rounded-2xl shadow hover:shadow-xl hover:from-[#0891b2] hover:to-[#16bca7] transition-all duration-200 text-lg tracking-wide"
+  >
+    View All Courses
+  </Link>
+</div>
+
         </div>
         {/* RIGHT: Enquiry Glass Card */}
         <div className="flex-1 w-full max-w-lg mx-auto md:mx-0 flex flex-col justify-center px-0 md:px-4">

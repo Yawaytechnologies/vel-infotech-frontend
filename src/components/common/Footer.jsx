@@ -35,19 +35,20 @@ export default function Footer() {
             <h3 className="text-white font-bold text-lg mb-3">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="/all-courses" className="hover:text-[#005BAC] transition">Courses</a></li>
-              <li><a href="/about-us" className="hover:text-[#005BAC] transition">About</a></li>
-              <li><a href="/clients" className="hover:text-[#005BAC] transition">Clients</a></li>
-              <li><a href="/contact" className="hover:text-[#005BAC] transition">Contact</a></li>
+              <li><a href="/about" className="hover:text-[#005BAC] transition">About</a></li>
+              <li><a href="/client" className="hover:text-[#005BAC] transition">Clients</a></li>
+              <li><a href="/contact-us" className="hover:text-[#005BAC] transition">Contact</a></li>
             </ul>
           </div>
           {/* Popular Courses */}
           <div>
             <h3 className="text-white font-bold text-lg mb-3">Popular Courses</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-[#005BAC] transition">Full Stack Python</a></li>
-              <li><a href="#" className="hover:text-[#005BAC] transition">Data Analytics</a></li>
-              <li><a href="#" className="hover:text-[#005BAC] transition">Cloud Computing</a></li>
-              <li><a href="#" className="hover:text-[#005BAC] transition">Artificial Intelligence</a></li>
+              <li><a href="FullStackDevelopement" className="hover:text-[#005BAC] transition">Full Stack Development</a></li>
+              <li><a href="SoftwareTesting" className="hover:text-[#005BAC] transition">Software Testing</a></li>
+              <li><a href="DataScience" className="hover:text-[#005BAC] transition">Data Science</a></li>
+              <li><a href="AWSTraining" className="hover:text-[#005BAC] transition">AWS</a></li>
+              
             </ul>
           </div>
           {/* Contact */}
@@ -78,7 +79,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Vel Infotech. All rights reserved.
           </span>
           <span className="mt-2 md:mt-0">
-            Designed & Developed by Vel Infotech Team
+            Designed & Developed by Yaway Technologies
           </span>
         </div>
       </div>
