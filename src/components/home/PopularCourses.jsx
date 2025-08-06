@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const stats = [
   { value: "120K", label: "Students Enrolled" },
@@ -9,61 +10,61 @@ const stats = [
 
 const courses = [
   {
-    title: "Full Stack .Net",
-    learners: "12,500+",
-    rating: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/6132/6132221.png",
-    mode: "Online | Offline"
-  },
-  {
-    title: "Full Stack JAVA",
-    learners: "15,200+",
+    title: "Java",
+    learners: "15,000+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/226/226777.png",
     mode: "Online | Offline"
   },
   {
-    title: "Full Stack Python",
-    learners: "13,100+",
+    title: "Python",
+    learners: "13,500+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
     mode: "Online | Offline"
   },
   {
-    title: "Full Stack MERN",
-    learners: "14,300+",
+    title: "SQL",
+    learners: "9,000+",
     rating: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/919/919825.png",
+    image: "https://cdn-icons-png.flaticon.com/512/2772/2772128.png",
     mode: "Online | Offline"
   },
   {
-    title: "Data Analytics",
-    learners: "11,900+",
+    title: "DataScience",
+    learners: "12,000+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/2721/2721296.png",
     mode: "Online | Offline"
   },
   {
-    title: "Artificial Intelligence",
-    learners: "10,600+",
+    title: "SoftwareTesting",
+    learners: "8,500+",
     rating: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/4712/4712039.png",
+    image: "https://cdn-icons-png.flaticon.com/512/906/906324.png",
     mode: "Online | Offline"
   },
   {
-    title: "Cyber Security",
-    learners: "9,800+",
+    title: "AWSTraining",
+    learners: "7,800+",
     rating: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/3064/3064197.png",
+    image: "https://cdn-icons-png.flaticon.com/512/873/873120.png",
     mode: "Online | Offline"
   },
   {
-    title: "Cloud Computing",
-    learners: "13,400+",
+    title: "DevOps",
+    learners: "8,200+",
     rating: 5,
-    image: "https://cdn-icons-png.flaticon.com/512/4144/4144294.png",
+    image: "https://cdn-icons-png.flaticon.com/512/4248/4248443.png",
     mode: "Online | Offline"
   },
+  {
+    title: "Salesforce",
+    learners: "6,900+",
+    rating: 5,
+    image: "https://cdn-icons-png.flaticon.com/512/5968/5968770.png",
+    mode: "Online | Offline"
+  }
 ];
 
 export default function PopularCoursesSection() {
@@ -108,9 +109,10 @@ export default function PopularCoursesSection() {
       {/* Course Cards */}
       <div className="max-w-7xl mx-auto px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-8">
         {courses.map((course, idx) => (
-          <div
+          <Link
             key={idx}
-            className="bg-white rounded-xl shadow-md p-3 hover:shadow-lg transition-all"
+            to={`/all-courses/${encodeURIComponent(course.title)}`}
+            className="bg-white rounded-xl shadow-md p-3 hover:shadow-lg transition-all block hover:scale-105 cursor-pointer"
           >
             <img
               src={course.image}
@@ -127,15 +129,17 @@ export default function PopularCoursesSection() {
                 {"★".repeat(course.rating)}
               </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
       {/* CTA Button */}
       <div className="text-center pb-8">
-        <button className="bg-[#005BAC] text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-          Browse All Courses
-        </button>
+        <Link to="/all-courses">
+          <button className="bg-[#005BAC] text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+            Browse All Courses
+          </button>
+        </Link>
       </div>
 
       {/* Footer CTA */}

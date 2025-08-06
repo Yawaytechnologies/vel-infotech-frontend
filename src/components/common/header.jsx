@@ -314,10 +314,24 @@ const [mobileCategory, setMobileCategory] = useState(null);
 
           {/* Main nav links (with All Courses accordion at top) */}
           <nav className="flex flex-col mt-4 px-6 gap-2 overflow-y-auto scrollbar-none flex-1">
-            {/* All Courses Mobile Dropdown */}
+           
+            {/* Main nav links */}
+            {navLinks
+              .filter((n) => n.name !== "Corporate Training")
+              .map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-medium font-base py-2 text-text-secondary text-left transition-all hover:text-[#cbe8ff]"
+                >
+                  {link.name}
+                </a>
+              ))}
+               {/* All Courses Mobile Dropdown */}
             <div>
               <button
-                className="w-full flex items-center justify-between py-2 text-text-secondary text-lg font-bold hover:text-[#005BAC] transition"
+                className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#005BAC] transition"
                 onClick={() => setMobileCoursesOpen((prev) => !prev)}
               >
                 <span>All Courses</span>
@@ -333,7 +347,7 @@ const [mobileCategory, setMobileCategory] = useState(null);
                     <div key={cat.category} className="mb-1">
                       {/* Main category (expand/collapse) */}
                       <button
-                        className="w-full flex items-center justify-between text-base text-gray-900 font-medium py-2 hover:text-[#005BAC] transition"
+                        className="w-full flex items-center justify-between text-base text-gray-900 font-base py-2 hover:text-[#005BAC] transition"
                         onClick={() =>
                           setMobileCategory(mobileCategory === idx ? null : idx)
                         }
@@ -367,23 +381,10 @@ const [mobileCategory, setMobileCategory] = useState(null);
                 </div>
               )}
             </div>
-            {/* Main nav links */}
-            {navLinks
-              .filter((n) => n.name !== "Corporate Training")
-              .map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-medium font-base py-2 text-text-secondary text-left transition-all hover:text-[#cbe8ff]"
-                >
-                  {link.name}
-                </a>
-              ))}
             {/* "More" collapsible */}
             <div>
               <button
-                className="w-full flex items-center justify-between py-2 text-text-secondary text-lg font-semibold hover:text-[#cbe8ff] transition"
+                className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#cbe8ff] transition"
                 onClick={() => toggleSidebarMenu("More")}
               >
                 <span>More</span>
@@ -426,7 +427,7 @@ const [mobileCategory, setMobileCategory] = useState(null);
                   <li>
                     <a
                       href="/interview-questions"
-                      className="block px-6 py-2 text-medium font-medium text-text-secondary hover:bg-[#1a5c90] transition"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
                       onClick={() => setMenuOpen(false)}
                     >
                       Interview Questions
