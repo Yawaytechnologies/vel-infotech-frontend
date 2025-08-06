@@ -8,19 +8,20 @@ const InterviewCard = ({ title, date, description, route, image }) => {
       <div className="flex flex-col md:flex-row md:items-center gap-6 p-4 w-full">
         {/* Image - mobile on top, desktop on right */}
         {image && (
-          <div className="relative w-full md:w-[65%] rounded-lg overflow-hidden">
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-[220px] md:h-[260px] object-cover"
-            />
-            <div className="absolute top-4 left-4 bg-black/60 px-4 py-2 rounded z-10">
-              <h2 className="text-white text-base md:text-xl font-bold text-left">
-                {title}
-              </h2>
-            </div>
-          </div>
-        )}
+  <div className="relative w-full md:w-[65%] -mx-4 sm:mx-0 rounded-none md:rounded-lg overflow-hidden">
+    <img
+      src={image}
+      alt={title}
+      className="w-full h-[150px]  md:h-[260px] object-cover rounded-none md:rounded-lg"
+    />
+    <div className="absolute top-3 left-3 bg-black/40 px-3 py-1 rounded z-10">
+      <h2 className="text-white text-base md:text-sm font-bold text-left">
+        {title}
+      </h2>
+    </div>
+  </div>
+)}
+
 
         {/* Content */}
         <div className="flex-1 w-full">

@@ -1,7 +1,7 @@
 // src/pages/Internship.jsx
 import React from "react";
 import internshipBg from "../assets/internship.jpg";
-import background from "../assets/background.jpeg";
+import background from "../assets/background.jpg";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import dotnetIcon from "../assets/dotnet.png";
@@ -22,12 +22,15 @@ const Internship = () => {
     <div className="bg-background ">
       {/* Hero Banner */}
       <div
-        className="relative mt-[108px] w-full h-64 sm:h-70 bg-cover bg-center flex items-center justify-start px-4 sm:px-10 md:px-20 text-blue-800  md:px-40"
-        style={{
-          backgroundImage: `url(${background})`,
-        }}
+        className="relative w-full mt-[54px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px]
+                     flex items-center justify-start px-3 sm:px-4 md:px-10 lg:px-10"
+                style={{
+                  backgroundImage: `url(${background})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  backgroundSize: "100% 100%", // 💡 key line to stretch full width + height
+                }}
       >
-        
         <h1 className="relative z-10 text-3xl sm:text-4xl md:text-6xl font-bold leading-sung leading-relaxed sm:px-10 md:px-20">
           Internship
         </h1>
@@ -175,17 +178,17 @@ const Internship = () => {
           {
             title: "Data Science Internship",
             image: dataScienceIcon,
-            gradient: "from-red-800 to-indigo-400",
+            gradient: "from-cyan-500 to-cyan-200",
           },
           {
             title: "Python Internship",
             image: pythonIcon,
-            gradient: "from-purple-600 to-pink-500",
+            gradient: "from-cyan-500 to-cyan-200",
           },
           {
             title: "Artificial Intelligence Internship",
             image: aiIcon,
-            gradient: "from-blue-900 to-cyan-600",
+            gradient: "from-cyan-500 to-cyan-200",
           },
           {
             title: "Java Internship",

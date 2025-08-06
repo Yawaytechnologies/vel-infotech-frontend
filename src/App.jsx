@@ -8,7 +8,7 @@ import React from "react";
 import ScrollToTop from "./components/common/ScrollToTop";
 import Home from "./pages/Home";
 import Header from "./components/common/header";
-import Internship from "./pages/internship";
+import Internship from "./pages/Internship";
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
 import Interview from "./pages/interview";
