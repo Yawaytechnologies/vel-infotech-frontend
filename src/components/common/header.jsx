@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiChevronDown, FiChevronRight } from "react-icons/fi";
 import Logo from "../../assets/infotech.svg";
 import Logo1 from "../../assets/infotech.png";
-
+import Vel from "../../assets/Vel InfoTech.svg"
+import { Link } from "react-router-dom";
 
 const groupedCourses = [
   {
@@ -112,17 +113,15 @@ const [mobileCategory, setMobileCategory] = useState(null);
         <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[64px]">
           {/* Logo & name */}
           <div className="flex items-center flex-shrink-0">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="h-18 sm:h-14 md:h-18 w-auto object-contain"
-            />
-            <a
-              href="/"
-              className="text-xl sm:text-2xl font-bold text-primary font-poppins tracking-widest ml-2 select-none"
-            >
-              Vel Infotech
-            </a>
+             <Link to="/">
+    <img
+      src={Vel}
+      alt="Logo"
+      className="h-18 sm:h-14 md:h-39 md:pt-2 w-auto object-contain"
+      style={{ cursor: "pointer" }}
+    />
+  </Link>
+           
           </div>
 
           {/* Nav links: Take up remaining space, push to right */}
