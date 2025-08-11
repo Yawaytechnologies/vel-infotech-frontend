@@ -13,6 +13,7 @@ import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
 import Interview from "./pages/interview";
 import About from "./pages/About";
+import Blog from "./pages/Blog";
 
 import InterviewDetail from "./pages/InterviewDetail";
 import Footer from "./components/common/Footer";
@@ -81,6 +82,7 @@ export default function App() {
           <Route path="/contact-us" element={<Contact/>} />
           <Route path="/client" element={<Clientpage/>} />
           <Route path="/internship" element={<Internship />} />
+          <Route path="/Blog" element={<Blog />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
           <Route path="/all-courses" element={<AllCourses />} />
