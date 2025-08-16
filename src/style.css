@@ -137,3 +137,6 @@ body {
 .scrollbar-none::-webkit-scrollbar {
   display: none !important;             /* Chrome, Safari, Opera */
 }
+html {
+  scroll-behavior: smooth;
+}
