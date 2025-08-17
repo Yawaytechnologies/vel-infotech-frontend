@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiChevronDown, FiChevronRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
+
 import Logo from "../../assets/infotech.svg";
 import Logo1 from "../../assets/infotech.png";
-import Vel from "../../assets/Vel InfoTech.svg"
-import { Link } from "react-router-dom";
+import Vel from "../../assets/Vel InfoTech.svg";
 
 const groupedCourses = [
   {
@@ -12,7 +13,7 @@ const groupedCourses = [
       { name: "Java", href: "/all-courses/Java" },
       { name: "Python", href: "/all-courses/Python" },
       { name: "Full Stack Development", href: "/all-courses/FullStackDevelopement" },
-      { name: "PL SQL", href: "/all-courses/plsql" },
+      { name: "PL SQL", href: "/all-courses/Plsql" }, // fixed case
       { name: "SQL", href: "/all-courses/Sql" },
     ],
   },
@@ -29,7 +30,7 @@ const groupedCourses = [
     category: "Testing",
     items: [
       { name: "Software Testing", href: "/all-courses/SoftwareTesting" },
-      { name: "Selenium Testing", href: "all-courses/SeleniumTesting" },
+      { name: "Selenium Testing", href: "/all-courses/SeleniumTesting" }, // added leading slash
       { name: "ETL Testing", href: "/all-courses/EtlTesting" },
     ],
   },
@@ -82,9 +83,10 @@ export default function Header() {
   const [current, setCurrent] = useState("Home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [sidebarMenus, setSidebarMenus] = useState({});
- const [activeCategory, setActiveCategory] = useState(null);
- const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
-const [mobileCategory, setMobileCategory] = useState(null); 
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
+  const [mobileCategory, setMobileCategory] = useState(null);
+
   // ESC key closes drawer
   useEffect(() => {
     if (!menuOpen) return;
@@ -111,36 +113,31 @@ const [mobileCategory, setMobileCategory] = useState(null);
       {/* Main Header */}
       <header className="fixed top-0 w-full z-50 bg-background border-b border-white/20">
         <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[64px]">
-          {/* Logo & name */}
+          {/* Logo */}
           <div className="flex items-center flex-shrink-0">
-             <Link to="/">
-    <img
-      src={Vel}
-      alt="Logo"
-      className="h-18 sm:h-14 md:h-39 md:pt-2 w-auto object-contain"
-      style={{ cursor: "pointer" }}
-    />
-  </Link>
-           
+            <Link to="/">
+              <img
+                src={Vel}
+                alt="Logo"
+                className="h-18 sm:h-14 md:h-39 md:pt-2 w-auto object-contain"
+                style={{ cursor: "pointer" }}
+              />
+            </Link>
           </div>
 
-          {/* Nav links: Take up remaining space, push to right */}
+          {/* Nav links */}
           <nav className="hidden md:flex items-center gap-2 lg:gap-10 lg:ml-30 h-full">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 onClick={() => setCurrent(link.name)}
                 onMouseEnter={() => setCurrent(link.name)}
-                className={`
-  relative font-medium text-base transition-all duration-200
-  ${
-    current === link.name
-      ? "text-[#005BAC]"
-      : "text-gray-800/90 hover:text-[#005BAC]"
-  }
-  group
-`}
+                className={`relative font-medium text-base transition-all duration-200 ${
+                  current === link.name
+                    ? "text-[#005BAC]"
+                    : "text-gray-800/90 hover:text-[#005BAC]"
+                } group`}
                 style={{
                   boxShadow:
                     current === link.name
@@ -149,31 +146,21 @@ const [mobileCategory, setMobileCategory] = useState(null);
                 }}
               >
                 <span>{link.name}</span>
-              </a>
+              </Link>
             ))}
           </nav>
 
-          {/* Phone Numbers (Desktop only, right-aligned) */}
+          {/* Phone Numbers (Desktop) */}
           <div className="hidden md:flex flex-row items-center lg:ml-25 gap-15 ml-12">
             <div className="flex flex-col items-center">
-              <span className="font-semibold text-base text-gray-800">
-                Enquiry:
-              </span>
-              <a
-                href="tel:+919600593838"
-                className="text-[#005BAC] hover:underline text-base font-semibold"
-              >
+              <span className="font-semibold text-base text-gray-800">Enquiry:</span>
+              <a href="tel:+919600593838" className="text-[#005BAC] hover:underline text-base font-semibold">
                 +91 9600593838
               </a>
             </div>
             <div className="flex flex-col items-center">
-              <span className="font-semibold text-base text-gray-800">
-                Support:
-              </span>
-              <a
-                href="tel:+919600383839"
-                className="text-[#005BAC] hover:underline text-base font-semibold"
-              >
+              <span className="font-semibold text-base text-gray-800">Support:</span>
+              <a href="tel:+919600383839" className="text-[#005BAC] hover:underline text-base font-semibold">
                 +91 9600383839
               </a>
             </div>
@@ -190,114 +177,102 @@ const [mobileCategory, setMobileCategory] = useState(null);
         </div>
 
         {/* Desktop Subheader */}
-{/* Desktop Subheader */}
-<div className="hidden md:flex w-full bg-[#005BAC] min-h-[44px] items-center px-6 z-40 fixed top-[64px] left-0">
-  <nav className="w-full flex justify-center gap-10 text-white font-semibold text-md relative">
-    {/* All Courses Dropdown */}
-<div className="relative group">
-      <button className="transition flex items-center gap-1 focus:outline-none">
-        All Courses ▾
-      </button>
-      {/* Main Category Menu */}
-      <div
-  className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-50 hidden group-hover:flex flex-row  overflow-visible"
-  onMouseLeave={() => setActiveCategory(null)}
-  onMouseEnter={() => {}} // (optional, can omit)
->
-  <div className="flex flex-col w-64  scrollbar-none pr-0 rounded-l-lg">
-   {groupedCourses.map((cat, idx) => (
-  <div
-    key={cat.category}
-    className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between
-      ${activeCategory === idx
-        ? "bg-[#f0f4fa] text-[#005BAC]"
-        : "hover:bg-gray-100 text-gray-800"}
-      `}
-    onMouseEnter={() => setActiveCategory(idx)}
-    style={{
-      borderRadius: activeCategory === idx ? '8px 0 0 8px' : '8px 0 0 8px'
-    }}
-  >
-    {/* Text on left */}
-    <span>{cat.category}</span>
-    {/* Arrow on right */}
-    <FiChevronRight
-      className={`text-gray-400 transition-transform duration-200
-        ${activeCategory === idx ? "translate-x-1" : ""}
-      `}
-      size={18}
-    />
-  </div>
-))}
+        <div className="hidden md:flex w-full bg-[#005BAC] min-h-[44px] items-center px-6 z-40 fixed top-[64px] left-0">
+          <nav className="w-full flex justify-center gap-10 text-white font-semibold text-md relative">
+            {/* All Courses Dropdown */}
+            <div className="relative group">
+              <button className="transition flex items-center gap-1 focus:outline-none">
+                All Courses ▾
+              </button>
 
-  </div>
-  {/* Subcourses flyout menu */}
-  {activeCategory !== null && (
-    <div
-      className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto scrollbar-none bg-white rounded-r-lg shadow-none"
-      style={{
-        position: 'relative',
-        left: '-4px',
-        boxShadow: 'none'
-      }}
-    >
-      {groupedCourses[activeCategory].items.map((item) => (
-        <a
-          key={item.name}
-          href={item.href}
-          className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
-        >
-          {item.name}
-        </a>
-      ))}
-    </div>
-  )}
-</div>
+              {/* Main Category Menu */}
+              <div
+                className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-50 hidden group-hover:flex flex-row overflow-visible"
+                onMouseLeave={() => setActiveCategory(null)}
+              >
+                <div className="flex flex-col w-64 scrollbar-none pr-0 rounded-l-lg">
+                  {groupedCourses.map((cat, idx) => (
+                    <div
+                      key={cat.category}
+                      className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
+                        activeCategory === idx
+                          ? "bg-[#f0f4fa] text-[#005BAC]"
+                          : "hover:bg-gray-100 text-gray-800"
+                      }`}
+                      onMouseEnter={() => setActiveCategory(idx)}
+                      style={{ borderRadius: "8px 0 0 8px" }}
+                    >
+                      <span>{cat.category}</span>
+                      <FiChevronRight
+                        className={`text-gray-400 transition-transform duration-200 ${
+                          activeCategory === idx ? "translate-x-1" : ""
+                        }`}
+                        size={18}
+                      />
+                    </div>
+                  ))}
+                </div>
 
-    </div>
+                {/* Subcourses flyout */}
+                {activeCategory !== null && (
+                  <div
+                    className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto scrollbar-none bg-white rounded-r-lg shadow-none"
+                    style={{ position: "relative", left: "-4px", boxShadow: "none" }}
+                  >
+                    {groupedCourses[activeCategory].items.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
 
-    <a href="/internship" className="transition">
-      Internship
-    </a>
-    <a href="/placed-students" className="transition">
-      Placed Students List
-    </a>
-    <a href="/reviews" className="transition">
-      Reviews
-    </a>
-    <a href="/blog" className="transition">
-      Blog
-    </a>
+            <Link to="/internship" className="transition">Internship</Link>
+            <Link to="/placed-students" className="transition">Placed Students List</Link>
+            <Link to="/reviews" className="transition">Reviews</Link>
+            <Link to="/Blog" className="transition">Blog</Link>
 
-    {/* More Dropdown */}
-    <div className="relative group">
-      <button className="transition">More ▾</button>
-      <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
-        <a href="/interview-questions" className="px-4 py-2 hover:bg-gray-100">Interview Questions</a>
-        <a href="/resources" className="px-4 py-2 hover:bg-gray-100">Tutorials</a>
-        <a href="/branches" className="px-4 py-2 hover:bg-gray-100">Sample Resume</a>
-      </div>
-    </div>
-  </nav>
-</div>
-     {/* Sidebar Overlay */}
+            {/* More Dropdown */}
+            <div className="relative group">
+              <button className="transition">More ▾</button>
+              <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
+                <Link to="/interview-questions" className="px-4 py-2 hover:bg-gray-100">
+                  Interview Questions
+                </Link>
+                <Link to="/tutorials" className="px-4 py-2 hover:bg-gray-100">
+                  Tutorials
+                </Link>
+                <Link to="/branches" className="px-4 py-2 hover:bg-gray-100">
+                  Sample Resume
+                </Link>
+              </div>
+            </div>
+          </nav>
+        </div>
+
+        {/* Sidebar Overlay */}
         <div
           className={`fixed inset-0 z-40 bg-black/40 transition-all duration-300 ${
-            menuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
+            menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
           onClick={() => setMenuOpen(false)}
           aria-hidden="true"
         />
 
-         <aside
-          className={`fixed top-0 left-0 h-full w-[85vw] max-w-[360px] bg-white z-50 shadow-2xl flex flex-col
-            transform transition-transform duration-300
-            ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        {/* Mobile Sidebar */}
+        <aside
+          className={`fixed top-0 left-0 h-full w-[85vw] max-w-[360px] bg-white z-50 shadow-2xl flex flex-col transform transition-transform duration-300 ${
+            menuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
           style={{ transitionProperty: "transform, box-shadow, opacity" }}
         >
-          {/* Logo and Close button */}
+          {/* Logo and Close */}
           <div className="flex items-center justify-between px-6 py-6 border-b border-black/20">
             <div className="flex flex-col items-start gap-0">
               <img src={Logo1} alt="Logo" className="h-19 w-auto mb-1" />
@@ -311,67 +286,58 @@ const [mobileCategory, setMobileCategory] = useState(null);
             </button>
           </div>
 
-          {/* Main nav links (with All Courses accordion at top) */}
+          {/* Nav (Mobile) */}
           <nav className="flex flex-col mt-4 px-6 gap-2 overflow-y-auto scrollbar-none flex-1">
-           
-            {/* Main nav links */}
             {navLinks
               .filter((n) => n.name !== "Corporate Training")
               .map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="text-medium font-base py-2 text-text-secondary text-left transition-all hover:text-[#cbe8ff]"
+                  className="text-medium font-base py-2 text-text-secondary text-left transition-all hover:text-[#005BAC]"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
-               {/* All Courses Mobile Dropdown */}
+
+            {/* All Courses Mobile Dropdown */}
             <div>
               <button
                 className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#005BAC] transition"
                 onClick={() => setMobileCoursesOpen((prev) => !prev)}
               >
                 <span>All Courses</span>
-                {mobileCoursesOpen ? (
-                  <FiChevronDown className="ml-2" />
-                ) : (
-                  <FiChevronRight className="ml-2" />
-                )}
+                {mobileCoursesOpen ? <FiChevronDown className="ml-2" /> : <FiChevronRight className="ml-2" />}
               </button>
+
               {mobileCoursesOpen && (
                 <div className="ml-2 pb-2">
                   {groupedCourses.map((cat, idx) => (
                     <div key={cat.category} className="mb-1">
-                      {/* Main category (expand/collapse) */}
                       <button
                         className="w-full flex items-center justify-between text-base text-gray-900 font-base py-2 hover:text-[#005BAC] transition"
-                        onClick={() =>
-                          setMobileCategory(mobileCategory === idx ? null : idx)
-                        }
+                        onClick={() => setMobileCategory(mobileCategory === idx ? null : idx)}
                       >
                         <span>{cat.category}</span>
                         <FiChevronRight
                           className={`ml-2 transform transition-transform duration-200 ${
-                            mobileCategory === idx
-                              ? "rotate-90 text-[#005BAC]"
-                              : ""
+                            mobileCategory === idx ? "rotate-90 text-[#005BAC]" : ""
                           }`}
                         />
                       </button>
-                      {/* Show sub-courses if this category is open */}
+
                       {mobileCategory === idx && (
                         <div className="pl-4">
                           {cat.items.map((item) => (
-                            <a
+                            <Link
                               key={item.name}
-                              href={item.href}
+                              to={item.href}
                               className="block py-1 text-gray-800 hover:text-[#005BAC] text-[15px]"
                               onClick={() => setMenuOpen(false)}
                             >
                               {item.name}
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       )}
@@ -380,66 +346,72 @@ const [mobileCategory, setMobileCategory] = useState(null);
                 </div>
               )}
             </div>
-            {/* "More" collapsible */}
+
+            {/* More (Mobile) */}
             <div>
               <button
-                className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#cbe8ff] transition"
+                className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#005BAC] transition"
                 onClick={() => toggleSidebarMenu("More")}
               >
                 <span>More</span>
-                {sidebarMenus["More"] ? (
-                  <FiChevronDown className="ml-2" />
-                ) : (
-                  <FiChevronRight className="ml-2" />
-                )}
+                {sidebarMenus["More"] ? <FiChevronDown className="ml-2" /> : <FiChevronRight className="ml-2" />}
               </button>
-              {/* Collapsible submenu */}
+
               {sidebarMenus["More"] && (
-                <ul className="bg-[#fffff] rounded-lg mt-1 pb-1">
+                <ul className="rounded-lg mt-1 pb-1">
                   <li>
-                    <a
-                      href="/all-courses"
-                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                    <Link
+                      to="/all-courses"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC]"
                       onClick={() => setMenuOpen(false)}
                     >
                       All-Courses
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="/placed-students"
-                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                    <Link
+                      to="/placed-students"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC]"
                       onClick={() => setMenuOpen(false)}
                     >
                       Placed Students list
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="/reviews"
-                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                    <Link
+                      to="/reviews"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC]"
                       onClick={() => setMenuOpen(false)}
                     >
                       Reviews
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="/interview-questions"
-                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                    <Link
+                      to="/interview-questions"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC]"
                       onClick={() => setMenuOpen(false)}
                     >
                       Interview Questions
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="/internship"
-                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                    <Link
+                      to="/internship"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC]"
                       onClick={() => setMenuOpen(false)}
                     >
                       Internship
-                    </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/tutorials"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC]"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Tutorials
+                    </Link>
                   </li>
                 </ul>
               )}
