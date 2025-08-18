@@ -15,10 +15,13 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
-import Clientpage from "./pages/Clientpage";
-import Internship from "./pages/Internship";
-import Blog from "./pages/Blog";
-import Interview from "./pages/Interview";
+import Interview from "./pages/interview";
+import About from "./pages/About";
+
+import BlogBanner from "./pages/Blog";
+
+import Tutorials from "./pages/Tutorials";
+
 import InterviewDetail from "./pages/InterviewDetail";
 import Footer from "./components/common/Footer";
 import AdminDashboard from "../src/pages/Admin";
@@ -97,8 +100,11 @@ export default function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/sample-resume" element={<SampleResume />}/>
           <Route path="/placed-students" element={<PlacedStudents />} />
-          <Route path="/contact-us" element={<Contact />} />
-          <Route path="/client" element={<Clientpage />} />
+          <Route path="/blog" element={<BlogBanner />} />
+          <Route path="/resources" element={<Tutorials />} />
+
+          <Route path="/contact-us" element={<Contact/>} />
+          <Route path="/client" element={<Clientpage/>} />
           <Route path="/internship" element={<Internship />} />
           <Route path="/Blog" element={<Blog />} />
 
