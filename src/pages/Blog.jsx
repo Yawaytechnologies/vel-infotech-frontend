@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FiCalendar, FiArrowUpRight } from "react-icons/fi";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import blogSvg from "../assets/blog.svg";
 import careerImg from "../assets/career.jpg";
