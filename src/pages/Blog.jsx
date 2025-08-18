@@ -120,6 +120,7 @@ export default function BlogBanner() {
           </div>
 
           {/* RIGHT: Illustration */}
+          
           <motion.div
             className="w-full md:w-1/2 flex justify-center"
             initial={{ x: 100 }}

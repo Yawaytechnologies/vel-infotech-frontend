@@ -20,38 +20,44 @@ import Internship from "./pages/internship";
 import Blog from "./pages/Blog";
 import Interview from "./pages/interview";
 import InterviewDetail from "./pages/InterviewDetail";
-import Tutorials from "./pages/Tutorials";
-
-import AdminDashboard from "./pages/Admin";
-import AdminLayout from "./components/admin/AdminLayout";
-import StudentTable from "./components/admin/CourseEnquired";
-
+import Footer from "./components/common/Footer";
+import AdminDashboard from "../src/pages/Admin";
 import AllCourses from "./pages/AllCourses";
-import Java from "./components/Courses/Java";
-import Python from "./components/Courses/Python";
-import FullStackDevelopement from "./components/Courses/FullStackDevelopement";
-import Plsql from "./components/Courses/Plsql";
-import Sql from "./components/Courses/Sql";
-import DataScience from "./components/Courses/DataScience";
-import BusinessAnalytics from "./components/Courses/BusinessAnalytics";
-import DataScienceAi from "./components/Courses/DataScienceAi";
-import BigDataDeveloper from "./components/Courses/BigDataDeveloper";
-import SoftwareTesting from "./components/Courses/SoftwareTesting";
-import SeleniumTesting from "./components/Courses/SeleniumTesting";
-import EtlTesting from "./components/Courses/EtlTesting";
-import AwsTraining from "./components/Courses/AwsTraining";
-import DevOps from "./components/Courses/DevOps";
-import HardwareNetworking from "./components/Courses/HardwareNetworking";
-import CyberSecurity from "./components/Courses/CyberSecurity";
-import Sap from "./components/Courses/Sap";
-import SalesForce from "./components/Courses/SalesForce";
-import ServiceNow from "./components/Courses/ServiceNow";
-import RPA from "./components/Courses/RPA";
+import Java from './components/Courses/Java';
+import Python from './components/Courses/Python';
+import FullStackDevelopement from "../src/components/Courses/FullStackDevelopement";
+import Plsql from "../src/components/Courses/Plsql";
+import Sql from "../src/components/Courses/Sql";
+import DataScience from "../src/components/Courses/DataScience";
+import BusinessAnalytics from "../src/components/Courses/BusinessAnalytics";
+import DataScienceAi from "../src/components/Courses/DataScienceAi";
+import BigDataDeveloper from "../src/components/Courses/BigDataDeveloper";
+import SoftwareTesting from "../src/components/Courses/SoftwareTesting";
+import SeleniumTesting from "../src/components/Courses/SeleniumTesting";
+import EtlTesting from "../src/components/Courses/EtlTesting";
+import AwsTraining from "../src/components/Courses/AwsTraining";
+import DevOps from "../src/components/Courses/DevOps";
+import HardwareNetworking from "../src/components/Courses/HardwareNetworking";
+import CyberSecurity from "../src/components/Courses/CyberSecurity";
+import Sap from "../src/components/Courses/Sap";
+import SalesForce from "../src/components/Courses/SalesForce";
+import ServiceNow from "../src/components/Courses/ServiceNow";
+import RPA from "../src/components/Courses/RPA";
+import AdminLogin from "./components/admin/AdminLogin";
+import Clientpage from "./pages/Clientpage";
+
+
+import StudentTable from "./components/admin/CourseEnquired";
+import AdminLayout from "./components/admin/AdminLayout";
 import ProductionSupportPage from "./components/Courses/ProductionSupport";
 import DigitalMarketingPage from "./components/Courses/DigitalMarketing";
 import SoftSkillPage from "./components/Courses/SoftSkillsTraining";
 
-// Wrapper to use useLocation
+import Reviews from "./pages/Reviews";
+
+import SampleResume from "./pages/SampleResume";
+
+// Wrapper component to use useLocation
 function Layout({ children }) {
   const location = useLocation();
 
@@ -88,6 +94,8 @@ export default function App() {
           {/* User routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/sample-resume" element={<SampleResume />}/>
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/client" element={<Clientpage />} />
