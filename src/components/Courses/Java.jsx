@@ -428,7 +428,7 @@ export default function JavaCoursePage() {
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              Know More →
+              Get Started →
             </button>
           </div>
         </div>
