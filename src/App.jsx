@@ -107,14 +107,12 @@ export default function App() {
           <Route path="/all-courses/ProductionSupport" element={<ProductionSupportPage />} />
           <Route path="/all-courses/DigitalMarketing" element={<DigitalMarketingPage />} />
           <Route path="/all-courses/SoftSkillsTraining" element={<SoftSkillPage />} />
+
           {/* Admin routes */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="course-enquired" element={<StudentTable />} />
-            
-            {/* ...more nested admin routes... */}
           </Route>
-          {/* Catch-all route */}
         </Routes>
       </Layout>
     </Router>
