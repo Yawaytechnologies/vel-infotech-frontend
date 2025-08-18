@@ -138,16 +138,16 @@ export default function ElementsMarqueeSection() {
     <section className="relative py-14 w-full bg-[#f4f7fd] overflow-hidden">
       {/* Heading */}
       <h2 className="text-2xl text-center  font-black mb-10 tracking-tight z-30 relative">
-        <span className="text-[#41e392]">30+</span>{" "}
+        <span className="text-[#005BAC]">30+</span>{" "}
         <span className="text-[#232946]">
           Programming Languages & Frameworks
         </span>
       </h2>
       <style>{marqueeStyle}</style>
       <div className="max-w-7xl mx-auto flex flex-col  gap-1 relative z-10">
-        <MarqueeRow items={rows[0]} reverse={false} duration={40} />
-        <MarqueeRow items={rows[1]} reverse={true} duration={40} />
-        <MarqueeRow items={rows[2]} reverse={false} duration={40} />
+        <MarqueeRow items={rows[0]} reverse={false} duration={190} />
+        <MarqueeRow items={rows[1]} reverse={true} duration={190} />
+        <MarqueeRow items={rows[2]} reverse={false} duration={190} />
       </div>
     </section>
   );
