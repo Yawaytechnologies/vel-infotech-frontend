@@ -268,6 +268,7 @@ const [mobileCategory, setMobileCategory] = useState(null);
     <a href="/blog" className="transition">
       Blog
     </a>
+    
 
     {/* More Dropdown */}
     <div className="relative group">
@@ -275,7 +276,7 @@ const [mobileCategory, setMobileCategory] = useState(null);
       <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
         <a href="/interview-questions" className="px-4 py-2 hover:bg-gray-100">Interview Questions</a>
         <a href="/resources" className="px-4 py-2 hover:bg-gray-100">Tutorials</a>
-        <a href="/branches" className="px-4 py-2 hover:bg-gray-100">Sample Resume</a>
+        <a href="/sample-resume" className="px-4 py-2 hover:bg-gray-100">Sample Resume</a>
       </div>
     </div>
   </nav>
@@ -441,6 +442,8 @@ const [mobileCategory, setMobileCategory] = useState(null);
                       Internship
                     </a>
                   </li>
+                  
+                  
                 </ul>
               )}
             </div>
