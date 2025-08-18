@@ -41,11 +41,16 @@ import RPA from "../src/components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
 import Clientpage from "./pages/Clientpage";
 
+
 import StudentTable from "./components/admin/CourseEnquired";
 import AdminLayout from "./components/admin/AdminLayout";
 import ProductionSupportPage from "./components/Courses/ProductionSupport";
 import DigitalMarketingPage from "./components/Courses/DigitalMarketing";
 import SoftSkillPage from "./components/Courses/SoftSkillsTraining";
+
+import Reviews from "./pages/Reviews";
+
+import SampleResume from "./pages/SampleResume";
 
 // Wrapper component to use useLocation
 function Layout({ children }) {
@@ -77,6 +82,8 @@ export default function App() {
           {/* User routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/sample-resume" element={<SampleResume />}/>
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/contact-us" element={<Contact/>} />
           <Route path="/client" element={<Clientpage/>} />
