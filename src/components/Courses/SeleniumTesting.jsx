@@ -324,7 +324,7 @@ export default function JavaCoursePage() {
               What You’ll Learn From Selenium Testing Training
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Selenium architecture & WebDriver APIs.</li>
+              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Selenium Architecture & WebDriver APIs.</li>
               <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Automate UI flows in Java with reliable locators & waits.</li>
               <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> TestNG: suites, assertions, parallel runs & reports.</li>
               <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Frameworks: Page Object Model, data-driven & reusable utilities.</li>

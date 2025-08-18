@@ -101,7 +101,7 @@ export default function Header() {
   return (
     <>
       <header className="fixed top-0 w-full z-50 bg-background border-b border-white/20">
-        <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[64px]">
+        <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[74px]">
           <div className="flex items-center flex-shrink-0">
             <Link to="/">
               <img
@@ -162,7 +162,7 @@ export default function Header() {
         </div>
 
         {/* Desktop Subheader */}
-        <div className="hidden md:flex w-full bg-[#005BAC] min-h-[44px] items-center px-6 z-40 fixed top=[64px] top-[64px] left-0">
+        <div className="hidden md:flex w-full bg-[#005BAC] min-h-[54px] items-center px-6 z-40 fixed top=[64px] top-[64px] left-0">
           <nav className="w-full flex justify-center gap-10 text-white font-semibold text-md relative">
             {/* All Courses */}
             <div className="relative group">
