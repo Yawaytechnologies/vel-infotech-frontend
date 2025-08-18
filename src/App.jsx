@@ -16,7 +16,7 @@ import About from "./pages/About";
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
 import Clientpage from "./pages/Clientpage";
-import Internship from "./pages/Internship";
+import Internship from "./pages/internship";
 import Blog from "./pages/Blog";
 import Interview from "./pages/interview";
 import InterviewDetail from "./pages/InterviewDetail";
