@@ -214,23 +214,32 @@ export default function Header() {
               </div>
             </div>
 
-            <Link to="/internship" className="transition">Internship</Link>
-            <Link to="/placed-students" className="transition">Placed Students List</Link>
-            <Link to="/reviews" className="transition">Reviews</Link>
-            <Link to="/blog" className="transition">Blog</Link>
+    <a href="/internship" className="transition">
+      Internship
+    </a>
+    <a href="/placed-students" className="transition">
+      Placed Students List
+    </a>
+    <a href="/reviews" className="transition">
+      Reviews
+    </a>
+    <a href="/blog" className="transition">
+      Blog
+    </a>
+    
 
-            <div className="relative group">
-              <button className="transition">More ▾</button>
-              <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
-                <Link to="/interview-questions" className="px-4 py-2 hover:bg-gray-100">Interview Questions</Link>
-                <Link to="/resources" className="px-4 py-2 hover:bg-gray-100">Tutorials</Link>
-                <Link to="/sample-resume" className="px-4 py-2 hover:bg-gray-100">Sample Resume</Link>
-              </div>
-            </div>
-          </nav>
-        </div>
-
-        {/* Overlay */}
+    {/* More Dropdown */}
+    <div className="relative group">
+      <button className="transition">More ▾</button>
+      <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
+        <a href="/interview-questions" className="px-4 py-2 hover:bg-gray-100">Interview Questions</a>
+        <a href="/resources" className="px-4 py-2 hover:bg-gray-100">Tutorials</a>
+        <a href="/sample-resume" className="px-4 py-2 hover:bg-gray-100">Sample Resume</a>
+      </div>
+    </div>
+  </nav>
+</div>
+     {/* Sidebar Overlay */}
         <div
           className={`fixed inset-0 z-40 bg-black/40 transition-all duration-300 ${
             menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -256,29 +265,139 @@ export default function Header() {
           </div>
 
           <nav className="flex flex-col mt-4 px-6 gap-2 overflow-y-auto scrollbar-none flex-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="text-medium font-base py-2 text-text-secondary text-left transition-all hover:text-[#005BAC]"
+           
+            {/* Main nav links */}
+            {navLinks
+              .filter((n) => n.name !== "Corporate Training")
+              .map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-medium font-base py-2 text-text-secondary text-left transition-all hover:text-[#cbe8ff]"
+                >
+                  {link.name}
+                </a>
+              ))}
+               {/* All Courses Mobile Dropdown */}
+            <div>
+              <button
+                className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#005BAC] transition"
+                onClick={() => setMobileCoursesOpen((prev) => !prev)}
               >
-                {link.name}
-              </Link>
-            ))}
-
-            {/* All Courses (mobile) */}
-            <MobileAllCourses
-              groupedCourses={groupedCourses}
-              onNavigate={() => setMenuOpen(false)}
-            />
-
-            {/* More (mobile) */}
-            <MobileMore
-              onNavigate={() => setMenuOpen(false)}
-              toggleSidebarMenu={toggleSidebarMenu}
-              sidebarMenus={sidebarMenus}
-            />
+                <span>All Courses</span>
+                {mobileCoursesOpen ? (
+                  <FiChevronDown className="ml-2" />
+                ) : (
+                  <FiChevronRight className="ml-2" />
+                )}
+              </button>
+              {mobileCoursesOpen && (
+                <div className="ml-2 pb-2">
+                  {groupedCourses.map((cat, idx) => (
+                    <div key={cat.category} className="mb-1">
+                      {/* Main category (expand/collapse) */}
+                      <button
+                        className="w-full flex items-center justify-between text-base text-gray-900 font-base py-2 hover:text-[#005BAC] transition"
+                        onClick={() =>
+                          setMobileCategory(mobileCategory === idx ? null : idx)
+                        }
+                      >
+                        <span>{cat.category}</span>
+                        <FiChevronRight
+                          className={`ml-2 transform transition-transform duration-200 ${
+                            mobileCategory === idx
+                              ? "rotate-90 text-[#005BAC]"
+                              : ""
+                          }`}
+                        />
+                      </button>
+                      {/* Show sub-courses if this category is open */}
+                      {mobileCategory === idx && (
+                        <div className="pl-4">
+                          {cat.items.map((item) => (
+                            <a
+                              key={item.name}
+                              href={item.href}
+                              className="block py-1 text-gray-800 hover:text-[#005BAC] text-[15px]"
+                              onClick={() => setMenuOpen(false)}
+                            >
+                              {item.name}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            {/* "More" collapsible */}
+            <div>
+              <button
+                className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#cbe8ff] transition"
+                onClick={() => toggleSidebarMenu("More")}
+              >
+                <span>More</span>
+                {sidebarMenus["More"] ? (
+                  <FiChevronDown className="ml-2" />
+                ) : (
+                  <FiChevronRight className="ml-2" />
+                )}
+              </button>
+              {/* Collapsible submenu */}
+              {sidebarMenus["More"] && (
+                <ul className="bg-[#fffff] rounded-lg mt-1 pb-1">
+                  <li>
+                    <a
+                      href="/all-courses"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      All-Courses
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/placed-students"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Placed Students list
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/reviews"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Reviews
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/interview-questions"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Interview Questions
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/internship"
+                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Internship
+                    </a>
+                  </li>
+                  
+                  
+                </ul>
+              )}
+            </div>
           </nav>
         </aside>
       </header>
