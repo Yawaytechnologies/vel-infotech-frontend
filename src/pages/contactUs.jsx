@@ -6,7 +6,7 @@ import ContactForm from '../components/conatctUs/ContactUsform';
 
 function Contact() {
     return (
-      <div className='bg-[#e6ebf7] pb-0 mt-30'>
+      <div className='bg-[#e6ebf7] pb-0 mt-12'>
         <ContactHeader/>
         <div className='bg-white w-full max-h-full'>
         <ContactForm/>
