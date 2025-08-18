@@ -224,7 +224,7 @@ export default function Header() {
               <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
                 <Link to="/interview-questions" className="px-4 py-2 hover:bg-gray-100">Interview Questions</Link>
                 <Link to="/resources" className="px-4 py-2 hover:bg-gray-100">Tutorials</Link>
-                <Link to="/branches" className="px-4 py-2 hover:bg-gray-100">Sample Resume</Link>
+                <Link to="/sample-resume" className="px-4 py-2 hover:bg-gray-100">Sample Resume</Link>
               </div>
             </div>
           </nav>

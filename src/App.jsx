@@ -52,7 +52,7 @@ import DigitalMarketingPage from "./components/Courses/DigitalMarketing";
 import SoftSkillPage from "./components/Courses/SoftSkillsTraining";
 
 import Reviews from "./pages/Reviews";
-import SampleResume from "./pages/SampleResume";import Reviews from "./pages/Reviews";
+
 import SampleResume from "./pages/SampleResume";
 
 // Wrapper to use useLocation
