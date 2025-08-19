@@ -1,179 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { ToastContainer, toast, Slide } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function ProductionSupportPage() {
   const [mode, setMode] = useState("classroom");
-
-  /* ===========================
-     FORM STATE + VALIDATION
-     =========================== */
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    batch: "",
-    course: "Production Support", // prefill since this page is specific
-    message: "",
-  });
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
-
-  // Smooth scroll target
-  const formRef = useRef(null);
-  const scrollToForm = () => {
-    const el = formRef.current || document.getElementById("enquiry-form");
-    if (!el) return;
-    const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
-    window.scrollTo({ top: y, behavior: "smooth" });
-  };
-
-  // Toast defaults
-  const toastOpts = {
-    position: "top-center",
-    transition: Slide,
-    autoClose: 2200,
-    hideProgressBar: true,
-    closeButton: false,
-    icon: false,
-    pauseOnHover: true,
-    draggable: false,
-    theme: "colored",
-  };
-
-  // helpers
-  const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
-  const onlyLettersSpaces = (s) =>
-    s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
-  const digits10 = (s) => s.replace(/\D+/g, "").slice(0, 10);
-
-  const validateField = (name, value) => {
-    const v = (value ?? "").trim();
-    switch (name) {
-      case "name":
-        if (!v) return "Name is required.";
-        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
-        if (v.length < 2) return "Enter at least 2 characters.";
-        return null;
-      case "email":
-        if (!v) return "Email is required.";
-        if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v))
-          return "Enter a valid email (e.g., name@gmail.com).";
-        return null;
-      case "phone":
-        if (!v) return "Mobile number is required.";
-        if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
-        return null;
-      case "batch":
-        if (!v) return "Please select a batch.";
-        return null;
-      case "course":
-        if (!v) return "Course name is required.";
-        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
-        if (v.length < 2) return "Enter at least 2 characters.";
-        return null;
-      case "message":
-        if (!v) return "Message is required.";
-        if (v.length > 300) return "Max 300 characters.";
-        return null;
-      default:
-        return null;
-    }
-  };
-
-  const setField = (name, value) => {
-    let v = value;
-    if (name === "name") v = capFirst(onlyLettersSpaces(value));
-    if (name === "course") v = capFirst(onlyLettersSpaces(value));
-    if (name === "phone") v = digits10(value);
-    if (name === "message") {
-      v = value.length ? value[0].toUpperCase() + value.slice(1) : value;
-      v = v.slice(0, 300);
-    }
-    setForm((prev) => ({ ...prev, [name]: v }));
-
-    const msg = validateField(name, v);
-    setErrors((prev) => {
-      const n = { ...prev };
-      if (msg) n[name] = msg;
-      else delete n[name];
-      return n;
-    });
-  };
-
-  const handleChange = (e) => setField(e.target.name, e.target.value);
-
-  const handleBlur = (e) => {
-    const { name } = e.target;
-    setTouched((t) => ({ ...t, [name]: true }));
-    const msg = validateField(name, form[name]);
-    setErrors((prev) => ({
-      ...prev,
-      ...(msg ? { [name]: msg } : { [name]: undefined }),
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setTouched({
-      name: true,
-      email: true,
-      phone: true,
-      batch: true,
-      course: true,
-      message: true,
-    });
-
-    const fields = ["name", "email", "phone", "batch", "course", "message"];
-    const next = {};
-    fields.forEach((f) => {
-      const er = validateField(f, form[f]);
-      if (er) next[f] = er;
-    });
-    setErrors(next);
-
-    if (Object.keys(next).length) {
-      const first = fields.find((f) => next[f]);
-      const el = document.querySelector(`[name="${first}"]`);
-      if (el) el.focus();
-
-      toast.error(next[first] || "Please fix the highlighted errors.", {
-        ...toastOpts,
-        style: { background: "#ef4444", color: "#fff" },
-        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
-      });
-      return;
-    }
-
-    // success path – (wire API here if needed)
-    console.log("Production Support Enquiry:", form);
-
-    toast.success("Thanks! Your enquiry has been recorded.", {
-      ...toastOpts,
-      style: { background: "#16a34a", color: "#fff" },
-      className: "rounded-xl shadow-md text-[15px] px-4 py-3",
-    });
-
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      batch: "",
-      course: "Production Support",
-      message: "",
-    });
-    setErrors({});
-    setTouched({});
-  };
-
-  // input classes
-  const baseInput =
-    "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500";
-  const ok = "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]";
-  const bad = "border-red-500 focus:border-red-500 focus:ring-red-500";
 
   return (
     <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
@@ -181,35 +12,31 @@ export default function ProductionSupportPage() {
         {/* LEFT: Content */}
         <div className="flex-1">
           <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Join Our 100% Job-Oriented <br />
+            Join Our 100% Job Guaranteed <br />
             <span className="text-yellow-400">Production Support Program</span>
           </h2>
 
           <ul className="space-y-3 mt-6 text-lg">
-            <li>✅ Learn ITIL-based <strong>Incident / Problem / Change</strong> management.</li>
-            <li>✅ Hands-on with <strong>Linux, SQL, Shell</strong> & service monitoring.</li>
-            <li>✅ Master <strong>logs, alerts, runbooks, on-call & RCA</strong> workflows.</li>
-            <li>✅ Tools overview: <strong>ServiceNow/Jira, Splunk, Grafana, Prometheus, Postman</strong>.</li>
-            <li>✅ Flexible modes – <strong>Weekday / Weekend / Fast-track</strong>.</li>
-            <li>✅ <strong>Interview prep</strong>, resume support & job referrals.</li>
+            <li>✅ Join the <strong>Top Production Support Institute</strong> to master L1/L2/L3 Support skills.</li>
+            <li>✅ Learn core tools – <strong>Linux, Windows Server, SQL, Shell Scripting, ServiceNow, Jira, Ticketing Tools, Monitoring (Nagios/Zabbix)</strong>.</li>
+            <li>✅ Work on real-time scenarios with <strong>incident management, monitoring, troubleshooting, and escalation handling</strong>.</li>
+            <li>✅ Choose <strong>flexible learning paths</strong> – Weekday / Weekend / Fast-track options.</li>
+            <li>✅ Earn an industry-recognized <strong>Production Support Certification</strong>.</li>
+            <li>✅ Career support: Mock interviews, resume building, job referrals & hands-on assignments.</li>
           </ul>
 
           <button
-            type="button"
-            onClick={scrollToForm}
             className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
-              mt-8
-              before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
-              after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
-              hover:decoration-2 hover:text-rose-300
-              duration-500 hover:duration-500 before:duration-500 after:duration-500
-              group-hover:before:duration-500 group-hover:after:duration-500
-              hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
+                    mt-8
+                    before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
+                    after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
+                    hover:decoration-2 hover:text-rose-300
+                    duration-500 hover:duration-500 before:duration-500 after:duration-500
+                    group-hover:before:duration-500 group-hover:after:duration-500
+                    hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
           >
             <div>
-              <span className="text-lg font-extrabold text-violet-400 block">
-                Freshers Salary:
-              </span>
+              <span className="text-lg font-extrabold text-violet-400 block">Freshers Salary:</span>
               ₹3 LPA to ₹8 LPA <br />
               <span className="text-sm text-gray-300">| Duration: 3 Months</span>
             </div>
@@ -219,15 +46,23 @@ export default function ProductionSupportPage() {
         {/* RIGHT: Call to Action */}
         <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
           <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-          <p className="mb-4 text-lg">Become a Production Support Engineer in 3 Months</p>
+          <p className="mb-4 text-lg">Become a Production Support Specialist in 3 Months</p>
 
           <button
             type="button"
-            onClick={scrollToForm}
+            onClick={() => {
+              const formSection = document.getElementById("enquiry-form");
+              if (formSection) {
+                formSection.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
             className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
           >
+            {/* Expanding background on hover */}
             <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
+            {/* Text */}
             <span className="relative z-10 group-hover:text-black transition-colors duration-300">Enquire Now</span>
+            {/* Icon */}
             <span className="relative z-10">
               <svg
                 className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
@@ -254,22 +89,55 @@ export default function ProductionSupportPage() {
       {/* Course Partners Section */}
       <section className="py-16 bg-[#002855]">
         <div className="max-w-7xl mx-auto px-4">
+          {/* Header */}
           <div className="text-center mb-10">
             <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
               <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
             </h3>
           </div>
-
+          {/* Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
             {[
-              { name: "HubSpot", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg", link: "https://www.hubspot.com/" },
-              { name: "GitLab", logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg", link: "https://about.gitlab.com/" },
-              { name: "Monday.com", logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg", link: "https://monday.com/" },
-              { name: "Google Cloud", logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg", link: "https://cloud.google.com/" },
-              { name: "AWS", logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg", link: "https://aws.amazon.com/" },
-              { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg", link: "https://www.salesforce.com/" },
-              { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", link: "https://www.ibm.com/" },
-              { name: "Slack", logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg", link: "https://slack.com/" },
+              {
+                name: "HubSpot",
+                logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
+                link: "https://www.hubspot.com/",
+              },
+              {
+                name: "GitLab",
+                logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
+                link: "https://about.gitlab.com/",
+              },
+              {
+                name: "Monday.com",
+                logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
+                link: "https://monday.com/",
+              },
+              {
+                name: "Google Cloud",
+                logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
+                link: "https://cloud.google.com/",
+              },
+              {
+                name: "AWS",
+                logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
+                link: "https://aws.amazon.com/",
+              },
+              {
+                name: "Salesforce",
+                logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
+                link: "https://www.salesforce.com/",
+              },
+              {
+                name: "IBM",
+                logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                link: "https://www.ibm.com/",
+              },
+              {
+                name: "Slack",
+                logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                link: "https://slack.com/",
+              },
             ].map((partner, index) => (
               <motion.a
                 key={index}
@@ -290,349 +158,211 @@ export default function ProductionSupportPage() {
         </div>
       </section>
 
-      {/* Production Support Overview */}
-      <section className="px-0 py-16">
+      {/* PRODUCTION SUPPORT overview */}
+      <section className="px-0 py-16 bg-">
         <div className="max-w-[100%] mx-auto px-4 md:px-10">
           <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
+            {/* Heading */}
             <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
-              Overview of Production Support Training
+              Overview of Production Support Course
             </h2>
             <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
+            {/* Description */}
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-              Become job-ready for 24×7 production environments. Learn how to triage incidents, analyze logs, stabilize
-              applications, coordinate with dev teams, and restore services quickly while maintaining SLAs & SLOs.
+              Our Production Support Training program is designed to provide comprehensive knowledge of IT operations, monitoring, troubleshooting, and incident management. Learn to ensure business continuity and application uptime through real-world support scenarios and hands-on labs.
             </p>
 
+            {/* What You’ll Learn */}
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-              What You’ll Learn
+              What You’ll Learn From Production Support Training
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> ITIL foundations: Incident, Problem, Change.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Monitoring & alert triage (thresholds, noise reduction).</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Log analysis with Splunk/ELK, dashboards with Grafana.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Linux basics, Shell scripting, SQL for prod checks.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Runbooks, on-call, comms, and post-incident RCA.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Change & release windows, canary/rollback basics.</li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Fundamentals of IT operations and support processes (ITIL/ITSM).
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Real-time incident, change, and problem management.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Troubleshooting applications, databases, and server issues.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Working with monitoring tools and alerts (Nagios, Zabbix).
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Scripting for automation (Shell, PowerShell, Python basics).
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Exposure to ITSM tools like ServiceNow, Jira, and ticketing systems.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Career support with mock interviews, resume prep, and placement guidance.
+              </li>
             </ul>
           </div>
         </div>
       </section>
 
-      {/* CTA + Cards */}
-      <section className="w-full px-6 py-20 text-black ">
+      {/* Production Support Section */}
+      <section className="w-full px-6 py-20 bg-gradient-to-b from-[#] to-[#] text-black">
+        {/* Header */}
         <div className="max-w-7xl mx-auto text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
             Become a Certified Production Support Engineer
           </h2>
           <p className="text-lg md:text-xl text-white mb-6">
-            Hands-on training with ticketing, monitoring, logs, automation, and real incident simulations.
+            Learn IT Operations, Monitoring, Ticketing, Automation, and Troubleshooting from industry experts.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
-            <button
-              type="button"
-              onClick={scrollToForm}
-              className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all"
-            >
+            <button className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all">
               Get Started →
             </button>
           </div>
         </div>
 
+        {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {/* Card 1 - Course Highlights */}
-          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+          <div className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Highlights" className="w-10 h-10 mb-4" />
+              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Course Highlights" className="w-10 h-10 mb-4" />
               <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                <li>✓ ITIL foundations</li>
-                <li>✓ Real incident drills</li>
-                <li>✓ RCA & runbook writing</li>
-                <li>✓ Shift handover best practices</li>
+                <li>✓ IT Operations & Monitoring</li>
+                <li>✓ Real-time incident management</li>
+                <li>✓ Resume & mock interview support</li>
+                <li>✓ Job-oriented, industry-backed curriculum</li>
               </ul>
             </div>
           </div>
-
           {/* Card 2 - Tools */}
-          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+          <div className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Tools" className="w-10 h-10 mb-4" />
+              <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Tools You’ll Master" className="w-10 h-10 mb-4" />
               <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
               <div className="flex flex-wrap gap-2">
-                {["Linux", "Shell", "SQL", "ServiceNow/Jira", "Splunk", "Grafana", "Prometheus", "Postman", "Git"].map(
-                  (tool) => (
-                    <span key={tool} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
-                      {tool}
-                    </span>
-                  )
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3 - Topics Covered */}
-          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
-            <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Topics" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Alert Triage",
-                  "Log Analysis",
-                  "RCA",
-                  "Runbooks",
-                  "SLA/SLO",
-                  "Change Windows",
-                  "Release Basics",
-                  "On-call",
-                ].map((topic) => (
-                  <span key={topic} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
-                    {topic}
-                  </span>
+                {["Linux", "Windows Server", "SQL", "Nagios", "Zabbix", "ServiceNow", "Jira", "Shell Scripting", "Ticketing Tools"].map((tool, i) => (
+                  <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{tool}</span>
                 ))}
               </div>
             </div>
           </div>
-
-          {/* Card 4 - Key Skills */}
-          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+          {/* Card 3 - Topics Covered */}
+          <div className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Skills" className="w-10 h-10 mb-4" />
+              <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Topics Covered" className="w-10 h-10 mb-4" />
+              <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
+              <div className="flex flex-wrap gap-2">
+                {["ITIL/ITSM", "Incident Management", "Monitoring Tools", "Troubleshooting", "Scripting", "Ticket Handling"].map((topic, i) => (
+                  <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{topic}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* Card 4 - Key Skills */}
+          <div className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300">
+            <div className="mb-4">
+              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Key Skills You’ll Gain" className="w-10 h-10 mb-4" />
               <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                <li>Stability & uptime mindset</li>
-                <li>Effective incident comms</li>
-                <li>Cross-team collaboration</li>
-                <li>Automation-first approach</li>
+                <li>Incident & problem management</li>
+                <li>Monitoring & alert handling</li>
+                <li>Scripting for automation</li>
+                <li>Effective ticket communication</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ENQUIRY FORM */}
-      <section className="w-full px-6 py-20 text-white">
+      {/* ENQUIRY FORM SECTION */}
+      <section className="w-full px-6 py-20 bg-[#] text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
           {/* LEFT: Additional Info Boxes */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
+            {/* Box 1 */}
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h4 className="text-xl font-bold mb-2">Comprehensive Curriculum</h4>
-              <p className="text-black/90">
-                Structured modules covering ITIL, monitoring, logs, Linux, shell, SQL, and incident workflows.
-              </p>
+              <p className="text-balck/90">Master Production Support with structured modules covering ITIL, ITSM, monitoring, troubleshooting, scripting, and more.</p>
             </div>
-
+            {/* Box 2 */}
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h4 className="text-xl font-bold mb-2">Career-Oriented Training</h4>
-              <p className="text-black/90">
-                Mock interviews, resume prep, real incident simulations, and interview question banks.
-              </p>
+              <p className="text-black/90">Learn from working professionals. Includes mock interviews, resume prep, and job assistance.</p>
             </div>
-
+            {/* Box 3 */}
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Strong Placement Support</h4>
-              <p className="text-black/90">
-                Referrals via partner network and hiring drives for Production/App Support roles.
-              </p>
+              <h4 className="text-xl font-bold mb-2">100% Job Guarantee</h4>
+              <p className="text-black/90">We assure placement support post training with strong partner network and hiring drives.</p>
             </div>
-
+            {/* Box 4 */}
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
-              <p className="text-black/90">
-                Build runbooks, create dashboards, triage simulated outages, and deliver RCAs.
-              </p>
+              <p className="text-black/90">Gain real-world experience with simulated production support cases and incident handling assignments included in every module.</p>
             </div>
           </div>
-
-          {/* RIGHT: Validated Form */}
-          <div className="w-full max-w-lg">
-            <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-              <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
-                Get a Free Training Quote
-              </h3>
-
-              {/* Toggle Buttons */}
-              <div className="flex justify-center gap-3 mb-6">
-                <button
-                  onClick={() => setMode("classroom")}
-                  type="button"
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                    mode === "classroom"
-                      ? "bg-[#003c6a] text-white"
-                      : "bg-white text-[#003c6a] border border-[#003c6a]"
-                  }`}
-                >
-                  <FaChalkboardTeacher className="text-base" /> Class Room
-                </button>
-                <button
-                  onClick={() => setMode("online")}
-                  type="button"
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                    mode === "online"
-                      ? "bg-[#003c6a] text-white"
-                      : "bg-white text-[#003c6a] border border-[#003c6a]"
-                  }`}
-                >
-                  <FaLaptop className="text-base" /> Online
-                </button>
-              </div>
-
-              {/* Form Fields */}
-              <form
-                id="enquiry-form"
-                ref={formRef}
-                onSubmit={handleSubmit}
-                noValidate
-                className="grid grid-cols-1 gap-2"
-              >
-                {/* Name */}
-                <div>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={form.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    aria-invalid={!!errors?.name}
-                    className={[baseInput, touched?.name && errors?.name ? bad : ok].join(" ")}
-                  />
-                  <div className="h-3 mt-0.5">
-                    {touched?.name && errors?.name && (
-                      <p className="text-red-600 text-xs">{errors.name}</p>
-                    )}
-                  </div>
+          {/* RIGHT: Form (unchanged) */}
+          <div className="w-full lg:w-1/2 flex justify-end">
+            <div className="w-full max-w-lg">
+              <div className="relative backdrop-blur-[6px] bg-white/70 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
+                <h3 className="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
+                  Get a Free Training Quote
+                </h3>
+                {/* Mode Toggle */}
+                <div className="flex justify-center mb-7 gap-2">
+                  <button
+                    onClick={() => setMode("classroom")}
+                    className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-lg font-semibold shadow transition-all duration-200
+                      ${mode === "classroom"
+                        ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                        : "bg-white/60 text-black border border-[#a7f3d0]/40"
+                      }`}
+                  >
+                    <FaChalkboardTeacher className="text-xl" /> Class Room
+                  </button>
+                  <button
+                    onClick={() => setMode("online")}
+                    className={`flex-1 flex items-center justify-center gap-2 py-2.5 md:py-3 rounded-full text-lg font-semibold shadow transition-all duration-200
+                      ${mode === "online"
+                        ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                        : "bg-white/60 text-black border border-[#a7f3d0]/40"
+                      }`}
+                  >
+                    <FaLaptop className="text-xl" /> Online
+                  </button>
                 </div>
-
-                {/* Email */}
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    value={form.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    aria-invalid={!!errors?.email}
-                    className={[baseInput, touched?.email && errors?.email ? bad : ok].join(" ")}
-                  />
-                  <div className="h-3 mt-0.5">
-                    {touched?.email && errors?.email && (
-                      <p className="text-red-600 text-xs">{errors.email}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Phone + Batch */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      inputMode="numeric"
-                      pattern="\d*"
-                      placeholder="Mobile Num"
-                      value={form.phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.phone}
-                      className={[baseInput, touched?.phone && errors?.phone ? bad : ok].join(" ")}
-                    />
-                    <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && (
-                        <p className="text-red-600 text-xs">{errors.phone}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div>
-                    <select
-                      name="batch"
-                      value={form.batch}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.batch}
-                      className={[baseInput, touched?.batch && errors?.batch ? bad : ok, "placeholder:text-transparent"].join(" ")}
-                    >
-                      <option value="" disabled>
-                        How & Where
-                      </option>
+                {/* Form */}
+                <form id="enquiry-form" className="flex flex-col gap-4">
+                  <input type="text" placeholder="Your Name" className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none shadow" />
+                  <input type="email" placeholder="Your Email" className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none shadow" />
+                  <div className="flex gap-3">
+                    <input type="tel" placeholder="Mobile Number" className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#16bca7] outline-none shadow" />
+                    <select className="rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#16bca7] outline-none shadow text-black" defaultValue="">
+                      <option value="" disabled>How & Where</option>
                       <option>Morning Batch</option>
                       <option>Evening Batch</option>
                       <option>Weekend</option>
                     </select>
-                    <div className="h-3 mt-0.5">
-                      {touched?.batch && errors?.batch && (
-                        <p className="text-red-600 text-xs">{errors.batch}</p>
-                      )}
-                    </div>
                   </div>
-                </div>
-
-                {/* Course */}
-                <div>
-                  <input
-                    type="text"
-                    name="course"
-                    placeholder="Type Course"
-                    value={form.course}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    aria-invalid={!!errors?.course}
-                    className={[baseInput, touched?.course && errors?.course ? bad : ok].join(" ")}
-                  />
-                  <div className="h-3 mt-0.5">
-                    {touched?.course && errors?.course && (
-                      <p className="text-red-600 text-xs">{errors.course}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Message */}
-                <div>
-                  <textarea
-                    rows={2}
-                    name="message"
-                    placeholder="Your Message"
-                    value={form.message}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    aria-invalid={!!errors?.message}
-                    className={[baseInput, "resize-none", touched?.message && errors?.message ? bad : ok].join(" ")}
-                  />
-                  <div className="flex justify-between text-xs text-gray-500 mt-0.5">
-                    <span>First letter auto-caps</span>
-                    <span>{form.message.length}/300</span>
-                  </div>
-                  <div className="h-3 mt-0.5">
-                    {touched?.message && errors?.message && (
-                      <p className="text-red-600 text-xs">{errors.message}</p>
-                    )}
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition"
-                >
-                  Submit
-                </button>
-              </form>
+                  <input type="text" placeholder="Type Course" className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none shadow" />
+                  <textarea placeholder="Your Message" rows={2} className="placeholder:text-black rounded-xl bg-white/80 px-5 py-3 border border-[#a7f3d0]/60 text-base font-medium focus:ring-2 focus:ring-[#16bca7] outline-none resize-none shadow" />
+                  <button className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-extrabold py-3 rounded-xl hover:from-[#0891b2] hover:to-[#16bca7] transition shadow-lg mt-1">
+                    Submit
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Toasts */}
-      <ToastContainer
-        newestOnTop
-        limit={2}
-        className="!z-[9999]"
-        toastClassName={() => "rounded-xl shadow-md"}
-        bodyClassName={() => "text-[15px] font-medium"}
-        theme="colored"
-      />
     </section>
   );
 }
