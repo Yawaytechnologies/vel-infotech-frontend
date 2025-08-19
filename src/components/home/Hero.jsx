@@ -28,7 +28,7 @@ const slides = [
     headline: "Real-Time Projects",
     subtext: "Gain hands-on experience by working on real-time industry projects that boost your confidence and portfolio. Learn by doing, not just watching.",
     cta: "See Placements",
-    link: "/placed-students",
+    link: "/",
   },
   {
     image: img4,
