@@ -6,7 +6,7 @@ import {
   FaYoutube,
   FaInstagram,
 } from "react-icons/fa";
-import Logo from "../../assets/infotech.png";
+import Logo from "../../assets/Vel InfoTech.svg";
 export default function Footer() {
   return (
     <footer className="relative bg-[#e9f1fb] text-black-200 pt-10 pb-3">
@@ -16,15 +16,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 pb-10 border-b border-gray-700 md:justify-items-center">
           {/* Logo and About */}
           <div>
-            <div className="flex items-center h-18 ">
+            <div className="flex item s-center h-18 ">
               <img
                 src={Logo}
                 alt="Logo"
-                className=" h-25 w-auto object-contain"
+                className=" h-35 w-auto object-contain"
               />
-              <span className="text-xl font-bold text-text-text-primary font-poppins tracking-widest  select-none">
-                Vel <span className="text-[#005BAC]">InfoTech</span>
-              </span>
+             
             </div>
             <p className="text-black-400 text-md mt-8 mb-8 font-bold ">
               Empowering your career with industry-ready IT and tech skills.
