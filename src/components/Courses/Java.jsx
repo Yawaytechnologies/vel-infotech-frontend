@@ -337,8 +337,32 @@ export default function JavaCoursePage() {
      
     </div>
 
+      <section className="w-full px-6 py-20">
+        <div className="max-w-7xl mx-auto text-center mb-10">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
+            Become a Full Stack Java Developer
+          </h2>
+          <p className="text-lg md:text-xl text-white/80 mb-6">
+            Master Java, Spring Boot, REST APIs, React, and more through
+            practical, expert-led training.
+          </p>
+          <div className="flex justify-center">
+            <button
+              className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all"
+              type="button"
+              onClick={() => {
+                const el = document.getElementById("enquiry-form");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Get Started →
+            </button>
+          </div>
+        </div>
+
   </div>
 </section>
+
 
 
 
