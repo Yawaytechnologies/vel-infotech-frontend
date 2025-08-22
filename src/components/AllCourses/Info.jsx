@@ -11,10 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-
 export default function Info() {
-  const navigate = useNavigate();
-
   return (
     <section
       className="py-16 px-4 bg-gradient-to-br from-[#f5f8ff] to-[#ffffff] relative overflow-hidden"
@@ -80,18 +77,15 @@ export default function Info() {
 
       {/* CTA Button */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="text-center mt-6 relative z-10"
-      >
-        <button
-          onClick={() => navigate("/about")}
-          className="bg-[#4f3cc9] hover:bg-[#372ba5] text-white font-bold py-3 px-6 rounded-full text-base shadow transition"
-        >
-          Know More →
-        </button>
-      </motion.div>
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.4 }}
+  className="text-center mt-6 relative z-10"
+>
+  <button className="bg-[#4f3cc9] hover:bg-[#372ba5] text-white font-bold py-3 px-6 rounded-full text-base shadow transition">
+    Know More →
+  </button>
+</motion.div>
     </section>
   );
 }
