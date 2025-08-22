@@ -17,14 +17,14 @@ import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
 import Interview from "./pages/interview";
 import About from "./pages/About";
-
+import AdminDashboard from "./components/admin/AdminDashboard";
 import BlogBanner from "./pages/Blog";
 
 import Tutorials from "./pages/Tutorials";
 
 import InterviewDetail from "./pages/InterviewDetail";
 import Footer from "./components/common/Footer";
-import AdminDashboard from "../src/pages/Admin";
+import AddStudent from "./components/admin/AddStudent";
 import AllCourses from "./pages/AllCourses";
 import Java from './components/Courses/Java';
 import Python from './components/Courses/Python';
@@ -48,16 +48,13 @@ import ServiceNow from "../src/components/Courses/ServiceNow";
 import RPA from "../src/components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
 import Clientpage from "./pages/Clientpage";
-
-
+import Feedback from "./pages/Feedback";
 import StudentTable from "./components/admin/CourseEnquired";
 import AdminLayout from "./components/admin/AdminLayout";
 import ProductionSupportPage from "./components/Courses/ProductionSupport";
 import DigitalMarketingPage from "./components/Courses/DigitalMarketing";
 import SoftSkillPage from "./components/Courses/SoftSkillsTraining";
-
 import Reviews from "./pages/Reviews";
-
 import SampleResume from "./pages/SampleResume";
 
 // Wrapper component to use useLocation
@@ -68,7 +65,8 @@ function Layout({ children }) {
     "/admin",
     "/admin/login",
     "/admin/dashboard",
-    "/admin/course-enquired",
+    "/admin/course-enquired",,
+    "/admin/add-student",
   ];
   const isAdmin = adminPaths.includes(location.pathname);
 
@@ -102,6 +100,7 @@ export default function App() {
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<BlogBanner />} />
           <Route path="/resources" element={<Tutorials />} />
+          <Route path="/feedback" element={<Feedback />} />
 
           <Route path="/contact-us" element={<Contact/>} />
           <Route path="/client" element={<Clientpage/>} />
@@ -147,6 +146,9 @@ export default function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="course-enquired" element={<StudentTable />} />
+            <Route path="add-student" element={<AddStudent />} />
+            
+            {/* ...more nested admin routes... */}
           </Route>
         </Routes>
       </Layout>

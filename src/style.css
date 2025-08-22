@@ -140,3 +140,14 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+
+/* in src/index.css (or a global CSS loaded in your app) */
+.input {
+  @apply w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+}
+.file-input {
+  @apply block w-full rounded-xl border border-neutral-300 bg-white text-sm text-neutral-700
+         file:mr-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-indigo-700
+         hover:file:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+}
