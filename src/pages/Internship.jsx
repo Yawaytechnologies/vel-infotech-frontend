@@ -1,5 +1,5 @@
 // src/pages/Internship.jsx
-import React, { useState } from "react";
+import React from "react";
 import internshipBg from "../assets/internship.jpg";
 import background from "../assets/background.jpg";
 // eslint-disable-next-line no-unused-vars
@@ -17,174 +17,19 @@ import phpIcon from "../assets/php.png";
 import mlIcon from "../assets/machine.png";
 import analyticsIcon from "../assets/analytics.png";
 
-import { ToastContainer, toast, Slide } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 const Internship = () => {
-  // ----- Form state -----
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    course: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
-
-  // ----- Helpers -----
-  const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
-  const onlyLettersSpaces = (s) =>
-    s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
-  const digits10 = (s) => s.replace(/\D+/g, "").slice(0, 10);
-
-  const validateField = (name, value) => {
-    const v = (value ?? "").trim();
-    switch (name) {
-      case "fullName":
-        if (!v) return "Full name is required.";
-        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
-        if (v.length < 2) return "Enter at least 2 characters.";
-        return null;
-      case "email":
-        if (!v) return "Email is required.";
-        if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v))
-          return "Enter a valid email with domain (e.g., example@gmail.com).";
-        return null;
-      case "phone":
-        if (!v) return "Phone number is required.";
-        if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit number.";
-        return null;
-      case "course":
-        if (!v) return "Course / Domain is required.";
-        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
-        if (v.length < 2) return "Enter at least 2 characters.";
-        return null;
-      case "message":
-        if (!v) return "Message is required.";
-        if (v.length > 300) return "Max 300 characters.";
-        return null;
-      default:
-        return null;
-    }
-  };
-
-  const validateAll = (data) => {
-    const next = {};
-    ["fullName", "email", "phone", "course", "message"].forEach((k) => {
-      const e = validateField(k, data[k]);
-      if (e) next[k] = e;
-    });
-    setErrors(next);
-    return next;
-  };
-
-  // ----- Toast setup -----
-  const tBase = {
-    position: "top-center",
-    autoClose: 2200,
-    hideProgressBar: true,
-    closeButton: false,
-    draggable: false,
-    pauseOnHover: true,
-    pauseOnFocusLoss: false,
-    transition: Slide,
-    theme: "colored",
-    style: {
-      borderRadius: "12px",
-      padding: "10px 16px",
-      minWidth: "280px",
-      maxWidth: "360px",
-      lineHeight: 1.25,
-      fontSize: "14px",
-      fontWeight: 600,
-      color: "#fff",
-      boxShadow: "0 10px 24px rgba(0,0,0,.18)",
-    },
-  };
-  const toastSuccess = (m) =>
-    toast(m, { ...tBase, style: { ...tBase.style, background: "#34d399" } });
-  const toastError = (m) =>
-    toast(m, { ...tBase, style: { ...tBase.style, background: "#ef4444" } });
-
-  // ----- Handlers -----
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    let v = value;
-
-    if (name === "fullName") v = capFirst(onlyLettersSpaces(value));
-    if (name === "course") v = capFirst(onlyLettersSpaces(value));
-    if (name === "phone") v = digits10(value);
-    if (name === "message") {
-      v = value.length ? value[0].toUpperCase() + value.slice(1) : value;
-      v = v.slice(0, 300);
-    }
-
-    setForm((f) => ({ ...f, [name]: v }));
-
-    // live-validate
-    const msg = validateField(name, v);
-    setErrors((prev) => {
-      const next = { ...prev };
-      if (msg) next[name] = msg;
-      else delete next[name];
-      return next;
-    });
-  };
-
-  const handleBlur = (e) => {
-    const { name } = e.target;
-    setTouched((t) => ({ ...t, [name]: true }));
-    const msg = validateField(name, form[name]);
-    setErrors((prev) => ({ ...prev, ...(msg ? { [name]: msg } : { [name]: undefined }) }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setTouched({
-      fullName: true,
-      email: true,
-      phone: true,
-      course: true,
-      message: true,
-    });
-
-    const errs = validateAll(form);
-    if (Object.keys(errs).length) {
-      const order = ["fullName", "email", "phone", "course", "message"];
-      const first = order.find((k) => errs[k]);
-      toastError(errs[first] || "Please fix the highlighted fields.");
-      return;
-    }
-
-    // TODO: post to your API here
-    toastSuccess("Thanks! Your application has been submitted.");
-    setForm({ fullName: "", email: "", phone: "", course: "", message: "" });
-    setErrors({});
-    setTouched({});
-  };
-
-  const inputBase =
-    "border border-gray-300 rounded px-4 py-2 w-full transition-colors";
-  const ok = "focus:border-blue-500";
-  const bad = "border-red-500 focus:border-red-500";
-  const help = "mt-1 text-[12px] text-red-600";
-
   return (
     <div className="bg-background ">
-      {/* Toasts */}
-      <ToastContainer newestOnTop />
-
       {/* Hero Banner */}
       <div
         className="relative w-full mt-[54px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px]
                      flex items-center justify-start px-3 sm:px-4 md:px-10 lg:px-10"
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "100% 100%",
-        }}
+                style={{
+                  backgroundImage: `url(${background})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  backgroundSize: "100% 100%", // 💡 key line to stretch full width + height
+                }}
       >
         <h1 className="relative z-10 text-3xl sm:text-4xl md:text-6xl font-bold leading-sung leading-relaxed sm:px-10 md:px-20">
           Internship
@@ -226,6 +71,7 @@ const Internship = () => {
           </div>
 
           {/* Internship Icons Grid */}
+          {/* Internship Icons Grid with Images */}
           <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto ">
             {[
               { title: "Dotnet", image: dotnetIcon },
@@ -322,6 +168,7 @@ const Internship = () => {
       </div>
 
       {/* Trending Internship Cards */}
+
       <h2 className="text-3xl font-bold text-center text-black mt-10 mb-10">
         Trending Internship in Chennai
       </h2>
@@ -382,113 +229,36 @@ const Internship = () => {
           <h3 className="text-2xl font-bold mb-6 text-center text-blue-800">
             Internship Application Form
           </h3>
-
-          <form className="space-y-4" noValidate onSubmit={handleSubmit}>
+          <form className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Full Name */}
-              <div>
-                <input
-                  name="fullName"
-                  type="text"
-                  placeholder="Full Name"
-                  value={form.fullName}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  aria-invalid={!!errors.fullName}
-                  className={`${inputBase} ${
-                    touched.fullName && errors.fullName ? bad : ok
-                  }`}
-                />
-                {touched.fullName && errors.fullName && (
-                  <p className={help}>{errors.fullName}</p>
-                )}
-              </div>
-
-              {/* Email */}
-              <div>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Email Address"
-                  value={form.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  aria-invalid={!!errors.email}
-                  className={`${inputBase} ${
-                    touched.email && errors.email ? bad : ok
-                  }`}
-                />
-                {touched.email && errors.email && (
-                  <p className={help}>{errors.email}</p>
-                )}
-              </div>
+              <input
+                type="text"
+                placeholder="Full Name"
+                className="border border-gray-300 rounded px-4 py-2 w-full"
+              />
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="border border-gray-300 rounded px-4 py-2 w-full"
+              />
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Phone */}
-              <div>
-                <input
-                  name="phone"
-                  type="tel"
-                  inputMode="numeric"
-                  pattern="\d*"
-                  placeholder="Phone Number"
-                  value={form.phone}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  aria-invalid={!!errors.phone}
-                  className={`${inputBase} ${
-                    touched.phone && errors.phone ? bad : ok
-                  }`}
-                />
-                {touched.phone && errors.phone && (
-                  <p className={help}>{errors.phone}</p>
-                )}
-              </div>
-
-              {/* Course / Domain */}
-              <div>
-                <input
-                  name="course"
-                  type="text"
-                  placeholder="Interested Course / Domain"
-                  value={form.course}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  aria-invalid={!!errors.course}
-                  className={`${inputBase} ${
-                    touched.course && errors.course ? bad : ok
-                  }`}
-                />
-                {touched.course && errors.course && (
-                  <p className={help}>{errors.course}</p>
-                )}
-              </div>
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                className="border border-gray-300 rounded px-4 py-2 w-full"
+              />
+              <input
+                type="text"
+                placeholder="Interested Course / Domain"
+                className="border border-gray-300 rounded px-4 py-2 w-full"
+              />
             </div>
-
-            {/* Message */}
-            <div>
-              <textarea
-                name="message"
-                rows="4"
-                placeholder="Your Message"
-                value={form.message}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                aria-invalid={!!errors.message}
-                className={`${inputBase} ${
-                  touched.message && errors.message ? bad : ok
-                }`}
-              ></textarea>
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
-                <span>First letter auto-caps</span>
-                <span>{form.message.length}/300</span>
-              </div>
-              {touched.message && errors.message && (
-                <p className={help}>{errors.message}</p>
-              )}
-            </div>
-
+            <textarea
+              rows="4"
+              placeholder="Your Message"
+              className="border border-gray-300 rounded px-4 py-2 w-full"
+            ></textarea>
             <div className="text-center">
               <button
                 type="submit"
@@ -498,7 +268,7 @@ const Internship = () => {
               </button>
             </div>
           </form>
-        </div>  
+        </div>
       </div>
     </div>
   );
