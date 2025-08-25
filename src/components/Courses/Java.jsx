@@ -713,7 +713,7 @@ export default function JavaCoursePage() {
                       </option>
                       <option>Morning Batch</option>
                       <option>Evening Batch</option>
-                      <option>Weekend</option>
+                      <option>Week End</option>
                     </select>
                     <div className="h-3 mt-0.5">
                       {touched?.batch && errors?.batch && (
