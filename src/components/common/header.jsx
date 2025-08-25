@@ -82,7 +82,8 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sidebarMenus, setSidebarMenus] = useState({});
   const [activeCategory, setActiveCategory] = useState(null);
-
+const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
+ const [mobileCategory, setMobileCategory] = useState(null);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -163,7 +164,7 @@ export default function Header() {
         </div>
 
         {/* Desktop Subheader */}
-        <div className="hidden md:flex w-full bg-[#005BAC] min-h-[54px] items-center px-6 z-40 fixed top=[64px] top-[64px] left-0">
+        <div className="hidden md:flex w-full bg-[#005BAC] min-h-[54px] items-center px-6 z-40 fixed top-[64px] left-0">
           <nav className="w-full flex justify-center gap-10 text-white font-semibold text-md relative">
             {/* All Courses */}
             <div className="relative group">
@@ -406,69 +407,6 @@ export default function Header() {
   );
 }
 
-function MobileMore({ sidebarMenus, toggleSidebarMenu, onNavigate }) {
-  return (
-    <div>
-      <button
-        className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#005BAC] transition"
-        onClick={() => toggleSidebarMenu("More")}
-      >
-        <span>More</span>
-        {sidebarMenus["More"] ? <FiChevronDown className="ml-2" /> : <FiChevronRight className="ml-2" />}
-      </button>
-
-      {sidebarMenus["More"] && (
-        <ul className="rounded-lg mt-1 pb-1">
-          <li>
-            <Link
-              to="/all-courses"
-              className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC] transition"
-              onClick={onNavigate}
-            >
-              All-Courses
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/placed-students"
-              className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC] transition"
-              onClick={onNavigate}
-            >
-              Placed Students list
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/reviews"
-              className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC] transition"
-              onClick={onNavigate}
-            >
-              Reviews
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/interview-questions"
-              className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC] transition"
-              onClick={onNavigate}
-            >
-              Interview Questions
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/internship"
-              className="block px-6 py-2 text-medium font-base text-text-secondary hover:text-[#005BAC] transition"
-              onClick={onNavigate}
-            >
-              Internship
-            </Link>
-          </li>
-        </ul>
-      )}
-    </div>
-  );
-}
 
 function MobileAllCourses({ groupedCourses, onNavigate }) {
   const [open, setOpen] = useState(false);

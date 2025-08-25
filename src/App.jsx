@@ -10,9 +10,9 @@ import {
 import ScrollToTop from "./components/common/ScrollToTop";
 import Header from "./components/common/header";
 import Footer from "./components/common/Footer";
-
+import Internship from "./pages/internship";
 import Home from "./pages/Home";
-
+import Blog from "./pages/Blog";
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
 import Interview from "./pages/interview";
