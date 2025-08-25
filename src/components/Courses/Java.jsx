@@ -519,6 +519,8 @@ export default function JavaCoursePage() {
     </section>
   );
 }
+
+
 function SelectCourse({ name = "course", options, defaultValue = "" }) {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState(defaultValue || "");
