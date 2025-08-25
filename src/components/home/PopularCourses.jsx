@@ -71,7 +71,7 @@ export default function PopularCoursesSection() {
   return (
     <section className="bg-[#e8f1f8]">
       {/* Blue background and heading */}
-      <div className="bg-[#56628b] pt-10 pb-8">
+      <div className="bg-[#005BAC] pt-10 pb-8">
         <h2 className="text-white text-2xl md:text-3xl font-extrabold text-center mb-8">
           You Always Get the Best Guidance
         </h2>

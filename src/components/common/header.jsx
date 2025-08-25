@@ -103,14 +103,15 @@ export default function Header() {
       <header className="fixed top-0 w-full z-50 bg-background border-b border-white/20">
         <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[74px]">
           <div className="flex items-center flex-shrink-0">
-            <Link to="/">
-              <img
-                src={Vel}
-                alt="Logo"
-                className="h-18 sm:h-14 md:h-39 md:pt-2 w-auto object-contain"
-                style={{ cursor: "pointer" }}
-              />
-            </Link>
+             <Link to="/">
+    <img
+      src={Vel}
+      alt="Logo"
+      className="h-18 sm:h-14 md:h-49 md:pt-2 w-auto object-contain"
+      style={{ cursor: "pointer" }}
+    />
+  </Link>
+           
           </div>
 
           <nav className="hidden md:flex items-center gap-2 lg:gap-10 lg:ml-30 h-full">
@@ -402,57 +403,6 @@ export default function Header() {
         </aside>
       </header>
     </>
-  );
-}
-
-function MobileAllCourses({ groupedCourses, onNavigate }) {
-  const [open, setOpen] = useState(false);
-  const [catIdx, setCatIdx] = useState(null);
-  return (
-    <div>
-      <button
-        className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#005BAC] transition"
-        onClick={() => setOpen((p) => !p)}
-      >
-        <span>All Courses</span>
-        {open ? <FiChevronDown className="ml-2" /> : <FiChevronRight className="ml-2" />}
-      </button>
-
-      {open && (
-        <div className="ml-2 pb-2">
-          {groupedCourses.map((cat, idx) => (
-            <div key={cat.category} className="mb-1">
-              <button
-                className="w-full flex items-center justify-between text-base text-gray-900 font-base py-2 hover:text-[#005BAC] transition"
-                onClick={() => setCatIdx(catIdx === idx ? null : idx)}
-              >
-                <span>{cat.category}</span>
-                <FiChevronRight
-                  className={`ml-2 transform transition-transform duration-200 ${
-                    catIdx === idx ? "rotate-90 text-[#005BAC]" : ""
-                  }`}
-                />
-              </button>
-
-              {catIdx === idx && (
-                <div className="pl-4">
-                  {cat.items.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href} // ABSOLUTE
-                      className="block py-1 text-gray-800 hover:text-[#005BAC] text-[15px]"
-                      onClick={onNavigate}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
   );
 }
 

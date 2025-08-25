@@ -9,7 +9,8 @@ import {
 import Logo from "../../assets/Vel InfoTech.svg";
 export default function Footer() {
   return (
-    <footer className="relative bg-[#e9f1fb] text-black-200 pt-10 pb-3">
+    <footer className="relative bg-[#e9f1fb] text-black-200 pt-10 pb-3 border-t-4     border-[#005BAC]">
+
       {/* Top shadow separator */}
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-b from-black/20 to-transparent"></div>
       <div className="max-w-6xl mx-auto px-4">

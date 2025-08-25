@@ -12,40 +12,38 @@ import Header from "./components/common/header";
 import Footer from "./components/common/Footer";
 
 import Home from "./pages/Home";
-import About from "./pages/About";
+
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
 import Interview from "./pages/interview";
 import About from "./pages/About";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import BlogBanner from "./pages/Blog";
-
 import Tutorials from "./pages/Tutorials";
-
 import InterviewDetail from "./pages/InterviewDetail";
-import Footer from "./components/common/Footer";
+
 import AddStudent from "./components/admin/AddStudent";
 import AllCourses from "./pages/AllCourses";
-import Java from './components/Courses/Java';
-import Python from './components/Courses/Python';
-import FullStackDevelopement from "../src/components/Courses/FullStackDevelopement";
-import Plsql from "../src/components/Courses/Plsql";
-import Sql from "../src/components/Courses/Sql";
-import DataScience from "../src/components/Courses/DataScience";
-import BusinessAnalytics from "../src/components/Courses/BusinessAnalytics";
-import DataScienceAi from "../src/components/Courses/DataScienceAi";
-import BigDataDeveloper from "../src/components/Courses/BigDataDeveloper";
-import SoftwareTesting from "../src/components/Courses/SoftwareTesting";
-import SeleniumTesting from "../src/components/Courses/SeleniumTesting";
-import EtlTesting from "../src/components/Courses/EtlTesting";
-import AwsTraining from "../src/components/Courses/AwsTraining";
-import DevOps from "../src/components/Courses/DevOps";
-import HardwareNetworking from "../src/components/Courses/HardwareNetworking";
-import CyberSecurity from "../src/components/Courses/CyberSecurity";
-import Sap from "../src/components/Courses/Sap";
-import SalesForce from "../src/components/Courses/SalesForce";
-import ServiceNow from "../src/components/Courses/ServiceNow";
-import RPA from "../src/components/Courses/RPA";
+import Java from "./components/Courses/Java";
+import Python from "./components/Courses/Python";
+import FullStackDevelopement from "./components/Courses/FullStackDevelopement";
+import Plsql from "./components/Courses/Plsql";
+import Sql from "./components/Courses/Sql";
+import DataScience from "./components/Courses/DataScience";
+import BusinessAnalytics from "./components/Courses/BusinessAnalytics";
+import DataScienceAi from "./components/Courses/DataScienceAi";
+import BigDataDeveloper from "./components/Courses/BigDataDeveloper";
+import SoftwareTesting from "./components/Courses/SoftwareTesting";
+import SeleniumTesting from "./components/Courses/SeleniumTesting";
+import EtlTesting from "./components/Courses/EtlTesting";
+import AwsTraining from "./components/Courses/AwsTraining";
+import DevOps from "./components/Courses/DevOps";
+import HardwareNetworking from "./components/Courses/HardwareNetworking";
+import CyberSecurity from "./components/Courses/CyberSecurity";
+import Sap from "./components/Courses/Sap";
+import SalesForce from "./components/Courses/SalesForce";
+import ServiceNow from "./components/Courses/ServiceNow";
+import RPA from "./components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
 import Clientpage from "./pages/Clientpage";
 import Feedback from "./pages/Feedback";
@@ -56,8 +54,9 @@ import DigitalMarketingPage from "./components/Courses/DigitalMarketing";
 import SoftSkillPage from "./components/Courses/SoftSkillsTraining";
 import Reviews from "./pages/Reviews";
 import SampleResume from "./pages/SampleResume";
+import Whatsapp from "./components/common/Whatsapp";
 
-// Wrapper component to use useLocation
+// Wrapper to use useLocation
 function Layout({ children }) {
   const location = useLocation();
 
@@ -81,6 +80,9 @@ function Layout({ children }) {
       </main>
 
       {!isAdmin && <Footer />}
+      {/* <-- Put WhatsApp outside <Routes>, and only on non-admin pages */}
+      {!isAdmin && <Whatsapp phone="+91 9600593838" variant="float" />}
+
     </div>
   );
 }
@@ -96,14 +98,13 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/reviews" element={<Reviews />} />
-          <Route path="/sample-resume" element={<SampleResume />}/>
+          <Route path="/sample-resume" element={<SampleResume />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<BlogBanner />} />
           <Route path="/resources" element={<Tutorials />} />
           <Route path="/feedback" element={<Feedback />} />
-
-          <Route path="/contact-us" element={<Contact/>} />
-          <Route path="/client" element={<Clientpage/>} />
+          <Route path="/contact-us" element={<Contact />} />
+          <Route path="/client" element={<Clientpage />} />
           <Route path="/internship" element={<Internship />} />
           <Route path="/Blog" element={<Blog />} />
 
@@ -147,8 +148,6 @@ export default function App() {
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="course-enquired" element={<StudentTable />} />
             <Route path="add-student" element={<AddStudent />} />
-            
-            {/* ...more nested admin routes... */}
           </Route>
         </Routes>
       </Layout>

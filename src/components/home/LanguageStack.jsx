@@ -1,31 +1,11 @@
 import {
-  FaJs,
-  FaCode,
-  FaPython,
-  FaJava,
-  FaHtml5,
-  FaCss3Alt,
-  FaReact,
-  FaNodeJs,
-  FaServer,
-  FaDatabase,
-  FaFire,
-  FaCloud,
-  FaDocker,
-  FaLinux,
-  FaGitAlt,
-  FaGem,
-  FaPhp,
-  FaSwift,
-  FaMobileAlt,
-  FaWind,
-  FaSyncAlt,
-  FaSass,
-  FaProjectDiagram,
-  FaVuejs,
-  FaAngular,
-  FaLeaf,
+  FaJs, FaCode, FaPython, FaJava, FaHtml5, FaCss3Alt, FaReact, FaNodeJs,
+  FaServer, FaDatabase, FaFire, FaCloud, FaDocker, FaLinux, FaGitAlt,
+  FaGem, FaPhp, FaSwift, FaMobileAlt, FaWind, FaSyncAlt, FaSass,
+  FaProjectDiagram, FaVuejs, FaAngular, FaLeaf,
 } from "react-icons/fa";
+
+/* --- your rows unchanged --- */
 const rows = [
   [
     { label: "JavaScript", Icon: FaJs },
@@ -73,61 +53,93 @@ const rows = [
   ],
 ];
 
-// Marquee keyframes (unchanged)
+/* --- brand colors by label --- */
+const BRAND_COLORS = {
+  "JavaScript": "#F7DF1E",
+  "TypeScript": "#3178C6",
+  "Python": "#3776AB",
+  "Java": "#007396",
+  "C#": "#512BD4",
+  "C++": "#00599C",
+  "Go": "#00ADD8",
+  "Rust": "#000000",
+
+  "HTML5": "#E34F26",
+  "CSS3": "#1572B6",
+  "React": "#61DAFB",
+  "Next.js": "#000000",
+  "Node.js": "#5FA04E",
+  "Express": "#000000",
+  "Django": "#092E20",
+  "Spring": "#6DB33F",
+
+  "MongoDB": "#47A248",
+  "MySQL": "#4479A1",
+  "PostgreSQL": "#336791",
+  "Firebase": "#FFCA28",
+  "AWS": "#FF9900",
+  "Docker": "#2496ED",
+  "Linux": "#FCC624",
+  "Git": "#F05032",
+
+  "Ruby": "#CC342D",
+  "PHP": "#777BB4",
+  "Swift": "#F05138",
+  "Kotlin": "#7F52FF",
+  "Dart": "#0175C2",
+  "Flutter": "#02569B",
+  "Tailwind CSS": "#38BDF8",
+  "Redux": "#764ABC",
+  "Sass": "#CC6699",
+  "GraphQL": "#E10098",
+  "Vue.js": "#42B883",
+  "Angular": "#DD0031",
+};
+
+/* --- marquee keyframes unchanged --- */
 const marqueeStyle = `
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes marqueeReverse {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes marqueeReverse { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 `;
 
 function MarqueeRow({ items, reverse = false, duration = 24 }) {
   const pills = Array(4).fill(items).flat();
   return (
     <div className="overflow-hidden w-full my-2 relative">
-      {/* ... overlays ... */}
-      {/* Left vignette */}
+      {/* left vignette */}
       <div
         className="pointer-events-none absolute left-0 top-0 w-24 h-full z-20"
-        style={{
-          background: "linear-gradient(to right, #f4f7fd 60%, #fff0 100%)",
-        }}
+        style={{ background: "linear-gradient(to right, #f4f7fd 60%, #fff0 100%)" }}
       />
 
       <div
         className="flex gap-6 min-w-fit"
-        style={{
-          animation: `${
-            reverse ? "marqueeReverse" : "marquee"
-          } ${duration}s linear infinite`,
-        }}
+        style={{ animation: `${reverse ? "marqueeReverse" : "marquee"} ${duration}s linear infinite` }}
       >
         {pills.map((item, i) => {
           const { label, Icon } = item;
           return (
             <span
-              key={i}
-              className="flex items-center gap-2 mt-1 mb-1 bg-white rounded-3xl px-4 py-3 min-w-[170px] shadow-3xl text-gray-700 text-xs font-medium justify-center transition-all duration-200 hover:shadow-2xl hover:-translate-y-1 cursor-pointer select-none relative"
-              style={{
-                boxShadow: "0 8px 32px 0 rgba(80,89,143,0.13)",
-              }}
+              key={`${label}-${i}`}
+              className="flex items-center gap-2 mt-1 mb-1 bg-white rounded-3xl px-4 py-3 min-w-[170px] shadow-3xl text-gray-800 text-xs font-medium justify-center transition-all duration-200 hover:shadow-2xl hover:-translate-y-1 cursor-pointer select-none relative"
+              style={{ boxShadow: "0 8px 32px 0 rgba(80,89,143,0.13)" }}
             >
-              <Icon className="text-xl md:text-2xl text-[#858caa]" />
+              {/* remove the forced gray; apply brand color */}
+              <Icon
+                className="text-xl md:text-2xl"
+                style={{ color: BRAND_COLORS[label] || undefined }}
+                aria-hidden
+              />
               <span>{label}</span>
             </span>
           );
         })}
       </div>
-      {/* Right vignette */}
+
+      {/* right vignette */}
       <div
         className="pointer-events-none absolute right-0 top-0 w-24 h-full z-20"
-        style={{
-          background: "linear-gradient(to left, #f4f7fd 60%, #fff0 100%)",
-        }}
+        style={{ background: "linear-gradient(to left, #f4f7fd 60%, #fff0 100%)" }}
       />
     </div>
   );
@@ -136,18 +148,16 @@ function MarqueeRow({ items, reverse = false, duration = 24 }) {
 export default function ElementsMarqueeSection() {
   return (
     <section className="relative py-14 w-full bg-[#f4f7fd] overflow-hidden">
-      {/* Heading */}
-      <h2 className="text-2xl text-center  font-black mb-10 tracking-tight z-30 relative">
+      <h2 className="text-2xl text-center font-black mb-10 tracking-tight z-30 relative">
         <span className="text-[#005BAC]">30+</span>{" "}
-        <span className="text-[#232946]">
-          Programming Languages & Frameworks
-        </span>
+        <span className="text-[#232946]">Programming Languages & Frameworks</span>
       </h2>
       <style>{marqueeStyle}</style>
-      <div className="max-w-7xl mx-auto flex flex-col  gap-1 relative z-10">
+      <div className="max-w-7xl mx-auto flex flex-col gap-1 relative z-10">
         <MarqueeRow items={rows[0]} reverse={false} duration={190} />
         <MarqueeRow items={rows[1]} reverse={true} duration={190} />
         <MarqueeRow items={rows[2]} reverse={false} duration={190} />
+       
       </div>
     </section>
   );
