@@ -452,5 +452,8 @@ export default function JavaCoursePage() {
 
     </section>
   );
+
+}
+
 }
 
