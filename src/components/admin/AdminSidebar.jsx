@@ -17,7 +17,7 @@ import { Link, useLocation } from "react-router-dom";
 const menu = [
   { name: "Dashboard", icon: FiHome, to: "/admin/dashboard", active: true },
   { name: "Course Enquired", icon: FiUser, to: "/admin/course-enquired" },
-  { name: "Students", icon: FiUsers, to: "/admin/students" },
+  { name: "Students", icon: FiUsers, to: "/admin/add-student" },
   { name: "Courses", icon: FiBook, to: "/admin/courses" },
   { name: "Library", icon: FiGrid, to: "/admin/library" },
   { name: "Departments", icon: FiClipboard, to: "/admin/departments" },

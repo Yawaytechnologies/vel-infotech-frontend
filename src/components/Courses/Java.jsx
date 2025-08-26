@@ -1,162 +1,86 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { ToastContainer, toast, Slide } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import JavaSyllabus from "../coursecomponent/Javasyllabus";
+import SyllabusLocked from "../coursecomponent/SyllabusLocked";
+import { SYLLABI } from "../coursecomponent/Syllabi";
+
+const HEADER_OFFSET = 110; // adjust to your sticky header height
+
+const scrollToWithOffset = (ref) => {
+  const el = ref?.current;
+  if (!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+  window.scrollTo({ top: y, behavior: "smooth" });
+};
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("classroom");
+  const course = SYLLABI.java;
+  const [unlocked, setUnlocked] = useState(false);
 
-  /* ===========================
-     FORM STATE + VALIDATION
-     =========================== */
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    batch: "",
-    course: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
+  const syllabusRef = useRef(null);
+  const formRef = useRef(null);
+  const COURSE_OPTIONS = [
+    "Java",
+    "Python",
+    "Full Stack Development",
+    "PL/SQL",
+    "SQL",
+    "Data Science",
+    "Business Analytics",
+    "Data Science & AI",
+    "Big Data Developer",
+    "Software Testing",
+    "Selenium Testing",
+    "ETL Testing",
+    "AWS Training",
+    "DevOps",
+    "Hardware Networking",
+    "Cyber Security",
+    "SAP",
+    "Salesforce",
+    "ServiceNow",
+    "RPA (Robotic Process Automation)",
+    "Production Support",
+    "Digital Marketing",
+    "Soft Skill Training",
+    "Scrum Master",
+    "Business Analyst",
+    "Product Management",
+  ];
 
-  // Toast defaults (colored theme so our bg shows) — same as Python page
-  const toastOpts = {
-    position: "top-center",
-    transition: Slide,
-    autoClose: 2200,
-    hideProgressBar: true,
-    closeButton: false,
-    icon: false,
-    pauseOnHover: true,
-    draggable: false,
-    theme: "colored",
+  // preselect current page's course if possible (matches words in course.title)
+  const preselectedCourse = React.useMemo(() => {
+    if (!course?.title) return "";
+    const lower = course.title.toLowerCase();
+    const match = COURSE_OPTIONS.find((opt) =>
+      lower.includes(opt.toLowerCase())
+    );
+    return match || "";
+  }, [course?.title]);
+
+  const handleRequestUnlock = () => {
+    scrollToWithOffset(formRef); // go to form
   };
 
-  const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
-  const onlyLettersSpaces = (s) =>
-    s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
-  const digits10 = (s) => s.replace(/\D+/g, "").slice(0, 10);
-
-  const validateField = (name, value) => {
-    const v = (value ?? "").trim();
-    switch (name) {
-      case "name":
-        if (!v) return "Name is required.";
-        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
-        if (v.length < 2) return "Enter at least 2 characters.";
-        return null;
-      case "email":
-        if (!v) return "Email is required.";
-        if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v))
-          return "Enter a valid email with domain (e.g., example@gmail.com).";
-        return null;
-      case "phone":
-        if (!v) return "Mobile number is required.";
-        if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
-        return null;
-      case "batch":
-        if (!v) return "Please select a batch.";
-        return null;
-      case "course":
-        if (!v) return "Course name is required.";
-        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
-        if (v.length < 2) return "Enter at least 2 characters.";
-        return null;
-      case "message":
-        if (!v) return "Message is required.";
-        if (v.length > 300) return "Max 300 characters.";
-        return null;
-      default:
-        return null;
-    }
-  };
-
-  const setField = (name, value) => {
-    let v = value;
-    if (name === "name") v = capFirst(onlyLettersSpaces(value));
-    if (name === "course") v = capFirst(onlyLettersSpaces(value));
-    if (name === "phone") v = digits10(value);
-    if (name === "message") {
-      v = value.length ? value[0].toUpperCase() + value.slice(1) : value;
-      v = v.slice(0, 300);
-    }
-    setForm((prev) => ({ ...prev, [name]: v }));
-
-    const msg = validateField(name, v);
-    setErrors((prev) => {
-      const n = { ...prev };
-      if (msg) n[name] = msg;
-      else delete n[name];
-      return n;
-    });
-  };
-
-  const handleChange = (e) => setField(e.target.name, e.target.value);
-
-  const handleBlur = (e) => {
-    const { name } = e.target;
-    setTouched((t) => ({ ...t, [name]: true }));
-    const msg = validateField(name, form[name]);
-    setErrors((prev) => ({
-      ...prev,
-      ...(msg ? { [name]: msg } : { [name]: undefined }),
-    }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setTouched({
-      name: true,
-      email: true,
-      phone: true,
-      batch: true,
-      course: true,
-      message: true,
-    });
+    // ...payload...
+    try {
+      // await fetch(...)
+    } finally {
+      setUnlocked(true);
+      e.currentTarget.reset();
 
-    const fields = ["name", "email", "phone", "batch", "course", "message"];
-    const next = {};
-    fields.forEach((f) => {
-      const er = validateField(f, form[f]);
-      if (er) next[f] = er;
-    });
-    setErrors(next);
-
-    if (Object.keys(next).length) {
-      const first = fields.find((f) => next[f]);
-      const el = document.querySelector(`[name="${first}"]`);
-      if (el) el.focus();
-
-      toast.error(next[first] || "Please fix the highlighted errors.", {
-        ...toastOpts,
-        style: { background: "#ef4444", color: "#fff" }, // red (same as Python)
-        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      // wait for DOM to paint unlocked state, then scroll back up
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          scrollToWithOffset(syllabusRef);
+        });
       });
-      return;
     }
-
-    // success path – (wire API here if needed)
-    console.log("Enquiry:", form);
-
-    toast.success("Thanks! Your enquiry has been recorded.", {
-      ...toastOpts,
-      style: { background: "#16a34a", color: "#fff" }, // green (same as Python)
-      className: "rounded-xl shadow-md text-[15px] px-4 py-3",
-    });
-
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      batch: "",
-      course: "",
-      message: "",
-    });
-    setErrors({});
-    setTouched({});
   };
 
   return (
@@ -169,9 +93,36 @@ export default function JavaCoursePage() {
             <span className="text-yellow-400">
               Java Full Stack Developer Course
             </span>
+            <span className="text-yellow-400">
+              Java Full Stack Developer Course
+            </span>
           </h2>
 
           <ul className="space-y-3 mt-6 text-lg">
+            <li>
+              ✅ Join the <strong>Best Java Training Institute</strong> to
+              master Core & Advanced Java.
+            </li>
+            <li>
+              ✅ Learn Java Full Stack –{" "}
+              <strong>Spring Boot, Hibernate, React, Node.js</strong>.
+            </li>
+            <li>
+              ✅ Build real-world projects with hands-on{" "}
+              <strong>coding experience</strong>.
+            </li>
+            <li>
+              ✅ Choose <strong>flexible learning modes</strong> – Weekday /
+              Weekend / Fast-track.
+            </li>
+            <li>
+              ✅ Earn an industry-accepted{" "}
+              <strong>Java Developer Certification</strong>.
+            </li>
+            <li>
+              ✅ Career support: Resume building, mock interviews & job
+              referrals.
+            </li>
             <li>
               ✅ Join the <strong>Best Java Training Institute</strong> to
               master Core & Advanced Java.
@@ -207,12 +158,6 @@ export default function JavaCoursePage() {
                 duration-500 hover:duration-500 before:duration-500 after:duration-500
                 group-hover:before:duration-500 group-hover:after:duration-500
                 hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
-            type="button"
-            onClick={() => {
-              const formSection = document.getElementById("enquiry-form");
-              if (formSection)
-                formSection.scrollIntoView({ behavior: "smooth" });
-            }}
           >
             <div>
               <span className="text-lg font-extrabold text-violet-400 block">
@@ -232,6 +177,9 @@ export default function JavaCoursePage() {
           <p className="mb-4 text-lg">
             Become a Java Full Stack Developer in 3 Months
           </p>
+          <p className="mb-4 text-lg">
+            Become a Java Full Stack Developer in 3 Months
+          </p>
 
           <button
             type="button"
@@ -243,10 +191,15 @@ export default function JavaCoursePage() {
             }}
             className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
           >
+            {/* Expanding background on hover */}
             <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
+
+            {/* Text */}
             <span className="relative z-10 group-hover:text-black transition-colors duration-300">
               Enquire Now
             </span>
+
+            {/* Icon */}
             <span className="relative z-10">
               <svg
                 className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
@@ -270,6 +223,8 @@ export default function JavaCoursePage() {
         </h4>
       </div>
 
+      
+     
       {/* Course Partners Section */}
       <section className="py-16 bg-[#002855]">
         <div className="max-w-7xl mx-auto px-4">
@@ -348,18 +303,21 @@ export default function JavaCoursePage() {
         </div>
       </section>
 
+
+
+
       {/* JAVA overview */}
-      <section className="px-0 py-16">
+      <section className="px-0 py-16 bg-">
         <div className="max-w-[100%] mx-auto px-4 md:px-10">
-          <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10 text-gray-900">
+          <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
             {/* Heading */}
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-5">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
               Overview of Java Full Stack Course
             </h2>
             <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
             {/* Description */}
-            <p className="text-base md:text-lg mb-8 leading-relaxed text-center md:text-left">
+            <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
               Our Java Full Stack Training equips you with the knowledge and
               hands-on experience required to become an industry-ready
               developer. This course covers both frontend and backend
@@ -370,10 +328,10 @@ export default function JavaCoursePage() {
             </p>
 
             {/* What You’ll Learn */}
-            <h3 className="text-xl md:text-2xl font-bold mb-5">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
               What You’ll Learn From Java Full Stack Training
             </h3>
-            <ul className="space-y-4 text-base md:text-lg">
+            <ul className="space-y-4 text-gray-800 text-base md:text-lg">
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>
                 Get a solid foundation in Core Java concepts including OOPs,
@@ -392,7 +350,7 @@ export default function JavaCoursePage() {
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>
                 Learn deployment strategies using Git, GitHub, and cloud
-                platforms.
+                platforms like Heroku or Render.
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>
@@ -408,135 +366,26 @@ export default function JavaCoursePage() {
           </div>
         </div>
       </section>
+      <div ref={syllabusRef} id="syllabus" className="scroll-mt-[110px]">
+        <SyllabusLocked
+          title={course.title}
+          accent={course.accent}
+          meta={course.meta}
+          preview={course.preview}
+          sections={course.sections} // ← REQUIRED
+          useExternalForm
+          isUnlocked={unlocked}
+          onRequestUnlock={handleRequestUnlock}
+          cardMinH={400} // tweak to visually match your right cards
+          stickyOffset={110}
+        />
+      </div>
 
-      {/* ======= MATCHED "KNOW MORE" SECTION (like Python page) ======= */}
-      <section className="w-full px-6 py-20">
-        <div className="max-w-7xl mx-auto text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
-            Become a Full Stack Java Developer
-          </h2>
-          <p className="text-lg md:text-xl text-white/80 mb-6">
-            Master Java, Spring Boot, REST APIs, React, and more through
-            practical, expert-led training.
-          </p>
-          <div className="flex justify-center">
-            <button
-              className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all"
-              type="button"
-              onClick={() => {
-                const el = document.getElementById("enquiry-form");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Get Started →
-            </button>
-          </div>
-        </div>
-
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {/* Card 1 */}
-          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
-            <div className="mb-4">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                alt="Course Highlights"
-                className="w-10 h-10 mb-4"
-              />
-              <h3 className="text-lg font-extrabold text-black mb-2">
-                Course Highlights
-              </h3>
-              <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                <li>✓ Java, Spring Boot, REST APIs</li>
-                <li>✓ Placement prep & resume support</li>
-                <li>✓ Live projects + session recordings</li>
-                <li>✓ Learn from 10+ yrs experienced mentors</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
-            <div className="mb-4">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
-                alt="Tools You’ll Master"
-                className="w-10 h-10 mb-4"
-              />
-              <h3 className="text-lg font-extrabold text-black mb-2">
-                Tools You’ll Master
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {["Java", "Spring", "MySQL", "React", "GitHub"].map((tool) => (
-                  <span
-                    key={tool}
-                    className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-base font-medium"
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
-            <div className="mb-4">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
-                alt="Frameworks Covered"
-                className="w-10 h-10 mb-4"
-              />
-              <h3 className="text-lg font-extrabold text-black mb-2">
-                Frameworks Covered
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Spring",
-                  "Hibernate",
-                  "Spring Security",
-                  "JPA",
-                  "Maven",
-                  "JUnit",
-                ].map((fw) => (
-                  <span
-                    key={fw}
-                    className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-base font-medium"
-                  >
-                    {fw}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Card 4 */}
-          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
-            <div className="mb-4">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
-                alt="Key Skills You’ll Gain"
-                className="w-10 h-10 mb-4"
-              />
-              <h3 className="text-lg font-extrabold text-black mb-2">
-                Key Skills You’ll Gain
-              </h3>
-              <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                <li>Debugging & deployment practices</li>
-                <li>Version control, CI/CD pipelines</li>
-                <li>REST API integration & testing</li>
-                <li>Client communication, hosting apps</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ENQUIRY FORM (validated + aligned) */}
-      <section className="w-full px-6 py-20 text-white">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-10">
-          {/* LEFT boxes */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-4">
+      {/* ENQUIRY FORM - BELOW, moved right and fixed placeholders */}
+      <section ref={formRef} className="w-full px-6 py-20 bg-[#f6f9ff]">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
+          {/* LEFT: Info Boxes */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h4 className="text-xl font-bold mb-2">
                 Comprehensive Curriculum
@@ -566,23 +415,22 @@ export default function JavaCoursePage() {
               <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
               <p className="text-black/90">
                 Gain real-world experience with capstone projects and
-                industry-based assignments included in every module.
+                industry-based assignments in every module.
               </p>
             </div>
           </div>
 
-          {/* RIGHT: Form */}
+          {/* RIGHT: Enquiry Form */}
           <div className="w-full max-w-lg">
             <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
               <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                 Get a Free Training Quote
               </h3>
 
-              {/* Mode Toggle */}
+              {/* Toggle Buttons */}
               <div className="flex justify-center gap-3 mb-6">
                 <button
                   onClick={() => setMode("classroom")}
-                  type="button"
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
                     mode === "classroom"
                       ? "bg-[#003c6a] text-white"
@@ -593,7 +441,6 @@ export default function JavaCoursePage() {
                 </button>
                 <button
                   onClick={() => setMode("online")}
-                  type="button"
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
                     mode === "online"
                       ? "bg-[#003c6a] text-white"
@@ -604,184 +451,63 @@ export default function JavaCoursePage() {
                 </button>
               </div>
 
-              {/* Form (with fixed-height error rows to avoid layout shift) */}
+              {/* Form */}
               <form
                 id="enquiry-form"
                 onSubmit={handleSubmit}
-                noValidate
-                className="grid grid-cols-1 gap-2"
+                className="flex flex-col gap-4"
               >
-                {/* Name */}
-                <div>
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Your Name"
+                  className="rounded-xl px-5 py-3 text-black bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
+                  required
+                />
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="Your Email"
+                  className="rounded-xl px-5 text-black py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
+                  required
+                />
+                <div className="flex flex-col  sm:flex-row gap-3">
                   <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={form.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    aria-invalid={!!errors?.name}
-                    className={[
-                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm",
-                      "focus:ring-2 outline-none",
-                      "text-gray-900 placeholder:text-gray-500",
-                      touched?.name && errors?.name
-                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                    ].join(" ")}
+                    name="phone"
+                    type="number"
+                    placeholder="Mobile Num"
+                    className="w-full sm:w-1/2 rounded-xl px-5 py-3 text-black bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
+                    required
                   />
-                  <div className="h-3 mt-0.5">
-                    {touched?.name && errors?.name && (
-                      <p className="text-red-600 text-xs">{errors.name}</p>
-                    )}
-                  </div>
+                  <select
+                    name="batch"
+                    defaultValue=""
+                    className="w-full sm:w-1/2 rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] text-sm text-gray-700 focus:ring-2 focus:ring-[#003c6a] outline-none"
+                    required
+                  >
+                    <option value="" disabled>
+                      How & Where
+                    </option>
+                    <option>Morning Batch</option>
+                    <option>Evening Batch</option>
+                    <option>Weekend</option>
+                  </select>
                 </div>
+                <SelectCourse
+                  name="course"
+                  options={COURSE_OPTIONS}
+                  defaultValue={preselectedCourse}
+                />
 
-                {/* Email */}
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    value={form.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    aria-invalid={!!errors?.email}
-                    className={[
-                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm",
-                      "focus:ring-2 outline-none",
-                      "text-gray-900 placeholder:text-gray-500",
-                      touched?.email && errors?.email
-                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                    ].join(" ")}
-                  />
-                  <div className="h-3 mt-0.5">
-                    {touched?.email && errors?.email && (
-                      <p className="text-red-600 text-xs">{errors.email}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Phone + Batch */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      inputMode="numeric"
-                      pattern="\d*"
-                      placeholder="Mobile Num"
-                      value={form.phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.phone}
-                      className={[
-                        "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm",
-                        "focus:ring-2 outline-none",
-                        "text-gray-900 placeholder:text-gray-500",
-                        touched?.phone && errors?.phone
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                          : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                      ].join(" ")}
-                    />
-                    <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && (
-                        <p className="text-red-600 text-xs">{errors.phone}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div>
-                    <select
-                      name="batch"
-                      value={form.batch}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.batch}
-                      className={[
-                        "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm",
-                        "focus:ring-2 outline-none",
-                        "text-gray-900",
-                        touched?.batch && errors?.batch
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                          : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                      ].join(" ")}
-                    >
-                      <option value="" disabled>
-                        How & Where
-                      </option>
-                      <option>Morning Batch</option>
-                      <option>Evening Batch</option>
-                      <option>Week End</option>
-                    </select>
-                    <div className="h-3 mt-0.5">
-                      {touched?.batch && errors?.batch && (
-                        <p className="text-red-600 text-xs">{errors.batch}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Course */}
-                <div>
-                  <input
-                    type="text"
-                    name="course"
-                    placeholder="Type Course"
-                    value={form.course}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    aria-invalid={!!errors?.course}
-                    className={[
-                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm",
-                      "focus:ring-2 outline-none",
-                      "text-gray-900 placeholder:text-gray-500",
-                      touched?.course && errors?.course
-                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                    ].join(" ")}
-                  />
-                  <div className="h-3 mt-0.5">
-                    {touched?.course && errors?.course && (
-                      <p className="text-red-600 text-xs">{errors.course}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Message */}
-                <div>
-                  <textarea
-                    rows={2}
-                    name="message"
-                    placeholder="Your Message"
-                    value={form.message}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    aria-invalid={!!errors?.message}
-                    className={[
-                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none",
-                      "focus:ring-2 outline-none",
-                      "text-gray-900 placeholder:text-gray-500",
-                      touched?.message && errors?.message
-                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                    ].join(" ")}
-                  />
-                  <div className="flex justify-between text-xs text-gray-500 mt-0.5">
-                    <span>First letter auto-caps</span>
-                    <span>{form.message.length}/300</span>
-                  </div>
-                  <div className="h-3 mt-0.5">
-                    {touched?.message && errors?.message && (
-                      <p className="text-red-600 text-xs">{errors.message}</p>
-                    )}
-                  </div>
-                </div>
-
+                <textarea
+                  name="message"
+                  rows={2}
+                  placeholder="Your Message"
+                  className="rounded-xl px-5 text-black py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none resize-none"
+                />
                 <button
                   type="submit"
-                  className="w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition"
+                  className="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-base hover:from-[#0891b2] hover:to-[#16bca7] transition"
                 >
                   Submit
                 </button>
@@ -790,16 +516,125 @@ export default function JavaCoursePage() {
           </div>
         </div>
       </section>
-
-      {/* Toast container — same config as Python page */}
-      <ToastContainer
-        newestOnTop
-        limit={2}
-        className="!z-[9999]"
-        toastClassName={() => "rounded-xl shadow-md"}
-        bodyClassName={() => "text-[15px] font-medium"}
-        theme="colored"
-      />
     </section>
+  );
+}
+
+
+function SelectCourse({ name = "course", options, defaultValue = "" }) {
+  const [open, setOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState(defaultValue || "");
+  const [hoverIdx, setHoverIdx] = React.useState(
+    Math.max(
+      0,
+      options.findIndex((o) => o === (defaultValue || ""))
+    )
+  );
+  const wrapRef = React.useRef(null);
+  const listRef = React.useRef(null);
+
+  // Close on outside click
+  React.useEffect(() => {
+    const onDocClick = (e) => {
+      if (!wrapRef.current?.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, []);
+
+  // Ensure hovered item stays in view
+  React.useEffect(() => {
+    if (!open) return;
+    const el = listRef.current?.querySelector(`[data-idx="${hoverIdx}"]`);
+    el?.scrollIntoView({ block: "nearest" });
+  }, [hoverIdx, open]);
+
+  const choose = (val, idx) => {
+    setSelected(val);
+    setHoverIdx(idx);
+    setOpen(false);
+  };
+
+  const onKeyDown = (e) => {
+    if (
+      !open &&
+      (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ")
+    ) {
+      e.preventDefault();
+      setOpen(true);
+      return;
+    }
+    if (!open) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setHoverIdx((i) => Math.min(options.length - 1, i + 1));
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setHoverIdx((i) => Math.max(0, i - 1));
+    }
+    if (e.key === "Enter") {
+      e.preventDefault();
+      choose(options[hoverIdx], hoverIdx);
+    }
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setOpen(false);
+    }
+  };
+
+  return (
+    <div className="relative" ref={wrapRef}>
+      {/* Hidden input so FormData picks up the value */}
+      <input type="hidden" name={name} value={selected} />
+
+      {/* Button */}
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        onKeyDown={onKeyDown}
+        className="w-full rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] text-left text-sm text-gray-700 focus:ring-2 focus:ring-[#003c6a] focus:border-[#003c6a] outline-none"
+      >
+        {selected || "Select Course"}
+      </button>
+
+      {/* Options panel (max 5 items visible, scroll for the rest) */}
+      {open && (
+        <div
+          className="absolute z-20 mt-1 w-full rounded-xl border border-slate-200 bg-white shadow-xl overflow-hidden"
+          role="listbox"
+        >
+          <ul
+            ref={listRef}
+            className="max-h-60 overflow-y-auto py-1" /* ~5 items tall */
+          >
+            {options.map((opt, idx) => {
+              const isSel = opt === selected;
+              const isHover = idx === hoverIdx;
+              return (
+                <li
+                  key={opt}
+                  data-idx={idx}
+                  role="option"
+                  aria-selected={isSel}
+                  onMouseEnter={() => setHoverIdx(idx)}
+                  onMouseDown={(e) => e.preventDefault()} // prevents blur before click
+                  onClick={() => choose(opt, idx)}
+                  className={`px-4 py-2 text-sm cursor-pointer ${
+                    isHover ? "bg-slate-100" : ""
+                  } ${
+                    isSel ? "font-semibold text-slate-900" : "text-slate-700"
+                  }`}
+                >
+                  {opt}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 }
