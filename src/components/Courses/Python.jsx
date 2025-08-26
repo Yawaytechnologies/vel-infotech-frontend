@@ -4,10 +4,12 @@ import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Syllabus from "../coursecomponent/SyllabusLocked";
+import { SYLLABI } from "../coursecomponent/Syllabi";
 
 export default function PythonCoursePage() {
   const [mode, setMode] = useState("classroom");
-
+const course = SYLLABI.python;
   /* ===========================
      FORM STATE + VALIDATION
      =========================== */
@@ -527,7 +529,18 @@ export default function PythonCoursePage() {
           </div>
         </div>
       </section>
-
+<Syllabus
+            title={course.title}
+            accent={course.accent}
+            meta={course.meta}
+            preview={course.preview}
+            sections={course.sections} // ← REQUIRED
+            useExternalForm
+            
+            
+            cardMinH={400} // tweak to visually match your right cards
+            stickyOffset={110}
+          />
       {/* ENQUIRY FORM (validated + aligned) */}
       <section className="w-full px-6 py-20 text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-10">

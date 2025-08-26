@@ -143,7 +143,7 @@ export default function AboutSection() {
 
     try {
       setSubmitting(true);
-      // TODO: post to your API here
+        // TODO: post to your API here
       // await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, mode }) });
       notifySuccess("Thanks! Your enquiry has been recorded.");
       setForm({ name: "", email: "", phone: "", batch: "", course: "", message: "" });

@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import {
   FaClock, FaUserGraduate, FaSignal, FaCalendarAlt,
-  FaBookOpen, FaCheckCircle, FaLock
+  FaBookOpen, FaCheckCircle
 } from "react-icons/fa";
 
-export default function SyllabusLocked({
+/**
+ * Always-unlocked syllabus
+ */
+export default function Syllabus({
   title = "Course Syllabus",
   accent = "#005BAC",
   meta = { duration: "", audience: "", level: "", mode: "", schedule: "" },
-  preview = [],           // safe chips visible before unlock
+  preview = [],           // safe chips
   outline = [],           // flat items (optional)
-  sections = [],          // [{ title, items: [string], initialCount?: number }]
-  useExternalForm = true, // we scroll to your external form
-  isUnlocked = false,     // parent controls unlock state
-  onRequestUnlock,        // called on View Syllabus click
-  defaultInitialCount = 4,
-  stickyOffset = 110, // default visible items per section
-   cardMinH = 400,
+  sections = [],          // [{ title, items: [string] }]
+  initialModules = 4,     // how many modules visible before "Show more"
+  initialItemsPerModule = 4, // how many items per module before "Show more"
+  stickyOffset = 110,
+  cardMinH = 0,
 }) {
-  const unlocked = !!isUnlocked;
-
   return (
     <section className="relative w-full bg-[#f6f9ff] py-10 sm:py-12">
       {/* Accent bar */}
@@ -34,25 +33,27 @@ export default function SyllabusLocked({
             {meta?.audience && <Badge icon={FaUserGraduate} text={meta.audience} />}
             {meta?.level && <Badge icon={FaSignal} text={`Level: ${meta.level}`} />}
             {(meta?.mode || meta?.schedule) && (
-              <Badge icon={FaCalendarAlt} text={`${meta.mode || ""}${meta.mode && meta.schedule ? " • " : ""}${meta.schedule || ""}`} />
+              <Badge
+                icon={FaCalendarAlt}
+                text={`${meta.mode || ""}${meta.mode && meta.schedule ? " • " : ""}${meta.schedule || ""}`}
+              />
             )}
           </p>
-
-         
         </header>
 
         {/* Body */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* LEFT: curriculum */}
           <div className="lg:col-span-2">
             <Card>
-               <div
-    className={`${unlocked ? "p-5 sm:p-6" : "p-4 sm:p-5"} relative`}
-    style={!unlocked ? { minHeight: cardMinH } : undefined}  // <— enforce min-height
-  >
+              <div
+                className="p-5 sm:p-6 relative"
+                style={cardMinH ? { minHeight: cardMinH } : undefined}
+              >
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
                   <FaBookOpen className="text-slate-500" /> Curriculum
                 </h3>
-                
+
                 {/* Always-safe preview chips */}
                 {preview?.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-2">
@@ -64,121 +65,98 @@ export default function SyllabusLocked({
                   </div>
                 )}
 
-                {/* Content: render only after unlock */}
-                {unlocked && (
-                  <div className="mt-4">
-                    {/* Sections (modules) with Show more/less */}
-                    {sections?.length > 0 ? (
-                      <SectionsWithGlobalToggle
-                        sections={sections}
-                        accent={accent}
-                        defaultInitialCount={defaultInitialCount}
-                      />
-                    ) : (
-                      // Or a simple flat outline if provided
-                      outline?.length > 0 && (
-                        <ul className="divide-y divide-slate-100">
-                          {outline.map((item, idx) => (
-                            <li key={idx} className="py-3 font-medium text-slate-900">{item.title || item}</li>
-                          ))}
-                        </ul>
-                      )
-                    )}
-                  </div>
-                )}
-
-                {/* Blue blur overlay while locked */}
-                {!unlocked && (
-                  <div
-                    className="absolute inset-0 rounded-2xl border border-slate-200/60 flex flex-col items-center justify-center text-center p-6 backdrop-blur-[60px] backdrop-saturate-150"
-                    style={{ background: `linear-gradient(180deg, ${accent}40, ${accent}66)` }}
-                  >
-                    <div className="flex items-center gap-2 text-white font-semibold drop-shadow">
-                      <FaLock /> Syllabus is private
-                    </div>
-                    <p className="text-sm text-white/90 mt-1">Submit the enquiry form to view the curriculum.</p>
-                    <button
-                      onClick={() => onRequestUnlock?.()}
-                      className="mt-3 px-4 py-2 rounded-lg text-white font-medium shadow-sm"
-                      style={{ backgroundColor: accent }}
-                    >
-                      View Syllabus
-                    </button>
-                  </div>
-                )}
+                {/* Full content (always visible now) */}
+                <div className="mt-4">
+                  {sections?.length > 0 ? (
+                    <SectionsWithGlobalToggle
+                      sections={sections}
+                      accent={accent}
+                      initialModules={initialModules}
+                      initialItemsPerModule={initialItemsPerModule}
+                    />
+                  ) : (
+                    outline?.length > 0 && (
+                      <ul className="divide-y divide-slate-100">
+                        {outline.map((item, idx) => (
+                          <li key={idx} className="py-3 font-medium text-slate-900">
+                            {typeof item === "string" ? item : item?.title || ""}
+                          </li>
+                        ))}
+                      </ul>
+                    )
+                  )}
+                </div>
               </div>
             </Card>
           </div>
 
-          
-        {/* RIGHT: sticky info column */}
-<aside className="lg:col-span-1 lg:self-stretch h-full">
-  <div className="sticky space-y-6" style={{ top: stickyOffset ?? 110 }}>
-    {/* Card 1 – At a Glance */}
-    <Card>
-      <div className="p-5 sm:p-6  ">
-        <h4 className="font-bold text-slate-900">At a Glance</h4>
-        <ul className="mt-3 space-y-2 text-sm text-slate-700">
-          <li className="flex items-start gap-2">
-            <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-            Instructor-led
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-            Projects included
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
-            Interview prep
-          </li>
-        </ul>
-      </div>
-    </Card>
+          {/* RIGHT: sticky info column */}
+          <aside className="lg:col-span-1 lg:self-stretch h-full">
+            <div className="sticky space-y-6" style={{ top: stickyOffset ?? 110 }}>
+              {/* Card 1 – At a Glance */}
+              <Card>
+                <div className="p-5 sm:p-6">
+                  <h4 className="font-bold text-slate-900">At a Glance</h4>
+                  <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                      Instructor-led
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                      Projects included
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                      Interview prep
+                    </li>
+                  </ul>
+                </div>
+              </Card>
 
-    {/* Card 2 – Next Batch & Timings */}
-    <Card>
-      <div className="p-5 sm:p-6">
-        <h4 className="font-bold text-slate-900">Next Batch & Timings</h4>
-        <ul className="mt-3 space-y-2 text-sm text-slate-700">
-          <li className="flex items-start gap-2">
-            <FaCalendarAlt className="mt-0.5 text-slate-500" />
-            Weekday: Mon–Fri, 7–9 PM IST
-          </li>
-          <li className="flex items-start gap-2">
-            <FaCalendarAlt className="mt-0.5 text-slate-500" />
-            Weekend: Sat–Sun, 10 AM–1 PM IST
-          </li>
-          <li className="flex items-start gap-2">
-            <FaCalendarAlt className="mt-0.5 text-slate-500" />
-            Fast-Track: On request
-          </li>
-        </ul>
-      </div>
-    </Card>
+              {/* Card 2 – Next Batch & Timings */}
+              <Card>
+                <div className="p-5 sm:p-6">
+                  <h4 className="font-bold text-slate-900">Next Batch & Timings</h4>
+                  <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                    <li className="flex items-start gap-2">
+                      <FaCalendarAlt className="mt-0.5 text-slate-500" />
+                      Weekday: Mon–Fri, 7–9 PM IST
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <FaCalendarAlt className="mt-0.5 text-slate-500" />
+                      Weekend: Sat–Sun, 10 AM–1 PM IST
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <FaCalendarAlt className="mt-0.5 text-slate-500" />
+                      Fast-Track: On request
+                    </li>
+                  </ul>
+                </div>
+              </Card>
 
-    {/* Card 3 – Placement & Support */}
-    <Card>
-      <div className="p-5 sm:p-6">
-        <h4 className="font-bold text-slate-900">Placement & Support</h4>
-        <ul className="mt-3 space-y-2 text-sm text-slate-700">
-          <li className="flex items-start gap-2">
-            <FaCheckCircle className="mt-0.5 text-emerald-500" />
-            1:1 resume review & mock interviews
-          </li>
-          <li className="flex items-start gap-2">
-            <FaCheckCircle className="mt-0.5 text-emerald-500" />
-            Referral drives with partner companies
-          </li>
-          <li className="flex items-start gap-2">
-            <FaCheckCircle className="mt-0.5 text-emerald-500" />
-            Career guidance post-course
-          </li>
-        </ul>
-      </div>
-    </Card>
-  </div>
-</aside>
-
+              {/* Card 3 – Placement & Support */}
+              <Card>
+                <div className="p-5 sm:p-6">
+                  <h4 className="font-bold text-slate-900">Placement & Support</h4>
+                  <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                    <li className="flex items-start gap-2">
+                      <FaCheckCircle className="mt-0.5 text-emerald-500" />
+                      1:1 resume review &amp; mock interviews
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <FaCheckCircle className="mt-0.5 text-emerald-500" />
+                      Referral drives with partner companies
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <FaCheckCircle className="mt-0.5 text-emerald-500" />
+                      Career guidance post-course
+                    </li>
+                  </ul>
+                </div>
+              </Card>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -193,6 +171,7 @@ function Card({ children, className = "" }) {
     </div>
   );
 }
+
 function Badge({ icon: Icon, text, accent }) {
   return (
     <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-sm text-slate-700">
@@ -206,21 +185,16 @@ function Badge({ icon: Icon, text, accent }) {
 function SectionsWithGlobalToggle({
   sections,
   accent = "#005BAC",
-  initialModules = 4,        // how many modules to show before "Show more"
-  initialItemsPerModule = 4, // how many items per module before "Show more"
-  labels = {
-    showMore: "Show more",
-    showLess: "Show less",
-  },
+  initialModules = 4,
+  initialItemsPerModule = 4,
+  labels = { showMore: "Show more", showLess: "Show less" },
 }) {
   const [expanded, setExpanded] = useState(false);
 
   if (!Array.isArray(sections) || sections.length === 0) return null;
 
-  // What is visible in collapsed vs expanded state
   const visibleSections = expanded ? sections : sections.slice(0, initialModules);
 
-  // Compute "remaining" badge counts for the collapsed label
   const hiddenModules = Math.max(0, sections.length - initialModules);
   const hiddenItems = sections.reduce((sum, sec, i) => {
     const items = Array.isArray(sec.items) ? sec.items.length : 0;
@@ -232,7 +206,10 @@ function SectionsWithGlobalToggle({
 
   const anyExpandable =
     hiddenModules > 0 ||
-    sections.some((sec, i) => (sec.items?.length || 0) > (expanded ? 0 : (i < initialModules ? initialItemsPerModule : 0)));
+    sections.some((sec, i) => {
+      const len = sec.items?.length || 0;
+      return expanded ? false : i < initialModules ? len > initialItemsPerModule : len > 0;
+    });
 
   return (
     <div>
@@ -268,16 +245,14 @@ function SectionsWithGlobalToggle({
             {expanded
               ? labels.showLess
               : hiddenModules > 0 || hiddenItems > 0
-              ? `${labels.showMore} ${
-                  hiddenModules > 0 || hiddenItems > 0
-                    ? `(${[
-                        hiddenModules > 0 ? `${hiddenModules} more module${hiddenModules > 1 ? "s" : ""}` : null,
-                        hiddenItems > 0 ? `${hiddenItems} more item${hiddenItems > 1 ? "s" : ""}` : null,
-                      ]
-                        .filter(Boolean)
-                        .join(", ")})`
-                    : ""
-                }`
+              ? `${labels.showMore} (${
+                  [
+                    hiddenModules > 0 ? `${hiddenModules} more module${hiddenModules > 1 ? "s" : ""}` : null,
+                    hiddenItems > 0 ? `${hiddenItems} more item${hiddenItems > 1 ? "s" : ""}` : null,
+                  ]
+                    .filter(Boolean)
+                    .join(", ")
+                })`
               : labels.showMore}
           </button>
         </div>
@@ -285,4 +260,3 @@ function SectionsWithGlobalToggle({
     </div>
   );
 }
-

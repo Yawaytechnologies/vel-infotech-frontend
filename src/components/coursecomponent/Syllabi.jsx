@@ -169,6 +169,167 @@ export const SYLLABI = {
       },
     ],
   },
+    python: {
+    title: "Python Online Training — Syllabus",
+    accent: "#3776AB", // Python blue
+    meta: {
+      duration: "8–10 weeks",
+      audience: "Students & Working Professionals",
+      level: "Beginner → Intermediate",
+      mode: "Online / Classroom",
+      schedule: "Weekday & Weekend Batches",
+    },
+    preview: [
+      "Core Python",
+      "Data Types",
+      "Control Flow",
+      "Functions",
+      "OOP",
+      "File I/O",
+      "Error Handling",
+      "Testing (pytest)",
+      "FastAPI",
+      "SQL & ORM",
+    ],
+    sections: [
+      {
+        title: "Module 1: Introduction to Python",
+        items: [
+          "Language overview & use-cases",
+          "Installing Python, IDE/Editor setup",
+          "Running scripts vs REPL",
+          "PEP 8, docstrings, typing basics",
+        ],
+      },
+      {
+        title: "Module 2: Data Types & Operators",
+        items: [
+          "Numbers, booleans, strings",
+          "Lists, tuples, dicts, sets",
+          "Slicing, mutability, copying",
+          "Operators, type casting, f-strings",
+        ],
+      },
+      {
+        title: "Module 3: Control Flow & Iteration",
+        items: [
+          "if / elif / else",
+          "for / while, break / continue",
+          "Comprehensions (list/dict/set)",
+          "Iterators & generators, enumerate/zip",
+        ],
+      },
+      {
+        title: "Module 4: Functions & Modules",
+        items: [
+          "def, return, annotations",
+          "*args, **kwargs, keyword-only args",
+          "Closures & lambdas",
+          "Decorators & higher-order functions",
+        ],
+      },
+      {
+        title: "Module 5: Strings & Regular Expressions",
+        items: [
+          "String methods & formatting",
+          "Bytes vs str",
+          "re module: patterns & groups",
+          "Common text-processing recipes",
+        ],
+      },
+      {
+        title: "Module 6: Errors, Exceptions & Logging",
+        items: [
+          "try / except / else / finally",
+          "Raising & custom exceptions",
+          "Context managers (with), contextlib",
+          "Logging basics & log levels",
+        ],
+      },
+      {
+        title: "Module 7: File I/O & Serialization",
+        items: [
+          "Text/binary I/O, pathlib",
+          "CSV/JSON, Pickle",
+          "Working with dates & times",
+          "OS & subprocess essentials",
+        ],
+      },
+      {
+        title: "Module 8: Environments & Packaging",
+        items: [
+          "virtualenv/venv & pip",
+          "requirements.txt & pip-tools",
+          "Intro to Poetry / pyproject.toml",
+          "Project structure & imports",
+        ],
+      },
+      {
+        title: "Module 9: Object-Oriented Programming",
+        items: [
+          "Classes, objects, attributes",
+          "Inheritance & composition",
+          "Class/static methods, properties",
+          "Dunder methods & dataclasses",
+        ],
+      },
+      {
+        title: "Module 10: Testing & Quality",
+        items: [
+          "unittest vs pytest",
+          "Fixtures & parametrization",
+          "Coverage & TDD basics",
+          "Type hints, mypy, linting (ruff/flake8)",
+        ],
+      },
+      {
+        title: "Module 11: Databases & SQL",
+        items: [
+          "SQL fundamentals, CRUD",
+          "sqlite3 & PostgreSQL client",
+          "SQLAlchemy ORM & models",
+          "Transactions & migrations (Alembic)",
+        ],
+      },
+      {
+        title: "Module 12: Web APIs with FastAPI",
+        items: [
+          "Routing & HTTP methods",
+          "Pydantic v2 models (request/response)",
+          "Dependency Injection & routers",
+          "Auth (JWT), CORS, pagination",
+        ],
+      },
+      {
+        title: "Module 13: Django Fundamentals (Optional)",
+        items: [
+          "MVT architecture",
+          "Models, Admin & ORM",
+          "Templates & Class-Based Views",
+          "Forms, validations, auth basics",
+        ],
+      },
+      {
+        title: "Module 14: Async & Concurrency",
+        items: [
+          "Threading & multiprocessing",
+          "asyncio & async/await",
+          "Async HTTP clients",
+          "Choosing the right concurrency model",
+        ],
+      },
+      {
+        title: "Module 15: Final Project & Deployment",
+        items: [
+          "Build a REST API (FastAPI + SQLAlchemy)",
+          "Env vars & settings (.env)",
+          "Uvicorn/Gunicorn, Docker basics",
+          "Deploy to cloud (Render/AWS) & logging",
+        ],
+      },
+    ],
+  },
+
 
   // Add more courses like this:
   // python: { title, accent, meta, preview, sections: [...] },
