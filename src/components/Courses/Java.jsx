@@ -43,7 +43,7 @@
       "Salesforce",
       "ServiceNow",
       "RPA (Robotic Process Automation)",
-      "RPA (Robotic Process Automation)",
+      
       "Production Support",
       "Digital Marketing",
       "Soft Skill Training",
