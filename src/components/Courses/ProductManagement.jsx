@@ -7,9 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Syllabus from "../coursecomponent/SyllabusLocked";
 import { SYLLABI } from "../coursecomponent/Syllabi";
 
-export default function ProductionSupportPage() {
+export default function ScrumMaster() {
   const [mode, setMode] = useState("classroom");
-  const course = SYLLABI.productionsupport;
+  const course = SYLLABI.productmanagement;
   /* ===========================
      FORM STATE + VALIDATION
      =========================== */
@@ -18,7 +18,7 @@ export default function ProductionSupportPage() {
     email: "",
     phone: "",
     batch: "",
-    course: "Production Support", // prefill since this page is specific
+    course: "",
     message: "",
   });
   const [errors, setErrors] = useState({});
@@ -33,7 +33,7 @@ export default function ProductionSupportPage() {
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  // Toast defaults
+  // Toast options
   const toastOpts = {
     position: "top-center",
     transition: Slide,
@@ -95,6 +95,7 @@ export default function ProductionSupportPage() {
       v = value.length ? value[0].toUpperCase() + value.slice(1) : value;
       v = v.slice(0, 300);
     }
+
     setForm((prev) => ({ ...prev, [name]: v }));
 
     const msg = validateField(name, v);
@@ -151,7 +152,7 @@ export default function ProductionSupportPage() {
     }
 
     // success path – (wire API here if needed)
-    console.log("Production Support Enquiry:", form);
+    console.log("Selenium Enquiry:", form);
 
     toast.success("Thanks! Your enquiry has been recorded.", {
       ...toastOpts,
@@ -164,7 +165,7 @@ export default function ProductionSupportPage() {
       email: "",
       phone: "",
       batch: "",
-      course: "Production Support",
+      course: "",
       message: "",
     });
     setErrors({});
@@ -183,37 +184,69 @@ export default function ProductionSupportPage() {
         {/* LEFT: Content */}
         <div className="flex-1">
           <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Join Our 100% Job-Oriented <br />
-            <span className="text-yellow-400">Production Support Program</span>
+            Join Our 100% Job Guaranteed <br />
+            <span className="text-yellow-400">Product Management Program</span>
           </h2>
 
           <ul className="space-y-3 mt-6 text-lg">
-            <li>✅ Learn ITIL-based <strong>Incident / Problem / Change</strong> management.</li>
-            <li>✅ Hands-on with <strong>Linux, SQL, Shell</strong> & service monitoring.</li>
-            <li>✅ Master <strong>logs, alerts, runbooks, on-call & RCA</strong> workflows.</li>
-            <li>✅ Tools overview: <strong>ServiceNow/Jira, Splunk, Grafana, Prometheus, Postman</strong>.</li>
-            <li>✅ Flexible modes – <strong>Weekday / Weekend / Fast-track</strong>.</li>
-            <li>✅ <strong>Interview prep</strong>, resume support & job referrals.</li>
+            <li>
+              ✅ Learn the <strong>end-to-end Product Lifecycle</strong> from
+              industry experts.
+            </li>
+            <li>
+              ✅ Master key practices –{" "}
+              <strong>
+                Market Research, Roadmap Planning, Agile Execution, Product
+                Launch
+              </strong>
+              .
+            </li>
+            <li>
+              ✅ Get hands-on with{" "}
+              <strong>Jira, Confluence, Figma, Miro, Aha!</strong>.
+            </li>
+            <li>
+              ✅ Build real-world skills in{" "}
+              <strong>
+                stakeholder management, user stories, backlog prioritization &
+                go-to-market strategy
+              </strong>
+              .
+            </li>
+            <li>
+              ✅ Prepare for global certifications like{" "}
+              <strong>PMC, AIPMM, Pragmatic Institute</strong>.
+            </li>
+            <li>
+              ✅ Career support:{" "}
+              <strong>
+                Mock interviews, resume prep, leadership training & placement
+                assistance
+              </strong>
+              .
+            </li>
           </ul>
 
           <button
             type="button"
             onClick={scrollToForm}
             className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
-              mt-8
-              before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
-              after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
-              hover:decoration-2 hover:text-rose-300
-              duration-500 hover:duration-500 before:duration-500 after:duration-500
-              group-hover:before:duration-500 group-hover:after:duration-500
-              hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
+    mt-8
+    before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
+    after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
+    hover:decoration-2 hover:text-rose-300
+    duration-500 hover:duration-500 before:duration-500 after:duration-500
+    group-hover:before:duration-500 group-hover:after:duration-500
+    hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
           >
             <div>
               <span className="text-lg font-extrabold text-violet-400 block">
                 Freshers Salary:
               </span>
-              ₹3 LPA to ₹8 LPA <br />
-              <span className="text-sm text-gray-300">| Duration: 3 Months</span>
+              ₹6 LPA to ₹15 LPA <br />
+              <span className="text-sm text-gray-300">
+                | Duration: 3 Months
+              </span>
             </div>
           </button>
         </div>
@@ -221,7 +254,9 @@ export default function ProductionSupportPage() {
         {/* RIGHT: Call to Action */}
         <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
           <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-          <p className="mb-4 text-lg">Become a Production Support Engineer in 3 Months</p>
+          <p className="mb-4 text-lg">
+            Become a Product Management Expert in 3 Months
+          </p>
 
           <button
             type="button"
@@ -229,7 +264,9 @@ export default function ProductionSupportPage() {
             className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
           >
             <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
-            <span className="relative z-10 group-hover:text-black transition-colors duration-300">Enquire Now</span>
+            <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+              Enquire Now
+            </span>
             <span className="relative z-10">
               <svg
                 className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
@@ -258,20 +295,53 @@ export default function ProductionSupportPage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
             <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
-              <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
+              <span className="text-purple-400">●</span> Our Course Partners{" "}
+              <span className="text-purple-400">●</span>
             </h3>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
             {[
-              { name: "HubSpot", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg", link: "https://www.hubspot.com/" },
-              { name: "GitLab", logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg", link: "https://about.gitlab.com/" },
-              { name: "Monday.com", logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg", link: "https://monday.com/" },
-              { name: "Google Cloud", logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg", link: "https://cloud.google.com/" },
-              { name: "AWS", logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg", link: "https://aws.amazon.com/" },
-              { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg", link: "https://www.salesforce.com/" },
-              { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", link: "https://www.ibm.com/" },
-              { name: "Slack", logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg", link: "https://slack.com/" },
+              {
+                name: "HubSpot",
+                logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
+                link: "https://www.hubspot.com/",
+              },
+              {
+                name: "GitLab",
+                logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
+                link: "https://about.gitlab.com/",
+              },
+              {
+                name: "Monday.com",
+                logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
+                link: "https://monday.com/",
+              },
+              {
+                name: "Google Cloud",
+                logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
+                link: "https://cloud.google.com/",
+              },
+              {
+                name: "AWS",
+                logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
+                link: "https://aws.amazon.com/",
+              },
+              {
+                name: "Salesforce",
+                logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
+                link: "https://www.salesforce.com/",
+              },
+              {
+                name: "IBM",
+                logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                link: "https://www.ibm.com/",
+              },
+              {
+                name: "Slack",
+                logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                link: "https://slack.com/",
+              },
             ].map((partner, index) => (
               <motion.a
                 key={index}
@@ -285,50 +355,80 @@ export default function ProductionSupportPage() {
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
                 className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
               >
-                <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-12 object-contain"
+                />
               </motion.a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Production Support Overview */}
+      {/* Product Management  overview */}
       <section className="px-0 py-16">
         <div className="max-w-[100%] mx-auto px-4 md:px-10">
           <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
-              Overview of Production Support Training
+              Overview of Product Management Course
             </h2>
             <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-              Become job-ready for 24×7 production environments. Learn how to triage incidents, analyze logs, stabilize
-              applications, coordinate with dev teams, and restore services quickly while maintaining SLAs & SLOs.
+              Become job-ready as a Product Manager. Learn how to define product
+              vision, build roadmaps, conduct market research, collaborate with
+              cross-functional teams, and drive successful product launches.
+              Prepare for global certifications like{" "}
+              <span className="font-semibold">
+                PMC / AIPMM / Pragmatic Institute
+              </span>{" "}
+              with real-world projects and case studies.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-              What You’ll Learn
+              What You’ll Learn From Product Management Training
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> ITIL foundations: Incident, Problem, Change.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Monitoring & alert triage (thresholds, noise reduction).</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Log analysis with Splunk/ELK, dashboards with Grafana.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Linux basics, Shell scripting, SQL for prod checks.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Runbooks, on-call, comms, and post-incident RCA.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Change & release windows, canary/rollback basics.</li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> End-to-end
+                product lifecycle: vision, strategy, roadmap & execution.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Market research,
+                user personas, competitive analysis & positioning.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Backlog
+                management: user stories, prioritization frameworks (MoSCoW,
+                RICE, WSJF).
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Go-to-market
+                strategy, pricing models, product launches & success metrics.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Tools: Jira,
+                Confluence, Figma, Miro, Aha! & analytics dashboards.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Leadership &
+                stakeholder management, communication & decision-making.
+              </li>
             </ul>
           </div>
         </div>
       </section>
 
-      {/* CTA + Cards */}
-      <section className="w-full px-6 py-20 text-black ">
+      {/* Product Management CTA + Cards */}
+      <section className="w-full px-6 py-20 text-black bg-gradient-to-b from-[#005BAC] to-[#003c6a]">
         <div className="max-w-7xl mx-auto text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
-            Become a Certified Production Support Engineer
+            Become a Certified Product Manager
           </h2>
           <p className="text-lg md:text-xl text-white mb-6">
-            Hands-on training with ticketing, monitoring, logs, automation, and real incident simulations.
+            Master product strategy, roadmapping, market research & go-to-market
+            execution with hands-on practice.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button
@@ -345,13 +445,19 @@ export default function ProductionSupportPage() {
           {/* Card 1 - Course Highlights */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Highlights" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                alt="Course Highlights"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Course Highlights
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                <li>✓ ITIL foundations</li>
-                <li>✓ Real incident drills</li>
-                <li>✓ RCA & runbook writing</li>
-                <li>✓ Shift handover best practices</li>
+                <li>✓ End-to-end product lifecycle training</li>
+                <li>✓ Certification prep: PMC / AIPMM</li>
+                <li>✓ Real case studies & product simulations</li>
+                <li>✓ Career support: resume & mock interviews</li>
               </ul>
             </div>
           </div>
@@ -359,16 +465,32 @@ export default function ProductionSupportPage() {
           {/* Card 2 - Tools */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Tools" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+                alt="Tools You’ll Master"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Tools You’ll Master
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {["Linux", "Shell", "SQL", "ServiceNow/Jira", "Splunk", "Grafana", "Prometheus", "Postman", "Git"].map(
-                  (tool) => (
-                    <span key={tool} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
-                      {tool}
-                    </span>
-                  )
-                )}
+                {[
+                  "Jira",
+                  "Confluence",
+                  "Figma",
+                  "Miro",
+                  "Aha!",
+                  "Trello",
+                  "Notion",
+                  "Google Analytics",
+                ].map((tool) => (
+                  <span
+                    key={tool}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                  >
+                    {tool}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -376,20 +498,27 @@ export default function ProductionSupportPage() {
           {/* Card 3 - Topics Covered */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Topics" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
+                alt="Topics Covered"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Topics Covered
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "Alert Triage",
-                  "Log Analysis",
-                  "RCA",
-                  "Runbooks",
-                  "SLA/SLO",
-                  "Change Windows",
-                  "Release Basics",
-                  "On-call",
+                  "Product Lifecycle",
+                  "Market Research",
+                  "Roadmapping",
+                  "Prioritization",
+                  "Go-to-Market Strategy",
+                  "Analytics & Metrics",
                 ].map((topic) => (
-                  <span key={topic} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
+                  <span
+                    key={topic}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                  >
                     {topic}
                   </span>
                 ))}
@@ -400,59 +529,81 @@ export default function ProductionSupportPage() {
           {/* Card 4 - Key Skills */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Skills" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
+                alt="Key Skills You’ll Gain"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Key Skills You’ll Gain
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                <li>Stability & uptime mindset</li>
-                <li>Effective incident comms</li>
-                <li>Cross-team collaboration</li>
-                <li>Automation-first approach</li>
+                <li>Define product vision & strategy</li>
+                <li>Create user personas & competitive analysis</li>
+                <li>Build roadmaps & manage backlogs</li>
+                <li>Drive product launches & measure success</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
+
       {/* SYLLABUS */}
-                              <Syllabus
-                                            title={course.title}
-                                            accent={course.accent}
-                                            meta={course.meta}
-                                            preview={course.preview}
-                                            sections={course.sections} // ← REQUIRED
-                                            useExternalForm
-                                            cardMinH={400} // tweak to visually match your right cards
-                                            stickyOffset={110}
-                                          />
+      <Syllabus
+        title={course.title}
+        accent={course.accent}
+        meta={course.meta}
+        preview={course.preview}
+        sections={course.sections} // ← REQUIRED
+        useExternalForm
+        cardMinH={400} // tweak to visually match your right cards
+        stickyOffset={110}
+      />
       {/* ENQUIRY FORM */}
       <section className="w-full px-6 py-20 text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
-          {/* LEFT: Additional Info Boxes */}
+          {/* LEFT: Additional Info Boxes (Scrum Master) */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Comprehensive Curriculum</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Comprehensive Curriculum
+              </h4>
               <p className="text-black/90">
-                Structured modules covering ITIL, monitoring, logs, Linux, shell, SQL, and incident workflows.
+                Product lifecycle management, product vision & strategy, market
+                research, competitive analysis, roadmapping, backlog
+                prioritization (MoSCoW, RICE, WSJF), and go-to-market planning.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Career-Oriented Training</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Career-Oriented Training
+              </h4>
               <p className="text-black/90">
-                Mock interviews, resume prep, real incident simulations, and interview question banks.
+                PMC / AIPMM certification prep, case studies & simulations, mock
+                product pitches, resume & LinkedIn optimization, and
+                storytelling for product leadership interviews.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Strong Placement Support</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Strong Placement Support
+              </h4>
               <p className="text-black/90">
-                Referrals via partner network and hiring drives for Production/App Support roles.
+                Access to partner network referrals, interview prep with senior
+                product managers, and career targeting for roles like Associate
+                PM, Product Manager, or Product Owner.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
+              <h4 className="text-xl font-bold mb-2">Hands-On Simulations</h4>
               <p className="text-black/90">
-                Build runbooks, create dashboards, triage simulated outages, and deliver RCAs.
+                Build product roadmaps in Aha! & Jira, create wireframes in
+                Figma/Miro, run backlog grooming & prioritization sessions,
+                design go-to-market strategies, and analyze KPIs with real-world
+                case studies.
               </p>
             </div>
           </div>
@@ -508,7 +659,10 @@ export default function ProductionSupportPage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.name}
-                    className={[baseInput, touched?.name && errors?.name ? bad : ok].join(" ")}
+                    className={[
+                      baseInput,
+                      touched?.name && errors?.name ? bad : ok,
+                    ].join(" ")}
                   />
                   <div className="h-3 mt-0.5">
                     {touched?.name && errors?.name && (
@@ -527,7 +681,10 @@ export default function ProductionSupportPage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.email}
-                    className={[baseInput, touched?.email && errors?.email ? bad : ok].join(" ")}
+                    className={[
+                      baseInput,
+                      touched?.email && errors?.email ? bad : ok,
+                    ].join(" ")}
                   />
                   <div className="h-3 mt-0.5">
                     {touched?.email && errors?.email && (
@@ -549,7 +706,10 @@ export default function ProductionSupportPage() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       aria-invalid={!!errors?.phone}
-                      className={[baseInput, touched?.phone && errors?.phone ? bad : ok].join(" ")}
+                      className={[
+                        baseInput,
+                        touched?.phone && errors?.phone ? bad : ok,
+                      ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
                       {touched?.phone && errors?.phone && (
@@ -565,7 +725,11 @@ export default function ProductionSupportPage() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       aria-invalid={!!errors?.batch}
-                      className={[baseInput, touched?.batch && errors?.batch ? bad : ok, "placeholder:text-transparent"].join(" ")}
+                      className={[
+                        baseInput,
+                        touched?.batch && errors?.batch ? bad : ok,
+                        "placeholder:text-transparent",
+                      ].join(" ")}
                     >
                       <option value="" disabled>
                         How & Where
@@ -592,7 +756,10 @@ export default function ProductionSupportPage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.course}
-                    className={[baseInput, touched?.course && errors?.course ? bad : ok].join(" ")}
+                    className={[
+                      baseInput,
+                      touched?.course && errors?.course ? bad : ok,
+                    ].join(" ")}
                   />
                   <div className="h-3 mt-0.5">
                     {touched?.course && errors?.course && (
@@ -611,7 +778,11 @@ export default function ProductionSupportPage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.message}
-                    className={[baseInput, "resize-none", touched?.message && errors?.message ? bad : ok].join(" ")}
+                    className={[
+                      baseInput,
+                      "resize-none",
+                      touched?.message && errors?.message ? bad : ok,
+                    ].join(" ")}
                   />
                   <div className="flex justify-between text-xs text-gray-500 mt-0.5">
                     <span>First letter auto-caps</span>
