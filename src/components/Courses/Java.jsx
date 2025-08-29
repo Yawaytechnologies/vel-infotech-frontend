@@ -94,9 +94,7 @@
               <span className="text-yellow-400">
                 Java Full Stack Developer Course
               </span>
-              <span className="text-yellow-400">
-                Java Full Stack Developer Course
-              </span>
+              
             </h2>
 
             <ul className="space-y-3 mt-6 text-lg">
@@ -178,9 +176,7 @@
             <p className="mb-4 text-lg">
               Become a Java Full Stack Developer in 3 Months
             </p>
-            <p className="mb-4 text-lg">
-              Become a Java Full Stack Developer in 3 Months
-            </p>
+            
 
             <button
               type="button"
