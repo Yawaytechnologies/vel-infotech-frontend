@@ -16,7 +16,7 @@ const posts = [
       "Considering a career shift to data analytics? You're certainly not alone! Numerous professionals are steering their careers towards this in-demand field...",
     date: "JULY 31, 2025",
     image: careerImg,
-    slug: "/blog/how-to-switch-career-to-data-analytics",
+    slug: "how-to-switch-career-to-data-analytics",
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const posts = [
       "We are surrounded by data everywhere — from the websites you visit to the things you buy online. Here's how compensation varies for freshers...",
     date: "JULY 28, 2025",
     image: careerImg1,
-    slug: "/blog/highest-salary-for-data-analyst-fresher",
+    slug: "highest-salary-for-data-analyst-fresher",
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const posts = [
       "Considering a career shift to data analytics? You're certainly not alone! Numerous professionals are steering their careers towards this in-demand field...",
     date: "JULY 31, 2025",
     image: careerImg1,
-    slug: "/blog/how-to-switch-career-to-data-analytics",
+    slug: "how-to-switch-career-to-data-analytics",
   },
   {
     id: 4,
@@ -43,58 +43,19 @@ const posts = [
       "We are surrounded by data everywhere — from the websites you visit to the things you buy online. Here's how compensation varies for freshers...",
     date: "JULY 28, 2025",
     image: careerImg,
-    slug: "/blog/highest-salary-for-data-analyst-fresher",
+    slug: "highest-salary-for-data-analyst-fresher",
   },
 ];
 
-const trending = [
-  {
-    title: "Java Programming for Beginners: Start with No Experience",
-    to: "/blog/java-for-beginners",
-  },
-  {
-    title: "Choosing Between Data Science and Cloud Computing",
-    to: "/blog/data-science-vs-cloud",
-  },
-  {
-    title: "Your Roadmap to Learning Selenium: 10 Essential Steps",
-    to: "/blog/selenium-roadmap",
-  },
-  {
-    title: "Mastering Page Factory in Selenium for Efficient Automation",
-    to: "/blog/page-factory-selenium",
-  },
-  {
-    title: "How to Prepare for Software Testing Interview – The Perfect Guide",
-    to: "/blog/testing-interview-guide",
-  },
-  {
-    title: "Choosing Between Data Science and Cloud Computing",
-    to: "/blog/data-science-vs-cloud",
-  },
-  {
-    title: "Your Roadmap to Learning Selenium: 10 Essential Steps",
-    to: "/blog/selenium-roadmap",
-  },
-  {
-    title: "Mastering Page Factory in Selenium for Efficient Automation",
-    to: "/blog/page-factory-selenium",
-  },
-  {
-    title: "Choosing Between Data Science and Cloud Computing",
-    to: "/blog/data-science-vs-cloud",
-  },
-];
-
-export default function BlogBanner() {
+export default function Blog() {
   return (
     <main className="bg-[#F7F9FC] min-h-screen">
       {/* HERO */}
       <motion.section
         className="relative w-full bg-gradient-to-r from-[#005BAC] to-[#003c6a] py-24 px-4 text-white overflow-hidden mt-10"
-        initial={{ opacity: 0 }} // Animation start state
-        animate={{ opacity: 5 }} // Animation end state
-        transition={{ duration: 1 }} // Duration for fade-in effect
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
         <div className="max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12">
           {/* LEFT: Text */}
@@ -120,7 +81,6 @@ export default function BlogBanner() {
           </div>
 
           {/* RIGHT: Illustration */}
-          
           <motion.div
             className="w-full md:w-1/2 flex justify-center"
             initial={{ x: 100 }}
@@ -140,103 +100,67 @@ export default function BlogBanner() {
         <div className="absolute bottom-0 right-0 w-60 h-60 bg-white/10 rounded-full blur-3xl -z-10" />
       </motion.section>
 
-      {/* CONTENT: Cards + Trending */}
-
+      {/* CONTENT: Centered Cards (no sidebar) */}
       <section
         id="blog-list"
-        className="max-w-7xl mx-auto px-5 py-1 bg-gradient-to-r from-[#005BAC] to-[#003c6a]"
+        className="max-w-7xl mx-auto px-5 py-10 bg-gradient-to-r from-[#005BAC] to-[#003c6a]"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left: cards (2 columns on sm+) */}
-          <div className="lg:col-span-2">
-            <div className="grid gap-8 sm:grid-cols-2">
-              {posts.map((post) => (
-                <motion.article
-                  key={post.id}
-                  className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  <Link to={post.slug} className="block">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-40 object-cover"
-                      loading="lazy"
-                    />
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-15 justify-items-center">
+            {posts.map((post) => (
+              <motion.article
+                key={post.id}
+                className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Link to={`/blog/${post.slug}`} className="block">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-40 object-cover"
+                    loading="lazy"
+                  />
+                </Link>
+
+                <div className="p-4">
+                  <Link to={`/blog/${post.slug}`}>
+                    <h2 className="text-lg font-semibold text-[#0B3D6E] hover:text-[#005BAC] leading-snug">
+                      {post.title}
+                    </h2>
                   </Link>
 
-                  <div className="p-3">
-                    <Link to={post.slug}>
-                      <h2 className="text-md font-semibold text-[#0B3D6E] hover:text-[#005BAC] leading-snug">
-                        {post.title}
-                      </h2>
+                  <p className="mt-2 text-gray-600 leading-relaxed line-clamp-3">
+                    {post.excerpt}
+                  </p>
+
+                  <div className="mt-4 flex items-center justify-between">
+                    <Link
+                      to={`/blog/${post.slug}`}
+                      className="inline-flex items-center gap-1 text-white bg-[#005BAC] hover:bg-[#004b8d] px-4 py-2 rounded-lg font-medium"
+                    >
+                      Continue Reading <FiArrowUpRight />
                     </Link>
 
-                    <p className="mt-2 text-gray-600 leading-relaxed max-h-20 overflow-hidden">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="mt-3 flex items-center justify-between">
-                      <Link
-                        to={post.slug}
-                        className="inline-flex items-center gap-1 text-white bg-[#005BAC] hover:bg-[#004b8d] px-4 py-2 rounded-lg font-medium"
-                      >
-                        Continue Reading <FiArrowUpRight />
-                      </Link>
-
-                      <div className="flex items-center gap-1 text-sm text-gray-500">
-                        <FiCalendar />
-                        <span className="uppercase tracking-wide">
-                          {post.date}
-                        </span>
-                      </div>
+                    <div className="flex items-center gap-1 text-sm text-gray-500">
+                      <FiCalendar />
+                      <span className="uppercase tracking-wide">{post.date}</span>
                     </div>
                   </div>
-                </motion.article>
-              ))}
-            </div>
+                </div>
+              </motion.article>
+            ))}
           </div>
-
-          {/* Right: Trending */}
-          <aside className="lg:col-span-1">
-            <motion.div
-              className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              <h3 className="text-2xl font-semibold text-gray-800">
-                Top Trending{" "}
-                <span className="italic text-[#0B5DB6]">Blogs</span>
-              </h3>
-
-              <ul className="mt-4 space-y-4">
-                {trending.map((item, i) => (
-                  <li key={i} className="pb-3 border-b last:border-b-0">
-                    <Link
-                      to={item.to}
-                      className="text-[#0B3D6E] hover:text-[#005BAC] leading-snug"
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </aside>
         </div>
       </section>
 
-      <section className=" px-5 py-10  bg-gradient-to-r from-[#005BAC] to-[#003c6a] pl-30">
-        <div className=" max-w-5xl bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col sm:flex-row items-center justify-between gap-6  ">
+      {/* Subscribe CTA */}
+      <section className="px-5 py-10 bg-gradient-to-r from-[#005BAC] to-[#003c6a]">
+        <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* LEFT TEXT */}
           <div className="flex items-center gap-4">
-            <div
-              className="w-1 bg-blue-600 rounded-full"
-              style={{ minHeight: "60px" }}
-            ></div>
+            <div className="w-1 bg-blue-600 rounded-full" style={{ minHeight: "60px" }} />
             <div>
               <h2 className="text-2xl font-bold text-gray-800">Subscribe</h2>
               <p className="text-gray-600 mt-2">

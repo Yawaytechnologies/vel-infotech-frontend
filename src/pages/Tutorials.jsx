@@ -1,15 +1,8 @@
-// src/pages/Tutorials.jsx
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  FiUser,
-  FiCalendar,
-  FiFolder,
-  FiChevronRight,
-  FiSearch,
-} from "react-icons/fi";
-import tutorialsImg from "../assets/tutorials.jpg"; // banner + card image
-
+import { FiUser, FiCalendar, FiFolder, FiSearch } from "react-icons/fi";
+import tutorialsImg from "../assets/tutorials.jpg";
+import tutorials2 from "../assets/tutorials2.jpg";
 // --- demo data (replace with API later) ---
 const TUTORIALS = [
   {
@@ -18,7 +11,7 @@ const TUTORIALS = [
     author: "Global 04",
     date: "2024-10-11",
     categories: ["Blog", "Software Engineering", "Tutorials"],
-    image: tutorialsImg,
+    image: tutorials2,
     slug: "/tutorials/django-framework-from-scratch",
     excerpt:
       "Introduction to Django, environment setup, project structure, models and views, templates, and deployment basics. Django's high-level Python web framework promotes quick development through simple, pragmatic design…",
@@ -40,7 +33,7 @@ const TUTORIALS = [
     author: "Team",
     date: "2024-10-08",
     categories: ["Blog", "DevTools", "Tutorials"],
-    image: tutorialsImg,
+    image: tutorials2,
     slug: "/tutorials/git-beginners",
     excerpt:
       "Install Git, init repository, branching, commits, rebase vs merge, remote workflows, and opening your first pull request the right way…",
@@ -62,7 +55,7 @@ const TUTORIALS = [
     author: "Team",
     date: "2024-10-02",
     categories: ["Blog", "Frontend", "Tutorials"],
-    image: tutorialsImg,
+    image: tutorials2,
     slug: "/tutorials/react-hooks-deep-dive",
     excerpt:
       "Understand how hooks compose logic, avoid infinite renders, and structure effects and custom hooks for maintainable React apps…",
@@ -80,13 +73,10 @@ const TUTORIALS = [
   },
 ];
 
-const PER_PAGE = 5;
-
-const Tutorials = () => {
+export default function Tutorials() {
   const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
 
-  const filtered = useMemo(() => {
+  const items = useMemo(() => {
     if (!query.trim()) return TUTORIALS;
     const q = query.toLowerCase();
     return TUTORIALS.filter(
@@ -97,191 +87,121 @@ const Tutorials = () => {
     );
   }, [query]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
-  const items = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
-
   return (
-    <section className="pt-25">
-      {/* Banner */}
-      <div className="max-w-7xl mx-auto">
-        <div className="relative overflow-hidden rounded border border-slate-200">
-          <img
-            src={tutorialsImg}
-            alt="Tutorials banner"
-            className="w-full h-48 md:h-72 lg:h-80 object-cover"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-black/20" />
-          <h1 className="absolute left-5 bottom-5 text-3xl md:text-4xl font-extrabold text-white drop-shadow">
-            Tutorials
-          </h1>
-        </div>
+    <section className="bg-background min-h-screen">
+      {/* Hero */}
+      <div
+        className="relative w-full mt-[54px] sm:mt-[100px] h-[220px] sm:h-[300px] md:h-[380px] lg:h-[420px]
+                   flex items-center justify-start px-3 sm:px-4 md:px-8 lg:px-10"
+        style={{
+          backgroundImage: `url(${tutorialsImg})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/30" />
+        <h1
+          className="relative z-10 text-white font-bold leading-snug
+                     text-[18px] sm:text-[24px] md:text-[32px] lg:text-[40px]
+                     max-w-[95%] sm:max-w-[80%] md:max-w-[720px] tracking-wide text-left"
+        >
+          Explore Tutorials
+        </h1>
       </div>
 
-      {/* Content */}
-      <div className="max-w-7xl mx-auto mt-6 grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6">
-        {/* LEFT: list */}
-        <div className="space-y-6">
-          {items.map((t) => (
-            <article
-              key={t.id}
-              className="bg-white rounded-lg border border-slate-200 shadow-sm p-4"
-            >
-              <div className="flex flex-col md:flex-row gap-4">
+      {/* Search + Cards */}
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-4 py-10">
+        {/* Search */}
+        <div className="mb-6 max-w-xl">
+          <label className="sr-only" htmlFor="tutorialSearch">
+            Search tutorials
+          </label>
+          <div className="flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 bg-white">
+            <FiSearch className="opacity-60 shrink-0" />
+            <input
+              id="tutorialSearch"
+              aria-label="Search tutorials"
+              type="text"
+              placeholder="Search tutorials…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="w-full outline-none bg-transparent text-sm sm:text-base"
+            />
+          </div>
+        </div>
+
+        {/* List */}
+        {items.map((t) => (
+          <div
+            key={t.id}
+            className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 mb-8"
+          >
+            <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-6 p-4 w-full">
+              {/* Image – right on desktop */}
+              <div className="relative w-full md:w-[58%] rounded-lg overflow-hidden md:order-2">
                 <img
                   src={t.image}
                   alt={t.title}
-                  className="w-full md:w-56 h-40 object-cover rounded-md border border-slate-200"
                   loading="lazy"
+                  decoding="async"
+                  className="w-full h-[160px] sm:h-[200px] md:h-[240px] lg:h-[260px] object-cover"
                 />
-
-                <div className="flex-1">
-                  {/* Title */}
-                  <Link to={t.slug}>
-                    <h2 className="text-xl md:text-2xl font-bold hover:text-[#005BAC] transition-colors">
-                      {t.title}
-                    </h2>
-                  </Link>
-
-                  {/* Meta */}
-                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-600">
-                    <span className="inline-flex items-center gap-1">
-                      <FiUser /> {t.author}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <FiCalendar />{" "}
-                      {new Date(t.date).toLocaleDateString("en-IN", {
-                        year: "numeric",
-                        month: "long",
-                        day: "2-digit",
-                      })}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <FiFolder /> {t.categories.join(", ")}
-                    </span>
-                  </div>
-
-                  {/* Excerpt */}
-                  <p className="mt-3 text-slate-700 leading-relaxed">
-                    {t.excerpt}
-                  </p>
-
-                  {/* Read more */}
-                  <div className="mt-4">
-                    <Link
-                      to={t.slug}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded bg-[#14a3db] text-white hover:bg-[#0f8fbe] transition-colors"
-                    >
-                      Read more <FiChevronRight />
-                    </Link>
-                  </div>
+                <div className="absolute top-3 left-3 bg-black/45 px-3 py-1 rounded">
+                  <h2 className="text-white text-sm sm:text-base font-semibold line-clamp-2">
+                    {t.title}
+                  </h2>
                 </div>
               </div>
-            </article>
-          ))}
 
-          {/* Empty state */}
-          {items.length === 0 && (
-            <div className="bg-white rounded-lg border border-slate-200 p-10 text-center">
-              <p className="text-slate-700">
-                No tutorials match your search.
-              </p>
-            </div>
-          )}
+              {/* Content */}
+              <div className="flex-1 w-full md:order-1">
+                <h2 className="text-xl sm:text-2xl font-bold text-[#1a2650] mb-2">
+                  {t.title}
+                </h2>
 
-          {/* Pagination */}
-          {filtered.length > PER_PAGE && (
-            <div className="flex items-center justify-center gap-3">
-              <button
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page === 1}
-                className="px-3 py-2 rounded border border-slate-300 disabled:opacity-50"
-              >
-                Prev
-              </button>
-              <span className="text-sm">
-                Page {page} of {totalPages}
-              </span>
-              <button
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                disabled={page === totalPages}
-                className="px-3 py-2 rounded border border-slate-300 disabled:opacity-50"
-              >
-                Next
-              </button>
-            </div>
-          )}
-        </div>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] sm:text-sm text-gray-600 mb-3">
+                  <span className="inline-flex items-center gap-1">
+                    <FiUser className="text-blue-700" /> {t.author}
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <FiCalendar className="text-blue-700" />
+                    {new Date(t.date).toLocaleDateString("en-IN", {
+                      year: "numeric",
+                      month: "long",
+                      day: "2-digit",
+                    })}
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <FiFolder className="text-blue-700" />
+                    <span className="truncate max-w-[220px] sm:max-w-none">
+                      {t.categories.join(", ")}
+                    </span>
+                  </span>
+                </div>
 
-        {/* RIGHT: sidebar */}
-        <aside className="space-y-6">
-          {/* Search */}
-          <div className="bg-white rounded-lg border border-slate-200 p-4">
-            <label className="text-sm font-semibold text-slate-700">
-              Search for Courses
-            </label>
-            <div className="mt-2 flex items-center gap-2 rounded border border-slate-300 px-3 py-2">
-              <FiSearch className="opacity-60" />
-              <input
-                type="text"
-                placeholder="Search tutorials…"
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                  setPage(1);
-                }}
-                className="w-full outline-none bg-transparent"
-              />
+                <p className="text-gray-700 mb-4 text-sm sm:text-base leading-relaxed line-clamp-4">
+                  {t.excerpt}
+                </p>
+
+                <Link
+                  to={t.slug}
+                  className="inline-block bg-[#005BAC] hover:bg-blue-800 text-white font-semibold text-sm sm:text-[15px] px-5 py-2 rounded transition"
+                >
+                  Read More »
+                </Link>
+              </div>
             </div>
           </div>
+        ))}
 
-          {/* Video */}
-          <div className="bg-white rounded-lg border border-slate-200 p-4">
-            <div className="aspect-video w-full overflow-hidden rounded">
-              {/* Replace the video ID with your own */}
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="Digital Marketing"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
+        {/* Empty state */}
+        {items.length === 0 && (
+          <div className="bg-white rounded-xl border border-slate-200 p-10 text-center">
+            <p className="text-slate-700">No tutorials match your search.</p>
           </div>
-
-          {/* Interview Q&A list */}
-          <div className="bg-white rounded-lg border border-slate-200 p-4">
-            <h3 className="text-lg font-semibold">
-              Interview Questions and Answers
-            </h3>
-            <ul className="mt-3 space-y-2 text-[#005BAC]">
-              <li>
-                <Link to="/interview-questions" className="hover:underline">
-                  Telephone Interview Questions and Answers
-                </Link>
-              </li>
-              <li>
-                <Link to="/interview-questions" className="hover:underline">
-                  Genpact Interview Questions and Answers
-                </Link>
-              </li>
-              <li>
-                <Link to="/interview-questions" className="hover:underline">
-                  50+ Real-time Interview Questions
-                </Link>
-              </li>
-              <li>
-                <Link to="/interview-questions" className="hover:underline">
-                  Behavioural Interview Questions
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </aside>
+        )}
       </div>
     </section>
   );
-};
-
-export default Tutorials;
+}

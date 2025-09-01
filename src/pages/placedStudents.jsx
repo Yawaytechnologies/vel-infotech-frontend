@@ -1,64 +1,48 @@
-import React, { useState } from "react";
-// eslint-disable-next-line no-unused-vars
+import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import bgPlacement from "../assets/bgplacement.jpg";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
+import { FiGrid, FiCircle, FiSearch, FiBriefcase } from "react-icons/fi";
 
+/* =========================
+   DATA: add/extend here
+   ========================= */
+const placed = [
+  // 🔹 Fill these from your notebook. “notes” is optional. If LPA unsure, put null and we’ll show “—”.
+  { id: 1,  name: "Rajasopi",                 company: "Yaway Tech",   designation: "HR",                 course: "—",              lpa: 1.5,  notes: "15K/month approx" },
+  { id: 2,  name: "Muthukrishnan Gopal",      company: "Cognizant",    designation: "ETL Testing",        course: "ETL",            lpa: 9 },
+  { id: 3,  name: "Srinivasan V",             company: "Capgemini",    designation: "ETL Testing",        course: "ETL",            lpa: 8 },
+  { id: 4,  name: "Manikam Ponnusamy",        company: "L&T",          designation: "ETL",                course: "ETL",            lpa: 8.5 },
+  { id: 5,  name: "Kanimozhi Saravanan",      company: "Citibank",     designation: "Java Developer",     course: "Java",           lpa: 8.5 },
+  { id: 6,  name: "Harish Kumar",             company: "Expleo",       designation: "Manual Tester",      course: "Testing",        lpa: 3.5 },
+  { id: 7,  name: "Balaji V",                 company: "—",            designation: "Desktop Support",    course: "—",              lpa: 2.0 },
+  { id: 8,  name: "Jone Cathy",               company: "—",            designation: "Java Developer",     course: "Java",           lpa: 11.5 },
+  { id: 9,  name: "Chalapathi",               company: "—",            designation: "HW/SW Testing",      course: "Testing",        lpa: 3.5 },
+  { id:10,  name: "Yamini",                   company: "Expleo",       designation: "Manual Tester",      course: "Testing",        lpa: 7 },
+  { id:11,  name: "Naveen Kumar",             company: "Expleo",       designation: "Manual Tester",      course: "Testing",        lpa: 7 },
+  { id:12,  name: "Priya Dharshini",          company: "Axis Bank",    designation: "—",                  course: "—",              lpa: null },
+  { id:13,  name: "Babu Mani",                company: "Virtusa",      designation: "ETL",                course: "ETL",            lpa: 7 },
+  { id:14,  name: "Sithan Kaththan",          company: "—",            designation: "Digital Banking",    course: "—",              lpa: 3 },
+  { id:15,  name: "Jay Bharathi",             company: "Expleo",       designation: "Manual Tester",      course: "Testing",        lpa: 3.5 },
+  { id:16,  name: "Nithiya Swaminathan",      company: "Capgemini",    designation: "Selenium Tester",    course: "Selenium",       lpa: 8 },
+  { id:17,  name: "Raghunath Srinivasan",     company: "DXC",          designation: "Networking",         course: "Networking",     lpa: 9 },
+  { id:18,  name: "Sudha Selvarajan",         company: "Expleo",       designation: "Data Analyst",       course: "Data Science",   lpa: 6.5 },
+  { id:19,  name: "Shyam Kumar",              company: "Infosys",      designation: "Networking",         course: "Networking",     lpa: 4 },
+  { id:20,  name: "John Vimal",               company: "Virtusa",      designation: "PL/SQL Developer",   course: "PL/SQL",         lpa: 12 },
+  // …continue with the rest from pages 2–4 when ready
+];
+
+/* Your original static sections (kept) */
 const categoryData = [
-  {
-    id: 1,
-    label: "Non-IT to IT (Career Transition)",
-    count: "2455+",
-    gradient: "from-[#005BAC] to-[#0078D7]",
-  },
-  {
-    id: 2,
-    label: "Diploma Candidates",
-    count: "2947+",
-    gradient: "from-[#005BAC] to-[#0078D7]",
-  },
-  {
-    id: 3,
-    label: "Non-Engineering  (Arts & Science)",
-    count: "3018+",
-    gradient: "from-[#005BAC] to-[#0078D7]",
-  },
-  {
-    id: 4,
-    label: "Engineering Students",
-    count: "4207+",
-    gradient: "from-[#005BAC] to-[#0078D7]",
-  },
-  {
-    id: 5,
-    label: "CTC Greater than 5 LPA",
-    count: "4478+",
-    gradient: "from-[#005BAC] to-[#0078D7]",
-  },
-  {
-    id: 6,
-    label: "Academic Percentage Less than 60%",
-    count: "5236+",
-    gradient: "from-[#005BAC] to-[#0078D7]",
-  },
-  {
-    id: 7,
-    label: "Career Break / Gap Students",
-    count: "2359+",
-    gradient: "from-[#005BAC] to-[#0078D7]",
-  },
-  {
-    id: 8,
-    label: "Freshers Hired",
-    count: "3120+",
-    gradient: "from-[#005BAC] to-[#0078D7]",
-  },
-  {
-    id: 9,
-    label: "Working Professionals Upskilled",
-    count: "1980+",
-    gradient: "from-[#005BAC] to-[#0078D7]",
-  },
+  { id:1, label:"Non-IT to IT (Career Transition)", count:"2455+", gradient:"from-[#005BAC] to-[#0078D7]" },
+  { id:2, label:"Diploma Candidates",               count:"2947+", gradient:"from-[#005BAC] to-[#0078D7]" },
+  { id:3, label:"Non-Engineering  (Arts & Science)",count:"3018+", gradient:"from-[#005BAC] to-[#0078D7]" },
+  { id:4, label:"Engineering Students",             count:"4207+", gradient:"from-[#005BAC] to-[#0078D7]" },
+  { id:5, label:"CTC Greater than 5 LPA",           count:"4478+", gradient:"from-[#005BAC] to-[#0078D7]" },
+  { id:6, label:"Academic Percentage Less than 60%",count:"5236+", gradient:"from-[#005BAC] to-[#0078D7]" },
+  { id:7, label:"Career Break / Gap Students",      count:"2359+", gradient:"from-[#005BAC] to-[#0078D7]" },
+  { id:8, label:"Freshers Hired",                   count:"3120+", gradient:"from-[#005BAC] to-[#0078D7]" },
+  { id:9, label:"Working Professionals Upskilled",  count:"1980+", gradient:"from-[#005BAC] to-[#0078D7]" },
 ];
 
 const roleDataColumns = [
@@ -91,359 +75,241 @@ const roleDataColumns = [
   ],
 ];
 
+/* ========= Helpers ========= */
+const GRADS = [
+  "from-[#005BAC] to-[#003c6a]",
+  "from-indigo-600 to-blue-600",
+  "from-cyan-600 to-teal-600",
+  "from-rose-600 to-pink-600",
+  "from-amber-600 to-orange-600",
+];
+const initials = (name="") => name.split(" ").filter(Boolean).slice(0,2).map(s=>s[0]?.toUpperCase()).join("");
+const gradFor = (key) => { let h=0; for (let i=0;i<key.length;i++) h=key.charCodeAt(i)+((h<<5)-h); return GRADS[Math.abs(h)%GRADS.length]; };
+const band = (lpa) => {
+  if (lpa == null) return { label: "—", cls: "bg-gray-200 text-gray-700" };
+  if (lpa < 4)     return { label: `${lpa} LPA`, cls: "bg-orange-100 text-orange-800" };
+  if (lpa < 7)     return { label: `${lpa} LPA`, cls: "bg-amber-100 text-amber-800" };
+  if (lpa < 10)    return { label: `${lpa} LPA`, cls: "bg-emerald-100 text-emerald-800" };
+  if (lpa < 13)    return { label: `${lpa} LPA`, cls: "bg-sky-100 text-sky-800" };
+  return { label: `${lpa} LPA`, cls: "bg-violet-100 text-violet-800" };
+};
+
+/* =============================
+   COMPONENT
+   ============================= */
 const PlacedStudents = () => {
   const [mode, setMode] = useState("classroom");
+  const [view, setView] = useState("cards"); // 'cards' | 'circles'
+  const [q, setQ] = useState("");
+  const [company, setCompany] = useState("All");
+  const [role, setRole] = useState("All");
+  const [sort, setSort] = useState("recent"); // 'recent' | 'lpaHigh' | 'lpaLow'
+
+  const companies = useMemo(() => ["All", ...Array.from(new Set(placed.map(p => p.company).filter(Boolean)))], []);
+  const roles     = useMemo(() => ["All", ...Array.from(new Set(placed.map(p => p.designation).filter(Boolean)))], []);
+
+  const filtered = useMemo(() => {
+    let data = placed;
+    const term = q.trim().toLowerCase();
+    if (term) {
+      data = data.filter(s => [s.name,s.company,s.designation,s.course, String(s.lpa ?? "")]
+        .join(" ").toLowerCase().includes(term));
+    }
+    if (company !== "All") data = data.filter(s => s.company === company);
+    if (role !== "All")    data = data.filter(s => s.designation === role);
+
+    if (sort === "lpaHigh") data = [...data].sort((a,b)=>(b.lpa??-1)-(a.lpa??-1));
+    else if (sort === "lpaLow") data = [...data].sort((a,b)=>(a.lpa??999)-(b.lpa??999));
+    // 'recent' -> keep input order
+    return data;
+  }, [q, company, role, sort]);
+
   return (
-    <div className="bg-background">
-      {/* Hero Section */}
+    <div className="bg-background pb-10">
+      {/* ---------- Hero ---------- */}
       <div
-        className="relative w-full mt-[54px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px]
-                     flex items-center justify-start px-3 sm:px-4 md:px-10 lg:px-10"
-                style={{
-                  backgroundImage: `url(${bgPlacement})`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  backgroundSize: "100% 100%", // 💡 key line to stretch full width + height
-                }}
+        className="relative w-full mt-[54px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px] flex items-center justify-start px-3 sm:px-4 md:px-10 lg:px-10"
+        style={{ backgroundImage:`url(${bgPlacement})`, backgroundRepeat:"no-repeat", backgroundPosition:"center", backgroundSize:"100% 100%" }}
       >
         <h1 className="relative z-10 text-xl sm:text-3xl md:text-4xl text-white font-bold leading-snug text-center sm:text-left sm:px-8 md:px-0">
           Placed Students List
         </h1>
       </div>
 
-      {/* Content Section */}
+      {/* ---------- Intro blocks (kept) ---------- */}
       <div className="max-w-6xl mx-auto  px-4 py-10">
         <div className="grid grid-cols-1 md:grid-cols gap-6">
           <div className="bg-white shadow-md rounded-lg p-6 border border-blue-400">
             <h2 className="text-2xl font-bold text-gray-800 mb-2 border-b-2 border-gray-400 inline-block">
               List of Students Placed from Vel infotech
             </h2>
-            <p className="text-gray-600 mt-5 leading-relaxed">
-              With the growing number of graduates and the insufficient demand
-              in IT field, candidates now need to learn techniques and usage of
-              upcoming technologies that are utilized by these MNC’s... With the
-              growing number of graduates and the insufficient demand in IT
-              field, candidates now need to learn techniques and usage of
-              upcoming technologies that are utilized by these MNC’s...
-            </p>
+            <p className="text-gray-600 mt-5 leading-relaxed">Our learners get placed across development, testing, cloud and analytics roles with competitive CTCs.</p>
           </div>
           <div className="bg-white shadow-md rounded-lg px-4 py-3 border border-blue-400">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2 border-b-2 border-gray-400 inline-block">
-              Training and Placement
-            </h2>
-            <p className="text-gray-700 mt-4 leading-relaxed">
-              At Vel infotech , we have trainers that are experts in the
-              corresponding field. Our trainers are major professionals, who
-              have worked or are still working in a well-reputed MNC... With the
-              growing number of graduates and the insufficient demand in IT
-              field, candidates now need to learn techniques and usage of
-              upcoming technologies that are utilized by these MNC’s...
-            </p>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2 border-b-2 border-gray-400 inline-block">Training and Placement</h2>
+            <p className="text-gray-700 mt-4 leading-relaxed">Hands-on training + interview prep + referrals ensure strong outcomes.</p>
           </div>
         </div>
       </div>
 
-      {/* Category Cards Section with Framer Motion */}
+      {/* ---------- Categories (kept) ---------- */}
       <div className="max-w-6xl mx-auto px-4 pb-16">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-center text-black-800 mb-5">
-          Placement Categories
-        </h2>
-
+        <h2 className="text-2xl sm:text-3xl font-semibold text-center text-black-800 mb-5">Placement Categories</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {categoryData.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.1,
-                ease: "easeOut",
-              }}
-              whileHover={{ scale: 1.05 }}
-              className={`bg-gradient-to-br ${item.gradient} p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 text-center cursor-pointer`}
-            >
-              <h3 className="text-lg font-semibold text-white mb-2">
-                {item.label}
-              </h3>
-              <div className="flex justify-center">
-                <span className="inline-block px-3 py-1 rounded-full bg-white text-sm font-bold text-gray-800">
-                  {item.count}
-                </span>
-              </div>
+            <motion.div key={item.id} initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}} viewport={{once:true}}
+              transition={{duration:0.5,delay:index*0.1,ease:"easeOut"}}
+              className={`bg-gradient-to-br ${item.gradient} p-6 rounded-xl shadow-md text-center`}>
+              <h3 className="text-lg font-semibold text-white mb-2">{item.label}</h3>
+              <span className="inline-block px-3 py-1 rounded-full bg-white text-sm font-bold text-gray-800">{item.count}</span>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Role-based Placements */}
-      <div className="max-w-8xl  mx-auto px-4 pb-20">
-        <h2 className="text-3xl font-semibold text-center text-black-800 mb-6">
-          Role-based Placements
-        </h2>
+      {/* ---------- Role-based (kept) ---------- */}
+      <div className="max-w-8xl  mx-auto px-4 pb-10">
+        <h2 className="text-3xl font-semibold text-center text-black-800 mb-6">Role-based Placements</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {roleDataColumns.map((column, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-white-900 rounded-lg shadow-md bg-blue-700 p-4"
-            >
-              <h3 className="text-xl font-bold text-center text-white mb-4">
-                Role-based Placements
-              </h3>
-              {column.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className={`flex justify-between items-center py-2 px-4 my-2 rounded-lg shadow-sm hover:shadow-md cursor-pointer ${
-                    item.highlight
-                      ? "bg-orange-400 text-white font-semibold"
-                      : "bg-white"
-                  }`}
-                >
-                  <span
-                    className={`text-sm sm:text-base ${
-                      item.highlight
-                        ? "text-white"
-                        : "text-gray-800 font-medium"
-                    }`}
-                  >
-                    {item.role}
-                  </span>
-                  <span
-                    className={`px-3 py-1 text-xs sm:text-sm font-bold rounded-full ${
-                      item.highlight
-                        ? "bg-yellow-400 text-gray-900"
-                        : "bg-yellow-300 text-gray-800"
-                    }`}
-                  >
-                    {item.count}
-                  </span>
-                </motion.div>
+          {roleDataColumns.map((column, i) => (
+            <div key={i} className="rounded-lg shadow-md bg-blue-700 p-4">
+              <h3 className="text-xl font-bold text-center text-white mb-4">Role-based Placements</h3>
+              {column.map((r, idx) => (
+                <div key={idx} className="flex justify-between items-center py-2 px-4 my-2 rounded-lg bg-white">
+                  <span className="text-sm sm:text-base text-gray-800 font-medium">{r.role}</span>
+                  <span className="px-3 py-1 text-xs sm:text-sm font-bold rounded-full bg-yellow-300 text-gray-800">{r.count}</span>
+                </div>
               ))}
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-      {/* Placed Students Table */}
-      <div className="max-w-7xl mx-auto px-4 pb-10">
-        <h2 className="text-3xl font-semibold text-center text-black-900 mb-6">
-          Placed Students JAN 2025 – MARCH 2025
-        </h2>
 
-        <div className="overflow-x-auto rounded-lg shadow-md bg-white">
-          <table className="w-full text-sm text-left border border-blue-900">
-            <thead className="text-white bg-gradient-to-r from-[#005BAC] to-[#003c6a] ">
-              <tr>
-                <th scope="col" className="px-4 py-3 border-r border-blue-600">
-                  ID
-                </th>
-                <th scope="col" className="px-4 py-3 border-r border-blue-600">
-                  Name
-                </th>
-                <th scope="col" className="px-4 py-3 border-r border-blue-600">
-                  Company
-                </th>
-                <th scope="col" className="px-4 py-3 border-r border-blue-600">
-                  Designation
-                </th>
-                <th scope="col" className="px-4 py-3">
-                  Course Done
-                </th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-800">
-              {[
-                {
-                  id: 1,
-                  name: "Poornima",
-                  company: "TCS",
-                  designation: "Software Engineer",
-                  course: "Fullstack Development",
-                },
-                {
-                  id: 2,
-                  name: "Ram",
-                  company: "Infosys",
-                  designation: "Web Developer",
-                  course: "Angular JS",
-                },
-                {
-                  id: 3,
-                  name: "Kapilesh",
-                  company: "HCL Technologies",
-                  designation: "Software Developer",
-                  course: "Python",
-                },
-                {
-                  id: 4,
-                  name: "Gowtham",
-                  company: "Wipro",
-                  designation: "Software Tester",
-                  course: "Selenium",
-                },
-                {
-                  id: 5,
-                  name: "Sindhu",
-                  company: "IBM India",
-                  designation: "Software Developer",
-                  course: "Java",
-                },
-                {
-                  id: 6,
-                  name: "Janani",
-                  company: "Capgemini",
-                  designation: "Data Scientist",
-                  course: "Python",
-                },
-                {
-                  id: 7,
-                  name: "Ashwin",
-                  company: "Wipro",
-                  designation: "Fullstack Developer",
-                  course: "Angular Js",
-                },
-                {
-                  id: 8,
-                  name: "Meenakshi",
-                  company: "Cognizant",
-                  designation: "PowerBI Developer",
-                  course: "PowerBI",
-                },
-                {
-                  id: 9,
-                  name: "Rachana",
-                  company: "TCS",
-                  designation: "Software Tester",
-                  course: "Selenium",
-                },
-                {
-                  id: 10,
-                  name: "Mukunth",
-                  company: "Infosys",
-                  designation: "Cloud Engineer",
-                  course: "AWS",
-                },
-              ].map((student) => (
-                <tr
-                  key={student.id}
-                  className="hover:bg-gray-100 border-b border-blue-200"
-                >
-                  <td className="px-4 py-2 font-semibold">{student.id}</td>
-                  <td className="px-4 py-2">{student.name}</td>
-                  <td className="px-4 py-2">{student.company}</td>
-                  <td className="px-4 py-2">{student.designation}</td>
-                  <td className="px-4 py-2">{student.course}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {/* ========== SHOWCASE with filters ========== */}
+      <div className="max-w-7xl mx-auto px-4 pb-10">
+        <h2 className="text-3xl font-semibold text-center text-black-900 mb-4">Placed Students (Detailed)</h2>
+
+        {/* Controls */}
+        <div className="flex flex-wrap gap-3 items-center justify-between mb-6">
+          {/* search */}
+          <div className="relative">
+            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input value={q} onChange={(e)=>setQ(e.target.value)} placeholder="Search name, company, role…"
+              className="pl-9 pr-3 py-2 rounded-xl bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#003c6a] w-72" />
+          </div>
+
+          {/* filters */}
+          <div className="flex flex-wrap gap-2">
+            <select value={company} onChange={(e)=>setCompany(e.target.value)} className="px-3 py-2 rounded-xl border bg-white">
+              {companies.map(c => <option key={c}>{c}</option>)}
+            </select>
+            <select value={role} onChange={(e)=>setRole(e.target.value)} className="px-3 py-2 rounded-xl border bg-white">
+              {roles.map(r => <option key={r}>{r}</option>)}
+            </select>
+            <select value={sort} onChange={(e)=>setSort(e.target.value)} className="px-3 py-2 rounded-xl border bg-white">
+              <option value="recent">Sort: Recent</option>
+              <option value="lpaHigh">Sort: LPA High → Low</option>
+              <option value="lpaLow">Sort: LPA Low → High</option>
+            </select>
+
+            <div className="inline-flex rounded-xl overflow-hidden border">
+              <button onClick={()=>setView("cards")}   className={`px-3 py-2 ${view==="cards"?"bg-[#003c6a] text-white":"bg-white"}`}><FiGrid/></button>
+              <button onClick={()=>setView("circles")} className={`px-3 py-2 ${view==="circles"?"bg-[#003c6a] text-white":"bg-white"}`}><FiCircle/></button>
+            </div>
+          </div>
         </div>
+
+        {/* Views */}
+        {view === "cards" ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filtered.map((s, i) => {
+              const grad = gradFor(s.company + s.name);
+              const b = band(s.lpa);
+              return (
+                <motion.div key={s.id} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}}
+                  transition={{duration:0.35, delay:i*0.03}} whileHover={{y:-4}}
+                  className="group bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition">
+                  <div className={`h-20 w-full rounded-t-2xl bg-gradient-to-r ${grad}`} />
+                  <div className="-mt-8 px-5 pb-5">
+                    <div className="w-16 h-16 rounded-2xl bg-white shadow ring-2 ring-white flex items-center justify-center -mt-8 mb-3">
+                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${grad} text-white font-bold flex items-center justify-center`}>{initials(s.name)}</div>
+                    </div>
+
+                    <h3 className="text-lg font-bold text-[#0f172a] leading-tight">{s.name}</h3>
+                    <p className="text-sm text-gray-500 flex items-center gap-2 mt-1"><FiBriefcase className="opacity-70"/><span className="font-medium">{s.company}</span></p>
+
+                    <div className="mt-3 text-sm flex items-center justify-between">
+                      <p className="font-medium text-gray-800">{s.designation}</p>
+                      <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${b.cls}`}>{b.label}</span>
+                    </div>
+
+                    {s.course && <div className="mt-2 text-xs font-semibold inline-block bg-[#e0f2fe] text-[#003c6a] px-2 py-1 rounded-full">{s.course}</div>}
+                    {s.notes &&  <p className="mt-2 text-xs text-gray-500">{s.notes}</p>}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-6">
+            {filtered.map((s, i) => {
+              const grad = gradFor(s.name + s.company);
+              const b = band(s.lpa);
+              return (
+                <motion.div key={s.id} initial={{opacity:0,scale:0.9}} whileInView={{opacity:1,scale:1}} viewport={{once:true}}
+                  transition={{duration:0.35, delay:i*0.02}}
+                  className="bg-white border border-gray-200 rounded-3xl p-4 text-center shadow hover:shadow-md">
+                  <div className={`mx-auto w-24 h-24 rounded-full bg-gradient-to-br ${grad} text-white font-extrabold text-xl flex items-center justify-center`}>
+                    {initials(s.name)}
+                  </div>
+                  <h4 className="mt-3 font-bold text-[#0f172a]">{s.name}</h4>
+                  <p className="text-sm text-gray-500">{s.company}</p>
+                  <p className="text-xs mt-1 text-gray-700">{s.designation}</p>
+                  <div className="mt-2">
+                    <span className={`inline-block px-2 py-0.5 text-[11px] rounded-full ${b.cls}`}>{b.label}</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
+
+        {filtered.length === 0 && <div className="text-center text-gray-500 mt-10">No students match your search.</div>}
       </div>
+
+      {/* ---------- Highlights + Enquiry (kept) ---------- */}
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-7 items-center pl-5 pt-2 px-2 pb-2">
-        {/* Left Side - Text Content */}
-        <div className="relative backdrop-blur-[4px] bg-white/30 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
-          <h2 className="text-xl md:text-2xl font-extrabold text-gray-800 mb-7 ml-19">
-            Placement Highlights
-          </h2>
-          <p className="text-gray-700 text-md mb-6">
-            With the growing number of graduates and the insufficient demand in
-            IT field, candidates now need to learn techniques and technologies
-            utilized by MNCs.
-          </p>
+        <div className="relative backdrop-blur-[4px] bg-white/30 border border-white/60 shadow-2xl rounded-3xl p-8">
+          <h2 className="text-xl md:text-2xl font-extrabold text-gray-800 mb-7">Placement Highlights</h2>
           <ul className="list-disc list-inside text-gray-800 space-2">
-            <li>
-              <strong>Industry Trend:</strong> Real-time skills required by top
-              companies
-            </li>
-            <li>
-              <strong>Top Domains:</strong> Fullstack, Cloud, Testing, Data
-              Science
-            </li>
-            <li>
-              <strong>Freshers & Experienced:</strong> Placement support for all
-              levels
-            </li>
+            <li><strong>Industry Trend:</strong> Real-time skills required by top companies</li>
+            <li><strong>Top Domains:</strong> Fullstack, Cloud, Testing, Data Science</li>
+            <li><strong>Freshers & Experienced:</strong> Placement support for all levels</li>
           </ul>
         </div>
 
-        {/* Right Side - Enquiry Form */}
         <div className="w-full max-w-md mx-auto">
-          <div className="relative backdrop-blur-[4px] bg-white/30 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
+          <div className="relative backdrop-blur-[4px] bg-white/30 border border-white/60 shadow-2xl rounded-3xl p-8">
             <h5 className="text-xl font-bold mb-4 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
               Get a Free Training Quote
             </h5>
             <div className="flex justify-center  mb-5 gap-2">
-              <button
-                onClick={() => setMode("classroom")}
-                className={`flex-1 flex items-center justify-center gap-2 py-1.5 md:py-2 rounded-full text-xs sm:text-base lg:text-lg shadow
-                  ${
-                    mode === "classroom"
-                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                      : "bg-white/60 text-black border border-[#a7f3d0]/40"
-                  } transition-all duration-200`}
-              >
-                <FaChalkboardTeacher className="text-xl" /> Class Room
-              </button>
-              <button
-                onClick={() => setMode("online")}
-                className={`flex-1 flex items-center justify-center gap-2 py-1.5 md:py-2 rounded-full text-xs sm:text-base lg:text-lg shadow
-                  ${
-                    mode === "online"
-                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                      : "bg-white/60 text-black border border-[#a7f3d0]/40"
-                  } transition-all duration-200`}
-              >
-                <FaLaptop className="text-xl" /> Online
-              </button>
+              <button onClick={()=>setMode("classroom")} className={`flex-1 py-2 rounded-full ${mode==="classroom"?"bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white":"bg-white/60 border"}`}>Class Room</button>
+              <button onClick={()=>setMode("online")}     className={`flex-1 py-2 rounded-full ${mode==="online"?"bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white":"bg-white/60 border"}`}>Online</button>
             </div>
             <form className="flex flex-col gap-4">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
-              />
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
-              />
+              <input type="text" placeholder="Your Name"  className="rounded-xl bg-background px-3 py-2 border focus:ring-2 focus:ring-[#003c6a]" />
+              <input type="email" placeholder="Your Email" className="rounded-xl bg-background px-3 py-2 border focus:ring-2 focus:ring-[#003c6a]" />
               <div className="flex gap-3">
-                <input
-                  type="tel"
-                  placeholder="Mobile Number"
-                  className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
-                />
-                <select
-                  defaultValue=""
-                  className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium w-1/2 focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
-                >
-                  <option value="" disabled>
-                    How & Where
-                  </option>
-                  <option>Morning Batch</option>
-                  <option>Evening Batch</option>
-                  <option>Weekend</option>
+                <input type="tel" placeholder="Mobile Number" className="rounded-xl bg-background px-3 py-2 border w-1/2 focus:ring-2 focus:ring-[#003c6a]" />
+                <select defaultValue="" className="rounded-xl bg-background px-3 py-2 border w-1/2 focus:ring-2 focus:ring-[#003c6a]">
+                  <option value="" disabled>How & Where</option>
+                  <option>Morning Batch</option><option>Evening Batch</option><option>Weekend</option>
                 </select>
               </div>
-              <input
-                type="text"
-                placeholder="Type Course"
-                className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow"
-              />
-              <textarea
-                placeholder="Your Message"
-                rows={1}
-                className="rounded-xl bg-background px-3 py-2 border border-[#003c6a]/60 text-base font-medium focus:ring-2 focus:ring-[#003c6a] outline-none resize-none shadow"
-              />
-              <button className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-extrabold px-3 py-2 rounded-xl hover:from-[#0891b2] hover:to-[#16bca7] transition shadow-lg mt-1">
-                Submit
-              </button>
+              <input type="text" placeholder="Type Course" className="rounded-xl bg-background px-3 py-2 border focus:ring-2 focus:ring-[#003c6a]" />
+              <textarea placeholder="Your Message" rows={1} className="rounded-xl bg-background px-3 py-2 border focus:ring-2 focus:ring-[#003c6a]" />
+              <button className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-extrabold px-3 py-2 rounded-xl shadow-lg">Submit</button>
             </form>
           </div>
         </div>
