@@ -23,7 +23,7 @@ import BlogBanner from "./pages/Blog";
 import Tutorials from "./pages/Tutorials";
 import TutorialDetail from "./pages/TutorialDetails";
 import InterviewDetail from "./pages/InterviewDetail";
-
+import ScrumMasterPage from "./components/Courses/ScrumMAster.jsx";
 import AddStudent from "./components/admin/AddStudent";
 import AllCourses from "./pages/AllCourses";
 import Java from "./components/Courses/Java";
@@ -57,7 +57,8 @@ import SoftSkillPage from "./components/Courses/SoftSkillsTraining";
 import Reviews from "./pages/Reviews";
 import SampleResume from "./pages/SampleResume";
 import Whatsapp from "./components/common/Whatsapp";
-
+import ProductManagement from "./components/Courses/ProductManagement";
+import BusinessAnalyst from "./components/Courses/BusinessAnalyst";
 // Wrapper to use useLocation
 function Layout({ children }) {
   const location = useLocation();
@@ -126,6 +127,7 @@ export default function App() {
           <Route path="/all-courses/FullStackDevelopement" element={<FullStackDevelopement />} />
           <Route path="/all-courses/Plsql" element={<Plsql />} />
           <Route path="/all-courses/Sql" element={<Sql />} />
+          <Route path="/all-courses/ScrumMaster" element={<ScrumMasterPage />} />
           <Route path="/all-courses/DataScience" element={<DataScience />} />
           <Route path="/all-courses/BusinessAnalytics" element={<BusinessAnalytics />} />
           <Route path="/all-courses/DataScienceAi" element={<DataScienceAi />} />
@@ -135,6 +137,8 @@ export default function App() {
           <Route path="/all-courses/EtlTesting" element={<EtlTesting />} />
           <Route path="/all-courses/AwsTraining" element={<AwsTraining />} />
           <Route path="/all-courses/DevOps" element={<DevOps />} />
+          <Route path="/all-courses/ProductManagement" element={<ProductManagement />} />
+          <Route path="/all-courses/BusinessAnalyst" element={<BusinessAnalyst />} />
           <Route path="/all-courses/HardwareNetworking" element={<HardwareNetworking />} />
           <Route path="/all-courses/CyberSecurity" element={<CyberSecurity />} />
           <Route path="/all-courses/Sap" element={<Sap />} />

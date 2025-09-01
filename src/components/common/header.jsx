@@ -5,6 +5,7 @@ import Vel from "../../assets/Vel InfoTech.svg";
 import { Link } from "react-router-dom";
 
 const groupedCourses = [
+  
   {
     category: "Software Development",
     items: [
@@ -22,6 +23,15 @@ const groupedCourses = [
       { name: "Business Analytics", href: "/all-courses/BusinessAnalytics" },
       { name: "Data Science & AI", href: "/all-courses/DataScienceAi" },
       { name: "Big Data Developer", href: "/all-courses/BigDataDeveloper" },
+    ],
+  },
+  {
+    category: "Non Coding Courses",
+    items: [
+      { name: "Scrum Master", href: "/all-courses/ScrumMaster" },
+      { name: "Business Analyst", href: "/all-courses/BusinessAnalyst" },
+      { name: "Product Management", href: "/all-courses/ProductManagement" },
+      
     ],
   },
   {

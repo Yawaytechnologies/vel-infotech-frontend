@@ -188,7 +188,7 @@ export default function Footer() {
                   href="/all-courses/EtlTesting"
                   className="hover:text-[#005BAC] transition font-bold "
                 >
-                  EtlResting
+                  Etl Testing
                 </a>
               </li>
             </ul>
@@ -204,7 +204,7 @@ export default function Footer() {
                   href="/all-courses/Devops"
                   className="hover:text-[#005BAC] font-bold "
                 >
-                  Devops
+                  Dev Ops
                 </a>
               </li>
               <li>
@@ -212,7 +212,7 @@ export default function Footer() {
                   href="/all-courses/AwaTraining"
                   className="hover:text-[#005BAC] font-bold "
                 >
-                  Aws Training
+                  AWS Training
                 </a>
               </li>
               <li>
@@ -252,7 +252,7 @@ export default function Footer() {
                   href="/all-courses/BigDataDeveloper"
                   className="hover:text-[#005BAC] font-bold "
                 >
-                  BigDataDeveloper
+                  Big Data Developer
                 </a>
               </li>
               <li>
@@ -260,7 +260,7 @@ export default function Footer() {
                   href="/all-courses/CyberSecurity"
                   className="hover:text-[#005BAC] font-bold "
                 >
-                  CyberSecurity
+                  Cyber Security
                 </a>
               </li>
             </ul>
@@ -277,16 +277,16 @@ export default function Footer() {
                 </span>
                 <span className="block text-black-400">
                   KBS Towers, No:-50, Jawaharlal Nehru Road, Ekattuthangal,
-                  (Near Jaya TV) ,
+                  (Near Jaya TV),Chennai-600032
                 </span>
-                <span className="block text-black-400">Chennai-600032</span>
+               
               </li>
               <li>
                 <a
                   href="mailto:info@velinfotech.com"
                   className="hover:text-[#005BAC] transition "
                 >
-                  contact.velinfotech@gmail.com
+                  contact.velinfo@gmail.com
                 </a>
               </li>
               <li>

@@ -4,10 +4,12 @@ import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Syllabus from "../coursecomponent/SyllabusLocked";
+import { SYLLABI } from "../coursecomponent/Syllabi";
 
 export default function SoftwareTesting() {
   const [mode, setMode] = useState("classroom");
-
+  const course = SYLLABI.softwaretesting;
   /* ===========================
      FORM STATE + VALIDATION
      (same style as Selenium page)
@@ -553,6 +555,18 @@ export default function SoftwareTesting() {
           </div>
         </div>
       </section>
+      
+      {/* SYLLABUS */}
+                  <Syllabus
+                                title={course.title}
+                                accent={course.accent}
+                                meta={course.meta}
+                                preview={course.preview}
+                                sections={course.sections} // ← REQUIRED
+                                useExternalForm
+                                cardMinH={400} // tweak to visually match your right cards
+                                stickyOffset={110}
+                              />
 
       {/* ENQUIRY FORM (validated + toasts) */}
       <section className="w-full px-6 py-20 text-white">

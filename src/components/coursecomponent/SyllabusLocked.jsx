@@ -190,6 +190,7 @@ function SectionsWithGlobalToggle({
   labels = { showMore: "Show more", showLess: "Show less" },
 }) {
   const [expanded, setExpanded] = useState(false);
+  const containerRef = React.useRef(null);
 
   if (!Array.isArray(sections) || sections.length === 0) return null;
 
@@ -211,8 +212,16 @@ function SectionsWithGlobalToggle({
       return expanded ? false : i < initialModules ? len > initialItemsPerModule : len > 0;
     });
 
+  const handleToggle = () => {
+    if (expanded && containerRef.current) {
+      // Smooth scroll back to top of the section when collapsing
+      containerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setExpanded((v) => !v);
+  };
+
   return (
-    <div>
+    <div ref={containerRef}>
       {/* Modules */}
       <div className="divide-y divide-slate-100">
         {visibleSections.map((sec, idx) => {
@@ -237,7 +246,7 @@ function SectionsWithGlobalToggle({
       {anyExpandable && (
         <div className="mt-3 flex justify-center">
           <button
-            onClick={() => setExpanded((v) => !v)}
+            onClick={handleToggle}
             className="text-sm font-semibold px-4 py-2 rounded-full border border-slate-200 bg-white hover:bg-slate-50"
             style={{ color: accent, borderColor: `${accent}55` }}
             aria-expanded={expanded}
@@ -260,3 +269,4 @@ function SectionsWithGlobalToggle({
     </div>
   );
 }
+
