@@ -2,7 +2,8 @@
   import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
   // eslint-disable-next-line no-unused-vars
   import { motion } from "framer-motion";
-  import JavaSyllabus from "../coursecomponent/Javasyllabus";
+  import { ToastContainer, toast, Slide } from "react-toastify";
+ 
   import Syllabus from "../coursecomponent/SyllabusLocked";
   import { SYLLABI } from "../coursecomponent/Syllabi";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,17 +11,12 @@ import { submitEnquiry } from "../../redux/actions/enquiryAction";
 
   const HEADER_OFFSET = 110; // adjust to your sticky header height
 
-  const scrollToWithOffset = (ref) => {
-    const el = ref?.current;
-    if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-    window.scrollTo({ top: y, behavior: "smooth" });
-  };
+  
 
   export default function JavaCoursePage() {
     const [mode, setMode] = useState("classroom");
     const course = SYLLABI.java;
-    const [unlocked, setUnlocked] = useState(false);
+   
     const dispatch = useDispatch();
     const { status, error } = useSelector((s) => s.enquiry || {});
     const syllabusRef = useRef(null);
@@ -43,12 +39,7 @@ import { submitEnquiry } from "../../redux/actions/enquiryAction";
 
   // Smooth scroll target
   const formRef = useRef(null);
-  const scrollToForm = () => {
-    const el = formRef.current || document.getElementById("enquiry-form");
-    if (!el) return;
-    const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
-    window.scrollTo({ top: y, behavior: "smooth" });
-  };
+ 
 
   // Toast options
   const toastOpts = {
@@ -495,8 +486,7 @@ import { submitEnquiry } from "../../redux/actions/enquiryAction";
             preview={course.preview}
             sections={course.sections} // ← REQUIRED
             useExternalForm
-            isUnlocked={unlocked}
-            onRequestUnlock={handleRequestUnlock}
+
             cardMinH={400} // tweak to visually match your right cards
             stickyOffset={110}
           />
@@ -573,66 +563,189 @@ import { submitEnquiry } from "../../redux/actions/enquiryAction";
                 </div>
 
                 {/* Form */}
-                <form
-                  id="enquiry-form"
-                  onSubmit={handleSubmit}
-                  className="flex flex-col gap-4"
-                >
+                 <form
+                id="enquiry-form"
+                onSubmit={handleSubmit}
+                noValidate
+                className="grid grid-cols-1 gap-2"
+              >
+                {/* Name */}
+                <div>
                   <input
-                    name="name"
                     type="text"
+                    name="name"
                     placeholder="Your Name"
-                    className="rounded-xl px-5 py-3 text-black bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
-                    required
+                    value={form.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.name}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.name && errors?.name
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="Your Email"
-                    className="rounded-xl px-5 text-black py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
-                    required
-                  />
-                  <div className="flex flex-col  sm:flex-row gap-3">
-                    <input
-                      name="phone"
-                      type="number"
-                      placeholder="Mobile Num"
-                      className="w-full sm:w-1/2 rounded-xl px-5 py-3 text-black bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
-                      required
-                    />
-                    <select
-                      name="batch"
-                      defaultValue=""
-                      className="w-full sm:w-1/2 rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] text-sm text-gray-700 focus:ring-2 focus:ring-[#003c6a] outline-none"
-                      required
-                    >
-                      <option value="" disabled>
-                        How & Where
-                      </option>
-                      <option>Morning Batch</option>
-                      <option>Evening Batch</option>
-                      <option>Weekend</option>
-                    </select>
+                  <div className="h-3 mt-0.5">
+                    {touched?.name && errors?.name && (
+                      <p className="text-red-600 text-xs">{errors.name}</p>
+                    )}
                   </div>
-                  <SelectCourse
-                    name="course"
-                    options={COURSE_OPTIONS}
-                    defaultValue={preselectedCourse}
-                  />
+                </div>
 
-                  <textarea
-                    name="message"
-                    rows={2}
-                    placeholder="Your Message"
-                    className="rounded-xl px-5 text-black py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none resize-none"
+                {/* Email */}
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={form.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.email}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.email && errors?.email
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
-                  <button
-                    type="submit"
-                    className="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-base hover:from-[#0891b2] hover:to-[#16bca7] transition"
+                  <div className="h-3 mt-0.5">
+                    {touched?.email && errors?.email && (
+                      <p className="text-red-600 text-xs">{errors.email}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Phone + Batch */}
+
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    placeholder="Mobile Number"
+                    value={form.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.phone}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.phone && errors?.phone
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  />
+                  <div className="h-3 mt-0.5">
+                    {touched?.phone && errors?.phone && (
+                      <p className="text-red-600 text-xs">{errors.phone}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Course (dropdown select) */}
+                <div>
+                  <select
+                    name="course"
+                    value={form.course}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.course}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
+                      touched?.course && errors?.course
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   >
-                    Submit
-                  </button>
-                </form>
+                    <option value="">Select Course</option>
+                    {[
+                      "Java",
+                      "Python",
+                      "Full Stack Development",
+                      "PL/SQL",
+                      "SQL",
+                      "Data Science",
+                      "Business Analytics",
+                      "Data Science & AI",
+                      "Big Data Developer",
+                      "Software Testing",
+                      "Selenium Testing",
+                      "ETL Testing",
+                      "AWS Training",
+                      "DevOps",
+                      "Hardware Networking",
+                      "Cyber Security",
+                      "SAP",
+                      "Salesforce",
+                      "ServiceNow",
+                      "RPA (Robotic Process Automation)",
+                      "Production Support",
+                      "Digital Marketing",
+                      "Soft Skill Training",
+                      "Scrum Master",
+                      "Business Analyst",
+                      "Product Management",
+                    ].map((course) => (
+                      <option key={course} value={course}>
+                        {course}
+                      </option>
+                    ))}
+                  </select>
+
+                  <div className="h-3 mt-0.5">
+                    {touched?.course && errors?.course && (
+                      <p className="text-red-600 text-xs">{errors.course}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <textarea
+                    rows={2}
+                    name="message"
+                    placeholder="Your Message"
+                    value={form.message}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.message}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.message && errors?.message
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-0.5">
+                    <span>First letter auto-caps</span>
+                    <span>{form.message.length}/300</span>
+                  </div>
+                  <div className="h-3 mt-0.5">
+                    {touched?.message && errors?.message && (
+                      <p className="text-red-600 text-xs">{errors.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
+                    status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                  }`}
+                >
+                  {status === "loading" ? "Submitting..." : "Submit"}
+                </button>
+
+                {/* Optional server error */}
+                {error && (
+                  <p className="text-red-600 text-xs mt-1">
+                    Submission failed: {String(error)}
+                  </p>
+                )}
+              </form>
               </div>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import bgPlacement from "../assets/bgplacement.jpg";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";

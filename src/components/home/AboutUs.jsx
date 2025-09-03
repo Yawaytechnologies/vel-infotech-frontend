@@ -21,11 +21,33 @@ export default function AboutSection() {
   });
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
-  const [submitting, setSubmitting] = useState(false);
+  
 
-  // helpers
-  const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
-  const lettersSpaces = (s) => s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
+ // ✅ define toastOpts (you were using it but not defining it)
+  const toastOpts = {
+    position: "top-center",
+    autoClose: 2200,
+    hideProgressBar: true,
+    closeButton: false,
+    newestOnTop: true,
+    draggable: false,
+    pauseOnHover: true,
+    pauseOnFocusLoss: false,
+    theme: "colored",
+    transition: Slide,
+    style: {
+      borderRadius: "10px",
+      padding: "8px 12px",
+      minWidth: "260px",
+      maxWidth: "320px",
+      lineHeight: 1.25,
+      fontSize: "14px",
+      fontWeight: 600,
+      boxShadow: "0 8px 20px rgba(0,0,0,.18)",
+      color: "#fff",
+    },
+  };
+
 
   const setField = (field, value) => {
     setForm((f) => ({ ...f, [field]: value }));
@@ -81,65 +103,13 @@ export default function AboutSection() {
     }
   };
 
-  const validateAll = () => {
-    const fields = ["name", "email", "phone", "batch", "course", "message"];
-    const next = {};
-    fields.forEach((f) => {
-      const err = validateField(f, form[f]);
-      if (err) next[f] = err;
-    });
-    setErrors(next);
-    return next;
-  };
+ 
 
-  const onBlur = (e) => {
-    const { name, value } = e.target;
-    setTouched((t) => ({ ...t, [name]: true }));
-    if (name === "name") setField("name", capFirst(value));
-    if (name === "course") setField("course", capFirst(value));
-    if (name === "message") setField("message", capFirst(value));
-  };
+  
 
-  // inputs
-  const handleName = (e) => setField("name", capFirst(lettersSpaces(e.target.value)));
-  const handleEmail = (e) => setField("email", e.target.value);
-  const handlePhone = (e) => setField("phone", e.target.value.replace(/\D+/g, "").slice(0, 10));
-  const handleCourse = (e) => setField("course", capFirst(lettersSpaces(e.target.value)));
-  const handleMessage = (e) => {
-    const v = e.target.value;
-    setField("message", v.length ? v[0].toUpperCase() + v.slice(1) : v);
-  };
+ 
 
-  // toast helpers
-  const tBase = {
-    position: "top-center",
-    autoClose: 2200,
-    hideProgressBar: true,
-    closeButton: false,
-    newestOnTop: true,
-    draggable: false,
-    pauseOnHover: true,
-    pauseOnFocusLoss: false,
-    theme: "colored",
-    transition: Slide,
-    style: {
-      borderRadius: "10px",
-      padding: "8px 12px",
-      minWidth: "260px", // smaller width
-      maxWidth: "320px",
-      lineHeight: 1.25,
-      fontSize: "14px",
-      fontWeight: 600,
-      boxShadow: "0 8px 20px rgba(0,0,0,.18)",
-      color: "#fff",
-    },
-  };
 
-  const notifySuccess = (msg) =>
-    toast(msg, { ...tBase, style: { ...tBase.style, background: "#34d399" /* light green */, color: "#fff" } });
-
-  const notifyError = (msg) =>
-    toast(msg, { ...tBase, style: { ...tBase.style, background: "#ef4444" /* red */, color: "#fff" } });
 
    async function handleSubmit(e) {
       e.preventDefault();
@@ -217,12 +187,7 @@ export default function AboutSection() {
     }
   
 
-  // compact controls
-  const control =
-    "h-10 rounded-xl bg-background px-3 border text-[13px] font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow w-full";
-  const ok = "border-[#003c6a]/60";
-  const err = "border-red-500 focus:ring-red-500";
-  const helper = (hasErr) => `h-3 text-[10px] mt-1 ${hasErr ? "text-red-600" : "text-transparent"}`;
+ 
 
   return (
     <>
