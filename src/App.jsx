@@ -48,7 +48,7 @@ import ServiceNow from "./components/Courses/ServiceNow";
 import RPA from "./components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
 import Clientpage from "./pages/Clientpage";
-import Feedback from "./pages/Feedback";
+
 import StudentTable from "./components/admin/CourseEnquired";
 import AdminLayout from "./components/admin/AdminLayout";
 import ProductionSupportPage from "./components/Courses/ProductionSupport";
@@ -67,7 +67,7 @@ function Layout({ children }) {
     "/admin",
     "/admin/login",
     "/admin/dashboard",
-    "/admin/course-enquired",,
+    "/admin/course-enquired",
     "/admin/add-student",
   ];
   const isAdmin = adminPaths.includes(location.pathname);
@@ -105,7 +105,7 @@ export default function App() {
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<BlogBanner />} />
           <Route path="/resources" element={<Tutorials />} />
-          <Route path="/feedback" element={<Feedback />} />
+          
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/client" element={<Clientpage />} />
           <Route path="/internship" element={<Internship />} />

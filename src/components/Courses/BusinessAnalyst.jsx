@@ -6,16 +6,15 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Syllabus from "../coursecomponent/SyllabusLocked";
 import { SYLLABI } from "../coursecomponent/Syllabi";
-// import { useDispatch, useSelector } from "react-redux";
-// import { submitEnquiry } from "../../redux/actions/enquiryAction";
-// import { clearEnquiryError } from "../../redux/actions/enquiryAction";
+import { useDispatch, useSelector } from "react-redux";
+import { submitEnquiry } from "../../redux/actions/enquiryAction";
 
 
 export default function ScrumMaster() {
-  const [mode, setMode] = useState("classroom");
+  const [mode, setMode] = useState("class_room");
   const course = SYLLABI.businessanalyst;
-//   const dispatch = useDispatch();
-//   const{ status, error } = useSelector((s) => s.enquiry);
+  const dispatch = useDispatch();
+  const { status, error } = useSelector((s) => s.enquiry || {});
 
 
 
@@ -27,7 +26,7 @@ export default function ScrumMaster() {
     name: "",
     email: "",
     phone: "",
-    batch: "",
+   
     course: "",
     message: "",
   });
@@ -79,9 +78,7 @@ export default function ScrumMaster() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-      case "batch":
-        if (!v) return "Please select a batch.";
-        return null;
+      
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -129,19 +126,21 @@ export default function ScrumMaster() {
     }));
   };
 
-  async function handleSubmit(e) {
-e.preventDefault();
-// run your existing validation first; if ok:
-const payload = {
-name: form.name.trim(),
-email: form.email.trim(),
-phone: form.phone.trim(),
-batch: form.batch,
-course: form.course.trim(),
-message: form.message.trim(),
-};
+async function handleSubmit(e) {
+    e.preventDefault();
 
-    const fields = ["name", "email", "phone", "batch", "course", "message"];
+    // touch all
+    setTouched({
+      name: true,
+      email: true,
+      phone: true,
+
+      course: true,
+      message: true,
+    });
+
+    // validate all
+    const fields = ["name", "email", "phone", "course", "message"];
     const next = {};
     fields.forEach((f) => {
       const er = validateField(f, form[f]);
@@ -153,7 +152,6 @@ message: form.message.trim(),
       const first = fields.find((f) => next[f]);
       const el = document.querySelector(`[name="${first}"]`);
       if (el) el.focus();
-
       toast.error(next[first] || "Please fix the highlighted errors.", {
         ...toastOpts,
         style: { background: "#ef4444", color: "#fff" },
@@ -162,32 +160,46 @@ message: form.message.trim(),
       return;
     }
 
-    // success path – (wire API here if needed)
-    console.log("Selenium Enquiry:", form);
+    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    const payload = {
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      name: form.name.trim(),
+      email: form.email.trim(),
+      mobile: form.phone.trim(), // API key is 'mobile'
+      course: form.course.trim(),
+      message: form.message.trim(),
+      // batch is kept for UI; not sent since your sample payload doesn't include it
+    };
 
-    toast.success("Thanks! Your enquiry has been recorded.", {
-      ...toastOpts,
-      style: { background: "#16a34a", color: "#fff" },
-      className: "rounded-xl shadow-md text-[15px] px-4 py-3",
-    });
+    try {
+      await dispatch(submitEnquiry(payload)).unwrap();
 
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      batch: "",
-      course: "",
-      message: "",
-    });
-    setErrors({});
-    setTouched({});
-  };
+      toast.success("Thanks! Your enquiry has been recorded.", {
+        ...toastOpts,
+        style: { background: "#16a34a", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
 
-  // input classes
-  const baseInput =
-    "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500";
-  const ok = "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]";
-  const bad = "border-red-500 focus:border-red-500 focus:ring-red-500";
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+
+        course: "",
+        message: "",
+      });
+      setErrors({});
+      setTouched({});
+    } catch (err) {
+      console.error(err);
+      const msg = typeof err === "string" ? err : "Submission failed.";
+      toast.error(msg, {
+        ...toastOpts,
+        style: { background: "#ef4444", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+    }
+  }
 
   return (
     <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
@@ -615,20 +627,20 @@ message: form.message.trim(),
             </div>
           </div>
 
-          {/* RIGHT: Validated Form */}
+          {/* RIGHT: Form */}
           <div className="w-full max-w-lg">
             <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
               <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                 Get a Free Training Quote
               </h3>
 
-              {/* Toggle Buttons */}
+              {/* Mode Toggle */}
               <div className="flex justify-center gap-3 mb-6">
                 <button
-                  onClick={() => setMode("classroom")}
+                  onClick={() => setMode("class_room")}
                   type="button"
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                    mode === "classroom"
+                    mode === "class_room"
                       ? "bg-[#003c6a] text-white"
                       : "bg-white text-[#003c6a] border border-[#003c6a]"
                   }`}
@@ -648,10 +660,8 @@ message: form.message.trim(),
                 </button>
               </div>
 
-              {/* Form Fields */}
               <form
                 id="enquiry-form"
-                ref={formRef}
                 onSubmit={handleSubmit}
                 noValidate
                 className="grid grid-cols-1 gap-2"
@@ -667,8 +677,10 @@ message: form.message.trim(),
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.name}
                     className={[
-                      baseInput,
-                      touched?.name && errors?.name ? bad : ok,
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.name && errors?.name
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
                   <div className="h-3 mt-0.5">
@@ -689,8 +701,10 @@ message: form.message.trim(),
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.email}
                     className={[
-                      baseInput,
-                      touched?.email && errors?.email ? bad : ok,
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.email && errors?.email
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
                   <div className="h-3 mt-0.5">
@@ -701,73 +715,82 @@ message: form.message.trim(),
                 </div>
 
                 {/* Phone + Batch */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      inputMode="numeric"
-                      pattern="\d*"
-                      placeholder="Mobile Num"
-                      value={form.phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.phone}
-                      className={[
-                        baseInput,
-                        touched?.phone && errors?.phone ? bad : ok,
-                      ].join(" ")}
-                    />
-                    <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && (
-                        <p className="text-red-600 text-xs">{errors.phone}</p>
-                      )}
-                    </div>
-                  </div>
 
-                  <div>
-                    <select
-                      name="batch"
-                      value={form.batch}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.batch}
-                      className={[
-                        baseInput,
-                        touched?.batch && errors?.batch ? bad : ok,
-                        "placeholder:text-transparent",
-                      ].join(" ")}
-                    >
-                      <option value="" disabled>
-                        How & Where
-                      </option>
-                      <option>Morning Batch</option>
-                      <option>Evening Batch</option>
-                      <option>Weekend</option>
-                    </select>
-                    <div className="h-3 mt-0.5">
-                      {touched?.batch && errors?.batch && (
-                        <p className="text-red-600 text-xs">{errors.batch}</p>
-                      )}
-                    </div>
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    placeholder="Mobile Number"
+                    value={form.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.phone}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.phone && errors?.phone
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  />
+                  <div className="h-3 mt-0.5">
+                    {touched?.phone && errors?.phone && (
+                      <p className="text-red-600 text-xs">{errors.phone}</p>
+                    )}
                   </div>
                 </div>
 
-                {/* Course */}
+                {/* Course (dropdown select) */}
                 <div>
-                  <input
-                    type="text"
+                  <select
                     name="course"
-                    placeholder="Type Course"
                     value={form.course}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.course}
                     className={[
-                      baseInput,
-                      touched?.course && errors?.course ? bad : ok,
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
+                      touched?.course && errors?.course
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
-                  />
+                  >
+                    <option value="">Select Course</option>
+                    {[
+                      "Java",
+                      "Python",
+                      "Full Stack Development",
+                      "PL/SQL",
+                      "SQL",
+                      "Data Science",
+                      "Business Analytics",
+                      "Data Science & AI",
+                      "Big Data Developer",
+                      "Software Testing",
+                      "Selenium Testing",
+                      "ETL Testing",
+                      "AWS Training",
+                      "DevOps",
+                      "Hardware Networking",
+                      "Cyber Security",
+                      "SAP",
+                      "Salesforce",
+                      "ServiceNow",
+                      "RPA (Robotic Process Automation)",
+                      "Production Support",
+                      "Digital Marketing",
+                      "Soft Skill Training",
+                      "Scrum Master",
+                      "Business Analyst",
+                      "Product Management",
+                    ].map((course) => (
+                      <option key={course} value={course}>
+                        {course}
+                      </option>
+                    ))}
+                  </select>
+
                   <div className="h-3 mt-0.5">
                     {touched?.course && errors?.course && (
                       <p className="text-red-600 text-xs">{errors.course}</p>
@@ -775,7 +798,6 @@ message: form.message.trim(),
                   </div>
                 </div>
 
-                {/* Message */}
                 <div>
                   <textarea
                     rows={2}
@@ -786,9 +808,10 @@ message: form.message.trim(),
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.message}
                     className={[
-                      baseInput,
-                      "resize-none",
-                      touched?.message && errors?.message ? bad : ok,
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.message && errors?.message
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
                   <div className="flex justify-between text-xs text-gray-500 mt-0.5">
@@ -802,12 +825,23 @@ message: form.message.trim(),
                   </div>
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
-                  className="w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition"
+                  disabled={status === "loading"}
+                  className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
+                    status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                  }`}
                 >
-                  Submit
+                  {status === "loading" ? "Submitting..." : "Submit"}
                 </button>
+
+                {/* Optional server error */}
+                {error && (
+                  <p className="text-red-600 text-xs mt-1">
+                    Submission failed: {String(error)}
+                  </p>
+                )}
               </form>
             </div>
           </div>
