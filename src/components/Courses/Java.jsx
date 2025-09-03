@@ -5,6 +5,8 @@
   import JavaSyllabus from "../coursecomponent/Javasyllabus";
   import Syllabus from "../coursecomponent/SyllabusLocked";
   import { SYLLABI } from "../coursecomponent/Syllabi";
+import { useDispatch, useSelector } from "react-redux";
+import { submitEnquiry } from "../../redux/actions/enquiryAction";
 
   const HEADER_OFFSET = 110; // adjust to your sticky header height
 
@@ -19,71 +21,193 @@
     const [mode, setMode] = useState("classroom");
     const course = SYLLABI.java;
     const [unlocked, setUnlocked] = useState(false);
-
+    const dispatch = useDispatch();
+    const { status, error } = useSelector((s) => s.enquiry || {});
     const syllabusRef = useRef(null);
-    const formRef = useRef(null);
-    const COURSE_OPTIONS = [
-      "Java",
-      "Python",
-      "Full Stack Development",
-      "PL/SQL",
-      "SQL",
-      "Data Science",
-      "Business Analytics",
-      "Data Science & AI",
-      "Big Data Developer",
-      "Software Testing",
-      "Selenium Testing",
-      "ETL Testing",
-      "AWS Training",
-      "DevOps",
-      "Hardware Networking",
-      "Cyber Security",
-      "SAP",
-      "Salesforce",
-      "ServiceNow",
-      "RPA (Robotic Process Automation)",
+    
+    
+
+    /* ===========================
+     FORM STATE + VALIDATION
+     =========================== */
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    
+    course: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
+  // Smooth scroll target
+  const formRef = useRef(null);
+  const scrollToForm = () => {
+    const el = formRef.current || document.getElementById("enquiry-form");
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
+  // Toast options
+  const toastOpts = {
+    position: "top-center",
+    transition: Slide,
+    autoClose: 2200,
+    hideProgressBar: true,
+    closeButton: false,
+    icon: false,
+    pauseOnHover: true,
+    draggable: false,
+    theme: "colored",
+  };
+
+  // helpers
+  const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+  const onlyLettersSpaces = (s) =>
+    s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
+  const digits10 = (s) => s.replace(/\D+/g, "").slice(0, 10);
+
+  const validateField = (name, value) => {
+    const v = (value ?? "").trim();
+    switch (name) {
+      case "name":
+        if (!v) return "Name is required.";
+        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
+        if (v.length < 2) return "Enter at least 2 characters.";
+        return null;
+      case "email":
+        if (!v) return "Email is required.";
+        if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v))
+          return "Enter a valid email (e.g., name@gmail.com).";
+        return null;
+      case "phone":
+        if (!v) return "Mobile number is required.";
+        if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
+        return null;
       
-      "Production Support",
-      "Digital Marketing",
-      "Soft Skill Training",
-      "Scrum Master",
-      "Business Analyst",
-      "Product Management",
-    ];
+      case "course":
+        if (!v) return "Course name is required.";
+        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
+        if (v.length < 2) return "Enter at least 2 characters.";
+        return null;
+      case "message":
+        if (!v) return "Message is required.";
+        if (v.length > 300) return "Max 300 characters.";
+        return null;
+      default:
+        return null;
+    }
+  };
 
-    // preselect current page's course if possible (matches words in course.title)
-    const preselectedCourse = React.useMemo(() => {
-      if (!course?.title) return "";
-      const lower = course.title.toLowerCase();
-      const match = COURSE_OPTIONS.find((opt) =>
-        lower.includes(opt.toLowerCase())
-      );
-      return match || "";
-    }, [course?.title]);
+  const setField = (name, value) => {
+    let v = value;
+    if (name === "name") v = capFirst(onlyLettersSpaces(value));
+    if (name === "course") v = capFirst(onlyLettersSpaces(value));
+    if (name === "phone") v = digits10(value);
+    if (name === "message") {
+      v = value.length ? value[0].toUpperCase() + value.slice(1) : value;
+      v = v.slice(0, 300);
+    }
 
-    const handleRequestUnlock = () => {
-      scrollToWithOffset(formRef); // go to form
+    setForm((prev) => ({ ...prev, [name]: v }));
+
+    const msg = validateField(name, v);
+    setErrors((prev) => {
+      const n = { ...prev };
+      if (msg) n[name] = msg;
+      else delete n[name];
+      return n;
+    });
+  };
+
+  const handleChange = (e) => setField(e.target.name, e.target.value);
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((t) => ({ ...t, [name]: true }));
+    const msg = validateField(name, form[name]);
+    setErrors((prev) => ({
+      ...prev,
+      ...(msg ? { [name]: msg } : { [name]: undefined }),
+    }));
+  };
+
+ async function handleSubmit(e) {
+    e.preventDefault();
+
+    // touch all
+    setTouched({
+      name: true,
+      email: true,
+      phone: true,
+
+      course: true,
+      message: true,
+    });
+
+    // validate all
+    const fields = ["name", "email", "phone", "course", "message"];
+    const next = {};
+    fields.forEach((f) => {
+      const er = validateField(f, form[f]);
+      if (er) next[f] = er;
+    });
+    setErrors(next);
+
+    if (Object.keys(next).length) {
+      const first = fields.find((f) => next[f]);
+      const el = document.querySelector(`[name="${first}"]`);
+      if (el) el.focus();
+      toast.error(next[first] || "Please fix the highlighted errors.", {
+        ...toastOpts,
+        style: { background: "#ef4444", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+      return;
+    }
+
+    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    const payload = {
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      name: form.name.trim(),
+      email: form.email.trim(),
+      mobile: form.phone.trim(), // API key is 'mobile'
+      course: form.course.trim(),
+      message: form.message.trim(),
+      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      // ...payload...
-      try {
-        // await fetch(...)
-      } finally {
-        setUnlocked(true);
-        e.currentTarget.reset();
+    try {
+      await dispatch(submitEnquiry(payload)).unwrap();
 
-        // wait for DOM to paint unlocked state, then scroll back up
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            scrollToWithOffset(syllabusRef);
-          });
-        });
-      }
-    };
+      toast.success("Thanks! Your enquiry has been recorded.", {
+        ...toastOpts,
+        style: { background: "#16a34a", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
 
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+
+        course: "",
+        message: "",
+      });
+      setErrors({});
+      setTouched({});
+    } catch (err) {
+      console.error(err);
+      const msg = typeof err === "string" ? err : "Submission failed.";
+      toast.error(msg, {
+        ...toastOpts,
+        style: { background: "#ef4444", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+    }
+  }
     return (
       <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
