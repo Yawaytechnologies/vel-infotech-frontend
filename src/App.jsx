@@ -13,6 +13,7 @@ import Footer from "./components/common/Footer";
 import Internship from "./pages/internship";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import BlogDetails from "./pages/BlogDetails";
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
 import Interview from "./pages/interview";
@@ -20,6 +21,7 @@ import About from "./pages/About";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import BlogBanner from "./pages/Blog";
 import Tutorials from "./pages/Tutorials";
+import TutorialDetail from "./pages/TutorialDetails";
 import InterviewDetail from "./pages/InterviewDetail";
 import ScrumMasterPage from "./components/Courses/ScrumMAster.jsx";
 import AddStudent from "./components/admin/AddStudent";
@@ -108,13 +110,13 @@ export default function App() {
           <Route path="/client" element={<Clientpage />} />
           <Route path="/internship" element={<Internship />} />
           <Route path="/Blog" element={<Blog />} />
-
+<Route path="/blog/:slug" element={<BlogDetails />} />
           {/* Tutorials */}
           <Route path="/tutorials" element={<Tutorials />} />
           {/* Aliases/redirects to be safe */}
           <Route path="/Tutorials" element={<Navigate to="/tutorials" replace />} />
           <Route path="/resources" element={<Navigate to="/tutorials" replace />} />
-
+          <Route path="/tutorials/:slug" element={<TutorialDetail />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
 
