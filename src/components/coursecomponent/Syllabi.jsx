@@ -169,6 +169,378 @@ export const SYLLABI = {
       },
     ],
   },
+  blockchain: {
+  title: "Blockchain Online Training — Syllabus",
+  accent: "#0E76A8",
+  meta: {
+    duration: "8–10 weeks",
+    audience: "Students, Developers, IT Professionals, Entrepreneurs",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Blockchain Fundamentals",
+    "Cryptography",
+    "Ethereum",
+    "Smart Contracts",
+    "Hyperledger Fabric",
+    "DApps",
+    "Consensus Mechanisms",
+    "IPFS",
+    "DeFi & NFTs",
+    "Blockchain Use Cases",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Blockchain",
+      items: [
+        "Blockchain overview & history",
+        "Distributed ledger technology",
+        "Blockchain vs traditional databases",
+        "Types of Blockchains (Public, Private, Consortium)",
+        "Real-world use cases",
+      ],
+    },
+    {
+      title: "Module 2: Cryptography & Security",
+      items: [
+        "Hash functions (SHA-256, Keccak256)",
+        "Public & private keys",
+        "Digital signatures",
+        "Merkle trees",
+        "Wallets & addresses",
+      ],
+    },
+    {
+      title: "Module 3: Blockchain Architecture",
+      items: [
+        "Blocks, transactions & mining",
+        "Consensus mechanisms (PoW, PoS, PoA, DPoS)",
+        "Forks (hard & soft forks)",
+        "Blockchain nodes & P2P network",
+      ],
+    },
+    {
+      title: "Module 4: Ethereum & Smart Contracts",
+      items: [
+        "Ethereum basics & accounts",
+        "Gas, transactions, and fees",
+        "Solidity programming",
+        "Building & deploying smart contracts",
+        "Remix IDE, Truffle, and Hardhat",
+      ],
+    },
+    {
+      title: "Module 5: Decentralized Applications (DApps)",
+      items: [
+        "DApp architecture",
+        "Web3.js & Ethers.js",
+        "Integrating smart contracts with frontend",
+        "MetaMask & Wallet integration",
+        "Building a sample DApp",
+      ],
+    },
+    {
+      title: "Module 6: Hyperledger Fabric",
+      items: [
+        "Hyperledger overview",
+        "Architecture & components (Peers, Orderers, CAs)",
+        "Chaincode development",
+        "Fabric SDKs",
+        "Use cases in enterprises",
+      ],
+    },
+    {
+      title: "Module 7: Advanced Blockchain Concepts",
+      items: [
+        "IPFS & decentralized storage",
+        "Oracles & external data integration",
+        "Layer 2 solutions (Polygon, Lightning Network)",
+        "DeFi protocols & applications",
+        "NFTs & Token standards (ERC-20, ERC-721, ERC-1155)",
+      ],
+    },
+    {
+      title: "Module 8: Blockchain Security & Best Practices",
+      items: [
+        "Common vulnerabilities in smart contracts",
+        "Reentrancy, overflow, front-running attacks",
+        "Audit tools (MythX, Slither)",
+        "Security guidelines for DApps",
+      ],
+    },
+    {
+      title: "Module 9: Blockchain Use Cases & Projects",
+      items: [
+        "Cryptocurrency platforms",
+        "Supply chain & healthcare",
+        "Fintech & banking",
+        "Voting & governance",
+        "Capstone project: End-to-end DApp",
+      ],
+    },
+  ],
+}
+,
+  azure: {
+  title: "Microsoft Azure Online Training — Syllabus",
+  accent: "#007FFF",
+  meta: {
+    duration: "8–10 weeks",
+    audience: "Students, IT Professionals & Cloud Enthusiasts",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Azure Fundamentals",
+    "Virtual Machines",
+    "Networking",
+    "Azure Storage",
+    "Azure Active Directory",
+    "Security & IAM",
+    "Azure DevOps",
+    "Monitoring",
+    "ARM Templates",
+    "Cloud Deployment",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Cloud & Azure",
+      items: [
+        "Cloud computing overview (IaaS, PaaS, SaaS)",
+        "Microsoft Azure ecosystem",
+        "Azure Portal & CLI basics",
+        "Azure Resource Manager (ARM)",
+      ],
+    },
+    {
+      title: "Module 2: Azure Virtual Machines & Compute",
+      items: [
+        "Creating and configuring Virtual Machines",
+        "VM images & sizes",
+        "Scaling & availability sets",
+        "Azure App Services",
+        "Container Instances & AKS basics",
+      ],
+    },
+    {
+      title: "Module 3: Azure Networking",
+      items: [
+        "Virtual Networks (VNets)",
+        "Subnets & IP addressing",
+        "Network Security Groups (NSGs)",
+        "Azure Load Balancer & Application Gateway",
+        "VPN Gateway & ExpressRoute",
+      ],
+    },
+    {
+      title: "Module 4: Azure Storage Solutions",
+      items: [
+        "Azure Storage Accounts",
+        "Blob, File, Queue & Table storage",
+        "Disk Storage",
+        "Data redundancy (LRS, ZRS, GRS)",
+        "Storage Explorer",
+      ],
+    },
+    {
+      title: "Module 5: Azure Identity & Access Management",
+      items: [
+        "Azure Active Directory (AAD)",
+        "Users, Groups & Roles",
+        "Role-Based Access Control (RBAC)",
+        "Multi-Factor Authentication (MFA)",
+        "Identity Protection & Conditional Access",
+      ],
+    },
+    {
+      title: "Module 6: Azure Security & Compliance",
+      items: [
+        "Azure Security Center",
+        "Key Vault for secrets & certificates",
+        "Encryption in Azure",
+        "Monitoring & audit logs",
+        "Governance: Policies & Blueprints",
+      ],
+    },
+    {
+      title: "Module 7: Databases in Azure",
+      items: [
+        "Azure SQL Database",
+        "Cosmos DB",
+        "Azure Database for MySQL & PostgreSQL",
+        "Scaling & replication",
+        "Database backup & restore",
+      ],
+    },
+    {
+      title: "Module 8: Monitoring & Management",
+      items: [
+        "Azure Monitor & Metrics",
+        "Log Analytics",
+        "Application Insights",
+        "Alerts & dashboards",
+        "Automation with Azure Runbooks",
+      ],
+    },
+    {
+      title: "Module 9: Azure DevOps & CI/CD",
+      items: [
+        "Introduction to Azure DevOps",
+        "Repos, Boards & Pipelines",
+        "Continuous Integration / Continuous Deployment",
+        "Infrastructure as Code (IaC) with ARM Templates",
+        "DevOps security & governance",
+      ],
+    },
+    {
+      title: "Module 10: Advanced Azure Services",
+      items: [
+        "Azure Kubernetes Service (AKS)",
+        "Serverless with Azure Functions",
+        "Event Grid & Service Bus",
+        "Logic Apps",
+        "AI & ML services integration",
+      ],
+    },
+    {
+      title: "Module 11: Real-World Projects & Capstone",
+      items: [
+        "Deploying multi-tier applications on Azure",
+        "Configuring secure hybrid networks",
+        "CI/CD pipeline setup with Azure DevOps",
+        "Monitoring & scaling real workloads",
+      ],
+    },
+  ],
+},
+
+  uxui: {
+  title: "UI/UX Online Training — Syllabus",
+  accent: "#7C3AED",
+  meta: {
+    duration: "8–10 weeks",
+    audience: "Students, Designers, Developers, and Working Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Design Thinking",
+    "User Research",
+    "Wireframing",
+    "Prototyping",
+    "Figma & Adobe XD",
+    "UI Principles",
+    "Accessibility",
+    "Usability Testing",
+    "Design Systems",
+    "Portfolio Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to UI/UX",
+      items: [
+        "What is UX vs UI?",
+        "Importance of human-centered design",
+        "Design process & industry workflows",
+        "Roles & responsibilities of UX/UI designers",
+      ],
+    },
+    {
+      title: "Module 2: Design Thinking & Research",
+      items: [
+        "Understanding design thinking",
+        "Empathy mapping & user personas",
+        "User research techniques (interviews, surveys)",
+        "Defining user journeys & pain points",
+      ],
+    },
+    {
+      title: "Module 3: Information Architecture",
+      items: [
+        "Card sorting & content organization",
+        "Site maps & navigation structures",
+        "Hierarchy & labeling systems",
+      ],
+    },
+    {
+      title: "Module 4: Wireframing",
+      items: [
+        "Low-fidelity vs high-fidelity wireframes",
+        "Sketching layouts",
+        "Wireframing tools (Figma, Adobe XD, Balsamiq)",
+        "Responsive design wireframes",
+      ],
+    },
+    {
+      title: "Module 5: Visual Design & UI Principles",
+      items: [
+        "Typography & color theory",
+        "Layouts, grids, and spacing",
+        "Icons & imagery",
+        "UI design patterns",
+        "Designing for mobile vs web",
+      ],
+    },
+    {
+      title: "Module 6: Prototyping",
+      items: [
+        "Creating interactive prototypes",
+        "Micro-interactions & animations",
+        "Figma prototyping features",
+        "Collaboration & feedback loops",
+      ],
+    },
+    {
+      title: "Module 7: Usability & Accessibility",
+      items: [
+        "Heuristic evaluation",
+        "Usability testing methods",
+        "Accessibility guidelines (WCAG, ARIA)",
+        "Inclusive design principles",
+      ],
+    },
+    {
+      title: "Module 8: Design Systems & Tools",
+      items: [
+        "What is a design system?",
+        "Components, tokens, and guidelines",
+        "Building reusable UI kits",
+        "Team collaboration in Figma/Adobe XD",
+      ],
+    },
+    {
+      title: "Module 9: UX Writing & Microcopy",
+      items: [
+        "Role of content in UX",
+        "Writing effective microcopy",
+        "Error messages, CTAs, onboarding text",
+      ],
+    },
+    {
+      title: "Module 10: UX for Emerging Tech",
+      items: [
+        "Designing for mobile-first",
+        "Design for AR/VR basics",
+        "UX in AI-driven products",
+        "Voice & conversational UI",
+      ],
+    },
+    {
+      title: "Module 11: Portfolio & Projects",
+      items: [
+        "Case study preparation",
+        "End-to-end UX project (research → prototype)",
+        "Presenting design decisions",
+        "Building a designer portfolio",
+      ],
+    },
+  ],
+}
+,
     python: {
     title: "Python Online Training — Syllabus",
     accent: "#005BAC", // Python blue

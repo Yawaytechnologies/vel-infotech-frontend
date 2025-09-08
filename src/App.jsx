@@ -57,6 +57,9 @@ import SampleResume from "./pages/SampleResume";
 import Whatsapp from "./components/common/Whatsapp";
 import ProductManagement from "./components/Courses/ProductManagement";
 import BusinessAnalyst from "./components/Courses/BusinessAnalyst";
+import UIUXPage from "./components/Courses/UIUX";
+import AzureCoursePage from "./components/Courses/AzureTraining";
+import BlockchainCoursePage from "./components/Courses/BlockChain";
 // Wrapper to use useLocation
 function Layout({ children }) {
   const location = useLocation();
@@ -146,6 +149,9 @@ export default function App() {
           <Route path="/all-courses/ProductionSupport" element={<ProductionSupportPage />} />
           <Route path="/all-courses/DigitalMarketing" element={<DigitalMarketingPage />} />
           <Route path="/all-courses/SoftSkillsTraining" element={<SoftSkillPage />} />
+          <Route path="/all-courses/UIUXTraining" element={<UIUXPage />} />
+          <Route path="/all-courses/AzureTraining" element={<AzureCoursePage />} />
+          <Route path="/all-courses/BlockchainTraining" element={<BlockchainCoursePage />} />
 
           {/* Admin routes */}
           <Route path="/admin" element={<AdminLayout />}>

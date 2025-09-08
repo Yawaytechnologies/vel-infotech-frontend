@@ -6,7 +6,20 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Syllabus from "../coursecomponent/SyllabusLocked";
 import { SYLLABI } from "../coursecomponent/Syllabi";
-export default function DataScienceCoursePage() {
+export default function DataScience() {
+  const audience = [
+    "Non IT to IT", 
+"From Any Degree to IT Job",
+"Any passed out to IT Job", 
+"Any Domain to IT Job" 
+
+];
+ const images = [
+    "/images/training1.jpg",
+    "/images/training2.jpg",
+    "/images/training3.jpg",
+    "/images/training4.jpg",
+  ];
   const [mode, setMode] = useState("classroom");
   const course = SYLLABI.datascience;
   /* ===========================
@@ -653,6 +666,63 @@ export default function DataScienceCoursePage() {
           </div>
         </div>
       </section>
+      <section className="py-10 px-6">
+      <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
+        Who Should Take a Data Analytics Course:
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+        {audience.map((item, idx) => (
+          <div
+            key={idx}
+            className="bg-white text-black shadow-md rounded-xl p-4 flex items-center font-medium text-lg border-l-4"
+            style={{
+              borderImage: "linear-gradient(to bottom, #4f46e5, #ec4899) 1",
+            }}
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+    </section>
+     <section className="py-16 px-6 bg-white">
+      {/* Title */}
+      <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-6">
+        Hands-On Training
+      </h2>
+
+      {/* Description */}
+      <p className="text-center max-w-5xl mx-auto text-gray-600 mb-12 leading-relaxed">
+        Our <span className="font-bold text-gray-900">Data Analytics Course</span> includes
+        extensive hands-on training to ensure you gain practical experience with real-world data in
+        Chennai. You’ll work on live projects, case studies, and simulations that mirror industry
+        challenges. This hands-on approach helps you apply theoretical knowledge to practical
+        scenarios, making you job-ready from day one.
+      </p>
+
+      {/* Images Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {images.map((src, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: idx * 0.1 }}
+            whileHover={{ scale: 1.05 }}
+            className="bg-white shadow-md rounded-xl overflow-hidden border-l-4 border-solid"
+            style={{
+              borderImage: "linear-gradient(to bottom, #4f46e5, #ec4899) 1",
+            }}
+          >
+            <img
+              src={src}
+              alt={`Training ${idx + 1}`}
+              className="w-full h-56 object-cover"
+            />
+          </motion.div>
+        ))}
+      </div>
+    </section>
 
       {/* Toast container */}
       <ToastContainer

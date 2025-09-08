@@ -11,7 +11,7 @@ import { SYLLABI } from "../coursecomponent/Syllabi";
 // import { clearEnquiryError } from "../../redux/actions/enquiryAction";
 
 
-export default function ScrumMaster() {
+export default function BusinessAnalyst() {
   const [mode, setMode] = useState("classroom");
   const course = SYLLABI.businessanalyst;
 //   const dispatch = useDispatch();
@@ -188,6 +188,23 @@ message: form.message.trim(),
     "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500";
   const ok = "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]";
   const bad = "border-red-500 focus:border-red-500 focus:ring-red-500";
+
+  const audience = [
+  "Recent Graduates",
+  "Business Analysts",
+  "Career Gap Professionals",
+  "Entrepreneurs",
+  "Students",
+  "Business Owners",
+  "IT Professionals",
+  "Non-IT to IT Transitioners",
+];
+ const images = [
+    "/images/training1.jpg",
+    "/images/training2.jpg",
+    "/images/training3.jpg",
+    "/images/training4.jpg",
+  ];
 
   return (
     <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
@@ -813,6 +830,8 @@ message: form.message.trim(),
           </div>
         </div>
       </section>
+      
+       
 
       {/* Toasts */}
       <ToastContainer
