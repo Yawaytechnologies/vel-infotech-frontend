@@ -416,6 +416,246 @@ export const SYLLABI = {
     },
   ],
 },
+vmware: {
+  title: "VMware Online Training — Syllabus",
+  accent: "#607D8B",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "IT Professionals, System Administrators, Cloud Engineers",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to Virtualization",
+    "VMware vSphere & ESXi",
+    "vCenter Server",
+    "Networking & Storage",
+    "vMotion & High Availability",
+    "Resource Management",
+    "Snapshots & Cloning",
+    "Security & Permissions",
+    "Backup & Recovery",
+    "Real-world Labs & Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Virtualization",
+      items: [
+        "What is virtualization?",
+        "Types of virtualization (server, network, storage)",
+        "VMware product suite overview",
+        "Use cases & benefits of VMware",
+      ],
+    },
+    {
+      title: "Module 2: VMware vSphere & ESXi",
+      items: [
+        "Introduction to vSphere architecture",
+        "Installing & configuring ESXi hosts",
+        "VMware tools installation",
+        "Creating and managing virtual machines",
+      ],
+    },
+    {
+      title: "Module 3: vCenter Server",
+      items: [
+        "Deploying vCenter Server",
+        "Managing ESXi hosts & VMs via vCenter",
+        "User roles & permissions",
+        "Monitoring & performance tracking",
+      ],
+    },
+    {
+      title: "Module 4: Networking in VMware",
+      items: [
+        "Standard vs Distributed Switches",
+        "Configuring virtual switches",
+        "NIC teaming & VLANs",
+        "Network security policies",
+      ],
+    },
+    {
+      title: "Module 5: Storage in VMware",
+      items: [
+        "VMware storage concepts",
+        "Datastores & storage provisioning",
+        "iSCSI, NFS & Fibre Channel storage",
+        "Storage vMotion & datastore clusters",
+      ],
+    },
+    {
+      title: "Module 6: VM Management",
+      items: [
+        "Snapshots & cloning VMs",
+        "Templates for VM deployment",
+        "VM migration techniques",
+        "Resource pools & clusters",
+      ],
+    },
+    {
+      title: "Module 7: High Availability & Scalability",
+      items: [
+        "vMotion & Storage vMotion",
+        "VMware High Availability (HA)",
+        "Fault Tolerance (FT)",
+        "Distributed Resource Scheduler (DRS)",
+      ],
+    },
+    {
+      title: "Module 8: Security & Permissions",
+      items: [
+        "User authentication & roles",
+        "VM encryption",
+        "VMware security hardening guidelines",
+        "Audit & compliance in VMware environments",
+      ],
+    },
+    {
+      title: "Module 9: Backup & Recovery",
+      items: [
+        "VMware Data Protection",
+        "Snapshots vs Backups",
+        "Disaster recovery planning",
+        "Third-party backup tools (Veeam, Commvault)",
+      ],
+    },
+    {
+      title: "Module 10: Real-World Projects & Labs",
+      items: [
+        "Deploying and managing a VMware virtual lab",
+        "Configuring HA & DRS clusters",
+        "Simulating disaster recovery scenarios",
+        "Performance tuning & optimization",
+      ],
+    },
+  ],
+}
+,
+dataAnalyst: {
+  title: "Data Analyst Online Training — Syllabus",
+  accent: "#005BAC",
+  meta: {
+    duration: "10–12 weeks",
+    audience: "Students, Graduates, Working Professionals & Career Switchers",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Excel for Data Analysis",
+    "SQL & Databases",
+    "Python for Analytics",
+    "Data Cleaning & Wrangling",
+    "Data Visualization",
+    "Power BI & Tableau",
+    "Statistics & Hypothesis Testing",
+    "Exploratory Data Analysis",
+    "Capstone Projects",
+    "Career Preparation",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Data Analytics",
+      items: [
+        "What is Data Analytics?",
+        "Types of Analytics: Descriptive, Diagnostic, Predictive, Prescriptive",
+        "Data Analytics Lifecycle",
+        "Key skills & career paths",
+      ],
+    },
+    {
+      title: "Module 2: Excel for Data Analysis",
+      items: [
+        "Excel basics & shortcuts",
+        "Data cleaning & formatting",
+        "Pivot tables & pivot charts",
+        "Lookup & reference functions (VLOOKUP, HLOOKUP, XLOOKUP)",
+        "Data validation & what-if analysis",
+      ],
+    },
+    {
+      title: "Module 3: SQL & Databases",
+      items: [
+        "Introduction to RDBMS & ER diagrams",
+        "SQL queries: SELECT, WHERE, ORDER BY",
+        "Joins, subqueries & aggregations",
+        "Stored procedures & functions",
+        "Working with real-world databases",
+      ],
+    },
+    {
+      title: "Module 4: Python for Data Analysis",
+      items: [
+        "Python basics: data types, loops, functions",
+        "Data manipulation with Pandas & NumPy",
+        "Exploratory Data Analysis (EDA)",
+        "Data visualization with Matplotlib & Seaborn",
+        "Working with CSV, Excel & APIs",
+      ],
+    },
+    {
+      title: "Module 5: Data Cleaning & Wrangling",
+      items: [
+        "Handling missing & duplicate values",
+        "Data transformations",
+        "Encoding categorical variables",
+        "Merging & joining datasets",
+        "Outlier detection & treatment",
+      ],
+    },
+    {
+      title: "Module 6: Data Visualization & BI Tools",
+      items: [
+        "Principles of data visualization",
+        "Power BI dashboards & DAX functions",
+        "Tableau: charts, filters & storytelling",
+        "Connecting BI tools to SQL & Excel",
+        "Interactive reporting for decision-making",
+      ],
+    },
+    {
+      title: "Module 7: Statistics for Data Analytics",
+      items: [
+        "Descriptive vs inferential statistics",
+        "Probability distributions",
+        "Hypothesis testing & p-values",
+        "Correlation & regression analysis",
+        "A/B testing & real-world case studies",
+      ],
+    },
+    {
+      title: "Module 8: Advanced Analytics Concepts",
+      items: [
+        "Introduction to machine learning for analysts",
+        "Predictive modeling basics",
+        "Clustering & classification overview",
+        "Feature engineering",
+        "Limitations of analytics & ethical concerns",
+      ],
+    },
+    {
+      title: "Module 9: Capstone Projects",
+      items: [
+        "Analyzing sales & marketing datasets",
+        "Customer segmentation dashboard",
+        "Financial performance reporting",
+        "End-to-end EDA with Python & SQL",
+      ],
+    },
+    {
+      title: "Module 10: Career Preparation",
+      items: [
+        "Building a data analytics portfolio",
+        "Resume & LinkedIn profile optimization",
+        "Mock interviews & aptitude tests",
+        "Common data analyst interview questions",
+        "Job placement guidance",
+      ],
+    },
+  ],
+}
+,
 
   uxui: {
   title: "UI/UX Online Training — Syllabus",
@@ -2899,6 +3139,2482 @@ export const SYLLABI = {
       },
     ],
   },
+
+  snowflake: {
+  title: "Snowflake Online Training — Syllabus",
+  accent: "#29B5E8",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "Students, Data Analysts, Data Engineers, BI Developers, Cloud Professionals",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to Cloud Data Warehousing",
+    "Snowflake Architecture",
+    "Virtual Warehouses",
+    "Databases & Schemas",
+    "Loading & Unloading Data",
+    "Snowflake SQL",
+    "Time Travel & Cloning",
+    "Security & Access Control",
+    "Performance Optimization",
+    "Integration & BI Tools",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Data Warehousing & Snowflake",
+      items: [
+        "Overview of cloud data warehousing",
+        "Snowflake features & benefits",
+        "Snowflake editions & pricing",
+        "Understanding multi-cluster shared data architecture",
+      ],
+    },
+    {
+      title: "Module 2: Snowflake Architecture & Ecosystem",
+      items: [
+        "Snowflake layers: Storage, Compute, Cloud Services",
+        "Virtual Warehouses & Scaling",
+        "Databases, Schemas, and Objects",
+        "Snowflake on AWS, Azure, and GCP",
+      ],
+    },
+    {
+      title: "Module 3: Working with Snowflake",
+      items: [
+        "Creating users, roles, and warehouses",
+        "Creating and managing databases & schemas",
+        "Loading data into Snowflake (COPY INTO, Snowpipe)",
+        "Unloading data from Snowflake",
+      ],
+    },
+    {
+      title: "Module 4: Snowflake SQL Essentials",
+      items: [
+        "DML & DDL operations",
+        "Joins, aggregations & window functions",
+        "Working with semi-structured data (JSON, Avro, Parquet)",
+        "Stored procedures & user-defined functions",
+      ],
+    },
+    {
+      title: "Module 5: Advanced Features",
+      items: [
+        "Time Travel & Data Recovery",
+        "Cloning databases & tables",
+        "Zero-Copy Cloning",
+        "Data Sharing & Marketplace",
+      ],
+    },
+    {
+      title: "Module 6: Security & Access Control",
+      items: [
+        "Role-Based Access Control (RBAC)",
+        "Encryption & key management",
+        "Network policies & multi-factor authentication",
+        "Data masking & governance",
+      ],
+    },
+    {
+      title: "Module 7: Performance Optimization",
+      items: [
+        "Clustering & partitioning",
+        "Query optimization techniques",
+        "Caching in Snowflake",
+        "Resource monitoring",
+      ],
+    },
+    {
+      title: "Module 8: Integration & BI Tools",
+      items: [
+        "Snowflake connectors (Python, Spark, JDBC/ODBC)",
+        "Integration with ETL tools (Informatica, Talend, Matillion)",
+        "Using Snowflake with Power BI & Tableau",
+        "Data pipelines with Kafka & AWS/GCP/Azure services",
+      ],
+    },
+    {
+      title: "Module 9: Real-World Projects & Capstone",
+      items: [
+        "Designing a data warehouse in Snowflake",
+        "Building a real-time analytics pipeline",
+        "Data visualization with BI tools",
+        "Optimizing costs & performance",
+      ],
+    },
+    {
+      title: "Module 10: Career Preparation",
+      items: [
+        "Resume & portfolio building",
+        "Common Snowflake interview questions",
+        "Mock interviews & assessments",
+        "Job placement support",
+      ],
+    },
+  ],
+}
+,
+awsSolutionArchitect: {
+  title: "AWS Solutions Architect Training — Syllabus",
+  accent:  "#29B5E8",
+  meta: {
+    duration: "8–12 weeks",
+    audience: "Aspiring Cloud Architects, Developers, IT Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom / Hybrid",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "AWS Cloud Fundamentals",
+    "Compute, Storage & Networking Services",
+    "Security & IAM",
+    "Databases on AWS",
+    "High Availability & Scalability",
+    "Cost Optimization & Monitoring",
+    "Serverless Architectures",
+    "Infrastructure as Code",
+    "Disaster Recovery & Backup Strategies",
+    "Capstone Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to AWS Cloud",
+      items: [
+        "Overview of Cloud Computing & AWS",
+        "AWS Global Infrastructure",
+        "Regions, Availability Zones, and Edge Locations",
+        "AWS Management Console & CLI Basics",
+        "Identity and Access Management (IAM) fundamentals",
+      ],
+    },
+    {
+      title: "Module 2: Compute Services",
+      items: [
+        "EC2 instances, types, and lifecycle management",
+        "Elastic Load Balancer (ELB) & Auto Scaling",
+        "Serverless computing with AWS Lambda",
+        "Container services: ECS & EKS basics",
+      ],
+    },
+    {
+      title: "Module 3: Storage & Content Delivery",
+      items: [
+        "S3 buckets, storage classes, and lifecycle policies",
+        "EBS, EFS, and Glacier",
+        "CloudFront for content delivery",
+        "Storage security & encryption",
+      ],
+    },
+    {
+      title: "Module 4: Networking & Security",
+      items: [
+        "Virtual Private Cloud (VPC) setup and configuration",
+        "Subnets, route tables, NAT Gateways, and Internet Gateways",
+        "Security groups, NACLs, and network ACLs",
+        "AWS Key Management Service (KMS) & CloudTrail",
+      ],
+    },
+    {
+      title: "Module 5: Databases on AWS",
+      items: [
+        "Amazon RDS & Aurora",
+        "DynamoDB (NoSQL)",
+        "Redshift for data warehousing",
+        "Database backup, restore, and replication strategies",
+      ],
+    },
+    {
+      title: "Module 6: High Availability & Scalability",
+      items: [
+        "Elastic Load Balancing & Auto Scaling",
+        "Multi-AZ deployments",
+        "Designing fault-tolerant architectures",
+        "Caching strategies with ElastiCache",
+      ],
+    },
+    {
+      title: "Module 7: Cost Optimization & Monitoring",
+      items: [
+        "AWS Cost Explorer & Trusted Advisor",
+        "Monitoring with CloudWatch",
+        "Billing and budgeting best practices",
+        "Resource tagging and cost allocation",
+      ],
+    },
+    {
+      title: "Module 8: Serverless Architectures & Event-Driven Design",
+      items: [
+        "AWS Lambda functions & triggers",
+        "API Gateway integration",
+        "Event-driven architecture with SNS & SQS",
+        "Step Functions for workflow automation",
+      ],
+    },
+    {
+      title: "Module 9: Infrastructure as Code (IaC)",
+      items: [
+        "AWS CloudFormation templates",
+        "AWS CDK overview",
+        "Automation of deployments",
+        "Version control & CI/CD integration",
+      ],
+    },
+    {
+      title: "Module 10: Disaster Recovery & Backup Strategies",
+      items: [
+        "Backup strategies using S3, Glacier, and RDS snapshots",
+        "Cross-region replication",
+        "Recovery Time Objective (RTO) & Recovery Point Objective (RPO)",
+        "Disaster recovery best practices",
+      ],
+    },
+    {
+      title: "Module 11: Capstone Projects",
+      items: [
+        "Design and deploy a highly available web application",
+        "Implement a serverless event-driven data pipeline",
+        "Cost-optimized cloud architecture project",
+        "Presentation of end-to-end AWS solution design",
+      ],
+    },
+  ],
+}
+,
+iotTesting: {
+  title: "IoT Testing Online Training — Syllabus",
+  accent: "#29B5E8",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "Students, QA Professionals & IoT Enthusiasts",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to IoT",
+    "IoT Architecture & Protocols",
+    "Functional Testing of IoT Devices",
+    "Connectivity & Network Testing",
+    "Performance Testing",
+    "Security Testing",
+    "Interoperability Testing",
+    "Tools & Automation",
+    "Real-World Projects & Capstone",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to IoT & IoT Ecosystem",
+      items: [
+        "Overview of IoT and its applications",
+        "IoT architecture layers (Perception, Network, Application)",
+        "Common IoT devices, sensors, and actuators",
+        "IoT communication protocols: MQTT, CoAP, HTTP, Bluetooth, Zigbee, LoRa",
+      ],
+    },
+    {
+      title: "Module 2: Functional Testing of IoT Devices",
+      items: [
+        "Device connectivity and data acquisition",
+        "Sensor accuracy and actuator response testing",
+        "Firmware and software validation",
+        "Mobile & web application testing for IoT",
+      ],
+    },
+    {
+      title: "Module 3: Connectivity & Network Testing",
+      items: [
+        "Testing Wi-Fi, Bluetooth, Zigbee, LoRa, 5G connections",
+        "Latency, throughput, and packet loss analysis",
+        "Connectivity failover and recovery scenarios",
+      ],
+    },
+    {
+      title: "Module 4: Performance Testing",
+      items: [
+        "Load testing IoT devices and applications",
+        "Stress testing under extreme conditions",
+        "Response time and throughput analysis",
+      ],
+    },
+    {
+      title: "Module 5: Security Testing",
+      items: [
+        "Authentication and authorization testing",
+        "Data encryption and privacy",
+        "Vulnerability assessment and penetration testing",
+      ],
+    },
+    {
+      title: "Module 6: Interoperability Testing",
+      items: [
+        "Cross-platform testing (Android/iOS/Web)",
+        "Cloud integration and API testing",
+        "Protocol compatibility testing",
+      ],
+    },
+    {
+      title: "Module 7: Tools & Automation in IoT Testing",
+      items: [
+        "Postman, MQTT Lens, Wireshark",
+        "Selenium for IoT web interfaces",
+        "JMeter for load testing",
+        "IoTIFY and other IoT simulation tools",
+      ],
+    },
+    {
+      title: "Module 8: Real-World Projects & Capstone",
+      items: [
+        "Smart Home device testing",
+        "Wearable device analytics testing",
+        "Industrial IoT sensor network testing",
+        "End-to-end IoT testing scenarios",
+      ],
+    },
+  ],
+}
+,
+coreJava: {
+  title: "Core Java Training — Syllabus",
+  accent: "#005BAC",
+  meta: {
+    duration: "8–10 weeks",
+    audience: "Beginners & Working Professionals",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Java Basics",
+    "OOP Concepts",
+    "Collections Framework",
+    "Exception Handling",
+    "File I/O",
+    "Multithreading",
+    "JDBC",
+    "Java 8 Features",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Java",
+      items: [
+        "Overview of Java & JDK/JRE/JVM",
+        "Java Program Structure",
+        "Data types, Variables & Operators",
+        "Control Statements: if, switch, loops",
+      ],
+    },
+    {
+      title: "Module 2: Object-Oriented Programming in Java",
+      items: [
+        "Classes & Objects",
+        "Constructors (Default & Parameterized)",
+        "Methods, Method Overloading",
+        "Inheritance, Polymorphism, Encapsulation, Abstraction",
+        "Abstract & Final classes",
+      ],
+    },
+    {
+      title: "Module 3: Packages & Interfaces",
+      items: [
+        "Creating & Using Packages",
+        "Java Built-in Packages",
+        "Interfaces & Multiple Inheritance",
+        "Access Specifiers: public, private, protected, default",
+      ],
+    },
+    {
+      title: "Module 4: Exception Handling & File I/O",
+      items: [
+        "Types of Exceptions",
+        "try, catch, finally, throw, throws",
+        "Custom Exceptions",
+        "File Handling: FileReader, FileWriter",
+        "Serialization & Deserialization",
+      ],
+    },
+    {
+      title: "Module 5: Java Collections Framework",
+      items: [
+        "Overview of Collections",
+        "List, Set, Map Interfaces",
+        "ArrayList, LinkedList, HashSet, TreeSet, HashMap, Hashtable",
+        "Iterators & Traversal",
+      ],
+    },
+    {
+      title: "Module 6: Multithreading & Concurrency",
+      items: [
+        "Creating Threads (Thread class & Runnable interface)",
+        "Thread Lifecycle",
+        "Synchronization & Locks",
+        "Inter-thread Communication",
+      ],
+    },
+    {
+      title: "Module 7: JDBC (Java Database Connectivity)",
+      items: [
+        "Introduction to JDBC & Drivers",
+        "Connecting to Database",
+        "CRUD Operations (Insert, Update, Delete, Select)",
+        "PreparedStatement & ResultSet",
+      ],
+    },
+    {
+      title: "Module 8: Advanced Java Features",
+      items: [
+        "Generics & Collections in Java 8",
+        "Lambda Expressions",
+        "Streams API",
+        "Date & Time API",
+      ],
+    },
+    {
+      title: "Module 9: Project / Capstone",
+      items: [
+        "End-to-end Java project",
+        "Implementing OOP concepts",
+        "Database Integration using JDBC",
+        "Exception Handling & Multithreading",
+      ],
+    },
+  ],
+}
+,
+j2ee: {
+  title: "J2EE Online Training — Syllabus",
+  accent: "#005BAC",
+  meta: {
+    duration: "10–12 weeks",
+    audience: "Students & Working Professionals",
+    level: "Intermediate → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Servlets",
+    "JSP",
+    "EJB",
+    "JDBC",
+    "JPA/Hibernate",
+    "Spring Framework",
+    "Web Services",
+    "Struts / MVC",
+    "Design Patterns",
+  ],
+  sections: [
+    {
+      title: "Module 1: J2EE Introduction",
+      items: [
+        "Overview of J2EE Architecture",
+        "J2EE vs Core Java",
+        "Enterprise Applications & Use Cases",
+        "J2EE Containers (Web & EJB)",
+      ],
+    },
+    {
+      title: "Module 2: Servlets",
+      items: [
+        "Introduction to Servlets",
+        "Servlet Lifecycle",
+        "HttpServlet & GenericServlet",
+        "RequestDispatcher (Forward & Include)",
+        "Session Management (Cookies, HttpSession, URL Rewriting)",
+        "Filters & Listeners",
+      ],
+    },
+    {
+      title: "Module 3: JSP (Java Server Pages)",
+      items: [
+        "Introduction to JSP",
+        "JSP Architecture & Life Cycle",
+        "Scriptlets, Declarations, Expressions",
+        "Directives & Implicit Objects",
+        "JSP with JDBC",
+        "Error Handling & Custom Tags",
+      ],
+    },
+    {
+      title: "Module 4: EJB (Enterprise Java Beans)",
+      items: [
+        "Introduction to EJB",
+        "Types: Session, Message-Driven, Entity Beans",
+        "EJB Lifecycle & Deployment",
+        "EJB with JPA/Hibernate Integration",
+      ],
+    },
+    {
+      title: "Module 5: JDBC & Database Integration",
+      items: [
+        "JDBC Architecture",
+        "Connecting to Databases",
+        "CRUD Operations",
+        "Prepared Statements & Transactions",
+        "Connection Pooling",
+      ],
+    },
+    {
+      title: "Module 6: Spring Framework",
+      items: [
+        "Introduction to Spring",
+        "IoC & Dependency Injection",
+        "Spring MVC Overview",
+        "Spring JDBC & ORM Integration",
+        "Transaction Management",
+      ],
+    },
+    {
+      title: "Module 7: Web Services",
+      items: [
+        "Introduction to Web Services",
+        "SOAP & RESTful Services",
+        "JAX-WS & JAX-RS Implementation",
+        "Consuming Web Services in Java",
+      ],
+    },
+    {
+      title: "Module 8: Struts & MVC Design Pattern",
+      items: [
+        "Introduction to Struts Framework",
+        "Struts Configuration & Action Classes",
+        "Form Beans & Validation",
+        "MVC Design Pattern in J2EE",
+      ],
+    },
+    {
+      title: "Module 9: Advanced J2EE Concepts",
+      items: [
+        "Security in J2EE Applications",
+        "Design Patterns in Enterprise Applications",
+        "Caching & Performance Optimization",
+        "Best Practices in J2EE Development",
+      ],
+    },
+    {
+      title: "Module 10: Capstone Project",
+      items: [
+        "Develop a full-fledged enterprise application",
+        "Use Servlets, JSP, EJB, Spring & JDBC",
+        "Integrate Web Services",
+        "Apply MVC & Design Patterns",
+      ],
+    },
+  ],
+}
+,
+springboot: {
+  title: "Spring Boot Online Training — Syllabus",
+  accent: "#6DB33F",
+  meta: {
+    duration: "8–10 weeks",
+    audience: "Students & Working Professionals",
+    level: "Intermediate → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Spring Boot Basics",
+    "Spring MVC",
+    "Dependency Injection",
+    "JPA & Hibernate",
+    "RESTful APIs",
+    "Security",
+    "Microservices",
+    "Spring Data",
+    "Testing & Debugging",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Spring Boot",
+      items: [
+        "Overview of Spring Framework & Spring Boot",
+        "Spring Boot Architecture",
+        "Spring Boot Starter Projects",
+        "Spring Boot Annotations & Configuration",
+      ],
+    },
+    {
+      title: "Module 2: Spring Core Concepts",
+      items: [
+        "Dependency Injection & Inversion of Control (IoC)",
+        "Bean Scopes & Lifecycle",
+        "Application Context & Configuration",
+      ],
+    },
+    {
+      title: "Module 3: Spring MVC",
+      items: [
+        "Introduction to Spring MVC",
+        "Controllers, Models, Views",
+        "Form Handling & Validation",
+        "Request Mapping & URL Handling",
+      ],
+    },
+    {
+      title: "Module 4: RESTful Web Services",
+      items: [
+        "Introduction to REST & RESTful APIs",
+        "Building REST APIs with Spring Boot",
+        "HTTP Methods, Status Codes, & CRUD Operations",
+        "Exception Handling & ResponseEntity",
+      ],
+    },
+    {
+      title: "Module 5: Data Persistence with JPA & Hibernate",
+      items: [
+        "Introduction to JPA & Hibernate",
+        "Entity, Repository & DTO",
+        "CRUD Operations with Spring Data JPA",
+        "Query Methods & JPQL",
+        "Database Transactions & Relationships",
+      ],
+    },
+    {
+      title: "Module 6: Spring Security",
+      items: [
+        "Introduction to Spring Security",
+        "Authentication & Authorization",
+        "JWT & OAuth2",
+        "Role-based Access Control",
+        "Secure REST APIs",
+      ],
+    },
+    {
+      title: "Module 7: Microservices with Spring Boot",
+      items: [
+        "Introduction to Microservices Architecture",
+        "Spring Boot for Microservices",
+        "Service Registration & Discovery (Eureka)",
+        "API Gateway & Routing",
+        "Inter-service Communication (REST & Feign Client)",
+      ],
+    },
+    {
+      title: "Module 8: Testing in Spring Boot",
+      items: [
+        "Unit Testing with JUnit & Mockito",
+        "Integration Testing",
+        "Test REST APIs",
+        "Debugging & Logging",
+      ],
+    },
+    {
+      title: "Module 9: Deployment & DevOps Basics",
+      items: [
+        "Packaging Spring Boot Applications",
+        "Deploying to Cloud (AWS/Azure/Heroku)",
+        "Dockerizing Spring Boot Apps",
+        "Application Monitoring & Performance Tuning",
+      ],
+    },
+    {
+      title: "Module 10: Capstone Project",
+      items: [
+        "Develop a full-fledged Spring Boot application",
+        "Use REST APIs, JPA/Hibernate, and Spring Security",
+        "Implement Microservices architecture",
+        "Apply best practices & deploy to cloud",
+      ],
+    },
+  ],
+}
+,
+hibernate: {
+  title: "Hibernate Online Training — Syllabus",
+  accent: "#6C63FF",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "Students & Working Professionals",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Hibernate Basics",
+    "ORM Concepts",
+    "Entity Mapping",
+    "Relationships",
+    "HQL & JPQL",
+    "Caching",
+    "Transactions",
+    "Spring Integration",
+    "Testing & Deployment",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Hibernate",
+      items: [
+        "Overview of Hibernate & ORM",
+        "Advantages over JDBC",
+        "Architecture & Core Components",
+        "Setup & Configuration",
+      ],
+    },
+    {
+      title: "Module 2: Hibernate Mapping",
+      items: [
+        "Mapping POJOs to Database Tables",
+        "Primary Keys & Identifiers",
+        "Column Mapping & Constraints",
+        "Auto-generation Strategies",
+      ],
+    },
+    {
+      title: "Module 3: Relationships in Hibernate",
+      items: [
+        "One-to-One Mapping",
+        "One-to-Many Mapping",
+        "Many-to-One Mapping",
+        "Many-to-Many Mapping",
+        "Cascading & Fetch Types",
+      ],
+    },
+    {
+      title: "Module 4: Hibernate Query Language (HQL)",
+      items: [
+        "Introduction to HQL",
+        "CRUD Operations using HQL",
+        "Named Queries & Parameter Binding",
+        "Pagination & Sorting",
+      ],
+    },
+    {
+      title: "Module 5: Criteria API & Native SQL",
+      items: [
+        "Criteria API for Dynamic Queries",
+        "Restrictions & Projections",
+        "Native SQL Queries",
+        "Query Caching",
+      ],
+    },
+    {
+      title: "Module 6: Transactions & Concurrency",
+      items: [
+        "Transaction Management",
+        "ACID Properties",
+        "Optimistic & Pessimistic Locking",
+        "Concurrency Control",
+      ],
+    },
+    {
+      title: "Module 7: Caching in Hibernate",
+      items: [
+        "First-Level Cache",
+        "Second-Level Cache",
+        "Query Cache",
+        "Cache Providers (Ehcache, Infinispan)",
+      ],
+    },
+    {
+      title: "Module 8: Integration with Spring",
+      items: [
+        "Spring & Hibernate Integration",
+        "Spring Transaction Management",
+        "DAO Layer Implementation",
+        "Best Practices & Design Patterns",
+      ],
+    },
+    {
+      title: "Module 9: Advanced Topics",
+      items: [
+        "Hibernate Events & Listeners",
+        "Interceptors & Callbacks",
+        "Batch Processing",
+        "Performance Tuning & Optimizations",
+      ],
+    },
+    {
+      title: "Module 10: Capstone Project",
+      items: [
+        "Develop a full-stack application using Hibernate",
+        "Implement CRUD operations with complex relationships",
+        "Integrate with Spring Boot",
+        "Deploy to cloud or local server",
+      ],
+    },
+  ],
+}
+,
+ajax: {
+  title: "AJAX Online Training — Syllabus",
+  accent: "#FF5733",
+  meta: {
+    duration: "3–4 weeks",
+    audience: "Students & Working Professionals",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "AJAX Basics",
+    "XMLHttpRequest",
+    "Fetch API",
+    "JSON & XML",
+    "Asynchronous Requests",
+    "Event Handling",
+    "AJAX with jQuery",
+    "AJAX with APIs",
+    "Error Handling",
+    "Practical Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to AJAX",
+      items: [
+        "What is AJAX and its importance",
+        "How AJAX works",
+        "Synchronous vs Asynchronous requests",
+        "AJAX in modern web applications",
+      ],
+    },
+    {
+      title: "Module 2: XMLHttpRequest Object",
+      items: [
+        "Creating and configuring XMLHttpRequest",
+        "Handling state changes",
+        "Sending GET and POST requests",
+        "Handling server responses",
+      ],
+    },
+    {
+      title: "Module 3: Fetch API",
+      items: [
+        "Introduction to Fetch API",
+        "GET & POST requests using fetch",
+        "Handling JSON responses",
+        "Promises and async/await",
+      ],
+    },
+    {
+      title: "Module 4: Data Formats in AJAX",
+      items: [
+        "Working with JSON",
+        "Working with XML",
+        "Parsing data in JavaScript",
+        "Sending data to the server",
+      ],
+    },
+    {
+      title: "Module 5: AJAX Event Handling",
+      items: [
+        "DOM Events and AJAX",
+        "Button clicks, forms, and AJAX",
+        "Handling multiple requests",
+        "Debouncing and throttling requests",
+      ],
+    },
+    {
+      title: "Module 6: AJAX with jQuery",
+      items: [
+        "Introduction to jQuery AJAX methods",
+        "$.ajax(), $.get(), $.post()",
+        "Handling responses and errors",
+        "Simplifying AJAX code with jQuery",
+      ],
+    },
+    {
+      title: "Module 7: AJAX with APIs",
+      items: [
+        "Consuming REST APIs using AJAX",
+        "Authentication & headers",
+        "Handling CORS issues",
+        "Practical examples with public APIs",
+      ],
+    },
+    {
+      title: "Module 8: Error Handling & Debugging",
+      items: [
+        "Common AJAX errors",
+        "Timeouts and retries",
+        "Browser developer tools for debugging",
+        "Best practices for robust AJAX apps",
+      ],
+    },
+    {
+      title: "Module 9: Practical Projects",
+      items: [
+        "Build a live search feature",
+        "Create a dynamic form submission",
+        "Consume a third-party API and display data",
+        "Build a small SPA (Single Page Application) using AJAX",
+      ],
+    },
+  ],
+}
+,
+angular: {
+  title: "Angular Online Training — Syllabus",
+  accent: "#DD0031",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "Students & Working Professionals",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Angular Basics",
+    "Components & Templates",
+    "Modules & Services",
+    "Data Binding",
+    "Directives & Pipes",
+    "Routing & Navigation",
+    "HTTP & APIs",
+    "Forms & Validation",
+    "RxJS & Observables",
+    "Projects & Deployment",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Angular",
+      items: [
+        "What is Angular and its advantages",
+        "Setting up Angular CLI",
+        "Creating your first Angular app",
+        "Folder structure and Angular architecture",
+      ],
+    },
+    {
+      title: "Module 2: Components & Templates",
+      items: [
+        "Understanding components",
+        "Creating and using components",
+        "Template syntax",
+        "Component interaction with @Input and @Output",
+      ],
+    },
+    {
+      title: "Module 3: Modules & Services",
+      items: [
+        "Angular modules and NgModule",
+        "Creating services",
+        "Dependency injection",
+        "Singleton services across app",
+      ],
+    },
+    {
+      title: "Module 4: Data Binding & Directives",
+      items: [
+        "One-way & two-way binding",
+        "Built-in directives: ngIf, ngFor, ngClass",
+        "Custom directives",
+        "Pipes: built-in and custom",
+      ],
+    },
+    {
+      title: "Module 5: Routing & Navigation",
+      items: [
+        "Angular Router basics",
+        "Configuring routes",
+        "Route parameters and guards",
+        "Lazy loading modules",
+      ],
+    },
+    {
+      title: "Module 6: HTTP & APIs",
+      items: [
+        "HttpClient module",
+        "GET, POST, PUT, DELETE requests",
+        "Handling errors",
+        "Consuming REST APIs",
+      ],
+    },
+    {
+      title: "Module 7: Forms & Validation",
+      items: [
+        "Template-driven forms",
+        "Reactive forms",
+        "Form validation techniques",
+        "Dynamic forms",
+      ],
+    },
+    {
+      title: "Module 8: RxJS & Observables",
+      items: [
+        "Introduction to RxJS",
+        "Observables and subscriptions",
+        "Operators: map, filter, mergeMap, etc.",
+        "Handling async data in Angular",
+      ],
+    },
+    {
+      title: "Module 9: Project & Deployment",
+      items: [
+        "Build a complete Angular project",
+        "Integrate with backend APIs",
+        "Debugging and testing",
+        "Deployment to hosting platforms",
+      ],
+    },
+  ],
+}
+,
+angularjs: {
+  title: "AngularJS Online Training — Syllabus",
+  accent: "#DD0031",
+  meta: {
+    duration: "4–6 weeks",
+    audience: "Students & Working Professionals",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "AngularJS Basics",
+    "Directives & Data Binding",
+    "Controllers & Scope",
+    "Services & Factories",
+    "Routing & SPA",
+    "Filters & Expressions",
+    "Forms & Validation",
+    "HTTP & AJAX",
+    "Modules & Dependency Injection",
+    "Projects & Deployment",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to AngularJS",
+      items: [
+        "What is AngularJS and SPA concept",
+        "Advantages over traditional JS",
+        "Setting up AngularJS environment",
+        "AngularJS architecture overview",
+      ],
+    },
+    {
+      title: "Module 2: Directives & Data Binding",
+      items: [
+        "Understanding directives",
+        "Built-in directives: ng-app, ng-model, ng-bind, ng-repeat, ng-show/ng-hide",
+        "Two-way data binding",
+        "Creating custom directives",
+      ],
+    },
+    {
+      title: "Module 3: Controllers & Scope",
+      items: [
+        "Role of controllers",
+        "$scope object usage",
+        "Controller communication",
+        "Nested controllers",
+      ],
+    },
+    {
+      title: "Module 4: Services & Factories",
+      items: [
+        "AngularJS services",
+        "Factories vs Services",
+        "Dependency injection",
+        "Creating reusable services",
+      ],
+    },
+    {
+      title: "Module 5: Routing & Single Page Application (SPA)",
+      items: [
+        "Introduction to ngRoute",
+        "Configuring routes",
+        "Route parameters",
+        "Nested views & SPA navigation",
+      ],
+    },
+    {
+      title: "Module 6: Filters & Expressions",
+      items: [
+        "Built-in filters: currency, date, lowercase, uppercase, filter, orderBy",
+        "Custom filters",
+        "Using expressions in views",
+      ],
+    },
+    {
+      title: "Module 7: Forms & Validation",
+      items: [
+        "ng-model for form inputs",
+        "Built-in validation directives",
+        "Custom validations",
+        "Displaying validation messages",
+      ],
+    },
+    {
+      title: "Module 8: HTTP & AJAX",
+      items: [
+        "$http service for AJAX requests",
+        "GET, POST, PUT, DELETE requests",
+        "Handling promises",
+        "Consuming RESTful APIs",
+      ],
+    },
+    {
+      title: "Module 9: Modules & Dependency Injection",
+      items: [
+        "Creating AngularJS modules",
+        "Organizing app with modules",
+        "Dependency injection concept",
+        "Injecting services, factories, constants",
+      ],
+    },
+    {
+      title: "Module 10: Project & Deployment",
+      items: [
+        "Build a sample AngularJS application",
+        "Integrate with backend APIs",
+        "Debugging and testing",
+        "Deployment to hosting platforms",
+      ],
+    },
+  ],
+}
+,
+manualTesting: {
+  title: "Manual Testing Training — Syllabus",
+  accent: "#3178C6",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "Beginners & IT Professionals",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Software Testing Fundamentals",
+    "Test Case Design",
+    "Bug Life Cycle",
+    "Functional Testing",
+    "Regression Testing",
+    "User Acceptance Testing",
+    "Test Management Tools",
+    "Defect Tracking",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Software Testing",
+      items: [
+        "Software Development Life Cycle (SDLC)",
+        "Testing Life Cycle (STLC)",
+        "Types of Testing: Manual vs Automation",
+        "Roles & Responsibilities of a Tester",
+      ],
+    },
+    {
+      title: "Module 2: Testing Fundamentals",
+      items: [
+        "Understanding Requirements & SRS Documents",
+        "Test Plan, Test Scenarios, Test Cases",
+        "Test Data Preparation",
+        "Test Environment Setup",
+      ],
+    },
+    {
+      title: "Module 3: Types of Testing",
+      items: [
+        "Functional Testing",
+        "Non-Functional Testing",
+        "Smoke & Sanity Testing",
+        "Regression Testing",
+        "Integration & System Testing",
+      ],
+    },
+    {
+      title: "Module 4: Defect Management",
+      items: [
+        "Bug Life Cycle",
+        "Severity vs Priority",
+        "Defect Reporting using Tools (JIRA, Bugzilla, Mantis)",
+        "Defect Tracking & Closure",
+      ],
+    },
+    {
+      title: "Module 5: Test Case Design Techniques",
+      items: [
+        "Equivalence Partitioning",
+        "Boundary Value Analysis",
+        "Decision Table Testing",
+        "Use Case Testing",
+      ],
+    },
+    {
+      title: "Module 6: User Acceptance & Exploratory Testing",
+      items: [
+        "User Acceptance Testing (UAT) Process",
+        "Exploratory Testing Techniques",
+        "Ad-hoc Testing",
+        "Checklist-based Testing",
+      ],
+    },
+    {
+      title: "Module 7: Test Management Tools",
+      items: [
+        "Introduction to Test Management Tools",
+        "Creating & Managing Test Cases",
+        "Test Execution & Reporting",
+        "Metrics & Dashboards",
+      ],
+    },
+    {
+      title: "Module 8: Practical Project",
+      items: [
+        "End-to-end manual testing project",
+        "Writing Test Cases & Executing Tests",
+        "Logging & Tracking Defects",
+        "Preparing Test Summary Reports",
+      ],
+    },
+  ],
+}
+,
+apiTesting: {
+  title: "API Testing Online Training — Syllabus",
+  accent: "#3178C6",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "QA Professionals, Software Testers, Developers",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to APIs",
+    "RESTful API Concepts & Architecture",
+    "HTTP Methods, Status Codes & Headers",
+    "Postman for API Testing",
+    "Authentication & Authorization (OAuth, JWT, API Keys)",
+    "Automation using REST Assured / Postman / JavaScript",
+    "SOAP Web Services Testing",
+    "Performance Testing with JMeter / LoadRunner",
+    "Security Testing for APIs",
+    "Real-World Projects & Capstone",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to API Testing",
+      items: [
+        "What is an API and why testing is important",
+        "Types of APIs: REST vs SOAP",
+        "API lifecycle and testing strategies",
+      ],
+    },
+    {
+      title: "Module 2: REST API Concepts & HTTP",
+      items: [
+        "HTTP methods: GET, POST, PUT, DELETE, PATCH",
+        "Status codes and their significance",
+        "Headers, parameters, and query strings",
+        "JSON & XML payload structures",
+      ],
+    },
+    {
+      title: "Module 3: API Testing with Postman",
+      items: [
+        "Creating requests and collections",
+        "Environment variables and pre-request scripts",
+        "Chaining requests and automated tests",
+        "Assertions and response validation",
+      ],
+    },
+    {
+      title: "Module 4: Authentication & Security",
+      items: [
+        "API Authentication types: Basic, OAuth, JWT, API Keys",
+        "Role-based access control testing",
+        "Securing API endpoints",
+      ],
+    },
+    {
+      title: "Module 5: API Automation Testing",
+      items: [
+        "Introduction to REST Assured and JavaScript-based automation",
+        "Writing automated API test scripts",
+        "Data-driven and keyword-driven API testing",
+      ],
+    },
+    {
+      title: "Module 6: SOAP Web Services Testing",
+      items: [
+        "SOAP request and response structure",
+        "Testing SOAP APIs with SoapUI",
+        "Validating SOAP responses",
+      ],
+    },
+    {
+      title: "Module 7: Performance Testing of APIs",
+      items: [
+        "Load and stress testing concepts",
+        "Using JMeter / LoadRunner for API performance testing",
+        "Analyzing response times, throughput, and latency",
+      ],
+    },
+    {
+      title: "Module 8: Real-World Projects & Capstone",
+      items: [
+        "E-commerce API testing project",
+        "Banking API validation scenario",
+        "Integration testing with multiple services",
+        "End-to-end API automation and reporting",
+      ],
+    },
+  ],
+}
+,
+playwrightTesting: {
+  title: "Playwright Testing Online Training — Syllabus",
+  accent: "#3178C6",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "Students, QA Engineers, Automation Testers, Developers",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to Playwright",
+    "Playwright Installation & Setup",
+    "Selectors & Locators",
+    "UI Automation",
+    "Cross-Browser & Cross-Platform Testing",
+    "Network Interception & API Testing",
+    "Assertions & Debugging",
+    "Advanced Playwright Features",
+    "Framework Design & CI/CD",
+    "Real-World Projects & Capstone",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Playwright",
+      items: [
+        "What is Playwright & Why Playwright?",
+        "Comparison with Selenium & Cypress",
+        "Playwright architecture & supported browsers",
+        "Installing Playwright & environment setup",
+      ],
+    },
+    {
+      title: "Module 2: Selectors, Locators & Basic Automation",
+      items: [
+        "Understanding locators & selectors",
+        "Working with text, CSS, and XPath locators",
+        "Handling iframes, alerts, and popups",
+        "Running tests in headless & headed mode",
+      ],
+    },
+    {
+      title: "Module 3: UI Automation with Playwright",
+      items: [
+        "Handling input fields, dropdowns, checkboxes, and buttons",
+        "File uploads & downloads",
+        "Assertions with Playwright Test",
+        "Page navigation, waits & timeouts",
+      ],
+    },
+    {
+      title: "Module 4: Cross-Browser & Parallel Testing",
+      items: [
+        "Testing on Chromium, Firefox, and WebKit",
+        "Running tests in parallel",
+        "Cross-platform testing on Windows, Linux, macOS",
+        "Mobile emulation & device testing",
+      ],
+    },
+    {
+      title: "Module 5: Network Interception & API Testing",
+      items: [
+        "Intercepting network requests",
+        "Mocking & stubbing API responses",
+        "API testing with Playwright",
+        "Validating REST APIs with assertions",
+      ],
+    },
+    {
+      title: "Module 6: Advanced Playwright Features",
+      items: [
+        "Handling multiple browser contexts & pages",
+        "Visual testing & screenshot comparison",
+        "Video recording of test runs",
+        "Using fixtures & test hooks",
+      ],
+    },
+    {
+      title: "Module 7: Test Automation Framework Design",
+      items: [
+        "Page Object Model (POM) in Playwright",
+        "Data-driven testing",
+        "Reusable utilities & custom commands",
+        "Test reporting & HTML reports",
+      ],
+    },
+    {
+      title: "Module 8: CI/CD Integration & Scalability",
+      items: [
+        "Integrating Playwright with Jenkins, GitHub Actions, GitLab CI",
+        "Running tests in Docker & cloud environments",
+        "Scalable test execution",
+        "Best practices for CI/CD pipelines",
+      ],
+    },
+    {
+      title: "Module 9: Real-World Projects & Capstone",
+      items: [
+        "E-commerce website end-to-end testing",
+        "Banking/FinTech application automation",
+        "API + UI combined test scenarios",
+        "Capstone project & interview preparation",
+      ],
+    },
+  ],
+}
+,
+typescriptTesting: {
+  title: "TypeScript Testing Online Training — Syllabus",
+  accent: "#3178C6", // TypeScript blue
+  meta: {
+    duration: "4–6 weeks",
+    audience: "Developers, QA Engineers & Automation Testers",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to TypeScript & Testing Fundamentals",
+    "Unit Testing with Jest & Mocha",
+    "Integration Testing",
+    "End-to-End Testing with Cypress/Playwright",
+    "Mocking, Stubbing & Dependency Injection",
+    "Type Safety & Strong Typing in Tests",
+    "TDD & BDD with TypeScript",
+    "API Testing with Supertest",
+    "Automation Framework Design",
+    "CI/CD Integration",
+    "Real-World Projects & Capstone",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to TypeScript Testing",
+      items: [
+        "Why test with TypeScript? Benefits over JavaScript",
+        "Setting up TypeScript for testing projects",
+        "Compiler options & tsconfig.json",
+        "Writing your first test with TypeScript",
+      ],
+    },
+    {
+      title: "Module 2: Unit Testing with Jest & Mocha",
+      items: [
+        "Installing and configuring Jest/Mocha + Chai",
+        "Assertions and matchers",
+        "Async/await and promises in tests",
+        "Organizing unit test suites",
+      ],
+    },
+    {
+      title: "Module 3: Integration Testing",
+      items: [
+        "Testing services and repositories",
+        "Working with in-memory databases",
+        "Testing API routes with TypeScript",
+        "Managing test data & fixtures",
+      ],
+    },
+    {
+      title: "Module 4: End-to-End Testing (E2E)",
+      items: [
+        "Cypress with TypeScript for UI automation",
+        "Playwright for cross-browser testing",
+        "Headless browser execution",
+        "Testing real-world workflows (login, checkout, APIs)",
+      ],
+    },
+    {
+      title: "Module 5: Mocking, Stubbing & Dependency Injection",
+      items: [
+        "Mocking with Jest and ts-mockito",
+        "Stubbing services and external APIs",
+        "HTTP request mocking",
+        "Dependency injection for testable code",
+      ],
+    },
+    {
+      title: "Module 6: Type Safety in Testing",
+      items: [
+        "Using TypeScript interfaces and types",
+        "Generics for reusable test utilities",
+        "Avoiding runtime errors with type definitions",
+      ],
+    },
+    {
+      title: "Module 7: TDD & BDD with TypeScript",
+      items: [
+        "Test-Driven Development (TDD) cycle",
+        "Mocha + Chai for Behavior-Driven Development",
+        "Cucumber + TypeScript for feature testing",
+      ],
+    },
+    {
+      title: "Module 8: API Testing with TypeScript",
+      items: [
+        "REST API testing with Supertest",
+        "GraphQL API testing",
+        "Schema validation & contract testing",
+      ],
+    },
+    {
+      title: "Module 9: Test Automation Framework Design",
+      items: [
+        "Building scalable test frameworks",
+        "Page Object Model (POM) in TypeScript",
+        "Utilities, configs, and helpers",
+      ],
+    },
+    {
+      title: "Module 10: CI/CD & Reporting",
+      items: [
+        "Integrating tests with Jenkins, GitHub Actions, GitLab CI",
+        "Test reporting with Allure & HTML reports",
+        "Parallel execution & coverage reports",
+      ],
+    },
+    {
+      title: "Module 11: Real-World Projects & Capstone",
+      items: [
+        "End-to-end testing of a full-stack TypeScript app",
+        "Combining unit, integration & E2E tests",
+        "Capstone: Build a complete TypeScript testing framework",
+      ],
+    },
+  ],
+}
+,
+cypressTesting: {
+  title: "Cypress Testing Online Training — Syllabus",
+  accent: "#008fbfff",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "QA Engineers, Automation Testers, Developers",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to Cypress & Setup",
+    "JavaScript & Mocha Basics",
+    "Cypress Fundamentals",
+    "UI Automation with Cypress",
+    "Advanced Cypress Features",
+    "API Testing",
+    "Framework Design & Best Practices",
+    "CI/CD Integration",
+    "Reporting & Debugging",
+    "Real-World Projects & Interview Prep",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Cypress & Setup",
+      items: [
+        "Overview of Test Automation & Cypress",
+        "Cypress vs Selenium & Other Tools",
+        "Installation & Project Setup",
+        "Folder Structure & Configuration",
+        "Writing First Cypress Test",
+      ],
+    },
+    {
+      title: "Module 2: JavaScript & Mocha Basics",
+      items: [
+        "JavaScript ES6+ essentials for testers",
+        "Functions, Callbacks, and Promises",
+        "Async/Await in Cypress",
+        "Mocha Test Runner & Chai Assertions",
+        "BDD/TDD with Cypress",
+      ],
+    },
+    {
+      title: "Module 3: Cypress Fundamentals",
+      items: [
+        "Cypress Test Lifecycle",
+        "Cypress Commands & Assertions",
+        "Retry-ability & Auto-Waiting",
+        "Running & Debugging Tests",
+        "Cypress Dashboard Overview",
+      ],
+    },
+    {
+      title: "Module 4: UI Automation with Cypress",
+      items: [
+        "Locators & Element Handling",
+        "Click, Type, Select, and Check Actions",
+        "Mouse Hover, Drag & Drop, Double Click",
+        "Handling Alerts, Popups & Iframes",
+        "File Uploads & Downloads",
+      ],
+    },
+    {
+      title: "Module 5: Advanced Cypress Features",
+      items: [
+        "Custom Commands & Utilities",
+        "Fixtures & Test Data Management",
+        "Environment Variables in Cypress",
+        "Handling Flaky Tests",
+        "Cypress Best Practices",
+      ],
+    },
+    {
+      title: "Module 6: API Testing with Cypress",
+      items: [
+        "API Testing Fundamentals",
+        "GET, POST, PUT, DELETE requests",
+        "Stubbing & Mocking Network Requests",
+        "Validating JSON Responses",
+        "Chaining API & UI Tests",
+      ],
+    },
+    {
+      title: "Module 7: Framework Design & Best Practices",
+      items: [
+        "Page Object Model (POM) in Cypress",
+        "Data-Driven Testing",
+        "Reusable Utilities & Helper Functions",
+        "Managing Large Test Suites",
+        "Cross-Browser & Parallel Testing",
+      ],
+    },
+    {
+      title: "Module 8: Reporting & Debugging",
+      items: [
+        "Built-in Cypress Reports",
+        "Mochawesome & Allure Reporting",
+        "Screenshots & Video Recording",
+        "Debugging Techniques",
+        "Error Handling in Tests",
+      ],
+    },
+    {
+      title: "Module 9: CI/CD Integration",
+      items: [
+        "Integrating Cypress with Jenkins",
+        "GitHub Actions / GitLab CI Pipelines",
+        "Dockerizing Cypress Tests",
+        "Parallel Execution in CI/CD",
+        "Cloud Testing Platforms (BrowserStack, Sauce Labs)",
+      ],
+    },
+    {
+      title: "Module 10: Real-World Projects & Interview Prep",
+      items: [
+        "End-to-End Web Application Testing Project",
+        "API + UI Combined Test Project",
+        "Optimizing Test Execution Time",
+        "Common Cypress Interview Questions",
+        "Resume Building & Mock Interviews",
+      ],
+    },
+  ],
+}
+,
+gcplatform: {
+  title: "Google Cloud Platform (GCP) Training — Syllabus",
+  accent: "#29B5E8",
+  meta: {
+    duration: "8–12 weeks",
+    audience: "Aspiring Cloud Architects, Developers, IT Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom / Hybrid",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "GCP Fundamentals",
+    "Compute Engine & App Engine",
+    "Cloud Storage & Databases",
+    "Networking & Security",
+    "IAM & Access Management",
+    "Serverless Services: Cloud Functions & Cloud Run",
+    "BigQuery & Data Analytics",
+    "Monitoring & Logging",
+    "Infrastructure as Code with Deployment Manager",
+    "Capstone Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to GCP",
+      items: [
+        "Overview of Cloud Computing & GCP",
+        "GCP Global Infrastructure",
+        "Regions, Zones, and Projects",
+        "GCP Console & CLI basics",
+        "IAM basics and identity management",
+      ],
+    },
+    {
+      title: "Module 2: Compute Services",
+      items: [
+        "Google Compute Engine (VMs)",
+        "App Engine for PaaS applications",
+        "Kubernetes Engine (GKE) basics",
+        "Serverless computing with Cloud Functions",
+      ],
+    },
+    {
+      title: "Module 3: Storage & Databases",
+      items: [
+        "Cloud Storage buckets & classes",
+        "Persistent Disks & Filestore",
+        "Cloud SQL, Cloud Spanner, Bigtable",
+        "Cloud Firestore & Datastore",
+      ],
+    },
+    {
+      title: "Module 4: Networking & Security",
+      items: [
+        "Virtual Private Cloud (VPC) setup",
+        "Subnets, Firewalls, and Routes",
+        "Load Balancing & Cloud CDN",
+        "Cloud Armor & Security best practices",
+      ],
+    },
+    {
+      title: "Module 5: Big Data & Analytics",
+      items: [
+        "BigQuery fundamentals and SQL queries",
+        "Dataflow & Dataproc for ETL",
+        "Pub/Sub for messaging & streaming data",
+        "Data Studio for visualization",
+      ],
+    },
+    {
+      title: "Module 6: Monitoring & Management",
+      items: [
+        "Cloud Monitoring & Logging",
+        "Stackdriver and Alerts",
+        "Cost Management & Billing",
+        "Resource tagging & labeling",
+      ],
+    },
+    {
+      title: "Module 7: Serverless Architectures",
+      items: [
+        "Cloud Functions & triggers",
+        "Cloud Run for containerized apps",
+        "Event-driven design with Pub/Sub",
+        "Workflows and orchestration",
+      ],
+    },
+    {
+      title: "Module 8: Infrastructure as Code",
+      items: [
+        "Deployment Manager templates",
+        "Terraform integration with GCP",
+        "Automating deployments",
+        "CI/CD pipelines on GCP",
+      ],
+    },
+    {
+      title: "Module 9: Security & Identity Management",
+      items: [
+        "IAM roles & permissions",
+        "Service accounts & keys",
+        "Encryption at rest & in transit",
+        "Best practices for secure cloud architecture",
+      ],
+    },
+    {
+      title: "Module 10: Capstone Projects",
+      items: [
+        "Deploying a highly available multi-tier application",
+        "Building a serverless data pipeline",
+        "Real-world GCP architecture design project",
+        "Presentation and documentation of solutions",
+      ],
+    },
+  ],
+}
+,
+oracleFusion: {
+  title: "Oracle Fusion Training — Syllabus",
+  accent: "#29B5E8",
+  meta: {
+    duration: "8–10 weeks",
+    audience: "ERP Consultants, Functional & Technical Professionals, Finance/HR Specialists",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom / Hybrid",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Oracle Fusion HCM",
+    "Oracle Fusion Financials",
+    "Oracle Fusion SCM",
+    "Setup & Configuration",
+    "User Management & Security",
+    "Reporting & Analytics",
+    "Integration & Extensions",
+    "Workflows & Approvals",
+    "Practical Use Cases & Projects",
+    "Capstone Project",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Oracle Fusion",
+      items: [
+        "Overview of Oracle Fusion Cloud Applications",
+        "ERP, HCM, and SCM modules",
+        "Cloud architecture and deployment",
+        "Navigation and UI overview",
+      ],
+    },
+    {
+      title: "Module 2: Oracle Fusion HCM",
+      items: [
+        "Core HR setup and configuration",
+        "Employee data management",
+        "Payroll, Benefits, and Compensation modules",
+        "Approval workflows and reporting",
+      ],
+    },
+    {
+      title: "Module 3: Oracle Fusion Financials",
+      items: [
+        "General Ledger, Accounts Payable, Accounts Receivable",
+        "Cash Management and Asset Management",
+        "Financial reporting and analytics",
+        "Approval workflows and audit processes",
+      ],
+    },
+    {
+      title: "Module 4: Oracle Fusion SCM",
+      items: [
+        "Procurement and Inventory Management",
+        "Order Management and Planning",
+        "Supply Chain Analytics and Reporting",
+        "Integration with Financials",
+      ],
+    },
+    {
+      title: "Module 5: Setup & Configuration",
+      items: [
+        "Managing Users, Roles & Security",
+        "Data import and setup tasks",
+        "Customizing workflows and approvals",
+        "Configuring notifications and alerts",
+      ],
+    },
+    {
+      title: "Module 6: Reporting & Analytics",
+      items: [
+        "Oracle BI Publisher and OTBI",
+        "Creating reports and dashboards",
+        "Key metrics and KPIs",
+        "Exporting and sharing analytics",
+      ],
+    },
+    {
+      title: "Module 7: Integration & Extensions",
+      items: [
+        "Integrating Oracle Fusion with other ERP/CRM systems",
+        "Web services and APIs",
+        "Extending functionality with custom objects",
+        "Monitoring integrations and errors",
+      ],
+    },
+    {
+      title: "Module 8: Workflows & Approvals",
+      items: [
+        "Creating and managing workflows",
+        "Approval hierarchies",
+        "Notification rules and alerts",
+        "Troubleshooting workflow issues",
+      ],
+    },
+    {
+      title: "Module 9: Real-World Use Cases & Projects",
+      items: [
+        "Implementing a complete HR process in Fusion HCM",
+        "Financial cycle automation in Fusion Financials",
+        "Supply chain management scenarios in SCM module",
+        "Cross-module integration projects",
+      ],
+    },
+    {
+      title: "Module 10: Capstone Project",
+      items: [
+        "End-to-end Oracle Fusion implementation simulation",
+        "Configuring multiple modules for a sample organization",
+        "Generating reports, dashboards, and analytics",
+        "Presentation of project outcomes",
+      ],
+    },
+  ],
+}
+,
+awsdata: {
+  title: "AWS Data Engineer Training — Syllabus",
+  accent: "#29B5E8",
+  meta: {
+    duration: "8–12 weeks",
+    audience: "Aspiring Data Engineers, Analytics Professionals, Cloud Enthusiasts",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom / Hybrid",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "AWS Cloud Fundamentals",
+    "Data Storage & Databases on AWS",
+    "ETL & Data Pipeline Design",
+    "Big Data Processing",
+    "Streaming Data & Real-Time Analytics",
+    "Data Warehousing with Redshift",
+    "Data Security & Governance",
+    "Serverless Data Processing",
+    "Monitoring & Optimization",
+    "Capstone Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to AWS for Data Engineering",
+      items: [
+        "Overview of AWS Cloud & Services",
+        "IAM & Security Best Practices",
+        "AWS CLI & SDKs for automation",
+        "Understanding cloud architecture for data solutions",
+      ],
+    },
+    {
+      title: "Module 2: Data Storage Solutions",
+      items: [
+        "S3 buckets, lifecycle policies, and versioning",
+        "AWS RDS, Aurora, DynamoDB overview",
+        "Data modeling for relational & NoSQL databases",
+        "Storage optimization and cost management",
+      ],
+    },
+    {
+      title: "Module 3: ETL & Data Pipeline Design",
+      items: [
+        "Introduction to ETL concepts",
+        "AWS Glue for ETL jobs",
+        "Data transformation using Python, Spark, or Scala",
+        "Automating pipelines with AWS Step Functions & Lambda",
+      ],
+    },
+    {
+      title: "Module 4: Big Data Processing",
+      items: [
+        "Introduction to Big Data on AWS",
+        "AWS EMR for Hadoop & Spark",
+        "Batch vs Real-Time processing",
+        "Processing large datasets efficiently",
+      ],
+    },
+    {
+      title: "Module 5: Streaming Data & Real-Time Analytics",
+      items: [
+        "AWS Kinesis Data Streams & Firehose",
+        "Real-time ETL with Lambda",
+        "Data ingestion patterns",
+        "Monitoring & scaling streaming applications",
+      ],
+    },
+    {
+      title: "Module 6: Data Warehousing with Redshift",
+      items: [
+        "Amazon Redshift architecture",
+        "Creating and managing Redshift clusters",
+        "Optimizing queries and data distribution",
+        "Integrating Redshift with BI tools",
+      ],
+    },
+    {
+      title: "Module 7: Data Security & Governance",
+      items: [
+        "Encryption in transit & at rest (KMS, SSL)",
+        "IAM roles & policies for data access",
+        "Auditing & monitoring using CloudTrail & CloudWatch",
+        "Compliance best practices",
+      ],
+    },
+    {
+      title: "Module 8: Serverless Data Processing",
+      items: [
+        "AWS Lambda for serverless ETL",
+        "Integrating Lambda with S3, DynamoDB, and Kinesis",
+        "Error handling and retry strategies",
+        "Cost optimization for serverless workflows",
+      ],
+    },
+    {
+      title: "Module 9: Monitoring & Optimization",
+      items: [
+        "Monitoring data pipelines with CloudWatch",
+        "Performance tuning for ETL jobs",
+        "Optimizing storage and query performance",
+        "Troubleshooting common data pipeline issues",
+      ],
+    },
+    {
+      title: "Module 10: Capstone Projects",
+      items: [
+        "Building end-to-end data pipelines from ingestion to analytics",
+        "Processing batch and streaming datasets",
+        "Integrating Redshift and BI tools",
+        "Presenting a complete AWS Data Engineering solution",
+      ],
+    },
+  ],
+}
+,
+performanceTuning: {
+  title: "Performance Tuning Training — Syllabus",
+  accent: "#29B5E8",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "Developers, DBAs, System Administrators, IT Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom / Hybrid",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to Performance Tuning",
+    "System & Database Architecture Analysis",
+    "Query Optimization Techniques",
+    "Indexing & Partitioning Strategies",
+    "Caching & Memory Management",
+    "Profiling Tools & Monitoring",
+    "Load Testing & Benchmarking",
+    "Application Performance Tuning",
+    "Performance Troubleshooting & Best Practices",
+    "Real-World Performance Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Performance Tuning",
+      items: [
+        "Understanding performance metrics and benchmarks",
+        "Common performance bottlenecks",
+        "Performance goals and SLAs",
+        "Overview of tuning strategies",
+      ],
+    },
+    {
+      title: "Module 2: System & Database Architecture Analysis",
+      items: [
+        "Understanding hardware & software architecture",
+        "Database internals and query processing",
+        "Analyzing system resources (CPU, memory, I/O)",
+        "Identifying resource-intensive operations",
+      ],
+    },
+    {
+      title: "Module 3: Query Optimization Techniques",
+      items: [
+        "Analyzing query execution plans",
+        "Optimizing SQL queries and joins",
+        "Using hints and optimizer directives",
+        "Reducing query latency and response time",
+      ],
+    },
+    {
+      title: "Module 4: Indexing & Partitioning Strategies",
+      items: [
+        "Creating and using indexes effectively",
+        "Partitioning large tables for efficiency",
+        "Balancing storage and performance",
+        "Maintaining indexes and avoiding fragmentation",
+      ],
+    },
+    {
+      title: "Module 5: Caching & Memory Management",
+      items: [
+        "Understanding buffer/cache mechanisms",
+        "Memory allocation and optimization",
+        "Managing session and connection memory",
+        "Application-level caching strategies",
+      ],
+    },
+    {
+      title: "Module 6: Profiling Tools & Monitoring",
+      items: [
+        "Using performance monitoring tools",
+        "Profiling queries and procedures",
+        "Tracking system and database metrics",
+        "Analyzing logs for performance insights",
+      ],
+    },
+    {
+      title: "Module 7: Load Testing & Benchmarking",
+      items: [
+        "Simulating workload scenarios",
+        "Stress testing applications and databases",
+        "Benchmarking performance improvements",
+        "Capacity planning and resource scaling",
+      ],
+    },
+    {
+      title: "Module 8: Application Performance Tuning",
+      items: [
+        "Optimizing application code for efficiency",
+        "Reducing latency in data access and processing",
+        "Integrating caching and indexing strategies",
+        "Best practices for scalable applications",
+      ],
+    },
+    {
+      title: "Module 9: Performance Troubleshooting & Best Practices",
+      items: [
+        "Identifying root causes of bottlenecks",
+        "Systematic troubleshooting approach",
+        "Preventive tuning strategies",
+        "Documenting and maintaining performance improvements",
+      ],
+    },
+    {
+      title: "Module 10: Real-World Performance Projects",
+      items: [
+        "Analyzing and tuning a real-world database",
+        "Optimizing application workflows",
+        "Implementing end-to-end performance enhancements",
+        "Presenting findings and recommendations",
+      ],
+    },
+  ],
+}
+,
+oracleDba: {
+  title: "Oracle DBA Training — Syllabus",
+  accent: "#29B5E8",
+  meta: {
+    duration: "8–10 weeks",
+    audience: "Aspiring DBAs, IT Professionals, Developers, Database Administrators",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Oracle Architecture & RDBMS Concepts",
+    "Installation & Configuration",
+    "User Management & Security",
+    "Backup & Recovery Strategies",
+    "Performance Tuning",
+    "Storage & Tablespace Management",
+    "Data Guard & High Availability",
+    "RMAN & Flashback Technologies",
+    "Oracle Networking & RAC",
+    "Real-World Projects & Capstone",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Oracle DBA",
+      items: [
+        "Overview of RDBMS & Oracle Database Architecture",
+        "Oracle Database Editions & Components",
+        "Installation & Configuration on Windows/Linux",
+        "Tools: SQL*Plus, SQL Developer, Enterprise Manager",
+      ],
+    },
+    {
+      title: "Module 2: Database Administration Basics",
+      items: [
+        "Creating & Managing Databases",
+        "Tablespaces, Datafiles, and Storage Structures",
+        "Managing Users, Roles & Privileges",
+        "Profiles & Password Management",
+      ],
+    },
+    {
+      title: "Module 3: Backup & Recovery",
+      items: [
+        "Understanding RMAN and Backup Types",
+        "Performing Full and Incremental Backups",
+        "Recovery Scenarios: Complete & Incomplete",
+        "Flashback Technologies",
+      ],
+    },
+    {
+      title: "Module 4: Performance Tuning",
+      items: [
+        "Monitoring Database Performance",
+        "SQL Query Tuning",
+        "Using AWR, ASH & Statspack Reports",
+        "Optimizing Memory & Storage Parameters",
+      ],
+    },
+    {
+      title: "Module 5: Storage & Tablespace Management",
+      items: [
+        "Managing Tablespaces & Datafiles",
+        "Segment & Extent Management",
+        "Tablespace Quotas & Autoextend",
+        "Undo Tablespaces & Temporary Tablespaces",
+      ],
+    },
+    {
+      title: "Module 6: High Availability & Data Guard",
+      items: [
+        "Oracle Data Guard Architecture",
+        "Configuring Physical & Logical Standby",
+        "Failover & Switchover Operations",
+        "Introduction to Oracle RAC",
+      ],
+    },
+    {
+      title: "Module 7: Oracle Networking",
+      items: [
+        "Listener Configuration & TNS",
+        "Oracle Net Services",
+        "Client-Server Connectivity",
+        "Network Troubleshooting",
+      ],
+    },
+    {
+      title: "Module 8: Security & User Management",
+      items: [
+        "Database Security Best Practices",
+        "Roles, Privileges & Grants",
+        "Auditing & Compliance",
+        "Data Encryption & Masking",
+      ],
+    },
+    {
+      title: "Module 9: Advanced DBA Topics",
+      items: [
+        "RMAN Advanced Features",
+        "Partitioning & Indexing Strategies",
+        "Cloning & Patching Databases",
+        "Scheduler & Automation",
+      ],
+    },
+    {
+      title: "Module 10: Real-World Projects & Capstone",
+      items: [
+        "Database setup & user management project",
+        "Backup, recovery & failover implementation",
+        "Performance tuning & monitoring project",
+        "High availability & disaster recovery simulation",
+      ],
+    },
+  ],
+}
+,
+oraclePlSql: {
+  title: "Oracle PL/SQL Training — Syllabus",
+  accent: "#29B5E8",
+
+  meta: {
+    duration: "6–8 weeks",
+    audience: "Students, Developers, Database Administrators & IT Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "PL/SQL Basics & Architecture",
+    "Variables, Data Types & Control Structures",
+    "Cursors (Implicit & Explicit)",
+    "Exception Handling",
+    "Stored Procedures & Functions",
+    "Packages & Triggers",
+    "Dynamic SQL & Bulk Processing",
+    "Error Logging & Debugging",
+    "Performance Optimization",
+    "Real-World Projects & Capstone",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to PL/SQL",
+      items: [
+        "PL/SQL architecture and features",
+        "Benefits of PL/SQL over standard SQL",
+        "PL/SQL block structure: Declarative, Executable, Exception",
+        "Setting up Oracle environment for PL/SQL",
+      ],
+    },
+    {
+      title: "Module 2: Variables, Data Types & Control Structures",
+      items: [
+        "PL/SQL data types: Scalar, Composite, LOB, Reference",
+        "Declaring and initializing variables",
+        "IF, CASE, LOOP, WHILE constructs",
+        "Best practices for control flow",
+      ],
+    },
+    {
+      title: "Module 3: Cursors",
+      items: [
+        "Implicit vs Explicit cursors",
+        "Cursor attributes (%FOUND, %NOTFOUND, %ROWCOUNT)",
+        "Cursor FOR loops",
+        "Parameterized cursors",
+      ],
+    },
+    {
+      title: "Module 4: Exception Handling",
+      items: [
+        "Predefined exceptions",
+        "User-defined exceptions",
+        "RAISE, RAISE_APPLICATION_ERROR",
+        "Exception propagation and handling best practices",
+      ],
+    },
+    {
+      title: "Module 5: Stored Procedures & Functions",
+      items: [
+        "Creating, compiling, and executing procedures",
+        "Input, output, and IN OUT parameters",
+        "Creating reusable functions",
+        "Calling procedures/functions from SQL and PL/SQL blocks",
+      ],
+    },
+    {
+      title: "Module 6: Packages & Triggers",
+      items: [
+        "Creating packages: Specification & Body",
+        "Package variables and procedures",
+        "Database triggers: BEFORE, AFTER, INSTEAD OF",
+        "Row-level vs Statement-level triggers",
+      ],
+    },
+    {
+      title: "Module 7: Advanced PL/SQL Concepts",
+      items: [
+        "Dynamic SQL (EXECUTE IMMEDIATE)",
+        "Bulk Processing: BULK COLLECT & FORALL",
+        "Collections: VARRAY, Nested Tables, Associative Arrays",
+        "PL/SQL Records and Tables",
+      ],
+    },
+    {
+      title: "Module 8: Error Logging & Debugging",
+      items: [
+        "DBMS_OUTPUT for debugging",
+        "DBMS_APPLICATION_INFO",
+        "Logging errors in tables",
+        "Best practices for maintainable PL/SQL code",
+      ],
+    },
+    {
+      title: "Module 9: Performance Optimization",
+      items: [
+        "Optimizing queries in PL/SQL blocks",
+        "Reducing context switches",
+        "Using bulk operations for efficiency",
+        "Profiling and tuning PL/SQL code",
+      ],
+    },
+    {
+      title: "Module 10: Real-World Projects & Capstone",
+      items: [
+        "Building a payroll or inventory management system",
+        "Implementing triggers for automated workflows",
+        "Designing packages for modular applications",
+        "End-to-end PL/SQL project with reporting and optimization",
+      ],
+    },
+  ],
+}
+,
+oracleSql: {
+  title: "Oracle SQL Training — Syllabus",
+  accent: "#29B5E8",
+  meta: {
+    duration: "6–8 weeks",
+    audience: "Students, Developers, Database Administrators & IT Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to Databases & Oracle SQL",
+    "DDL, DML & TCL Commands",
+    "Constraints & Joins",
+    "Subqueries & Set Operators",
+    "Views & Indexes",
+    "Functions & Expressions",
+    "PL/SQL Basics",
+    "Stored Procedures & Triggers",
+    "Performance Tuning",
+    "Real-World Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Oracle SQL",
+      items: [
+        "Database concepts & Oracle architecture",
+        "Overview of SQL & PL/SQL",
+        "Oracle environment setup & tools (SQL*Plus, SQL Developer)",
+      ],
+    },
+    {
+      title: "Module 2: SQL Basics",
+      items: [
+        "Data types in Oracle",
+        "DDL (CREATE, ALTER, DROP)",
+        "DML (INSERT, UPDATE, DELETE)",
+        "TCL (COMMIT, ROLLBACK, SAVEPOINT)",
+      ],
+    },
+    {
+      title: "Module 3: Constraints & Joins",
+      items: [
+        "Primary key, Foreign key, Unique, Not Null, Check",
+        "Equi join, Inner join, Outer join, Self join, Cross join",
+      ],
+    },
+    {
+      title: "Module 4: Advanced SQL Queries",
+      items: [
+        "Single-row & multi-row subqueries",
+        "Set operators (UNION, INTERSECT, MINUS)",
+        "Inline views & correlated subqueries",
+      ],
+    },
+    {
+      title: "Module 5: Views, Indexes & Sequences",
+      items: [
+        "Creating & managing views",
+        "Indexes & their types",
+        "Sequences & synonyms",
+      ],
+    },
+    {
+      title: "Module 6: Functions & Expressions",
+      items: [
+        "Single-row functions (character, numeric, date, conversion)",
+        "Aggregate functions",
+        "Group By & Having",
+        "Analytical functions (RANK, DENSE_RANK, ROW_NUMBER)",
+      ],
+    },
+    {
+      title: "Module 7: Introduction to PL/SQL",
+      items: [
+        "PL/SQL architecture",
+        "Variables & data types",
+        "Control structures (IF, CASE, LOOP, WHILE)",
+        "Cursors (implicit & explicit)",
+      ],
+    },
+    {
+      title: "Module 8: Stored Procedures & Triggers",
+      items: [
+        "Creating procedures & functions",
+        "Exception handling",
+        "Packages in PL/SQL",
+        "Triggers & their types",
+      ],
+    },
+    {
+      title: "Module 9: Performance Tuning & Optimization",
+      items: [
+        "Query optimization techniques",
+        "Explain Plan",
+        "Indexes & statistics usage",
+      ],
+    },
+    {
+      title: "Module 10: Real-World Projects & Capstone",
+      items: [
+        "Designing & querying complex databases",
+        "Building stored procedures for business logic",
+        "Data migration & reporting scenarios",
+      ],
+    },
+  ],
+}
+,
 
   businessanalyst: {
     title: "Business Analyst Online Training — Syllabus",

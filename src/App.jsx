@@ -60,6 +60,29 @@ import BusinessAnalyst from "./components/Courses/BusinessAnalyst";
 import UIUXPage from "./components/Courses/UIUX";
 import AzureCoursePage from "./components/Courses/AzureTraining";
 import BlockchainCoursePage from "./components/Courses/BlockChain";
+import DataAnalystPage from "./components/Courses/DataAnalyst";
+import VmwarePage from "./components/Courses/vmwareTraining";
+import SnowflakePage from "./components/Courses/Snowflake";
+import OracleSqlPage from "./components/Courses/OracleSql";
+import OraclePlSqlPage from "./components/Courses/OraclePlSql";
+import OracleDbaPage from "./components/Courses/OracleDba";
+import PerformanceTuningPage from "./components/Courses/PerformanceTuning";
+import OracleFusionPage from "./components/Courses/OracleFusion";
+import AwsDataEngineerPage from "./components/Courses/AwsDataEngineer";
+import GoogleCloudPlatformPage from "./components/Courses/GoogleCloudP";
+import IOTtestingPage from "./components/Courses/IOTtesting";  
+import CypresstestingPage from "./components/Courses/CypressTesting"; 
+import TypescriptTestingPage from "./components/Courses/TypescriptTesting";
+import PlaywrightTestingPage from "./components/Courses/PlaywrightTesting";
+import ApiTestingPage from "./components/Courses/ApiTesting";
+import ManualTestingPage from "./components/Courses/ManualTesting";
+import AngularJSPage from "./components/Courses/AngualrJS";
+import AngularPage from "./components/Courses/angular";
+import AjaxPage from "./components/Courses/ajax";
+import HibernatePage from "./components/Courses/hibernate";
+import SpringbootPage from "./components/Courses/Springboot";
+import J2EEPage from "./components/Courses/j2ee";
+import CoreJavaPage from "./components/Courses/Corejava";
 // Wrapper to use useLocation
 function Layout({ children }) {
   const location = useLocation();
@@ -152,6 +175,30 @@ export default function App() {
           <Route path="/all-courses/UIUXTraining" element={<UIUXPage />} />
           <Route path="/all-courses/AzureTraining" element={<AzureCoursePage />} />
           <Route path="/all-courses/BlockchainTraining" element={<BlockchainCoursePage />} />
+          <Route path="/all-courses/DataAnalyst" element={<DataAnalystPage />} />
+          <Route path="/all-courses/Vmware" element={<VmwarePage />} />
+          <Route path="/all-courses/Snowflake" element={<SnowflakePage/>}/>
+          <Route path="/all-courses/OracleSql" element={<OracleSqlPage/>}/>
+          <Route path="/all-courses/OraclePlSql" element={<OraclePlSqlPage/>}/>
+          <Route path="/all-courses/OracleDba" element={<OracleDbaPage/>}/>
+          <Route path="/all-courses/PerformanceTuning" element={<PerformanceTuningPage/>}/>
+          <Route path="/all-courses/OracleFusion" element={<OracleFusionPage/>}/>
+          <Route path="/all-courses/awsDataEngineer" element={<AwsDataEngineerPage/>}/>
+          <Route path="/all-courses/GoogleCloudPlatform" element={<GoogleCloudPlatformPage/>}/>
+          <Route path="/all-courses/IOTtesting" element={<IOTtestingPage/>}/>
+          <Route path="/all-courses/Cypresstesting" element={<CypresstestingPage/>}/>
+          <Route path="/all-courses/typeScriptTesting" element={<TypescriptTestingPage/>}/>
+          <Route path="/all-courses/playwrightTesting" element={<PlaywrightTestingPage/>}/>
+          <Route path="/all-courses/ApiTesting" element={<ApiTestingPage/>}/>
+          <Route path="/all-courses/ManualTesting" element={<ManualTestingPage/>}/>
+          <Route path="/all-courses/AnularJs" element={<AngularJSPage/>}/>
+          <Route path="/all-courses/Angular" element={<AngularPage/>}/>
+          <Route path="/all-courses/AjaxTraining" element={<AjaxPage/>}/>
+          <Route path="/all-courses/HibernateCourse" element={<HibernatePage/>}/>
+          <Route path="/all-courses/SpringbootCourse" element={<SpringbootPage/>}/>
+          <Route path="/all-courses/J2EECourse" element={<J2EEPage/>}/>
+          <Route path="/all-courses/ManualTesting" element={<CoreJavaPage/>}/>
+          
 
           {/* Admin routes */}
           <Route path="/admin" element={<AdminLayout />}>
