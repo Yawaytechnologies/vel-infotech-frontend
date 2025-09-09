@@ -263,12 +263,12 @@ export default function AboutSection() {
               <div className="flex justify-center mb-6 gap-2">
                 <button
                   type="button"
-                  onClick={() => setMode("classroom")}
+                  onClick={() => setMode("class_room")}
                   className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-sm font-medium shadow
-                    ${mode === "classroom"
+                    ${mode === "class_room"
                       ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
                       : "bg-white/60 text-black border border-[#a7f3d0]/40"} transition-all duration-200`}
-                  aria-pressed={mode === "classroom"}
+                  aria-pressed={mode === "class_room"}
                 >
                   <FaChalkboardTeacher className="text-base" /> Class Room
                 </button>
