@@ -10,13 +10,13 @@ import {
 import ScrollToTop from "./components/common/ScrollToTop";
 import Header from "./components/common/header";
 import Footer from "./components/common/Footer";
-import Internship from "./pages/internship";
+import Internship from "./pages/Internship";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import BlogDetails from "./pages/BlogDetails";
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
-import Interview from "./pages/interview";
+import Interview from "./pages/Interview";
 import About from "./pages/About";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import BlogBanner from "./pages/Blog";
@@ -46,7 +46,7 @@ import Sap from "./components/Courses/Sap";
 import SalesForce from "./components/Courses/SalesForce";
 import ServiceNow from "./components/Courses/ServiceNow";
 import RPA from "./components/Courses/RPA";
-import AdminLogin from "./components/admin/AdminLogin";
+
 import Clientpage from "./pages/Clientpage";
 
 import StudentTable from "./components/admin/CourseEnquired";

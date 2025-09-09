@@ -8,6 +8,7 @@ import Syllabus from "../coursecomponent/SyllabusLocked";
 import { SYLLABI } from "../coursecomponent/Syllabi";
 import { useDispatch, useSelector } from "react-redux";
 import { submitEnquiry } from "../../redux/actions/enquiryAction";
+import FeedbackWidget from "../common/Feedback";
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -851,6 +852,7 @@ export default function JavaCoursePage() {
           </div>
         </div>
       </section>
+      <FeedbackWidget />
     </section>
   );
 }
