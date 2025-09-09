@@ -14,7 +14,7 @@ import { submitEnquiry } from "../../redux/actions/enquiryAction";
   
 
   export default function JavaCoursePage() {
-    const [mode, setMode] = useState("classroom");
+    const [mode, setMode] = useState("class_room");
     const course = SYLLABI.java;
    
     const dispatch = useDispatch();
@@ -541,9 +541,9 @@ import { submitEnquiry } from "../../redux/actions/enquiryAction";
                 {/* Toggle Buttons */}
                 <div className="flex justify-center gap-3 mb-6">
                   <button
-                    onClick={() => setMode("classroom")}
+                    onClick={() => setMode("class_room")}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "classroom"
+                      mode === "class_room"
                         ? "bg-[#003c6a] text-white"
                         : "bg-white text-[#003c6a] border border-[#003c6a]"
                     }`}
