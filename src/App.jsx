@@ -23,7 +23,7 @@ import BlogBanner from "./pages/Blog";
 import Tutorials from "./pages/Tutorials";
 import TutorialDetail from "./pages/TutorialDetails";
 import InterviewDetail from "./pages/InterviewDetail";
-import ScrumMasterPage from "./components/Courses/ScrumMAster.jsx";
+import ScrumMasterPage from "./components/Courses/ScrumMaster.jsx";
 import AddStudent from "./components/admin/AddStudent";
 import AllCourses from "./pages/AllCourses";
 import Java from "./components/Courses/Java";
