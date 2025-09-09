@@ -4,10 +4,16 @@ import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Syllabus from "../coursecomponent/SyllabusLocked";
+import { SYLLABI } from "../coursecomponent/Syllabi";
+import { useDispatch, useSelector } from "react-redux";
+import { submitEnquiry } from "../../redux/actions/enquiryAction";
 
 export default function JavaCoursePage() {
-  const [mode, setMode] = useState("classroom");
-
+  const [mode, setMode] = useState("class_room");
+  const course = SYLLABI.servicenow;
+  const dispatch = useDispatch();
+  const { status, error } = useSelector((s) => s.enquiry || {});
   /* ===========================
      FORM STATE + VALIDATION
      =========================== */
@@ -15,7 +21,7 @@ export default function JavaCoursePage() {
     name: "",
     email: "",
     phone: "",
-    batch: "",
+
     course: "",
     message: "",
   });
@@ -117,18 +123,21 @@ export default function JavaCoursePage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+
+    // touch all
     setTouched({
       name: true,
       email: true,
       phone: true,
-      batch: true,
+
       course: true,
       message: true,
     });
 
-    const fields = ["name", "email", "phone", "batch", "course", "message"];
+    // validate all
+    const fields = ["name", "email", "phone", "course", "message"];
     const next = {};
     fields.forEach((f) => {
       const er = validateField(f, form[f]);
@@ -140,7 +149,6 @@ export default function JavaCoursePage() {
       const first = fields.find((f) => next[f]);
       const el = document.querySelector(`[name="${first}"]`);
       if (el) el.focus();
-
       toast.error(next[first] || "Please fix the highlighted errors.", {
         ...toastOpts,
         style: { background: "#ef4444", color: "#fff" },
@@ -149,32 +157,46 @@ export default function JavaCoursePage() {
       return;
     }
 
-    // success path – (wire API here if needed)
-    console.log("ServiceNow Enquiry:", form);
+    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    const payload = {
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      name: form.name.trim(),
+      email: form.email.trim(),
+      mobile: form.phone.trim(), // API key is 'mobile'
+      course: form.course.trim(),
+      message: form.message.trim(),
+      // batch is kept for UI; not sent since your sample payload doesn't include it
+    };
 
-    toast.success("Thanks! Your enquiry has been recorded.", {
-      ...toastOpts,
-      style: { background: "#16a34a", color: "#fff" },
-      className: "rounded-xl shadow-md text-[15px] px-4 py-3",
-    });
+    try {
+      await dispatch(submitEnquiry(payload)).unwrap();
 
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      batch: "",
-      course: "",
-      message: "",
-    });
-    setErrors({});
-    setTouched({});
-  };
+      toast.success("Thanks! Your enquiry has been recorded.", {
+        ...toastOpts,
+        style: { background: "#16a34a", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
 
-  // input classes
-  const baseInput =
-    "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500";
-  const ok = "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]";
-  const bad = "border-red-500 focus:border-red-500 focus:ring-red-500";
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+
+        course: "",
+        message: "",
+      });
+      setErrors({});
+      setTouched({});
+    } catch (err) {
+      console.error(err);
+      const msg = typeof err === "string" ? err : "Submission failed.";
+      toast.error(msg, {
+        ...toastOpts,
+        style: { background: "#ef4444", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+    }
+  }
 
   return (
     <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
@@ -188,23 +210,40 @@ export default function JavaCoursePage() {
 
           <ul className="space-y-3 mt-6 text-lg">
             <li>
-              ✅ Enroll in the <strong>Top ServiceNow Training Institute</strong> to kickstart your career in IT Service
-              Management and enterprise automation.
+              ✅ Enroll in the{" "}
+              <strong>Top ServiceNow Training Institute</strong> to kickstart
+              your career in IT Service Management and enterprise automation.
             </li>
             <li>
-              ✅ Learn core topics – <strong>ServiceNow Admin, ITSM, CMDB, Flow Designer, IntegrationHub, and Scripting</strong>.
+              ✅ Learn core topics –{" "}
+              <strong>
+                ServiceNow Admin, ITSM, CMDB, Flow Designer, IntegrationHub, and
+                Scripting
+              </strong>
+              .
             </li>
             <li>
-              ✅ Build practical skills through <strong>hands-on projects, developer instance, and workflow automations</strong>.
+              ✅ Build practical skills through{" "}
+              <strong>
+                hands-on projects, developer instance, and workflow automations
+              </strong>
+              .
             </li>
             <li>
-              ✅ Deep insights into <strong>incident/change management, catalog items, scripting, and UI policies</strong>.
+              ✅ Deep insights into{" "}
+              <strong>
+                incident/change management, catalog items, scripting, and UI
+                policies
+              </strong>
+              .
             </li>
             <li>
-              ✅ Earn a globally recognized <strong>ServiceNow Certification</strong> like CSA or CIS.
+              ✅ Earn a globally recognized{" "}
+              <strong>ServiceNow Certification</strong> like CSA or CIS.
             </li>
             <li>
-              ✅ Career support: Live projects, resume preparation, mock interviews & placement assistance.
+              ✅ Career support: Live projects, resume preparation, mock
+              interviews & placement assistance.
             </li>
           </ul>
 
@@ -220,9 +259,13 @@ export default function JavaCoursePage() {
               hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
           >
             <div>
-              <span className="text-lg font-extrabold text-violet-400 block">Freshers Salary:</span>
+              <span className="text-lg font-extrabold text-violet-400 block">
+                Freshers Salary:
+              </span>
               ₹3 LPA to ₹8 LPA <br />
-              <span className="text-sm text-gray-300">| ServiceNow Training | Duration: 3 Months</span>
+              <span className="text-sm text-gray-300">
+                | ServiceNow Training | Duration: 3 Months
+              </span>
             </div>
           </button>
         </div>
@@ -230,7 +273,9 @@ export default function JavaCoursePage() {
         {/* RIGHT: Call to Action */}
         <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
           <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-          <p className="mb-4 text-lg">Become a ServiceNow Professional in Just 3 Months</p>
+          <p className="mb-4 text-lg">
+            Become a ServiceNow Professional in Just 3 Months
+          </p>
 
           <button
             type="button"
@@ -238,7 +283,9 @@ export default function JavaCoursePage() {
             className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
           >
             <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
-            <span className="relative z-10 group-hover:text-black transition-colors duration-300">Enquire Now</span>
+            <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+              Enquire Now
+            </span>
             <span className="relative z-10">
               <svg
                 className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
@@ -267,20 +314,53 @@ export default function JavaCoursePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
             <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
-              <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
+              <span className="text-purple-400">●</span> Our Course Partners{" "}
+              <span className="text-purple-400">●</span>
             </h3>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
             {[
-              { name: "HubSpot", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg", link: "https://www.hubspot.com/" },
-              { name: "GitLab", logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg", link: "https://about.gitlab.com/" },
-              { name: "Monday.com", logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg", link: "https://monday.com/" },
-              { name: "Google Cloud", logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg", link: "https://cloud.google.com/" },
-              { name: "AWS", logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg", link: "https://aws.amazon.com/" },
-              { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg", link: "https://www.salesforce.com/" },
-              { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", link: "https://www.ibm.com/" },
-              { name: "Slack", logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg", link: "https://slack.com/" },
+              {
+                name: "HubSpot",
+                logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
+                link: "https://www.hubspot.com/",
+              },
+              {
+                name: "GitLab",
+                logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
+                link: "https://about.gitlab.com/",
+              },
+              {
+                name: "Monday.com",
+                logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
+                link: "https://monday.com/",
+              },
+              {
+                name: "Google Cloud",
+                logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
+                link: "https://cloud.google.com/",
+              },
+              {
+                name: "AWS",
+                logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
+                link: "https://aws.amazon.com/",
+              },
+              {
+                name: "Salesforce",
+                logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
+                link: "https://www.salesforce.com/",
+              },
+              {
+                name: "IBM",
+                logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                link: "https://www.ibm.com/",
+              },
+              {
+                name: "Slack",
+                logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                link: "https://slack.com/",
+              },
             ].map((partner, index) => (
               <motion.a
                 key={index}
@@ -294,7 +374,11 @@ export default function JavaCoursePage() {
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
                 className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
               >
-                <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-12 object-contain"
+                />
               </motion.a>
             ))}
           </div>
@@ -311,20 +395,36 @@ export default function JavaCoursePage() {
             <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-              Our ServiceNow program helps you master ITSM and workflow automation. Gain hands-on experience with Admin
-              configuration, CMDB, Flow Designer, IntegrationHub, and scripting to prepare for CSA/CIS certifications and
-              enterprise roles.
+              Our ServiceNow program helps you master ITSM and workflow
+              automation. Gain hands-on experience with Admin configuration,
+              CMDB, Flow Designer, IntegrationHub, and scripting to prepare for
+              CSA/CIS certifications and enterprise roles.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
               What You’ll Learn From ServiceNow Training
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> ITSM fundamentals & platform architecture.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Admin topics: Incident, Change, Problem, Request & Catalog.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Flow Designer, IntegrationHub, UI Policies & Business Rules.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> App development in Studio, Glide APIs & Update Sets.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Certification prep: CSA and CIS specializations.</li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> ITSM
+                fundamentals & platform architecture.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Admin topics:
+                Incident, Change, Problem, Request & Catalog.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Flow Designer,
+                IntegrationHub, UI Policies & Business Rules.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> App development
+                in Studio, Glide APIs & Update Sets.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Certification
+                prep: CSA and CIS specializations.
+              </li>
             </ul>
           </div>
         </div>
@@ -337,8 +437,8 @@ export default function JavaCoursePage() {
             Become a Certified ServiceNow Professional
           </h2>
           <p className="text-lg md:text-xl text-white mb-6">
-            Learn Administration, ITSM, CMDB, Flow Designer, IntegrationHub & Scripting with hands-on labs and
-            industry-focused training.
+            Learn Administration, ITSM, CMDB, Flow Designer, IntegrationHub &
+            Scripting with hands-on labs and industry-focused training.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button
@@ -355,8 +455,14 @@ export default function JavaCoursePage() {
           {/* Card 1 */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Course Highlights" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                alt="Course Highlights"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Course Highlights
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                 <li>✓ Admin & Developer tracks included</li>
                 <li>✓ Real-time workflow & ITSM implementation</li>
@@ -369,16 +475,32 @@ export default function JavaCoursePage() {
           {/* Card 2 */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Tools You’ll Master" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+                alt="Tools You’ll Master"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Tools You’ll Master
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {["ServiceNow Admin", "ITSM", "CMDB", "Flow Designer", "IntegrationHub", "Glide Scripting", "Catalog Builder", "Update Sets"].map(
-                  (tool) => (
-                    <span key={tool} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
-                      {tool}
-                    </span>
-                  )
-                )}
+                {[
+                  "ServiceNow Admin",
+                  "ITSM",
+                  "CMDB",
+                  "Flow Designer",
+                  "IntegrationHub",
+                  "Glide Scripting",
+                  "Catalog Builder",
+                  "Update Sets",
+                ].map((tool) => (
+                  <span
+                    key={tool}
+                    className="bg-gray-100 px-3 py-1 text-black rounded-full text-base font-medium"
+                  >
+                    {tool}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -386,16 +508,30 @@ export default function JavaCoursePage() {
           {/* Card 3 */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Topics Covered" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
+                alt="Topics Covered"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Topics Covered
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {["ITSM Processes", "Admin Configuration", "Flow Design", "Scripting with Glide", "Catalog Creation", "Incident/Change Mgmt"].map(
-                  (topic) => (
-                    <span key={topic} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
-                      {topic}
-                    </span>
-                  )
-                )}
+                {[
+                  "ITSM Processes",
+                  "Admin Configuration",
+                  "Flow Design",
+                  "Scripting with Glide",
+                  "Catalog Creation",
+                  "Incident/Change Mgmt",
+                ].map((topic) => (
+                  <span
+                    key={topic}
+                    className="bg-gray-100 px-3 text-black py-1 rounded-full text-base font-medium"
+                  >
+                    {topic}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -403,8 +539,14 @@ export default function JavaCoursePage() {
           {/* Card 4 */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Key Skills You’ll Gain" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
+                alt="Key Skills You’ll Gain"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Key Skills You’ll Gain
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                 <li>Configure & manage ServiceNow instances</li>
                 <li>Automate workflows with Flow Designer</li>
@@ -415,55 +557,75 @@ export default function JavaCoursePage() {
           </div>
         </div>
       </section>
-
+      {/* SYLLABUS */}
+      <Syllabus
+        title={course.title}
+        accent={course.accent}
+        meta={course.meta}
+        preview={course.preview}
+        sections={course.sections} // ← REQUIRED
+        useExternalForm
+        cardMinH={400} // tweak to visually match your right cards
+        stickyOffset={110}
+      />
       {/* ENQUIRY FORM */}
       <section className="w-full px-6 py-20 text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
           {/* LEFT: Additional Info Boxes (aligned like reference) */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Comprehensive Curriculum</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Comprehensive Curriculum
+              </h4>
               <p className="text-black/90">
-                Master ServiceNow with modules covering Admin, ITSM, CMDB, Flow Designer, IntegrationHub & scripting on developer instances.
+                Master ServiceNow with modules covering Admin, ITSM, CMDB, Flow
+                Designer, IntegrationHub & scripting on developer instances.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Career-Oriented Training</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Career-Oriented Training
+              </h4>
               <p className="text-black/90">
-                Learn from working professionals. Includes mock interviews, resume prep, and job assistance.
+                Learn from working professionals. Includes mock interviews,
+                resume prep, and job assistance.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Strong Placement Support</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Strong Placement Support
+              </h4>
               <p className="text-black/90">
-                We support your placement journey with partner network and hiring drives.
+                We support your placement journey with partner network and
+                hiring drives.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
               <p className="text-black/90">
-                Build service catalogs, automation flows, CMDB integrations & custom apps as capstones.
+                Build service catalogs, automation flows, CMDB integrations &
+                custom apps as capstones.
               </p>
             </div>
           </div>
 
-          {/* RIGHT: Validated Form */}
+          {/* RIGHT: Form */}
           <div className="w-full max-w-lg">
             <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
               <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                 Get a Free Training Quote
               </h3>
 
-              {/* Toggle Buttons */}
+              {/* Mode Toggle */}
               <div className="flex justify-center gap-3 mb-6">
                 <button
-                  onClick={() => setMode("classroom")}
+                  onClick={() => setMode("class_room")}
                   type="button"
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                    mode === "classroom"
+                    mode === "class_room"
                       ? "bg-[#003c6a] text-white"
                       : "bg-white text-[#003c6a] border border-[#003c6a]"
                   }`}
@@ -483,10 +645,8 @@ export default function JavaCoursePage() {
                 </button>
               </div>
 
-              {/* Form Fields */}
               <form
                 id="enquiry-form"
-                ref={formRef}
                 onSubmit={handleSubmit}
                 noValidate
                 className="grid grid-cols-1 gap-2"
@@ -501,10 +661,17 @@ export default function JavaCoursePage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.name}
-                    className={[baseInput, touched?.name && errors?.name ? bad : ok].join(" ")}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.name && errors?.name
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
                   <div className="h-3 mt-0.5">
-                    {touched?.name && errors?.name && <p className="text-red-600 text-xs">{errors.name}</p>}
+                    {touched?.name && errors?.name && (
+                      <p className="text-red-600 text-xs">{errors.name}</p>
+                    )}
                   </div>
                 </div>
 
@@ -518,75 +685,104 @@ export default function JavaCoursePage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.email}
-                    className={[baseInput, touched?.email && errors?.email ? bad : ok].join(" ")}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.email && errors?.email
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
                   <div className="h-3 mt-0.5">
-                    {touched?.email && errors?.email && <p className="text-red-600 text-xs">{errors.email}</p>}
+                    {touched?.email && errors?.email && (
+                      <p className="text-red-600 text-xs">{errors.email}</p>
+                    )}
                   </div>
                 </div>
 
                 {/* Phone + Batch */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      inputMode="numeric"
-                      pattern="\d*"
-                      placeholder="Mobile Num"
-                      value={form.phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.phone}
-                      className={[baseInput, touched?.phone && errors?.phone ? bad : ok].join(" ")}
-                    />
-                    <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && <p className="text-red-600 text-xs">{errors.phone}</p>}
-                    </div>
-                  </div>
 
-                  <div>
-                    <select
-                      name="batch"
-                      value={form.batch}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.batch}
-                      className={[baseInput, touched?.batch && errors?.batch ? bad : ok, "placeholder:text-transparent"].join(
-                        " "
-                      )}
-                    >
-                      <option value="" disabled>
-                        How & Where
-                      </option>
-                      <option>Morning Batch</option>
-                      <option>Evening Batch</option>
-                      <option>Weekend</option>
-                    </select>
-                    <div className="h-3 mt-0.5">
-                      {touched?.batch && errors?.batch && <p className="text-red-600 text-xs">{errors.batch}</p>}
-                    </div>
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    placeholder="Mobile Number"
+                    value={form.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.phone}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.phone && errors?.phone
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  />
+                  <div className="h-3 mt-0.5">
+                    {touched?.phone && errors?.phone && (
+                      <p className="text-red-600 text-xs">{errors.phone}</p>
+                    )}
                   </div>
                 </div>
 
-                {/* Course */}
+                {/* Course (dropdown select) */}
                 <div>
-                  <input
-                    type="text"
+                  <select
                     name="course"
-                    placeholder="Type Course (e.g., ServiceNow)"
                     value={form.course}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.course}
-                    className={[baseInput, touched?.course && errors?.course ? bad : ok].join(" ")}
-                  />
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
+                      touched?.course && errors?.course
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  >
+                    <option value="">Select Course</option>
+                    {[
+                      "Java",
+                      "Python",
+                      "Full Stack Development",
+                      "PL/SQL",
+                      "SQL",
+                      "Data Science",
+                      "Business Analytics",
+                      "Data Science & AI",
+                      "Big Data Developer",
+                      "Software Testing",
+                      "Selenium Testing",
+                      "ETL Testing",
+                      "AWS Training",
+                      "DevOps",
+                      "Hardware Networking",
+                      "Cyber Security",
+                      "SAP",
+                      "Salesforce",
+                      "ServiceNow",
+                      "RPA (Robotic Process Automation)",
+                      "Production Support",
+                      "Digital Marketing",
+                      "Soft Skill Training",
+                      "Scrum Master",
+                      "Business Analyst",
+                      "Product Management",
+                    ].map((course) => (
+                      <option key={course} value={course}>
+                        {course}
+                      </option>
+                    ))}
+                  </select>
+
                   <div className="h-3 mt-0.5">
-                    {touched?.course && errors?.course && <p className="text-red-600 text-xs">{errors.course}</p>}
+                    {touched?.course && errors?.course && (
+                      <p className="text-red-600 text-xs">{errors.course}</p>
+                    )}
                   </div>
                 </div>
 
-                {/* Message */}
                 <div>
                   <textarea
                     rows={2}
@@ -596,23 +792,41 @@ export default function JavaCoursePage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.message}
-                    className={[baseInput, "resize-none", touched?.message && errors?.message ? bad : ok].join(" ")}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.message && errors?.message
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
                   <div className="flex justify-between text-xs text-gray-500 mt-0.5">
                     <span>First letter auto-caps</span>
                     <span>{form.message.length}/300</span>
                   </div>
                   <div className="h-3 mt-0.5">
-                    {touched?.message && errors?.message && <p className="text-red-600 text-xs">{errors.message}</p>}
+                    {touched?.message && errors?.message && (
+                      <p className="text-red-600 text-xs">{errors.message}</p>
+                    )}
                   </div>
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
-                  className="w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition"
+                  disabled={status === "loading"}
+                  className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
+                    status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                  }`}
                 >
-                  Submit
+                  {status === "loading" ? "Submitting..." : "Submit"}
                 </button>
+
+                {/* Optional server error */}
+                {error && (
+                  <p className="text-red-600 text-xs mt-1">
+                    Submission failed: {String(error)}
+                  </p>
+                )}
               </form>
             </div>
           </div>

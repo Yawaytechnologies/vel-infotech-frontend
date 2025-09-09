@@ -171,7 +171,7 @@ const Internship = () => {
   const help = "mt-1 text-[12px] text-red-600";
 
   return (
-    <div className="bg-background ">
+    <div className="bg-background pb-10 ">
       {/* Toasts */}
       <ToastContainer newestOnTop />
 

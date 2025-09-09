@@ -3,25 +3,51 @@ import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { submitEnquiry } from "../../redux/actions/enquiryAction";
 
 export default function AboutSection() {
-  const [mode, setMode] = useState("classroom");
+  const [mode, setMode] = useState("class_room");
+  const dispatch = useDispatch();
+  const { status, error } = useSelector((s) => s.enquiry || {});
 
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    batch: "",
+    
     course: "",
     message: "",
   });
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
-  const [submitting, setSubmitting] = useState(false);
+  
 
-  // helpers
-  const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
-  const lettersSpaces = (s) => s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
+ // ✅ define toastOpts (you were using it but not defining it)
+  const toastOpts = {
+    position: "top-center",
+    autoClose: 2200,
+    hideProgressBar: true,
+    closeButton: false,
+    newestOnTop: true,
+    draggable: false,
+    pauseOnHover: true,
+    pauseOnFocusLoss: false,
+    theme: "colored",
+    transition: Slide,
+    style: {
+      borderRadius: "10px",
+      padding: "8px 12px",
+      minWidth: "260px",
+      maxWidth: "320px",
+      lineHeight: 1.25,
+      fontSize: "14px",
+      fontWeight: 600,
+      boxShadow: "0 8px 20px rgba(0,0,0,.18)",
+      color: "#fff",
+    },
+  };
+
 
   const setField = (field, value) => {
     setForm((f) => ({ ...f, [field]: value }));
@@ -33,7 +59,16 @@ export default function AboutSection() {
       return next;
     });
   };
-
+  const handleChange = (e) => setField(e.target.name, e.target.value);
+    const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((t) => ({ ...t, [name]: true }));
+    const msg = validateField(name, form[name]);
+    setErrors((prev) => ({
+      ...prev,
+      ...(msg ? { [name]: msg } : { [name]: undefined }),
+    }));
+  };
   // validations
   const validateField = (field, value) => {
     const val = (value ?? "").trim();
@@ -54,9 +89,7 @@ export default function AboutSection() {
         if (!val) return "Mobile number is required.";
         if (!/^\d{10}$/.test(val)) return "Enter a valid 10-digit mobile number.";
         return null;
-      case "batch":
-        if (!val) return "Please select a batch.";
-        return null;
+      
       case "course":
         if (!val) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(val)) return "Only letters and spaces are allowed.";
@@ -70,98 +103,91 @@ export default function AboutSection() {
     }
   };
 
-  const validateAll = () => {
-    const fields = ["name", "email", "phone", "batch", "course", "message"];
-    const next = {};
-    fields.forEach((f) => {
-      const err = validateField(f, form[f]);
-      if (err) next[f] = err;
-    });
-    setErrors(next);
-    return next;
-  };
+ 
 
-  const onBlur = (e) => {
-    const { name, value } = e.target;
-    setTouched((t) => ({ ...t, [name]: true }));
-    if (name === "name") setField("name", capFirst(value));
-    if (name === "course") setField("course", capFirst(value));
-    if (name === "message") setField("message", capFirst(value));
-  };
+  
 
-  // inputs
-  const handleName = (e) => setField("name", capFirst(lettersSpaces(e.target.value)));
-  const handleEmail = (e) => setField("email", e.target.value);
-  const handlePhone = (e) => setField("phone", e.target.value.replace(/\D+/g, "").slice(0, 10));
-  const handleCourse = (e) => setField("course", capFirst(lettersSpaces(e.target.value)));
-  const handleMessage = (e) => {
-    const v = e.target.value;
-    setField("message", v.length ? v[0].toUpperCase() + v.slice(1) : v);
-  };
+ 
 
-  // toast helpers
-  const tBase = {
-    position: "top-center",
-    autoClose: 2200,
-    hideProgressBar: true,
-    closeButton: false,
-    newestOnTop: true,
-    draggable: false,
-    pauseOnHover: true,
-    pauseOnFocusLoss: false,
-    theme: "colored",
-    transition: Slide,
-    style: {
-      borderRadius: "10px",
-      padding: "8px 12px",
-      minWidth: "260px", // smaller width
-      maxWidth: "320px",
-      lineHeight: 1.25,
-      fontSize: "14px",
-      fontWeight: 600,
-      boxShadow: "0 8px 20px rgba(0,0,0,.18)",
-      color: "#fff",
-    },
-  };
 
-  const notifySuccess = (msg) =>
-    toast(msg, { ...tBase, style: { ...tBase.style, background: "#34d399" /* light green */, color: "#fff" } });
 
-  const notifyError = (msg) =>
-    toast(msg, { ...tBase, style: { ...tBase.style, background: "#ef4444" /* red */, color: "#fff" } });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setTouched({ name: true, email: true, phone: true, batch: true, course: true, message: true });
-
-    const errs = validateAll();
-    if (Object.keys(errs).length) {
-      const firstErr = errs.name || errs.email || errs.phone || errs.batch || errs.course || errs.message;
-      notifyError(firstErr || "Please fix the highlighted fields.");
-      return;
+   async function handleSubmit(e) {
+      e.preventDefault();
+  
+      // touch all
+      setTouched({
+        name: true,
+        email: true,
+        phone: true,
+  
+        course: true,
+        message: true,
+      });
+  
+      // validate all
+      const fields = ["name", "email", "phone", "course", "message"];
+      const next = {};
+      fields.forEach((f) => {
+        const er = validateField(f, form[f]);
+        if (er) next[f] = er;
+      });
+      setErrors(next);
+  
+      if (Object.keys(next).length) {
+        const first = fields.find((f) => next[f]);
+        const el = document.querySelector(`[name="${first}"]`);
+        if (el) el.focus();
+        toast.error(next[first] || "Please fix the highlighted errors.", {
+          ...toastOpts,
+          style: { background: "#ef4444", color: "#fff" },
+          className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+        });
+        return;
+      }
+  
+      // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+      const payload = {
+        mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+        name: form.name.trim(),
+        email: form.email.trim(),
+        mobile: form.phone.trim(), // API key is 'mobile'
+        course: form.course.trim(),
+        message: form.message.trim(),
+        // batch is kept for UI; not sent since your sample payload doesn't include it
+      };
+  
+      try {
+        await dispatch(submitEnquiry(payload)).unwrap();
+  
+        toast.success("Thanks! Your enquiry has been recorded.", {
+          ...toastOpts,
+          style: { background: "#16a34a", color: "#fff" },
+          className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+        });
+  
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+  
+          course: "",
+          message: "",
+        });
+        setErrors({});
+        setTouched({});
+      } catch (err) {
+        console.error(err);
+        const msg = typeof err === "string" ? err : "Submission failed.";
+        toast.error(msg, {
+          ...toastOpts,
+          style: { background: "#ef4444", color: "#fff" },
+          className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+        });
+      }
     }
+  
 
-    try {
-      setSubmitting(true);
-        // TODO: post to your API here
-      // await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, mode }) });
-      notifySuccess("Thanks! Your enquiry has been recorded.");
-      setForm({ name: "", email: "", phone: "", batch: "", course: "", message: "" });
-      setErrors({});
-      setTouched({});
-    } catch {
-      notifyError("Something went wrong. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  // compact controls
-  const control =
-    "h-10 rounded-xl bg-background px-3 border text-[13px] font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow w-full";
-  const ok = "border-[#003c6a]/60";
-  const err = "border-red-500 focus:ring-red-500";
-  const helper = (hasErr) => `h-3 text-[10px] mt-1 ${hasErr ? "text-red-600" : "text-transparent"}`;
+ 
 
   return (
     <>
@@ -237,12 +263,12 @@ export default function AboutSection() {
               <div className="flex justify-center mb-6 gap-2">
                 <button
                   type="button"
-                  onClick={() => setMode("classroom")}
+                  onClick={() => setMode("class_room")}
                   className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-sm font-medium shadow
-                    ${mode === "classroom"
+                    ${mode === "class_room"
                       ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
                       : "bg-white/60 text-black border border-[#a7f3d0]/40"} transition-all duration-200`}
-                  aria-pressed={mode === "classroom"}
+                  aria-pressed={mode === "class_room"}
                 >
                   <FaChalkboardTeacher className="text-base" /> Class Room
                 </button>
@@ -260,141 +286,188 @@ export default function AboutSection() {
               </div>
 
               {/* Form (compact) */}
-              <form className="flex flex-col gap-2" noValidate onSubmit={handleSubmit}>
+                <form
+                id="enquiry-form"
+                onSubmit={handleSubmit}
+                noValidate
+                className="grid grid-cols-1 gap-2"
+              >
                 {/* Name */}
                 <div>
                   <input
-                    name="name"
                     type="text"
+                    name="name"
                     placeholder="Your Name"
                     value={form.name}
-                    onChange={handleName}
-                    onBlur={onBlur}
-                    aria-invalid={!!errors.name}
-                    aria-describedby="err-name"
-                    className={`${control} ${touched.name && errors.name ? err : ok}`}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.name}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.name && errors?.name
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
-                  <div id="err-name" className={helper(touched.name && errors.name)}>
-                    {touched.name && errors.name ? errors.name : "placeholder"}
+                  <div className="h-3 mt-0.5">
+                    {touched?.name && errors?.name && (
+                      <p className="text-red-600 text-xs">{errors.name}</p>
+                    )}
                   </div>
                 </div>
 
                 {/* Email */}
                 <div>
                   <input
-                    name="email"
                     type="email"
+                    name="email"
                     placeholder="Your Email"
                     value={form.email}
-                    onChange={handleEmail}
-                    onBlur={onBlur}
-                    aria-invalid={!!errors.email}
-                    aria-describedby="err-email"
-                    className={`${control} ${touched.email && errors.email ? err : ok}`}
-                    autoComplete="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.email}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.email && errors?.email
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
-                  <div id="err-email" className={helper(touched.email && errors.email)}>
-                    {touched.email && errors.email ? errors.email : "placeholder"}
+                  <div className="h-3 mt-0.5">
+                    {touched?.email && errors?.email && (
+                      <p className="text-red-600 text-xs">{errors.email}</p>
+                    )}
                   </div>
                 </div>
 
                 {/* Phone + Batch */}
-                <div className="grid grid-cols-2 gap-2 items-start">
-                  <div>
-                    <input
-                      name="phone"
-                      type="tel"
-                      inputMode="numeric"
-                      pattern="\d*"
-                      placeholder="Mobile Number"
-                      value={form.phone}
-                      onChange={handlePhone}
-                      onBlur={onBlur}
-                      aria-invalid={!!errors.phone}
-                      aria-describedby="err-phone"
-                      className={`${control} ${touched.phone && errors.phone ? err : ok}`}
-                    />
-                    <div id="err-phone" className={helper(touched.phone && errors.phone)}>
-                      {touched.phone && errors.phone ? errors.phone : "placeholder"}
-                    </div>
-                  </div>
 
-                  <div>
-                    <select
-                      name="batch"
-                      value={form.batch}
-                      onChange={(e) => setField("batch", e.target.value)}
-                      onBlur={onBlur}
-                      aria-invalid={!!errors.batch}
-                      aria-describedby="err-batch"
-                      className={`${control} cursor-pointer pr-7 ${
-                        touched.batch && errors.batch ? err : ok
-                      }`}
-                    >
-                      <option value="" disabled>
-                        How & Where
-                      </option>
-                      <option>Morning Batch</option>
-                      <option>Evening Batch</option>
-                      <option>Weekend</option>
-                    </select>
-                    <div id="err-batch" className={helper(touched.batch && errors.batch)}>
-                      {touched.batch && errors.batch ? errors.batch : "placeholder"}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Course */}
                 <div>
                   <input
-                    name="course"
-                    type="text"
-                    placeholder="Type Course"
-                    value={form.course}
-                    onChange={handleCourse}
-                    onBlur={onBlur}
-                    aria-invalid={!!errors.course}
-                    aria-describedby="err-course"
-                    className={`${control} ${touched.course && errors.course ? err : ok}`}
+                    type="tel"
+                    name="phone"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    placeholder="Mobile Number"
+                    value={form.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.phone}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.phone && errors?.phone
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
-                  <div id="err-course" className={helper(touched.course && errors.course)}>
-                    {touched.course && errors.course ? errors.course : "placeholder"}
+                  <div className="h-3 mt-0.5">
+                    {touched?.phone && errors?.phone && (
+                      <p className="text-red-600 text-xs">{errors.phone}</p>
+                    )}
                   </div>
                 </div>
 
-                {/* Message */}
+                {/* Course (dropdown select) */}
+                <div>
+                  <select
+                    name="course"
+                    value={form.course}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.course}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
+                      touched?.course && errors?.course
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  >
+                    <option value="">Select Course</option>
+                    {[
+                      "Java",
+                      "Python",
+                      "Full Stack Development",
+                      "PL/SQL",
+                      "SQL",
+                      "Data Science",
+                      "Business Analytics",
+                      "Data Science & AI",
+                      "Big Data Developer",
+                      "Software Testing",
+                      "Selenium Testing",
+                      "ETL Testing",
+                      "AWS Training",
+                      "DevOps",
+                      "Hardware Networking",
+                      "Cyber Security",
+                      "SAP",
+                      "Salesforce",
+                      "ServiceNow",
+                      "RPA (Robotic Process Automation)",
+                      "Production Support",
+                      "Digital Marketing",
+                      "Soft Skill Training",
+                      "Scrum Master",
+                      "Business Analyst",
+                      "Product Management",
+                    ].map((course) => (
+                      <option key={course} value={course}>
+                        {course}
+                      </option>
+                    ))}
+                  </select>
+
+                  <div className="h-3 mt-0.5">
+                    {touched?.course && errors?.course && (
+                      <p className="text-red-600 text-xs">{errors.course}</p>
+                    )}
+                  </div>
+                </div>
+
                 <div>
                   <textarea
+                    rows={2}
                     name="message"
                     placeholder="Your Message"
-                    rows={3}
                     value={form.message}
-                    onChange={handleMessage}
-                    onBlur={onBlur}
-                    aria-invalid={!!errors.message}
-                    aria-describedby="err-message"
-                    className={`rounded-xl bg-background px-3 py-2 min-h-[72px] border text-[13px] font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow w-full ${
-                      touched.message && errors.message ? err : ok
-                    }`}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.message}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.message && errors?.message
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
-                  <div className="flex justify-between text-[10px] text-gray-500 mt-1">
-                    <span>Optional</span>
+                  <div className="flex justify-between text-xs text-gray-500 mt-0.5">
+                    <span>First letter auto-caps</span>
                     <span>{form.message.length}/300</span>
                   </div>
-                  <div id="err-message" className={helper(touched.message && errors.message)}>
-                    {touched.message && errors.message ? errors.message : "placeholder"}
+                  <div className="h-3 mt-0.5">
+                    {touched?.message && errors?.message && (
+                      <p className="text-red-600 text-xs">{errors.message}</p>
+                    )}
                   </div>
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
-                  disabled={submitting}
-                  className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] disabled:opacity-70 disabled:cursor-not-allowed text-white font-extrabold py-2.5 rounded-xl hover:from-[#0891b2] hover:to-[#16bca7] transition shadow-lg mt-1"
+                  disabled={status === "loading"}
+                  className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
+                    status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                  }`}
                 >
-                  {submitting ? "Submitting..." : "Submit"}
+                  {status === "loading" ? "Submitting..." : "Submit"}
                 </button>
 
-                <input type="hidden" name="mode" value={mode} />
+                {/* Optional server error */}
+                {error && (
+                  <p className="text-red-600 text-xs mt-1">
+                    Submission failed: {String(error)}
+                  </p>
+                )}
               </form>
             </div>
           </div>

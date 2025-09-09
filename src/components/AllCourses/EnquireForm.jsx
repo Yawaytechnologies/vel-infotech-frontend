@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { FiPhone } from "react-icons/fi";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FiPhone, FiClock, FiStar, FiShield, FiCheckCircle } from "react-icons/fi";
 
 export default function CallAndFormSection() {
   const [mode, setMode] = useState("classroom");
@@ -19,7 +19,31 @@ export default function CallAndFormSection() {
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
 
-  // Helper functions
+  // --- NEW: phone + mailto helpers (edit numbers if needed) ---
+  const PHONE_PILL = "+919600593838";     // phone shown in the left "pill"
+  const PHONE_CALL_NOW = "+917667663035"; // phone used by big "Call Us Now" CTA
+  const EMAIL_TO = "contact.velinfo@gmail.com";
+
+  const phoneHref = `tel:${PHONE_PILL}`;
+  const callNowHref = `tel:${PHONE_CALL_NOW}`;
+
+  const mailtoHref = `mailto:${EMAIL_TO}` +
+    `?subject=${encodeURIComponent(`Course Enquiry — ${form.course || "Vel InfoTech"}`)}` +
+    `&body=${encodeURIComponent(
+      `Hi Team,
+
+I'm interested in ${form.course || "a course"} (${mode} mode).
+Please call me at ${form.phone || "your number"}.
+Batch preference: ${form.batch || "-"}
+
+Message:
+${form.message || "-"}
+
+Thanks,
+${form.name || ""}`
+    )}`;
+
+  // Helpers
   const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
   const lettersSpaces = (s) => s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
 
@@ -45,7 +69,6 @@ export default function CallAndFormSection() {
         return null;
       case "email": {
         if (!val) return "Email is required.";
-        // Updated regex for email validation with domain check
         const formatOK = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
         if (!formatOK) return "Email must include letter or also can be with numbers, and allowed symbols before @ ";
         return null;
@@ -114,7 +137,7 @@ export default function CallAndFormSection() {
     style: {
       borderRadius: "10px",
       padding: "8px 12px",
-      minWidth: "260px", // smaller width
+      minWidth: "260px",
       maxWidth: "320px",
       lineHeight: 1.25,
       fontSize: "14px",
@@ -125,10 +148,10 @@ export default function CallAndFormSection() {
   };
 
   const notifySuccess = (msg) =>
-    toast(msg, { ...tBase, style: { ...tBase.style, background: "#34d399" /* light green */, color: "#fff" } });
+    toast(msg, { ...tBase, style: { ...tBase.style, background: "#34d399", color: "#fff" } });
 
   const notifyError = (msg) =>
-    toast(msg, { ...tBase, style: { ...tBase.style, background: "#ef4444" /* red */, color: "#fff" } });
+    toast(msg, { ...tBase, style: { ...tBase.style, background: "#ef4444", color: "#fff" } });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -143,7 +166,6 @@ export default function CallAndFormSection() {
 
     try {
       setSubmitting(true);
-      // TODO: post to your API here
       // await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, mode }) });
       notifySuccess("Thanks! Your enquiry has been recorded.");
       setForm({ name: "", email: "", phone: "", batch: "", course: "", message: "" });
@@ -165,29 +187,90 @@ export default function CallAndFormSection() {
 
   return (
     <>
-      {/* Toasts pinned to top of viewport */}
       <ToastContainer newestOnTop position="top-center" autoClose={2200} closeOnClick={false} pauseOnHover={true} />
 
       <section className="w-full py-12 px-4 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-start">
-          {/* LEFT: Call To Action */}
-          <div className="flex-1 w-full bg-gradient-to-r from-[#7f00ff] to-[#e100ff] text-white rounded-3xl px-6 py-10 shadow-lg">
-            <h2 className="text-2xl md:text-3xl font-extrabold mb-4">Still have queries? Contact Us</h2>
-            <p className="text-lg md:text-xl font-medium mb-6">
-              Request a callback. An expert from our office will call you in the next 24 working hours.
-              <br className="hidden md:block" />
-              You can also reach out to us at{" "}
-              <a href="mailto:velinfo@gmail.com" className="underline hover:text-gray-200">
-                velinfo@gmail.com
-              </a>{" "}
-              or <span className="font-semibold">7667663035</span>
+          {/* LEFT: Call / Advisor CTA */}
+          <div className="relative w-full flex-1 overflow-hidden rounded-3xl p-8 md:p-10 text-white
+                bg-gradient-to-br from-[#005BAC] via-[#0a6cc4] to-[#003c6a] shadow-xl">
+
+            <div className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-cyan-300/20 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-white/10 blur-2xl" />
+
+            {/* header */}
+            <div className="relative z-10 flex items-start gap-4">
+              <div className="h-12 w-12 shrink-0 rounded-2xl bg-white/20 ring-1 ring-white/30 backdrop-blur-sm flex items-center justify-center shadow">
+                <FiPhone className="text-2xl" />
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">
+                  Talk to a <span className="text-cyan-200">Course Advisor</span>
+                </h2>
+                <p className="mt-2 text-white/90 max-w-xl">
+                  Get the right course recommendation and fee details in minutes. We’ll call you back within <span className="font-semibold underline decoration-white/70">24 working hours</span>.
+                </p>
+              </div>
+            </div>
+
+            {/* trust chips */}
+            <div className="relative z-10 mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="flex items-center gap-2 rounded-xl bg-white/15 ring-1 ring-white/20 px-3 py-2 backdrop-blur">
+                <FiStar className="text-lg" /><span className="text-sm font-semibold">4.8/5 Support</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-xl bg-white/15 ring-1 ring-white/20 px-3 py-2 backdrop-blur">
+                <FiClock className="text-lg" /><span className="text-sm font-semibold">Quick Callback</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-xl bg-white/15 ring-1 ring-white/20 px-3 py-2 backdrop-blur">
+                <FiShield className="text-lg" /><span className="text-sm font-semibold">Data Safe</span>
+              </div>
+            </div>
+
+            {/* contact pills (UPDATED hrefs) */}
+            <div className="relative z-10 mt-6 grid sm:grid-cols-2 gap-3">
+              <a
+                href={mailtoHref}
+                className="flex items-center gap-3 rounded-2xl bg-white/20 hover:bg-white/25 transition
+                           ring-1 ring-white/30 px-4 py-3 backdrop-blur-lg shadow"
+                aria-label="Email Vel InfoTech"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/25">📧</span>
+                <span className="text-sm font-semibold">{EMAIL_TO}</span>
+              </a>
+
+              <a
+                href={phoneHref}
+                className="flex items-center gap-3 rounded-2xl bg-white/20 hover:bg-white/25 transition
+                           ring-1 ring-white/30 px-4 py-3 backdrop-blur-lg shadow"
+                aria-label="Call Vel InfoTech"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/25">📞</span>
+                <span className="text-sm font-semibold">{PHONE_PILL.replace("+91", "+91 ")}</span>
+              </a>
+            </div>
+
+            {/* primary actions (UPDATED href) */}
+            <div className="relative z-10 mt-6 flex flex-wrap gap-3">
+              <a
+                href={callNowHref}
+                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-bold
+                           bg-emerald-500 hover:bg-emerald-600 shadow-lg ring-1 ring-emerald-400/40 transition"
+              >
+                <FiPhone className="text-lg" /> Call Us Now
+              </a>
+              <button
+                type="button"
+                onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-bold
+                           bg-white/15 hover:bg-white/25 ring-1 ring-white/30 backdrop-blur transition"
+              >
+                <FiCheckCircle className="text-lg" /> Request a Callback
+              </button>
+            </div>
+
+            <p className="relative z-10 mt-4 text-xs text-white/75">
+              Working hours: Mon–Sat, 9:30 AM – 7:00 PM IST
             </p>
-            <a
-              href="tel:7667663035"
-              className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white text-lg font-bold px-8 py-3 rounded-full shadow-lg transition-all duration-300"
-            >
-              <FiPhone className="mr-2" /> Call Us
-            </a>
           </div>
 
           {/* RIGHT: Enquiry Form */}
@@ -203,8 +286,8 @@ export default function CallAndFormSection() {
                   onClick={() => setMode("classroom")}
                   className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-lg font-semibold shadow transition-all duration-200
                   ${mode === "classroom"
-                    ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                    : "bg-white/60 text-black border border-[#a7f3d0]/40"}`}
+                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                      : "bg-white/60 text-black border border-[#a7f3d0]/40"}`}
                 >
                   <FaChalkboardTeacher className="text-xl" /> Class Room
                 </button>
@@ -212,8 +295,8 @@ export default function CallAndFormSection() {
                   onClick={() => setMode("online")}
                   className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-lg font-semibold shadow transition-all duration-200
                   ${mode === "online"
-                    ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                    : "bg-white/60 text-black border border-[#a7f3d0]/40"}`}
+                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                      : "bg-white/60 text-black border border-[#a7f3d0]/40"}`}
                 >
                   <FaLaptop className="text-xl" /> Online
                 </button>

@@ -13,6 +13,7 @@ import Footer from "./components/common/Footer";
 import Internship from "./pages/internship";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import BlogDetails from "./pages/BlogDetails";
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
 import Interview from "./pages/interview";
@@ -20,8 +21,9 @@ import About from "./pages/About";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import BlogBanner from "./pages/Blog";
 import Tutorials from "./pages/Tutorials";
+import TutorialDetail from "./pages/TutorialDetails";
 import InterviewDetail from "./pages/InterviewDetail";
-
+import ScrumMasterPage from "./components/Courses/ScrumMAster.jsx";
 import AddStudent from "./components/admin/AddStudent";
 import AllCourses from "./pages/AllCourses";
 import Java from "./components/Courses/Java";
@@ -46,7 +48,7 @@ import ServiceNow from "./components/Courses/ServiceNow";
 import RPA from "./components/Courses/RPA";
 import AdminLogin from "./components/admin/AdminLogin";
 import Clientpage from "./pages/Clientpage";
-import Feedback from "./pages/Feedback";
+
 import StudentTable from "./components/admin/CourseEnquired";
 import AdminLayout from "./components/admin/AdminLayout";
 import ProductionSupportPage from "./components/Courses/ProductionSupport";
@@ -55,7 +57,8 @@ import SoftSkillPage from "./components/Courses/SoftSkillsTraining";
 import Reviews from "./pages/Reviews";
 import SampleResume from "./pages/SampleResume";
 import Whatsapp from "./components/common/Whatsapp";
-
+import ProductManagement from "./components/Courses/ProductManagement";
+import BusinessAnalyst from "./components/Courses/BusinessAnalyst";
 // Wrapper to use useLocation
 function Layout({ children }) {
   const location = useLocation();
@@ -64,7 +67,7 @@ function Layout({ children }) {
     "/admin",
     "/admin/login",
     "/admin/dashboard",
-    "/admin/course-enquired",,
+    "/admin/course-enquired",
     "/admin/add-student",
   ];
   const isAdmin = adminPaths.includes(location.pathname);
@@ -102,18 +105,18 @@ export default function App() {
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<BlogBanner />} />
           <Route path="/resources" element={<Tutorials />} />
-          <Route path="/feedback" element={<Feedback />} />
+          
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/client" element={<Clientpage />} />
           <Route path="/internship" element={<Internship />} />
           <Route path="/Blog" element={<Blog />} />
-
+<Route path="/blog/:slug" element={<BlogDetails />} />
           {/* Tutorials */}
           <Route path="/tutorials" element={<Tutorials />} />
           {/* Aliases/redirects to be safe */}
           <Route path="/Tutorials" element={<Navigate to="/tutorials" replace />} />
           <Route path="/resources" element={<Navigate to="/tutorials" replace />} />
-
+          <Route path="/tutorials/:slug" element={<TutorialDetail />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
 
@@ -124,6 +127,7 @@ export default function App() {
           <Route path="/all-courses/FullStackDevelopement" element={<FullStackDevelopement />} />
           <Route path="/all-courses/Plsql" element={<Plsql />} />
           <Route path="/all-courses/Sql" element={<Sql />} />
+          <Route path="/all-courses/ScrumMaster" element={<ScrumMasterPage />} />
           <Route path="/all-courses/DataScience" element={<DataScience />} />
           <Route path="/all-courses/BusinessAnalytics" element={<BusinessAnalytics />} />
           <Route path="/all-courses/DataScienceAi" element={<DataScienceAi />} />
@@ -133,6 +137,8 @@ export default function App() {
           <Route path="/all-courses/EtlTesting" element={<EtlTesting />} />
           <Route path="/all-courses/AwsTraining" element={<AwsTraining />} />
           <Route path="/all-courses/DevOps" element={<DevOps />} />
+          <Route path="/all-courses/ProductManagement" element={<ProductManagement />} />
+          <Route path="/all-courses/BusinessAnalyst" element={<BusinessAnalyst />} />
           <Route path="/all-courses/HardwareNetworking" element={<HardwareNetworking />} />
           <Route path="/all-courses/CyberSecurity" element={<CyberSecurity />} />
           <Route path="/all-courses/Sap" element={<Sap />} />

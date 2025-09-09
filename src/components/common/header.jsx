@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiChevronDown, FiChevronRight } from "react-icons/fi";
 import Logo1 from "../../assets/infotech.png";
-import Vel from "../../assets/Vel InfoTech.svg";
+import Vel from "../../assets/Brandd.png";
 import { Link } from "react-router-dom";
 
 const groupedCourses = [
@@ -10,7 +10,10 @@ const groupedCourses = [
     items: [
       { name: "Java", href: "/all-courses/Java" },
       { name: "Python", href: "/all-courses/Python" },
-      { name: "Full Stack Development", href: "/all-courses/FullStackDevelopement" },
+      {
+        name: "Full Stack Development",
+        href: "/all-courses/FullStackDevelopement",
+      },
       { name: "PL SQL", href: "/all-courses/Plsql" }, // matches Route
       { name: "SQL", href: "/all-courses/Sql" },
     ],
@@ -22,6 +25,14 @@ const groupedCourses = [
       { name: "Business Analytics", href: "/all-courses/BusinessAnalytics" },
       { name: "Data Science & AI", href: "/all-courses/DataScienceAi" },
       { name: "Big Data Developer", href: "/all-courses/BigDataDeveloper" },
+    ],
+  },
+  {
+    category: "Non Coding Courses",
+    items: [
+      { name: "Scrum Master", href: "/all-courses/ScrumMaster" },
+      { name: "Business Analyst", href: "/all-courses/BusinessAnalyst" },
+      { name: "Product Management", href: "/all-courses/ProductManagement" },
     ],
   },
   {
@@ -57,15 +68,21 @@ const groupedCourses = [
   },
   {
     category: "IT Operations",
-    items: [{ name: "Production Support", href: "/all-courses/ProductionSupport" }],
+    items: [
+      { name: "Production Support", href: "/all-courses/ProductionSupport" },
+    ],
   },
   {
     category: "Business & Marketing",
-    items: [{ name: "Digital Marketing", href: "/all-courses/DigitalMarketing" }],
+    items: [
+      { name: "Digital Marketing", href: "/all-courses/DigitalMarketing" },
+    ],
   },
   {
     category: "Professional Development",
-    items: [{ name: "Soft Skill Training", href: "/all-courses/SoftSkillsTraining" }],
+    items: [
+      { name: "Soft Skill Training", href: "/all-courses/SoftSkillsTraining" },
+    ],
   },
 ];
 
@@ -82,8 +99,8 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sidebarMenus, setSidebarMenus] = useState({});
   const [activeCategory, setActiveCategory] = useState(null);
-const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
- const [mobileCategory, setMobileCategory] = useState(null);
+  const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
+  const [mobileCategory, setMobileCategory] = useState(null);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -102,17 +119,16 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   return (
     <>
       <header className="fixed top-0 w-full z-50 bg-background border-b border-white/20">
-        <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[74px]">
+        <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[78px]">
           <div className="flex items-center flex-shrink-0">
-             <Link to="/">
-    <img
-      src={Vel}
-      alt="Logo"
-      className="h-18 sm:h-14 md:h-49 md:pt-2 w-auto object-contain"
-      style={{ cursor: "pointer" }}
-    />
-  </Link>
-           
+            <Link to="/">
+              <img
+                src={Vel}
+                alt="Logo"
+                className="h-28 w-auto object-contain md:h-30 lg:h-43 md:pt-3 md:pb-2"
+                style={{ cursor: "pointer" }}
+              />
+            </Link>
           </div>
 
           <nav className="hidden md:flex items-center gap-2 lg:gap-10 lg:ml-30 h-full">
@@ -141,14 +157,24 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
 
           <div className="hidden md:flex flex-row items-center lg:ml-25 gap-15 ml-12">
             <div className="flex flex-col items-center">
-              <span className="font-semibold text-base text-gray-800">Enquiry:</span>
-              <a href="tel:+919600593838" className="text-[#005BAC] hover:underline text-base font-semibold">
+              <span className="font-semibold text-base text-gray-800">
+                Enquiry:
+              </span>
+              <a
+                href="tel:+919600593838"
+                className="text-[#005BAC] hover:underline text-base font-semibold"
+              >
                 +91 9600593838
               </a>
             </div>
             <div className="flex flex-col items-center">
-              <span className="font-semibold text-base text-gray-800">Support:</span>
-              <a href="tel:+919600383839" className="text-[#005BAC] hover:underline text-base font-semibold">
+              <span className="font-semibold text-base text-gray-800">
+                Support:
+              </span>
+              <a
+                href="tel:+919600383839"
+                className="text-[#005BAC] hover:underline text-base font-semibold"
+              >
                 +91 9600383839
               </a>
             </div>
@@ -181,7 +207,9 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
                     <div
                       key={cat.category}
                       className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
-                        activeCategory === idx ? "bg-[#f0f4fa] text-[#005BAC]" : "hover:bg-gray-100 text-gray-800"
+                        activeCategory === idx
+                          ? "bg-[#f0f4fa] text-[#005BAC]"
+                          : "hover:bg-gray-100 text-gray-800"
                       }`}
                       onMouseEnter={() => setActiveCategory(idx)}
                       style={{ borderRadius: "8px 0 0 8px" }}
@@ -200,7 +228,11 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
                 {activeCategory !== null && (
                   <div
                     className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto bg-white rounded-r-lg"
-                    style={{ position: "relative", left: "-4px", boxShadow: "none" }}
+                    style={{
+                      position: "relative",
+                      left: "-4px",
+                      boxShadow: "none",
+                    }}
                   >
                     {groupedCourses[activeCategory].items.map((item) => (
                       <Link
@@ -216,35 +248,48 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
               </div>
             </div>
 
-    <a href="/internship" className="transition">
-      Internship
-    </a>
-    <a href="/placed-students" className="transition">
-      Placed Students List
-    </a>
-    <a href="/reviews" className="transition">
-      Reviews
-    </a>
-    <a href="/blog" className="transition">
-      Blog
-    </a>
-    
+            <a href="/internship" className="transition">
+              Internship
+            </a>
+            <a href="/placed-students" className="transition">
+              Placed Students List
+            </a>
+            <a href="/reviews" className="transition">
+              Reviews
+            </a>
+            <a href="/blog" className="transition">
+              Blog
+            </a>
 
-    {/* More Dropdown */}
-    <div className="relative group">
-      <button className="transition">More ▾</button>
-      <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
-        <a href="/interview-questions" className="px-4 py-2 hover:bg-gray-100">Interview Questions</a>
-        <a href="/resources" className="px-4 py-2 hover:bg-gray-100">Tutorials</a>
-        <a href="/sample-resume" className="px-4 py-2 hover:bg-gray-100">Sample Resume</a>
-      </div>
-    </div>
-  </nav>
-</div>
-     {/* Sidebar Overlay */}
+            {/* More Dropdown */}
+            <div className="relative group">
+              <button className="transition">More ▾</button>
+              <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
+                <a
+                  href="/interview-questions"
+                  className="px-4 py-2 hover:bg-gray-100"
+                >
+                  Interview Questions
+                </a>
+                <a href="/resources" className="px-4 py-2 hover:bg-gray-100">
+                  Tutorials
+                </a>
+                <a
+                  href="/sample-resume"
+                  className="px-4 py-2 hover:bg-gray-100"
+                >
+                  Sample Resume
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+        {/* Sidebar Overlay */}
         <div
           className={`fixed inset-0 z-40 bg-black/40 transition-all duration-300 ${
-            menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            menuOpen
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
           }`}
           onClick={() => setMenuOpen(false)}
           aria-hidden="true"
@@ -259,15 +304,18 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
         >
           <div className="flex items-center justify-between px-6 py-6 border-b border-black/20">
             <div className="flex flex-col items-start gap-0">
-              <img src={Logo1} alt="Logo" className="h-19 w-auto mb-1" />
+              <img src={Vel} alt="Logo" className="h-29 w-auto mb-1" />
             </div>
-            <button className="p-2 rounded-full hover:bg-text-secondary" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+            <button
+              className="p-2 rounded-full hover:bg-text-secondary"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+            >
               <FiX className="w-8 h-8 text-text-secondary" />
             </button>
           </div>
 
           <nav className="flex flex-col mt-4 px-6 gap-2 overflow-y-auto scrollbar-none flex-1">
-           
             {/* Main nav links */}
             {navLinks
               .filter((n) => n.name !== "Corporate Training")
@@ -281,7 +329,7 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
                   {link.name}
                 </a>
               ))}
-               {/* All Courses Mobile Dropdown */}
+            {/* All Courses Mobile Dropdown */}
             <div>
               <button
                 className="w-full flex items-center justify-between py-2 text-text-secondary text-md font-base hover:text-[#005BAC] transition"
@@ -350,15 +398,7 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
               {/* Collapsible submenu */}
               {sidebarMenus["More"] && (
                 <ul className="bg-[#fffff] rounded-lg mt-1 pb-1">
-                  <li>
-                    <a
-                      href="/all-courses"
-                      className="block px-6 py-2 text-medium font-base text-text-secondary hover:bg-[#1a5c90] transition"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      All-Courses
-                    </a>
-                  </li>
+                 
                   <li>
                     <a
                       href="/placed-students"
@@ -395,8 +435,6 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
                       Internship
                     </a>
                   </li>
-                  
-                  
                 </ul>
               )}
             </div>
@@ -406,7 +444,6 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
     </>
   );
 }
-
 
 function MobileAllCourses({ groupedCourses, onNavigate }) {
   const [open, setOpen] = useState(false);
@@ -418,7 +455,11 @@ function MobileAllCourses({ groupedCourses, onNavigate }) {
         onClick={() => setOpen((p) => !p)}
       >
         <span>All Courses</span>
-        {open ? <FiChevronDown className="ml-2" /> : <FiChevronRight className="ml-2" />}
+        {open ? (
+          <FiChevronDown className="ml-2" />
+        ) : (
+          <FiChevronRight className="ml-2" />
+        )}
       </button>
 
       {open && (
@@ -467,7 +508,11 @@ function MobileMore({ sidebarMenus, toggleSidebarMenu, onNavigate }) {
         onClick={() => toggleSidebarMenu("More")}
       >
         <span>More</span>
-        {sidebarMenus["More"] ? <FiChevronDown className="ml-2" /> : <FiChevronRight className="ml-2" />}
+        {sidebarMenus["More"] ? (
+          <FiChevronDown className="ml-2" />
+        ) : (
+          <FiChevronRight className="ml-2" />
+        )}
       </button>
 
       {sidebarMenus["More"] && (

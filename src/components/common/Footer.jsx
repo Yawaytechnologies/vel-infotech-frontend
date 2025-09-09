@@ -6,14 +6,15 @@ import {
   FaYoutube,
   FaInstagram,
 } from "react-icons/fa";
-import Logo from "../../assets/Vel InfoTech.svg";
+import Logo from "../../assets/Brandd.png";
 export default function Footer() {
   return (
-    <footer className="relative bg-[#e9f1fb] text-black-200 pt-10 pb-3 border-t-4     border-[#005BAC]">
+   <footer className="relative bg-[#e9f1fb] text-black-200 pt-10 pb-3 border-t-4 border-[#005BAC]">
+  {/* Top shadow separator */}
+  <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-b from-black/20 to-transparent" />
 
-      {/* Top shadow separator */}
-      <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-b from-black/20 to-transparent"></div>
-      <div className="max-w-6xl mx-auto px-4">
+  {/* ⬇️ match header container: use the same max-w and padding you use there */}
+  <div className="max-w-7xl mx-auto px-6 sm:px-8"> 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 pb-10 border-b border-gray-700 md:justify-items-center">
           {/* Logo and About */}
           <div>
@@ -21,7 +22,7 @@ export default function Footer() {
               <img
                 src={Logo}
                 alt="Logo"
-                className=" h-35 w-auto object-contain"
+                className=" h-40 w-auto object-contain"
               />
              
             </div>
@@ -188,7 +189,7 @@ export default function Footer() {
                   href="/all-courses/EtlTesting"
                   className="hover:text-[#005BAC] transition font-bold "
                 >
-                  EtlResting
+                  Etl Testing
                 </a>
               </li>
             </ul>
@@ -204,7 +205,7 @@ export default function Footer() {
                   href="/all-courses/Devops"
                   className="hover:text-[#005BAC] font-bold "
                 >
-                  Devops
+                  Dev Ops
                 </a>
               </li>
               <li>
@@ -212,7 +213,7 @@ export default function Footer() {
                   href="/all-courses/AwaTraining"
                   className="hover:text-[#005BAC] font-bold "
                 >
-                  Aws Training
+                  AWS Training
                 </a>
               </li>
               <li>
@@ -252,7 +253,7 @@ export default function Footer() {
                   href="/all-courses/BigDataDeveloper"
                   className="hover:text-[#005BAC] font-bold "
                 >
-                  BigDataDeveloper
+                  Big Data Developer
                 </a>
               </li>
               <li>
@@ -260,7 +261,7 @@ export default function Footer() {
                   href="/all-courses/CyberSecurity"
                   className="hover:text-[#005BAC] font-bold "
                 >
-                  CyberSecurity
+                  Cyber Security
                 </a>
               </li>
             </ul>
@@ -277,16 +278,16 @@ export default function Footer() {
                 </span>
                 <span className="block text-black-400">
                   KBS Towers, No:-50, Jawaharlal Nehru Road, Ekattuthangal,
-                  (Near Jaya TV) ,
+                  (Near Jaya TV),Chennai-600032
                 </span>
-                <span className="block text-black-400">Chennai-600032</span>
+               
               </li>
               <li>
                 <a
                   href="mailto:info@velinfotech.com"
                   className="hover:text-[#005BAC] transition "
                 >
-                  contact.velinfotech@gmail.com
+                  contact.velinfo@gmail.com
                 </a>
               </li>
               <li>
