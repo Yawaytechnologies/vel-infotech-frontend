@@ -49,6 +49,7 @@ const COURSE_GROUPS = [
       { name: "Big Data Developer", href: "/big-data-developer" },
     ],
   },
+
   // Add more groups as needed...
 ];
 

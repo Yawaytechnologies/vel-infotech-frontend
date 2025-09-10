@@ -83,6 +83,19 @@ import HibernatePage from "./components/Courses/hibernate";
 import SpringbootPage from "./components/Courses/Springboot";
 import J2EEPage from "./components/Courses/j2ee";
 import CoreJavaPage from "./components/Courses/Corejava";
+import AwsSolutionsArchitectPage from "./components/Courses/AwsSolutionsArchitect";
+import JavaFullstackPage from "./components/Courses/javafullstack";
+import PythonFullstackPage from "./components/Courses/pythonFullstack";
+import DotnetFullstackPage from "./components/Courses/Dotnetfullstack";
+import HadoopSparkPage from "./components/Courses/hadoopSparkBig";
+import HadoopTestingPage from "./components/Courses/hadoopTesting";
+import HadoopAdministrationPage from "./components/Courses/administrationBigData";
+import AIPage from "./components/Courses/AI";
+import MLPage from "./components/Courses/ML";
+import UnixShellScriptingPage from "./components/Courses/UnixShellScripting";
+import JuniorHRPage from "./components/Courses/juniorHR";
+import SeniorHRPage from "./components/Courses/SeniorHr";
+import TalentAquisitionPage from "./components/Courses/TalentAcq";
 // Wrapper to use useLocation
 function Layout({ children }) {
   const location = useLocation();
@@ -197,7 +210,20 @@ export default function App() {
           <Route path="/all-courses/HibernateCourse" element={<HibernatePage/>}/>
           <Route path="/all-courses/SpringbootCourse" element={<SpringbootPage/>}/>
           <Route path="/all-courses/J2EECourse" element={<J2EEPage/>}/>
-          <Route path="/all-courses/ManualTesting" element={<CoreJavaPage/>}/>
+          <Route path="/all-courses/CoreJava" element={<CoreJavaPage/>}/>
+          <Route path="/all-courses/AwsSolutionsArchitect" element={<AwsSolutionsArchitectPage/>}/>
+          <Route path="/all-courses/javafullstack" element={<JavaFullstackPage/>}/>
+          <Route path="/all-courses/pythonfullstack" element={<PythonFullstackPage/>}/>
+          <Route path="/all-courses/dotnetfullstack" element={<DotnetFullstackPage/>}/>
+          <Route path="/all-courses/hadoopSpark" element={<HadoopSparkPage/>}/>
+          <Route path="/all-courses/hadoopTesting" element={<HadoopTestingPage/>}/>
+          <Route path="/all-courses/hadoopAdministrator" element={<HadoopAdministrationPage/>}/>
+          <Route path="/all-courses/ai" element={<AIPage/>}/>
+          <Route path="/all-courses/ml" element={<MLPage/>}/>
+          <Route path="/all-courses/unixshell" element={<UnixShellScriptingPage/>}/>
+          <Route path="/all-courses/juniorHr" element={<JuniorHRPage/>}/>
+          <Route path="/all-courses/seniorHr" element={<SeniorHRPage/>}/>
+          <Route path="/all-courses/talentaqu" element={<TalentAquisitionPage/>}/>
           
 
           {/* Admin routes */}

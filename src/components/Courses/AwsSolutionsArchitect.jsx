@@ -15,7 +15,7 @@
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  export default function AwsDataEngineerPage() {
+  export default function AwsSolutionsArchitectPage() {
     const [mode, setMode] = useState("classroom");
     const course = SYLLABI.awsSolutionArchitect;
     const [unlocked, setUnlocked] = useState(false);

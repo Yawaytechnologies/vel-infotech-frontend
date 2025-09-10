@@ -15,9 +15,9 @@
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  export default function CoreJavaPage() {
+  export default function SeniorHRPage() {
     const [mode, setMode] = useState("classroom");
-    const course = SYLLABI.coreJava;
+    const course = SYLLABI.seniorhr;
     const [unlocked, setUnlocked] = useState(false);
 
     const syllabusRef = useRef(null);
@@ -92,36 +92,36 @@
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-  Join Our 100% Job Guaranteed <br />
-  <span className="text-yellow-400">
-   Core Java Course
-</span>
+         <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+ Master<span className="text-yellow-400"> Senior HR Skills</span> 
+  <br />with Hands-On Practical Training
 </h2>
 
 <ul className="space-y-3 mt-6 text-lg">
   <li>
-    ✅ Join the <strong>Best Core Java Training Institute</strong> to master 
-    Java programming, object-oriented concepts, and foundational development skills.
+    ✅ Join the <strong>Top HR Training Institute</strong> to enhance strategic HR expertise, 
+    leadership in HR functions, and advanced workforce management skills.
   </li>
   <li>
-    ✅ Learn <strong>Core Java Fundamentals, OOP Concepts, Collections, Exception Handling, 
-    Multithreading, File I/O, JDBC, and Java Best Practices</strong>.
+    ✅ Learn <strong>Strategic HR Management, Talent Acquisition & Retention, Leadership & 
+    Team Development, Performance & Competency Management, HR Analytics, Compensation & Benefits 
+    Strategies, Conflict Resolution, Labor Law Compliance, Change Management, and Organizational 
+    Development</strong>.
   </li>
   <li>
-    ✅ Work on <strong>real-world Java projects</strong> to gain hands-on programming experience.
+    ✅ Work on <strong>real-world HR projects</strong> including talent acquisition plans, 
+    performance appraisal frameworks, HR policy optimization, and employee engagement strategies.
   </li>
   <li>
     ✅ Choose <strong>flexible learning modes</strong> – Weekday / Weekend / Fast-track.
   </li>
   <li>
-    ✅ Earn an industry-recognized <strong>Java Developer Certification</strong>.
+    ✅ Earn an industry-recognized <strong>Senior HR Training Certification</strong>.
   </li>
   <li>
-    ✅ Career support: Resume building, mock interviews & job placement assistance.
+    ✅ Career support: Resume building, mock interviews & executive-level job placement assistance.
   </li>
 </ul>
-
 
 
             <button
@@ -149,9 +149,12 @@
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
             <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-            <p className="mb-4 text-lg">
-  Become a proficient Core Java Developer in 2 Months
+         <p className="mb-4 text-lg">
+  Become an expert in Senior HR strategies and advanced workforce management in 2–3 Months
 </p>
+
+
+
 
 
             
@@ -287,51 +290,60 @@
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
               {/* Heading */}
              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
-  Overview of Core Java Training Course
+  Overview of Senior HR Training Course
 </h2>
 <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
 {/* Description */}
 <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-  Our Core Java Training equips you with the foundational and advanced Java skills 
-  required to become a proficient developer. This course covers Java Basics, 
-  OOP Concepts, Collections, Exception Handling, Multithreading, File I/O, JDBC, 
-  and hands-on coding exercises. You’ll also work on real-world projects, understand 
-  best coding practices, and receive interview preparation support to kick-start 
-  your career in Java development.
+  Our Senior HR Training equips you with advanced skills and strategic knowledge required to manage
+  HR operations, develop workforce strategies, and lead recruitment, talent acquisition, and employee
+  development initiatives effectively. This course covers strategic HR management, talent planning,
+  performance and succession management, HR policies, compliance, and advanced communication skills.
+  You’ll also work on real-world HR projects and receive career guidance to excel as a senior HR professional.
 </p>
 
 {/* What You’ll Learn */}
 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-  What You’ll Learn From Core Java Training
+  What You’ll Learn From Senior HR Training
 </h3>
 <ul className="space-y-4 text-gray-800 text-base md:text-lg">
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Build a strong foundation in Java syntax, OOP concepts, and programming best practices.
+    Understand strategic HR management, workforce planning, and organizational development.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Learn to work with Java Collections, Generics, Exception Handling, and File I/O.
+    Learn advanced recruitment strategies, talent acquisition, and onboarding at a senior level.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Gain expertise in multithreading, concurrency, and working with JDBC for database integration.
+    Gain expertise in employee engagement, performance management, and succession planning.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Work on practical coding projects to strengthen problem-solving and real-world application development skills.
+    Work on practical HR projects like policy development, compliance audits, and HR analytics.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Prepare for Java developer interviews and assessments with practical exercises and mock tests.
+    Learn best practices in leadership communication, HR documentation, and organizational compliance.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Get career support including resume guidance, mock interviews, and job placement assistance.
+    Receive career support including executive resume building, mock interviews, and senior-level placement assistance.
   </li>
 </ul>
-</div>
+
+
+
+
+
+
+
+
+
+
+            </div>
           </div>
         </section>
         <div ref={syllabusRef} id="syllabus" className="scroll-mt-[110px]">
@@ -359,20 +371,13 @@
                   Comprehensive Curriculum
                 </h4>
            <p className="text-black/90">
-  Master Core Java with structured modules covering Java Basics, Object-Oriented Programming (OOP) Concepts, 
-  Data Types & Operators, Collections Framework, Exception Handling, Multithreading, File I/O, JDBC, 
-  Generics, Java Packages, and more. Gain hands-on experience with coding exercises, real-world projects, 
-  and best practices to become a proficient Java developer ready for industry challenges.
+  Master Senior HR skills with structured modules covering 
+  strategic HR management, advanced recruitment and talent acquisition, workforce planning, 
+  leadership and employee development programs, performance management and succession planning, 
+  HR policies and regulatory compliance, compensation and benefits strategy, advanced HR documentation, 
+  executive communication and leadership skills, conflict management and resolution, HR analytics and reporting, 
+  organizational development projects, and best practices for leading efficient HR operations in any organization.
 </p>
-
-
-
-
-
-
-
-
-
 
 
 

@@ -169,119 +169,1447 @@ export const SYLLABI = {
       },
     ],
   },
-  blockchain: {
-  title: "Blockchain Online Training — Syllabus",
-  accent: "#0E76A8",
+  unix: {
+  title: "Unix Shell Scripting Training — Syllabus",
+  accent: "#00c8ffff",
   meta: {
-    duration: "8–10 weeks",
-    audience: "Students, Developers, IT Professionals, Entrepreneurs",
+    duration: "1–2 Months",
+    audience: "Students, IT Professionals, System Administrators, DevOps Engineers",
     level: "Beginner → Advanced",
     mode: "Online / Classroom",
     schedule: "Weekday & Weekend Batches",
   },
   preview: [
-    "Blockchain Fundamentals",
-    "Cryptography",
-    "Ethereum",
-    "Smart Contracts",
-    "Hyperledger Fabric",
-    "DApps",
-    "Consensus Mechanisms",
-    "IPFS",
-    "DeFi & NFTs",
-    "Blockchain Use Cases",
+    "Introduction to Unix & Linux",
+    "Shell Fundamentals & Bash Commands",
+    "Variables, Data Types, and Operators",
+    "Loops, Conditionals, and Functions",
+    "File & Directory Management",
+    "Process & Job Control",
+    "Text Processing (awk, sed, grep)",
+    "Automation of System Tasks",
+    "Debugging & Error Handling",
+    "Capstone Projects in Shell Scripting",
   ],
   sections: [
     {
-      title: "Module 1: Introduction to Blockchain",
+      title: "Module 1: Unix & Linux Fundamentals",
       items: [
-        "Blockchain overview & history",
-        "Distributed ledger technology",
-        "Blockchain vs traditional databases",
-        "Types of Blockchains (Public, Private, Consortium)",
-        "Real-world use cases",
+        "Introduction to Unix and Linux operating systems",
+        "Understanding the filesystem structure",
+        "Basic Unix commands for file and directory management",
+        "File permissions, users, and groups",
       ],
     },
     {
-      title: "Module 2: Cryptography & Security",
+      title: "Module 2: Shell Fundamentals & Bash Commands",
       items: [
-        "Hash functions (SHA-256, Keccak256)",
-        "Public & private keys",
-        "Digital signatures",
-        "Merkle trees",
-        "Wallets & addresses",
+        "Introduction to Unix shell and types of shells",
+        "Navigating directories and file operations",
+        "Command chaining, piping, and redirection",
+        "Using man pages and help commands effectively",
       ],
     },
     {
-      title: "Module 3: Blockchain Architecture",
+      title: "Module 3: Variables, Data Types & Operators",
       items: [
-        "Blocks, transactions & mining",
-        "Consensus mechanisms (PoW, PoS, PoA, DPoS)",
-        "Forks (hard & soft forks)",
-        "Blockchain nodes & P2P network",
+        "Defining and using variables",
+        "String and numeric operations",
+        "Positional parameters and command-line arguments",
+        "Environment variables and exporting",
       ],
     },
     {
-      title: "Module 4: Ethereum & Smart Contracts",
+      title: "Module 4: Loops, Conditionals & Functions",
       items: [
-        "Ethereum basics & accounts",
-        "Gas, transactions, and fees",
-        "Solidity programming",
-        "Building & deploying smart contracts",
-        "Remix IDE, Truffle, and Hardhat",
+        "Using if, else, and case statements",
+        "For, while, and until loops",
+        "Creating reusable functions",
+        "Debugging and flow control techniques",
       ],
     },
     {
-      title: "Module 5: Decentralized Applications (DApps)",
+      title: "Module 5: File & Directory Management",
       items: [
-        "DApp architecture",
-        "Web3.js & Ethers.js",
-        "Integrating smart contracts with frontend",
-        "MetaMask & Wallet integration",
-        "Building a sample DApp",
+        "Creating, copying, moving, and deleting files and directories",
+        "File compression and archiving",
+        "Finding files using `find` and `locate`",
+        "Permissions management and file ownership",
       ],
     },
     {
-      title: "Module 6: Hyperledger Fabric",
+      title: "Module 6: Process & Job Control",
       items: [
-        "Hyperledger overview",
-        "Architecture & components (Peers, Orderers, CAs)",
-        "Chaincode development",
-        "Fabric SDKs",
-        "Use cases in enterprises",
+        "Understanding processes in Unix/Linux",
+        "Foreground, background, and job control commands",
+        "Killing and monitoring processes",
+        "Scheduling tasks with cron and at jobs",
       ],
     },
     {
-      title: "Module 7: Advanced Blockchain Concepts",
+      title: "Module 7: Text Processing Tools",
       items: [
-        "IPFS & decentralized storage",
-        "Oracles & external data integration",
-        "Layer 2 solutions (Polygon, Lightning Network)",
-        "DeFi protocols & applications",
-        "NFTs & Token standards (ERC-20, ERC-721, ERC-1155)",
+        "Using grep, sed, and awk for text processing",
+        "Sorting, cutting, and formatting text data",
+        "Regular expressions for pattern matching",
+        "Automating log file analysis",
       ],
     },
     {
-      title: "Module 8: Blockchain Security & Best Practices",
+      title: "Module 8: Automation of System Tasks",
       items: [
-        "Common vulnerabilities in smart contracts",
-        "Reentrancy, overflow, front-running attacks",
-        "Audit tools (MythX, Slither)",
-        "Security guidelines for DApps",
+        "Writing shell scripts for repetitive tasks",
+        "System backup and maintenance scripts",
+        "Automating user and process management",
+        "Best practices for script organization and versioning",
       ],
     },
     {
-      title: "Module 9: Blockchain Use Cases & Projects",
+      title: "Module 9: Debugging & Error Handling",
       items: [
-        "Cryptocurrency platforms",
-        "Supply chain & healthcare",
-        "Fintech & banking",
-        "Voting & governance",
-        "Capstone project: End-to-end DApp",
+        "Using set -x, set -e for debugging scripts",
+        "Error detection and handling techniques",
+        "Logging script output and creating reports",
+        "Writing robust and reusable scripts",
+      ],
+    },
+    {
+      title: "Module 10: Capstone Projects in Shell Scripting",
+      items: [
+        "End-to-end system automation project",
+        "Log monitoring and reporting scripts",
+        "Backup and restore automation scripts",
+        "Comprehensive shell scripting assignment integrating multiple concepts",
       ],
     },
   ],
 }
+,
+  pythonfullstack: {
+  title: "Python Full Stack Developer Online Training — Syllabus",
+  accent: "#306998",
+  meta: {
+    duration: "16–20 weeks",
+    audience: "Students, Freshers, Software Developers, IT Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Python Programming",
+    "OOPs & Advanced Python",
+    "Data Structures & Algorithms",
+    "Flask / Django Framework",
+    "RESTful APIs",
+    "Frontend (HTML, CSS, JavaScript, React.js)",
+    "Database (MySQL, PostgreSQL, MongoDB)",
+    "Version Control & Git",
+    "Testing (PyTest, Unittest)",
+    "Deployment (Heroku, Docker, AWS)",
+    "Capstone Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Python Programming Fundamentals",
+      items: [
+        "Python syntax, variables, and data types",
+        "Operators, loops, and conditional statements",
+        "Functions, modules, and packages",
+        "File handling (read, write, CSV, JSON)",
+        "Error & exception handling",
+      ],
+    },
+    {
+      title: "Module 2: Object-Oriented Programming (OOP) in Python",
+      items: [
+        "Classes and objects",
+        "Inheritance, polymorphism, encapsulation, abstraction",
+        "Magic methods and decorators",
+        "Class variables and instance variables",
+        "Best practices in OOP",
+      ],
+    },
+    {
+      title: "Module 3: Data Structures & Algorithms",
+      items: [
+        "Lists, tuples, sets, dictionaries",
+        "Stacks, queues, linked lists",
+        "Searching & sorting algorithms",
+        "Recursion & complexity analysis",
+        "Practical coding exercises",
+      ],
+    },
+    {
+      title: "Module 4: Database & ORM",
+      items: [
+        "Introduction to SQL & NoSQL databases",
+        "CRUD operations in MySQL/PostgreSQL",
+        "ORM with SQLAlchemy / Django ORM",
+        "Database relationships (One-to-One, One-to-Many, Many-to-Many)",
+        "Query optimization & indexing",
+      ],
+    },
+    {
+      title: "Module 5: Web Development with Flask / Django",
+      items: [
+        "Setting up Flask / Django project",
+        "Routing & URL mapping",
+        "Templates (Jinja2 / Django Templates)",
+        "Forms & validations",
+        "Authentication & authorization",
+        "Session & cookie management",
+      ],
+    },
+    {
+      title: "Module 6: RESTful APIs & Backend Integration",
+      items: [
+        "Introduction to REST API concepts",
+        "Creating APIs using Flask / Django REST framework",
+        "Request & Response handling",
+        "Serialization & deserialization",
+        "API testing using Postman",
+      ],
+    },
+    {
+      title: "Module 7: Frontend Development",
+      items: [
+        "HTML5, CSS3, JavaScript fundamentals",
+        "Responsive design (Bootstrap/Tailwind)",
+        "React.js fundamentals",
+        "Components, props, state, hooks",
+        "Connecting frontend to backend APIs",
+      ],
+    },
+    {
+      title: "Module 8: Version Control & Collaboration",
+      items: [
+        "Git basics and commands",
+        "Branching & merging",
+        "Pull requests and collaboration on GitHub",
+        "Code review best practices",
+      ],
+    },
+    {
+      title: "Module 9: Testing & Debugging",
+      items: [
+        "Unit testing with PyTest / Unittest",
+        "Mocking & test coverage",
+        "Debugging techniques & logging",
+        "Error handling & troubleshooting",
+      ],
+    },
+    {
+      title: "Module 10: Deployment & DevOps Basics",
+      items: [
+        "Application deployment on Heroku / AWS",
+        "Containerization using Docker",
+        "CI/CD introduction",
+        "Basic DevOps practices for Python projects",
+      ],
+    },
+    {
+      title: "Module 11: Security & Best Practices",
+      items: [
+        "Authentication & authorization",
+        "OWASP security principles",
+        "Data validation & sanitization",
+        "Secure API development",
+      ],
+    },
+    {
+      title: "Module 12: Capstone Projects",
+      items: [
+        "E-commerce web application",
+        "Social media app with user authentication",
+        "Blog management system",
+        "Integrating frontend, backend, database, and deployment",
+      ],
+    },
+  ],
+}
+,
+hadoopspark: {
+  title: "Big Data Hadoop & Spark Fullstack Training — Syllabus",
+  accent: "#FF6F00",
+  meta: {
+    duration: "12–14 weeks",
+    audience: "Students, Developers, IT Professionals, Data Engineers",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Big Data Fundamentals",
+    "Hadoop Ecosystem",
+    "HDFS & YARN",
+    "MapReduce Programming",
+    "Apache Hive & Pig",
+    "Apache Spark (Core, SQL, Streaming)",
+    "NoSQL Databases (HBase, Cassandra, MongoDB)",
+    "Kafka & Data Ingestion",
+    "Data Analytics & Visualization",
+    "Cluster Management & Deployment",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Big Data",
+      items: [
+        "Understanding Big Data & its importance",
+        "Challenges with traditional data processing",
+        "Big Data use cases across industries",
+        "Introduction to Hadoop and Spark ecosystems",
+      ],
+    },
+    {
+      title: "Module 2: Hadoop Ecosystem",
+      items: [
+        "HDFS architecture & operations",
+        "YARN and Resource Management",
+        "MapReduce concepts and programming",
+        "Hadoop cluster setup and configuration",
+      ],
+    },
+    {
+      title: "Module 3: Data Processing with Hive & Pig",
+      items: [
+        "Introduction to Hive and its architecture",
+        "Writing HiveQL queries",
+        "Data transformation with Pig scripts",
+        "Data modeling and schema design in Hive",
+      ],
+    },
+    {
+      title: "Module 4: Apache Spark",
+      items: [
+        "Spark architecture & RDDs",
+        "DataFrames and Spark SQL",
+        "Spark Streaming for real-time processing",
+        "Machine learning with MLlib",
+        "Performance optimization in Spark",
+      ],
+    },
+    {
+      title: "Module 5: NoSQL Databases",
+      items: [
+        "Introduction to HBase, Cassandra, MongoDB",
+        "Data modeling in NoSQL",
+        "CRUD operations and querying",
+        "Integration with Hadoop and Spark",
+      ],
+    },
+    {
+      title: "Module 6: Kafka & Data Ingestion",
+      items: [
+        "Kafka architecture and topics",
+        "Producer & Consumer API",
+        "Integration with Spark Streaming",
+        "Real-time data ingestion pipelines",
+      ],
+    },
+    {
+      title: "Module 7: Big Data Analytics & Visualization",
+      items: [
+        "Data cleaning and preprocessing",
+        "Exploratory data analysis (EDA)",
+        "Visualizing data with tools like Tableau or Power BI",
+        "Reporting insights from Big Data pipelines",
+      ],
+    },
+    {
+      title: "Module 8: Cluster Management & Deployment",
+      items: [
+        "Hadoop and Spark cluster setup (Standalone, Pseudo, and Multi-node)",
+        "Monitoring and troubleshooting clusters",
+        "Security, authentication, and access control",
+        "Deploying Big Data applications in production",
+      ],
+    },
+    {
+      title: "Module 9: Capstone Projects",
+      items: [
+        "Real-time streaming analytics project",
+        "End-to-end Hadoop + Spark pipeline",
+        "Integration with NoSQL databases",
+        "Data visualization and reporting project",
+      ],
+    },
+  ],
+}
+,
+hadooptesting: {
+  title: "Big Data Hadoop Testing Training — Syllabus",
+  accent: "#FF6F00",
+  meta: {
+    duration: "8–10 weeks",
+    audience: "QA Professionals, Test Engineers, Manual Testers, Automation Testers",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Big Data Fundamentals",
+    "Hadoop Ecosystem Overview",
+    "HDFS & YARN Basics",
+    "MapReduce Testing",
+    "Data Validation with Hive & Pig",
+    "Apache Spark Testing",
+    "NoSQL Database Testing (HBase, Cassandra, MongoDB)",
+    "Data Quality & ETL Testing",
+    "Real-time Data Testing with Kafka",
+    "Performance & Cluster Testing",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Big Data & Testing",
+      items: [
+        "Overview of Big Data concepts and ecosystems",
+        "Need for Big Data Testing",
+        "Challenges in testing Big Data applications",
+        "Types of testing: Functional, Non-Functional, Regression, Performance",
+      ],
+    },
+    {
+      title: "Module 2: Hadoop Architecture & Testing",
+      items: [
+        "HDFS architecture & operations",
+        "YARN and resource management testing",
+        "MapReduce job testing strategies",
+        "Cluster setup, monitoring, and troubleshooting",
+      ],
+    },
+    {
+      title: "Module 3: Data Validation using Hive & Pig",
+      items: [
+        "Testing data pipelines using HiveQL queries",
+        "Pig scripts validation and debugging",
+        "Data consistency, completeness, and integrity checks",
+        "Test data preparation for Hadoop",
+      ],
+    },
+    {
+      title: "Module 4: Apache Spark Testing",
+      items: [
+        "Unit testing of Spark applications (RDDs, DataFrames)",
+        "Testing Spark SQL queries",
+        "Real-time data validation with Spark Streaming",
+        "Integration testing with Hadoop and NoSQL databases",
+      ],
+    },
+    {
+      title: "Module 5: NoSQL Database Testing",
+      items: [
+        "Testing data in HBase, Cassandra, and MongoDB",
+        "Data integrity, consistency, and schema validation",
+        "CRUD operation testing",
+        "Performance and scalability testing for NoSQL",
+      ],
+    },
+    {
+      title: "Module 6: ETL & Data Quality Testing",
+      items: [
+        "Testing ETL pipelines for Big Data",
+        "Data profiling and quality checks",
+        "Validation of transformations and aggregations",
+        "Regression testing for data workflows",
+      ],
+    },
+    {
+      title: "Module 7: Real-time Data Testing with Kafka",
+      items: [
+        "Kafka architecture overview",
+        "Testing producers and consumers",
+        "Data validation in streaming pipelines",
+        "Integration with Hadoop and Spark",
+      ],
+    },
+    {
+      title: "Module 8: Performance, Security & Cluster Testing",
+      items: [
+        "Load and stress testing for Big Data clusters",
+        "Security testing and access control validation",
+        "Monitoring cluster health and performance",
+        "Optimization techniques for large-scale data testing",
+      ],
+    },
+    {
+      title: "Module 9: Capstone Projects",
+      items: [
+        "End-to-end Hadoop + Spark testing project",
+        "Real-time data validation project",
+        "ETL and data quality testing case study",
+        "Performance and cluster testing assignment",
+      ],
+    },
+  ],
+}
+,
+hadoopadministration: {
+  title: "Big Data Administrator Training — Syllabus",
+  accent: "#00a2ffff",
+  meta: {
+    duration: "10–12 weeks",
+    audience: "System Administrators, Data Engineers, IT Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Big Data Fundamentals",
+    "Hadoop Ecosystem Administration",
+    "HDFS Management",
+    "YARN & Resource Management",
+    "Cluster Setup & Configuration",
+    "MapReduce & Spark Job Administration",
+    "Monitoring & Troubleshooting",
+    "Data Security & Access Control",
+    "NoSQL Database Administration (HBase, Cassandra)",
+    "Performance Optimization & Best Practices",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Big Data Administration",
+      items: [
+        "Overview of Big Data ecosystems",
+        "Role of a Big Data Administrator",
+        "Challenges in managing Big Data clusters",
+        "Basic Linux commands and system administration concepts",
+      ],
+    },
+    {
+      title: "Module 2: Hadoop Architecture & Administration",
+      items: [
+        "HDFS architecture & file management",
+        "YARN resource management and scheduling",
+        "Node management: DataNodes, NameNodes",
+        "Cluster setup and configuration",
+        "Hadoop commands and utilities for administrators",
+      ],
+    },
+    {
+      title: "Module 3: Hadoop Cluster Deployment",
+      items: [
+        "Installing Hadoop in standalone, pseudo-distributed, and fully-distributed mode",
+        "Cluster sizing and hardware requirements",
+        "Configuration of core-site.xml, hdfs-site.xml, yarn-site.xml, mapred-site.xml",
+        "Cluster maintenance and upgrades",
+      ],
+    },
+    {
+      title: "Module 4: MapReduce & Spark Job Administration",
+      items: [
+        "Submitting and monitoring MapReduce jobs",
+        "Resource allocation and optimization",
+        "Spark cluster setup and job monitoring",
+        "Handling job failures and troubleshooting",
+      ],
+    },
+    {
+      title: "Module 5: NoSQL Database Administration",
+      items: [
+        "HBase architecture and administration",
+        "Cassandra setup, replication, and scaling",
+        "MongoDB cluster administration",
+        "Backup and restore strategies for NoSQL databases",
+      ],
+    },
+    {
+      title: "Module 6: Monitoring & Troubleshooting",
+      items: [
+        "Using Ambari, Cloudera Manager, and other monitoring tools",
+        "Log management and analysis",
+        "Resource usage tracking and performance tuning",
+        "Handling cluster failures and disaster recovery",
+      ],
+    },
+    {
+      title: "Module 7: Data Security & Access Control",
+      items: [
+        "Hadoop security fundamentals",
+        "Kerberos authentication setup",
+        "User and group management",
+        "Access control using HDFS ACLs",
+        "Encryption and data privacy best practices",
+      ],
+    },
+    {
+      title: "Module 8: Performance Optimization & Best Practices",
+      items: [
+        "Cluster tuning for optimal performance",
+        "Load balancing and resource management",
+        "HDFS storage optimization",
+        "Best practices for Hadoop and Spark administration",
+        "Capacity planning and monitoring metrics",
+      ],
+    },
+    {
+      title: "Module 9: Capstone Project",
+      items: [
+        "End-to-end Hadoop cluster setup and management",
+        "Deploying and monitoring MapReduce & Spark jobs",
+        "Administering HBase/Cassandra clusters",
+        "Implementing security, access control, and performance optimization",
+      ],
+    },
+  ],
+}
+,
+ai: {
+  title: "Artificial Intelligence Online Training — Syllabus",
+  accent: "#FF4500",
+  meta: {
+    duration: "12–14 weeks",
+    audience: "Students, Developers, IT Professionals, Enthusiasts",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to AI",
+    "Python for AI",
+    "Mathematics for AI (Linear Algebra, Probability, Statistics)",
+    "Machine Learning Algorithms",
+    "Deep Learning & Neural Networks",
+    "Natural Language Processing (NLP)",
+    "Computer Vision",
+    "Reinforcement Learning",
+    "AI Ethics & Best Practices",
+    "AI Capstone Project",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Artificial Intelligence",
+      items: [
+        "History and evolution of AI",
+        "Applications of AI in various industries",
+        "AI vs Machine Learning vs Deep Learning",
+        "AI problem-solving techniques",
+      ],
+    },
+    {
+      title: "Module 2: Python for AI",
+      items: [
+        "Python basics and data structures",
+        "NumPy, Pandas, and Matplotlib",
+        "Data preprocessing techniques",
+        "Working with datasets and visualization",
+      ],
+    },
+    {
+      title: "Module 3: Mathematics for AI",
+      items: [
+        "Linear Algebra: Matrices, Vectors, Eigenvalues",
+        "Probability and Statistics",
+        "Calculus basics for AI",
+        "Optimization techniques",
+      ],
+    },
+    {
+      title: "Module 4: Machine Learning Algorithms",
+      items: [
+        "Supervised learning: Regression, Classification",
+        "Unsupervised learning: Clustering, Dimensionality Reduction",
+        "Model evaluation metrics",
+        "Overfitting, underfitting, and regularization",
+      ],
+    },
+    {
+      title: "Module 5: Deep Learning & Neural Networks",
+      items: [
+        "Introduction to neural networks",
+        "Activation functions and architectures",
+        "CNNs for image processing",
+        "RNNs and LSTMs for sequential data",
+        "Deep learning frameworks: TensorFlow, PyTorch",
+      ],
+    },
+    {
+      title: "Module 6: Natural Language Processing (NLP)",
+      items: [
+        "Text preprocessing and tokenization",
+        "Word embeddings (Word2Vec, GloVe)",
+        "Sentiment analysis and text classification",
+        "Chatbots and conversational AI",
+        "Advanced NLP with Transformers (BERT, GPT)",
+      ],
+    },
+    {
+      title: "Module 7: Computer Vision",
+      items: [
+        "Image processing basics",
+        "Object detection and recognition",
+        "Image segmentation techniques",
+        "OpenCV and deep learning integration",
+      ],
+    },
+    {
+      title: "Module 8: Reinforcement Learning",
+      items: [
+        "Concepts of agents, states, and rewards",
+        "Markov Decision Process (MDP)",
+        "Q-Learning and Policy Gradient methods",
+        "Applications in gaming, robotics, and optimization",
+      ],
+    },
+    {
+      title: "Module 9: AI Ethics & Best Practices",
+      items: [
+        "Ethical AI principles",
+        "Bias detection and mitigation",
+        "Responsible AI deployment",
+        "Data privacy and security in AI projects",
+      ],
+    },
+    {
+      title: "Module 10: AI Capstone Project",
+      items: [
+        "End-to-end AI project development",
+        "Data collection, preprocessing, and model building",
+        "Model evaluation and deployment",
+        "Presentation of AI solutions",
+      ],
+    },
+  ],
+}
+,
+ml: {
+  title: "Machine Learning Online Training — Syllabus",
+  accent: "#1E90FF",
+  meta: {
+    duration: "10–12 weeks",
+    audience: "Students, Developers, IT Professionals, Data Enthusiasts",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Introduction to Machine Learning",
+    "Python for Machine Learning",
+    "Mathematics for ML (Linear Algebra, Probability, Statistics)",
+    "Supervised Learning",
+    "Unsupervised Learning",
+    "Model Evaluation & Tuning",
+    "Feature Engineering",
+    "Ensemble Methods",
+    "Deep Learning & Neural Networks",
+    "Capstone Project",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Machine Learning",
+      items: [
+        "Definition, types, and applications of ML",
+        "Supervised vs Unsupervised vs Reinforcement Learning",
+        "Real-world use cases in finance, healthcare, and e-commerce",
+      ],
+    },
+    {
+      title: "Module 2: Python for Machine Learning",
+      items: [
+        "Python basics and libraries (NumPy, Pandas, Matplotlib, Seaborn)",
+        "Data preprocessing and handling missing values",
+        "Exploratory Data Analysis (EDA) techniques",
+      ],
+    },
+    {
+      title: "Module 3: Mathematics for ML",
+      items: [
+        "Linear Algebra: Matrices, Vectors, Eigenvalues",
+        "Probability & Statistics fundamentals",
+        "Calculus basics for ML optimization",
+      ],
+    },
+    {
+      title: "Module 4: Supervised Learning",
+      items: [
+        "Regression: Linear, Polynomial, and Logistic Regression",
+        "Classification: K-Nearest Neighbors, Decision Trees, SVM",
+        "Evaluation metrics: Accuracy, Precision, Recall, F1-score",
+      ],
+    },
+    {
+      title: "Module 5: Unsupervised Learning",
+      items: [
+        "Clustering: K-Means, Hierarchical, DBSCAN",
+        "Dimensionality Reduction: PCA, t-SNE",
+        "Anomaly detection techniques",
+      ],
+    },
+    {
+      title: "Module 6: Feature Engineering & Model Tuning",
+      items: [
+        "Feature selection and extraction",
+        "Handling categorical and numerical data",
+        "Hyperparameter tuning (Grid Search, Random Search)",
+        "Cross-validation techniques",
+      ],
+    },
+    {
+      title: "Module 7: Ensemble Methods",
+      items: [
+        "Bagging and Boosting techniques",
+        "Random Forests",
+        "Gradient Boosting, AdaBoost, XGBoost",
+        "Stacking and Voting classifiers",
+      ],
+    },
+    {
+      title: "Module 8: Introduction to Deep Learning",
+      items: [
+        "Neural networks basics",
+        "Activation functions and backpropagation",
+        "CNNs for image tasks",
+        "RNNs and LSTMs for sequential data",
+      ],
+    },
+    {
+      title: "Module 9: Model Evaluation & Deployment",
+      items: [
+        "Model selection and validation",
+        "Overfitting & underfitting mitigation",
+        "Introduction to ML deployment",
+        "Using Flask/Django for API integration",
+      ],
+    },
+    {
+      title: "Module 10: Machine Learning Capstone Project",
+      items: [
+        "End-to-end ML project workflow",
+        "Data collection, preprocessing, and modeling",
+        "Evaluation and optimization of models",
+        "Presentation and deployment of ML solutions",
+      ],
+    },
+  ],
+}
+,
+
+
+dotnetfullstack: {
+  title: ".NET Developer Online Training — Syllabus",
+  accent: "#512BD4",
+  meta: {
+    duration: "16–20 weeks",
+    audience: "Students, Freshers, Software Developers, IT Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "VB.NET Training",
+    "HTML, CSS, JavaScript",
+    "ASP.NET & ASP.NET Core MVC",
+    "JavaScript Frameworks (Angular, React, Vue.js)",
+    "ASP.NET Core Web API",
+    "SQL Server, Oracle SQL, MySQL, PostgreSQL, NoSQL",
+    "Azure Cloud Services (App Service, SQL Database)",
+    "Docker & Kubernetes",
+    "DevOps Practices (CI/CD)",
+    "Capstone Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: VB.NET & C# Fundamentals",
+      items: [
+        "Introduction to VB.NET and C# programming",
+        "Data types, variables, operators, and control structures",
+        "Functions, methods, and error handling",
+        "Object-Oriented Programming: classes, inheritance, polymorphism, encapsulation",
+        "Hands-on exercises and mini-projects",
+      ],
+    },
+    {
+      title: "Module 2: Web Development Basics",
+      items: [
+        "HTML5, CSS3, JavaScript fundamentals",
+        "DOM manipulation, events, and validation",
+        "Responsive design with Bootstrap / Tailwind CSS",
+        "Introduction to JavaScript frameworks: Angular, React, Vue.js",
+      ],
+    },
+    {
+      title: "Module 3: ASP.NET & ASP.NET Core MVC",
+      items: [
+        "Introduction to ASP.NET and MVC architecture",
+        "Routing, controllers, views, and models",
+        "Form handling, validation, and session management",
+        "Creating reusable components and partial views",
+      ],
+    },
+    {
+      title: "Module 4: ASP.NET Core Web API",
+      items: [
+        "Building RESTful APIs with ASP.NET Core",
+        "Request & Response handling, JSON serialization",
+        "Authentication & authorization in APIs",
+        "Integration with frontend frameworks",
+      ],
+    },
+    {
+      title: "Module 5: Databases",
+      items: [
+        "SQL Server fundamentals: tables, queries, joins, and indexes",
+        "Working with Oracle SQL, MySQL, PostgreSQL, and NoSQL databases",
+        "Database relationships, normalization, and transactions",
+        "CRUD operations using ADO.NET and Entity Framework",
+      ],
+    },
+    {
+      title: "Module 6: Frontend Frameworks Integration",
+      items: [
+        "Integrating Angular, React, or Vue.js with ASP.NET Core backend",
+        "State management and component-based architecture",
+        "API consumption, routing, and reactive forms",
+        "Frontend debugging and best practices",
+      ],
+    },
+    {
+      title: "Module 7: Azure Cloud Services",
+      items: [
+        "Introduction to Azure cloud platform",
+        "Deploying applications using Azure App Service",
+        "Azure SQL Database configuration and management",
+        "Scaling applications and monitoring",
+      ],
+    },
+    {
+      title: "Module 8: Containerization & Orchestration",
+      items: [
+        "Introduction to Docker and containerization",
+        "Creating Docker images and containers",
+        "Docker Compose for multi-container applications",
+        "Introduction to Kubernetes for container orchestration",
+      ],
+    },
+    {
+      title: "Module 9: DevOps Practices & CI/CD",
+      items: [
+        "Source control using Git and GitHub",
+        "Continuous Integration and Continuous Deployment concepts",
+        "Building CI/CD pipelines for ASP.NET applications",
+        "Automated testing and deployment best practices",
+      ],
+    },
+    {
+      title: "Module 10: Security & Best Practices",
+      items: [
+        "Authentication & authorization",
+        "OWASP security principles for web applications",
+        "Data validation & secure API development",
+        "Performance optimization and logging",
+      ],
+    },
+    {
+      title: "Module 11: Capstone Projects",
+      items: [
+        "E-commerce web application with ASP.NET Core MVC",
+        "Social media app using Angular / React frontend with .NET backend",
+        "API-first project integrated with SQL & Azure deployment",
+        "Complete DevOps pipeline implementation for project deployment",
+      ],
+    },
+  ],
+}
+,
+juniorhr: {
+  title: "Junior HR Training — Syllabus",
+  accent: "#512BD4",
+  meta: {
+    duration: "1–2 Months",
+    audience: "Students, Freshers, HR Aspirants, Office Administrators",
+    level: "Beginner → Intermediate",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "HR Fundamentals",
+    "Recruitment & Onboarding",
+    "Employee Engagement",
+    "Attendance & Leave Management",
+    "Performance Management",
+    "HR Policies & Compliance",
+    "Payroll Basics",
+    "Communication Skills",
+    "HR Documentation",
+    "Practical HR Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Introduction to Human Resources",
+      items: [
+        "Understanding the role and importance of HR",
+        "Overview of HR functions and responsibilities",
+        "Organizational structure and HR departments",
+        "Workplace best practices and ethics",
+      ],
+    },
+    {
+      title: "Module 2: Recruitment & Onboarding",
+      items: [
+        "Job description creation and candidate sourcing",
+        "Resume screening and interview coordination",
+        "Employee onboarding process and joining formalities",
+        "Creating onboarding checklists and HR forms",
+      ],
+    },
+    {
+      title: "Module 3: Employee Engagement & Communication",
+      items: [
+        "Employee motivation techniques and recognition programs",
+        "Team-building and internal communication strategies",
+        "Conflict resolution basics and problem-solving",
+        "Improving interpersonal and professional communication skills",
+      ],
+    },
+    {
+      title: "Module 4: Attendance, Leave & Payroll Management",
+      items: [
+        "Tracking attendance and leave management",
+        "Introduction to payroll processing and HR software",
+        "Payroll basics and documentation",
+        "Maintaining accurate HR records",
+      ],
+    },
+    {
+      title: "Module 5: Performance Management",
+      items: [
+        "Understanding KPIs and performance appraisal systems",
+        "Employee performance tracking methods",
+        "Providing constructive feedback",
+        "Documentation and reporting of appraisals",
+      ],
+    },
+    {
+      title: "Module 6: HR Policies & Compliance",
+      items: [
+        "Introduction to labor laws and compliance",
+        "Creating and enforcing HR policies",
+        "Handling employee grievances and disputes",
+        "Maintaining confidentiality and ethical standards",
+      ],
+    },
+    {
+      title: "Module 7: Practical HR Tasks",
+      items: [
+        "Assisting in recruitment and onboarding activities",
+        "Creating HR forms, reports, and templates",
+        "Managing attendance, leave, and payroll data",
+        "Participating in employee engagement and training activities",
+      ],
+    },
+    {
+      title: "Module 8: Career Development & Placement Support",
+      items: [
+        "Resume building and interview preparation",
+        "Soft skill enhancement and workplace etiquette",
+        "Career guidance for HR roles",
+        "Job placement assistance and mentorship",
+      ],
+    },
+  ],
+}
+,
+seniorhr: {
+  title: "Senior HR Training — Syllabus",
+  accent: "#FF8C00",
+  meta: {
+    duration: "3–4 Months",
+    audience: "HR Professionals, Team Leads, Managers, HR Executives",
+    level: "Intermediate → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Advanced HR Strategies",
+    "Talent Acquisition & Management",
+    "Performance Management Systems",
+    "Employee Engagement & Retention",
+    "Compensation & Benefits Planning",
+    "HR Policies, Compliance & Governance",
+    "Workforce Analytics",
+    "Leadership & Organizational Development",
+    "Conflict Resolution & Counseling",
+    "Strategic HR Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Advanced HR Fundamentals",
+      items: [
+        "Strategic role of HR in business growth",
+        "Organizational behavior and change management",
+        "Advanced HR operations and process improvement",
+        "Ethics, corporate governance, and HR compliance",
+      ],
+    },
+    {
+      title: "Module 2: Talent Acquisition & Management",
+      items: [
+        "Strategic workforce planning and forecasting",
+        "Advanced recruitment and selection techniques",
+        "Onboarding high-potential employees",
+        "Succession planning and talent pipeline management",
+      ],
+    },
+    {
+      title: "Module 3: Performance Management & Appraisals",
+      items: [
+        "Designing performance evaluation frameworks",
+        "KPI setting, goal alignment, and appraisal cycles",
+        "Coaching and feedback techniques",
+        "Employee development plans and competency mapping",
+      ],
+    },
+    {
+      title: "Module 4: Employee Engagement & Retention",
+      items: [
+        "Employee motivation and recognition programs",
+        "Designing engagement surveys and action plans",
+        "Retention strategies for high-performing employees",
+        "Building a positive workplace culture",
+      ],
+    },
+    {
+      title: "Module 5: Compensation & Benefits Management",
+      items: [
+        "Salary structuring and incentive programs",
+        "Benefits administration and compliance",
+        "Payroll optimization and cost management",
+        "Legal considerations in compensation",
+      ],
+    },
+    {
+      title: "Module 6: HR Policies, Compliance & Governance",
+      items: [
+        "Advanced labor laws and statutory compliance",
+        "Policy creation, implementation, and audits",
+        "Handling grievances and disciplinary actions",
+        "Ensuring ethical HR practices and risk mitigation",
+      ],
+    },
+    {
+      title: "Module 7: Workforce Analytics & Reporting",
+      items: [
+        "HR metrics and KPI dashboards",
+        "Data-driven decision making in HR",
+        "Employee performance and engagement analytics",
+        "Strategic workforce insights for management",
+      ],
+    },
+    {
+      title: "Module 8: Leadership & Organizational Development",
+      items: [
+        "Leading HR teams effectively",
+        "Organizational development strategies",
+        "Change management and HR transformation",
+        "Mentoring, coaching, and knowledge sharing",
+      ],
+    },
+    {
+      title: "Module 9: Conflict Resolution & Employee Counseling",
+      items: [
+        "Advanced conflict management techniques",
+        "Employee counseling and support strategies",
+        "Mediation and negotiation skills",
+        "Maintaining a healthy workplace environment",
+      ],
+    },
+    {
+      title: "Module 10: Strategic HR Projects",
+      items: [
+        "Design and implementation of HR initiatives",
+        "Cross-functional HR projects",
+        "Case studies on organizational challenges",
+        "Practical hands-on assignments to demonstrate strategic HR skills",
+      ],
+    },
+  ],
+}
+,
+talentaqu: {
+  title: "Talent Acquisition Training — Syllabus",
+  accent: "#1E90FF",
+  meta: {
+    duration: "2–3 Months",
+    audience: "HR Professionals, Recruiters, Talent Acquisition Specialists",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Talent Acquisition Fundamentals",
+    "Workforce Planning & Sourcing Strategies",
+    "Recruitment & Selection Techniques",
+    "Interviewing & Assessment Methods",
+    "Onboarding & Employee Retention",
+    "Employer Branding & Candidate Experience",
+    "Recruitment Analytics & Metrics",
+    "Recruitment Tools & ATS Management",
+    "Legal & Compliance in Hiring",
+    "Capstone Projects in Talent Acquisition",
+  ],
+  sections: [
+    {
+      title: "Module 1: Talent Acquisition Fundamentals",
+      items: [
+        "Introduction to talent acquisition and recruitment lifecycle",
+        "Strategic role of TA in organizational growth",
+        "Talent acquisition vs. HR generalist roles",
+        "Overview of recruitment channels and sourcing methods",
+      ],
+    },
+    {
+      title: "Module 2: Workforce Planning & Sourcing",
+      items: [
+        "Analyzing workforce needs and talent gaps",
+        "Building a sourcing strategy aligned with business goals",
+        "Using social media, job portals, and networking for sourcing",
+        "Passive candidate sourcing techniques",
+      ],
+    },
+    {
+      title: "Module 3: Recruitment & Selection",
+      items: [
+        "Job analysis and creating effective job descriptions",
+        "Screening resumes and shortlisting candidates",
+        "Structured and behavioral interviews",
+        "Assessment methods: technical, psychometric, and soft skills",
+      ],
+    },
+    {
+      title: "Module 4: Interviewing & Candidate Assessment",
+      items: [
+        "Effective interview techniques and evaluation criteria",
+        "Conducting panel and remote interviews",
+        "Competency mapping and candidate fitment",
+        "Bias-free and fair selection practices",
+      ],
+    },
+    {
+      title: "Module 5: Onboarding & Retention",
+      items: [
+        "Designing onboarding programs for smooth integration",
+        "Employee engagement strategies from day one",
+        "Retention strategies for top talent",
+        "Monitoring early attrition and feedback mechanisms",
+      ],
+    },
+    {
+      title: "Module 6: Employer Branding & Candidate Experience",
+      items: [
+        "Building a strong employer brand",
+        "Communicating company culture to attract talent",
+        "Enhancing candidate experience throughout the recruitment process",
+        "Managing candidate feedback and reputation",
+      ],
+    },
+    {
+      title: "Module 7: Recruitment Analytics & Metrics",
+      items: [
+        "Tracking key recruitment metrics (TAT, cost per hire, quality of hire)",
+        "Using data to optimize sourcing and selection",
+        "Talent pipeline reporting and dashboards",
+        "Forecasting hiring needs and trends",
+      ],
+    },
+    {
+      title: "Module 8: Recruitment Tools & ATS Management",
+      items: [
+        "Introduction to Applicant Tracking Systems (ATS)",
+        "Managing recruitment workflows using tools",
+        "Leveraging automation for efficiency",
+        "Integrating recruitment tools with HRIS",
+      ],
+    },
+    {
+      title: "Module 9: Legal & Compliance in Hiring",
+      items: [
+        "Employment laws and labor regulations",
+        "Diversity, equity, and inclusion in hiring",
+        "Data privacy and candidate information management",
+        "Compliance audits and documentation",
+      ],
+    },
+    {
+      title: "Module 10: Capstone Projects in Talent Acquisition",
+      items: [
+        "End-to-end recruitment project implementation",
+        "Sourcing, screening, interviewing, and onboarding simulation",
+        "Employer branding and candidate engagement project",
+        "Data-driven recruitment analytics and reporting assignment",
+      ],
+    },
+  ],
+}
+,
+
+  javafullstack: {
+  title: "Java Full Stack Online Training — Syllabus",
+  accent: "#2097f8ff",
+  meta: {
+    duration: "16–20 weeks",
+    audience: "Students, Freshers, Software Developers, IT Professionals",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Core Java",
+    "Advanced Java (JDBC, Servlets, JSP)",
+    "Spring Framework & Spring Boot",
+    "Hibernate / JPA",
+    "RESTful Web Services",
+    "Microservices with Spring Cloud",
+    "Frontend (HTML, CSS, JavaScript, React.js)",
+    "Database (MySQL)",
+    "Testing (JUnit, Mockito)",
+    "Version Control & CI/CD",
+    "Deployment (Docker, Cloud, Jenkins)",
+    "Capstone Project",
+  ],
+  sections: [
+    {
+      title: "Module 1: Core Java Programming",
+      items: [
+        "Java basics & JVM architecture",
+        "OOPs concepts (Inheritance, Polymorphism, Abstraction, Encapsulation)",
+        "Data types, Arrays, and Strings",
+        "Collections Framework & Generics",
+        "Exception Handling & Assertions",
+        "Multithreading & Concurrency",
+        "Java 8+ features: Streams, Lambda expressions, Functional interfaces",
+      ],
+    },
+    {
+      title: "Module 2: Advanced Java",
+      items: [
+        "JDBC & database connectivity",
+        "Servlets lifecycle & API",
+        "JSP, JSTL, and EL",
+        "Session tracking & state management",
+        "MVC design pattern",
+      ],
+    },
+    {
+      title: "Module 3: Web Technologies (Frontend Basics)",
+      items: [
+        "HTML5 & CSS3 fundamentals",
+        "JavaScript ES6+ features",
+        "DOM manipulation & events",
+        "Responsive design (Bootstrap/Tailwind)",
+        "AJAX & Fetch API",
+      ],
+    },
+    {
+      title: "Module 4: React.js Frontend Development",
+      items: [
+        "React setup & components",
+        "Props, state & hooks",
+        "React Router",
+        "Forms & validation",
+        "REST API integration",
+        "State management (Redux / Context API)",
+      ],
+    },
+    {
+      title: "Module 5: Spring Framework Core",
+      items: [
+        "Spring basics & architecture",
+        "Inversion of Control (IoC) & Dependency Injection",
+        "Spring Beans & configuration",
+        "Spring AOP concepts",
+      ],
+    },
+    {
+      title: "Module 6: Spring Boot",
+      items: [
+        "Spring Boot introduction & starters",
+        "Spring MVC & REST API development",
+        "Spring Data JPA with Hibernate",
+        "Validation & exception handling",
+        "Spring Boot Testing (JUnit, Mockito)",
+      ],
+    },
+    {
+      title: "Module 7: Hibernate & JPA",
+      items: [
+        "Hibernate ORM basics",
+        "Entity mapping (One-to-One, One-to-Many, Many-to-Many)",
+        "JPQL & Criteria API",
+        "Transaction & caching",
+        "Performance tuning & best practices",
+      ],
+    },
+    {
+      title: "Module 8: Microservices with Spring Cloud",
+      items: [
+        "Introduction to microservices",
+        "Service discovery with Eureka",
+        "API Gateway with Zuul / Spring Cloud Gateway",
+        "Centralized configuration (Spring Cloud Config)",
+        "Inter-service communication (Feign, RestTemplate)",
+        "Circuit Breakers & Resilience4j",
+      ],
+    },
+    {
+      title: "Module 9: Database Management",
+      items: [
+        "RDBMS concepts & normalization",
+        "MySQL database setup",
+        "DDL, DML, DQL operations",
+        "Joins, indexes, and constraints",
+        "Stored procedures & triggers",
+      ],
+    },
+    {
+      title: "Module 10: Tools & Build Management",
+      items: [
+        "Git & GitHub for version control",
+        "Maven & Gradle build tools",
+        "Logging frameworks (SLF4J, Logback)",
+        "Lombok & utility libraries",
+      ],
+    },
+    {
+      title: "Module 11: Testing in Full Stack Applications",
+      items: [
+        "Unit testing with JUnit",
+        "Mocking with Mockito",
+        "Integration testing",
+        "Test-driven development (TDD)",
+        "Postman for API testing",
+      ],
+    },
+    {
+      title: "Module 12: DevOps & Deployment",
+      items: [
+        "Introduction to CI/CD",
+        "Jenkins pipelines",
+        "Containerization with Docker",
+        "Cloud deployment (AWS / Azure basics)",
+        "Kubernetes introduction",
+      ],
+    },
+    {
+      title: "Module 13: Security & Performance",
+      items: [
+        "Spring Security basics",
+        "JWT authentication",
+        "OAuth2 authorization",
+        "Application performance monitoring",
+        "Best practices for enterprise apps",
+      ],
+    },
+    {
+      title: "Module 14: Capstone Project",
+      items: [
+        "E-commerce web application",
+        "Employee management system",
+        "Banking/Fintech mini-project",
+        "Capstone project integrating frontend + backend + database + deployment",
+      ],
+    },
+  ],
+}
+
 ,
   azure: {
   title: "Microsoft Azure Online Training — Syllabus",

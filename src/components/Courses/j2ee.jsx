@@ -95,35 +95,36 @@
           <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
   Join Our 100% Job Guaranteed <br />
   <span className="text-yellow-400">
-   Manual Testing Course
+   J2EE Course
 </span>
+
 </h2>
 
 <ul className="space-y-3 mt-6 text-lg">
 <li>
-  ✅ Join the <strong>Best Manual Testing Training Institute</strong> to master 
-  software testing, defect tracking, and end-to-end quality assurance processes.
+  ✅ Join the <strong>Best J2EE Training Institute</strong> to master 
+  enterprise-level application development with Java technologies.
 </li>
 <li>
-  ✅ Learn <strong>Manual Testing Fundamentals, SDLC & STLC, Test Case Design, 
-  Test Plan Preparation, Requirement Analysis, Bug Life Cycle, Defect Reporting, 
-  Functional & Regression Testing, User Acceptance Testing (UAT), 
-  Test Management Tools (JIRA, TestRail), and QA Best Practices</strong>.
+  ✅ Learn <strong>J2EE Fundamentals, Servlets, JSP, JDBC, EJB, Web Services, 
+  MVC Architecture, Dependency Injection, Session Management, Security, 
+  and Integration with frameworks like Spring & Hibernate</strong>.
 </li>
 <li>
-  ✅ Work on <strong>real-world manual testing projects</strong> including web, mobile, 
-  and enterprise application testing.
+  ✅ Work on <strong>real-world J2EE projects</strong> including scalable, 
+  enterprise web applications.
 </li>
 <li>
   ✅ Choose <strong>flexible learning modes</strong> – Weekday / Weekend / Fast-track.
 </li>
 <li>
-  ✅ Earn an industry-recognized <strong>Manual Testing Certification</strong>.
+  ✅ Earn an industry-recognized <strong>J2EE Certification</strong>.
 </li>
 <li>
   ✅ Career support: Resume building, mock interviews & job
   placement assistance.
 </li>
+
 
 
 </ul>
@@ -154,9 +155,10 @@
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
             <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-            <p className="mb-4 text-lg">
-  Become an expert Manual Tester in 2 Months
+           <p className="mb-4 text-lg">
+  Become an expert in J2EE in 2 Months
 </p>
+
 
             
 
@@ -297,46 +299,47 @@
 
 {/* Description */}
 <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-  Our Manual Testing Training equips you with the skills and hands-on expertise
-  required to validate software applications, ensure quality, and follow end-to-end
-  testing processes. This course covers Manual Testing Fundamentals, SDLC & STLC, 
-  Test Case Design, Test Plan Preparation, Requirement Analysis, Defect Reporting, 
-  Functional & Regression Testing, User Acceptance Testing (UAT), Test Management Tools 
-  like JIRA and TestRail, and QA Best Practices. You’ll also work on real-world 
-  projects, execute test cases, and receive interview preparation support to kick-start
-  your career in software quality assurance.
+  Our J2EE Training equips you with the skills and hands-on expertise 
+  required to build scalable, secure, and enterprise-level web applications. 
+  This course covers J2EE Fundamentals, Servlets, JSP, JDBC, EJB, Web Services, 
+  MVC Architecture, Session Management, Security, Integration with frameworks 
+  like Spring and Hibernate, and Best Practices for enterprise application 
+  development. You’ll also work on real-world projects, deploy applications, 
+  and receive interview preparation support to kick-start your career as a 
+  J2EE Developer.
 </p>
 
 {/* What You’ll Learn */}
 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-  What You’ll Learn From Manual Testing Training
+  What You’ll Learn From J2EE Training
 </h3>
 <ul className="space-y-4 text-gray-800 text-base md:text-lg">
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Build a strong foundation in manual testing concepts, processes, and quality assurance methodologies.
+    Build a strong foundation in J2EE concepts, architecture, and application layers.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Learn to analyze requirements, design effective test cases, and execute functional and regression testing.
+    Learn to develop dynamic web applications using Servlets, JSP, and JDBC.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Gain expertise in defect reporting, bug lifecycle management, and using test management tools like JIRA and TestRail.
+    Gain expertise in Enterprise JavaBeans (EJB), web services, and MVC-based design.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Work on real-world manual testing projects including web, mobile, and enterprise applications.
+    Work on real-world J2EE projects including enterprise-level applications with Spring & Hibernate integration.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Prepare for real-world QA scenarios, UAT, and release validation to ensure software quality.
+    Learn session management, security, and performance optimization techniques.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
     Get career support with resume building, mock interviews, and placement assistance.
   </li>
 </ul>
+
 
 
 
@@ -371,13 +374,14 @@
                   Comprehensive Curriculum
                 </h4>
            <p className="text-black/90">
-  Master Manual Testing with structured modules covering Manual Testing Fundamentals, 
-  Software Development Life Cycle (SDLC) & Software Testing Life Cycle (STLC), 
-  Requirement Analysis, Test Case Design & Execution, Test Plan Preparation, 
-  Functional & Regression Testing, User Acceptance Testing (UAT), Defect Life Cycle & Bug Reporting, 
-  Test Management Tools (JIRA, TestRail), Exploratory Testing, Cross-Browser & Compatibility Testing, 
-  QA Best Practices, Documentation, Reporting & Metrics, and more.
+  Master J2EE with structured modules covering J2EE Fundamentals, 
+  Servlets, JSP, JDBC, Enterprise JavaBeans (EJB), Web Services, 
+  MVC Architecture, Session Management, Security, Integration with Spring & Hibernate, 
+  Deployment in Application Servers (Tomcat, JBoss, WebLogic), 
+  Performance Optimization, Enterprise Application Best Practices, 
+  and more.
 </p>
+
 
 
 

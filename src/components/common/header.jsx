@@ -14,8 +14,24 @@ const groupedCourses = [
       { name: "Full Stack Development", href: "/all-courses/FullStackDevelopement" },
       { name: "PL SQL", href: "/all-courses/Plsql" }, // matches Route
       { name: "SQL", href: "/all-courses/Sql" },
+      { name: "Blockchain", href: "/all-courses/BlockchainTraining" },
+      { name: "UI-UX", href: "/all-courses/UIUXTraining" },
+      { name: "Unix Shell Scripting", href: "/all-courses/unixshell" },
+
     ],
   },
+    {
+      category: "Java Developer",
+      items: [
+        { name: "AJAX", href: "/all-courses/AjaxTraining" },
+        { name: "AngularJS", href: "/all-courses/AnularJs" },
+        { name: "Angular", href: "/all-courses/Angular" },
+        { name: "Core Java", href: "/all-courses/CoreJava" },
+        { name: "Hibernate", href: "/all-courses/HibernateCourse" },
+        { name: "J2EE", href: "/all-courses/J2EECourse" },
+        { name: "Springboot", href: "/all-courses/SpringbootCourse" },
+      ],
+    },
   {
     category: "Data Science & Analytics",
     items: [
@@ -23,6 +39,37 @@ const groupedCourses = [
       { name: "Business Analytics", href: "/all-courses/BusinessAnalytics" },
       { name: "Data Science & AI", href: "/all-courses/DataScienceAi" },
       { name: "Big Data Developer", href: "/all-courses/BigDataDeveloper" },
+      { name: "Data Analyst", href: "/all-courses/DataAnalyst" },
+      { name: "Artificial Intelligence", href: "/all-courses/ai" },
+      { name: "Machine Learning", href: "/all-courses/ml" },
+    ],
+  },
+  {
+    category: "Oracle training",
+    items: [
+      { name: "Oracle SQL training", href: "/all-courses/OracleSql" },
+      { name: "Oracle PlSQL training", href: "/all-courses/OraclePlSql" },
+      { name: "Oracle DBA training", href: "/all-courses/OracleDba" },
+      { name: "Oracle Fusion training", href: "/all-courses/OracleFusion" },
+      { name: "Performance training", href: "/all-courses/PerformanceTuning" },
+    ],
+  },
+   {
+    category: "Fullstack Development",
+    items: [
+      { name: "Java Fullstack", href: "/all-courses/javafullstack" },
+      { name: "Python Fullstack", href: "/all-courses/pythonfullstack" },
+      { name: ".NET Fullstack", href: "/all-courses/dotnetfullstack" },
+      
+    ],
+  },
+  {
+    category: "Big Data",
+    items: [
+      { name: "Hadoop Spark Fullstack", href: "/all-courses/hadoopSpark" },
+      { name: "Hadoop Testing", href: "/all-courses/hadoopTesting" },
+      { name: "Big Data Administration", href: "/all-courses/hadoopAdministrator" },
+      
     ],
   },
   {
@@ -40,6 +87,13 @@ const groupedCourses = [
       { name: "Software Testing", href: "/all-courses/SoftwareTesting" },
       { name: "Selenium Testing", href: "/all-courses/SeleniumTesting" }, // ABSOLUTE
       { name: "ETL Testing", href: "/all-courses/EtlTesting" },
+      { name: "IOT Testing", href: "/all-courses/IOTtesting" },
+      { name: "Cypress Testing", href: "/all-courses/Cypresstesting" },
+      { name: "TypeScript Testing", href: "/all-courses/typeScriptTesting" },
+      { name: "Playwright Testing", href: "/all-courses/playwrightTesting" },
+      { name: "API Testing", href: "/all-courses/ApiTesting" },
+      { name: "Manual Testing", href: "/all-courses/ManualTesting" },
+      
     ],
   },
   {
@@ -47,6 +101,12 @@ const groupedCourses = [
     items: [
       { name: "AWS Training", href: "/all-courses/AwsTraining" },
       { name: "DevOps", href: "/all-courses/DevOps" },
+      { name: "AWS Data Engineer", href: "/all-courses/awsDataEngineer" },
+      { name: "AWS Solutions Architect", href: "/all-courses/AwsSolutionsArchitect" },
+      { name: "Azure Training", href: "/all-courses/AzureTraining" },
+      { name: "GCP Training", href: "/all-courses/GoogleCloudPlatform" },
+      { name: "Snowflake Training", href: "/all-courses/Snowflake" },
+
     ],
   },
   {
@@ -54,6 +114,7 @@ const groupedCourses = [
     items: [
       { name: "Hardware Networking", href: "/all-courses/HardwareNetworking" },
       { name: "Cyber Security", href: "/all-courses/CyberSecurity" },
+      { name: "VMware Training", href: "/all-courses/Vmware" },
     ],
   },
   {
@@ -76,6 +137,15 @@ const groupedCourses = [
   {
     category: "Professional Development",
     items: [{ name: "Soft Skill Training", href: "/all-courses/SoftSkillsTraining" }],
+  },
+  {
+    category: "Human Resource Training",
+    items: [
+      { name: "Junior HR Training", href: "/all-courses/juniorHr" },
+      { name: "Senior HR Training", href: "/all-courses/seniorHr" },
+      { name: "Talent Acquisition", href: "/all-courses/talentaqu" },
+      
+    ],
   },
 ];
 
@@ -182,49 +252,53 @@ const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
                 All Courses ▾
               </button>
 
-              <div
-                className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-50 hidden group-hover:flex flex-row overflow-visible"
-                onMouseLeave={() => setActiveCategory(null)}
-              >
-                <div className="flex flex-col w-64 rounded-l-lg">
-                  {groupedCourses.map((cat, idx) => (
-                    <div
-                      key={cat.category}
-                      className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
-                        activeCategory === idx ? "bg-[#f0f4fa] text-[#005BAC]" : "hover:bg-gray-100 text-gray-800"
-                      }`}
-                      onMouseEnter={() => setActiveCategory(idx)}
-                      style={{ borderRadius: "8px 0 0 8px" }}
-                    >
-                      <span>{cat.category}</span>
-                      <FiChevronRight
-                        className={`text-gray-400 transition-transform duration-200 ${
-                          activeCategory === idx ? "translate-x-1" : ""
-                        }`}
-                        size={18}
-                      />
-                    </div>
-                  ))}
-                </div>
+              {/* Desktop "All Courses" dropdown */}
+<div
+  className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg z-50 hidden group-hover:flex flex-row"
+  onMouseLeave={() => setActiveCategory(null)}
+>
+  {/* Left panel - categories */}
+  <div className="flex flex-col w-64 rounded-l-lg max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+    {groupedCourses.map((cat, idx) => (
+      <div
+        key={cat.category}
+        className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
+          activeCategory === idx ? "bg-[#f0f4fa] text-[#005BAC]" : "hover:bg-gray-100 text-gray-800"
+        }`}
+        onMouseEnter={() => setActiveCategory(idx)}
+        style={{ borderRadius: "8px 0 0 8px" }}
+      >
+        <span>{cat.category}</span>
+        <FiChevronRight
+          className={`text-gray-400 transition-transform duration-200 ${
+            activeCategory === idx ? "translate-x-1" : ""
+          }`}
+          size={18}
+        />
+      </div>
+    ))}
+  </div>
 
-                {activeCategory !== null && (
-                  <div
-                    className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto bg-white rounded-r-lg"
-                    style={{ position: "relative", left: "-4px", boxShadow: "none" }}
-                  >
-                    {groupedCourses[activeCategory].items.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.href} // ABSOLUTE
-                        className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+  {/* Right panel - items */}
+  {activeCategory !== null && (
+    <div
+      className="flex flex-col min-w-[220px] bg-white rounded-r-lg max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+      style={{ position: "relative", left: "-4px" }}
+    >
+      {groupedCourses[activeCategory].items.map((item) => (
+        <Link
+          key={item.name}
+          to={item.href}
+          className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
+        >
+          {item.name}
+        </Link>
+      ))}
+    </div>
+  )}
+</div>
+
+</div>
 
     <a href="/internship" className="transition">
       Internship

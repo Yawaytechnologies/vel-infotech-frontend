@@ -15,9 +15,9 @@
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  export default function CoreJavaPage() {
+  export default function UnixShellScriptingPage() {
     const [mode, setMode] = useState("classroom");
-    const course = SYLLABI.coreJava;
+    const course = SYLLABI.unix;
     const [unlocked, setUnlocked] = useState(false);
 
     const syllabusRef = useRef(null);
@@ -92,33 +92,36 @@
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-  Join Our 100% Job Guaranteed <br />
+         <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+  Master Unix Shell Scripting with <br />
   <span className="text-yellow-400">
-   Core Java Course
-</span>
+    Hands-On Practical Training
+  </span>
 </h2>
 
 <ul className="space-y-3 mt-6 text-lg">
   <li>
-    ✅ Join the <strong>Best Core Java Training Institute</strong> to master 
-    Java programming, object-oriented concepts, and foundational development skills.
+    ✅ Join the <strong>Top Unix Shell Scripting Training Institute</strong> to learn 
+    scripting for automation, system administration, and real-world server management.
   </li>
   <li>
-    ✅ Learn <strong>Core Java Fundamentals, OOP Concepts, Collections, Exception Handling, 
-    Multithreading, File I/O, JDBC, and Java Best Practices</strong>.
+    ✅ Learn <strong>Shell Scripting Basics, Bash Commands, Variables, Loops, 
+    Conditional Statements, Functions, File Handling, Process Management, Cron Jobs, 
+    Regular Expressions, and Advanced Scripting Techniques</strong>.
   </li>
   <li>
-    ✅ Work on <strong>real-world Java projects</strong> to gain hands-on programming experience.
+    ✅ Work on <strong>practical projects</strong> including system automation scripts, 
+    backup solutions, log analysis, and task scheduling scripts.
   </li>
   <li>
     ✅ Choose <strong>flexible learning modes</strong> – Weekday / Weekend / Fast-track.
   </li>
   <li>
-    ✅ Earn an industry-recognized <strong>Java Developer Certification</strong>.
+    ✅ Earn an industry-recognized <strong>Unix Shell Scripting Certification</strong>.
   </li>
   <li>
-    ✅ Career support: Resume building, mock interviews & job placement assistance.
+    ✅ Career support: Resume building, mock interviews & job
+    placement assistance.
   </li>
 </ul>
 
@@ -149,9 +152,11 @@
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
             <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-            <p className="mb-4 text-lg">
-  Become a proficient Core Java Developer in 2 Months
+          <p className="mb-4 text-lg">
+  Become an expert in Unix Shell Scripting and Bash Automation in 1–2 Months
 </p>
+
+
 
 
             
@@ -287,51 +292,60 @@
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
               {/* Heading */}
              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
-  Overview of Core Java Training Course
+  Overview of Unix Shell Scripting Training Course
 </h2>
 <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
 {/* Description */}
 <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-  Our Core Java Training equips you with the foundational and advanced Java skills 
-  required to become a proficient developer. This course covers Java Basics, 
-  OOP Concepts, Collections, Exception Handling, Multithreading, File I/O, JDBC, 
-  and hands-on coding exercises. You’ll also work on real-world projects, understand 
-  best coding practices, and receive interview preparation support to kick-start 
-  your career in Java development.
+  Our Unix Shell Scripting Training equips you with the skills and hands-on expertise
+  required to automate tasks, manage files, and handle system administration efficiently
+  using Bash and other Unix shells. This course covers shell basics, variables, loops, 
+  conditionals, file handling, process management, scripting best practices, and writing 
+  reusable scripts. You’ll also work on practical projects, automate workflows, and receive 
+  career guidance to jump-start your journey as a Unix/Linux professional.
 </p>
 
 {/* What You’ll Learn */}
 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-  What You’ll Learn From Core Java Training
+  What You’ll Learn From Unix Shell Scripting Training
 </h3>
 <ul className="space-y-4 text-gray-800 text-base md:text-lg">
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Build a strong foundation in Java syntax, OOP concepts, and programming best practices.
+    Understand Unix/Linux environment, shell fundamentals, and command-line operations.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Learn to work with Java Collections, Generics, Exception Handling, and File I/O.
+    Learn to write scripts using variables, loops, conditionals, and functions.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Gain expertise in multithreading, concurrency, and working with JDBC for database integration.
+    Automate file management, system tasks, and routine administrative operations.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Work on practical coding projects to strengthen problem-solving and real-world application development skills.
+    Work on practical projects like backup scripts, log monitoring, and deployment scripts.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Prepare for Java developer interviews and assessments with practical exercises and mock tests.
+    Learn best practices for debugging, error handling, and creating reusable shell scripts.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Get career support including resume guidance, mock interviews, and job placement assistance.
+    Receive career support including resume building, mock interviews, and job placement assistance.
   </li>
 </ul>
-</div>
+
+
+
+
+
+
+
+
+
+            </div>
           </div>
         </section>
         <div ref={syllabusRef} id="syllabus" className="scroll-mt-[110px]">
@@ -359,22 +373,13 @@
                   Comprehensive Curriculum
                 </h4>
            <p className="text-black/90">
-  Master Core Java with structured modules covering Java Basics, Object-Oriented Programming (OOP) Concepts, 
-  Data Types & Operators, Collections Framework, Exception Handling, Multithreading, File I/O, JDBC, 
-  Generics, Java Packages, and more. Gain hands-on experience with coding exercises, real-world projects, 
-  and best practices to become a proficient Java developer ready for industry challenges.
+  Master Unix Shell Scripting with structured modules covering 
+  shell fundamentals, Bash scripting, variables and data types, loops and conditionals, 
+  functions and modular scripting, file and directory management, process and job control, 
+  text processing with awk, sed, and grep, automation of system tasks, shell debugging 
+  techniques, writing reusable scripts, and best practices for building efficient 
+  end-to-end automation solutions in Unix/Linux environments.
 </p>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

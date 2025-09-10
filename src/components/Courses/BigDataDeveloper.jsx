@@ -751,15 +751,16 @@ export default function BigDataDeveloper() {
         ))}
       </div>
     </section>
-   <section className="py-16 px-6 bg-white">
-  <div className="max-w-4xl mx-auto mt-10">
+   {/* Tab Section */}
+<section className="pt-5 pb-10 px-6 bg-white">
+  <div className="max-w-2xl mx-auto mt-2"> {/* reduced width */}
     {/* Tabs */}
-    <div className="flex flex-wrap border-b border-gray-200">
+    <div className="flex flex-wrap border-b border-gray-200 justify-center">
       {tabs.map((tab) => (
         <button
           key={tab}
           onClick={() => setActiveTab(tab)}
-          className={`px-4 py-2 text-sm font-medium ${
+          className={`px-4 py-2 text-sm font-medium transition ${
             activeTab === tab
               ? "border-b-2 border-blue-600 text-blue-600"
               : "text-gray-600 hover:text-blue-600"
@@ -772,18 +773,26 @@ export default function BigDataDeveloper() {
 
     {/* Tab Content */}
     <div className="mt-6">
-      {activeTab === "Practice Tasks" && (
-        <div className="border border-black rounded-md">
-          {practiceTasks.map((task, idx) => (
+      {/* Accordion-based Tabs */}
+      {(activeTab === "Practice Tasks" ||
+        activeTab === "Interview Questions" ||
+        activeTab === "Projects") && (
+        <div className="border border-gray-300 rounded-md">
+          {(activeTab === "Practice Tasks"
+            ? practiceTasks
+            : activeTab === "Interview Questions"
+            ? interviewQuestions
+            : projects
+          ).map((item, idx) => (
             <div
               key={idx}
-              className={`border-b border-black last:border-b-0`}
+              className="border-b border-gray-200 last:border-b-0"
             >
               <button
                 onClick={() => toggleAccordion(idx)}
                 className="w-full flex justify-between items-center text-left font-medium text-gray-800 p-3"
               >
-                {task}
+                {item}
                 <FiChevronDown
                   className={`transform transition-transform ${
                     openIndex === idx ? "rotate-180" : ""
@@ -792,179 +801,107 @@ export default function BigDataDeveloper() {
               </button>
               {openIndex === idx && (
                 <div className="mt-1 text-gray-600 p-3 border-t border-gray-200">
-                  Content for {task} goes here...
+                  Content for {item} goes here...
                 </div>
               )}
             </div>
           ))}
-        </div>
-      )}
 
-      {activeTab === "Interview Questions" && (
-        <div className="max-w-3xl mx-auto mt-6">
-      {interviewQuestions.map((q, idx) => (
-        <div
-          key={idx}
-          className="border-b border-black last:border-b-0"
-        >
-          <button
-            onClick={() => toggleAccordion(idx)}
-            className="w-full flex justify-between items-center text-left font-semibold text-gray-800 p-3"
-          >
-            {q}
-            <FiChevronDown
-              className={`transform transition-transform ${
-                openIndex === idx ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-          {openIndex === idx && (
-            <div className="mt-1 text-gray-600 p-3 border-t border-gray-200">
-              Content for {q} goes here...
+          {/* CTA for Projects only */}
+          {activeTab === "Projects" && (
+            <div className="p-4 text-center">
+              <a
+                href="#"
+                className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 transition"
+              >
+                For More Projects
+              </a>
             </div>
           )}
         </div>
-      ))}
-    </div>
       )}
 
-      {activeTab === "Model Resume" && (
-        <div className="max-w-2xl mx-auto text-center py-8">
-      {/* Heading */}
-      <h2 className="text-xl font-semibold text-green-900 mb-6">
-        Model Resume Download Links
-      </h2>
+      {/* Resume + Software Links */}
+      {(activeTab === "Model Resume" || activeTab === "Software Links") && (
+        <div className="max-w-md mx-auto text-center py-8"> {/* narrower */}
+          <h2 className="text-lg font-semibold text-green-900 mb-6">
+            {activeTab === "Model Resume"
+              ? "Model Resume Download Links"
+              : "Software Download Links"}
+          </h2>
+          <div className="space-y-3">
+            {(activeTab === "Model Resume" ? resumes : softwares).map(
+              (item, idx) => (
+                <a
+                  key={idx}
+                  href={item.url}
+                  className="block bg-green-950 text-white py-2 rounded-md hover:bg-green-800 transition"
+                  download
+                >
+                  {item.name}
+                </a>
+              )
+            )}
+          </div>
 
-      {/* Resume Links */}
-      <div className="space-y-3">
-        {resumes.map((resume, idx) => (
-          <a
-            key={idx}
-            href={resume.url}
-            className="block bg-green-950 text-white py-2 rounded-md hover:bg-green-800 transition"
-            download
-          >
-            {resume.name}
-          </a>
-        ))}
-      </div>
-
-      {/* CTA Button */}
-      <div className="mt-6">
-        <a
-          href="#"
-          className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 transition"
-        >
-          For More Resume Models
-        </a>
-      </div>
-    </div>
+          {/* CTA only for Resume */}
+          {activeTab === "Model Resume" && (
+            <div className="mt-6">
+              <a
+                href="#"
+                className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 transition"
+              >
+                For More Resume Models
+              </a>
+            </div>
+          )}
+        </div>
       )}
-      {activeTab === "Software Links" && (
-        <div className="max-w-2xl mx-auto text-center py-8">
-      {/* Heading */}
-      <h2 className="text-xl font-semibold text-green-900 mb-6">
-        Software Download Links
-      </h2>
 
-      {/* Software Links */}
-      <div className="space-y-3">
-        {softwares.map((software, idx) => (
-          <a
-            key={idx}
-            href={software.url}
-            className="block bg-green-950 text-white py-2 rounded-md hover:bg-green-800 transition"
-            download
-          >
-            {software.name}
-          </a>
-        ))}
-      </div>
-    </div>
+      {/* Accommodation Tab */}
+      {activeTab === "Accommodation" && (
+        <div className="max-w-lg mx-auto py-6 px-4 text-gray-800 border border-gray-300 rounded-md">
+          <p className="font-bold text-red-600 mb-2">Disclaimer Note:</p>
+          <p className="mb-6">
+            The details mentioned here are for supportive purposes only. 
+            There are no tie-ups or links with the corresponding PGs.
+          </p>
+
+          <h3 className="font-semibold text-lg mb-3">Ladies PG Accommodation</h3>
+          <ul className="space-y-2 mb-6">
+            {ladiesPG.map((pg, idx) => (
+              <li key={idx}>
+                <span className="font-medium">{pg.name}</span> :{" "}
+                <a
+                  href={`tel:${pg.phone}`}
+                  className="text-blue-600 hover:underline"
+                >
+                  {pg.phone}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="font-semibold text-lg mb-3">Mens PG Accommodation</h3>
+          <ul className="space-y-2">
+            {mensPG.map((pg, idx) => (
+              <li key={idx}>
+                <span className="font-medium">{pg.name}</span> :{" "}
+                <a
+                  href={`tel:${pg.phone}`}
+                  className="text-blue-600 hover:underline"
+                >
+                  {pg.phone}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   </div>
-  {activeTab === "Projects" && (
-        <div className="max-w-3xl mx-auto mt-6 text-center">
-      {projects.map((project, idx) => (
-        <div
-          key={idx}
-          className="border-b border-black last:border-b-0 text-left"
-        >
-          <button
-            onClick={() => toggleAccordion(idx)}
-            className="w-full flex justify-between items-center text-left font-semibold text-green-900 p-3"
-          >
-            {project}
-            <FiChevronDown
-              className={`transform transition-transform ${
-                openIndex === idx ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-          {openIndex === idx && (
-            <div className="mt-1 text-gray-600 p-3 border-t border-gray-200">
-              Content for {project} goes here...
-            </div>
-          )}
-        </div>
-      ))}
-
-      {/* CTA Button */}
-      <div className="mt-6">
-        <a
-          href="#"
-          className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 transition"
-        >
-          For More Projects
-        </a>
-      </div>
-    </div>
-        
-      )}
-      {activeTab === "Accommodation" && (
-        <div className="max-w-3xl mx-auto py-6 px-4 text-gray-800">
-      {/* Disclaimer */}
-      <p className="font-bold text-red-600 mb-2">Disclaimer Note:</p>
-      <p className="mb-6">
-        The details mentioned here are for supportive purposes only. 
-        There are no tie-ups or links with the corresponding PGs.
-      </p>
-
-      {/* Ladies PG Section */}
-      <h3 className="font-semibold text-lg mb-3">Ladies PG Accommodation</h3>
-      <ul className="space-y-2 mb-6">
-        {ladiesPG.map((pg, idx) => (
-          <li key={idx}>
-            <span className="font-medium">{pg.name}</span> :{" "}
-            <a
-              href={`tel:${pg.phone}`}
-              className="text-blue-600 hover:underline"
-            >
-              {pg.phone}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      {/* Mens PG Section */}
-      <h3 className="font-semibold text-lg mb-3">Mens PG Accommodation</h3>
-      <ul className="space-y-2">
-        {mensPG.map((pg, idx) => (
-          <li key={idx}>
-            <span className="font-medium">{pg.name}</span> :{" "}
-            <a
-              href={`tel:${pg.phone}`}
-              className="text-blue-600 hover:underline"
-            >
-              {pg.phone}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-      )}
 </section>
+
 <div className="max-w-6xl mx-auto py-10 px-6">
       {/* Section Header */}
       <h2 className="text-2xl font-bold text-center mb-10">

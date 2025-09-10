@@ -15,9 +15,9 @@
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  export default function CoreJavaPage() {
+  export default function AIPage() {
     const [mode, setMode] = useState("classroom");
-    const course = SYLLABI.coreJava;
+    const course = SYLLABI.ai;
     const [unlocked, setUnlocked] = useState(false);
 
     const syllabusRef = useRef(null);
@@ -95,31 +95,34 @@
           <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
   Join Our 100% Job Guaranteed <br />
   <span className="text-yellow-400">
-   Core Java Course
-</span>
+   Artificial Intelligence (AI) Course
+  </span>
 </h2>
 
 <ul className="space-y-3 mt-6 text-lg">
-  <li>
-    ✅ Join the <strong>Best Core Java Training Institute</strong> to master 
-    Java programming, object-oriented concepts, and foundational development skills.
-  </li>
-  <li>
-    ✅ Learn <strong>Core Java Fundamentals, OOP Concepts, Collections, Exception Handling, 
-    Multithreading, File I/O, JDBC, and Java Best Practices</strong>.
-  </li>
-  <li>
-    ✅ Work on <strong>real-world Java projects</strong> to gain hands-on programming experience.
-  </li>
-  <li>
-    ✅ Choose <strong>flexible learning modes</strong> – Weekday / Weekend / Fast-track.
-  </li>
-  <li>
-    ✅ Earn an industry-recognized <strong>Java Developer Certification</strong>.
-  </li>
-  <li>
-    ✅ Career support: Resume building, mock interviews & job placement assistance.
-  </li>
+<li>
+  ✅ Join the <strong>Best AI Training Institute</strong> to master 
+  artificial intelligence concepts, algorithms, and real-world AI applications.
+</li>
+<li>
+  ✅ Learn <strong>AI Fundamentals, Machine Learning, Deep Learning, Neural Networks, 
+  Natural Language Processing (NLP), Computer Vision, Python for AI, 
+  AI Model Training & Optimization, Reinforcement Learning, AI Ethics, 
+  and AI Deployment Techniques</strong>.
+</li>
+<li>
+  ✅ Work on <strong>real-world AI projects</strong> including predictive modeling, image recognition, NLP-based chatbots, and intelligent automation solutions.
+</li>
+<li>
+  ✅ Choose <strong>flexible learning modes</strong> – Weekday / Weekend / Fast-track.
+</li>
+<li>
+  ✅ Earn an industry-recognized <strong>Artificial Intelligence Certification</strong>.
+</li>
+<li>
+  ✅ Career support: Resume building, mock interviews & job
+  placement assistance.
+</li>
 </ul>
 
 
@@ -149,9 +152,11 @@
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
             <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-            <p className="mb-4 text-lg">
-  Become a proficient Core Java Developer in 2 Months
+          <p className="mb-4 text-lg">
+  Become an expert in Artificial Intelligence (AI) and Machine Learning in 3–4 Months
 </p>
+
+
 
 
             
@@ -287,51 +292,59 @@
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
               {/* Heading */}
              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
-  Overview of Core Java Training Course
+  Overview of Artificial Intelligence (AI) Training Course
 </h2>
 <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
 {/* Description */}
 <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-  Our Core Java Training equips you with the foundational and advanced Java skills 
-  required to become a proficient developer. This course covers Java Basics, 
-  OOP Concepts, Collections, Exception Handling, Multithreading, File I/O, JDBC, 
-  and hands-on coding exercises. You’ll also work on real-world projects, understand 
-  best coding practices, and receive interview preparation support to kick-start 
-  your career in Java development.
+  Our Artificial Intelligence (AI) Training equips you with the skills and hands-on expertise
+  required to build AI applications using machine learning, deep learning, and related technologies.
+  This course covers AI fundamentals, Python for AI, Machine Learning algorithms, Neural Networks,
+  Deep Learning with TensorFlow and PyTorch, Natural Language Processing (NLP), Computer Vision,
+  and Best Practices for AI model development. You’ll also work on real-world projects, analyze
+  datasets, and receive interview preparation support to kick-start your career as an AI Developer.
 </p>
 
 {/* What You’ll Learn */}
 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-  What You’ll Learn From Core Java Training
+  What You’ll Learn From AI Training
 </h3>
 <ul className="space-y-4 text-gray-800 text-base md:text-lg">
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Build a strong foundation in Java syntax, OOP concepts, and programming best practices.
+    Build a strong foundation in AI concepts, machine learning, and deep learning principles.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Learn to work with Java Collections, Generics, Exception Handling, and File I/O.
+    Learn data preprocessing, feature engineering, and model building using Python.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Gain expertise in multithreading, concurrency, and working with JDBC for database integration.
+    Gain expertise in supervised, unsupervised, and reinforcement learning algorithms.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Work on practical coding projects to strengthen problem-solving and real-world application development skills.
+    Work on real-world AI projects including NLP, computer vision, and predictive analytics.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Prepare for Java developer interviews and assessments with practical exercises and mock tests.
+    Learn to deploy AI models, optimize performance, and follow ethical AI practices.
   </li>
   <li className="flex items-start gap-3">
     <span className="text-purple-600 mt-1">➤</span>
-    Get career support including resume guidance, mock interviews, and job placement assistance.
+    Get career support with resume building, mock interviews, and placement assistance.
   </li>
 </ul>
-</div>
+
+
+
+
+
+
+
+
+            </div>
           </div>
         </section>
         <div ref={syllabusRef} id="syllabus" className="scroll-mt-[110px]">
@@ -359,23 +372,12 @@
                   Comprehensive Curriculum
                 </h4>
            <p className="text-black/90">
-  Master Core Java with structured modules covering Java Basics, Object-Oriented Programming (OOP) Concepts, 
-  Data Types & Operators, Collections Framework, Exception Handling, Multithreading, File I/O, JDBC, 
-  Generics, Java Packages, and more. Gain hands-on experience with coding exercises, real-world projects, 
-  and best practices to become a proficient Java developer ready for industry challenges.
+  Master Artificial Intelligence (AI) development with structured modules covering 
+  AI fundamentals, Python for AI, Machine Learning algorithms, Deep Learning with 
+  TensorFlow and PyTorch, Neural Networks, Natural Language Processing (NLP), 
+  Computer Vision, Reinforcement Learning, Model Deployment & Optimization, 
+  AI Ethics & Governance, and best practices for building scalable end-to-end AI applications.
 </p>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
               </div>
