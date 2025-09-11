@@ -5,6 +5,12 @@
   import JavaSyllabus from "../coursecomponent/Javasyllabus";
   import Syllabus from "../coursecomponent/SyllabusLocked";
   import { SYLLABI } from "../coursecomponent/Syllabi";
+  import ha1 from "../../assets/handson1.jpg"
+  import ha2 from "../../assets/handson2.jpg"
+  import ha3 from "../../assets/handson3.webp"
+  import ha4 from "../../assets/handson4.webp"
+
+  import { FiChevronDown } from "react-icons/fi";
 
   const HEADER_OFFSET = 110; // adjust to your sticky header height
 
@@ -16,6 +22,89 @@
   };
 
   export default function DataAnalystPage() {
+      const roles = [
+        "Data Analyst",
+        "Business Intelligence Analyst",
+        "Data Scientist",
+        "Data Engineer",
+        "Quantitative Analyst",
+        "Operations Analyst",
+        "Marketing Analyst",
+        "Financial Analyst",
+        "Risk Analyst",
+        "Product Analyst",
+        "Customer Insights Analyst",
+        "Supply Chain Analyst",
+        "Fraud Analyst",
+        "Machine Learning Engineer",
+        "Big Data Analyst",
+        "Data Visualization Specialist",
+      ];
+       const ladiesPG = [
+        { name: "Rainbow", phone: "6369217603" },
+        { name: "Green Home", phone: "9150607451" },
+        { name: "Sai Balaji", phone: "8142583960" },
+        { name: "Orange", phone: "9080195608" },
+      ];
+    
+      const mensPG = [
+        { name: "Blue Nest", phone: "9876543210" },
+        { name: "Comfort Stay", phone: "9123456780" },
+        { name: "City Homes", phone: "9988776655" },
+        { name: "Elite PG", phone: "9090909090" },
+      ];
+    
+      const projects = ["Project - 1", "Project - 2", "Project - 3"];
+    
+      const softwares = [
+        { name: "Power BI Download Link", url: "#" },
+        { name: "Tableau Download Link", url: "#" },
+        { name: "SQL Download Link", url: "#" },
+      ];
+    
+      const tabs = [
+        "Practice Tasks",
+        "Interview Questions",
+        "Model Resume",
+        "Software Links",
+        "Projects",
+        "Accommodation",
+      ];
+      const [activeTab, setActiveTab] = useState("Practice Tasks");
+      const [openIndex, setOpenIndex] = useState(null);
+       const resumes = [
+        { name: "Model Resume 1 Download Link", url: "#" },
+        { name: "Model Resume 2 Download Link", url: "#" },
+        { name: "Model Resume 3 Download Link", url: "#" },
+      ];
+    
+      const practiceTasks = [
+        "Tableau Class Task",
+        "Power BI Class Task",
+        "SQL Class Task",
+      ];
+      const interviewQuestions = [
+        "Power BI Interview Questions",
+        "Tableau Interview Questions",
+        "SQL Interview Questions",
+      ];
+      const toggleAccordion = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+      };
+      const audience = [
+      "Non IT to IT", 
+    "From Any Degree to IT Job",
+    "Any passed out to IT Job", 
+    "Any Domain to IT Job" 
+    
+    ];
+     const images = [
+        ha1,
+        ha2,
+        ha3,
+        ha4,
+      ];
+
     const [mode, setMode] = useState("classroom");
     const course = SYLLABI.dataAnalyst;
     const [unlocked, setUnlocked] = useState(false);
@@ -489,6 +578,244 @@
             </div>
           </div>
         </section>
+        <section className="py-10 px-6">
+      <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
+        Who Should Take a Data Analytics Course:
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+        {audience.map((item, idx) => (
+          <div
+            key={idx}
+            className="bg-white text-black shadow-md rounded-xl p-4 flex items-center font-medium text-lg border-l-4"
+            style={{
+              borderImage: "linear-gradient(to bottom, #4f46e5, #ec4899) 1",
+            }}
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+    </section>
+     <section className="py-16 px-6 bg-white">
+      {/* Title */}
+      <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-6">
+        Hands-On Training
+      </h2>
+
+      {/* Description */}
+      <p className="text-center max-w-5xl mx-auto text-gray-600 mb-12 leading-relaxed">
+        Our <span className="font-bold text-gray-900">Data Analytics Course</span> includes
+        extensive hands-on training to ensure you gain practical experience with real-world data in
+        Chennai. You’ll work on live projects, case studies, and simulations that mirror industry
+        challenges. This hands-on approach helps you apply theoretical knowledge to practical
+        scenarios, making you job-ready from day one.
+      </p>
+
+      {/* Images Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {images.map((src, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: idx * 0.1 }}
+            whileHover={{ scale: 1.05 }}
+            className="bg-white shadow-md rounded-xl overflow-hidden border-l-4 border-solid"
+            style={{
+              borderImage: "linear-gradient(to bottom, #4f46e5, #ec4899) 1",
+            }}
+          >
+            <img
+              src={src}
+              alt={`Training ${idx + 1}`}
+              className="w-full h-56 object-cover"
+            />
+          </motion.div>
+        ))}
+      </div>
+    </section>
+   {/* Tab Section */}
+<section className="pt-5 pb-10 px-6 bg-white">
+  <div className="max-w-2xl mx-auto mt-2"> {/* reduced width */}
+    {/* Tabs */}
+    <div className="flex flex-wrap border-b border-gray-200 justify-center">
+      {tabs.map((tab) => (
+        <button
+          key={tab}
+          onClick={() => setActiveTab(tab)}
+          className={`px-4 py-2 text-sm font-medium transition ${
+            activeTab === tab
+              ? "border-b-2 border-blue-600 text-blue-600"
+              : "text-gray-600 hover:text-blue-600"
+          }`}
+        >
+          {tab}
+        </button>
+      ))}
+    </div>
+
+    {/* Tab Content */}
+    <div className="mt-6">
+      {/* Accordion-based Tabs */}
+      {(activeTab === "Practice Tasks" ||
+        activeTab === "Interview Questions" ||
+        activeTab === "Projects") && (
+        <div className="border border-gray-300 rounded-md">
+          {(activeTab === "Practice Tasks"
+            ? practiceTasks
+            : activeTab === "Interview Questions"
+            ? interviewQuestions
+            : projects
+          ).map((item, idx) => (
+            <div
+              key={idx}
+              className="border-b border-gray-200 last:border-b-0"
+            >
+              <button
+                onClick={() => toggleAccordion(idx)}
+                className="w-full flex justify-between items-center text-left font-medium text-gray-800 p-3"
+              >
+                {item}
+                <FiChevronDown
+                  className={`transform transition-transform ${
+                    openIndex === idx ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {openIndex === idx && (
+                <div className="mt-1 text-gray-600 p-3 border-t border-gray-200">
+                  Content for {item} goes here...
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* CTA for Projects only */}
+          {activeTab === "Projects" && (
+            <div className="p-4 text-center">
+              <a
+                href="#"
+                className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 transition"
+              >
+                For More Projects
+              </a>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Resume + Software Links */}
+      {(activeTab === "Model Resume" || activeTab === "Software Links") && (
+        <div className="max-w-md mx-auto text-center py-8"> {/* narrower */}
+          <h2 className="text-lg font-semibold text-green-900 mb-6">
+            {activeTab === "Model Resume"
+              ? "Model Resume Download Links"
+              : "Software Download Links"}
+          </h2>
+          <div className="space-y-3">
+            {(activeTab === "Model Resume" ? resumes : softwares).map(
+              (item, idx) => (
+                <a
+                  key={idx}
+                  href={item.url}
+                  className="block bg-green-950 text-white py-2 rounded-md hover:bg-green-800 transition"
+                  download
+                >
+                  {item.name}
+                </a>
+              )
+            )}
+          </div>
+
+          {/* CTA only for Resume */}
+          {activeTab === "Model Resume" && (
+            <div className="mt-6">
+              <a
+                href="#"
+                className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 transition"
+              >
+                For More Resume Models
+              </a>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Accommodation Tab */}
+      {activeTab === "Accommodation" && (
+        <div className="max-w-lg mx-auto py-6 px-4 text-gray-800 border border-gray-300 rounded-md">
+          <p className="font-bold text-red-600 mb-2">Disclaimer Note:</p>
+          <p className="mb-6">
+            The details mentioned here are for supportive purposes only. 
+            There are no tie-ups or links with the corresponding PGs.
+          </p>
+
+          <h3 className="font-semibold text-lg mb-3">Ladies PG Accommodation</h3>
+          <ul className="space-y-2 mb-6">
+            {ladiesPG.map((pg, idx) => (
+              <li key={idx}>
+                <span className="font-medium">{pg.name}</span> :{" "}
+                <a
+                  href={`tel:${pg.phone}`}
+                  className="text-blue-600 hover:underline"
+                >
+                  {pg.phone}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="font-semibold text-lg mb-3">Mens PG Accommodation</h3>
+          <ul className="space-y-2">
+            {mensPG.map((pg, idx) => (
+              <li key={idx}>
+                <span className="font-medium">{pg.name}</span> :{" "}
+                <a
+                  href={`tel:${pg.phone}`}
+                  className="text-blue-600 hover:underline"
+                >
+                  {pg.phone}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<div className="max-w-6xl mx-auto py-10 px-6">
+      {/* Section Header */}
+      <h2 className="text-2xl font-bold text-center mb-10">
+        Job Roles for Data Analytics
+      </h2>
+
+      {/* Grid Container */}
+      {/* - Responsive grid
+          - 1 column on mobile
+          - 2 columns on small screens
+          - 3 columns on medium screens
+          - 4 columns on large screens */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        
+        {/* Loop through each role and display in a styled card */}
+        {roles.map((role, idx) => (
+          <div
+            key={idx} // unique key required for React list rendering
+            className="flex items-center justify-center h-20 bg-white shadow-md rounded-xl font-semibold text-gray-800 border-l-4"
+            style={{
+              // Alternate left border color:
+              // Blue for even index, Pink for odd index
+              borderLeftColor: idx % 2 === 0 ? "#4F46E5" : "#EC4899",
+            }}
+          >
+            {role}
+          </div>
+        ))}
+      </div>
+    </div>
       </section>
     );
   }

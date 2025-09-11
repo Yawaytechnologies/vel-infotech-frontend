@@ -7,6 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 import Syllabus from "../coursecomponent/SyllabusLocked";
 import { SYLLABI } from "../coursecomponent/Syllabi";
 import { FiChevronDown } from "react-icons/fi";
+import ha1 from "../../assets/handson1.jpg"
+import ha2 from "../../assets/handson2.jpg"
+import ha3 from "../../assets/handson3.webp"
+import ha4 from "../../assets/handson4.webp"
 
 
 export default function BigDataDeveloper() {
@@ -88,10 +92,10 @@ export default function BigDataDeveloper() {
 
 ];
  const images = [
-    "/images/training1.jpg",
-    "/images/training2.jpg",
-    "/images/training3.jpg",
-    "/images/training4.jpg",
+    ha1,
+    ha2,
+    ha3,
+    ha4,
   ];
   const [mode, setMode] = useState("classroom");
   const course = SYLLABI.bigdatadeveloper;

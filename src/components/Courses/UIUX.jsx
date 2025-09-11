@@ -1,10 +1,16 @@
   import React, { useState, useRef } from "react";
   import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
+  import { ArrowRight } from "lucide-react";
+  import { Users, Monitor, User, UserCheck } from "lucide-react"; // Icons
   // eslint-disable-next-line no-unused-vars
   import { motion } from "framer-motion";
   import JavaSyllabus from "../coursecomponent/Javasyllabus";
   import Syllabus from "../coursecomponent/SyllabusLocked";
   import { SYLLABI } from "../coursecomponent/Syllabi";
+  import ui from "../../assets/ui.jpg";
+  import UX from "../../assets/UX.jpg";
+  import diff from "../../assets/difference-web-ui-ux-design.jpg";
+  import best from "../../assets/Best Tools for ui ux design.jpg";
 
   const HEADER_OFFSET = 110; // adjust to your sticky header height
 
@@ -14,6 +20,63 @@
     const y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
+  const modes = [
+  {
+    title: "Online Training",
+    description: "Instructor Led live online training",
+    icon: <Users className="w-10 h-10 text-blue-600" />,
+  },
+  {
+    title: "Classroom Training",
+    description: "Instructor Led classroom training",
+    icon: <Monitor className="w-10 h-10 text-blue-600" />,
+  },
+  {
+    title: "One to One Training",
+    description: "Customized and Exclusive training based on your requirement",
+    icon: <User className="w-10 h-10 text-blue-600" />,
+  },
+  {
+    title: "Team/Corporate Training",
+    description: "Customized Corporate Training",
+    icon: <UserCheck className="w-10 h-10 text-blue-600" />,
+  },
+];
+
+  const topics = [
+  {
+    title: "User Interface Design - UI",
+    description:
+      "User Interface Design shapes the users digital experience. It is a bridge between humans and computers (i.e) from websites to mobile apps.",
+    image:
+      ui, // Replace with your image
+    link: "#",
+  },
+  {
+    title: "User Experience Design - UX",
+    description:
+      "User Experience Design helps user to know about the look and feel of the product, website or app.",
+    image:
+      UX, // Replace with your image
+    link: "#",
+  },
+  {
+    title: "Tools For UI UX Design",
+    description:
+      "For Designing purpose various tools can be used, such that we can create, modify and explore user interface and user experience by specialized software application.",
+    image:
+      best, // Replace with your image
+    link: "#",
+  },
+  {
+    title: "Difference between web Design an UI UX Design",
+    description:
+      "Web design is only related to web pages and website application. UI UX Design are related to any kind of design of software and applications.",
+    image:
+      diff, // Replace with your image
+    link: "#",
+  },
+];
 
   export default function UIUXPage() {
     const [mode, setMode] = useState("classroom");
@@ -509,6 +572,58 @@
             </div>
           </div>
         </section>
+        <section className="py-12 px-6 bg-[#f6f9ff] mt-16 rounded-2xl shadow-md">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {topics.map((topic, idx) => (
+          <div
+            key={idx}
+            className="flex flex-col bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
+          >
+            <img
+              src={topic.image}
+              alt={topic.title}
+              className="w-full h-40 object-cover"
+            />
+            <div className="p-5 flex flex-col flex-grow">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                {topic.title}
+              </h3>
+              <p className="text-gray-600 text-sm flex-grow">
+                {topic.description}
+              </p>
+              <a
+                href={topic.link}
+                className="mt-4 inline-flex items-center text-blue-600 font-medium hover:underline"
+              >
+                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+    <section className="py-12 px-6 bg-[#f6f9ff] mt-16  rounded-2xl shadow-md">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+  Modes Of Delivery
+</h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {modes.map((mode, idx) => (
+            <div
+              key={idx}
+              className="flex flex-col items-center text-center bg-white rounded-xl border border-gray-200 shadow-2xl hover:shadow-md transition-all duration-300 p-6"
+            >
+              {mode.icon}
+              <h3 className="mt-4 text-lg font-semibold text-gray-800">
+                {mode.title}
+              </h3>
+              <p className="mt-2 text-gray-600 text-sm">{mode.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
       </section>
     );
   }
