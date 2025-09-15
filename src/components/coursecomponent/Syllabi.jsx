@@ -1110,6 +1110,129 @@ dotnetfullstack: {
   ],
 }
 ,
+blockchain: {
+  title: "Blockchain Developer Online Training — Syllabus",
+  accent: "#0D9488",
+  meta: {
+    duration: "16–20 weeks",
+    audience: "Students, Freshers, Software Developers, IT Professionals, Entrepreneurs",
+    level: "Beginner → Advanced",
+    mode: "Online / Classroom",
+    schedule: "Weekday & Weekend Batches",
+  },
+  preview: [
+    "Blockchain Fundamentals & Cryptography",
+    "Ethereum & Smart Contracts (Solidity)",
+    "Decentralized Applications (DApps)",
+    "Hyperledger Fabric",
+    "Consensus Mechanisms (PoW, PoS, PoA, etc.)",
+    "Decentralized Finance (DeFi)",
+    "NFTs & Token Development",
+    "Web3.js, Ethers.js, Hardhat & Truffle",
+    "Blockchain Security & Best Practices",
+    "Capstone Projects",
+  ],
+  sections: [
+    {
+      title: "Module 1: Blockchain & Cryptography Basics",
+      items: [
+        "Introduction to Blockchain technology",
+        "Distributed ledger concepts & peer-to-peer networks",
+        "Hash functions, Merkle trees, and digital signatures",
+        "Public vs Private vs Consortium blockchains",
+        "Use cases of Blockchain across industries",
+      ],
+    },
+    {
+      title: "Module 2: Cryptocurrency & Bitcoin Fundamentals",
+      items: [
+        "Bitcoin architecture & transactions",
+        "Mining process, nodes, and consensus",
+        "Wallets, addresses, and private/public keys",
+        "Bitcoin scripting & UTXO model",
+        "Hands-on with Bitcoin Testnet",
+      ],
+    },
+    {
+      title: "Module 3: Ethereum & Smart Contracts",
+      items: [
+        "Ethereum ecosystem & accounts",
+        "Solidity programming basics",
+        "Writing and deploying smart contracts",
+        "Gas fees, transactions, and events",
+        "Debugging & testing contracts",
+      ],
+    },
+    {
+      title: "Module 4: DApp Development",
+      items: [
+        "Connecting blockchain with frontend (Web3.js, Ethers.js)",
+        "Building decentralized applications (DApps)",
+        "Using Hardhat & Truffle for development",
+        "IPFS for decentralized storage",
+        "Hands-on: Simple DApp with React + Ethereum",
+      ],
+    },
+    {
+      title: "Module 5: Advanced Blockchain Concepts",
+      items: [
+        "Consensus mechanisms (PoW, PoS, PoA, DPoS, PBFT)",
+        "Scalability solutions: Sidechains, State Channels, Rollups",
+        "Cross-chain interoperability",
+        "Layer-2 protocols (Polygon, Optimism, Arbitrum)",
+      ],
+    },
+    {
+      title: "Module 6: Hyperledger & Enterprise Blockchain",
+      items: [
+        "Introduction to Hyperledger Fabric",
+        "Chaincode development",
+        "Setting up a Hyperledger Fabric network",
+        "Use cases: Supply Chain, Healthcare, Finance",
+      ],
+    },
+    {
+      title: "Module 7: Tokens, NFTs & DeFi",
+      items: [
+        "ERC-20 Token development",
+        "NFT standards (ERC-721, ERC-1155)",
+        "Building and minting NFTs",
+        "Introduction to DeFi protocols (Uniswap, Aave, Compound)",
+        "Staking, Yield farming & Liquidity pools",
+      ],
+    },
+    {
+      title: "Module 8: Blockchain Security",
+      items: [
+        "Smart contract vulnerabilities (Reentrancy, Overflow, etc.)",
+        "OWASP Blockchain security guidelines",
+        "Auditing smart contracts",
+        "Secure coding practices",
+      ],
+    },
+    {
+      title: "Module 9: Tools & Frameworks",
+      items: [
+        "Ganache, MetaMask, Remix IDE",
+        "Hardhat & Truffle framework",
+        "Testing with Mocha/Chai",
+        "Oracles (Chainlink) & external data integration",
+      ],
+    },
+    {
+      title: "Module 10: Capstone Projects",
+      items: [
+        "Decentralized Voting Application",
+        "Crowdfunding DApp with Ethereum",
+        "NFT Marketplace with React + Solidity",
+        "DeFi Yield Farming Application",
+        "Blockchain Supply Chain Solution",
+      ],
+    },
+  ],
+}
+
+,
 juniorhr: {
   title: "Junior HR Training — Syllabus",
   accent: "#512BD4",
