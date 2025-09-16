@@ -2,7 +2,6 @@
   import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
   // eslint-disable-next-line no-unused-vars
   import { motion } from "framer-motion";
-  import JavaSyllabus from "../coursecomponent/Javasyllabus";
   import Syllabus from "../coursecomponent/SyllabusLocked";
   import { SYLLABI } from "../coursecomponent/Syllabi";
 
