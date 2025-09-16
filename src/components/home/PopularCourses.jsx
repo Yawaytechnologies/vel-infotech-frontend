@@ -11,56 +11,56 @@ const stats = [
 const courses = [
   {
     title: "Java",
-    learners: "15,000+",
+    learners: "150+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/226/226777.png",
     mode: "Online | Offline"
   },
   {
     title: "Python",
-    learners: "13,500+",
+    learners: "100+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
     mode: "Online | Offline"
   },
   {
     title: "SQL",
-    learners: "9,000+",
+    learners: "50+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/2772/2772128.png",
     mode: "Online | Offline"
   },
   {
     title: "DataScience",
-    learners: "12,000+",
+    learners: "50+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/2721/2721296.png",
     mode: "Online | Offline"
   },
   {
     title: "SoftwareTesting",
-    learners: "8,500+",
+    learners: "50+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/906/906324.png",
     mode: "Online | Offline"
   },
   {
     title: "AWSTraining",
-    learners: "7,800+",
+    learners: "100+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/873/873120.png",
     mode: "Online | Offline"
   },
   {
     title: "DevOps",
-    learners: "8,200+",
+    learners: "100+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/4248/4248443.png",
     mode: "Online | Offline"
   },
   {
     title: "Salesforce",
-    learners: "6,900+",
+    learners: "100+",
     rating: 5,
     image: "https://cdn-icons-png.flaticon.com/512/5968/5968770.png",
     mode: "Online | Offline"

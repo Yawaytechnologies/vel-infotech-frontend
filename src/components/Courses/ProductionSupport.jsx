@@ -8,6 +8,7 @@ import Syllabus from "../coursecomponent/SyllabusLocked";
 import { SYLLABI } from "../coursecomponent/Syllabi";
 import { useDispatch, useSelector } from "react-redux";
 import { submitEnquiry } from "../../redux/actions/enquiryAction";
+import FeedbackSection from "../common/Feedback";
 
 export default function ProductionSupportPage() {
   const [mode, setMode] = useState("class_room");
@@ -695,7 +696,7 @@ export default function ProductionSupportPage() {
           </div>
         </div>
       </section>
-
+      <FeedbackSection />
       {/* Toasts */}
       <ToastContainer
         newestOnTop

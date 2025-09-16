@@ -8,6 +8,7 @@ import Syllabus from "../coursecomponent/SyllabusLocked";
 import { SYLLABI } from "../coursecomponent/Syllabi";
 import { useDispatch, useSelector } from "react-redux";
 import { submitEnquiry } from "../../redux/actions/enquiryAction";
+import FeedbackSection from "../common/Feedback";
 
 export default function SqlCoursePage() {
   const dispatch = useDispatch();
@@ -821,7 +822,7 @@ export default function SqlCoursePage() {
           </div>
         </div>
       </section>
-
+      <FeedbackSection />
       {/* Toast container */}
       <ToastContainer
         newestOnTop

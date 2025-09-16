@@ -8,6 +8,7 @@ import Syllabus from "../coursecomponent/SyllabusLocked";
 import { SYLLABI } from "../coursecomponent/Syllabi";
 import { useDispatch, useSelector } from "react-redux";
 import { submitEnquiry } from "../../redux/actions/enquiryAction";
+import FeedbackSection from "../common/Feedback";
 
 export default function DataScienceCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -679,7 +680,7 @@ export default function DataScienceCoursePage() {
           </div>
         </div>
       </section>
-
+      <FeedbackSection />
       {/* Toast container */}
       <ToastContainer
         newestOnTop
