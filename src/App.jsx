@@ -10,18 +10,20 @@ import {
 import ScrollToTop from "./components/common/ScrollToTop";
 import Header from "./components/common/header";
 import Footer from "./components/common/Footer";
-import Internship from "./pages/internship";
+import Internship from "./pages/Internship";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import BlogDetails from "./pages/BlogDetails";
 import PlacedStudents from "./pages/placedStudents";
 import Contact from "./pages/contactUs";
-import Interview from "./pages/interview";
+import Interview from "./pages/Interview";
 import About from "./pages/About";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import BlogBanner from "./pages/Blog";
 import Tutorials from "./pages/Tutorials";
+import TutorialDetail from "./pages/TutorialDetails";
 import InterviewDetail from "./pages/InterviewDetail";
-import ScrumMasterPage from "./components/Courses/ScrumMAster.jsx";
+import ScrumMasterPage from "./components/Courses/ScrumMaster.jsx";
 import AddStudent from "./components/admin/AddStudent";
 import AllCourses from "./pages/AllCourses";
 import Java from "./components/Courses/Java";
@@ -44,9 +46,9 @@ import Sap from "./components/Courses/Sap";
 import SalesForce from "./components/Courses/SalesForce";
 import ServiceNow from "./components/Courses/ServiceNow";
 import RPA from "./components/Courses/RPA";
-import AdminLogin from "./components/admin/AdminLogin";
+
 import Clientpage from "./pages/Clientpage";
-import Feedback from "./pages/Feedback";
+
 import StudentTable from "./components/admin/CourseEnquired";
 import AdminLayout from "./components/admin/AdminLayout";
 import ProductionSupportPage from "./components/Courses/ProductionSupport";
@@ -104,7 +106,7 @@ function Layout({ children }) {
     "/admin",
     "/admin/login",
     "/admin/dashboard",
-    "/admin/course-enquired",,
+    "/admin/course-enquired",
     "/admin/add-student",
   ];
   const isAdmin = adminPaths.includes(location.pathname);
@@ -142,18 +144,18 @@ export default function App() {
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<BlogBanner />} />
           <Route path="/resources" element={<Tutorials />} />
-          <Route path="/feedback" element={<Feedback />} />
+          
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/client" element={<Clientpage />} />
           <Route path="/internship" element={<Internship />} />
           <Route path="/Blog" element={<Blog />} />
-
+<Route path="/blog/:slug" element={<BlogDetails />} />
           {/* Tutorials */}
           <Route path="/tutorials" element={<Tutorials />} />
           {/* Aliases/redirects to be safe */}
           <Route path="/Tutorials" element={<Navigate to="/tutorials" replace />} />
           <Route path="/resources" element={<Navigate to="/tutorials" replace />} />
-
+          <Route path="/tutorials/:slug" element={<TutorialDetail />} />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
 

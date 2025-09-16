@@ -1,60 +1,36 @@
-// API layer (axios). Swap BASE_URL once your Docker backend link is ready.
-// Includes a local MOCK mode you can toggle until the real API is live.
-// ============================================================================
 import axios from "axios";
 
-
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
-const API_PREFIX = "/api"; // e.g., Spring: "/api" or "/v1"
-const RESOURCE = "/enquiries"; // match your backend route (e.g., /api/enquiries)
-
-
-// Toggle this to true to simulate success without calling any server
-export const ENQUIRY_USE_MOCK = (import.meta.env.VITE_ENQUIRY_USE_MOCK === "true") || false;
+// In Vite projects (default with React + Vite):
+const BASE_URL =import.meta.env.VITE_API_BASE_URL;
 
 
 const client = axios.create({
-baseURL: `${BASE_URL}${API_PREFIX}`,
-timeout: 10000,
-headers: {
-"Content-Type": "application/json",
-},
+  baseURL: BASE_URL,
+  timeout: 15000,
+  headers: { "Content-Type": "application/json" },
 });
-
 
 /**
-* @typedef {Object} EnquiryPayload
-* @property {string} name
-* @property {string} email
-* @property {string} phone
-* @property {string} batch // "Morning Batch" | "Evening Batch" | "Weekend"
-* @property {string} course
-* @property {string} message
-*/
-
-
-/**
-* POST /api/enquiries
-* @param {EnquiryPayload} payload
-* @param {AbortSignal} [signal]
-*/
-export async function postEnquiry(payload, signal) {
-if (ENQUIRY_USE_MOCK) {
-// simulate network delay + echo back a fake id
-return new Promise((resolve) => {
-setTimeout(() => {
-resolve({
-id: Math.floor(Math.random() * 1_000_000),
-...payload,
-createdAt: new Date().toISOString(),
-source: "MOCK",
-});
-}, 800);
-});
+ * @param {{
+ *  name: string; email: string; phone: string;
+ *  batch: string; course: string; message: string;
+ * }} payload
+ * @param {AbortSignal} [signal]
+ */
+export async function postRegistration(payload, signal) {
+  // POST https://.../api/registrations
+  const { data } = await client.post("/registrations", payload, { signal });
+  return data; // expect created object or {success:true,...}
 }
 
-
-const { data } = await client.post(RESOURCE, payload, { signal });
-return data; // expect backend to return created object or {success:true}
+/**
+ * GET /api/registrations
+ * @param {AbortSignal} [signal]
+ * @returns {Promise<Array<{ mode:string; name:string; email:string; mobile:string; course:string; message:string }>>}
+ */
+export async function getRegistrations(signal) {
+  const { data } = await client.get("/registrations", { signal });
+  // Supports both raw array and wrapped { data: [...] }
+  return Array.isArray(data) ? data : (data?.data ?? []);
 }
 

@@ -6,10 +6,14 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Syllabus from "../coursecomponent/SyllabusLocked";
 import { SYLLABI } from "../coursecomponent/Syllabi";
+import { useDispatch, useSelector } from "react-redux";
+import { submitEnquiry } from "../../redux/actions/enquiryAction";
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("classroom");
   const course = SYLLABI.sap;
+  const dispatch = useDispatch();
+  const { status, error } = useSelector((s) => s.enquiry || {});
   /* ===========================
      FORM STATE + VALIDATION
      =========================== */
@@ -17,7 +21,7 @@ export default function JavaCoursePage() {
     name: "",
     email: "",
     phone: "",
-    batch: "",
+
     course: "",
     message: "",
   });
@@ -69,9 +73,7 @@ export default function JavaCoursePage() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-      case "batch":
-        if (!v) return "Please select a batch.";
-        return null;
+
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -119,18 +121,21 @@ export default function JavaCoursePage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+
+    // touch all
     setTouched({
       name: true,
       email: true,
       phone: true,
-      batch: true,
+
       course: true,
       message: true,
     });
 
-    const fields = ["name", "email", "phone", "batch", "course", "message"];
+    // validate all
+    const fields = ["name", "email", "phone", "course", "message"];
     const next = {};
     fields.forEach((f) => {
       const er = validateField(f, form[f]);
@@ -142,7 +147,6 @@ export default function JavaCoursePage() {
       const first = fields.find((f) => next[f]);
       const el = document.querySelector(`[name="${first}"]`);
       if (el) el.focus();
-
       toast.error(next[first] || "Please fix the highlighted errors.", {
         ...toastOpts,
         style: { background: "#ef4444", color: "#fff" },
@@ -151,32 +155,46 @@ export default function JavaCoursePage() {
       return;
     }
 
-    // success path – (wire API here if needed)
-    console.log("SAP Enquiry:", form);
+    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    const payload = {
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      name: form.name.trim(),
+      email: form.email.trim(),
+      mobile: form.phone.trim(), // API key is 'mobile'
+      course: form.course.trim(),
+      message: form.message.trim(),
+      // batch is kept for UI; not sent since your sample payload doesn't include it
+    };
 
-    toast.success("Thanks! Your enquiry has been recorded.", {
-      ...toastOpts,
-      style: { background: "#16a34a", color: "#fff" },
-      className: "rounded-xl shadow-md text-[15px] px-4 py-3",
-    });
+    try {
+      await dispatch(submitEnquiry(payload)).unwrap();
 
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      batch: "",
-      course: "",
-      message: "",
-    });
-    setErrors({});
-    setTouched({});
-  };
+      toast.success("Thanks! Your enquiry has been recorded.", {
+        ...toastOpts,
+        style: { background: "#16a34a", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
 
-  // input classes
-  const baseInput =
-    "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500";
-  const ok = "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]";
-  const bad = "border-red-500 focus:border-red-500 focus:ring-red-500";
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+
+        course: "",
+        message: "",
+      });
+      setErrors({});
+      setTouched({});
+    } catch (err) {
+      console.error(err);
+      const msg = typeof err === "string" ? err : "Submission failed.";
+      toast.error(msg, {
+        ...toastOpts,
+        style: { background: "#ef4444", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+    }
+  }
 
   return (
     <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
@@ -189,12 +207,31 @@ export default function JavaCoursePage() {
           </h2>
 
           <ul className="space-y-3 mt-6 text-lg">
-            <li>✅ Enroll in the <strong>Top SAP Training Institute</strong> to kickstart your ERP career.</li>
-            <li>✅ Learn modules – <strong>FICO, MM, SD, HCM, ABAP, BASIS, S/4HANA</strong>.</li>
-            <li>✅ Build hands-on skills via <strong>real projects & system practice labs</strong>.</li>
-            <li>✅ Understand <strong>process integration, SAP architecture & workflows</strong>.</li>
-            <li>✅ Get ready for <strong>SAP certification</strong> and consultant roles.</li>
-            <li>✅ Career support: Live projects, resume building, mock interviews & placements.</li>
+            <li>
+              ✅ Enroll in the <strong>Top SAP Training Institute</strong> to
+              kickstart your ERP career.
+            </li>
+            <li>
+              ✅ Learn modules –{" "}
+              <strong>FICO, MM, SD, HCM, ABAP, BASIS, S/4HANA</strong>.
+            </li>
+            <li>
+              ✅ Build hands-on skills via{" "}
+              <strong>real projects & system practice labs</strong>.
+            </li>
+            <li>
+              ✅ Understand{" "}
+              <strong>process integration, SAP architecture & workflows</strong>
+              .
+            </li>
+            <li>
+              ✅ Get ready for <strong>SAP certification</strong> and consultant
+              roles.
+            </li>
+            <li>
+              ✅ Career support: Live projects, resume building, mock interviews
+              & placements.
+            </li>
           </ul>
 
           <button
@@ -214,7 +251,9 @@ export default function JavaCoursePage() {
                 Freshers Salary:
               </span>
               ₹3 LPA to ₹8 LPA <br />
-              <span className="text-sm text-gray-300">| SAP Training | Duration: 3 Months</span>
+              <span className="text-sm text-gray-300">
+                | SAP Training | Duration: 3 Months
+              </span>
             </div>
           </button>
         </div>
@@ -268,14 +307,46 @@ export default function JavaCoursePage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
             {[
-              { name: "HubSpot", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg", link: "https://www.hubspot.com/" },
-              { name: "GitLab", logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg", link: "https://about.gitlab.com/" },
-              { name: "Monday.com", logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg", link: "https://monday.com/" },
-              { name: "Google Cloud", logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg", link: "https://cloud.google.com/" },
-              { name: "AWS", logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg", link: "https://aws.amazon.com/" },
-              { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg", link: "https://www.salesforce.com/" },
-              { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", link: "https://www.ibm.com/" },
-              { name: "Slack", logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg", link: "https://slack.com/" },
+              {
+                name: "HubSpot",
+                logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
+                link: "https://www.hubspot.com/",
+              },
+              {
+                name: "GitLab",
+                logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
+                link: "https://about.gitlab.com/",
+              },
+              {
+                name: "Monday.com",
+                logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
+                link: "https://monday.com/",
+              },
+              {
+                name: "Google Cloud",
+                logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
+                link: "https://cloud.google.com/",
+              },
+              {
+                name: "AWS",
+                logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
+                link: "https://aws.amazon.com/",
+              },
+              {
+                name: "Salesforce",
+                logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
+                link: "https://www.salesforce.com/",
+              },
+              {
+                name: "IBM",
+                logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                link: "https://www.ibm.com/",
+              },
+              {
+                name: "Slack",
+                logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                link: "https://slack.com/",
+              },
             ].map((partner, index) => (
               <motion.a
                 key={index}
@@ -289,7 +360,11 @@ export default function JavaCoursePage() {
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
                 className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
               >
-                <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-12 object-contain"
+                />
               </motion.a>
             ))}
           </div>
@@ -306,18 +381,38 @@ export default function JavaCoursePage() {
             <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-              Our SAP Training program equips you with in-demand ERP skills using real-time scenarios and project-based learning. Master SAP modules like FICO, MM, SD, and ABAP to prepare for roles in finance, logistics, HR, or technical consulting.
+              Our SAP Training program equips you with in-demand ERP skills
+              using real-time scenarios and project-based learning. Master SAP
+              modules like FICO, MM, SD, and ABAP to prepare for roles in
+              finance, logistics, HR, or technical consulting.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
               What You’ll Learn From SAP Training
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> SAP architecture, navigation & ERP fundamentals.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Functional modules: <strong>FICO</strong>, <strong>MM</strong>, <strong>SD</strong>, <strong>HCM</strong>; technical: <strong>ABAP</strong>, <strong>BASIS</strong>.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Real-time business process scenarios & integrations.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> S/4HANA, reporting, dashboards & configuration basics.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Certification prep & interview readiness.</li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> SAP
+                architecture, navigation & ERP fundamentals.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Functional
+                modules: <strong>FICO</strong>, <strong>MM</strong>,{" "}
+                <strong>SD</strong>, <strong>HCM</strong>; technical:{" "}
+                <strong>ABAP</strong>, <strong>BASIS</strong>.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Real-time
+                business process scenarios & integrations.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> S/4HANA,
+                reporting, dashboards & configuration basics.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Certification
+                prep & interview readiness.
+              </li>
             </ul>
           </div>
         </div>
@@ -330,7 +425,8 @@ export default function JavaCoursePage() {
             Become a Certified SAP Professional
           </h2>
           <p className="text-lg md:text-xl text-white mb-6">
-            Learn SAP FICO, MM, SD, ABAP & S/4HANA with hands-on projects and career-focused training for functional & technical tracks.
+            Learn SAP FICO, MM, SD, ABAP & S/4HANA with hands-on projects and
+            career-focused training for functional & technical tracks.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button
@@ -347,8 +443,14 @@ export default function JavaCoursePage() {
           {/* Card 1 */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Course Highlights" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                alt="Course Highlights"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Course Highlights
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                 <li>✓ Functional & Technical modules</li>
                 <li>✓ Real-time project training</li>
@@ -361,11 +463,31 @@ export default function JavaCoursePage() {
           {/* Card 2 */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Tools You’ll Master" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+                alt="Tools You’ll Master"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Tools You’ll Master
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {["SAP FICO", "SAP MM", "SAP SD", "SAP HCM", "SAP ABAP", "SAP BASIS", "S/4HANA", "SAP GUI"].map((tool) => (
-                  <span key={tool} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{tool}</span>
+                {[
+                  "SAP FICO",
+                  "SAP MM",
+                  "SAP SD",
+                  "SAP HCM",
+                  "SAP ABAP",
+                  "SAP BASIS",
+                  "S/4HANA",
+                  "SAP GUI",
+                ].map((tool) => (
+                  <span
+                    key={tool}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                  >
+                    {tool}
+                  </span>
                 ))}
               </div>
             </div>
@@ -374,11 +496,29 @@ export default function JavaCoursePage() {
           {/* Card 3 */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Topics Covered" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
+                alt="Topics Covered"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Topics Covered
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {["ERP Overview", "SAP Navigation", "Module Integration", "Real-time Scenarios", "Configuration", "Reporting"].map((topic) => (
-                  <span key={topic} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{topic}</span>
+                {[
+                  "ERP Overview",
+                  "SAP Navigation",
+                  "Module Integration",
+                  "Real-time Scenarios",
+                  "Configuration",
+                  "Reporting",
+                ].map((topic) => (
+                  <span
+                    key={topic}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                  >
+                    {topic}
+                  </span>
                 ))}
               </div>
             </div>
@@ -387,8 +527,14 @@ export default function JavaCoursePage() {
           {/* Card 4 */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Key Skills You’ll Gain" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
+                alt="Key Skills You’ll Gain"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Key Skills You’ll Gain
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                 <li>Configure & manage modules</li>
                 <li>Map end-to-end processes</li>
@@ -399,65 +545,75 @@ export default function JavaCoursePage() {
           </div>
         </div>
       </section>
-       {/* SYLLABUS */}
-                        <Syllabus
-                                      title={course.title}
-                                      accent={course.accent}
-                                      meta={course.meta}
-                                      preview={course.preview}
-                                      sections={course.sections} // ← REQUIRED
-                                      useExternalForm
-                                      cardMinH={400} // tweak to visually match your right cards
-                                      stickyOffset={110}
-                                    />
+      {/* SYLLABUS */}
+      <Syllabus
+        title={course.title}
+        accent={course.accent}
+        meta={course.meta}
+        preview={course.preview}
+        sections={course.sections} // ← REQUIRED
+        useExternalForm
+        cardMinH={400} // tweak to visually match your right cards
+        stickyOffset={110}
+      />
       {/* ENQUIRY FORM */}
       <section className="w-full px-6 py-20 text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
           {/* LEFT: Additional Info Boxes (aligned like reference) */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Comprehensive Curriculum</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Comprehensive Curriculum
+              </h4>
               <p className="text-black/90">
-                Master SAP with modules covering FICO, MM, SD, HCM, ABAP, BASIS and S/4HANA using real scenarios.
+                Master SAP with modules covering FICO, MM, SD, HCM, ABAP, BASIS
+                and S/4HANA using real scenarios.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Career-Oriented Training</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Career-Oriented Training
+              </h4>
               <p className="text-black/90">
-                Learn from working professionals. Includes mock interviews, resume prep, and job assistance.
+                Learn from working professionals. Includes mock interviews,
+                resume prep, and job assistance.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Strong Placement Support</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Strong Placement Support
+              </h4>
               <p className="text-black/90">
-                We support your placement journey with partner network and hiring drives.
+                We support your placement journey with partner network and
+                hiring drives.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
               <p className="text-black/90">
-                Work on business process case studies, configs, reports and capstone implementations.
+                Work on business process case studies, configs, reports and
+                capstone implementations.
               </p>
             </div>
           </div>
 
-          {/* RIGHT: Validated Form */}
+          {/* RIGHT: Form */}
           <div className="w-full max-w-lg">
             <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
               <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                 Get a Free Training Quote
               </h3>
 
-              {/* Toggle Buttons */}
+              {/* Mode Toggle */}
               <div className="flex justify-center gap-3 mb-6">
                 <button
-                  onClick={() => setMode("classroom")}
+                  onClick={() => setMode("class_room")}
                   type="button"
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                    mode === "classroom"
+                    mode === "class_room"
                       ? "bg-[#003c6a] text-white"
                       : "bg-white text-[#003c6a] border border-[#003c6a]"
                   }`}
@@ -477,10 +633,8 @@ export default function JavaCoursePage() {
                 </button>
               </div>
 
-              {/* Form Fields */}
               <form
                 id="enquiry-form"
-                ref={formRef}
                 onSubmit={handleSubmit}
                 noValidate
                 className="grid grid-cols-1 gap-2"
@@ -495,10 +649,17 @@ export default function JavaCoursePage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.name}
-                    className={[baseInput, touched?.name && errors?.name ? bad : ok].join(" ")}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.name && errors?.name
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
                   <div className="h-3 mt-0.5">
-                    {touched?.name && errors?.name && <p className="text-red-600 text-xs">{errors.name}</p>}
+                    {touched?.name && errors?.name && (
+                      <p className="text-red-600 text-xs">{errors.name}</p>
+                    )}
                   </div>
                 </div>
 
@@ -512,73 +673,104 @@ export default function JavaCoursePage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.email}
-                    className={[baseInput, touched?.email && errors?.email ? bad : ok].join(" ")}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.email && errors?.email
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
                   <div className="h-3 mt-0.5">
-                    {touched?.email && errors?.email && <p className="text-red-600 text-xs">{errors.email}</p>}
+                    {touched?.email && errors?.email && (
+                      <p className="text-red-600 text-xs">{errors.email}</p>
+                    )}
                   </div>
                 </div>
 
                 {/* Phone + Batch */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      inputMode="numeric"
-                      pattern="\d*"
-                      placeholder="Mobile Num"
-                      value={form.phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.phone}
-                      className={[baseInput, touched?.phone && errors?.phone ? bad : ok].join(" ")}
-                    />
-                    <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && <p className="text-red-600 text-xs">{errors.phone}</p>}
-                    </div>
-                  </div>
 
-                  <div>
-                    <select
-                      name="batch"
-                      value={form.batch}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.batch}
-                      className={[baseInput, touched?.batch && errors?.batch ? bad : ok, "placeholder:text-transparent"].join(" ")}
-                    >
-                      <option value="" disabled>
-                        How & Where
-                      </option>
-                      <option>Morning Batch</option>
-                      <option>Evening Batch</option>
-                      <option>Weekend</option>
-                    </select>
-                    <div className="h-3 mt-0.5">
-                      {touched?.batch && errors?.batch && <p className="text-red-600 text-xs">{errors.batch}</p>}
-                    </div>
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    placeholder="Mobile Number"
+                    value={form.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.phone}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.phone && errors?.phone
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  />
+                  <div className="h-3 mt-0.5">
+                    {touched?.phone && errors?.phone && (
+                      <p className="text-red-600 text-xs">{errors.phone}</p>
+                    )}
                   </div>
                 </div>
 
-                {/* Course */}
+                {/* Course (dropdown select) */}
                 <div>
-                  <input
-                    type="text"
+                  <select
                     name="course"
-                    placeholder="Type Course"
                     value={form.course}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.course}
-                    className={[baseInput, touched?.course && errors?.course ? bad : ok].join(" ")}
-                  />
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
+                      touched?.course && errors?.course
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  >
+                    <option value="">Select Course</option>
+                    {[
+                      "Java",
+                      "Python",
+                      "Full Stack Development",
+                      "PL/SQL",
+                      "SQL",
+                      "Data Science",
+                      "Business Analytics",
+                      "Data Science & AI",
+                      "Big Data Developer",
+                      "Software Testing",
+                      "Selenium Testing",
+                      "ETL Testing",
+                      "AWS Training",
+                      "DevOps",
+                      "Hardware Networking",
+                      "Cyber Security",
+                      "SAP",
+                      "Salesforce",
+                      "ServiceNow",
+                      "RPA (Robotic Process Automation)",
+                      "Production Support",
+                      "Digital Marketing",
+                      "Soft Skill Training",
+                      "Scrum Master",
+                      "Business Analyst",
+                      "Product Management",
+                    ].map((course) => (
+                      <option key={course} value={course}>
+                        {course}
+                      </option>
+                    ))}
+                  </select>
+
                   <div className="h-3 mt-0.5">
-                    {touched?.course && errors?.course && <p className="text-red-600 text-xs">{errors.course}</p>}
+                    {touched?.course && errors?.course && (
+                      <p className="text-red-600 text-xs">{errors.course}</p>
+                    )}
                   </div>
                 </div>
 
-                {/* Message */}
                 <div>
                   <textarea
                     rows={2}
@@ -588,23 +780,41 @@ export default function JavaCoursePage() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.message}
-                    className={[baseInput, "resize-none", touched?.message && errors?.message ? bad : ok].join(" ")}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.message && errors?.message
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
                   />
                   <div className="flex justify-between text-xs text-gray-500 mt-0.5">
                     <span>First letter auto-caps</span>
                     <span>{form.message.length}/300</span>
                   </div>
                   <div className="h-3 mt-0.5">
-                    {touched?.message && errors?.message && <p className="text-red-600 text-xs">{errors.message}</p>}
+                    {touched?.message && errors?.message && (
+                      <p className="text-red-600 text-xs">{errors.message}</p>
+                    )}
                   </div>
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
-                  className="w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition"
+                  disabled={status === "loading"}
+                  className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
+                    status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                  }`}
                 >
-                  Submit
+                  {status === "loading" ? "Submitting..." : "Submit"}
                 </button>
+
+                {/* Optional server error */}
+                {error && (
+                  <p className="text-red-600 text-xs mt-1">
+                    Submission failed: {String(error)}
+                  </p>
+                )}
               </form>
             </div>
           </div>

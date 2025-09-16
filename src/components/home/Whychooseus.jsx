@@ -15,8 +15,8 @@ const features = [
   },
   {
     icon: <FaUserGraduate className="text-white text-2xl md:text-3xl" />,
-    title: "17000+ Student Last Year",
-    desc: "95% positive feedback. Have a look of...",
+    title: "100+ Student Last Year",
+    desc: "95% positive feedback. ",
     bg: "bg-[#b94d6d]",
   },
   {

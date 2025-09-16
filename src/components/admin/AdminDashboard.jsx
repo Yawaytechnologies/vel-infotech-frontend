@@ -38,13 +38,13 @@ const ADMISSIONS_DROPOUTS = [
 ];
 
 /* ---------- UI ---------- */
-function StatCard({ title, value, pct, hint, gradient, Icon }) {
+function StatCard({ title, value, pct, hint, gradient, Icon: IconCmp }) {
   return (
     <div className={`h-[140px] rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] text-white p-6 bg-gradient-to-tr ${gradient} flex flex-col justify-between`}>
       <div className="text-[11px] font-semibold tracking-wider opacity-90">{title}</div>
       <div className="flex items-center gap-3">
         <div className="h-10 w-10 grid place-items-center rounded-full bg-white/20">
-          <Icon className="text-white" />
+          {IconCmp ? <IconCmp className="text-white" /> : null}
         </div>
         <div className="text-3xl font-extrabold">{value}</div>
       </div>
