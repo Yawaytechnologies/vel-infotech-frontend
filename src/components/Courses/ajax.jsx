@@ -4,87 +4,195 @@
   import { motion } from "framer-motion";
   import Syllabus from "../coursecomponent/SyllabusLocked";
   import { SYLLABI } from "../coursecomponent/Syllabi";
+  import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { submitEnquiry } from "../../redux/enquirySlice"; // adjust path
 
-  const HEADER_OFFSET = 110; // adjust to your sticky header height
 
-  const scrollToWithOffset = (ref) => {
-    const el = ref?.current;
-    if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-    window.scrollTo({ top: y, behavior: "smooth" });
+
+     export default function AjaxPage() {
+      const syllabusRef = useRef(null);
+const formRef = useRef(null);
+const [unlocked, setUnlocked] = useState(false);
+const handleRequestUnlock = () => setUnlocked(true);
+
+    const [mode, setMode] = useState("class_room");
+    const course = SYLLABI.ajax;
+    const dispatch = useDispatch();
+    const { status, error } = useSelector((s) => s.enquiry || {});
+  /* ===========================
+     FORM STATE + VALIDATION
+     =========================== */
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    batch: "",
+    course: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
+  // Toast defaults (colored theme so our bg shows)
+  const toastOpts = {
+    position: "top-center",
+    transition: Slide,
+    autoClose: 2200,
+    hideProgressBar: true,
+    closeButton: false,
+    icon: false,
+    pauseOnHover: true,
+    draggable: false,
+    theme: "colored",
   };
 
-  export default function AjaxPage() {
-    const [mode, setMode] = useState("classroom");
-    const course = SYLLABI.ajax;
-    const [unlocked, setUnlocked] = useState(false);
+  const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+  const onlyLettersSpaces = (s) =>
+    s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
+  const digits10 = (s) => s.replace(/\D+/g, "").slice(0, 10);
 
-    const syllabusRef = useRef(null);
-    const formRef = useRef(null);
-    const COURSE_OPTIONS = [
-      "Java",
-      "Python",
-      "Full Stack Development",
-      "PL/SQL",
-      "SQL",
-      "Data Science",
-      "Business Analytics",
-      "Data Science & AI",
-      "Big Data Developer",
-      "Software Testing",
-      "Selenium Testing",
-      "ETL Testing",
-      "AWS Training",
-      "DevOps",
-      "Hardware Networking",
-      "Cyber Security",
-      "SAP",
-      "Salesforce",
-      "ServiceNow",
-      "RPA (Robotic Process Automation)",
-      "Data Analyst",
-      "Vmware Training",
-      "Production Support",
-      "Digital Marketing",
-      "Soft Skill Training",
-      "Scrum Master",
-      "Business Analyst",
-      "Product Management",
-      "Snowflake",
-      "Oracle SQL"
-    ];
+  const validateField = (name, value) => {
+    const v = (value ?? "").trim();
+    switch (name) {
+      case "name":
+        if (!v) return "Name is required.";
+        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
+        if (v.length < 2) return "Enter at least 2 characters.";
+        return null;
+      case "email":
+        if (!v) return "Email is required.";
+        if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v))
+          return "Enter a valid email with domain (e.g., example@gmail.com).";
+        return null;
+      case "phone":
+        if (!v) return "Mobile number is required.";
+        if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
+        return null;
+      case "batch":
+        if (!v) return "Please select a batch.";
+        return null;
+      case "course":
+        if (!v) return "Course name is required.";
+        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
+        if (v.length < 2) return "Enter at least 2 characters.";
+        return null;
+      case "message":
+        if (!v) return "Message is required.";
+        if (v.length > 300) return "Max 300 characters.";
+        return null;
+      default:
+        return null;
+    }
+  };
 
-    // preselect current page's course if possible (matches words in course.title)
-    const preselectedCourse = React.useMemo(() => {
-      if (!course?.title) return "";
-      const lower = course.title.toLowerCase();
-      const match = COURSE_OPTIONS.find((opt) =>
-        lower.includes(opt.toLowerCase())
-      );
-      return match || "";
-    }, [course?.title]);
+  const setField = (name, value) => {
+    let v = value;
+    if (name === "name") v = capFirst(onlyLettersSpaces(value));
+    if (name === "course") v = capFirst(onlyLettersSpaces(value));
+    if (name === "phone") v = digits10(value);
+    if (name === "message") {
+      v = value.length ? value[0].toUpperCase() + value.slice(1) : value;
+      v = v.slice(0, 300);
+    }
+    setForm((prev) => ({ ...prev, [name]: v }));
 
-    const handleRequestUnlock = () => {
-      scrollToWithOffset(formRef); // go to form
+    const msg = validateField(name, v);
+    setErrors((prev) => {
+      const n = { ...prev };
+      if (msg) n[name] = msg;
+      else delete n[name];
+      return n;
+    });
+  };
+
+  const handleChange = (e) => setField(e.target.name, e.target.value);
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((t) => ({ ...t, [name]: true }));
+    const msg = validateField(name, form[name]);
+    setErrors((prev) => ({
+      ...prev,
+      ...(msg ? { [name]: msg } : { [name]: undefined }),
+    }));
+  };
+
+ async function handleSubmit(e) {
+    e.preventDefault();
+
+    // touch all
+    setTouched({
+      name: true,
+      email: true,
+      phone: true,
+
+      course: true,
+      message: true,
+    });
+
+    // validate all
+    const fields = ["name", "email", "phone", "course", "message"];
+    const next = {};
+    fields.forEach((f) => {
+      const er = validateField(f, form[f]);
+      if (er) next[f] = er;
+    });
+    setErrors(next);
+
+    if (Object.keys(next).length) {
+      const first = fields.find((f) => next[f]);
+      const el = document.querySelector(`[name="${first}"]`);
+      if (el) el.focus();
+      toast.error(next[first] || "Please fix the highlighted errors.", {
+        ...toastOpts,
+        style: { background: "#ef4444", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+      return;
+    }
+
+    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    const payload = {
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      name: form.name.trim(),
+      email: form.email.trim(),
+      mobile: form.phone.trim(), // API key is 'mobile'
+      course: form.course.trim(),
+      message: form.message.trim(),
+      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      // ...payload...
-      try {
-        // await fetch(...)
-      } finally {
-        setUnlocked(true);
-        e.currentTarget.reset();
+    try {
+      await dispatch(submitEnquiry(payload)).unwrap();
 
-        // wait for DOM to paint unlocked state, then scroll back up
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            scrollToWithOffset(syllabusRef);
-          });
-        });
-      }
-    };
+      toast.success("Thanks! Your enquiry has been recorded.", {
+        ...toastOpts,
+        style: { background: "#16a34a", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+
+        course: "",
+        message: "",
+      });
+      setErrors({});
+      setTouched({});
+    } catch (err) {
+      console.error(err);
+      const msg = typeof err === "string" ? err : "Submission failed.";
+      toast.error(msg, {
+        ...toastOpts,
+        style: { background: "#ef4444", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+    }
+    }
 
     return (
       <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
@@ -129,6 +237,12 @@
                   duration-500 hover:duration-500 before:duration-500 after:duration-500
                   group-hover:before:duration-500 group-hover:after:duration-500
                   hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
+                  type="button"
+            onClick={() => {
+              const formSection = document.getElementById("enquiry-form");
+              if (formSection)
+                formSection.scrollIntoView({ behavior: "smooth" });
+            }}            
             >
               <div>
                 <span className="text-lg font-extrabold text-violet-400 block">
@@ -162,7 +276,8 @@
               className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
             >
               {/* Expanding background on hover */}
-              <span classNameDa="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
+              <span className
+              ="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
 
               {/* Text */}
               <span className="relative z-10 group-hover:text-black transition-colors duration-300">
@@ -409,219 +524,236 @@
 
             {/* RIGHT: Enquiry Form */}
             <div className="w-full max-w-lg">
-              <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
-                  Get a Free Training Quote
-                </h3>
-
-                {/* Toggle Buttons */}
-                <div className="flex justify-center gap-3 mb-6">
-                  <button
-                    onClick={() => setMode("classroom")}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "classroom"
-                        ? "bg-[#003c6a] text-white"
-                        : "bg-white text-[#003c6a] border border-[#003c6a]"
-                    }`}
-                  >
-                    <FaChalkboardTeacher className="text-base" /> Class Room
-                  </button>
-                  <button
-                    onClick={() => setMode("online")}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "online"
-                        ? "bg-[#003c6a] text-white"
-                        : "bg-white text-[#003c6a] border border-[#003c6a]"
-                    }`}
-                  >
-                    <FaLaptop className="text-base" /> Online
-                  </button>
-                </div>
-
-                {/* Form */}
-                <form
-                  id="enquiry-form"
-                  onSubmit={handleSubmit}
-                  className="flex flex-col gap-4"
-                >
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder="Your Name"
-                    className="rounded-xl px-5 py-3 text-black bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
-                    required
-                  />
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="Your Email"
-                    className="rounded-xl px-5 text-black py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
-                    required
-                  />
-                  <div className="flex flex-col  sm:flex-row gap-3">
-                    <input
-                      name="phone"
-                      type="number"
-                      placeholder="Mobile Num"
-                      className="w-full sm:w-1/2 rounded-xl px-5 py-3 text-black bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none"
-                      required
-                    />
-                    <select
-                      name="batch"
-                      defaultValue=""
-                      className="w-full sm:w-1/2 rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] text-sm text-gray-700 focus:ring-2 focus:ring-[#003c6a] outline-none"
-                      required
-                    >
-                      <option value="" disabled>
-                        How & Where
-                      </option>
-                      <option>Morning Batch</option>
-                      <option>Evening Batch</option>
-                      <option>Weekend</option>
-                    </select>
-                  </div>
-                  <SelectCourse
-                    name="course"
-                    options={COURSE_OPTIONS}
-                    defaultValue={preselectedCourse}
-                  />
-
-                  <textarea
-                    name="message"
-                    rows={2}
-                    placeholder="Your Message"
-                    className="rounded-xl px-5 text-black py-3 bg-[#edf2f7] border border-[#b6c3d1] focus:border-[#003c6a] placeholder:text-gray-700 text-sm focus:ring-2 focus:ring-[#003c6a] outline-none resize-none"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-base hover:from-[#0891b2] hover:to-[#16bca7] transition"
-                  >
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
+                        <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
+                          <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                            Get a Free Training Quote
+                          </h3>
+            
+                          {/* Mode Toggle */}
+                          <div className="flex justify-center gap-3 mb-6">
+                            <button
+                              onClick={() => setMode("class_room")}
+                              type="button"
+                              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
+                                mode === "class_room"
+                                  ? "bg-[#003c6a] text-white"
+                                  : "bg-white text-[#003c6a] border border-[#003c6a]"
+                              }`}
+                            >
+                              <FaChalkboardTeacher className="text-base" /> Class Room
+                            </button>
+                            <button
+                              onClick={() => setMode("online")}
+                              type="button"
+                              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
+                                mode === "online"
+                                  ? "bg-[#003c6a] text-white"
+                                  : "bg-white text-[#003c6a] border border-[#003c6a]"
+                              }`}
+                            >
+                              <FaLaptop className="text-base" /> Online
+                            </button>
+                          </div>
+            
+                          <form
+                            id="enquiry-form"
+                            onSubmit={handleSubmit}
+                            noValidate
+                            className="grid grid-cols-1 gap-2"
+                          >
+                            {/* Name */}
+                            <div>
+                              <input
+                                type="text"
+                                name="name"
+                                placeholder="Your Name"
+                                value={form.name}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                aria-invalid={!!errors?.name}
+                                className={[
+                                  "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                                  touched?.name && errors?.name
+                                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                    : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                                ].join(" ")}
+                              />
+                              <div className="h-3 mt-0.5">
+                                {touched?.name && errors?.name && (
+                                  <p className="text-red-600 text-xs">{errors.name}</p>
+                                )}
+                              </div>
+                            </div>
+            
+                            {/* Email */}
+                            <div>
+                              <input
+                                type="email"
+                                name="email"
+                                placeholder="Your Email"
+                                value={form.email}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                aria-invalid={!!errors?.email}
+                                className={[
+                                  "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                                  touched?.email && errors?.email
+                                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                    : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                                ].join(" ")}
+                              />
+                              <div className="h-3 mt-0.5">
+                                {touched?.email && errors?.email && (
+                                  <p className="text-red-600 text-xs">{errors.email}</p>
+                                )}
+                              </div>
+                            </div>
+            
+                            {/* Phone + Batch */}
+            
+                            <div>
+                              <input
+                                type="tel"
+                                name="phone"
+                                inputMode="numeric"
+                                pattern="\d*"
+                                placeholder="Mobile Number"
+                                value={form.phone}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                aria-invalid={!!errors?.phone}
+                                className={[
+                                  "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                                  touched?.phone && errors?.phone
+                                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                    : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                                ].join(" ")}
+                              />
+                              <div className="h-3 mt-0.5">
+                                {touched?.phone && errors?.phone && (
+                                  <p className="text-red-600 text-xs">{errors.phone}</p>
+                                )}
+                              </div>
+                            </div>
+            
+                            {/* Course (dropdown select) */}
+                            <div>
+                              <select
+                                name="course"
+                                value={form.course}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                aria-invalid={!!errors?.course}
+                                className={[
+                                  "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
+                                  touched?.course && errors?.course
+                                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                    : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                                ].join(" ")}
+                              >
+                                <option value="">Select Course</option>
+                                {[
+                                  "Java",
+                                  "Python",
+                                  "Full Stack Development",
+                                  "PL/SQL",
+                                  "SQL",
+                                  "Data Science",
+                                  "Business Analytics",
+                                  "Data Science & AI",
+                                  "Big Data Developer",
+                                  "Software Testing",
+                                  "Selenium Testing",
+                                  "ETL Testing",
+                                  "AWS Training",
+                                  "DevOps",
+                                  "Hardware Networking",
+                                  "Cyber Security",
+                                  "SAP",
+                                  "Salesforce",
+                                  "ServiceNow",
+                                  "RPA (Robotic Process Automation)",
+                                  "Production Support",
+                                  "Digital Marketing",
+                                  "Soft Skill Training",
+                                  "Scrum Master",
+                                  "Business Analyst",
+                                  "Product Management",
+                                ].map((course) => (
+                                  <option key={course} value={course}>
+                                    {course}
+                                  </option>
+                                ))}
+                              </select>
+            
+                              <div className="h-3 mt-0.5">
+                                {touched?.course && errors?.course && (
+                                  <p className="text-red-600 text-xs">{errors.course}</p>
+                                )}
+                              </div>
+                            </div>
+            
+                            <div>
+                              <textarea
+                                rows={2}
+                                name="message"
+                                placeholder="Your Message"
+                                value={form.message}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                aria-invalid={!!errors?.message}
+                                className={[
+                                  "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                                  touched?.message && errors?.message
+                                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                                    : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                                ].join(" ")}
+                              />
+                              <div className="flex justify-between text-xs text-gray-500 mt-0.5">
+                                <span>First letter auto-caps</span>
+                                <span>{form.message.length}/300</span>
+                              </div>
+                              <div className="h-3 mt-0.5">
+                                {touched?.message && errors?.message && (
+                                  <p className="text-red-600 text-xs">{errors.message}</p>
+                                )}
+                              </div>
+                            </div>
+            
+                            {/* Submit */}
+                            <button
+                              type="submit"
+                              disabled={status === "loading"}
+                              className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
+                                status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                              }`}
+                            >
+                              {status === "loading" ? "Submitting..." : "Submit"}
+                            </button>
+            
+                            {/* Optional server error */}
+                            {error && (
+                              <p className="text-red-600 text-xs mt-1">
+                                Submission failed: {String(error)}
+                              </p>
+                            )}
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  {/* Toast container */}
+                        <ToastContainer
+                          newestOnTop
+                          limit={2}
+                          className="!z-[9999]"
+                          toastClassName={() => "rounded-xl shadow-md"}
+                          bodyClassName={() => "text-[15px] font-medium"}
+                          theme="colored"
+                        />
       </section>
     );
   }
 
 
-  function SelectCourse({ name = "course", options, defaultValue = "" }) {
-    const [open, setOpen] = React.useState(false);
-    const [selected, setSelected] = React.useState(defaultValue || "");
-    const [hoverIdx, setHoverIdx] = React.useState(
-      Math.max(
-        0,
-        options.findIndex((o) => o === (defaultValue || ""))
-      )
-    );
-    const wrapRef = React.useRef(null);
-    const listRef = React.useRef(null);
-
-    // Close on outside click
-    React.useEffect(() => {
-      const onDocClick = (e) => {
-        if (!wrapRef.current?.contains(e.target)) setOpen(false);
-      };
-      document.addEventListener("mousedown", onDocClick);
-      return () => document.removeEventListener("mousedown", onDocClick);
-    }, []);
-
-    // Ensure hovered item stays in view
-    React.useEffect(() => {
-      if (!open) return;
-      const el = listRef.current?.querySelector(`[data-idx="${hoverIdx}"]`);
-      el?.scrollIntoView({ block: "nearest" });
-    }, [hoverIdx, open]);
-
-    const choose = (val, idx) => {
-      setSelected(val);
-      setHoverIdx(idx);
-      setOpen(false);
-    };
-
-    const onKeyDown = (e) => {
-      if (
-        !open &&
-        (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ")
-      ) {
-        e.preventDefault();
-        setOpen(true);
-        return;
-      }
-      if (!open) return;
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        setHoverIdx((i) => Math.min(options.length - 1, i + 1));
-      }
-      if (e.key === "ArrowUp") {
-        e.preventDefault();
-        setHoverIdx((i) => Math.max(0, i - 1));
-      }
-      if (e.key === "Enter") {
-        e.preventDefault();
-        choose(options[hoverIdx], hoverIdx);
-      }
-      if (e.key === "Escape") {
-        e.preventDefault();
-        setOpen(false);
-      }
-    };
-
-    return (
-      <div className="relative" ref={wrapRef}>
-        {/* Hidden input so FormData picks up the value */}
-        <input type="hidden" name={name} value={selected} />
-
-        {/* Button */}
-        <button
-          type="button"
-          aria-haspopup="listbox"
-          aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
-          onKeyDown={onKeyDown}
-          className="w-full rounded-xl px-5 py-3 bg-[#edf2f7] border border-[#b6c3d1] text-left text-sm text-gray-700 focus:ring-2 focus:ring-[#003c6a] focus:border-[#003c6a] outline-none"
-        >
-          {selected || "Select Course"}
-        </button>
-
-        {/* Options panel (max 5 items visible, scroll for the rest) */}
-        {open && (
-          <div
-            className="absolute z-20 mt-1 w-full rounded-xl border border-slate-200 bg-white shadow-xl overflow-hidden"
-            role="listbox"
-          >
-            <ul
-              ref={listRef}
-              className="max-h-60 overflow-y-auto py-1" /* ~5 items tall */
-            >
-              {options.map((opt, idx) => {
-                const isSel = opt === selected;
-                const isHover = idx === hoverIdx;
-                return (
-                  <li
-                    key={opt}
-                    data-idx={idx}
-                    role="option"
-                    aria-selected={isSel}
-                    onMouseEnter={() => setHoverIdx(idx)}
-                    onMouseDown={(e) => e.preventDefault()} // prevents blur before click
-                    onClick={() => choose(opt, idx)}
-                    className={`px-4 py-2 text-sm cursor-pointer ${
-                      isHover ? "bg-slate-100" : ""
-                    } ${
-                      isSel ? "font-semibold text-slate-900" : "text-slate-700"
-                    }`}
-                  >
-                    {opt}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
-      </div>
-    );
-  }
+  
