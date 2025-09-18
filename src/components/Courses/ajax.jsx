@@ -7,7 +7,7 @@
   import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { submitEnquiry } from "../../redux/enquirySlice"; // adjust path
+import { submitEnquiry } from "../../redux/actions/enquiryAction"; // adjust path
 
 
 
