@@ -361,3 +361,20 @@ export default function FeedbackSection() {
     </section>
   );
 }
+
+
+function wakeUpAPI(url) {
+  setInterval(async () => {
+    try {
+      const res = await fetch(url);
+      console.log(
+        `[${new Date().toISOString()}] Pinged ${url} → Status: ${res.status}`
+      );
+    } catch (err) {
+      console.error(`[${new Date().toISOString()}] Error pinging API:`, err.message);
+    }
+  }, 500000);
+}
+
+// Usage
+wakeUpAPI("https://backend-velinfotech.onrender.com/api/registrations");

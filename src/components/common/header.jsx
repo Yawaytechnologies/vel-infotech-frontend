@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiChevronDown, FiChevronRight } from "react-icons/fi";
-import Logo1 from "../../assets/infotech.png";
-import Vel from "../../assets/Brandd.png";
+import Logo1 from "../../assets/Logo-vel.png";
+import Vel from "../../assets/Logo-vel.png";
 import { Link } from "react-router-dom";
 
 const groupedCourses = [
@@ -125,7 +125,7 @@ export default function Header() {
               <img
                 src={Vel}
                 alt="Logo"
-                className="h-28 w-auto object-contain md:h-30 lg:h-43 md:pt-3 md:pb-2"
+                className="h-28 w-auto object-contain md:h-30 lg:h-43 md:pt-1 md:pb-2"
                 style={{ cursor: "pointer" }}
               />
             </Link>
