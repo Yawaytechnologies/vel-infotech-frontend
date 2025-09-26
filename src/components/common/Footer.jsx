@@ -9,12 +9,12 @@ import {
 import Logo from "../../assets/Brandd.png";
 export default function Footer() {
   return (
-   <footer className="relative bg-[#e9f1fb] text-black-200 pt-10 pb-3 border-t-4 border-[#005BAC]">
-  {/* Top shadow separator */}
-  <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-b from-black/20 to-transparent" />
+    <footer className="relative bg-[#e9f1fb] text-black-200 pt-10 pb-3 border-t-4 border-[#005BAC]">
+      {/* Top shadow separator */}
+      <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-b from-black/20 to-transparent" />
 
-  {/* ⬇️ match header container: use the same max-w and padding you use there */}
-  <div className="max-w-7xl mx-auto px-6 sm:px-8"> 
+      {/* ⬇️ match header container: use the same max-w and padding you use there */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 pb-10 border-b border-gray-700 md:justify-items-center">
           {/* Logo and About */}
           <div>
@@ -24,7 +24,6 @@ export default function Footer() {
                 alt="Logo"
                 className=" h-40 w-auto object-contain"
               />
-             
             </div>
             <p className="text-black-400 text-md mt-8 mb-8 font-bold ">
               Empowering your career with industry-ready IT and tech skills.
@@ -274,13 +273,20 @@ export default function Footer() {
             <ul className="text-sm space-y-2 font-bold ">
               <li>
                 <span className="block text-black-400">
-                  Vel Infotech Private Limited
+                  Vel Infotech Private Limited 
+                  
+                 
                 </span>
+                
+                <span>
+                   Software training & Placement
+                </span>
+                <br/>
+                
                 <span className="block text-black-400">
-                  KBS Towers, No:-50, Jawaharlal Nehru Road, Ekattuthangal,
-                  (Near Jaya TV),Chennai-600032
+                  4/38, 2nd Main Rd, Kalaimagal Nagar, Ekkatuthangal, Chennai,
+                  Tamil Nadu 600032 9600593838
                 </span>
-               
               </li>
               <li>
                 <a
@@ -314,4 +320,3 @@ export default function Footer() {
     </footer>
   );
 }
-
