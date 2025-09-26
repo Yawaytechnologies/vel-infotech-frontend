@@ -23,7 +23,7 @@ const placed = [
   { id:11,  name: "Naveen Kumar",             company: "Expleo",       designation: "Manual Tester",      course: "Testing",        lpa: 7 },
   { id:12,  name: "Priya Dharshini",          company: "Axis Bank",    designation: "—",                  course: "—",              lpa: null },
   { id:13,  name: "Babu Mani",                company: "Virtusa",      designation: "ETL",                course: "ETL",            lpa: 7 },
-  { id:14,  name: "Sithan Kaththan",          company: "—",            designation: "Digital Banking",    course: "—",              lpa: 3 },
+ 
   { id:15,  name: "Jay Bharathi",             company: "Expleo",       designation: "Manual Tester",      course: "Testing",        lpa: 3.5 },
   { id:16,  name: "Nithiya Swaminathan",      company: "Capgemini",    designation: "Selenium Tester",    course: "Selenium",       lpa: 8 },
   { id:17,  name: "Raghunath Srinivasan",     company: "DXC",          designation: "Networking",         course: "Networking",     lpa: 9 },
