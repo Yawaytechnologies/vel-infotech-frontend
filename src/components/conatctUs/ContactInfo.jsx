@@ -20,7 +20,7 @@ const ContactInfo = () => {
     <p className="text-gray-600">Please call us and we will be happy to assist you.</p>
     <p className="text-gray-600">We work with you, not for you.</p>
     <p className="mt-3 font-bold text-black">
-      <a href="tel:7667662428" className="hover:underline">+91-7669 100 251</a>
+      <a href="tel:7667662428" className="hover:underline">+91 9600593838</a>
     </p>
   </div>
 
@@ -34,7 +34,7 @@ const ContactInfo = () => {
     <p className="text-gray-600">We work with you, not for you.</p>
     <p className="mt-3 font-bold text-black">
       <a href="mailto:info@velinfotech.com" className="hover:underline">
-        info@velinfotech.com
+        contact.velinfo@gmail.com
       </a>
     </p>
   </div>
@@ -46,7 +46,7 @@ const ContactInfo = () => {
     </div>
     <h2 className="text-xl font-bold mb-2">Location</h2>
     <p className="text-gray-600">Vel Infotech Private Limited</p>
-    <p className="text-gray-600">5/69, 3rd Main Rd, Kalaimagal Nagar,</p>
+    <p className="text-gray-600">4/38, 2nd Main Rd, Kalaimagal Nagar</p>
     <p className="text-gray-600">Ekkatuthangal, Chennai, Tamil Nadu 600032</p>
     <p className="mt-3 font-bold text-black underline">
       <a href="https://maps.app.goo.gl/hUTPZSHPgUJAKbu39" className="hover:underline" target="_blank" rel="noopener noreferrer">

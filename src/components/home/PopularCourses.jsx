@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const stats = [
-  { value: "120K", label: "Students Enrolled" },
+  { value: "2000+", label: "Students Enrolled" },
   { value: "20+", label: "Overall Branches" },
-  { value: "2500+", label: "Last Year Placed Students" },
+  { value: "1500+", label: "Last Year Placed Students" },
   { value: "10+", label: "Years Of Experience" },
 ];
 
