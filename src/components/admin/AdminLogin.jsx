@@ -15,7 +15,7 @@ export default function AdminLogin({ onLogin }) {
     const existing = getAuth();
     if (existing?.username) {
       onLogin?.(existing);
-      navigate("/admin/dashboard", { replace: true });
+      navigate("/admin/course-enquired", { replace: true });
     }
   }, [navigate, onLogin]);
 
@@ -29,7 +29,7 @@ export default function AdminLogin({ onLogin }) {
 
       setAuth(user); // save in localStorage
       onLogin?.(user);
-      navigate("/admin/dashboard", { replace: true });
+      navigate("/admin/course-enquired", { replace: true });
     } else {
       setError("Invalid username or password");
     }
