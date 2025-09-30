@@ -34,3 +34,5 @@ export async function getRegistrations(signal) {
   return Array.isArray(data) ? data : (data?.data ?? []);
 }
 
+export const deleteRegistration = (id, signal) =>
+  client.delete(`/registrations/${id}`, { signal }).then(r => r.data);

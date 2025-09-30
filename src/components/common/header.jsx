@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiChevronDown, FiChevronRight } from "react-icons/fi";
-import Logo1 from "../../assets/Logo-vel.png";
-import Vel from "../../assets/Logo-vel.png";
+import Logo1 from "../../assets/LL.png";
+
 import { Link } from "react-router-dom";
 
 const groupedCourses = [
@@ -123,7 +123,7 @@ export default function Header() {
           <div className="flex items-center flex-shrink-0">
             <Link to="/">
               <img
-                src={Vel}
+                src={Logo1}
                 alt="Logo"
                 className="h-28 w-auto object-contain md:h-30 lg:h-43 md:pt-1 md:pb-2"
                 style={{ cursor: "pointer" }}
@@ -304,7 +304,7 @@ export default function Header() {
         >
           <div className="flex items-center justify-between px-6 py-6 border-b border-black/20">
             <div className="flex flex-col items-start gap-0">
-              <img src={Vel} alt="Logo" className="h-29 w-auto mb-1" />
+              <img src={Logo1} alt="Logo" className="h-29 w-auto mb-1" />
             </div>
             <button
               className="p-2 rounded-full hover:bg-text-secondary"

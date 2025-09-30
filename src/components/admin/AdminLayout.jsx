@@ -26,7 +26,7 @@ export default function AdminLayout() {
           onToggleSidebar={() => setSidebarOpen((v) => !v)}
         />
         <main
-          className={`flex-1 min-h-[calc(100vh-72px)] p-6 transition-all duration-300 ${
+          className={`flex-1 min-h-[calc(100vh-72px)] p-6 transition-all duration-300 pt-[72px] ${
             sidebarOpen ? "md:ml-[260px]" : "md:ml-[72px]"
           }`}
         >

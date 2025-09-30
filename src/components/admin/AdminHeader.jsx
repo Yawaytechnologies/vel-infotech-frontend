@@ -1,7 +1,9 @@
 import {
-  FiMenu, FiSearch, FiX, FiBell, FiMessageSquare, FiSettings, FiMoon, FiChevronsLeft, FiChevronsRight
+  FiMenu, FiX, FiChevronsLeft, FiChevronsRight, FiLogOut
 } from "react-icons/fi";
 import Logo from "../../assets/infotech.png";
+import { clearAuth } from "../Utils/AuthStore";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminHeader({
   sidebarOpen,
@@ -10,75 +12,70 @@ export default function AdminHeader({
   onCloseMobileSidebar,
   mobileOpen,
 }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    clearAuth();
+    navigate("/admin/login", { replace: true });
+  };
+
   return (
-    <header className="
-      sticky top-0 z-40 bg-white
-      flex items-center justify-between h-[72px] px-7
-      shadow-md
-    ">
-      {/* --- LEFT: LOGO & CONTROLS --- */}
-      <div className="flex items-center gap-4 h-full">
-       <div className="flex items-center h-18">
-                   <img
-                     src={Logo}
-                     alt="Logo"
-                     className="h-15 w-auto object-contain"
-                   />
-                   
-                 </div>
-        
-        {/* Desktop sidebar toggle */}
-        <button
-          className="hidden md:flex text-2xl text-[#7c6cff] mr-1 items-center justify-center"
-          onClick={onToggleSidebar}
-        >
-          {sidebarOpen ? <FiChevronsLeft /> : <FiChevronsRight />}
-        </button>
-        
-        {/* Mobile hamburger/close */}
-        <button
-          className="md:hidden text-2xl text-[#7c6cff] mr-1"
-          onClick={mobileOpen ? onCloseMobileSidebar : onOpenMobileSidebar}
-          aria-label={mobileOpen ? "Close sidebar" : "Open sidebar"}
-        >
-          {mobileOpen ? <FiX /> : <FiMenu />}
-        </button>
-        
-        {/* Search - desktop only */}
-        <div className="ml-8 items-center h-full hidden md:flex">
-          <div className="relative">
-            <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
-            <input
-              type="text"
-              placeholder="Search"
-              className="pl-12 pr-4 py-2 bg-[#f6f7fb] rounded-xl border-none text-base min-w-[250px] max-w-[400px] outline-none focus:ring-2 focus:ring-[#eceeff]"
-              style={{ height: 48 }}
-            />
+    <header
+      className="
+        fixed inset-x-0 top-0 z-50 bg-white
+        h-[72px] shadow-md
+      "
+    >
+      <div
+        className="
+          mx-auto h-full
+          flex items-center justify-between
+          px-4 sm:px-7
+        "
+      >
+        {/* --- LEFT: LOGO & CONTROLS --- */}
+        <div className="flex items-center gap-3 sm:gap-4 h-full">
+          <div className="flex items-center h-18">
+            <img src={Logo} alt="Logo" className="h-7 sm:h-8 w-auto object-contain" />
           </div>
-        </div>
-      </div>
-      
-      {/* --- RIGHT: PROFILE (mobile) & ICONS (desktop) --- */}
-      <div className="flex items-center gap-5">
-        {/* Desktop right icons */}
-        <div className="hidden md:flex items-center gap-5">
-          <button className="text-[#7c6cff] hover:bg-[#eceeff] p-2 rounded-full"><FiMoon size={22} /></button>
-          <button className="text-[#7c6cff] hover:bg-[#eceeff] p-2 rounded-full relative">
-            <FiMessageSquare size={22} />
-            <span className="absolute top-1 left-4 text-[11px] bg-[#7c6cff] text-white rounded-full w-5 h-5 flex items-center justify-center font-bold">76</span>
+
+          {/* Desktop sidebar toggle */}
+          <button
+            className="hidden md:flex text-2xl text-[#7c6cff] items-center justify-center"
+            onClick={onToggleSidebar}
+            aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
+          >
+            {sidebarOpen ? <FiChevronsLeft /> : <FiChevronsRight />}
           </button>
-          <button className="text-[#7c6cff] hover:bg-[#eceeff] p-2 rounded-full relative">
-            <FiBell size={22} />
-            <span className="absolute top-1 left-4 text-[11px] bg-[#7c6cff] text-white rounded-full w-5 h-5 flex items-center justify-center font-bold">15</span>
+
+          {/* Mobile hamburger/close */}
+          <button
+            className="md:hidden text-2xl text-[#7c6cff]"
+            onClick={mobileOpen ? onCloseMobileSidebar : onOpenMobileSidebar}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileOpen ? <FiX /> : <FiMenu />}
           </button>
-          <button className="text-[#7c6cff] hover:bg-[#eceeff] p-2 rounded-full"><FiSettings size={22} /></button>
         </div>
-        {/* Profile image (always visible, last right on mobile & desktop) */}
-        <img
-          src="https://randomuser.me/api/portraits/women/1.jpg"
-          alt="avatar"
-          className="w-11 h-11 rounded-full object-cover border-2 border-[#eceeff]"
-        />
+
+        {/* --- RIGHT: PROFILE + LOGOUT --- */}
+        <div className="flex items-center gap-3 sm:gap-5">
+          {/* Profile image */}
+          <img
+            src="https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?q=80&w=500&auto=format&fit=crop"
+            alt="Profile"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-[#eceeff]"
+          />
+
+          {/* Logout */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-1 text-red-500 mr-5 hover:text-red-700 font-semibold"
+          >
+            <FiLogOut size={20} />
+            <span className="hidden md:inline">Logout</span>
+          </button>
+        </div>
       </div>
     </header>
   );

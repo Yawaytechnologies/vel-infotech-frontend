@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiUser, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
+import { setAuth, getAuth } from "../Utils/AuthStore";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminLogin({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  // Dummy admin credentials for example
+  // Auto-login if already stored
+  useEffect(() => {
+    const existing = getAuth();
+    if (existing?.username) {
+      onLogin?.(existing);
+      navigate("/admin/dashboard", { replace: true });
+    }
+  }, [navigate, onLogin]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === "admin" && password === "admin123") {
+
+    // ✅ Hardcoded check
+    if (username === "Admin" && password === "Velinfotech@123") {
       setError("");
-      onLogin?.({ username });
-      // redirect to dashboard, etc.
+      const user = { username, loggedAt: Date.now() };
+
+      setAuth(user); // save in localStorage
+      onLogin?.(user);
+      navigate("/admin/dashboard", { replace: true });
     } else {
       setError("Invalid username or password");
     }
@@ -27,10 +43,11 @@ export default function AdminLogin({ onLogin }) {
           <span className="text-[#005BAC] text-3xl font-extrabold tracking-wide">Admin Panel</span>
           <span className="text-[15px] text-gray-400 mt-2 tracking-widest font-semibold uppercase">Sign In</span>
         </div>
+
         {/* Form */}
         <form className="flex flex-col gap-6" onSubmit={handleSubmit} autoComplete="off">
           {/* Username */}
-          <div className="relative">
+          <div>
             <label className="block mb-1 text-sm font-bold text-gray-700">Username</label>
             <div className="flex items-center border border-gray-200 bg-white rounded-lg px-3 py-2 focus-within:border-[#005BAC] transition">
               <FiUser className="text-gray-400 mr-2 text-xl" />
@@ -44,8 +61,9 @@ export default function AdminLogin({ onLogin }) {
               />
             </div>
           </div>
+
           {/* Password */}
-          <div className="relative">
+          <div>
             <label className="block mb-1 text-sm font-bold text-gray-700">Password</label>
             <div className="flex items-center border border-gray-200 bg-white rounded-lg px-3 py-2 focus-within:border-[#005BAC] transition">
               <FiLock className="text-gray-400 mr-2 text-xl" />
@@ -67,24 +85,25 @@ export default function AdminLogin({ onLogin }) {
               </button>
             </div>
           </div>
+
           {/* Error */}
           {error && (
-            <div className="text-sm text-red-500 font-medium mt-[-16px] mb-2 text-center">
+            <div className="text-sm text-red-500 font-medium -mt-2 mb-2 text-center">
               {error}
             </div>
           )}
+
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-[#005BAC] to-[#2196f3] hover:from-[#2196f3] hover:to-[#005BAC] text-white font-bold py-2.5 rounded-lg text-lg shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#005BAC]/40 mt-2"
+            className="w-full bg-gradient-to-r from-[#005BAC] to-[#2196f3] hover:from-[#2196f3] hover:to-[#005BAC] text-white font-bold py-2.5 rounded-lg text-lg shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#005BAC]/40 mt-1"
           >
             Sign In
           </button>
         </form>
-        {/* Forgot Password */}
-        <div className="mt-6 flex justify-center">
-          <a href="#" className="text-[#005BAC] hover:underline text-sm font-medium">Forgot password?</a>
-        </div>
+
+        
+
         {/* Footer */}
         <div className="absolute left-0 bottom-2 w-full text-center text-xs text-gray-400 font-semibold tracking-wider opacity-80 select-none">
           © {new Date().getFullYear()} Vel Infotech Admin

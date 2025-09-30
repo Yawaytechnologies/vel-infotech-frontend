@@ -6,7 +6,7 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-
+import AdminLogin from "./components/admin/AdminLogin.jsx";
 import ScrollToTop from "./components/common/ScrollToTop";
 import Header from "./components/common/header";
 import Footer from "./components/common/Footer";
@@ -46,9 +46,8 @@ import Sap from "./components/Courses/Sap";
 import SalesForce from "./components/Courses/SalesForce";
 import ServiceNow from "./components/Courses/ServiceNow";
 import RPA from "./components/Courses/RPA";
-
+import ProtectedRoute from "./components/admin/ProtectedRoute.jsx";
 import Clientpage from "./pages/Clientpage";
-
 import StudentTable from "./components/admin/CourseEnquired";
 import AdminLayout from "./components/admin/AdminLayout";
 import ProductionSupportPage from "./components/Courses/ProductionSupport";
@@ -59,6 +58,7 @@ import SampleResume from "./pages/SampleResume";
 import Whatsapp from "./components/common/Whatsapp";
 import ProductManagement from "./components/Courses/ProductManagement";
 import BusinessAnalyst from "./components/Courses/BusinessAnalyst";
+import Feedback from "../src/components/admin/Feedback.jsx"
 // Wrapper to use useLocation
 function Layout({ children }) {
   const location = useLocation();
@@ -69,6 +69,7 @@ function Layout({ children }) {
     "/admin/dashboard",
     "/admin/course-enquired",
     "/admin/add-student",
+    "/admin/feedback",
   ];
   const isAdmin = adminPaths.includes(location.pathname);
 
@@ -105,12 +106,12 @@ export default function App() {
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<BlogBanner />} />
           <Route path="/resources" element={<Tutorials />} />
-          
+
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/client" element={<Clientpage />} />
           <Route path="/internship" element={<Internship />} />
           <Route path="/Blog" element={<Blog />} />
-<Route path="/blog/:slug" element={<BlogDetails />} />
+          <Route path="/blog/:slug" element={<BlogDetails />} />
           {/* Tutorials */}
           <Route path="/tutorials" element={<Tutorials />} />
           {/* Aliases/redirects to be safe */}
@@ -149,12 +150,22 @@ export default function App() {
           <Route path="/all-courses/DigitalMarketing" element={<DigitalMarketingPage />} />
           <Route path="/all-courses/SoftSkillsTraining" element={<SoftSkillPage />} />
 
-          {/* Admin routes */}
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="course-enquired" element={<StudentTable />} />
-            <Route path="add-student" element={<AddStudent />} />
+          {/* Public login */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+
+          {/* Protected admin */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<AdminDashboard />} />      {/* ✅ no leading slash */}
+              <Route path="course-enquired" element={<StudentTable />} />   {/* ✅ */}
+              <Route path="feedback" element={<Feedback />} />         {/* ✅ */}
+            </Route>
           </Route>
+
+          {/* Keep this LAST */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+
         </Routes>
       </Layout>
     </Router>

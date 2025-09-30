@@ -1,19 +1,17 @@
 // Reducer slice to track submission status and last result
 // ============================================================================
 import { createSlice } from "@reduxjs/toolkit";
-import { submitEnquiry, fetchRegistrations } from "../actions/enquiryAction";
+import { submitEnquiry, fetchRegistrations, removeRegistration } from "../actions/enquiryAction";
 
 const initialState = {
-  // ---- submit (UNCHANGED) ----
-  status: "idle",          // idle | loading | succeeded | failed  (used by your form)
+  status: "idle",
   error: null,
   last: null,
-
-  // ---- list (NEW for GET) ----
   list: {
     items: [],
-    status: "idle",        // idle | loading | succeeded | failed
+    status: "idle",
     error: null,
+    deleting: {}, // ✅ track per-row deleting: { [id]: true }
   },
 };
 
@@ -21,21 +19,17 @@ const enquirySlice = createSlice({
   name: "enquiry",
   initialState,
   reducers: {
-    // keeps your existing behavior
     resetEnquiryState: () => initialState,
-    clearEnquiryError: (state) => {
-      state.error = null;
-    },
-
-    // optional helper to clear the table state
+    clearEnquiryError: (state) => { state.error = null; },
     clearRegistrations(state) {
       state.list.items = [];
       state.list.status = "idle";
       state.list.error = null;
+      state.list.deleting = {};
     },
   },
   extraReducers: (builder) => {
-    // ---- submit (UNCHANGED) ----
+    // submit (unchanged)
     builder
       .addCase(submitEnquiry.pending, (state) => {
         state.status = "loading";
@@ -50,7 +44,7 @@ const enquirySlice = createSlice({
         state.error = action.payload || "Something went wrong";
       });
 
-    // ---- registrations list (NEW) ----
+    // list (get)
     builder
       .addCase(fetchRegistrations.pending, (state) => {
         state.list.status = "loading";
@@ -64,21 +58,39 @@ const enquirySlice = createSlice({
         state.list.status = "failed";
         state.list.error = action.payload || "Failed to fetch registrations";
       });
+
+    // ✅ delete handlers
+    builder
+      .addCase(removeRegistration.pending, (state, action) => {
+        const id = action.meta.arg;
+        state.list.deleting[id] = true;
+      })
+      .addCase(removeRegistration.fulfilled, (state, action) => {
+        const id = action.payload;
+        state.list.items = state.list.items.filter(r => (r.id || r._id) !== id);
+        delete state.list.deleting[id];
+      })
+      .addCase(removeRegistration.rejected, (state, action) => {
+        const id = action.meta.arg;
+        delete state.list.deleting[id];
+        state.list.error = action.payload || action.error?.message || "Delete failed";
+      });
   },
 });
 
 export const {
   resetEnquiryState,
   clearEnquiryError,
-  clearRegistrations, // optional
+  clearRegistrations,
 } = enquirySlice.actions;
 
 export default enquirySlice.reducer;
 
-// --- selectors (handy) ---
+// selectors
 export const selectEnquiryStatus = (s) => s.enquiry.status;
 export const selectEnquiryError  = (s) => s.enquiry.error;
 
 export const selectRegistrations = (s) => s.enquiry.list.items;
 export const selectRegStatus     = (s) => s.enquiry.list.status;
 export const selectRegError      = (s) => s.enquiry.list.error;
+export const selectDeletingMap   = (s) => s.enquiry.list.deleting; // ✅

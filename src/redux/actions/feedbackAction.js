@@ -1,6 +1,6 @@
 // src/redux/actions/feedbackActions.js
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { postFeedback, getFeedbacks } from "../service/feedbackService";
+import { postFeedback, getFeedbacks,deleteFeedback  } from "../service/feedbackService";
 
 export const submitFeedback = createAsyncThunk(
   "feedback/submitFeedback",
@@ -19,10 +19,21 @@ export const fetchFeedbacks = createAsyncThunk(
   "feedback/fetchFeedbacks",
   async (_, { signal, rejectWithValue }) => {
     try {
-      const data = await getFeedbacks({ signal });
-      return data; // array
+      const data = await getFeedbacks({ signal }); // paged object
+      return data;
     } catch (err) {
       return rejectWithValue(err.message || "Load failed");
+    }
+  }
+);
+export const removeFeedback = createAsyncThunk(
+  "feedback/removeFeedback",
+  async (id, { signal, rejectWithValue }) => {
+    try {
+      const data = await deleteFeedback(id, { signal });
+      return { id, data };
+    } catch (err) {
+      return rejectWithValue({ id, message: err.message || "Delete failed" });
     }
   }
 );
