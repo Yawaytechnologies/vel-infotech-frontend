@@ -1,6 +1,6 @@
 // src/redux/services/feedbackService.js
 
-const BASE_URL = "http://34.201.106.137:8000/api";
+const BASE_URL = "https://api.34.201.106.137.nip.io/api";
 
 const JSON_HEADERS = {
   "Content-Type": "application/json",

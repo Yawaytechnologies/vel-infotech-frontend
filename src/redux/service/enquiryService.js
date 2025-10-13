@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // In Vite projects (default with React + Vite):
-const BASE_URL ="http://34.201.106.137:8000/api";
+const BASE_URL ="https://api.34.201.106.137.nip.io/api";
 
 
 const client = axios.create({
