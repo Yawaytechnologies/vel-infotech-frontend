@@ -1,6 +1,6 @@
 // src/redux/services/feedbackService.js
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = "http://34.201.106.137:8000/api";
 
 const JSON_HEADERS = {
   "Content-Type": "application/json",
