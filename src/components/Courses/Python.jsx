@@ -195,12 +195,12 @@ export default function PythonCoursePage() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
         {/* LEFT: Content */}
         <div className="flex-1">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
             Join Our 100% Job Guaranteed <br />
             <span className="text-yellow-400">
               Python Full Stack Developer Course
             </span>
-          </h2>
+          </h1>
 
           <ul className="space-y-3 mt-6 text-lg">
             <li>

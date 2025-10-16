@@ -5,11 +5,9 @@ import education from "../../assets/education1.png";
 export default function BannerSection() {
   const navigate = useNavigate();
 
-  // OPTIONAL: use this if you have a sticky header (set its height here)
   const scrollToPopular = (offset = 0) => {
     const el = document.getElementById("popular-courses");
     if (!el) return;
-
     const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
@@ -25,20 +23,21 @@ export default function BannerSection() {
     >
       {/* LEFT: Text Content */}
       <div className="w-full md:w-1/2 flex flex-col gap-6 animate-fade-up">
+        {/* Single page H1 lives here */}
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white">
           Good <span className="text-[#00b4d8]">coaching</span> is
           <br /> good teaching & <br /> nothing else.
         </h1>
 
-        {/* Sub-heading */}
-        <p className="text-sm tracking-wide text-white uppercase">
+        {/* Sub-heading -> H3 for hierarchy under hero */}
+        <h3 className="text-sm tracking-wide text-white uppercase">
           Successful Coaches Are Visionaries
-        </p>
+        </h3>
 
         {/* Buttons */}
         <div className="flex gap-4 flex-wrap">
           <button
-            onClick={() => scrollToPopular(/* sticky header height */ 0)}
+            onClick={() => scrollToPopular(0)}
             className="px-6 py-2 border border-white text-white rounded-md hover:bg-gray-900 hover:text-white transition"
           >
             View Courses
@@ -56,7 +55,6 @@ export default function BannerSection() {
       {/* RIGHT: Image + Testimonial + Stats */}
       <div className="w-full md:w-1/2 mt-10 md:mt-0 flex flex-col items-center md:items-end justify-center relative animate-float">
         <div className="flex flex-col md:flex-row items-center gap-6">
-          {/* Image */}
           <img
             src={education}
             alt="Education Illustration"
@@ -65,6 +63,7 @@ export default function BannerSection() {
 
           {/* Testimonial block beside image */}
           <div className="bg-white shadow-md rounded-lg px-5 py-4 max-w-xs border-l-4 border-[#00b4d8] text-left">
+            {/* Keep as h4 to avoid competing with H2 sections elsewhere */}
             <h4 className="text-sm font-semibold text-gray-800 mb-1">
               Ronald Richards
             </h4>

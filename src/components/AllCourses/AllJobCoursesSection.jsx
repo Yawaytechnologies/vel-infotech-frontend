@@ -30,6 +30,7 @@ export default function AllJobCoursesSection() {
   return (
     <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
       <div className="max-w-7xl mx-auto text-center mb-10">
+        {/* H2 for section */}
         <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
           Popular Courses
         </h2>
@@ -54,6 +55,7 @@ export default function AllJobCoursesSection() {
               />
             </div>
 
+            {/* H3 for card title */}
             <h3 className="text-md font-bold text-gray-800 text-center">{course.title}</h3>
             <p className="text-sm text-gray-500">Online | Offline</p>
 

@@ -70,7 +70,7 @@ const courses = [
 export default function PopularCoursesSection() {
   return (
     <section className="bg-[#e8f1f8]">
-      {/* Blue background and heading */}
+      {/* 🔽 H2 */}
       <div className="bg-[#005BAC] pt-10 pb-8">
         <h2 className="text-white text-2xl md:text-3xl font-extrabold text-center mb-8">
           You Always Get the Best Guidance
@@ -96,11 +96,11 @@ export default function PopularCoursesSection() {
         </div>
       </div>
 
-      {/* Courses heading */}
+      {/* 🔽 H3 */}
       <div className="text-center py-8">
-        <h2 className="text-4xl font-semibold text-gray-800 mb-2">
+        <h3 className="text-4xl font-semibold text-gray-800 mb-2">
           Popular Courses
-        </h2>
+        </h3>
         <p className="text-md text-gray-600">
           We present to you the most popular courses recommended by experts.
         </p>
@@ -119,6 +119,7 @@ export default function PopularCoursesSection() {
               alt={course.title}
               className="h-20 mx-auto mb-3"
             />
+            {/* keep as-is (card heading) */}
             <h3 className="text-sm font-semibold text-center mb-1">
               {course.title}
             </h3>
@@ -147,14 +148,6 @@ export default function PopularCoursesSection() {
         <p className="font-semibold">
           We Provide the Best Online Course{" "}
           <span className="inline-flex items-center gap-2 text-yellow-300 font-bold">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 inline"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M6.62 10.79a15.07 15.07 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.72 11.72 0 003.65.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.58 3.65 1 1 0 01-.21 1.11z" />
-            </svg>
             +91-9600593838 
           </span>
         </p>

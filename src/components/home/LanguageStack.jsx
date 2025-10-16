@@ -1,3 +1,4 @@
+import React from "react";
 import {
   FaJs, FaCode, FaPython, FaJava, FaHtml5, FaCss3Alt, FaReact, FaNodeJs,
   FaServer, FaDatabase, FaFire, FaCloud, FaDocker, FaLinux, FaGitAlt,
@@ -53,7 +54,7 @@ const rows = [
   ],
 ];
 
-/* --- brand colors by label --- */
+/* --- brand colors by label (unchanged) --- */
 const BRAND_COLORS = {
   "JavaScript": "#F7DF1E",
   "TypeScript": "#3178C6",
@@ -124,7 +125,6 @@ function MarqueeRow({ items, reverse = false, duration = 24 }) {
               className="flex items-center gap-2 mt-1 mb-1 bg-white rounded-3xl px-4 py-3 min-w-[170px] shadow-3xl text-gray-800 text-xs font-medium justify-center transition-all duration-200 hover:shadow-2xl hover:-translate-y-1 cursor-pointer select-none relative"
               style={{ boxShadow: "0 8px 32px 0 rgba(80,89,143,0.13)" }}
             >
-              {/* remove the forced gray; apply brand color */}
               <Icon
                 className="text-xl md:text-2xl"
                 style={{ color: BRAND_COLORS[label] || undefined }}
@@ -147,7 +147,8 @@ function MarqueeRow({ items, reverse = false, duration = 24 }) {
 
 export default function ElementsMarqueeSection() {
   return (
-    <section className="relative py-14 w-full bg-[#f4f7fd] overflow-hidden">
+    <section className="relative py-14 w-full bg[#f4f7fd] overflow-hidden">
+      {/* 🔽 H2 */}
       <h2 className="text-2xl text-center font-black mb-10 tracking-tight z-30 relative">
         <span className="text-[#005BAC]">30+</span>{" "}
         <span className="text-[#232946]">Programming Languages & Frameworks</span>
@@ -157,7 +158,6 @@ export default function ElementsMarqueeSection() {
         <MarqueeRow items={rows[0]} reverse={false} duration={190} />
         <MarqueeRow items={rows[1]} reverse={true} duration={190} />
         <MarqueeRow items={rows[2]} reverse={false} duration={190} />
-       
       </div>
     </section>
   );

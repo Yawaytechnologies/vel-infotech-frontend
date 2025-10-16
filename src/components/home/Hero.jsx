@@ -131,9 +131,10 @@ export default function HeroSlider() {
             transition={{ type: "spring", duration: 0.7 }}
             className="mb-3 xs:mb-4"
           >
-            <h1 className="text-base xs:text-lg sm:text-2xl md:text-3xl font-extrabold text-[#005BAC] mb-2 xs:mb-3 drop-shadow-lg">
+            {/* 🔽 H2 for slide headline */}
+            <h2 className="text-base xs:text-lg sm:text-2xl md:text-3xl font-extrabold text-[#005BAC] mb-2 xs:mb-3 drop-shadow-lg">
               {slides[index].headline}
-            </h1>
+            </h2>
             <p className="text-xs xs:text-sm sm:text-base md:text-lg font-medium text-black/90 mb-5">
               {slides[index].subtext}
             </p>
@@ -185,29 +186,29 @@ export default function HeroSlider() {
 
       {/* Dancing Down Arrow at bottom center */}
       <motion.button
-  initial={{ y: 0 }}
-  animate={{ y: [0, 16, 0] }}
-  transition={{ repeat: Infinity, duration: 1.3, ease: "easeInOut" }}
-  className="
-    hidden md:flex
-    absolute left-1/2 -translate-x-1/2 bottom-4 z-40
-    bg-white/80 hover:bg-white text-[#005BAC] shadow-lg
-    rounded-full w-12 h-12 items-center justify-center
-    transition-all duration-200
-    border border-[#005BAC]/10
-    backdrop-blur-[2px]
-  "
-  style={{ cursor: "pointer" }}
-  aria-label="Scroll to Next Section"
-  onClick={() => {
-    const next = document.getElementById("next-section");
-    if (next) {
-      next.scrollIntoView({ behavior: "smooth" });
-    }
-  }}
->
-  <FiChevronDown size={36} />
-</motion.button>
+        initial={{ y: 0 }}
+        animate={{ y: [0, 16, 0] }}
+        transition={{ repeat: Infinity, duration: 1.3, ease: "easeInOut" }}
+        className="
+          hidden md:flex
+          absolute left-1/2 -translate-x-1/2 bottom-4 z-40
+          bg-white/80 hover:bg-white text-[#005BAC] shadow-lg
+          rounded-full w-12 h-12 items-center justify-center
+          transition-all duration-200
+          border border-[#005BAC]/10
+          backdrop-blur-[2px]
+        "
+        style={{ cursor: "pointer" }}
+        aria-label="Scroll to Next Section"
+        onClick={() => {
+          const next = document.getElementById("next-section");
+          if (next) {
+            next.scrollIntoView({ behavior: "smooth" });
+          }
+        }}
+      >
+        <FiChevronDown size={36} />
+      </motion.button>
 
     </section>
   );

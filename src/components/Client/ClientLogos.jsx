@@ -32,15 +32,16 @@ const startupLogos = [
 const HiringPartners = () => {
   return (
     <section className="bg-white py-8 px-4 sm:px-8 lg:px-20 text-center mt-4">
+      {/* H2: section title */}
       <h2 className="text-4xl font-bold text-[#005BAC] mb-10">
         Our Hiring Partners
       </h2>
+
       <p>
-        Being the Best Placement Training Institute in Chennai, Softlogic Systems offers
-        Unlimited lifelong FREE Placement support for all the programs. Our support doesn’t
-        stop with just unlimited Interviews but we offer free placement training until a student
-        gets placed. We have partnered with 500+ IT MNCs who hire our students and the list
-        keeps growing day by day.
+        As a placement-driven institute in Chennai, Vel InfoTech offers continuous career
+        support to every learner. Beyond arranging interviews, we assist with resume building,
+        mock interview practice, and job-readiness coaching until students secure the right role.
+        More than 500 leading IT companies hire from our talent pool—and that network grows each year.
       </p>
 
       {/* Regular Hiring Partners */}
@@ -59,10 +60,10 @@ const HiringPartners = () => {
         ))}
       </div>
 
-      {/* Featured Hiring Partners */}
-      <h2 className="text-4xl font-bold text-[#005BAC] mt-16 mb-10">
+      {/* H3: subsection titles */}
+      <h3 className="text-4xl font-bold text-[#005BAC] mt-16 mb-10">
         Featured Hiring Partners
-      </h2>
+      </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 pt-4">
         {featuredLogos.map((logo, index) => (
           <div
@@ -78,10 +79,9 @@ const HiringPartners = () => {
         ))}
       </div>
 
-      {/* Startup Hiring Partners */}
-      <h2 className="text-4xl font-bold text-[#005BAC] mt-16 mb-10">
+      <h3 className="text-4xl font-bold text-[#005BAC] mt-16 mb-10">
         Startup Hiring Partners
-      </h2>
+      </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 pt-4">
         {startupLogos.map((logo, index) => (
           <div

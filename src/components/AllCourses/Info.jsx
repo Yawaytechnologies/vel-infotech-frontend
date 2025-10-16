@@ -12,8 +12,6 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-
-
 export default function Info() {
   const navigate = useNavigate();
 
@@ -29,7 +27,7 @@ export default function Info() {
         backgroundRepeat: "repeat",
       }}
     >
-      {/* Heading */}
+      {/* Section heading -> H2 */}
       <div className="max-w-7xl mx-auto text-center mb-10 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -53,7 +51,11 @@ export default function Info() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 items-start relative z-10">
         {/* Left Features */}
         <div className="flex flex-col gap-4 pl-4 md:pl-12">
-          <Feature icon={<FaThumbsUp />} text="Award Winner for Best Training Institute by Silicon India." delay={0} />
+          <Feature
+            icon={<FaThumbsUp />}
+            text="Silicon India distinction: an award-winning training institute."
+            delay={0}
+          />
           <Feature icon={<FaUniversity />} text="Jain University Certification" delay={0.1} />
           <Feature icon={<FaHandshake />} text="On-Job Training and 100% Placement Support Program" delay={0.2} />
         </div>
@@ -98,7 +100,6 @@ export default function Info() {
   );
 }
 
-// 🔹 Feature Card Component
 const Feature = ({ icon, text, delay = 0 }) => (
   <motion.div
     initial={{ opacity: 0, y: 15 }}

@@ -2,30 +2,14 @@ import React, {useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
-  {
-    name: "Sanjay Kumar",
-    role: "Full Stack Developer at Infosys",
-    feedback:
-      "The training was top-notch! The practical approach and real-time projects helped me land my dream job.",
-  },
-  {
-    name: "Anjali R",
-    role: "UI/UX Designer at TCS",
-    feedback:
-      "Amazing experience. The instructors are supportive and the course content is industry relevant.",
-  },
-  {
-    name: "Rahul S",
-    role: "DevOps Engineer at HCL",
-    feedback:
-      "Hands-on labs and mentorship helped me build real confidence. Highly recommend this institute.",
-  },
-  {
-    name: "Divya M",
-    role: "React Developer at Cognizant",
-    feedback:
-      "I learned React from scratch and built my portfolio with guidance. Great placement support too!",
-  },
+  { name: "Sanjay Kumar", role: "Full Stack Developer at Infosys",
+    feedback: "The training was top-notch! The practical approach and real-time projects helped me land my dream job." },
+  { name: "Anjali R", role: "UI/UX Designer at TCS",
+    feedback: "Amazing experience. The instructors are supportive and the course content is industry relevant." },
+  { name: "Rahul S", role: "DevOps Engineer at HCL",
+    feedback: "Hands-on labs and mentorship helped me build real confidence. Highly recommend this institute." },
+  { name: "Divya M", role: "React Developer at Cognizant",
+    feedback: "I learned React from scratch and built my portfolio with guidance. Great placement support too!" },
 ];
 
 const TestimonialsSlider = () => {
@@ -34,44 +18,36 @@ const TestimonialsSlider = () => {
   const cardWidth = 340;
 
   useEffect(() => {
-    const updateVisibleCount = () => {
+    const updateVisible = () => {
       if (window.innerWidth < 640) setVisibleCount(1);
       else if (window.innerWidth < 1024) setVisibleCount(2);
       else setVisibleCount(3);
     };
-    updateVisibleCount();
-    window.addEventListener("resize", updateVisibleCount);
-    return () => window.removeEventListener("resize", updateVisibleCount);
+    updateVisible();
+    window.addEventListener("resize", updateVisible);
+    return () => window.removeEventListener("resize", updateVisible);
   }, []);
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) =>
-      Math.min(prev + 1, testimonials.length - visibleCount)
-    );
-  };
+  const prevSlide = () => setCurrentIndex((p) => Math.max(p - 1, 0));
+  const nextSlide = () =>
+    setCurrentIndex((p) => Math.min(p + 1, testimonials.length - visibleCount));
 
   return (
     <section className="bg-white py-16">
       <div className="w-full px-6 sm:px-12">
+        {/* H2: section heading */}
         <h2 className="text-4xl font-bold text-[#005BAC] mb-10 text-center">
           What Our Students Say
         </h2>
 
-        {/* Slider */}
         <div className="overflow-hidden">
           <div
             className="flex gap-4 transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${currentIndex * cardWidth}px)`,
-            }}
+            style={{ transform: `translateX(-${currentIndex * cardWidth}px)` }}
           >
-            {testimonials.map((t, index) => (
+            {testimonials.map((t, i) => (
               <div
-                key={index}
+                key={i}
                 className="w-[85vw] sm:min-w-[300px] md:min-w-[320px] lg:min-w-[340px] max-w-[340px] bg-gray-50 p-6 rounded-xl shadow-md flex-shrink-0"
               >
                 <p className="text-gray-700 italic mb-4">"{t.feedback}"</p>
@@ -82,7 +58,6 @@ const TestimonialsSlider = () => {
           </div>
         </div>
 
-        {/* Navigation Buttons Below */}
         <div className="flex justify-center gap-4 mt-8">
           <button
             onClick={prevSlide}
