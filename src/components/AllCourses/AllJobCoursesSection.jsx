@@ -22,7 +22,7 @@ const courses = [
   { title: "DataScienceAi", image: "https://cdn-icons-png.flaticon.com/512/8100/8100831.png" },
   { title: "Plsql", image: "https://cdn-icons-png.flaticon.com/512/603/603201.png" },
   { title: "Sql", image: "https://cdn-icons-png.flaticon.com/512/4248/4248449.png" },
-  { title: "BigData Developer", image: "https://cdn-icons-png.flaticon.com/512/4354/4354656.png" }, // ← matches route with space
+  { title: "BigDataDeveloper", image: "https://cdn-icons-png.flaticon.com/512/4354/4354656.png" }, // ← matches route with space
   { title: "RPA", image: "https://cdn-icons-png.flaticon.com/512/8001/8001983.png" },
 ];
 

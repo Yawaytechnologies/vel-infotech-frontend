@@ -312,11 +312,12 @@ export default function JavaCoursePage() {
       </div>
 
       {/* Info Bar */}
-      <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-        <h4 className="text-center text-white font-bold text-xl md:text-2xl">
-          We Offer Both Online and Classroom Training in Chennai & Bangalore.
-        </h4>
-      </div>
+        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
+          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline BigData Developer Training</strong> in 
+            <strong> Chennai & Bangalore</strong> 
+          </h3>
+        </div>
 
       {/* Course Partners Section */}
       <section className="py-16 bg-[#002855]">
@@ -580,7 +581,144 @@ export default function JavaCoursePage() {
         cardMinH={400} // tweak to visually match your right cards
         stickyOffset={110}
       />
+{/* === WHY CHOOSE US === */}
+        <section id="why-choose-us" className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800">
+          <div className="max-w-6xl mx-auto px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+              Why Choose Us
+            </h2>
 
+            <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
+              <div className="relative">
+                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
+                <p className="text-gray-600">
+                  Our mentors have deep industry experience and share practical, hands-on insights.
+                </p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Flexible Learning Modes</h3>
+                <p className="text-gray-600">
+                  Learn in-person or online with weekday, weekend, and fast-track options.
+                </p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Job-Ready Curriculum</h3>
+                <p className="text-gray-600">
+                  Real projects, labs, and interview prep aligned to what employers expect.
+                </p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Career Support</h3>
+                <p className="text-gray-600">
+                  Resume building, mock interviews, and placement assistance with hiring partners.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* === TESTIMONIALS === */}
+        <section id="testimonials" className="py-16 bg-[#fafafa]">
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">What Our Students Say</h2>
+            <p className="text-lg text-gray-600 mb-12">
+              Our success is measured by our learners’ success.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <p className="text-gray-700 italic">“Good place for job seekers. 💯 placement.”</p>
+                <div className="mt-4">
+                  <p className="font-semibold text-gray-900">Thennarasu S</p>
+                </div>
+              </div>
+
+              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <p className="text-gray-700 italic">“Good service and trusted organisation.”</p>
+                <div className="mt-4">
+                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
+                </div>
+              </div>
+
+              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <p className="text-gray-700 italic">
+                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
+                </p>
+                <div className="mt-4">
+                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
+                </div>
+              </div>
+            </div>
+
+            {/* optional internal link */}
+            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
+              View more reviews →
+            </a>
+          </div>
+        </section>
+
+        {/* === FAQ === */}
+        <section id="faq" className="py-16 bg-white">
+          <div className="max-w-5xl mx-auto px-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+              Frequently Asked Questions
+            </h2>
+
+            <div className="space-y-4">
+              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                  Is this course suitable for absolute beginners?
+                </summary>
+                <p className="mt-3 text-gray-700">
+                  Yes. We start from Core Java basics and gradually move to Spring Boot, REST APIs, and React.
+                </p>
+              </details>
+
+              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                  Do you provide placement assistance?
+                </summary>
+                <p className="mt-3 text-gray-700">
+                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                </p>
+              </details>
+
+              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                  What are the class modes and timings?
+                </summary>
+                <p className="mt-3 text-gray-700">
+                  Both online and classroom batches with weekday/weekend/fast-track options.
+                </p>
+              </details>
+
+              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                  Will I build real projects?
+                </summary>
+                <p className="mt-3 text-gray-700">
+                  Yes. You’ll work on guided labs and a capstone project covering APIs, DB integration, and a React UI.
+                </p>
+              </details>
+
+              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                  Do I get a certificate?
+                </summary>
+                <p className="mt-3 text-gray-700">
+                  Yes, a course completion certificate is provided. Project performance is also highlighted.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>   
       {/* ENQUIRY FORM */}
       <section className="w-full px-6 py-20 text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
@@ -845,6 +983,55 @@ export default function JavaCoursePage() {
           </div>
         </div>
       </section>
+      {/* Feedback Section */}  <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            Popular Courses
+          </h2>
+          <p className="text-gray-700 text-lg">
+            We present to you the most popular courses recommended by experts.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {courses.map((course, index) => (
+            <Link
+              to={`/all-courses/${encodeURIComponent(course.title)}`}
+              key={index}
+              className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
+            >
+              <div className="w-16 h-16 mb-4">
+                <img
+                  src={course.image}
+                  alt={course.title}
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+
+              <h3 className="text-md font-bold text-gray-800 text-center">
+                {course.title}
+              </h3>
+              <p className="text-sm text-gray-500">Online | Offline</p>
+
+              <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
+                <FaUserGraduate className="text-gray-500" />
+                <span>
+                  {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                  Learners
+                </span>
+              </div>
+
+              <div className="flex justify-center items-center mt-1 text-yellow-500">
+                {[...Array(5)].map((_, i) => (
+                  <AiFillStar key={i} />
+                ))}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>   
+
       <FeedbackSection />
       {/* Toasts */}
       <ToastContainer
@@ -855,6 +1042,19 @@ export default function JavaCoursePage() {
         bodyClassName={() => "text-[15px] font-medium"}
         theme="colored"
       />
+      <AutoPopupQuoteForm
+        status={status}
+        error={error}
+        mode={mode}
+        setMode={setMode}
+        form={form}
+        errors={errors}
+        touched={touched}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        handleSubmit={handleSubmit}
+      />
+
     </section>
   );
 }
