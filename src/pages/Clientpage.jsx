@@ -13,8 +13,7 @@ function Clientpage() {
       <div className="">
       <HiringPartners />
       </div>
-      {/* <JobOpeningsScroll /> */}
-      {/* <TestimonialsSection/> */}
+      
 
     </>
   );
