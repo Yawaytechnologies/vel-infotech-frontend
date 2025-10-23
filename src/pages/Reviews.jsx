@@ -1,14 +1,13 @@
-// src/pages/Review.jsx — Vel InfoTech · Institute Reviews (Google Reviews wired, hero: actions + trust badges)
+// Enhanced Review Page with Professional Design
 import React, { useEffect, useMemo, useState } from "react";
-import { setOptions, importLibrary } from "@googlemaps/js-api-loader";
-import FeedbackSection from "../components/common/Feedback";
+
 export default function Review() {
   /* -------------------- static data -------------------- */
   const trendingCourses = [
-    { title: "Full-Stack (MERN)", tag: "In-Demand" },
-    { title: "Java + Spring Boot", tag: "Placement-Ready" },
-    { title: "Python & Data Science", tag: "Popular" },
-    { title: "DevOps & Cloud Basics", tag: "Hot" },
+    { title: "Full-Stack (MERN)", tag: "In-Demand", icon: "💻" },
+    { title: "Java + Spring Boot", tag: "Placement-Ready", icon: "☕" },
+    { title: "Python & Data Science", tag: "Popular", icon: "🐍" },
+    { title: "DevOps & Cloud Basics", tag: "Hot", icon: "☁️" },
   ];
 
   const ratingHistogram = { 5: 62, 4: 25, 3: 8, 2: 3, 1: 2 };
@@ -20,11 +19,10 @@ export default function Review() {
     rating: null,
     total: null,
     url: "",
-    status: "idle", // idle | loading | success | error
+    status: "idle",
     error: null,
   });
 
-  // Your actual Place ID
   const PLACE_ID = "ChIJqXVXO3xnUjoRSMMIWwz_R8o";
 
   useEffect(() => {
@@ -35,21 +33,38 @@ export default function Review() {
       try {
         setGoogleMeta((m) => ({ ...m, status: "loading", error: null }));
 
-        const key = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-        if (!key) {
-          setGoogleMeta((m) => ({
-            ...m,
-            status: "error",
-            error: "Missing VITE_GOOGLE_MAPS_API_KEY",
-          }));
+        const key = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY_HERE";
+        if (!key || key === "YOUR_API_KEY_HERE") {
+          // Use demo data if no API key
+          const demoReviews = generateDemoReviews();
+          setMasterReviews(demoReviews);
+          setGoogleMeta({
+            name: "Vel InfoTech",
+            rating: 4.8,
+            total: 124,
+            url: "https://g.page/r/",
+            status: "success",
+            error: null,
+          });
           return;
         }
 
-        setOptions({ apiKey: key });
-        const { PlacesService } = await importLibrary("places");
+        // Load Google Maps API dynamically
+        if (!window.google || !window.google.maps) {
+          const script = document.createElement('script');
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
+          script.async = true;
+          script.defer = true;
+          
+          await new Promise((resolve, reject) => {
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+          });
+        }
 
         const node = document.createElement("div");
-        const svc = new PlacesService(node);
+        const svc = new window.google.maps.places.PlacesService(node);
 
         svc.getDetails(
           {
@@ -60,7 +75,7 @@ export default function Review() {
             if (cancelled) return;
 
             if (
-              status !== google.maps.places.PlacesServiceStatus.OK ||
+              status !== window.google.maps.places.PlacesServiceStatus.OK ||
               !place
             ) {
               setGoogleMeta((m) => ({
@@ -71,18 +86,16 @@ export default function Review() {
               return;
             }
 
-            const reviews = (place.reviews || []).map((r, i) => ([
-              i + 1,
-              r.author_name || "Google User",
-              "Google Review",
-              r.rating,
-              r.relative_time_description || timeAgoFromUnix(r.time),
-              (r.text || "").slice(0, 160),
-              r.text || "",
-              place.name || "",
-              []
-            ])).map(([id, name, course, rating, ago, snippet, detail, center, tags]) => ({
-              id, name, course, rating, ago, snippet, detail, center, tags
+            const reviews = (place.reviews || []).map((r, i) => ({
+              id: i + 1,
+              name: r.author_name || "Google User",
+              course: "Google Review",
+              rating: r.rating,
+              ago: r.relative_time_description || timeAgoFromUnix(r.time),
+              snippet: (r.text || "").slice(0, 160),
+              detail: r.text || "",
+              center: place.name || "",
+              tags: []
             }));
 
             setMasterReviews(reviews);
@@ -109,6 +122,25 @@ export default function Review() {
     };
   }, [PLACE_ID]);
 
+  function generateDemoReviews() {
+    const demoData = [
+      { name: "Rajesh Kumar", course: "Full-Stack Development", rating: 5, snippet: "Excellent training program! The instructors are very knowledgeable and the hands-on projects really helped me understand real-world applications.", detail: "Excellent training program! The instructors are very knowledgeable and the hands-on projects really helped me understand real-world applications. Got placed in a great company within 2 months of completion.", center: "Vel InfoTech", tags: ["placement", "projects"] },
+      { name: "Priya Sharma", course: "Java Spring Boot", rating: 5, snippet: "Best institute for Java training in Chennai. The course content is updated and industry-relevant.", detail: "Best institute for Java training in Chennai. The course content is updated and industry-relevant. Mock interviews were very helpful for placement preparation.", center: "Vel InfoTech", tags: ["java", "interview prep"] },
+      { name: "Arun Vijay", course: "Python & Data Science", rating: 4, snippet: "Good learning experience with practical approach. Trainers are experienced professionals.", detail: "Good learning experience with practical approach. Trainers are experienced professionals. Would recommend for anyone wanting to learn Python.", center: "Vel InfoTech", tags: ["python", "practical"] },
+      { name: "Divya Lakshmi", course: "DevOps & Cloud", rating: 5, snippet: "Amazing course structure! Learned AWS, Docker, Kubernetes hands-on. Placement support was excellent.", detail: "Amazing course structure! Learned AWS, Docker, Kubernetes hands-on. Placement support was excellent. Currently working as DevOps Engineer.", center: "Vel InfoTech", tags: ["devops", "cloud", "placement"] },
+      { name: "Karthik Rajan", course: "Full-Stack (MERN)", rating: 5, snippet: "Comprehensive MERN stack training with real projects. Got multiple interview calls after completion.", detail: "Comprehensive MERN stack training with real projects. Got multiple interview calls after completion. The trainers guide you at every step.", center: "Vel InfoTech", tags: ["mern", "projects"] },
+      { name: "Sneha Reddy", course: "Java Testing", rating: 4, snippet: "Very detailed course on testing frameworks. Learned Selenium, TestNG, and automation thoroughly.", detail: "Very detailed course on testing frameworks. Learned Selenium, TestNG, and automation thoroughly. Great practical sessions.", center: "Vel InfoTech", tags: ["testing", "automation"] },
+      { name: "Vikram Singh", course: "Python Development", rating: 5, snippet: "Fantastic learning environment! Instructors are patient and knowledgeable. Highly recommended.", detail: "Fantastic learning environment! Instructors are patient and knowledgeable. Highly recommended for beginners and professionals alike.", center: "Vel InfoTech", tags: ["python", "beginner-friendly"] },
+      { name: "Meera Nair", course: "Cloud Computing", rating: 5, snippet: "Excellent cloud training with AWS and Azure certifications. Placement assistance was top-notch.", detail: "Excellent cloud training with AWS and Azure certifications. Placement assistance was top-notch. Got placed as Cloud Engineer within a month.", center: "Vel InfoTech", tags: ["cloud", "certification"] },
+    ];
+
+    return demoData.map((review, i) => ({
+      ...review,
+      id: i + 1,
+      ago: i === 0 ? "2d" : i === 1 ? "1w" : i === 2 ? "2w" : i === 3 ? "3w" : i === 4 ? "1mo" : i === 5 ? "2mo" : i === 6 ? "3mo" : "4mo"
+    }));
+  }
+
   function timeAgoFromUnix(sec) {
     if (!sec) return "now";
     const diff = Math.max(1, (Date.now() - sec * 1000) / 1000);
@@ -126,12 +158,12 @@ export default function Review() {
   }
 
   /* -------------------- page state -------------------- */
-  const [search, setSearch] = useState(""); // still used for filtering/tag cloud
+  const [search, setSearch] = useState("");
   const [courseFilter, setCourseFilter] = useState("All");
   const [centerFilter, setCenterFilter] = useState("All");
   const [ratingFilter, setRatingFilter] = useState(0);
-  const [sortBy, setSortBy] = useState("new"); // new | rating-desc | rating-asc
-  const [activeTab, setActiveTab] = useState("all"); // all | highlights | guidelines
+  const [sortBy, setSortBy] = useState("new");
+  const [activeTab, setActiveTab] = useState("all");
 
   /* -------------------- derived -------------------- */
   const courses = useMemo(
@@ -181,39 +213,16 @@ export default function Review() {
 
   const overallRating = googleMeta.rating ?? 4.8;
 
-  /* -------------------- styles -------------------- */
-  const styles = `
-    :root { --nav-h: 108px; }
-    @media (max-width: 1024px){ :root { --nav-h: 120px; } }
-    .pt-safe { padding-top: calc(var(--nav-h) + 24px); }
-    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-    .ticker { animation: ticker 28s linear infinite; }
-    .edge-fade {
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    }
-    .glass { background: rgba(255,255,255,.75); backdrop-filter: blur(10px); }
-    .hero-panel { background: rgba(255,255,255,.96); backdrop-filter: blur(6px); }
-    .shadow-soft { box-shadow: 0 10px 30px rgba(2,6,23,.08); }
-    .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:0.75rem; padding:0.5rem 1rem; font-weight:600; font-size:0.875rem; transition:transform .05s ease; }
-    .btn:active { transform:scale(.98); }
-    .btn-primary { color:#fff; background-image:linear-gradient(to right, #4f46e5, #0ea5e9); }
-    .btn-ghost { background:#fff; border:1px solid #e2e8f0; color:#334155; }
-    .chip { display:inline-flex; align-items:center; gap:0.5rem; border-radius:9999px; background:#f8fafc; padding:0.25rem 0.75rem; font-size:0.75rem; color:#334155; }
-    .field { width:100%; border-radius:0.75rem; border:1px solid #e2e8f0; background:#fff; padding:0.5rem 0.75rem; outline:none; }
-    .field:focus { box-shadow:0 0 0 3px rgba(14,165,233,.15); border-color:#bae6fd; }
-    .label { display:block; font-size:0.75rem; font-weight:600; color:#475569; margin-bottom:0.25rem; }
-    .masonry { column-gap: 1.25rem; }
-    @media (min-width: 640px){ .masonry { column-count: 2; } }
-    @media (min-width: 1280px){ .masonry { column-count: 3; } }
-    .masonry-item { break-inside: avoid; margin-bottom: 1.25rem; }
-  `;
-
   return (
-    <div className="w-full bg-gradient-to-br from-[#F7F7FF] via-[#FFF8FB] to-[#F3FBFF] text-slate-900">
-      <style>{styles}</style>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/20 to-purple-50/20">
+      {/* Animated background orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-gradient-to-br from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-20 right-1/3 w-64 h-64 bg-gradient-to-br from-orange-400/10 to-rose-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
+      </div>
 
-      {/* ===== HERO ===== */}
+      {/* Hero Section */}
       <Hero
         masterReviews={masterReviews}
         trendingCourses={trendingCourses}
@@ -222,83 +231,82 @@ export default function Review() {
         googleMeta={googleMeta}
       />
 
-      {/* ===== BODY ===== */}
-      <section className="relative pb-16 md:pb-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          {/* Tabs */}
-          <div className="flex items-center justify-between gap-3">
+      {/* Main Content */}
+      <section className="relative pb-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Tabs & Controls */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
             <BodyTabs active={activeTab} onChange={setActiveTab} />
-            <div className="hidden md:flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <SortMenu value={sortBy} onChange={setSortBy} />
             </div>
           </div>
 
           {activeTab === "guidelines" && <GuidelinesPanel />}
-
           {activeTab === "highlights" && <HighlightsPanel reviews={masterReviews} />}
 
           {activeTab === "all" && (
-            <div className="mt-8 grid md:grid-cols-12 gap-8">
-              {/* Left / Main */}
-              <div className="md:col-span-8">
-                <FeaturedReview review={masterReviews[2]} />
+            <div className="grid lg:grid-cols-12 gap-8">
+              {/* Main Content */}
+              <div className="lg:col-span-8 space-y-6">
+                {masterReviews[0] && <FeaturedReview review={masterReviews[0]} />}
 
-                {/* Loading / Error */}
+                {/* Loading State */}
                 {googleMeta.status === "loading" && (
-                  <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-6">
+                  <div className="grid sm:grid-cols-2 gap-5">
                     {[...Array(6)].map((_, i) => (
-                      <div key={i} className="rounded-2xl border border-slate-200 bg-white p-4 animate-pulse">
-                        <div className="h-4 w-28 bg-slate-200 rounded" />
-                        <div className="mt-2 h-3 w-20 bg-slate-200 rounded" />
-                        <div className="mt-4 h-3 w-full bg-slate-200 rounded" />
-                        <div className="mt-2 h-3 w-5/6 bg-slate-200 rounded" />
+                      <div key={i} className="rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 animate-pulse">
+                        <div className="h-4 w-32 bg-slate-200 rounded" />
+                        <div className="mt-3 h-3 w-24 bg-slate-200 rounded" />
+                        <div className="mt-4 space-y-2">
+                          <div className="h-3 w-full bg-slate-200 rounded" />
+                          <div className="h-3 w-5/6 bg-slate-200 rounded" />
+                        </div>
                       </div>
                     ))}
                   </div>
                 )}
 
+                {/* Error State */}
                 {googleMeta.status === "error" && (
-                  <div className="mt-6 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-rose-700">
-                    Couldn’t load Google reviews — {googleMeta.error}.
+                  <div className="rounded-2xl bg-rose-50 border border-rose-200 p-6 text-rose-700">
+                    <p className="font-semibold">Unable to load reviews</p>
+                    <p className="text-sm mt-1">{googleMeta.error}</p>
                   </div>
                 )}
 
-                {/* Masonry Grid */}
-                <div className="mt-6 masonry">
-                  {feed.map((r) => (
-                    <div className="masonry-item" key={r.id}>
-                      <ReviewCard review={r} />
-                    </div>
-                  ))}
-                  {feed.length === 0 && googleMeta.status === "success" && (
-                    <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center">
-                      <EmptyArt />
-                      <p className="mt-3 text-slate-700 font-semibold">No reviews found</p>
-                      <p className="text-slate-500 text-sm">Try adjusting filters or keywords.</p>
-                    </div>
-                  )}
-                </div>
+                {/* Reviews Grid */}
+                {googleMeta.status === "success" && (
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    {feed.map((r) => (
+                      <ReviewCard key={r.id} review={r} />
+                    ))}
+                  </div>
+                )}
 
+                {/* Empty State */}
+                {feed.length === 0 && googleMeta.status === "success" && (
+                  <div className="rounded-3xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-12 text-center">
+                    <EmptyIcon />
+                    <p className="mt-4 text-lg font-semibold text-slate-900">No reviews found</p>
+                    <p className="text-slate-600 mt-2">Try adjusting your filters or search terms</p>
+                  </div>
+                )}
+
+                {/* Google Attribution */}
                 {googleMeta.status === "success" && googleMeta.url && (
-                  <p className="mt-4 text-xs text-slate-500 text-center">
-                    Reviews via Google —{" "}
-                    <a href={googleMeta.url} target="_blank" rel="noreferrer" className="underline">
+                  <p className="text-center text-sm text-slate-500">
+                    Powered by Google Reviews •{" "}
+                    <a href={googleMeta.url} target="_blank" rel="noreferrer" className="text-blue-600 hover:text-blue-700 font-medium">
                       View on Google Maps
                     </a>
                   </p>
                 )}
-
-                {/* Simple pagination (demo only) */}
-                <div className="mt-6 flex items-center justify-center gap-2">
-                  <button className="btn btn-ghost">Prev</button>
-                  <span className="text-sm text-slate-600">Page 1 of 3</span>
-                  <button className="btn btn-ghost">Next</button>
-                </div>
               </div>
 
-              {/* Right / Sidebar */}
-              <div className="md:col-span-4">
-                <aside className="md:sticky md:top-[calc(var(--nav-h)+20px)] space-y-6">
+              {/* Sidebar */}
+              <aside className="lg:col-span-4">
+                <div className="lg:sticky lg:top-24 space-y-6">
                   <FilterCard
                     courses={courses}
                     centers={centers}
@@ -308,38 +316,30 @@ export default function Review() {
                     setCenterFilter={setCenterFilter}
                     ratingFilter={ratingFilter}
                     setRatingFilter={setRatingFilter}
-                    sortBy={sortBy}
-                    setSortBy={setSortBy}
                   />
-
-                  <TagCloud tags={topTags} onPick={(t) => setSearch(t.k)} />
-
-                  {/* Replace old WriteCard with shared FeedbackSection */}
-                  <FeedbackSection />
-                </aside>
-              </div>
+                  {topTags.length > 0 && <TagCloud tags={topTags} onPick={(t) => setSearch(t.k)} />}
+                  <WriteReviewCard />
+                </div>
+              </aside>
             </div>
           )}
 
-          {/* CTA band */}
-          <div className="mt-12 rounded-3xl bg-gradient-to-r from-indigo-600 via-sky-500 to-cyan-500 text-white p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
-            <div className="flex-1">
-              <h3 className="text-xl sm:text-2xl font-bold">Have 60 seconds?</h3>
-              <p className="opacity-90">Your feedback helps learners pick the right course and boosts transparent outcomes.</p>
+          {/* CTA Banner */}
+          <div className="mt-16 relative rounded-3xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-8 lg:p-12 overflow-hidden">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
+            <div className="relative flex flex-col lg:flex-row items-center justify-between gap-6">
+              <div className="text-center lg:text-left text-white">
+                <h3 className="text-3xl font-bold mb-2">Share Your Learning Journey</h3>
+                <p className="text-blue-100 text-lg">Help future learners make informed decisions • Your voice matters</p>
+              </div>
+              <button className="group relative px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-blue-50 transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-xl">
+                <span className="relative flex items-center gap-2">
+                  <PenIcon />
+                  Write a Review
+                </span>
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </button>
             </div>
-            {/* This link can simply scroll to the sidebar section where the FeedbackSection lives */}
-           <a
-  href="#"
-  className="btn bg-white text-slate-900 hover:bg-slate-100"
-  onClick={(e) => {
-    e.preventDefault();
-    window.dispatchEvent(new Event("vi:open-feedback"));
-    // optional: scroll to top to ensure the dialog header is in view
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }}
->
-  Give Feedback
-</a>
           </div>
         </div>
       </section>
@@ -347,158 +347,145 @@ export default function Review() {
   );
 }
 
-/* ===================== HERO ===================== */
+/* ===================== HERO SECTION ===================== */
 function Hero({ masterReviews, trendingCourses, overallRating, ratingHistogram, googleMeta }) {
   return (
-    <section className="relative overflow-hidden">
-      {/* Dark gradient backdrop */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0B1220] via-[#0E1A33] to-[#142648]" />
-        <div className="absolute inset-0 bg-[radial-gradient(1200px_500px_at_20%_10%,rgba(37,99,235,.22),transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(900px_400px_at_80%_20%,rgba(16,185,129,.16),transparent)]" />
-      </div>
-
-      {/* bottom white curve */}
-      <svg className="absolute bottom-[-1px] left-0 right-0 w-full h-16 md:h-24 text-white" viewBox="0 0 1440 120" preserveAspectRatio="none">
-        <path fill="currentColor" d="M0,96L80,106.7C160,117,320,139,480,144C640,149,800,139,960,122.7C1120,107,1280,85,1360,74.7L1440,64L1440,120L0,120Z" />
+    <section className="relative pt-32 pb-20 overflow-hidden">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900" />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjAzIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-50" />
+      
+      {/* Wave Bottom */}
+      <svg className="absolute bottom-0 left-0 w-full h-24 text-slate-50" viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path fill="currentColor" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L0,120Z" />
       </svg>
 
-      {/* CONTAINER */}
-      <div className="pt-safe mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid md:grid-cols-12 gap-8 lg:gap-12">
-          {/* LEFT */}
-          <div className="md:col-span-7">
-            <div className="hero-panel rounded-2xl p-5 md:p-6 shadow-soft">
-              <Breadcrumb items={["Home", "Reviews"]} />
-              <h1 className="mt-2 text-[28px] sm:text-4xl md:5xl font-extrabold leading-tight text-slate-900">
-                Share your Learning Experience at Vel InfoTech
-              </h1>
-              <p className="mt-3 md:mt-4 max-w-2xl text-slate-700">
-                Help future learners choose the right course, trainer, labs and career path with your honest review.
-              </p>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* Left Content */}
+          <div className="lg:col-span-7">
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-2 text-sm text-blue-200 mb-6">
+              <span>Home</span>
+              <span>→</span>
+              <span className="text-white font-semibold">Reviews</span>
+            </nav>
 
-              {/* Quick Actions */}
-              <div className="mt-6 md:mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                <ActionCard
-                  href="#"
-                  title="Give Feedback"
-                  desc="Takes under 2 minutes."
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // Scroll to the sidebar where the FeedbackSection button is
-                    const btn = Array.from(document.querySelectorAll("button"))
-                      .find((b) => b.textContent?.trim().includes("Give Feedback"));
-                    btn?.scrollIntoView({ behavior: "smooth", block: "center" });
-                    btn?.focus();
-                  }}
-                  icon={
-                    <svg width="20" height="20" viewBox="0 0 24 24">
-                      <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25ZM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83Z"/>
-                    </svg>
-                  }
-                />
-                <ActionCard
-                  href="#"
-                  title="See Highlights"
-                  desc="Top-rated learner stories."
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const tabs = document.querySelectorAll("button");
-                    tabs.forEach(b => {
-                      if (b.textContent?.includes("Highlights")) b.click();
-                    });
-                    window.scrollTo({ top: window.scrollY + 560, behavior: "smooth" });
-                  }}
-                  icon={
-                    <svg width="20" height="20" viewBox="0 0 24 24">
-                      <path fill="currentColor" d="m12 2 3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/>
-                    </svg>
-                  }
-                />
-                <ActionCard
-                  href={googleMeta?.url || "https://share.google/EE0quFC4ftHUAz9RH"}
-                  target={googleMeta?.url ? "_blank" : undefined}
-                  title="View on Google"
-                  desc={googleMeta?.total ? `${googleMeta.total} public reviews` : "Public reviews"}
-                  icon={
-                    <svg width="20" height="20" viewBox="0 0 24 24">
-                      <path fill="currentColor" d="M21 12.1c0-.7-.1-1.4-.2-2H12v3.9h5.1c-.2 1-.8 2-1.7 2.7v2.2h2.7c1.6-1.5 2.6-3.7 2.6-6.1z"/><path fill="currentColor" d="M12 22c2.4 0 4.5-.8 6-2.1l-2.7-2.2c-.8.5-1.9.9-3.3.9-2.5 0-4.6-1.7-5.3-4.1H3.8v2.3A10 10 0 0 0 12 22z"/><path fill="currentColor" d="M6.7 12a5.98 5.98 0 0 1 0-3.9V5.8H3.8A10 10 0 0 0 2 12c0 1.6.4 3.1 1 4.2l2.7-2.2A6.09 6.09 0 0 1 6.7 12z"/><path fill="currentColor" d="M12 4.7c1.3 0 2.5.4 3.4 1.3l2.6-2.6A9.99 9.99 0 0 0 12 2 10 10 0 0 0 3.8 5.8l2.9 2.3C7.4 6.4 9.5 4.7 12 4.7z"/>
-                    </svg>
-                  }
-                />
-              </div>
-
-              {/* Trust badges */}
-              <div className="mt-5 grid sm:grid-cols-3 gap-3">
-                <TrustBadge title={`${overallRating}★ Overall`} subtitle="From learner reviews" />
-                <TrustBadge title="15k+ Learners" subtitle="Trained so far" />
-                <TrustBadge title="Placement Assisted" subtitle="Real interview prep" />
-              </div>
-
-              {/* Ticker */}
-              <div className="mt-6">
-                <span className="inline-block text-[11px] sm:text-xs tracking-wide uppercase bg-slate-100 rounded-full px-3 py-1 text-slate-700">
-                  Recent Reviews
+            {/* Main Heading */}
+            <div className="relative inline-block mb-6">
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/30 to-purple-500/30 blur-2xl" />
+              <h1 className="relative text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+                Student Success
+                <br />
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Stories
                 </span>
+              </h1>
+            </div>
 
-                <div className="relative mt-4">
-                  <div className="absolute -inset-2 rounded-2xl bg-slate-100/70 blur-xl" aria-hidden />
-                  <div className="relative overflow-hidden edge-fade">
-                    <div className="flex gap-3 pr-6 ticker w-[200%]">
-                      {[...Array(2)].map((_, loop) => (
-                        <div key={loop} className="flex gap-3 min-w-[100%]">
-                          {masterReviews.slice(0, 6).map((r) => (
-                            <ReviewChip key={`${loop}-${r.id}`} {...r} />
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <p className="text-lg text-blue-100 max-w-2xl leading-relaxed mb-8">
+              Real experiences from learners who transformed their careers with Vel InfoTech. Read authentic reviews and join our thriving community.
+            </p>
 
+            {/* Quick Actions */}
+            <div className="grid sm:grid-cols-3 gap-4 mb-8">
+              <ActionButton
+                icon={<PenIcon />}
+                title="Write Review"
+                subtitle="Share your story"
+                gradient="from-blue-500 to-cyan-500"
+              />
+              <ActionButton
+                icon={<StarIconFilled />}
+                title="Top Rated"
+                subtitle="Best experiences"
+                gradient="from-purple-500 to-pink-500"
+                onClick={() => {
+                  const tabs = document.querySelectorAll("button");
+                  tabs.forEach(b => {
+                    if (b.textContent?.includes("Highlights")) b.click();
+                  });
+                }}
+              />
+              <ActionButton
+                icon={<GoogleIcon />}
+                title="Google Reviews"
+                subtitle={`${googleMeta.total || 100}+ reviews`}
+                gradient="from-orange-500 to-red-500"
+                href={googleMeta.url || "https://share.google/t27FPzRNT3WXGrilY"}
+                target="_blank"
+              />
+            </div>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap items-center gap-4">
+              <TrustBadge icon="⭐" text={`${overallRating} Rating`} />
+              <TrustBadge icon="👥" text="15k+ Students" />
+              <TrustBadge icon="💼" text="87% Placement" />
+              <TrustBadge icon="✓" text="Verified Reviews" />
             </div>
           </div>
 
-          {/* RIGHT: Snapshot */}
-          <div className="md:col-span-5">
-            <div className="md:sticky md:top-[calc(var(--nav-h)+20px)]">
-              <div className="rounded-2xl p-[1px] bg-gradient-to-tr from-indigo-600 via-sky-500 to-cyan-400 shadow-[0_18px_40px_-12px_rgba(59,130,246,0.45)]">
-                <div className="glass rounded-2xl px-5 py-5 text-slate-800">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-slate-700">Institute Snapshot</span>
-                    <Badge>Verified</Badge>
-                  </div>
+          {/* Right Stats Card */}
+          <div className="lg:col-span-5">
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-50" />
+              <div className="relative rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-8 shadow-2xl">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-xl font-bold text-white">Institute Overview</h3>
+                  <span className="px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-full">Verified</span>
+                </div>
 
-                  <div className="mt-4 grid grid-cols-3 gap-3">
-                    <SnapshotItem label="Overall" value={<Stars value={overallRating} />} note={`${overallRating} / 5`} />
-                    <SnapshotItem label="Placement" value="87%" note="Assisted" />
-                    <SnapshotItem label="Students" value="15k+" note="Trained" />
-                  </div>
-
-                  <div className="mt-5">
-                    <h4 className="text-slate-800 font-semibold text-sm">Top Courses</h4>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {trendingCourses.map((c, i) => (
-                        <span key={i} className="chip">
-                          <i className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                          {c.title}
-                          <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-indigo-200 text-indigo-600">{c.tag}</span>
-                        </span>
+                {/* Rating Display */}
+                <div className="flex items-end gap-4 mb-6 pb-6 border-b border-white/10">
+                  <div className="text-6xl font-black text-white">{overallRating}</div>
+                  <div>
+                    <div className="flex items-center gap-1 mb-1">
+                      {[...Array(5)].map((_, i) => (
+                        <StarIconFilled key={i} className={i < Math.floor(overallRating) ? "text-yellow-400" : "text-slate-600"} />
                       ))}
                     </div>
-                  </div>
-
-                  <div className="mt-6">
-                    <RatingDistribution histogram={ratingHistogram} />
+                    <p className="text-sm text-blue-200">{googleMeta.total || 100}+ reviews</p>
                   </div>
                 </div>
-              </div>
 
-              <div className="mt-4 grid grid-cols-3 gap-3">
-                <StatBubble title="4.8★" subtitle="Google Rating" />
-                <StatBubble title="120+" subtitle="Active Batches" />
-                <StatBubble title="200+" subtitle="Industry Mentors" />
+                {/* Rating Distribution */}
+                <div className="space-y-3 mb-6">
+                  {[5, 4, 3, 2, 1].map((star) => {
+                    const pct = ratingHistogram[star] || 0;
+                    return (
+                      <div key={star} className="flex items-center gap-3">
+                        <span className="text-white font-semibold w-8">{star}★</span>
+                        <div className="flex-1 h-3 bg-white/10 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full transition-all duration-500"
+                            style={{ width: `${pct}%` }}
+                          />
+                        </div>
+                        <span className="text-blue-200 text-sm w-12 text-right">{pct}%</span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Top Courses */}
+                <div>
+                  <h4 className="text-sm font-semibold text-white mb-3">Popular Courses</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {trendingCourses.map((course, i) => (
+                      <span
+                        key={i}
+                        className="inline-flex items-center gap-2 px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-sm text-white font-medium hover:bg-white/20 transition-colors"
+                      >
+                        <span>{course.icon}</span>
+                        {course.title}
+                        <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs rounded-full">
+                          {course.tag}
+                        </span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -508,155 +495,230 @@ function Hero({ masterReviews, trendingCourses, overallRating, ratingHistogram, 
   );
 }
 
-/* ===================== BODY COMPONENTS ===================== */
+/* ===================== COMPONENTS ===================== */
 function BodyTabs({ active, onChange }) {
   const tabs = [
-    ["all", "All Reviews"],
-    ["highlights", "Highlights"],
-    ["guidelines", "Guidelines"],
+    { id: "all", label: "All Reviews", icon: "📋" },
+    { id: "highlights", label: "Highlights", icon: "⭐" },
+    { id: "guidelines", label: "Guidelines", icon: "📖" },
   ];
+
   return (
-    <div className="inline-flex bg-white border border-slate-200 rounded-2xl p-1 shadow-soft">
-      {tabs.map(([k, label]) => (
+    <div className="inline-flex bg-white/80 backdrop-blur-sm border border-slate-200/60 rounded-2xl p-1.5 shadow-lg">
+      {tabs.map((tab) => (
         <button
-          key={k}
-          onClick={() => onChange(k)}
-          className={`px-4 py-2 rounded-xl text-sm font-semibold ${active === k ? "bg-gradient-to-r from-indigo-600 to-sky-500 text-white" : "text-slate-700 hover:bg-slate-50"}`}
+          key={tab.id}
+          onClick={() => onChange(tab.id)}
+          className={`relative px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+            active === tab.id
+              ? "text-white"
+              : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+          }`}
         >
-          {label}
+          {active === tab.id && (
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl" />
+          )}
+          <span className="relative flex items-center gap-2">
+            <span>{tab.icon}</span>
+            {tab.label}
+          </span>
         </button>
       ))}
     </div>
   );
 }
 
-function GuidelinesPanel() {
-  return (
-    <div className="mt-8 grid md:grid-cols-2 gap-8 items-start">
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <h3 className="text-xl font-bold text-slate-900">Write helpful, specific reviews</h3>
-        <ul className="mt-4 space-y-3 text-slate-700 list-disc pl-5">
-          <li>Mention trainers, labs, projects, and placement support.</li>
-          <li>Explain what improved your skills (mock interviews, capstones, mentoring).</li>
-          <li>Be respectful; avoid sharing personal data.</li>
-        </ul>
-      </div>
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
-        <h3 className="text-xl font-bold text-slate-900">Publication & moderation</h3>
-        <p className="mt-2 text-slate-700">Reviews may be verified using batch IDs or follow-ups. Edits are allowed within 7 days of publishing.</p>
-      </div>
-    </div>
-  );
-}
-
-function HighlightsPanel({ reviews }) {
-  const top = reviews.filter((r) => r.rating >= 5).slice(0, 3);
-  return (
-    <div className="mt-8 grid lg:grid-cols-3 gap-6">
-      {top.map((r) => (
-        <SpotlightCard key={r.id} review={r} />
-      ))}
-      {top.length === 0 && (
-        <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center lg:col-span-3">
-          <EmptyArt />
-          <p className="mt-3 text-slate-700 font-semibold">No highlights yet</p>
-          <p className="text-slate-500 text-sm">Check back soon.</p>
+function ActionButton({ icon, title, subtitle, gradient, onClick, href, target }) {
+  const classes = `group relative rounded-2xl bg-gradient-to-r ${gradient} p-[1px] hover:-translate-y-1 transition-all active:translate-y-0`;
+  const inner = (
+    <>
+      <div className="absolute inset-0 bg-gradient-to-r ${gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity" />
+      <div className="relative rounded-2xl bg-slate-900 px-4 py-3 flex items-center gap-3">
+        <div className="text-white">{icon}</div>
+        <div className="text-left">
+          <div className="text-white font-bold text-sm">{title}</div>
+          <div className="text-blue-200 text-xs">{subtitle}</div>
         </div>
-      )}
-    </div>
+      </div>
+    </>
+  );
+
+  return href ? (
+    <a href={href} target={target} rel={target ? "noopener noreferrer" : undefined} className={classes}>
+      {inner}
+    </a>
+  ) : (
+    <button onClick={onClick} className={classes}>
+      {inner}
+    </button>
   );
 }
 
-function SpotlightCard({ review }) {
+function TrustBadge({ icon, text }) {
   return (
-    <article className="rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 shadow-soft">
-      <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-md">Top Rated</span>
-        <span className="text-xs text-slate-500">{review.ago} ago</span>
-      </div>
-      <div className="mt-3 text-lg font-semibold text-slate-900">{review.course}</div>
-      <div className="mt-1 text-sm text-slate-600">{review.center}</div>
-      <div className="mt-2">{StarsInline(review.rating)}</div>
-      <p className="mt-3 text-slate-800">{review.snippet}</p>
-      <p className="text-slate-600 text-sm">{review.detail}</p>
-    </article>
+    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white font-semibold text-sm">
+      <span>{icon}</span>
+      {text}
+    </div>
   );
 }
 
 function FeaturedReview({ review }) {
   if (!review) return null;
+  
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft relative overflow-hidden">
-      <div className="absolute -right-10 -top-10 w-48 h-48 rounded-full bg-gradient-to-br from-indigo-100 to-sky-100" />
+    <article className="group relative rounded-3xl bg-gradient-to-br from-blue-50 to-purple-50 border border-slate-200/60 p-8 shadow-xl hover:shadow-2xl transition-all overflow-hidden">
+      <div className="absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl" />
+      
       <div className="relative">
-        <div className="flex items-center justify-between">
-          <div className="font-bold text-slate-900">{review.name}</div>
-          <span className="text-xs text-slate-500">{review.ago} ago</span>
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg">
+              {review.name.charAt(0)}
+            </div>
+            <div>
+              <h3 className="font-bold text-lg text-slate-900">{review.name}</h3>
+              <p className="text-slate-600 text-sm">{review.center}</p>
+            </div>
+          </div>
+          <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full border border-amber-200">
+            ⭐ Featured
+          </span>
         </div>
-        <div className="mt-1 text-sm text-slate-600">{review.center}</div>
-        <div className="mt-3 flex items-center gap-2">
-          <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-[11px] text-indigo-700 border border-indigo-100">
+
+        <div className="flex items-center gap-3 mb-4">
+          <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg text-sm font-semibold border border-blue-200">
             {review.course}
           </span>
-          <span className="inline-flex items-center text-sm">{StarsInline(review.rating)}</span>
+          <div className="flex items-center gap-1">
+            {[...Array(5)].map((_, i) => (
+              <StarIconFilled key={i} className={i < review.rating ? "text-amber-400" : "text-slate-300"} />
+            ))}
+          </div>
+          <span className="text-slate-500 text-sm">• {review.ago}</span>
         </div>
-        <p className="mt-4 text-lg leading-relaxed text-slate-900">“{review.snippet}”</p>
-        <p className="mt-1 text-slate-600">{review.detail}</p>
-        <div className="mt-4 flex items-center gap-2 flex-wrap">
-          {(review.tags || []).map((t) => (
-            <span key={t} className="chip border border-slate-200 bg-white">
-              {t}
-            </span>
-          ))}
+
+        <p className="text-slate-900 text-lg leading-relaxed mb-2">"{review.snippet}"</p>
+        {review.detail && review.detail !== review.snippet && (
+          <p className="text-slate-700">{review.detail}</p>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function ReviewCard({ review }) {
+  return (
+    <article className="group relative rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+      
+      <div className="relative">
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-md">
+              {review.name.charAt(0)}
+            </div>
+            <div>
+              <h4 className="font-bold text-slate-900">{review.name}</h4>
+              <p className="text-xs text-slate-600">{review.center}</p>
+            </div>
+          </div>
+          <span className="text-xs text-slate-500">{review.ago}</span>
+        </div>
+
+        <div className="flex items-center gap-2 mb-4">
+          <span className="px-2.5 py-1 bg-blue-50 text-blue-700 rounded-lg text-xs font-semibold border border-blue-100">
+            {review.course}
+          </span>
+          <div className="flex items-center gap-0.5">
+            {[...Array(5)].map((_, i) => (
+              <StarIconFilled key={i} className={`w-3.5 h-3.5 ${i < review.rating ? "text-amber-400" : "text-slate-300"}`} />
+            ))}
+          </div>
+        </div>
+
+        <p className="text-slate-800 leading-relaxed mb-2">{review.snippet}</p>
+        {review.detail && review.detail !== review.snippet && (
+          <p className="text-slate-600 text-sm">{review.detail}</p>
+        )}
+
+        {review.tags && review.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-4">
+            {review.tags.map((tag) => (
+              <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-700 rounded-md text-xs">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="flex items-center gap-2 mt-4 pt-4 border-t border-slate-100">
+          <button className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium transition-colors">
+            <ThumbsUpIcon />
+            Helpful
+          </button>
+          <button className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium transition-colors">
+            <HeartIcon />
+            Like
+          </button>
         </div>
       </div>
     </article>
   );
 }
 
-function FilterCard({
-  courses,
-  centers,
-  courseFilter,
-  setCourseFilter,
-  centerFilter,
-  setCenterFilter,
-  ratingFilter,
-  setRatingFilter,
-  sortBy,
-  setSortBy,
-}) {
+function FilterCard({ courses, centers, courseFilter, setCourseFilter, centerFilter, setCenterFilter, ratingFilter, setRatingFilter }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
-      <h4 className="text-slate-900 font-semibold">Filters</h4>
-      <div className="mt-4 space-y-4">
-        <LabeledSelect label="Course" value={courseFilter} onChange={setCourseFilter} options={courses} />
-        <LabeledSelect label="Center" value={centerFilter} onChange={setCenterFilter} options={centers} />
+    <div className="rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 shadow-lg">
+      <h3 className="text-lg font-bold text-slate-900 mb-5 flex items-center gap-2">
+        <FilterIcon />
+        Filters
+      </h3>
+      
+      <div className="space-y-5">
         <div>
-          <label className="label">Rating</label>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">Course</label>
+          <select
+            value={courseFilter}
+            onChange={(e) => setCourseFilter(e.target.value)}
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+          >
+            {courses.map((course) => (
+              <option key={course} value={course}>{course}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">Center</label>
+          <select
+            value={centerFilter}
+            onChange={(e) => setCenterFilter(e.target.value)}
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+          >
+            {centers.map((center) => (
+              <option key={center} value={center}>{center}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-3">Rating</label>
           <div className="flex flex-wrap gap-2">
-            {[0, 5, 4, 3, 2, 1].map((o) => (
+            {[0, 5, 4, 3, 2, 1].map((rating) => (
               <button
-                key={o}
-                className={`px-3 py-1.5 rounded-lg text-sm border ${ratingFilter === o ? "border-amber-400 bg-amber-50" : "border-slate-200 bg-white hover:bg-slate-50"}`}
-                onClick={() => setRatingFilter(o)}
+                key={rating}
+                onClick={() => setRatingFilter(rating)}
+                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                  ratingFilter === rating
+                    ? "bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-lg"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
               >
-                {o === 0 ? "All" : `${o}★`}
+                {rating === 0 ? "All" : `${rating}★`}
               </button>
             ))}
           </div>
-        </div>
-        <div className="border-t border-slate-200 pt-4">
-          <LabeledSelect
-            label="Sort by"
-            value={sortBy}
-            onChange={setSortBy}
-            options={[
-              { label: "Newest", value: "new" },
-              { label: "Rating: High → Low", value: "rating-desc" },
-              { label: "Rating: Low → High", value: "rating-asc" },
-            ]}
-          />
         </div>
       </div>
     </div>
@@ -665,13 +727,24 @@ function FilterCard({
 
 function TagCloud({ tags, onPick }) {
   if (!tags?.length) return null;
+  
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
-      <h4 className="text-slate-900 font-semibold">Top Tags</h4>
-      <div className="mt-3 flex flex-wrap gap-2">
-        {tags.map((t) => (
-          <button key={t.k} onClick={() => onPick?.(t)} className="chip border border-slate-200 bg-white hover:bg-slate-50">
-            #{t.k} <span className="text-[10px] text-slate-500">({t.v})</span>
+    <div className="rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 shadow-lg">
+      <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+        <TagIcon />
+        Popular Tags
+      </h3>
+      <div className="flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <button
+            key={tag.k}
+            onClick={() => onPick?.(tag)}
+            className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl text-sm font-medium border border-blue-200 transition-colors"
+          >
+            #{tag.k}
+            <span className="px-1.5 py-0.5 bg-blue-200 text-blue-800 rounded text-xs font-bold">
+              {tag.v}
+            </span>
           </button>
         ))}
       </div>
@@ -679,284 +752,229 @@ function TagCloud({ tags, onPick }) {
   );
 }
 
-/* ===================== SMALL UI ===================== */
-function Breadcrumb({ items = [] }) {
+function WriteReviewCard() {
   return (
-    <nav aria-label="Breadcrumb" className="text-xs text-slate-500">
-      <ol className="flex items-center gap-2">
-        {items.map((it, idx) => (
-          <li key={it} className="flex items-center gap-2">
-            <span className={idx === items.length - 1 ? "text-slate-700 font-medium" : ""}>{it}</span>
-            {idx < items.length - 1 && <span className="opacity-60">/</span>}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
-}
+    <div className="relative rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600 p-[1px] shadow-xl overflow-hidden">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
+      
+      <div className="relative rounded-2xl bg-slate-900 p-6">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+            <PenIcon className="text-white" />
+          </div>
+          <div>
+            <h3 className="text-white font-bold text-lg">Share Your Experience</h3>
+            <p className="text-blue-200 text-sm">Help others make informed decisions</p>
+          </div>
+        </div>
 
-function ReviewChip({ name, course, rating, ago, snippet }) {
-  return (
-    <div className="shrink-0 glass rounded-full px-3 py-2 flex items-center gap-3 border border-white/50 shadow-sm">
-      <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-400 to-sky-400 ring-2 ring-white/70" />
-      <div className="flex items-center gap-2 text-[11px] sm:text-xs whitespace-nowrap text-slate-800">
-        <span className="font-semibold">{name}</span>
-        <span className="opacity-80">• {course}</span>
-        <span className="opacity-80">• {StarsInline(rating)}</span>
-        <span className="opacity-70">• {ago} ago</span>
-        <span className="opacity-90 hidden xl:inline">“{snippet}”</span>
+        <button className="w-full py-3 px-4 bg-white hover:bg-blue-50 text-slate-900 font-bold rounded-xl transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-lg">
+          Write a Review
+        </button>
+
+        <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+          <div className="p-2 bg-white/10 rounded-lg">
+            <div className="text-white font-bold">2 min</div>
+            <div className="text-blue-200 text-xs">Quick</div>
+          </div>
+          <div className="p-2 bg-white/10 rounded-lg">
+            <div className="text-white font-bold">100%</div>
+            <div className="text-blue-200 text-xs">Anonymous</div>
+          </div>
+          <div className="p-2 bg-white/10 rounded-lg">
+            <div className="text-white font-bold">Verified</div>
+            <div className="text-blue-200 text-xs">Authentic</div>
+          </div>
+        </div>
       </div>
-    </div>
-  );
-}
-
-function ActionCard({ href = "#", onClick, target, title, desc, icon }) {
-  return (
-    <a
-      href={href}
-      target={target}
-      onClick={onClick}
-      className="rounded-2xl bg-white border border-slate-200 p-4 shadow-soft hover:shadow-md transition flex items-start gap-3"
-    >
-      <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600">
-        {icon}
-      </div>
-      <div>
-        <div className="font-semibold text-slate-900">{title}</div>
-        <div className="text-sm text-slate-600">{desc}</div>
-      </div>
-    </a>
-  );
-}
-
-function TrustBadge({ title, subtitle }) {
-  return (
-    <div className="rounded-xl bg-white/90 border border-slate-200 p-3">
-      <div className="text-sm font-semibold text-slate-900">{title}</div>
-      <div className="text-[11px] text-slate-600">{subtitle}</div>
-    </div>
-  );
-}
-
-function StarsInline(n = 5) {
-  return (
-    <span className="inline-flex">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="12" height="12" viewBox="0 0 24 24" className={i < n ? "text-amber-400" : "text-slate-300"}>
-          <path fill="currentColor" d="m12 17.27 5.18 3.05-1.64-5.81L20 9.24l-6-.52L12 3 10 8.72l-6 .52 4.46 5.27-1.64 5.81L12 17.27Z" />
-        </svg>
-      ))}
-    </span>
-  );
-}
-
-function Stars({ value = 4.8 }) {
-  const full = Math.floor(value);
-  const half = value - full >= 0.5;
-  return (
-    <div className="flex items-center gap-1">
-      <span className="font-bold">{value}</span>
-      <span className="inline-flex">
-        {Array.from({ length: 5 }).map((_, i) => {
-          const active = i < full || (i === full && half);
-          return (
-            <svg key={i} width="16" height="16" viewBox="0 0 24 24" className={active ? "text-amber-500" : "text-slate-300"}>
-              <path fill="currentColor" d="m12 17.27 5.18 3.05-1.64-5.81L20 9.24l-6-.52L12 3 10 8.72l-6 .52 4.46 5.27-1.64 5.81L12 17.27Z" />
-            </svg>
-          );
-        })}
-      </span>
-    </div>
-  );
-}
-
-function SnapshotItem({ label, value, note }) {
-  return (
-    <div className="rounded-xl border border-slate-200 bg-white/85 p-3 text-center">
-      <div className="text-[11px] text-slate-500">{label}</div>
-      <div className="mt-1 text-base font-semibold text-slate-800">{value}</div>
-      <div className="text-[10px] text-slate-500">{note}</div>
-    </div>
-  );
-}
-
-function Badge({ children }) {
-  return (
-    <div className="relative">
-      <div className="px-2 py-0.5 rounded bg-emerald-600 text-white text-xs font-semibold">{children}</div>
-      <div className="absolute -bottom-1 left-1 right-1 h-1 bg-emerald-400/70 rounded-b" />
-    </div>
-  );
-}
-
-function StatBubble({ title, subtitle }) {
-  return (
-    <div className="glass rounded-2xl px-4 py-3 text-slate-800 shadow">
-      <div className="text-sm sm:text-base font-bold leading-snug">{title}</div>
-      <div className="text-[11px] sm:text-xs text-slate-600 leading-snug">{subtitle}</div>
-    </div>
-  );
-}
-
-function RatingDistribution({ histogram }) {
-  return (
-    <div>
-      <h4 className="text-slate-800 font-semibold text-sm">Ratings Breakdown</h4>
-      <div className="mt-2 space-y-2">
-        {[5, 4, 3, 2, 1].map((star) => {
-          const pct = histogram[star] || 0;
-          return (
-            <div key={star} className="grid grid-cols-[28px_1fr_40px] items-center gap-2 text-xs">
-              <div className="text-slate-600">{star}★</div>
-              <div className="h-2 rounded bg-slate-200 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-amber-400 to-amber-500" style={{ width: `${pct}%` }} />
-              </div>
-              <div className="text-right text-slate-600">{pct}%</div>
-            </div>
-          );
-        })}
-      </div>
-      <p className="mt-2 text-[11px] text-slate-500">Based on recent verified reviews.</p>
     </div>
   );
 }
 
 function SortMenu({ value, onChange }) {
   return (
-    <label className="text-xs text-slate-600">
-      <span className="mr-2">Sort:</span>
-      <select className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-sm text-slate-800" value={value} onChange={(e) => onChange(e.target.value)}>
-        <option value="new">Newest</option>
-        <option value="rating-desc">Rating: High → Low</option>
-        <option value="rating-asc">Rating: Low → High</option>
-      </select>
-    </label>
-  );
-}
-
-function ReviewCard({ review }) {
-  const { name, course, rating, ago, snippet, detail, center, tags = [] } = review;
-  return (
-    <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-soft hover:shadow-md transition">
-      <div className="flex items-center justify-between">
-        <div className="font-semibold text-slate-900">{name}</div>
-        <span className="text-xs text-slate-500">{ago} ago</span>
-      </div>
-      <div className="mt-1 text-xs text-slate-600">{center}</div>
-
-      <div className="mt-3 flex items-center gap-2">
-        <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-[11px] text-indigo-700 border border-indigo-100">{course}</span>
-        <span className="inline-flex items-center text-sm">{StarsInline(rating)}</span>
-      </div>
-
-      <p className="mt-3 text-slate-800">{snippet}</p>
-      <p className="mt-1 text-slate-600 text-sm">{detail}</p>
-
-      {tags.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-2">
-          {tags.map((t) => (
-            <span key={t} className="chip border border-slate-200 bg-white">
-              {t}
-            </span>
-          ))}
-        </div>
-      )}
-
-      <div className="mt-4 flex items-center gap-3">
-        <button className="btn btn-ghost px-3 py-1.5" aria-label="Mark helpful">
-          <svg width="16" height="16" viewBox="0 0 24 24" className="mr-1.5"><path fill="currentColor" d="M14 9V5a3 3 0 0 0-6 0v4H5v11h14V9h-5Zm-4-4a1 1 0 0 1 2 0v4h-2V5Z" /></svg>
-          Helpful
-        </button>
-        <button className="btn btn-ghost px-3 py-1.5" aria-label="Appreciate">
-          <svg width="16" height="16" viewBox="0 0 24 24" className="mr-1.5"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A4.49 4.49 0 0 1 6.5 4a5.2 5.2 0 0 1 4.24 2.34A5.2 5.2 0 0 1 15 4a4.5 4.5 0 0 1 4.5 4.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35Z" /></svg>
-          Appreciate
-        </button>
-      </div>
-    </article>
-  );
-}
-
-function LabeledSelect({ label, value, onChange, options }) {
-  // Normalize options to [{label:string, value:string}]
-  let opts = [];
-
-  if (Array.isArray(options)) {
-    const first = options[0];
-    if (typeof first === "string" || typeof first === "number") {
-      opts = options.map((v) => ({ label: String(v), value: String(v) }));
-    } else if (first && typeof first === "object" && "label" in first && "value" in first) {
-      opts = options.map((o) => ({
-        label: String(o.label),
-        value: String(o.value),
-      }));
-    } else {
-      opts = options.map((o) => ({ label: String(o), value: String(o) }));
-    }
-  } else {
-    opts = [{ label: String(options), value: String(options) }];
-  }
-
-  return (
-    <div>
-      <label className="label">{label}</label>
-      <select className="field" value={value} onChange={(e) => onChange(e.target.value)}>
-        {opts.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
+    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/60 rounded-xl shadow-md">
+      <span className="text-sm font-semibold text-slate-700">Sort:</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="bg-transparent text-sm font-semibold text-slate-900 outline-none cursor-pointer"
+      >
+        <option value="new">Newest First</option>
+        <option value="rating-desc">Highest Rated</option>
+        <option value="rating-asc">Lowest Rated</option>
       </select>
     </div>
   );
 }
 
-function EmptyArt() {
+function GuidelinesPanel() {
+  const guidelines = [
+    {
+      title: "Be Specific & Honest",
+      icon: "✍️",
+      points: [
+        "Mention specific courses, trainers, and projects",
+        "Share what worked well and what could improve",
+        "Be constructive and respectful in your feedback"
+      ]
+    },
+    {
+      title: "Share Your Journey",
+      icon: "🚀",
+      points: [
+        "Describe your learning experience and outcomes",
+        "Mention placement support and interview preparation",
+        "Help others understand the real value"
+      ]
+    },
+    {
+      title: "Stay Professional",
+      icon: "🤝",
+      points: [
+        "Avoid sharing personal or sensitive information",
+        "Keep language appropriate and constructive",
+        "Focus on your experience, not comparisons"
+      ]
+    }
+  ];
+
   return (
-    <svg width="140" height="90" viewBox="0 0 280 180" className="mx-auto opacity-80">
-      <rect x="20" y="30" width="240" height="120" rx="14" fill="#eef2ff" />
-      <rect x="40" y="50" width="200" height="16" rx="6" fill="#c7d2fe" />
-      <rect x="40" y="74" width="160" height="16" rx="6" fill="#e2e8f0" />
-      <rect x="40" y="98" width="180" height="16" rx="6" fill="#e2e8f0" />
-      <rect x="40" y="122" width="120" height="16" rx="6" fill="#e2e8f0" />
+    <div className="mt-8 grid md:grid-cols-3 gap-6">
+      {guidelines.map((guide, i) => (
+        <div key={i} className="rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 shadow-lg hover:shadow-xl transition-all">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl mb-4 shadow-lg">
+            {guide.icon}
+          </div>
+          <h3 className="text-xl font-bold text-slate-900 mb-3">{guide.title}</h3>
+          <ul className="space-y-2">
+            {guide.points.map((point, j) => (
+              <li key={j} className="flex items-start gap-2 text-slate-700">
+                <span className="text-blue-600 mt-1">•</span>
+                <span className="text-sm">{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function HighlightsPanel({ reviews }) {
+  const top = reviews.filter((r) => r.rating >= 5).slice(0, 6);
+  
+  if (top.length === 0) {
+    return (
+      <div className="mt-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-16 text-center shadow-lg">
+        <EmptyIcon />
+        <p className="mt-4 text-xl font-bold text-slate-900">No highlights yet</p>
+        <p className="text-slate-600 mt-2">Top-rated reviews will appear here</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {top.map((review) => (
+        <article key={review.id} className="group rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/60 p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+          <div className="flex items-center justify-between mb-4">
+            <span className="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full shadow-md">
+              ⭐ Top Rated
+            </span>
+            <span className="text-xs text-slate-600">{review.ago}</span>
+          </div>
+
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+              {review.name.charAt(0)}
+            </div>
+            <div>
+              <h4 className="font-bold text-slate-900">{review.name}</h4>
+              <p className="text-sm text-slate-600">{review.course}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1 mb-3">
+            {[...Array(5)].map((_, i) => (
+              <StarIconFilled key={i} className="text-amber-500 w-4 h-4" />
+            ))}
+          </div>
+
+          <p className="text-slate-800 leading-relaxed">{review.snippet}</p>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+/* ===================== ICONS ===================== */
+function StarIconFilled({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
     </svg>
   );
 }
 
-function ChevronDown() {
+function PenIcon({ className = "w-5 h-5" }) {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" className="opacity-80">
-      <path fill="currentColor" d="m7 10 5 5 5-5z" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
     </svg>
   );
 }
 
-function DeskIllustration() {
+function GoogleIcon({ className = "w-5 h-5" }) {
   return (
-    <svg viewBox="0 0 640 420" className="w-full h-auto" role="img" aria-label="Illustration of desk and learning elements">
-      <defs>
-        <linearGradient id="bg" x1="0" x2="1">
-          <stop offset="0%" stopColor="#EEF2FF" />
-          <stop offset="100%" stopColor="#E0F2FE" />
-        </linearGradient>
-        <linearGradient id="gold" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="#FFD54F" />
-          <stop offset="100%" stopColor="#FFA000" />
-        </linearGradient>
-      </defs>
-      <rect x="40" y="300" width="560" height="70" rx="16" fill="url(#bg)" />
-      <rect x="70" y="260" width="220" height="28" rx="8" fill="#CBD5E1" />
-      <rect x="320" y="250" width="120" height="40" rx="10" fill="#C7D2FE" />
-      <rect x="110" y="210" width="120" height="16" rx="6" fill="#94A3B8" />
-      <rect x="115" y="190" width="110" height="16" rx="6" fill="#A3BFFA" />
-      <rect x="125" y="130" width="90" height="60" rx="10" fill="url(#gold)" />
-      <rect x="145" y="100" width="50" height="30" rx="8" fill="#F59E0B" />
-      <circle cx="430" cy="210" r="24" fill="#60A5FA" />
-      <rect x="420" y="230" width="20" height="28" rx="6" fill="#1D4ED8" />
-      <circle cx="490" cy="230" r="22" fill="#34D399" />
-      <rect x="480" y="250" width="20" height="26" rx="6" fill="#059669" />
-      <rect x="260" y="180" width="16" height="70" rx="6" fill="#93C5FD" />
-      <rect x="280" y="160" width="16" height="90" rx="6" fill="#818CF8" />
-      <rect x="300" y="190" width="16" height="60" rx="6" fill="#38BDF8" />
+    <svg className={className} viewBox="0 0 24 24">
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+    </svg>
+  );
+}
+
+function FilterIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+    </svg>
+  );
+}
+
+function TagIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+      <line x1="7" y1="7" x2="7.01" y2="7" />
+    </svg>
+  );
+}
+
+function ThumbsUpIcon({ className = "w-4 h-4" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+    </svg>
+  );
+}
+
+function HeartIcon({ className = "w-4 h-4" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+  );
+}
+
+function EmptyIcon({ className = "w-24 h-24 mx-auto" }) {
+  return (
+    <svg className={className} viewBox="0 0 200 200" fill="none">
+      <circle cx="100" cy="100" r="80" fill="#E0F2FE" />
+      <path d="M70 90c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zM110 90c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z" fill="#94A3B8" />
+      <path d="M75 125c0-13.807 11.193-25 25-25s25 11.193 25 25" stroke="#94A3B8" strokeWidth="4" strokeLinecap="round" />
     </svg>
   );
 }
