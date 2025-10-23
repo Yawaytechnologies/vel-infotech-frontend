@@ -12,19 +12,20 @@ const courses = [
   { title: "DataScience", image: "https://cdn-icons-png.flaticon.com/512/8649/8649623.png" },
   { title: "AwsTraining", image: "https://cdn-icons-png.flaticon.com/512/11518/11518934.png" },
   { title: "DevOps", image: "https://cdn-icons-png.flaticon.com/512/5271/5271250.png" },
-  { title: "Hardware Networking", image: "https://cdn-icons-png.flaticon.com/512/4828/4828804.png" },
-  { title: "ETL Testing", image: "https://cdn-icons-png.flaticon.com/512/16813/16813580.png" },
-  { title: "Cyber Security", image: "https://cdn-icons-png.flaticon.com/512/7700/7700417.png" },
-  { title: "Business Analytics", image: "https://cdn-icons-png.flaticon.com/512/8955/8955275.png" },
+  { title: "HardwareNetworking", image: "https://cdn-icons-png.flaticon.com/512/4828/4828804.png" },
+  { title: "EtlTesting", image: "https://cdn-icons-png.flaticon.com/512/16813/16813580.png" },      // ← fixed
+  { title: "CyberSecurity", image: "https://cdn-icons-png.flaticon.com/512/7700/7700417.png" },     // ← fixed
+  { title: "BusinessAnalytics", image: "https://cdn-icons-png.flaticon.com/512/8955/8955275.png" },
   { title: "Sap", image: "https://cdn.simpleicons.org/sap" },
   { title: "SalesForce", image: "https://cdn-icons-png.flaticon.com/512/5968/5968914.png" },
   { title: "ServiceNow", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/ServiceNow_logo.svg/512px-ServiceNow_logo.svg.png" },
-  { title: "Data Science Ai", image: "https://cdn-icons-png.flaticon.com/512/8100/8100831.png" },
+  { title: "DataScienceAi", image: "https://cdn-icons-png.flaticon.com/512/8100/8100831.png" },
   { title: "Plsql", image: "https://cdn-icons-png.flaticon.com/512/603/603201.png" },
   { title: "Sql", image: "https://cdn-icons-png.flaticon.com/512/4248/4248449.png" },
-  { title: "Big Data Developer", image: "https://cdn-icons-png.flaticon.com/512/4354/4354656.png" },
-  { title: "RPA", image: "https://cdn-icons-png.flaticon.com/512/8001/8001983.png " },
+  { title: "BigData Developer", image: "https://cdn-icons-png.flaticon.com/512/4354/4354656.png" }, // ← matches route with space
+  { title: "RPA", image: "https://cdn-icons-png.flaticon.com/512/8001/8001983.png" },
 ];
+
 
 export default function AllJobCoursesSection() {
   return (

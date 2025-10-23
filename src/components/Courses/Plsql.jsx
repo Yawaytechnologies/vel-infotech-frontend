@@ -310,8 +310,8 @@ export default function JavaCoursePage() {
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
           <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Classroom FullStack Training</strong> in 
-            <strong> Chennai & Bangalore</strong> — learn from industry-certified trainers.
+            Offering <strong>Online and Classroom PL SQL Training</strong> in 
+            <strong> Chennai & Bangalore.</strong>
           </h3>
         </div>
 

@@ -1,6 +1,4 @@
 import React, { useState, useRef } from "react";
-import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +7,11 @@ import { SYLLABI } from "../coursecomponent/Syllabi";
 import { useDispatch, useSelector } from "react-redux";
 import { submitEnquiry } from "../../redux/actions/enquiryAction";
 import FeedbackSection from "../common/Feedback";
+import { FaLaptop, FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
+import { AiFillStar } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
+import Seo from "../../seo/Seo";
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -22,7 +25,7 @@ export default function JavaCoursePage() {
     name: "",
     email: "",
     phone: "",
-    
+
     course: "",
     message: "",
   });
@@ -74,7 +77,7 @@ export default function JavaCoursePage() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-     
+
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -196,7 +199,25 @@ export default function JavaCoursePage() {
       });
     }
   }
-
+  const courses = [
+    {
+      title: "SeleniumTesting",
+      image: "https://cdn.simpleicons.org/selenium/43B02A",
+    },
+    {
+      title: "DataScienceAi",
+      image: "https://cdn-icons-png.flaticon.com/512/8100/8100831.png",
+    },
+    {
+      title: "BusinessAnalytics",
+      image: "https://cdn-icons-png.flaticon.com/512/8955/8955275.png",
+    },
+    {
+      title: "DataScience",
+      image: "https://cdn-icons-png.flaticon.com/512/8649/8649623.png",
+    },
+    ,
+  ];
   return (
     <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
@@ -208,12 +229,30 @@ export default function JavaCoursePage() {
           </h2>
 
           <ul className="space-y-3 mt-6 text-lg">
-            <li>✅ Join the <strong>Top Big Data Institute</strong> to become a skilled Hadoop & Spark engineer.</li>
-            <li>✅ Learn essential technologies – <strong>Hadoop, Spark, Hive, Pig, Sqoop, Kafka, Scala</strong>.</li>
-            <li>✅ Build real-time data pipeline projects using <strong>distributed computing and big data tools</strong>.</li>
-            <li>✅ Choose <strong>flexible learning tracks</strong> – Weekday / Weekend / Fast-track options.</li>
-            <li>✅ Earn an industry-recognized <strong>Big Data Developer Certification</strong>.</li>
-            <li>✅ Career support: Hands-on project experience, resume prep & job interview assistance.</li>
+            <li>
+              ✅ Join the <strong>Top Big Data Institute</strong> to become a
+              skilled Hadoop & Spark engineer.
+            </li>
+            <li>
+              ✅ Learn essential technologies –{" "}
+              <strong>Hadoop, Spark, Hive, Pig, Sqoop, Kafka, Scala</strong>.
+            </li>
+            <li>
+              ✅ Build real-time data pipeline projects using{" "}
+              <strong>distributed computing and big data tools</strong>.
+            </li>
+            <li>
+              ✅ Choose <strong>flexible learning tracks</strong> – Weekday /
+              Weekend / Fast-track options.
+            </li>
+            <li>
+              ✅ Earn an industry-recognized{" "}
+              <strong>Big Data Developer Certification</strong>.
+            </li>
+            <li>
+              ✅ Career support: Hands-on project experience, resume prep & job
+              interview assistance.
+            </li>
           </ul>
 
           <button
@@ -229,9 +268,13 @@ export default function JavaCoursePage() {
               hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
           >
             <div>
-              <span className="text-lg font-extrabold text-violet-400 block">Freshers Salary:</span>
+              <span className="text-lg font-extrabold text-violet-400 block">
+                Freshers Salary:
+              </span>
               ₹3 LPA to ₹8 LPA <br />
-              <span className="text-sm text-gray-300">| Duration: 3 Months</span>
+              <span className="text-sm text-gray-300">
+                | Duration: 3 Months
+              </span>
             </div>
           </button>
         </div>
@@ -239,7 +282,9 @@ export default function JavaCoursePage() {
         {/* RIGHT: Call to Action */}
         <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
           <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-          <p className="mb-4 text-lg">Become a Big Data Developer in 3 Months</p>
+          <p className="mb-4 text-lg">
+            Become a Big Data Developer in 3 Months
+          </p>
 
           <button
             type="button"
@@ -247,7 +292,9 @@ export default function JavaCoursePage() {
             className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
           >
             <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
-            <span className="relative z-10 group-hover:text-black transition-colors duration-300">Enquire Now</span>
+            <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+              Enquire Now
+            </span>
             <span className="relative z-10">
               <svg
                 className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
@@ -276,20 +323,53 @@ export default function JavaCoursePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
             <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
-              <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
+              <span className="text-purple-400">●</span> Our Course Partners{" "}
+              <span className="text-purple-400">●</span>
             </h3>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
             {[
-              { name: "HubSpot", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg", link: "https://www.hubspot.com/" },
-              { name: "GitLab", logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg", link: "https://about.gitlab.com/" },
-              { name: "Monday.com", logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg", link: "https://monday.com/" },
-              { name: "Google Cloud", logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg", link: "https://cloud.google.com/" },
-              { name: "AWS", logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg", link: "https://aws.amazon.com/" },
-              { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg", link: "https://www.salesforce.com/" },
-              { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", link: "https://www.ibm.com/" },
-              { name: "Slack", logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg", link: "https://slack.com/" },
+              {
+                name: "HubSpot",
+                logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
+                link: "https://www.hubspot.com/",
+              },
+              {
+                name: "GitLab",
+                logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
+                link: "https://about.gitlab.com/",
+              },
+              {
+                name: "Monday.com",
+                logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
+                link: "https://monday.com/",
+              },
+              {
+                name: "Google Cloud",
+                logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
+                link: "https://cloud.google.com/",
+              },
+              {
+                name: "AWS",
+                logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
+                link: "https://aws.amazon.com/",
+              },
+              {
+                name: "Salesforce",
+                logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
+                link: "https://www.salesforce.com/",
+              },
+              {
+                name: "IBM",
+                logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                link: "https://www.ibm.com/",
+              },
+              {
+                name: "Slack",
+                logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                link: "https://slack.com/",
+              },
             ].map((partner, index) => (
               <motion.a
                 key={index}
@@ -303,7 +383,11 @@ export default function JavaCoursePage() {
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
                 className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
               >
-                <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-12 object-contain"
+                />
               </motion.a>
             ))}
           </div>
@@ -320,20 +404,39 @@ export default function JavaCoursePage() {
             <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-              Learn to process, analyze, and manage large-scale datasets using Hadoop, Spark, Hive, Kafka and more.
-              Build scalable pipelines and real-time streaming applications with hands-on projects.
+              Learn to process, analyze, and manage large-scale datasets using
+              Hadoop, Spark, Hive, Kafka and more. Build scalable pipelines and
+              real-time streaming applications with hands-on projects.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
               What You’ll Learn From Big Data Developer Training
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> HDFS, MapReduce fundamentals & cluster concepts.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Spark Core, SQL, Streaming with real-time pipelines.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Data warehousing with Hive; ETL with Pig/Sqoop.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Kafka for messaging & event-driven architectures.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> NoSQL stores (HBase/MongoDB) for unstructured data.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Interview prep, resume polish & portfolio projects.</li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> HDFS, MapReduce
+                fundamentals & cluster concepts.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Spark Core, SQL,
+                Streaming with real-time pipelines.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Data warehousing
+                with Hive; ETL with Pig/Sqoop.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Kafka for
+                messaging & event-driven architectures.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> NoSQL stores
+                (HBase/MongoDB) for unstructured data.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Interview prep,
+                resume polish & portfolio projects.
+              </li>
             </ul>
           </div>
         </div>
@@ -346,7 +449,8 @@ export default function JavaCoursePage() {
             Become a Certified Big Data Developer
           </h2>
           <p className="text-lg md:text-xl text-white mb-6">
-            Learn Hadoop, Spark, Hive, Kafka, and real-time data processing from industry professionals.
+            Learn Hadoop, Spark, Hive, Kafka, and real-time data processing from
+            industry professionals.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button
@@ -363,8 +467,14 @@ export default function JavaCoursePage() {
           {/* Card 1 - Course Highlights */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Course Highlights" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                alt="Course Highlights"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Course Highlights
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                 <li>✓ Hadoop, Spark, Hive, Kafka</li>
                 <li>✓ Real-time data pipeline projects</li>
@@ -377,11 +487,30 @@ export default function JavaCoursePage() {
           {/* Card 2 - Tools */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Tools" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+                alt="Tools"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Tools You’ll Master
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {["Hadoop", "Apache Spark", "Hive", "Kafka", "HBase", "Scala", "Python"].map((tool) => (
-                  <span key={tool} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{tool}</span>
+                {[
+                  "Hadoop",
+                  "Apache Spark",
+                  "Hive",
+                  "Kafka",
+                  "HBase",
+                  "Scala",
+                  "Python",
+                ].map((tool) => (
+                  <span
+                    key={tool}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                  >
+                    {tool}
+                  </span>
                 ))}
               </div>
             </div>
@@ -390,11 +519,29 @@ export default function JavaCoursePage() {
           {/* Card 3 - Topics Covered */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Topics Covered" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
+                alt="Topics Covered"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Topics Covered
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {["Big Data Architecture", "Data Ingestion", "Data Processing", "Real-Time Analytics", "Data Lakes", "ETL Pipelines"].map((topic) => (
-                  <span key={topic} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{topic}</span>
+                {[
+                  "Big Data Architecture",
+                  "Data Ingestion",
+                  "Data Processing",
+                  "Real-Time Analytics",
+                  "Data Lakes",
+                  "ETL Pipelines",
+                ].map((topic) => (
+                  <span
+                    key={topic}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                  >
+                    {topic}
+                  </span>
                 ))}
               </div>
             </div>
@@ -403,8 +550,14 @@ export default function JavaCoursePage() {
           {/* Card 4 - Key Skills */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Key Skills" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
+                alt="Key Skills"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Key Skills You’ll Gain
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                 <li>Big data processing & architecture</li>
                 <li>Real-time data streaming</li>
@@ -417,16 +570,16 @@ export default function JavaCoursePage() {
       </section>
 
       {/* SYLLABUS */}
-                  <Syllabus
-                                title={course.title}
-                                accent={course.accent}
-                                meta={course.meta}
-                                preview={course.preview}
-                                sections={course.sections} // ← REQUIRED
-                                useExternalForm
-                                cardMinH={400} // tweak to visually match your right cards
-                                stickyOffset={110}
-                              />
+      <Syllabus
+        title={course.title}
+        accent={course.accent}
+        meta={course.meta}
+        preview={course.preview}
+        sections={course.sections} // ← REQUIRED
+        useExternalForm
+        cardMinH={400} // tweak to visually match your right cards
+        stickyOffset={110}
+      />
 
       {/* ENQUIRY FORM */}
       <section className="w-full px-6 py-20 text-white">
@@ -434,30 +587,40 @@ export default function JavaCoursePage() {
           {/* LEFT: Additional Info Boxes */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Comprehensive Curriculum</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Comprehensive Curriculum
+              </h4>
               <p className="text-black/90">
-                Master Big Data with modules covering Hadoop, Spark, Kafka, Hive, NoSQL and real-time streaming.
+                Master Big Data with modules covering Hadoop, Spark, Kafka,
+                Hive, NoSQL and real-time streaming.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Career-Oriented Training</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Career-Oriented Training
+              </h4>
               <p className="text-black/90">
-                Learn from working professionals. Includes mock interviews, resume prep, and job assistance.
+                Learn from working professionals. Includes mock interviews,
+                resume prep, and job assistance.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Strong Placement Support</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Strong Placement Support
+              </h4>
               <p className="text-black/90">
-                We support your placement journey with partner network and hiring drives.
+                We support your placement journey with partner network and
+                hiring drives.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
               <p className="text-black/90">
-                Build end-to-end batch & streaming pipelines and domain-based capstones.
+                Build end-to-end batch & streaming pipelines and domain-based
+                capstones.
               </p>
             </div>
           </div>
@@ -682,7 +845,7 @@ export default function JavaCoursePage() {
           </div>
         </div>
       </section>
-       <FeedbackSection />
+      <FeedbackSection />
       {/* Toasts */}
       <ToastContainer
         newestOnTop

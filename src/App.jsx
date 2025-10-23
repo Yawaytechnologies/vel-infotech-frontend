@@ -132,7 +132,7 @@ export default function App() {
           <Route path="/all-courses/DataScience" element={<DataScience />} />
           <Route path="/all-courses/BusinessAnalytics" element={<BusinessAnalytics />} />
           <Route path="/all-courses/DataScienceAi" element={<DataScienceAi />} />
-          <Route path="/all-courses/BigDataDeveloper" element={<BigDataDeveloper />} />
+          <Route path="/all-courses/BigData Developer" element={<BigDataDeveloper />} />
           <Route path="/all-courses/SoftwareTesting" element={<SoftwareTesting />} />
           <Route path="/all-courses/SeleniumTesting" element={<SeleniumTesting />} />
           <Route path="/all-courses/EtlTesting" element={<EtlTesting />} />
