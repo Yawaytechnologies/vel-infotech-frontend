@@ -6,7 +6,10 @@ import {
   FaYoutube,
   FaInstagram,
 } from "react-icons/fa";
-import Logo from "../../assets/Brandd.png";
+import Logo1 from "../../assets/LL.png";
+
+
+
 export default function Footer() {
   return (
     <footer className="relative bg-[#e9f1fb] text-black-200 pt-10 pb-3 border-t-4 border-[#005BAC]">
@@ -20,7 +23,7 @@ export default function Footer() {
           <div>
             <div className="flex item s-center h-18 ">
               <img
-                src={Logo}
+                src={Logo1}
                 alt="Logo"
                 className=" h-40 w-auto object-contain"
               />
