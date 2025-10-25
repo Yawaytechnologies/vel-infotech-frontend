@@ -20,11 +20,11 @@ const courseJsonLd = {
   "@type": "Course",
   "name": "Full Stack Development Course",
   "description":
-    "Full Stack training covering HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, Git and cloud. Includes projects and 100% placement assistance.",
+    "- Learn to build dynamic web apps using frontend and backend technologies. Master HTML, CSS, JavaScript, React, Node.js, and databases with real projects.",
   "provider": {
     "@type": "Organization",
     "name": "Vel InfoTech",
-    "sameAs": "https://vellinfotech.com"
+      url: "https://www.velinfotech.com/all-courses/full-stack-development",
   },
   "image": "https://cdn-icons-png.flaticon.com/512/16990/16990193.png",
   "hasCourseInstance": [
@@ -236,8 +236,8 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Full Stack Development Course in Chennai & Bangalore — 100% Placement | Vel InfoTech"
-        description="Become a Full Stack Developer with React, Node.js, Express, MongoDB & cloud. Flexible online/classroom training in Chennai & Bangalore with real projects and placement assistance."
+        title="Full Stack Development Course"
+        description="- Learn to build dynamic web apps using frontend and backend technologies. Master HTML, CSS, JavaScript, React, Node.js, and databases with real projects."
         canonical="/all-courses/full-stack-development"
         image="https://cdn-icons-png.flaticon.com/512/16990/16990193.png"
         type="article"

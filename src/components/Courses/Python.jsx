@@ -19,11 +19,11 @@ const pythonCourseJsonLd = {
   "@context": "https://schema.org",
   "@type": "Course",
   "name": "Python Full Stack Developer Course",
-  "description": "Industry-focused Python full stack training covering Python, Django/Flask, REST APIs, SQL, and React—includes projects and 100% placement assistance.",
+  "description": "Learn Python, Django, React, and MySQL to build complete web apps. Become a job-ready Python Full Stack Developer with hands-on projects and training.",
   "provider": {
     "@type": "Organization",
     "name": "Vel InfoTech",
-    "sameAs": "https://vellinfotech.com"
+      url: "https://www.velinfotech.com/all-courses/python-full-stack-developer-course",
   },
   "image": "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
   "hasCourseInstance": [
@@ -240,9 +240,9 @@ export default function PythonCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Python Full Stack Developer Course in Chennai & Bangalore — 100% Placement | Vel InfoTech"
-        description="Learn Python, Django/Flask, REST APIs, PostgreSQL/MySQL & React with real projects and placement support. Flexible online/classroom Python full stack training in Chennai & Bangalore."
-        canonical="/all-courses/python-full-stack-development"
+        title="Python Full Stack Developer Course"
+        description="Learn Python, Django, React, and MySQL to build complete web apps. Become a job-ready Python Full Stack Developer with hands-on projects and training."
+        canonical="/all-courses/python-full-stack-developer-course"
         image="https://cdn-icons-png.flaticon.com/512/5968/5968350.png"
         type="article"
         jsonLd={pythonCourseJsonLd}

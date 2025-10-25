@@ -109,7 +109,10 @@ export default function JavaCoursePage() {
     const { name } = e.target;
     setTouched((t) => ({ ...t, [name]: true }));
     const msg = validateField(name, form[name]);
-    setErrors((prev) => ({ ...prev, ...(msg ? { [name]: msg } : { [name]: undefined }) }));
+    setErrors((prev) => ({
+      ...prev,
+      ...(msg ? { [name]: msg } : { [name]: undefined }),
+    }));
   };
 
   async function handleSubmit(e) {
@@ -186,57 +189,66 @@ export default function JavaCoursePage() {
   }
 
   const courses = [
-    { title: "Java", image: "https://cdn-icons-png.flaticon.com/512/226/226777.png" },
-    { title: "FullStackDevelopement", image: "https://cdn-icons-png.flaticon.com/512/16990/16990193.png" },
+    {
+      title: "Java",
+      image: "https://cdn-icons-png.flaticon.com/512/226/226777.png",
+    },
+    {
+      title: "FullStackDevelopement",
+      image: "https://cdn-icons-png.flaticon.com/512/16990/16990193.png",
+    },
     { title: "SoftwareTesting", image: "https://cdn.simpleicons.org/cypress" },
-    { title: "SeleniumTesting", image: "https://cdn.simpleicons.org/selenium/43B02A" },
+    {
+      title: "SeleniumTesting",
+      image: "https://cdn.simpleicons.org/selenium/43B02A",
+    },
   ];
 
   // ✅ Structured data for PL/SQL Course
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
-    "name": "Oracle PL/SQL Developer Course",
-    "description":
-      "PL/SQL training covering Oracle SQL, PL/SQL procedures, functions, triggers, cursors, exception handling, and performance tuning. Includes hands-on projects and placement assistance.",
-    "provider": {
+    name: "PL/SQL Developer Course",
+    description:
+      " Master PL/SQL programming, queries, and database management. Learn to write efficient code, create stored procedures, and optimize performance.x",
+    provider: {
       "@type": "Organization",
-      "name": "Vel InfoTech",
-      "sameAs": "https://vellinfotech.com"
+      name: "Vel InfoTech",
+      url: "https://www.velinfotech.com/all-courses/pl-sql-developer-course",
     },
-    "image": "https://cdn-icons-png.flaticon.com/512/16990/16990193.png",
-    "hasCourseInstance": [
+    image: "https://cdn-icons-png.flaticon.com/512/16990/16990193.png",
+    hasCourseInstance: [
       {
         "@type": "CourseInstance",
-        "courseMode": "Onsite",
-        "location": { "@type": "Place", "name": "Vel InfoTech — Chennai" },
-        "offers": {
+        courseMode: "Onsite",
+        location: { "@type": "Place", name: "Vel InfoTech — Chennai" },
+        offers: {
           "@type": "Offer",
-          "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock",
-          "url": "https://vellinfotech.com/all-courses/pl-sql-developer"
-        }
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: "https://vellinfotech.com/all-courses/pl-sql-developer",
+        },
       },
       {
         "@type": "CourseInstance",
-        "courseMode": "Online",
-        "offers": {
+        courseMode: "Online",
+        offers: {
           "@type": "Offer",
-          "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock",
-          "url": "https://vellinfotech.com/all-courses/pl-sql-developer"
-        }
-      }
-    ]
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: "https://vellinfotech.com/all-courses/pl-sql-developer",
+        },
+      },
+    ],
   };
 
   return (
     <>
       {/* ✅ SEO (no visual changes) */}
       <Seo
-        title="Oracle PL/SQL Developer Course in Chennai & Bangalore — Placement Assistance | Vel InfoTech"
-        description="Become a PL/SQL Developer: Oracle SQL, procedures, functions, triggers, cursors, performance tuning, real projects & job assistance. Online & classroom in Chennai & Bangalore."
-        canonical="/all-courses/pl-sql-developer"
+        title="PL/SQL Developer Course"
+        description="Master PL/SQL programming, queries, and database management. Learn to write efficient code, create stored procedures, and optimize performance."
+        canonical="/all-courses/pl-sql-developer-course"
         image="https://cdn-icons-png.flaticon.com/512/16990/16990193.png"
         type="article"
         jsonLd={courseJsonLd}
@@ -252,12 +264,30 @@ export default function JavaCoursePage() {
             </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
-              <li>✅ Join the <strong>Best PL/SQL Training Institute</strong> to master Oracle SQL & PL/SQL programming.</li>
-              <li>✅ Learn database development – <strong>SQL, PL/SQL, Triggers, Procedures, Functions</strong>.</li>
-              <li>✅ Work on real-time database projects with <strong>hands-on coding experience</strong>.</li>
-              <li>✅ Choose <strong>flexible learning modes</strong> – Weekday / Weekend / Fast-track.</li>
-              <li>✅ Earn a recognized <strong>PL/SQL Developer Certification</strong>.</li>
-              <li>✅ Career support: Resume building, mock interviews & job referrals.</li>
+              <li>
+                ✅ Join the <strong>Best PL/SQL Training Institute</strong> to
+                master Oracle SQL & PL/SQL programming.
+              </li>
+              <li>
+                ✅ Learn database development –{" "}
+                <strong>SQL, PL/SQL, Triggers, Procedures, Functions</strong>.
+              </li>
+              <li>
+                ✅ Work on real-time database projects with{" "}
+                <strong>hands-on coding experience</strong>.
+              </li>
+              <li>
+                ✅ Choose <strong>flexible learning modes</strong> – Weekday /
+                Weekend / Fast-track.
+              </li>
+              <li>
+                ✅ Earn a recognized{" "}
+                <strong>PL/SQL Developer Certification</strong>.
+              </li>
+              <li>
+                ✅ Career support: Resume building, mock interviews & job
+                referrals.
+              </li>
             </ul>
 
             <button
@@ -268,9 +298,13 @@ export default function JavaCoursePage() {
                        hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
             >
               <div>
-                <span className="text-lg font-extrabold text-violet-400 block">Freshers Salary:</span>
+                <span className="text-lg font-extrabold text-violet-400 block">
+                  Freshers Salary:
+                </span>
                 ₹3 LPA to ₹8 LPA <br />
-                <span className="text-sm text-gray-300">| Duration: 3 Months</span>
+                <span className="text-sm text-gray-300">
+                  | Duration: 3 Months
+                </span>
               </div>
             </button>
           </div>
@@ -279,8 +313,13 @@ export default function JavaCoursePage() {
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
             <h2 className="text-2xl font-bold mb-4">WANT IT JOB?</h2>
             <p className="mb-4 text-lg">
-              Master <strong>Full Stack Development</strong> in just 3 months with 
-              <strong> hands-on coding, real-world projects, and 100% placement assistance </strong> 
+              Master <strong>Full Stack Development</strong> in just 3 months
+              with
+              <strong>
+                {" "}
+                hands-on coding, real-world projects, and 100% placement
+                assistance{" "}
+              </strong>
               from Vel InfoTech.
             </p>
 
@@ -288,19 +327,25 @@ export default function JavaCoursePage() {
               type="button"
               onClick={() => {
                 const formSection = document.getElementById("enquiry-form");
-                if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
               }}
               className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
             >
               <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
-              <span className="relative z-10 group-hover:text-black transition-colors duration-300">Enquire Now</span>
+              <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+                Enquire Now
+              </span>
               <span className="relative z-10">
                 <svg
                   className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
                   viewBox="0 0 16 19"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z" fill="currentColor"></path>
+                  <path
+                    d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                    fill="currentColor"
+                  ></path>
                 </svg>
               </span>
             </button>
@@ -310,7 +355,7 @@ export default function JavaCoursePage() {
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
           <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Classroom PL SQL Training</strong> in 
+            Offering <strong>Online and Classroom PL SQL Training</strong> in
             <strong> Chennai & Bangalore.</strong>
           </h3>
         </div>
@@ -320,20 +365,53 @@ export default function JavaCoursePage() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
               <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
-                <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
+                <span className="text-purple-400">●</span> Our Course Partners{" "}
+                <span className="text-purple-400">●</span>
               </h3>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
               {[
-                { name: "HubSpot", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg", link: "https://www.hubspot.com/" },
-                { name: "GitLab", logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg", link: "https://about.gitlab.com/" },
-                { name: "Monday.com", logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg", link: "https://monday.com/" },
-                { name: "Google Cloud", logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg", link: "https://cloud.google.com/" },
-                { name: "AWS", logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg", link: "https://aws.amazon.com/" },
-                { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg", link: "https://www.salesforce.com/" },
-                { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", link: "https://www.ibm.com/" },
-                { name: "Slack", logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg", link: "https://slack.com/" },
+                {
+                  name: "HubSpot",
+                  logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
+                  link: "https://www.hubspot.com/",
+                },
+                {
+                  name: "GitLab",
+                  logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
+                  link: "https://about.gitlab.com/",
+                },
+                {
+                  name: "Monday.com",
+                  logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
+                  link: "https://monday.com/",
+                },
+                {
+                  name: "Google Cloud",
+                  logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
+                  link: "https://cloud.google.com/",
+                },
+                {
+                  name: "AWS",
+                  logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
+                  link: "https://aws.amazon.com/",
+                },
+                {
+                  name: "Salesforce",
+                  logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
+                  link: "https://www.salesforce.com/",
+                },
+                {
+                  name: "IBM",
+                  logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                  link: "https://www.ibm.com/",
+                },
+                {
+                  name: "Slack",
+                  logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                  link: "https://slack.com/",
+                },
               ].map((partner, index) => (
                 <motion.a
                   key={index}
@@ -347,7 +425,11 @@ export default function JavaCoursePage() {
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
                 >
-                  <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-12 object-contain"
+                  />
                 </motion.a>
               ))}
             </div>
@@ -364,19 +446,47 @@ export default function JavaCoursePage() {
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
               <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-                Our PL/SQL Developer Training program is designed to help you become proficient in writing efficient queries,
-                procedures, and database logic using Oracle SQL and PL/SQL. You'll gain hands-on experience with stored procedures,
-                triggers, cursors, and performance tuning, preparing you for real-world database development roles and placement success.
+                Our PL/SQL Developer Training program is designed to help you
+                become proficient in writing efficient queries, procedures, and
+                database logic using Oracle SQL and PL/SQL. You'll gain hands-on
+                experience with stored procedures, triggers, cursors, and
+                performance tuning, preparing you for real-world database
+                development roles and placement success.
               </p>
 
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">What You’ll Learn From PL/SQL Developer Training</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
+                What You’ll Learn From PL/SQL Developer Training
+              </h3>
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span>Master Oracle SQL basics including SELECT queries, joins, subqueries, and aggregate functions.</li>
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span>Develop advanced PL/SQL scripts using procedures, functions, packages, and triggers.</li>
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span>Learn exception handling, cursors, and PL/SQL records for dynamic database control.</li>
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span>Work with real-time scenarios using HR, finance, and inventory database projects.</li>
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span>Gain exposure to performance tuning and query optimization techniques.</li>
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span>Receive job assistance through resume building, mock interviews, and Oracle-based assessments.</li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span>Master Oracle
+                  SQL basics including SELECT queries, joins, subqueries, and
+                  aggregate functions.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span>Develop
+                  advanced PL/SQL scripts using procedures, functions, packages,
+                  and triggers.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span>Learn exception
+                  handling, cursors, and PL/SQL records for dynamic database
+                  control.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span>Work with
+                  real-time scenarios using HR, finance, and inventory database
+                  projects.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span>Gain exposure
+                  to performance tuning and query optimization techniques.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span>Receive job
+                  assistance through resume building, mock interviews, and
+                  Oracle-based assessments.
+                </li>
               </ul>
             </div>
           </div>
@@ -385,16 +495,20 @@ export default function JavaCoursePage() {
         {/* PL/SQL Developer Course Section */}
         <section className="w-full px-6 py-20 bg-gradient-to-b from-[#005BAC] to-[#003c6a] text-black">
           <div className="max-w-7xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">Become a Certified PL/SQL Developer</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
+              Become a Certified PL/SQL Developer
+            </h2>
             <p className="text-lg md:text-xl text-white mb-6">
-              Learn Oracle SQL, PL/SQL procedures, triggers, tuning, and more with expert-led, hands-on training.
+              Learn Oracle SQL, PL/SQL procedures, triggers, tuning, and more
+              with expert-led, hands-on training.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <button
                 type="button"
                 onClick={() => {
                   const formSection = document.getElementById("enquiry-form");
-                  if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+                  if (formSection)
+                    formSection.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all"
               >
@@ -407,8 +521,14 @@ export default function JavaCoursePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Course Highlights" className="w-10 h-10 mb-4" />
-                <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                  alt="Course Highlights"
+                  className="w-10 h-10 mb-4"
+                />
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Course Highlights
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>✓ Oracle SQL, PL/SQL, Procedures</li>
                   <li>✓ Query optimization & performance tuning</li>
@@ -420,11 +540,28 @@ export default function JavaCoursePage() {
 
             <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
-                <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Tools You’ll Master" className="w-10 h-10 mb-4" />
-                <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+                  alt="Tools You’ll Master"
+                  className="w-10 h-10 mb-4"
+                />
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Tools You’ll Master
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Oracle SQL", "PL/SQL", "Toad", "SQL Developer", "GitHub"].map((tool, i) => (
-                    <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{tool}</span>
+                  {[
+                    "Oracle SQL",
+                    "PL/SQL",
+                    "Toad",
+                    "SQL Developer",
+                    "GitHub",
+                  ].map((tool, i) => (
+                    <span
+                      key={i}
+                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                    >
+                      {tool}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -432,11 +569,29 @@ export default function JavaCoursePage() {
 
             <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
-                <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Topics Covered" className="w-10 h-10 mb-4" />
-                <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
+                  alt="Topics Covered"
+                  className="w-10 h-10 mb-4"
+                />
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Topics Covered
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Stored Procedures", "Functions", "Triggers", "Cursors", "Joins", "Subqueries"].map((topic, i) => (
-                    <span key={i} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{topic}</span>
+                  {[
+                    "Stored Procedures",
+                    "Functions",
+                    "Triggers",
+                    "Cursors",
+                    "Joins",
+                    "Subqueries",
+                  ].map((topic, i) => (
+                    <span
+                      key={i}
+                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                    >
+                      {topic}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -444,8 +599,14 @@ export default function JavaCoursePage() {
 
             <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Key Skills" className="w-10 h-10 mb-4" />
-                <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
+                  alt="Key Skills"
+                  className="w-10 h-10 mb-4"
+                />
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Key Skills You’ll Gain
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>Efficient PL/SQL programming</li>
                   <li>Database logic & triggers</li>
@@ -470,7 +631,10 @@ export default function JavaCoursePage() {
         />
 
         {/* === WHY CHOOSE US === */}
-        <section id="why-choose-us" className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800">
+        <section
+          id="why-choose-us"
+          className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
+        >
           <div className="max-w-6xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
               Why Choose Us
@@ -479,33 +643,45 @@ export default function JavaCoursePage() {
             <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Expert Trainers
+                </h3>
                 <p className="text-gray-600">
-                  Our mentors have deep industry experience and share practical, hands-on insights.
+                  Our mentors have deep industry experience and share practical,
+                  hands-on insights.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Flexible Learning Modes</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Flexible Learning Modes
+                </h3>
                 <p className="text-gray-600">
-                  Learn in-person or online with weekday, weekend, and fast-track options.
+                  Learn in-person or online with weekday, weekend, and
+                  fast-track options.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Job-Ready Curriculum</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Job-Ready Curriculum
+                </h3>
                 <p className="text-gray-600">
-                  Real projects, labs, and interview prep aligned to what employers expect.
+                  Real projects, labs, and interview prep aligned to what
+                  employers expect.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Career Support</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Career Support
+                </h3>
                 <p className="text-gray-600">
-                  Resume building, mock interviews, and placement assistance with hiring partners.
+                  Resume building, mock interviews, and placement assistance
+                  with hiring partners.
                 </p>
               </div>
             </div>
@@ -515,21 +691,27 @@ export default function JavaCoursePage() {
         {/* === TESTIMONIALS === */}
         <section id="testimonials" className="py-16 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">What Our Students Say</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+              What Our Students Say
+            </h2>
             <p className="text-lg text-gray-600 mb-12">
               Our success is measured by our learners’ success.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good place for job seekers. 💯 placement.”</p>
+                <p className="text-gray-700 italic">
+                  “Good place for job seekers. 💯 placement.”
+                </p>
                 <div className="mt-4">
                   <p className="font-semibold text-gray-900">Thennarasu S</p>
                 </div>
               </div>
 
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good service and trusted organisation.”</p>
+                <p className="text-gray-700 italic">
+                  “Good service and trusted organisation.”
+                </p>
                 <div className="mt-4">
                   <p className="font-semibold text-gray-900">Benjamin Andrew</p>
                 </div>
@@ -537,16 +719,22 @@ export default function JavaCoursePage() {
 
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
                 <p className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
+                  “Best consultancy for people who seek jobs. 100% placement
+                  guaranteed.”
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
+                  <p className="font-semibold text-gray-900">
+                    Sudha Selvarajan
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* optional internal link */}
-            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
+            <a
+              href="/reviews"
+              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
+            >
               View more reviews →
             </a>
           </div>
@@ -565,7 +753,8 @@ export default function JavaCoursePage() {
                   Is this course suitable for absolute beginners?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from Core Java basics and gradually move to Spring Boot, REST APIs, and React.
+                  Yes. We start from Core Java basics and gradually move to
+                  Spring Boot, REST APIs, and React.
                 </p>
               </details>
 
@@ -574,7 +763,8 @@ export default function JavaCoursePage() {
                   Do you provide placement assistance?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement
+                  assistance with hiring partners.
                 </p>
               </details>
 
@@ -583,7 +773,8 @@ export default function JavaCoursePage() {
                   What are the class modes and timings?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with weekday/weekend/fast-track options.
+                  Both online and classroom batches with
+                  weekday/weekend/fast-track options.
                 </p>
               </details>
 
@@ -592,7 +783,8 @@ export default function JavaCoursePage() {
                   Will I build real projects?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project covering APIs, DB integration, and a React UI.
+                  Yes. You’ll work on guided labs and a capstone project
+                  covering APIs, DB integration, and a React UI.
                 </p>
               </details>
 
@@ -601,7 +793,8 @@ export default function JavaCoursePage() {
                   Do I get a certificate?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project performance is also highlighted.
+                  Yes, a course completion certificate is provided. Project
+                  performance is also highlighted.
                 </p>
               </details>
             </div>
@@ -614,20 +807,36 @@ export default function JavaCoursePage() {
             {/* LEFT boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Comprehensive Curriculum</h4>
-                <p className="text-black/90">Master Java Full Stack with structured modules covering Core Java, Spring Boot, React, MySQL, and more.</p>
+                <h4 className="text-xl font-bold mb-2">
+                  Comprehensive Curriculum
+                </h4>
+                <p className="text-black/90">
+                  Master Java Full Stack with structured modules covering Core
+                  Java, Spring Boot, React, MySQL, and more.
+                </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Career-Oriented Training</h4>
-                <p className="text-black/90">Learn from working professionals. Includes mock interviews, resume prep, and job assistance.</p>
+                <h4 className="text-xl font-bold mb-2">
+                  Career-Oriented Training
+                </h4>
+                <p className="text-black/90">
+                  Learn from working professionals. Includes mock interviews,
+                  resume prep, and job assistance.
+                </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h4 className="text-xl font-bold mb-2">100% Job Guarantee</h4>
-                <p className="text-black/90">We assure placement support post training with strong partner network and hiring drives.</p>
+                <p className="text-black/90">
+                  We assure placement support post training with strong partner
+                  network and hiring drives.
+                </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
-                <p className="text-black/90">Gain real-world experience with capstone projects and industry-based assignments included in every module.</p>
+                <p className="text-black/90">
+                  Gain real-world experience with capstone projects and
+                  industry-based assignments included in every module.
+                </p>
               </div>
             </div>
 
@@ -833,7 +1042,9 @@ export default function JavaCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
@@ -877,12 +1088,17 @@ export default function JavaCoursePage() {
                   />
                 </div>
 
-                <h3 className="text-md font-bold text-gray-800 text-center">{course.title}</h3>
+                <h3 className="text-md font-bold text-gray-800 text-center">
+                  {course.title}
+                </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
 
                 <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                   <FaUserGraduate className="text-gray-500" />
-                  <span>{Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners</span>
+                  <span>
+                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                    Learners
+                  </span>
                 </div>
 
                 <div className="flex justify-center items-center mt-1 text-yellow-500">

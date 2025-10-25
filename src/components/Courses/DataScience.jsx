@@ -19,6 +19,7 @@ export default function DataScienceCoursePage() {
   const course = SYLLABI.datascience;
   const dispatch = useDispatch();
   const { status, error } = useSelector((s) => s.enquiry || {});
+
   /* ===========================
      FORM STATE + VALIDATION
      =========================== */
@@ -26,7 +27,6 @@ export default function DataScienceCoursePage() {
     name: "",
     email: "",
     phone: "",
-
     course: "",
     message: "",
   });
@@ -68,7 +68,6 @@ export default function DataScienceCoursePage() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -123,7 +122,6 @@ export default function DataScienceCoursePage() {
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
@@ -149,15 +147,14 @@ export default function DataScienceCoursePage() {
       return;
     }
 
-    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    // Map to API payload
     const payload = {
-      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "OFFLINE"
       name: form.name.trim(),
       email: form.email.trim(),
       mobile: form.phone.trim(), // API key is 'mobile'
       course: form.course.trim(),
       message: form.message.trim(),
-      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
     try {
@@ -173,7 +170,6 @@ export default function DataScienceCoursePage() {
         name: "",
         email: "",
         phone: "",
-
         course: "",
         message: "",
       });
@@ -189,6 +185,29 @@ export default function DataScienceCoursePage() {
       });
     }
   }
+
+  // ----- SEO JSON-LD -----
+  const courseJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: "Data Science Training Program",
+    description:
+      "Learn data analysis, Python, machine learning, and visualization. Gain hands-on experience to become a job-ready data scientist with real-world projects.",
+    provider: {
+      "@type": "Organization",
+      name: "Vel InfoTech",
+      url: "https://www.velinfotech.com/all-courses/data-science-training-program",
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: mode === "online" ? "online" : "inPerson",
+      location: {
+        "@type": "Place",
+        name: "Vel InfoTech — Chennai & Bangalore",
+        address: "Chennai, Tamil Nadu & Bangalore, Karnataka, India",
+      },
+    },
+  };
 
   const courses = [
     {
@@ -207,55 +226,65 @@ export default function DataScienceCoursePage() {
       title: "BusinessAnalytics",
       image: "https://cdn-icons-png.flaticon.com/512/8955/8955275.png",
     },
-    ,
   ];
 
   return (
-    <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-        {/* LEFT: Content */}
-        <div className="flex-1">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Join Our 100% Job Guaranteed <br />
-            <span className="text-yellow-400">
-              Data Science Training Program
-            </span>
-          </h2>
+    <>
+      <Seo
+        title="Data Science Training Program"
+        description="Learn data analysis, Python, machine learning, and visualization. Gain hands-on experience to become a job-ready data scientist with real-world projects."
+        canonical="/all-courses/data-science-training-program"
+        image="/images/courses/datascience-og.jpg"
+        type="article"
+        jsonLd={courseJsonLd}
+      />
 
-          <ul className="space-y-3 mt-6 text-lg">
-            <li>
-              ✅ Join the <strong>Best Data Science Institute</strong> to master
-              analytics and machine learning skills.
-            </li>
-            <li>
-              ✅ Learn the full stack –{" "}
-              <strong>Python, Pandas, NumPy, ML, DL, Tableau</strong>.
-            </li>
-            <li>
-              ✅ Build real-world projects with{" "}
-              <strong>hands-on model development</strong>.
-            </li>
-            <li>
-              ✅ Choose <strong>flexible modes</strong> – Weekday / Weekend /
-              Fast-track.
-            </li>
-            <li>
-              ✅ Earn a recognized <strong>Data Science Certification</strong>.
-            </li>
-            <li>
-              ✅ Career support: Resume building, mock interviews & job
-              referrals.
-            </li>
-          </ul>
+      <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+          {/* LEFT: Content */}
+          <div className="flex-1">
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+              Join Our 100% Job Guaranteed <br />
+              <span className="text-yellow-400">
+                Data Science Training Program
+              </span>
+            </h2>
 
-          <button
-            type="button"
-            onClick={() => {
-              const formSection = document.getElementById("enquiry-form");
-              if (formSection)
-                formSection.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
+            <ul className="space-y-3 mt-6 text-lg">
+              <li>
+                ✅ Join the <strong>Best Data Science Institute</strong> to
+                master analytics and machine learning skills.
+              </li>
+              <li>
+                ✅ Learn the full stack –{" "}
+                <strong>Python, Pandas, NumPy, ML, DL, Tableau</strong>.
+              </li>
+              <li>
+                ✅ Build real-world projects with{" "}
+                <strong>hands-on model development</strong>.
+              </li>
+              <li>
+                ✅ Choose <strong>flexible modes</strong> – Weekday / Weekend /
+                Fast-track.
+              </li>
+              <li>
+                ✅ Earn a recognized <strong>Data Science Certification</strong>
+                .
+              </li>
+              <li>
+                ✅ Career support: Resume building, mock interviews & job
+                referrals.
+              </li>
+            </ul>
+
+            <button
+              type="button"
+              onClick={() => {
+                const formSection = document.getElementById("enquiry-form");
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
               mt-8
               before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
               after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
@@ -263,137 +292,139 @@ export default function DataScienceCoursePage() {
               duration-500 hover:duration-500 before:duration-500 after:duration-500
               group-hover:before:duration-500 group-hover:after:duration-500
               hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
-          >
-            <div>
-              <span className="text-lg font-extrabold text-violet-400 block">
-                Freshers Salary:
+            >
+              <div>
+                <span className="text-lg font-extrabold text-violet-400 block">
+                  Freshers Salary:
+                </span>
+                ₹3 LPA to ₹8 LPA <br />
+                <span className="text-sm text-gray-300">
+                  | Duration: 3 Months
+                </span>
+              </div>
+            </button>
+          </div>
+
+          {/* RIGHT: Call to Action */}
+          <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
+            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
+            <p className="mb-4 text-lg">
+              Become a Data Science Professional in 3 Months
+            </p>
+
+            <button
+              type="button"
+              onClick={() => {
+                const formSection = document.getElementById("enquiry-form");
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
+            >
+              <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
+              <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+                Enquire Now
               </span>
-              ₹3 LPA to ₹8 LPA <br />
-              <span className="text-sm text-gray-300">
-                | Duration: 3 Months
+              <span className="relative z-10">
+                <svg
+                  className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
+                  viewBox="0 0 16 19"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
               </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Info Bar */}
+        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
+          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Data Science Training</strong>{" "}
+            in
+            <strong> Chennai & Bangalore</strong>
+          </h3>
+        </div>
+
+        {/* Course Partners Section */}
+        <section className="py-16 bg-[#002855]">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+                <span className="text-purple-400">●</span> Our Course Partners{" "}
+                <span className="text-purple-400">●</span>
+              </h3>
             </div>
-          </button>
-        </div>
 
-        {/* RIGHT: Call to Action */}
-        <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-          <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-          <p className="mb-4 text-lg">
-            Become a Data Science Professional in 3 Months
-          </p>
-
-          <button
-            type="button"
-            onClick={() => {
-              const formSection = document.getElementById("enquiry-form");
-              if (formSection)
-                formSection.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
-          >
-            <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
-            <span className="relative z-10 group-hover:text-black transition-colors duration-300">
-              Enquire Now
-            </span>
-            <span className="relative z-10">
-              <svg
-                className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
-                viewBox="0 0 16 19"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </span>
-          </button>
-        </div>
-      </div>
-
-      {/* Info Bar */}
-      <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-        <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-          Offering <strong>Online and Offline Data Science Training</strong> in
-          <strong> Chennai & Bangalore</strong>
-        </h3>
-      </div>
-
-      {/* Course Partners Section */}
-      <section className="py-16 bg-[#002855]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
-              <span className="text-purple-400">●</span> Our Course Partners{" "}
-              <span className="text-purple-400">●</span>
-            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              {[
+                {
+                  name: "HubSpot",
+                  logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
+                  link: "https://www.hubspot.com/",
+                },
+                {
+                  name: "GitLab",
+                  logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
+                  link: "https://about.gitlab.com/",
+                },
+                {
+                  name: "Monday.com",
+                  logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
+                  link: "https://monday.com/",
+                },
+                {
+                  name: "Google Cloud",
+                  logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
+                  link: "https://cloud.google.com/",
+                },
+                {
+                  name: "AWS",
+                  logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
+                  link: "https://aws.amazon.com/",
+                },
+                {
+                  name: "Salesforce",
+                  logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
+                  link: "https://www.salesforce.com/",
+                },
+                {
+                  name: "IBM",
+                  logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                  link: "https://www.ibm.com/",
+                },
+                {
+                  name: "Slack",
+                  logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                  link: "https://slack.com/",
+                },
+              ].map((partner, index) => (
+                <motion.a
+                  key={index}
+                  href={partner.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                  className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-12 object-contain"
+                  />
+                </motion.a>
+              ))}
+            </div>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {[
-              {
-                name: "HubSpot",
-                logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
-                link: "https://www.hubspot.com/",
-              },
-              {
-                name: "GitLab",
-                logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
-                link: "https://about.gitlab.com/",
-              },
-              {
-                name: "Monday.com",
-                logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
-                link: "https://monday.com/",
-              },
-              {
-                name: "Google Cloud",
-                logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
-                link: "https://cloud.google.com/",
-              },
-              {
-                name: "AWS",
-                logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
-                link: "https://aws.amazon.com/",
-              },
-              {
-                name: "Salesforce",
-                logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
-                link: "https://www.salesforce.com/",
-              },
-              {
-                name: "IBM",
-                logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-                link: "https://www.ibm.com/",
-              },
-              {
-                name: "Slack",
-                logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
-                link: "https://slack.com/",
-              },
-            ].map((partner, index) => (
-              <motion.a
-                key={index}
-                href={partner.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
-              >
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="h-12 object-contain"
-                />
-              </motion.a>
-            ))}
-          </div>
-        </div>
+        </section>
       </section>
 
       {/* DATA SCIENCE Overview */}
@@ -575,6 +606,7 @@ export default function DataScienceCoursePage() {
           </div>
         </div>
       </section>
+
       {/* SYLLABUS */}
       <Syllabus
         title={course.title}
@@ -583,9 +615,10 @@ export default function DataScienceCoursePage() {
         preview={course.preview}
         sections={course.sections} // ← REQUIRED
         useExternalForm
-        cardMinH={400} // tweak to visually match your right cards
+        cardMinH={400}
         stickyOffset={110}
       />
+
       {/* === WHY CHOOSE US === */}
       <section
         id="why-choose-us"
@@ -707,8 +740,8 @@ export default function DataScienceCoursePage() {
                 Is this course suitable for absolute beginners?
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. We start from Core Java basics and gradually move to Spring
-                Boot, REST APIs, and React.
+                Yes. We start from Python basics and gradually move to Data
+                Analysis, SQL, and Machine Learning.
               </p>
             </details>
 
@@ -738,7 +771,7 @@ export default function DataScienceCoursePage() {
               </summary>
               <p className="mt-3 text-gray-700">
                 Yes. You’ll work on guided labs and a capstone project covering
-                APIs, DB integration, and a React UI.
+                EDA, modeling, and BI dashboards.
               </p>
             </details>
 
@@ -883,8 +916,7 @@ export default function DataScienceCoursePage() {
                   </div>
                 </div>
 
-                {/* Phone + Batch */}
-
+                {/* Phone */}
                 <div>
                   <input
                     type="tel"
@@ -1067,6 +1099,7 @@ export default function DataScienceCoursePage() {
       </section>
 
       <FeedbackSection />
+
       {/* Toast container */}
       <ToastContainer
         newestOnTop
@@ -1076,6 +1109,7 @@ export default function DataScienceCoursePage() {
         bodyClassName={() => "text-[15px] font-medium"}
         theme="colored"
       />
+
       <AutoPopupQuoteForm
         status={status}
         error={error}
@@ -1088,6 +1122,6 @@ export default function DataScienceCoursePage() {
         handleBlur={handleBlur}
         handleSubmit={handleSubmit}
       />
-    </section>
+    </>
   );
 }

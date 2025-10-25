@@ -202,11 +202,11 @@ export default function SqlCoursePage() {
     "@type": "Course",
     "name": "SQL Developer Course",
     "description":
-      "SQL training covering fundamentals to advanced queries: joins, subqueries, views, indexes, constraints, normalization, and ER modeling. Hands-on projects plus interview prep and placement assistance.",
+      " Learn SQL programming, database management, and query optimization. Gain skills to create, manage, and analyze data efficiently for real-world applications.",
     "provider": {
       "@type": "Organization",
       "name": "Vel InfoTech",
-      "sameAs": "https://vellinfotech.com"
+      url: "https://www.velinfotech.com/all-courses/sql-developer-course",
     },
     "image": "https://cdn-icons-png.flaticon.com/512/603/603201.png",
     "hasCourseInstance": [
@@ -238,8 +238,8 @@ export default function SqlCoursePage() {
     <>
       {/* ✅ SEO (no visual change) */}
       <Seo
-        title="SQL Developer Course in Chennai & Bangalore — Certification & Placement | Vel InfoTech"
-        description="Master SQL: queries, joins, subqueries, views, indexes, normalization, and ER modeling with hands-on projects. Online & classroom batches. Resume help, mock interviews, and job referrals."
+        title="SQL Developer Course"
+        description=" Learn SQL programming, database management, and query optimization. Gain skills to create, manage, and analyze data efficiently for real-world applications."
         canonical="/all-courses/sql-developer"
         image="https://cdn-icons-png.flaticon.com/512/603/603201.png"
         type="article"
