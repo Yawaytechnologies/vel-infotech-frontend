@@ -25,7 +25,6 @@ export default function ScrumMaster() {
     name: "",
     email: "",
     phone: "",
-
     course: "",
     message: "",
   });
@@ -77,7 +76,6 @@ export default function ScrumMaster() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -133,7 +131,6 @@ export default function ScrumMaster() {
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
@@ -183,7 +180,6 @@ export default function ScrumMaster() {
         name: "",
         email: "",
         phone: "",
-
         course: "",
         message: "",
       });
@@ -199,7 +195,7 @@ export default function ScrumMaster() {
       });
     }
   }
-  // ✅ SEO: JSON-LD (updates if mode changes)
+  // ✅ SEO: JSON-LD (updates if mode changes) — domain vel → vell
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -209,7 +205,7 @@ export default function ScrumMaster() {
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/product-management-program",
+      url: "https://www.vellinfotech.com/all-courses/product-management-program",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -255,12 +251,14 @@ export default function ScrumMaster() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">
-                Product Management Program
-              </span>
-            </h2>
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+
+            {/* H1 — keyword only, whole line yellow */}
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
+              Product Management Program
+            </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
@@ -327,7 +325,7 @@ export default function ScrumMaster() {
 
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
+            <h2 className="text-2xl font-bold mb-4">WANT IT JOB?</h2>
             <p className="mb-4 text-lg">
               Become a Product Management Expert in 3 Months
             </p>
@@ -359,21 +357,20 @@ export default function ScrumMaster() {
 
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering{" "}
-            <strong>Online and Offline Product Managemet Training</strong> in
+          <h2 className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Product Management Training</strong> in
             <strong> Chennai & Bangalore</strong>
-          </h3>
+          </h2>
         </div>
 
         {/* Course Partners Section */}
         <section className="py-16 bg-[#002855]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+              <h2 className="text-xl font-semibold uppercase tracking-wide text-white">
                 <span className="text-purple-400">●</span> Our Course Partners{" "}
                 <span className="text-purple-400">●</span>
-              </h3>
+              </h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -442,7 +439,7 @@ export default function ScrumMaster() {
           </div>
         </section>
 
-        {/* Product Management  overview */}
+        {/* Product Management overview */}
         <section className="px-0 py-16">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
@@ -809,12 +806,12 @@ export default function ScrumMaster() {
         {/* ENQUIRY FORM */}
         <section className="w-full px-6 py-20 text-white">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
-            {/* LEFT: Additional Info Boxes (Scrum Master) */}
+            {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Comprehensive Curriculum
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Product lifecycle management, product vision & strategy,
                   market research, competitive analysis, roadmapping, backlog
@@ -824,9 +821,9 @@ export default function ScrumMaster() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Career-Oriented Training
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   PMC / AIPMM certification prep, case studies & simulations,
                   mock product pitches, resume & LinkedIn optimization, and
@@ -835,9 +832,9 @@ export default function ScrumMaster() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Strong Placement Support
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Access to partner network referrals, interview prep with
                   senior product managers, and career targeting for roles like
@@ -846,7 +843,7 @@ export default function ScrumMaster() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Simulations</h4>
+                <h3 className="text-xl font-bold mb-2">Hands-On Simulations</h3>
                 <p className="text-black/90">
                   Build product roadmaps in Aha! & Jira, create wireframes in
                   Figma/Miro, run backlog grooming & prioritization sessions,
@@ -859,9 +856,9 @@ export default function ScrumMaster() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                   Get a Free Training Quote
-                </h3>
+                </h2>
 
                 {/* Mode Toggle */}
                 <div className="flex justify-center gap-3 mb-6">
@@ -944,7 +941,6 @@ export default function ScrumMaster() {
                   </div>
 
                   {/* Phone + Batch */}
-
                   <div>
                     <input
                       type="tel"
@@ -1078,6 +1074,7 @@ export default function ScrumMaster() {
             </div>
           </div>
         </section>
+
         <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
           <div className="max-w-7xl mx-auto text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">

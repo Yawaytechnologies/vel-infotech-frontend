@@ -18,6 +18,7 @@ export default function DigitalMarketingPage() {
   const course = SYLLABI.digitalmarketing;
   const dispatch = useDispatch();
   const { status, error } = useSelector((s) => s.enquiry || {});
+
   /* ===========================
      FORM STATE + VALIDATION
      =========================== */
@@ -25,7 +26,6 @@ export default function DigitalMarketingPage() {
     name: "",
     email: "",
     phone: "",
-
     course: "",
     message: "",
   });
@@ -77,7 +77,6 @@ export default function DigitalMarketingPage() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -133,7 +132,6 @@ export default function DigitalMarketingPage() {
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
@@ -159,15 +157,14 @@ export default function DigitalMarketingPage() {
       return;
     }
 
-    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    // Map to API payload
     const payload = {
-      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "OFFLINE"
       name: form.name.trim(),
       email: form.email.trim(),
       mobile: form.phone.trim(), // API key is 'mobile'
       course: form.course.trim(),
       message: form.message.trim(),
-      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
     try {
@@ -183,7 +180,6 @@ export default function DigitalMarketingPage() {
         name: "",
         email: "",
         phone: "",
-
         course: "",
         message: "",
       });
@@ -199,6 +195,7 @@ export default function DigitalMarketingPage() {
       });
     }
   }
+
   // ✅ SEO: JSON-LD (updates if mode changes)
   const courseJsonLd = {
     "@context": "https://schema.org",
@@ -209,7 +206,7 @@ export default function DigitalMarketingPage() {
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses//all-courses/digital-marketing-program",
+      url: "https://www.velinfotech.com/all-courses/digital-marketing-program",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -253,6 +250,7 @@ export default function DigitalMarketingPage() {
         type="article"
         jsonLd={courseJsonLd}
       />
+
       <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
         {/* Toasts */}
         <ToastContainer
@@ -267,10 +265,17 @@ export default function DigitalMarketingPage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">Digital Marketing Program</span>
-            </h2>
+            {/* Lead line above H1 */}
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+            {/* H1 — Primary keyword */}
+            <h1
+              id="course-title"
+              className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400"
+            >
+              Digital Marketing Program
+            </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
@@ -323,16 +328,14 @@ export default function DigitalMarketingPage() {
                   Freshers Salary:
                 </span>
                 ₹3 LPA to ₹8 LPA <br />
-                <span className="text-sm text-gray-300">
-                  | Duration: 3 Months
-                </span>
+                <span className="text-sm text-gray-300">| Duration: 3 Months</span>
               </div>
             </button>
           </div>
 
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            <h3 className="text-2xl font-bold mb-4">WANT DIGITAL CAREER?</h3>
+            <h2 className="text-2xl font-bold mb-4">WANT DIGITAL CAREER?</h2>
             <p className="mb-4 text-lg">
               Become a Digital Marketing Expert in 3 Months
             </p>
@@ -364,20 +367,20 @@ export default function DigitalMarketingPage() {
 
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering{" "}
-            <strong>Online and Offline Digital Marketting Training</strong> in
-            <strong> Chennai & Bangalore</strong>
-          </h3>
+          <p className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Digital Marketing Training</strong> in
+            <strong> Chennai &amp; Bangalore</strong>
+          </p>
         </div>
+
         {/* Course Partners Section */}
         <section className="py-16 bg-[#002855]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+              <h2 className="text-xl font-semibold uppercase tracking-wide text-white">
                 <span className="text-purple-400">●</span> Our Course Partners{" "}
                 <span className="text-purple-400">●</span>
-              </h3>
+              </h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -445,706 +448,671 @@ export default function DigitalMarketingPage() {
             </div>
           </div>
         </section>
+      </section>
 
-        {/* DIGITAL MARKETING OVERVIEW */}
-        <section className="px-0 py-16">
-          <div className="max-w-[100%] mx-auto px-4 md:px-10">
-            <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
-              {/* Heading */}
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
-                Overview of Digital Marketing Course
-              </h2>
-              <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
+      {/* DIGITAL MARKETING OVERVIEW */}
+      <section className="px-0 py-16">
+        <div className="max-w-[100%] mx-auto px-4 md:px-10">
+          <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
+            {/* H2 */}
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
+              Overview of Digital Marketing Course
+            </h2>
+            <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
-              {/* Description */}
-              <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-                Our Digital Marketing Training program is designed to provide a
-                360° understanding of online marketing strategies, tools, and
-                analytics. Learn how to drive website traffic, generate leads,
-                build brand presence, and measure campaign ROI through hands-on
-                live projects.
-              </p>
+            <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
+              Our Digital Marketing Training program is designed to provide a
+              360° understanding of online marketing strategies, tools, and
+              analytics. Learn how to drive website traffic, generate leads,
+              build brand presence, and measure campaign ROI through hands-on
+              live projects.
+            </p>
 
-              {/* What You’ll Learn */}
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-                What You’ll Learn From Digital Marketing Training
-              </h3>
-              <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-                <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Fundamentals of SEO, SEM, Google Ads, and Social Media
-                  Marketing.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Content creation, copywriting, and effective brand
-                  communication.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Google Analytics, campaign tracking, and performance
-                  reporting.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Running Facebook, Instagram, and LinkedIn Ads.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Email marketing, marketing automation, and lead nurturing.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Exposure to industry tools (Semrush, Mailchimp, Hootsuite,
-                  Canva).
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Career support with mock interviews, resume prep, and
-                  placement guidance.
-                </li>
+            {/* H3 */}
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
+              What You’ll Learn From Digital Marketing Training
+            </h3>
+            <ul className="space-y-4 text-gray-800 text-base md:text-lg">
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Fundamentals of SEO, SEM, Google Ads, and Social Media Marketing.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Content creation, copywriting, and effective brand communication.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Google Analytics, campaign tracking, and performance reporting.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Running Facebook, Instagram, and LinkedIn Ads.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Email marketing, marketing automation, and lead nurturing.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Exposure to industry tools (Semrush, Mailchimp, Hootsuite, Canva).
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span>
+                Career support with mock interviews, resume prep, and placement guidance.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Digital Marketing CTA + Cards */}
+      <section className="w-full px-6 py-20 text-white">
+        <div className="max-w-7xl mx-auto text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+            Become a Certified Digital Marketing Specialist
+          </h2>
+          <p className="text-lg md:text-xl mb-6">
+            Learn SEO, Google Ads, Analytics, Social Media, Content, and Automation from industry experts.
+          </p>
+          <div className="flex justify-center gap-4 flex-wrap">
+            <button
+              type="button"
+              onClick={scrollToForm}
+              className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all"
+            >
+              Get Started →
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto text-gray-900">
+          {/* Cards use H3 */}
+          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+            <div className="mb-4">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                alt="Course Highlights"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold mb-2">Course Highlights</h3>
+              <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
+                <li>✓ SEO, SEM &amp; Social Media</li>
+                <li>✓ Live campaign projects</li>
+                <li>✓ Resume &amp; mock interview support</li>
+                <li>✓ Job-oriented, industry-backed curriculum</li>
               </ul>
             </div>
           </div>
-        </section>
 
-        {/* Digital Marketing Section */}
-        <section className="w-full px-6 py-20  text-white">
-          {/* Header */}
-          <div className="max-w-7xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-              Become a Certified Digital Marketing Specialist
-            </h2>
-            <p className="text-lg md:text-xl mb-6">
-              Learn SEO, Google Ads, Analytics, Social Media, Content, and
-              Automation from industry experts.
-            </p>
-            <div className="flex justify-center gap-4 flex-wrap">
-              <button
-                type="button"
-                onClick={scrollToForm}
-                className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all"
-              >
-                Get Started →
-              </button>
-            </div>
-          </div>
-
-          {/* Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto text-gray-900">
-            {/* Card 1 - Course Highlights */}
-            <div className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300 text-gray-900">
-              <div className="mb-4">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                  alt="Course Highlights"
-                  className="w-10 h-10 mb-4"
-                />
-                <h3 className="text-lg font-extrabold mb-2">
-                  Course Highlights
-                </h3>
-                <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                  <li>✓ SEO, SEM &amp; Social Media</li>
-                  <li>✓ Live campaign projects</li>
-                  <li>✓ Resume &amp; mock interview support</li>
-                  <li>✓ Job-oriented, industry-backed curriculum</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Card 2 - Tools */}
-            <div className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300 text-gray-900">
-              <div className="mb-4">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
-                  alt="Tools You’ll Master"
-                  className="w-10 h-10 mb-4"
-                />
-                <h3 className="text-lg font-extrabold mb-2">
-                  Tools You’ll Master
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "Google Ads",
-                    "Google Analytics",
-                    "Semrush",
-                    "Mailchimp",
-                    "Facebook Ads",
-                    "Instagram Ads",
-                    "Hootsuite",
-                    "Canva",
-                    "WordPress",
-                    "LinkedIn Ads",
-                  ].map((tool, i) => (
-                    <span
-                      key={i}
-                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium text-gray-800 ring-1 ring-gray-200"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3 - Topics Covered */}
-            <div className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300 text-gray-900">
-              <div className="mb-4">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
-                  alt="Topics Covered"
-                  className="w-10 h-10 mb-4"
-                />
-                <h3 className="text-lg font-extrabold mb-2">Topics Covered</h3>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "SEO & SEM",
-                    "Google Ads",
-                    "Social Media Marketing",
-                    "Analytics & Reporting",
-                    "Content Creation",
-                    "Automation Tools",
-                  ].map((topic, i) => (
-                    <span
-                      key={i}
-                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium text-gray-800 ring-1 ring-gray-200"
-                    >
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Card 4 - Key Skills */}
-            <div className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300 text-gray-900">
-              <div className="mb-4">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
-                  alt="Key Skills You’ll Gain"
-                  className="w-10 h-10 mb-4"
-                />
-                <h3 className="text-lg font-extrabold mb-2">
-                  Key Skills You’ll Gain
-                </h3>
-                <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                  <li>Campaign planning &amp; execution</li>
-                  <li>SEO, SEM &amp; Social Ads management</li>
-                  <li>Analytics &amp; ROI measurement</li>
-                  <li>Content &amp; brand strategy</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* SYLLABUS */}
-        <Syllabus
-          title={course.title}
-          accent={course.accent}
-          meta={course.meta}
-          preview={course.preview}
-          sections={course.sections} // ← REQUIRED
-          useExternalForm
-          cardMinH={400} // tweak to visually match your right cards
-          stickyOffset={110}
-        />
-
-        {/* === WHY CHOOSE US === */}
-        <section
-          id="why-choose-us"
-          className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
-        >
-          <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
-              Why Choose Us
-            </h2>
-
-            <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
-              <div className="relative">
-                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
-                  Expert Trainers
-                </h3>
-                <p className="text-gray-600">
-                  Our mentors have deep industry experience and share practical,
-                  hands-on insights.
-                </p>
-              </div>
-
-              <div className="relative">
-                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
-                  Flexible Learning Modes
-                </h3>
-                <p className="text-gray-600">
-                  Learn in-person or online with weekday, weekend, and
-                  fast-track options.
-                </p>
-              </div>
-
-              <div className="relative">
-                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
-                  Job-Ready Curriculum
-                </h3>
-                <p className="text-gray-600">
-                  Real projects, labs, and interview prep aligned to what
-                  employers expect.
-                </p>
-              </div>
-
-              <div className="relative">
-                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
-                  Career Support
-                </h3>
-                <p className="text-gray-600">
-                  Resume building, mock interviews, and placement assistance
-                  with hiring partners.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Good place for job seekers. 💯 placement.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Good service and trusted organisation.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement
-                  guaranteed.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">
-                    Sudha Selvarajan
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* optional internal link */}
-            <a
-              href="/reviews"
-              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-            >
-              View more reviews →
-            </a>
-          </div>
-        </section>
-
-        {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white">
-          <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
-              Frequently Asked Questions
-            </h2>
-
-            <div className="space-y-4">
-              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
-                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Is this course suitable for absolute beginners?
-                </summary>
-                <p className="mt-3 text-gray-700">
-                  Yes. We start from Core Java basics and gradually move to
-                  Spring Boot, REST APIs, and React.
-                </p>
-              </details>
-
-              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
-                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do you provide placement assistance?
-                </summary>
-                <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement
-                  assistance with hiring partners.
-                </p>
-              </details>
-
-              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
-                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  What are the class modes and timings?
-                </summary>
-                <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with
-                  weekday/weekend/fast-track options.
-                </p>
-              </details>
-
-              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
-                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Will I build real projects?
-                </summary>
-                <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project
-                  covering APIs, DB integration, and a React UI.
-                </p>
-              </details>
-
-              <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
-                <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do I get a certificate?
-                </summary>
-                <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project
-                  performance is also highlighted.
-                </p>
-              </details>
-            </div>
-          </div>
-        </section>
-        {/* ENQUIRY FORM - VALIDATED */}
-        <section className="w-full px-6 py-20 text-white">
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
-            {/* LEFT: Additional Info Boxes */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
-              <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Comprehensive Curriculum
-                </h4>
-                <p className="text-black/90">
-                  Master Digital Marketing with modules covering SEO, SEM,
-                  Social Media, Analytics, Automation, and more.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Career-Oriented Training
-                </h4>
-                <p className="text-black/90">
-                  Learn from digital leaders. Includes mock interviews, resume
-                  prep, and job assistance.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">100% Job Guarantee</h4>
-                <p className="text-black/90">
-                  We assure placement support post training with strong partner
-                  network and hiring drives.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
-                <p className="text-black/90">
-                  Gain experience by running real campaigns and digital projects
-                  as part of your learning journey.
-                </p>
-              </div>
-            </div>
-
-            {/* RIGHT: Form */}
-            <div className="w-full max-w-lg">
-              <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
-                  Get a Free Training Quote
-                </h3>
-
-                {/* Mode Toggle */}
-                <div className="flex justify-center gap-3 mb-6">
-                  <button
-                    onClick={() => setMode("class_room")}
-                    type="button"
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "class_room"
-                        ? "bg-[#003c6a] text-white"
-                        : "bg-white text-[#003c6a] border border-[#003c6a]"
-                    }`}
+          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+            <div className="mb-4">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+                alt="Tools You’ll Master"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold mb-2">Tools You’ll Master</h3>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Google Ads",
+                  "Google Analytics",
+                  "Semrush",
+                  "Mailchimp",
+                  "Facebook Ads",
+                  "Instagram Ads",
+                  "Hootsuite",
+                  "Canva",
+                  "WordPress",
+                  "LinkedIn Ads",
+                ].map((tool, i) => (
+                  <span
+                    key={i}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium text-gray-800 ring-1 ring-gray-200"
                   >
-                    <FaChalkboardTeacher className="text-base" /> Class Room
-                  </button>
-                  <button
-                    onClick={() => setMode("online")}
-                    type="button"
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "online"
-                        ? "bg-[#003c6a] text-white"
-                        : "bg-white text-[#003c6a] border border-[#003c6a]"
-                    }`}
-                  >
-                    <FaLaptop className="text-base" /> Online
-                  </button>
-                </div>
-
-                <form
-                  id="enquiry-form"
-                  onSubmit={handleSubmit}
-                  noValidate
-                  className="grid grid-cols-1 gap-2"
-                >
-                  {/* Name */}
-                  <div>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Your Name"
-                      value={form.name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.name}
-                      className={[
-                        "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
-                        touched?.name && errors?.name
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                          : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                      ].join(" ")}
-                    />
-                    <div className="h-3 mt-0.5">
-                      {touched?.name && errors?.name && (
-                        <p className="text-red-600 text-xs">{errors.name}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Your Email"
-                      value={form.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.email}
-                      className={[
-                        "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
-                        touched?.email && errors?.email
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                          : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                      ].join(" ")}
-                    />
-                    <div className="h-3 mt-0.5">
-                      {touched?.email && errors?.email && (
-                        <p className="text-red-600 text-xs">{errors.email}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Phone + Batch */}
-
-                  <div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      inputMode="numeric"
-                      pattern="\d*"
-                      placeholder="Mobile Number"
-                      value={form.phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.phone}
-                      className={[
-                        "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
-                        touched?.phone && errors?.phone
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                          : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                      ].join(" ")}
-                    />
-                    <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && (
-                        <p className="text-red-600 text-xs">{errors.phone}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Course (dropdown select) */}
-                  <div>
-                    <select
-                      name="course"
-                      value={form.course}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.course}
-                      className={[
-                        "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
-                        touched?.course && errors?.course
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                          : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                      ].join(" ")}
-                    >
-                      <option value="">Select Course</option>
-                      {[
-                        "Java",
-                        "Python",
-                        "Full Stack Development",
-                        "PL/SQL",
-                        "SQL",
-                        "Data Science",
-                        "Business Analytics",
-                        "Data Science & AI",
-                        "Big Data Developer",
-                        "Software Testing",
-                        "Selenium Testing",
-                        "ETL Testing",
-                        "AWS Training",
-                        "DevOps",
-                        "Hardware Networking",
-                        "Cyber Security",
-                        "SAP",
-                        "Salesforce",
-                        "ServiceNow",
-                        "RPA (Robotic Process Automation)",
-                        "Production Support",
-                        "Digital Marketing",
-                        "Soft Skill Training",
-                        "Scrum Master",
-                        "Business Analyst",
-                        "Product Management",
-                      ].map((course) => (
-                        <option key={course} value={course}>
-                          {course}
-                        </option>
-                      ))}
-                    </select>
-
-                    <div className="h-3 mt-0.5">
-                      {touched?.course && errors?.course && (
-                        <p className="text-red-600 text-xs">{errors.course}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div>
-                    <textarea
-                      rows={2}
-                      name="message"
-                      placeholder="Your Message"
-                      value={form.message}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      aria-invalid={!!errors?.message}
-                      className={[
-                        "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
-                        touched?.message && errors?.message
-                          ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                          : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
-                      ].join(" ")}
-                    />
-                    <div className="flex justify-between text-xs text-gray-500 mt-0.5">
-                      <span>First letter auto-caps</span>
-                      <span>{form.message.length}/300</span>
-                    </div>
-                    <div className="h-3 mt-0.5">
-                      {touched?.message && errors?.message && (
-                        <p className="text-red-600 text-xs">{errors.message}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Submit */}
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading"
-                        ? "opacity-70 cursor-not-allowed"
-                        : ""
-                    }`}
-                  >
-                    {status === "loading" ? "Submitting..." : "Submit"}
-                  </button>
-
-                  {/* Optional server error */}
-                  {error && (
-                    <p className="text-red-600 text-xs mt-1">
-                      Submission failed: {String(error)}
-                    </p>
-                  )}
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
-          <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
-              Popular Courses
-            </h2>
-            <p className="text-gray-700 text-lg">
-              We present to you the most popular courses recommended by experts.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {courses.map((course, index) => (
-              <Link
-                to={`/all-courses/${encodeURIComponent(course.title)}`}
-                key={index}
-                className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
-              >
-                <div className="w-16 h-16 mb-4">
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-contain"
-                    loading="lazy"
-                  />
-                </div>
-
-                <h3 className="text-md font-bold text-gray-800 text-center">
-                  {course.title}
-                </h3>
-                <p className="text-sm text-gray-500">Online | Offline</p>
-
-                <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
-                  <FaUserGraduate className="text-gray-500" />
-                  <span>
-                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
-                    Learners
+                    {tool}
                   </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+            <div className="mb-4">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
+                alt="Topics Covered"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold mb-2">Topics Covered</h3>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "SEO & SEM",
+                  "Google Ads",
+                  "Social Media Marketing",
+                  "Analytics & Reporting",
+                  "Content Creation",
+                  "Automation Tools",
+                ].map((topic, i) => (
+                  <span
+                    key={i}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium text-gray-800 ring-1 ring-gray-200"
+                  >
+                    {topic}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+            <div className="mb-4">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
+                alt="Key Skills You’ll Gain"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold mb-2">Key Skills You’ll Gain</h3>
+              <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
+                <li>Campaign planning &amp; execution</li>
+                <li>SEO, SEM &amp; Social Ads management</li>
+                <li>Analytics &amp; ROI measurement</li>
+                <li>Content &amp; brand strategy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SYLLABUS (internal headings should start at H2) */}
+      <Syllabus
+        title={course.title}
+        accent={course.accent}
+        meta={course.meta}
+        preview={course.preview}
+        sections={course.sections}
+        useExternalForm
+        cardMinH={400}
+        stickyOffset={110}
+      />
+
+      {/* === WHY CHOOSE US === */}
+      <section
+        id="why-choose-us"
+        className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            Why Choose Us
+          </h2>
+
+          <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
+            <div className="relative">
+              <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+              <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                Expert Trainers
+              </h3>
+              <p className="text-gray-600">
+                Our mentors have deep industry experience and share practical,
+                hands-on insights.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+              <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                Flexible Learning Modes
+              </h3>
+              <p className="text-gray-600">
+                Learn in-person or online with weekday, weekend, and fast-track options.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+              <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                Job-Ready Curriculum
+              </h3>
+              <p className="text-gray-600">
+                Real projects, labs, and interview prep aligned to what employers expect.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+              <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                Career Support
+              </h3>
+              <p className="text-gray-600">
+                Resume building, mock interviews, and placement assistance with hiring partners.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* === TESTIMONIALS === */}
+      <section id="testimonials" className="py-16 bg-[#fafafa]">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+            What Our Students Say
+          </h2>
+          <p className="text-lg text-gray-600 mb-12">
+            Our success is measured by our learners’ success.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
+              <p className="text-gray-700 italic">
+                “Good place for job seekers. 💯 placement.”
+              </p>
+              <div className="mt-4">
+                <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
+              </div>
+            </article>
+
+            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
+              <p className="text-gray-700 italic">
+                “Good service and trusted organisation.”
+              </p>
+              <div className="mt-4">
+                <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
+              </div>
+            </article>
+
+            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
+              <p className="text-gray-700 italic">
+                “Best consultancy for people who seek jobs. 100% placement guaranteed.”
+              </p>
+              <div className="mt-4">
+                <h3 className="font-semibold text-gray-900">Sudha Selvarajan</h3>
+              </div>
+            </article>
+          </div>
+
+          <a
+            href="/reviews"
+            className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
+          >
+            View more reviews →
+          </a>
+        </div>
+      </section>
+
+      {/* === FAQ === */}
+      <section id="faq" className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                <h3 className="inline text-lg">Is this course suitable for absolute beginners?</h3>
+              </summary>
+              <p className="mt-3 text-gray-700">
+                Yes. We start from Core Java basics and gradually move to Spring Boot, REST APIs, and React.
+              </p>
+            </details>
+
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                <h3 className="inline text-lg">Do you provide placement assistance?</h3>
+              </summary>
+              <p className="mt-3 text-gray-700">
+                We offer resume support, mock interviews, and placement assistance with hiring partners.
+              </p>
+            </details>
+
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                <h3 className="inline text-lg">What are the class modes and timings?</h3>
+              </summary>
+              <p className="mt-3 text-gray-700">
+                Both online and classroom batches with weekday/weekend/fast-track options.
+              </p>
+            </details>
+
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                <h3 className="inline text-lg">Will I build real projects?</h3>
+              </summary>
+              <p className="mt-3 text-gray-700">
+                Yes. You’ll work on guided labs and a capstone project covering APIs, DB integration, and a React UI.
+              </p>
+            </details>
+
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                <h3 className="inline text-lg">Do I get a certificate?</h3>
+              </summary>
+              <p className="mt-3 text-gray-700">
+                Yes, a course completion certificate is provided. Project performance is also highlighted.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      {/* ENQUIRY FORM */}
+      <section className="w-full px-6 py-20 text-white">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
+          {/* LEFT: Additional Info Boxes */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
+            <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
+              <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+              <p className="text-black/90">
+                Master Digital Marketing with modules covering SEO, SEM, Social Media, Analytics, Automation, and more.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
+              <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+              <p className="text-black/90">
+                Learn from digital leaders. Includes mock interviews, resume prep, and job assistance.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
+              <h3 className="text-xl font-bold mb-2">100% Job Guarantee</h3>
+              <p className="text-black/90">
+                We assure placement support post training with strong partner network and hiring drives.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
+              <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
+              <p className="text-black/90">
+                Gain experience by running real campaigns and digital projects as part of your learning journey.
+              </p>
+            </div>
+          </div>
+
+          {/* RIGHT: Form */}
+          <div className="w-full max-w-lg" ref={formRef}>
+            <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
+              <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                Get a Free Training Quote
+              </h2>
+
+              {/* Mode Toggle */}
+              <div className="flex justify-center gap-3 mb-6">
+                <button
+                  onClick={() => setMode("class_room")}
+                  type="button"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
+                    mode === "class_room"
+                      ? "bg-[#003c6a] text-white"
+                      : "bg-white text-[#003c6a] border border-[#003c6a]"
+                  }`}
+                >
+                  <FaChalkboardTeacher className="text-base" /> Class Room
+                </button>
+                <button
+                  onClick={() => setMode("online")}
+                  type="button"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
+                    mode === "online"
+                      ? "bg-[#003c6a] text-white"
+                      : "bg-white text-[#003c6a] border border-[#003c6a]"
+                  }`}
+                >
+                  <FaLaptop className="text-base" /> Online
+                </button>
+              </div>
+
+              <form
+                id="enquiry-form"
+                onSubmit={handleSubmit}
+                noValidate
+                className="grid grid-cols-1 gap-2"
+              >
+                {/* Name */}
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={form.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.name}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.name && errors?.name
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  />
+                  <div className="h-3 mt-0.5">
+                    {touched?.name && errors?.name && (
+                      <p className="text-red-600 text-xs">{errors.name}</p>
+                    )}
+                  </div>
                 </div>
 
-                <div className="flex justify-center items-center mt-1 text-yellow-500">
-                  {[...Array(5)].map((_, i) => (
-                    <AiFillStar key={i} />
-                  ))}
+                {/* Email */}
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={form.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.email}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.email && errors?.email
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  />
+                  <div className="h-3 mt-0.5">
+                    {touched?.email && errors?.email && (
+                      <p className="text-red-600 text-xs">{errors.email}</p>
+                    )}
+                  </div>
                 </div>
-              </Link>
-            ))}
+
+                {/* Phone */}
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    placeholder="Mobile Number"
+                    value={form.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.phone}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.phone && errors?.phone
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  />
+                  <div className="h-3 mt-0.5">
+                    {touched?.phone && errors?.phone && (
+                      <p className="text-red-600 text-xs">{errors.phone}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Course (dropdown select) */}
+                <div>
+                  <select
+                    name="course"
+                    value={form.course}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.course}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
+                      touched?.course && errors?.course
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  >
+                    <option value="">Select Course</option>
+                    {[
+                      "Java",
+                      "Python",
+                      "Full Stack Development",
+                      "PL/SQL",
+                      "SQL",
+                      "Data Science",
+                      "Business Analytics",
+                      "Data Science & AI",
+                      "Big Data Developer",
+                      "Software Testing",
+                      "Selenium Testing",
+                      "ETL Testing",
+                      "AWS Training",
+                      "DevOps",
+                      "Hardware Networking",
+                      "Cyber Security",
+                      "SAP",
+                      "Salesforce",
+                      "ServiceNow",
+                      "RPA (Robotic Process Automation)",
+                      "Production Support",
+                      "Digital Marketing",
+                      "Soft Skill Training",
+                      "Scrum Master",
+                      "Business Analyst",
+                      "Product Management",
+                    ].map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+
+                  <div className="h-3 mt-0.5">
+                    {touched?.course && errors?.course && (
+                      <p className="text-red-600 text-xs">{errors.course}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div>
+                  <textarea
+                    rows={2}
+                    name="message"
+                    placeholder="Your Message"
+                    value={form.message}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={!!errors?.message}
+                    className={[
+                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      touched?.message && errors?.message
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
+                    ].join(" ")}
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-0.5">
+                    <span>First letter auto-caps</span>
+                    <span>{form.message.length}/300</span>
+                  </div>
+                  <div className="h-3 mt-0.5">
+                    {touched?.message && errors?.message && (
+                      <p className="text-red-600 text-xs">{errors.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
+                    status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                  }`}
+                >
+                  {status === "loading" ? "Submitting..." : "Submit"}
+                </button>
+
+                {/* Optional server error */}
+                {error && (
+                  <p className="text-red-600 text-xs mt-1">
+                    Submission failed: {String(error)}
+                  </p>
+                )}
+              </form>
+            </div>
           </div>
-        </section>
-        <FeedbackSection />
-        <AutoPopupQuoteForm
-          status={status}
-          error={error}
-          mode={mode}
-          setMode={setMode}
-          form={form}
-          errors={errors}
-          touched={touched}
-          handleChange={handleChange}
-          handleBlur={handleBlur}
-          handleSubmit={handleSubmit}
-        />
+        </div>
       </section>
+
+      {/* Popular Courses */}
+      <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            Popular Courses
+          </h2>
+          <p className="text-gray-700 text-lg">
+            We present to you the most popular courses recommended by experts.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {courses.map((course, index) => (
+            <Link
+              to={`/all-courses/${encodeURIComponent(course.title)}`}
+              key={index}
+              className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
+            >
+              <div className="w-16 h-16 mb-4">
+                <img
+                  src={course.image}
+                  alt={course.title}
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+
+              <h3 className="text-md font-bold text-gray-800 text-center">
+                {course.title}
+              </h3>
+              <p className="text-sm text-gray-500">Online | Offline</p>
+
+              <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
+                <FaUserGraduate className="text-gray-500" />
+                <span>
+                  {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners
+                </span>
+              </div>
+
+              <div className="flex justify-center items-center mt-1 text-yellow-500">
+                {[...Array(5)].map((_, i) => (
+                  <AiFillStar key={i} />
+                ))}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <FeedbackSection />
+
+      <AutoPopupQuoteForm
+        status={status}
+        error={error}
+        mode={mode}
+        setMode={setMode}
+        form={form}
+        errors={errors}
+        touched={touched}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        handleSubmit={handleSubmit}
+      />
     </>
   );
 }

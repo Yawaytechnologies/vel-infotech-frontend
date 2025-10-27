@@ -13,11 +13,12 @@ import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
 
-export default function JavaCoursePage() {
+export default function DevOpsCoursePage() {
   const [mode, setMode] = useState("class_room");
   const course = SYLLABI.devops;
   const dispatch = useDispatch();
   const { status, error } = useSelector((s) => s.enquiry || {});
+
   /* ===========================
      FORM STATE + VALIDATION
      =========================== */
@@ -25,7 +26,6 @@ export default function JavaCoursePage() {
     name: "",
     email: "",
     phone: "",
-
     course: "",
     message: "",
   });
@@ -77,7 +77,6 @@ export default function JavaCoursePage() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -133,7 +132,6 @@ export default function JavaCoursePage() {
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
@@ -159,15 +157,13 @@ export default function JavaCoursePage() {
       return;
     }
 
-    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
     const payload = {
-      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "OFFLINE"
       name: form.name.trim(),
       email: form.email.trim(),
-      mobile: form.phone.trim(), // API key is 'mobile'
+      mobile: form.phone.trim(),
       course: form.course.trim(),
       message: form.message.trim(),
-      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
     try {
@@ -183,7 +179,6 @@ export default function JavaCoursePage() {
         name: "",
         email: "",
         phone: "",
-
         course: "",
         message: "",
       });
@@ -199,17 +194,18 @@ export default function JavaCoursePage() {
       });
     }
   }
+
   // ✅ SEO: JSON-LD (updates if mode changes)
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
     name: "DevOps Training Program",
     description:
-      "Learn DevOps practices, CI/CD, Docker, Kubernetes, and automation. Gain hands-on skills to streamline development and deploy applications efficiently.",
+      "Learn DevOps practices, CI/CD, Docker, Kubernetes, Terraform, and automation. Gain hands-on skills to streamline development and deploy applications efficiently.",
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/devops-training-program",
+      url: "https://www.vellinfotech.com/all-courses/devops-training-program",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -240,6 +236,7 @@ export default function JavaCoursePage() {
       image: "https://cdn-icons-png.flaticon.com/512/7700/7700417.png",
     },
   ];
+
   return (
     <>
       {/* ✅ Head-only SEO (no visual change) */}
@@ -251,6 +248,7 @@ export default function JavaCoursePage() {
         type="article"
         jsonLd={courseJsonLd}
       />
+
       <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
         {/* Toasts */}
         <ToastContainer
@@ -265,11 +263,20 @@ export default function JavaCoursePage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">DevOps Training Program</span>
-            </h2>
+            {/* Intro line above H1 (as requested) */}
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
 
+            {/* H1 — Primary keyword */}
+            <h1
+              id="course-title"
+              className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400"
+            >
+              DevOps Training Program
+            </h1>
+
+            {/* Supporting bullets remain paragraph-level content */}
             <ul className="space-y-3 mt-6 text-lg">
               <li>
                 ✅ Enroll in the <strong>Top DevOps Training Institute</strong>{" "}
@@ -279,7 +286,7 @@ export default function JavaCoursePage() {
                 ✅ Learn essential tools –{" "}
                 <strong>
                   Git, Jenkins, Docker, Kubernetes, Ansible, Terraform, AWS,
-                  Prometheus
+                  Prometheus, Grafana
                 </strong>
                 .
               </li>
@@ -292,20 +299,19 @@ export default function JavaCoursePage() {
                 .
               </li>
               <li>
-                ✅ Get deep insights into{" "}
+                ✅ Deep dive into{" "}
                 <strong>
-                  infrastructure as code (IaC), continuous integration, and
-                  monitoring
+                  Infrastructure as Code, continuous integration & delivery,
+                  observability, and security
                 </strong>
                 .
               </li>
               <li>
-                ✅ Earn a globally recognized{" "}
-                <strong>DevOps Certification</strong>.
+                ✅ Earn an industry-recognized <strong>DevOps Certification</strong>.
               </li>
               <li>
-                ✅ Career support: Live projects, resume preparation, mock
-                interviews & placement assistance.
+                ✅ Career support: Live projects, resume prep, mock interviews &amp;
+                placement assistance.
               </li>
             </ul>
 
@@ -319,7 +325,7 @@ export default function JavaCoursePage() {
                 hover:decoration-2 hover:text-rose-300
                 duration-500 hover:duration-500 before:duration-500 after:duration-500
                 group-hover:before:duration-500 group-hover:after:duration-500
-                hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
+                hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:after:-right-8"
             >
               <div>
                 <span className="text-lg font-extrabold text-violet-400 block">
@@ -327,18 +333,18 @@ export default function JavaCoursePage() {
                 </span>
                 ₹3 LPA to ₹8 LPA <br />
                 <span className="text-sm text-gray-300">
-                  | ETL Testing | Duration: 3 Months
+                  | DevOps Training | Duration: 3 Months
                 </span>
               </div>
             </button>
           </div>
 
           {/* RIGHT: Call to Action */}
-          <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-            <p className="mb-4 text-lg">
-              Become a DevOps Engineer in Just 3 Months
-            </p>
+          <aside className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md" aria-labelledby="cta-heading">
+            <h2 id="cta-heading" className="text-2xl font-bold mb-4">
+              Want an IT Job?
+            </h2>
+            <p className="mb-4 text-lg">Become a DevOps Engineer in Just 3 Months</p>
 
             <button
               type="button"
@@ -362,25 +368,23 @@ export default function JavaCoursePage() {
                 </svg>
               </span>
             </button>
-          </div>
+          </aside>
         </div>
 
         {/* Info Bar */}
-        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Offline Devops Training</strong> in
-            <strong> Chennai & Bangalore</strong>
-          </h3>
+        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md" aria-label="Training Locations">
+          <p className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline DevOps Training</strong> in
+            <strong> Chennai &amp; Bangalore</strong>
+          </p>
         </div>
+
         {/* Course Partners Section */}
-        <section className="py-16 bg-[#002855]">
+        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
-                <span className="text-purple-400">●</span> Our Course Partners{" "}
-                <span className="text-purple-400">●</span>
-              </h3>
-            </div>
+            <h2 id="partners-heading" className="text-xl font-semibold uppercase tracking-wide text-center text-white mb-10">
+              <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
+            </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
               {[
@@ -448,69 +452,68 @@ export default function JavaCoursePage() {
           </div>
         </section>
 
-        {/* AWS overview */}
-        <section className="px-0 py-16 bg-">
+        {/* DEVOPS overview */}
+        <section className="px-0 py-16" aria-labelledby="overview-heading">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
-                Overview of AWS Training Program
+              <h2 id="overview-heading" className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
+                Overview of DevOps Training Program
               </h2>
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
               <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-                Our AWS Training program is designed to help you build expertise
-                in Amazon Web Services, the leading cloud platform. You'll learn
-                key services like EC2, S3, Lambda, IAM, VPC, and RDS through
-                real-world use cases and hands-on labs. Perfect for those aiming
-                for cloud certifications and cloud-based career roles.
+                Our DevOps Training helps you integrate development and
+                operations using modern tooling and practices. You’ll build CI/CD
+                pipelines, containerize apps, orchestrate with Kubernetes,
+                automate infrastructure with Terraform/Ansible, and implement
+                monitoring/alerting for production-grade reliability.
               </p>
 
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
-                What You’ll Learn From AWS Training
+                What You’ll Learn From DevOps Training
               </h3>
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Understand cloud fundamentals and AWS global infrastructure.
+                  Version control with Git &amp; GitHub/GitLab flows.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Work with core services – EC2, S3, RDS, Lambda, IAM, and VPC.
+                  CI/CD with Jenkins/GitHub Actions &amp; artifact management.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Deploy scalable and fault-tolerant applications using AWS
-                  tools.
+                  Docker fundamentals &amp; Kubernetes orchestration (Deployments,
+                  Services, Ingress).
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Learn serverless computing, auto scaling, and load balancing.
+                  Infrastructure as Code with Terraform and config management
+                  using Ansible.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Prepare for AWS Certified Solutions Architect – Associate
-                  exam.
+                  Observability with Prometheus &amp; Grafana; logging pipelines.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Get career support with resume writing, certification prep,
-                  and placement help.
+                  Cloud basics on AWS (IAM, EC2, VPC, S3) for DevOps workflows.
                 </li>
               </ul>
             </div>
           </div>
         </section>
 
-        {/* AWS Training Section */}
-        <section className="w-full px-6 py-20 bg-gradient-to-b from-[#] to-[#] text-black">
+        {/* DevOps Training Section */}
+        <section className="w-full px-6 py-20 text-black" aria-labelledby="become-heading">
           {/* Header */}
           <div className="max-w-7xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
-              Become a Certified AWS Cloud Professional
+            <h2 id="become-heading" className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
+              Become a Certified DevOps Professional
             </h2>
             <p className="text-lg md:text-xl text-white mb-6">
-              Learn AWS Compute, Storage, Networking, IAM, Serverless, DevOps
-              Tools, and prepare for AWS Certification with real-world labs.
+              Learn CI/CD, Containers, Kubernetes, IaC, Monitoring &amp; Security — 
+              and build job-ready projects.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <button
@@ -526,54 +529,57 @@ export default function JavaCoursePage() {
           {/* Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {/* Card 1 - Course Highlights */}
-            <div
+            <article
               data-aos="fade-up"
               data-aos-delay="0"
               className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300"
+              aria-labelledby="card-highlights"
             >
               <div className="mb-4">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                  alt="Course Highlights"
+                  alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">
+                <h3 id="card-highlights" className="text-lg font-extrabold text-black mb-2">
                   Course Highlights
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                  <li>✓ AWS Cloud Practitioner to Architect</li>
-                  <li>✓ Real-time project implementation</li>
-                  <li>✓ Resume prep & mock interviews</li>
-                  <li>✓ Job-oriented modules with labs</li>
+                  <li>✓ CI/CD with real pipelines</li>
+                  <li>✓ Docker &amp; Kubernetes labs</li>
+                  <li>✓ IaC with Terraform &amp; Ansible</li>
+                  <li>✓ Monitoring with Prometheus/Grafana</li>
                 </ul>
               </div>
-            </div>
+            </article>
 
             {/* Card 2 - Tools */}
-            <div
+            <article
               data-aos="fade-up"
               data-aos-delay="100"
               className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300"
+              aria-labelledby="card-tools"
             >
               <div className="mb-4">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
-                  alt="Tools You’ll Master"
+                  alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">
+                <h3 id="card-tools" className="text-lg font-extrabold text-black mb-2">
                   Tools You’ll Master
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {[
-                    "EC2",
-                    "S3",
-                    "Lambda",
-                    "VPC",
-                    "IAM",
-                    "CloudWatch",
-                    "RDS",
-                    "CloudFormation",
+                    "Git",
+                    "Jenkins",
+                    "Docker",
+                    "Kubernetes",
+                    "Ansible",
+                    "Terraform",
+                    "AWS",
+                    "Prometheus",
+                    "Grafana",
                   ].map((tool, i) => (
                     <span
                       key={i}
@@ -584,31 +590,32 @@ export default function JavaCoursePage() {
                   ))}
                 </div>
               </div>
-            </div>
+            </article>
 
             {/* Card 3 - Topics Covered */}
-            <div
+            <article
               data-aos="fade-up"
               data-aos-delay="200"
               className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300"
+              aria-labelledby="card-topics"
             >
               <div className="mb-4">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
-                  alt="Topics Covered"
+                  alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">
+                <h3 id="card-topics" className="text-lg font-extrabold text-black mb-2">
                   Topics Covered
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {[
-                    "Cloud Basics",
-                    "AWS IAM & Policies",
-                    "Networking in AWS",
-                    "Compute & Storage",
-                    "Serverless",
-                    "Monitoring & Security",
+                    "CI/CD Pipelines",
+                    "Containerization",
+                    "K8s Deployments",
+                    "IaC & Config Mgmt",
+                    "Observability",
+                    "Cloud Fundamentals",
                   ].map((topic, i) => (
                     <span
                       key={i}
@@ -619,51 +626,55 @@ export default function JavaCoursePage() {
                   ))}
                 </div>
               </div>
-            </div>
+            </article>
 
             {/* Card 4 - Key Skills */}
-            <div
+            <article
               data-aos="fade-up"
               data-aos-delay="300"
               className="bg-white rounded-3xl shadow-md p-6 text-left flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition duration-300"
+              aria-labelledby="card-skills"
             >
               <div className="mb-4">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
-                  alt="Key Skills You’ll Gain"
+                  alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">
+                <h3 id="card-skills" className="text-lg font-extrabold text-black mb-2">
                   Key Skills You’ll Gain
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                  <li>Launch & manage EC2 and S3</li>
-                  <li>Design scalable cloud architecture</li>
-                  <li>Implement VPCs and IAM roles</li>
-                  <li>Automate deployments using CloudFormation</li>
+                  <li>Build &amp; run CI/CD pipelines</li>
+                  <li>Containerize &amp; orchestrate apps</li>
+                  <li>Automate infra with Terraform</li>
+                  <li>Implement monitoring &amp; alerts</li>
                 </ul>
               </div>
-            </div>
+            </article>
           </div>
         </section>
+
         {/* SYLLABUS */}
         <Syllabus
           title={course.title}
           accent={course.accent}
           meta={course.meta}
           preview={course.preview}
-          sections={course.sections} // ← REQUIRED
+          sections={course.sections}
           useExternalForm
-          cardMinH={400} // tweak to visually match your right cards
+          cardMinH={400}
           stickyOffset={110}
         />
+
         {/* === WHY CHOOSE US === */}
         <section
           id="why-choose-us"
           className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
+          aria-labelledby="why-heading"
         >
           <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            <h2 id="why-heading" className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
               Why Choose Us
             </h2>
 
@@ -716,9 +727,9 @@ export default function JavaCoursePage() {
         </section>
 
         {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]">
+        <section id="testimonials" className="py-16 bg-[#fafafa]" aria-labelledby="testimonials-heading">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+            <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
               What Our Students Say
             </h2>
             <p className="text-lg text-gray-600 mb-12">
@@ -726,38 +737,37 @@ export default function JavaCoursePage() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
+              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <blockquote className="text-gray-700 italic">
                   “Good place for job seekers. 💯 placement.”
-                </p>
-                <div className="mt-4">
+                </blockquote>
+                <figcaption className="mt-4">
                   <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
 
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
+              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <blockquote className="text-gray-700 italic">
                   “Good service and trusted organisation.”
-                </p>
-                <div className="mt-4">
+                </blockquote>
+                <figcaption className="mt-4">
                   <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
 
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
+              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <blockquote className="text-gray-700 italic">
                   “Best consultancy for people who seek jobs. 100% placement
                   guaranteed.”
-                </p>
-                <div className="mt-4">
+                </blockquote>
+                <figcaption className="mt-4">
                   <p className="font-semibold text-gray-900">
                     Sudha Selvarajan
                   </p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
             </div>
 
-            {/* optional internal link */}
             <a
               href="/reviews"
               className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
@@ -768,26 +778,26 @@ export default function JavaCoursePage() {
         </section>
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white">
+        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            <h2 id="faq-heading" className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
               Frequently Asked Questions
             </h2>
 
             <div className="space-y-4">
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Is this course suitable for absolute beginners?
+                  <h3 className="inline text-lg">Is this course suitable for absolute beginners?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from Core Java basics and gradually move to
-                  Spring Boot, REST APIs, and React.
+                  Yes. We start with DevOps fundamentals, Linux basics, and Git,
+                  then move to CI/CD, Docker, Kubernetes, and IaC.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do you provide placement assistance?
+                  <h3 className="inline text-lg">Do you provide placement assistance?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   We offer resume support, mock interviews, and placement
@@ -797,7 +807,7 @@ export default function JavaCoursePage() {
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  What are the class modes and timings?
+                  <h3 className="inline text-lg">What are the class modes and timings?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   Both online and classroom batches with
@@ -807,45 +817,41 @@ export default function JavaCoursePage() {
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Will I build real projects?
+                  <h3 className="inline text-lg">Will I build real projects?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project
-                  covering APIs, DB integration, and a React UI.
+                  Yes. You’ll build CI/CD pipelines, deploy to Kubernetes, set
+                  up monitoring, and apply security best practices.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do I get a certificate?
+                  <h3 className="inline text-lg">Do I get a certificate?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project
-                  performance is also highlighted.
+                  Yes, a course completion certificate is provided. We also help
+                  you prepare for industry-recognized certifications.
                 </p>
               </details>
             </div>
           </div>
         </section>
+
         {/* ENQUIRY FORM - VALIDATED */}
-        <section className="w-full px-6 py-20 bg-[#] text-white">
+        <section className="w-full px-6 py-20 text-white" aria-labelledby="quote-heading">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
             {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Comprehensive Curriculum
-                </h4>
-                <p className="text-balck/90">
-                  Master Java Full Stack with structured modules covering Core
-                  Java, Spring Boot, React, MySQL, and more.
+                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+                <p className="text-black/90">
+                  CI/CD, Docker, Kubernetes, Terraform, Ansible, AWS basics &amp; more with hands-on labs.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Career-Oriented Training
-                </h4>
+                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
                 <p className="text-black/90">
                   Learn from working professionals. Includes mock interviews,
                   resume prep, and job assistance.
@@ -853,18 +859,16 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">100% Job Guarantee</h4>
+                <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
                 <p className="text-black/90">
-                  We assure placement support post training with strong partner
-                  network and hiring drives.
+                  Assistance with interview prep, hiring drives, and referrals via partner networks.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
+                <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
-                  Gain real-world experience with capstone projects and
-                  industry-based assignments included in every module.
+                  Build production-like pipelines, automate infra, and deploy to Kubernetes with monitoring.
                 </p>
               </div>
             </div>
@@ -872,9 +876,9 @@ export default function JavaCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2 id="quote-heading" className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                   Get a Free Training Quote
-                </h3>
+                </h2>
 
                 {/* Mode Toggle */}
                 <div className="flex justify-center gap-3 mb-6">
@@ -907,6 +911,7 @@ export default function JavaCoursePage() {
                   onSubmit={handleSubmit}
                   noValidate
                   className="grid grid-cols-1 gap-2"
+                  ref={formRef}
                 >
                   {/* Name */}
                   <div>
@@ -956,8 +961,7 @@ export default function JavaCoursePage() {
                     </div>
                   </div>
 
-                  {/* Phone + Batch */}
-
+                  {/* Phone */}
                   <div>
                     <input
                       type="tel"
@@ -1026,9 +1030,9 @@ export default function JavaCoursePage() {
                         "Scrum Master",
                         "Business Analyst",
                         "Product Management",
-                      ].map((course) => (
-                        <option key={course} value={course}>
-                          {course}
+                      ].map((c) => (
+                        <option key={c} value={c}>
+                          {c}
                         </option>
                       ))}
                     </select>
@@ -1072,9 +1076,7 @@ export default function JavaCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading"
-                        ? "opacity-70 cursor-not-allowed"
-                        : ""
+                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
@@ -1091,9 +1093,10 @@ export default function JavaCoursePage() {
             </div>
           </div>
         </section>
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
+
+        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4" aria-labelledby="popular-heading">
           <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            <h2 id="popular-heading" className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
               Popular Courses
             </h2>
             <p className="text-gray-700 text-lg">
@@ -1102,23 +1105,24 @@ export default function JavaCoursePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {courses.map((course, index) => (
+            {courses.map((c, index) => (
               <Link
-                to={`/all-courses/${encodeURIComponent(course.title)}`}
+                to={`/all-courses/${encodeURIComponent(c.title)}`}
                 key={index}
                 className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
+                aria-labelledby={`course-${index}-title`}
               >
                 <div className="w-16 h-16 mb-4">
                   <img
-                    src={course.image}
-                    alt={course.title}
+                    src={c.image}
+                    alt={c.title}
                     className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
 
-                <h3 className="text-md font-bold text-gray-800 text-center">
-                  {course.title}
+                <h3 id={`course-${index}-title`} className="text-md font-bold text-gray-800 text-center">
+                  {c.title}
                 </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
 
@@ -1130,7 +1134,7 @@ export default function JavaCoursePage() {
                   </span>
                 </div>
 
-                <div className="flex justify-center items-center mt-1 text-yellow-500">
+                <div className="flex justify-center items-center mt-1 text-yellow-500" aria-label="5 star rating">
                   {[...Array(5)].map((_, i) => (
                     <AiFillStar key={i} />
                   ))}
@@ -1139,7 +1143,9 @@ export default function JavaCoursePage() {
             ))}
           </div>
         </section>
+
         <FeedbackSection />
+
         <AutoPopupQuoteForm
           status={status}
           error={error}

@@ -79,7 +79,6 @@ export default function SoftwareTesting() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -135,7 +134,6 @@ export default function SoftwareTesting() {
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
@@ -185,7 +183,6 @@ export default function SoftwareTesting() {
         name: "",
         email: "",
         phone: "",
-
         course: "",
         message: "",
       });
@@ -201,7 +198,8 @@ export default function SoftwareTesting() {
       });
     }
   }
-  // ✅ SEO: JSON-LD (updates if mode changes)
+
+  // ✅ SEO: JSON-LD (updates if mode changes) — domain vel → vell
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -211,7 +209,7 @@ export default function SoftwareTesting() {
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/software-testing-program",
+      url: "https://www.vellinfotech.com/all-courses/software-testing-program",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -223,6 +221,7 @@ export default function SoftwareTesting() {
       },
     },
   };
+
   const courses = [
     { title: "SoftwareTesting", image: "https://cdn.simpleicons.org/cypress" },
     {
@@ -238,6 +237,7 @@ export default function SoftwareTesting() {
       image: "https://cdn-icons-png.flaticon.com/512/7700/7700417.png",
     },
   ];
+
   return (
     <>
       {/* ✅ Head-only SEO (no visual change) */}
@@ -249,6 +249,7 @@ export default function SoftwareTesting() {
         type="article"
         jsonLd={courseJsonLd}
       />
+
       <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
         {/* Toasts */}
         <ToastContainer
@@ -263,10 +264,14 @@ export default function SoftwareTesting() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">Software Testing Program</span>
-            </h2>
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+
+            {/* H1 — keyword only, whole line yellow */}
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
+              Software Testing Program
+            </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
@@ -327,7 +332,7 @@ export default function SoftwareTesting() {
 
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
+            <h2 className="text-2xl font-bold mb-4">WANT IT JOB?</h2>
             <p className="mb-4 text-lg">
               Become a Software Testing Expert in 3 Months
             </p>
@@ -359,21 +364,20 @@ export default function SoftwareTesting() {
 
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering{" "}
-            <strong>Online and Offline Software Testing Training</strong> in
+          <h2 className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Software Testing Training</strong> in
             <strong> Chennai & Bangalore</strong>
-          </h3>
+          </h2>
         </div>
 
         {/* Course Partners Section */}
         <section className="py-16 bg-[#002855]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+              <h2 className="text-xl font-semibold uppercase tracking-wide text-white">
                 <span className="text-purple-400">●</span> Our Course Partners{" "}
                 <span className="text-purple-400">●</span>
-              </h3>
+              </h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -637,6 +641,7 @@ export default function SoftwareTesting() {
           cardMinH={400} // tweak to visually match your right cards
           stickyOffset={110}
         />
+
         {/* === WHY CHOOSE US === */}
         <section
           id="why-choose-us"
@@ -817,7 +822,7 @@ export default function SoftwareTesting() {
                 <h4 className="text-xl font-bold mb-2">
                   Comprehensive Curriculum
                 </h4>
-                <p className="text-balck/90">
+                <p className="text-black/90">
                   Master Java Full Stack with structured modules covering Core
                   Java, Spring Boot, React, MySQL, and more.
                 </p>
@@ -938,7 +943,6 @@ export default function SoftwareTesting() {
                   </div>
 
                   {/* Phone + Batch */}
-
                   <div>
                     <input
                       type="tel"
@@ -1072,12 +1076,13 @@ export default function SoftwareTesting() {
             </div>
           </div>
         </section>
+
         <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
           <div className="max-w-7xl mx-auto text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
               Popular Courses
             </h2>
-            <p className="text-gray-700 text-lg">
+          <p className="text-gray-700 text-lg">
               We present to you the most popular courses recommended by experts.
             </p>
           </div>

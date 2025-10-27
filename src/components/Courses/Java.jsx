@@ -185,7 +185,7 @@ export default function JavaCoursePage() {
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/java-full-stack-developer-course",
+      url: "https://www.vellinfotech.com/all-courses/java-full-stack-developer-course",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -220,45 +220,53 @@ export default function JavaCoursePage() {
       />
 
       {/* HERO */}
-      <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
+      <section
+        className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20"
+        aria-labelledby="course-title"
+      >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT */}
           <div className="flex-1">
-            {/* H1 — page title */}
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">Java Full Stack Developer Course</span>
+            {/* Marketing line (not a heading) */}
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+
+            {/* H1 — Primary keyword */}
+            <h1
+              id="course-title"
+              className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400"
+            >
+              Java Full Stack Developer Course
             </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
-              <li>✅ Join the <strong>Best Java Training Institute</strong> to master Core & Advanced Java.</li>
-              <li>✅ Learn Java Full Stack — <strong>Spring Boot, Hibernate, React, Node.js</strong>.</li>
-              <li>✅ Build real-world projects with hands-on <strong>coding experience</strong>.</li>
-              <li>✅ Choose <strong>flexible learning modes</strong> — Weekday / Weekend / Fast-track.</li>
-              <li>✅ Earn an industry-accepted <strong>Java Developer Certification</strong>.</li>
-              <li>✅ Career support: Resume building, mock interviews & job referrals.</li>
+              <li>
+                ✅ Join the <strong>Best Java Training Institute</strong> to master
+                Core &amp; Advanced Java.
+              </li>
+              <li>
+                ✅ Learn Java Full Stack — <strong>Spring Boot, Hibernate, React, Node.js</strong>.
+              </li>
+              <li>
+                ✅ Build real-world projects with hands-on <strong>coding experience</strong>.
+              </li>
+              <li>
+                ✅ Choose <strong>flexible learning modes</strong> — Weekday / Weekend / Fast-track.
+              </li>
+              <li>
+                ✅ Earn an industry-accepted <strong>Java Developer Certification</strong>.
+              </li>
+              <li>
+                ✅ Career support: Resume building, mock interviews &amp; job referrals.
+              </li>
             </ul>
-
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById("enquiry-form");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden mt-8 before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg hover:decoration-2 hover:text-rose-300 duration-500 hover:duration-500 before:duration-500 after:duration-500 group-hover:before:duration-500 group-hover:after:duration-500 hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
-            >
-              <div>
-                <span className="text-lg font-extrabold text-violet-400 block">Freshers Salary:</span>
-                ₹3 LPA to ₹8 LPA <br />
-                <span className="text-sm text-gray-300">| Duration: 3 Months</span>
-              </div>
-            </button>
           </div>
 
           {/* RIGHT: CTA card */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            {/* H2 — section heading */}
-            <h2 className="text-2xl font-bold mb-4">Want an IT Job?</h2>
+            {/* H3 — secondary message inside hero */}
+            <h3 className="text-2xl font-bold mb-4">Want an IT Job?</h3>
             <p className="mb-4 text-lg">
               Master <strong>Java Full Stack Development</strong> in just 3 months with
               <strong> hands-on coding, real-world projects, and 100% placement assistance</strong> from Vel InfoTech.
@@ -273,7 +281,9 @@ export default function JavaCoursePage() {
               className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
             >
               <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
-              <span className="relative z-10 group-hover:text-black transition-colors duration-300">Enquire Now</span>
+              <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+                Enquire Now
+              </span>
               <span className="relative z-10">
                 <svg
                   className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
@@ -290,7 +300,7 @@ export default function JavaCoursePage() {
           </div>
         </div>
 
-        {/* INFO BAR (use <p> to avoid extra heading) */}
+        {/* INFO BAR (no heading) */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
           <p className="text-center text-white font-bold text-xl md:text-2xl">
             Offering <strong>Online and Offline Java Training</strong> in
@@ -299,10 +309,13 @@ export default function JavaCoursePage() {
         </div>
 
         {/* Our Course Partners */}
-        <section className="py-16 bg-[#002855]">
+        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
           <div className="max-w-7xl mx-auto px-4">
             {/* H2 — section heading */}
-            <h2 className="text-xl font-semibold uppercase tracking-wide text-white text-center mb-10">
+            <h2
+              id="partners-heading"
+              className="text-xl font-semibold uppercase tracking-wide text-white text-center mb-10"
+            >
               <span className="text-purple-400">●</span> Our Course Partners{" "}
               <span className="text-purple-400">●</span>
             </h2>
@@ -338,11 +351,14 @@ export default function JavaCoursePage() {
         </section>
 
         {/* Overview */}
-        <section className="px-0 py-16">
+        <section className="px-0 py-16" aria-labelledby="overview-heading">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
               {/* H2 — section heading */}
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
+              <h2
+                id="overview-heading"
+                className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5"
+              >
                 Overview of Java Full Stack Course
               </h2>
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
@@ -358,18 +374,36 @@ export default function JavaCoursePage() {
                 What You’ll Learn From Java Full Stack Training
               </h3>
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Core Java (OOP, collections, exceptions, threads).</li>
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Spring Boot REST APIs + MySQL persistence.</li>
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Frontend: HTML, CSS, JS, React.js.</li>
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Git/GitHub and basic cloud deployment.</li>
-                <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Capstone projects and interview prep.</li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span> Core Java (OOP, collections, exceptions, threads).
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span> Spring Boot REST APIs + MySQL persistence.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span> Frontend: HTML, CSS, JS, React.js.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span> Git/GitHub and basic cloud deployment.
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-purple-600 mt-1">➤</span> Capstone projects and interview prep.
+                </li>
               </ul>
             </div>
           </div>
         </section>
 
-        <div ref={syllabusRef} id="syllabus" className="scroll-mt-[110px]">
-          {/* H2 inside Syllabus component should be handled there if headings exist */}
+        {/* Syllabus (ensure a proper H2 exists even if component doesn’t render one) */}
+        <div
+          ref={syllabusRef}
+          id="syllabus"
+          className="scroll-mt-[110px]"
+          aria-labelledby="syllabus-heading"
+        >
+          <h2 id="syllabus-heading" className="sr-only">
+            Java Full Stack Syllabus
+          </h2>
           <Syllabus
             title={course.title}
             accent={course.accent}
@@ -383,17 +417,28 @@ export default function JavaCoursePage() {
         </div>
 
         {/* Why Choose Us */}
-        <section id="why-choose-us" className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800">
+        <section
+          id="why-choose-us"
+          className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
+          aria-labelledby="why-heading"
+        >
           <div className="max-w-6xl mx-auto px-6">
             {/* H2 — section heading */}
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">Why Choose Us</h2>
+            <h2
+              id="why-heading"
+              className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12"
+            >
+              Why Choose Us
+            </h2>
 
             <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
               {/* H3 — items */}
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
                 <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
-                <p className="text-gray-600">Our mentors have deep industry experience and share practical, hands-on insights.</p>
+                <p className="text-gray-600">
+                  Our mentors have deep industry experience and share practical, hands-on insights.
+                </p>
               </div>
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
@@ -415,61 +460,94 @@ export default function JavaCoursePage() {
         </section>
 
         {/* Testimonials */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]">
+        <section
+          id="testimonials"
+          className="py-16 bg-[#fafafa]"
+          aria-labelledby="testimonials-heading"
+        >
           <div className="max-w-7xl mx-auto px-6 text-center">
             {/* H2 — section heading */}
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">What Our Students Say</h2>
-            <p className="text-lg text-gray-600 mb-12">Our success is measured by our learners’ success.</p>
+            <h2
+              id="testimonials-heading"
+              className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8"
+            >
+              What Our Students Say
+            </h2>
+            <p className="text-lg text-gray-600 mb-12">
+              Our success is measured by our learners’ success.
+            </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
                 <p className="text-gray-700 italic">“Good place for job seekers. 💯 placement.”</p>
-                <div className="mt-4"><p className="font-semibold text-gray-900">Thennarasu S</p></div>
+                <div className="mt-4">
+                  <p className="font-semibold text-gray-900">Thennarasu S</p>
+                </div>
               </div>
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
                 <p className="text-gray-700 italic">“Good service and trusted organisation.”</p>
-                <div className="mt-4"><p className="font-semibold text-gray-900">Benjamin Andrew</p></div>
+                <div className="mt-4">
+                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
+                </div>
               </div>
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Best consultancy for people who seek jobs. 100% placement guaranteed.”</p>
-                <div className="mt-4"><p className="font-semibold text-gray-900">Sudha Selvarajan</p></div>
+                <p className="text-gray-700 italic">
+                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
+                </p>
+                <div className="mt-4">
+                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
+                </div>
               </div>
             </div>
 
-            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
+            <a
+              href="/reviews"
+              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
+            >
               View more reviews →
             </a>
           </div>
         </section>
 
         {/* FAQ */}
-        <section id="faq" className="py-16 bg-white">
+        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
           <div className="max-w-5xl mx-auto px-6">
             {/* H2 — section heading */}
-            <h2 className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            <h2
+              id="faq-heading"
+              className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10"
+            >
               Frequently Asked Questions
             </h2>
 
             <div className="space-y-4">
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Is this course suitable for absolute beginners?
+                  <h3 className="inline text-inherit font-semibold">
+                    Is this course suitable for absolute beginners?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from Core Java basics and gradually move to Spring Boot, REST APIs, and React.
+                  Yes. We start from Core Java basics and gradually move to Spring Boot, REST
+                  APIs, and React.
                 </p>
               </details>
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do you provide placement assistance?
+                  <h3 className="inline text-inherit font-semibold">
+                    Do you provide placement assistance?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement assistance with hiring
+                  partners.
                 </p>
               </details>
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  What are the class modes and timings?
+                  <h3 className="inline text-inherit font-semibold">
+                    What are the class modes and timings?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   Both online and classroom batches with weekday/weekend/fast-track options.
@@ -477,18 +555,20 @@ export default function JavaCoursePage() {
               </details>
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Will I build real projects?
+                  <h3 className="inline text-inherit font-semibold">Will I build real projects?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project covering APIs, DB integration, and a React UI.
+                  Yes. You’ll work on guided labs and a capstone project covering APIs, DB
+                  integration, and a React UI.
                 </p>
               </details>
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do I get a certificate?
+                  <h3 className="inline text-inherit font-semibold">Do I get a certificate?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project performance is also highlighted.
+                  Yes, a course completion certificate is provided. Project performance is also
+                  highlighted.
                 </p>
               </details>
             </div>
@@ -496,7 +576,11 @@ export default function JavaCoursePage() {
         </section>
 
         {/* ENQUIRY FORM */}
-        <section ref={formRef} className="w-full px-6 py-20 bg-[#f6f9ff]">
+        <section
+          ref={formRef}
+          className="w-full px-6 py-20 bg-[#f6f9ff]"
+          aria-labelledby="quote-heading"
+        >
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
             {/* LEFT boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
@@ -504,25 +588,29 @@ export default function JavaCoursePage() {
                 {/* H3 — subheading */}
                 <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
                 <p className="text-black/90">
-                  Master Java Full Stack with structured modules covering Core Java, Spring Boot, React, MySQL, and more.
+                  Master Java Full Stack with structured modules covering Core Java, Spring Boot,
+                  React, MySQL, and more.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
                 <p className="text-black/90">
-                  Learn from working professionals. Includes mock interviews, resume prep, and job assistance.
+                  Learn from working professionals. Includes mock interviews, resume prep, and job
+                  assistance.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">100% Job Guarantee</h3>
                 <p className="text-black/90">
-                  We assure placement support post training with strong partner network and hiring drives.
+                  We assure placement support post training with strong partner network and hiring
+                  drives.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
-                  Gain real-world experience with capstone projects and industry-based assignments in every module.
+                  Gain real-world experience with capstone projects and industry-based assignments
+                  in every module.
                 </p>
               </div>
             </div>
@@ -531,7 +619,10 @@ export default function JavaCoursePage() {
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
                 {/* H2 — section heading for the form area */}
-                <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2
+                  id="quote-heading"
+                  className="text-2xl font-bold text-center text-[#003c6a] mb-5"
+                >
                   Get a Free Training Quote
                 </h2>
 
@@ -558,7 +649,12 @@ export default function JavaCoursePage() {
                   </button>
                 </div>
 
-                <form id="enquiry-form" onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-2">
+                <form
+                  id="enquiry-form"
+                  onSubmit={handleSubmit}
+                  noValidate
+                  className="grid grid-cols-1 gap-2"
+                >
                   <div>
                     <input
                       type="text"
@@ -576,7 +672,9 @@ export default function JavaCoursePage() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.name && errors?.name && <p className="text-red-600 text-xs">{errors.name}</p>}
+                      {touched?.name && errors?.name && (
+                        <p className="text-red-600 text-xs">{errors.name}</p>
+                      )}
                     </div>
                   </div>
 
@@ -597,7 +695,9 @@ export default function JavaCoursePage() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.email && errors?.email && <p className="text-red-600 text-xs">{errors.email}</p>}
+                      {touched?.email && errors?.email && (
+                        <p className="text-red-600 text-xs">{errors.email}</p>
+                      )}
                     </div>
                   </div>
 
@@ -620,7 +720,9 @@ export default function JavaCoursePage() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && <p className="text-red-600 text-xs">{errors.phone}</p>}
+                      {touched?.phone && errors?.phone && (
+                        <p className="text-red-600 text-xs">{errors.phone}</p>
+                      )}
                     </div>
                   </div>
 
@@ -674,7 +776,9 @@ export default function JavaCoursePage() {
                     </select>
 
                     <div className="h-3 mt-0.5">
-                      {touched?.course && errors?.course && <p className="text-red-600 text-xs">{errors.course}</p>}
+                      {touched?.course && errors?.course && (
+                        <p className="text-red-600 text-xs">{errors.course}</p>
+                      )}
                     </div>
                   </div>
 
@@ -699,7 +803,9 @@ export default function JavaCoursePage() {
                       <span>{form.message.length}/300</span>
                     </div>
                     <div className="h-3 mt-0.5">
-                      {touched?.message && errors?.message && <p className="text-red-600 text-xs">{errors.message}</p>}
+                      {touched?.message && errors?.message && (
+                        <p className="text-red-600 text-xs">{errors.message}</p>
+                      )}
                     </div>
                   </div>
 
@@ -714,7 +820,9 @@ export default function JavaCoursePage() {
                   </button>
 
                   {error && (
-                    <p className="text-red-600 text-xs mt-1">Submission failed: {String(error)}</p>
+                    <p className="text-red-600 text-xs mt-1">
+                      Submission failed: {String(error)}
+                    </p>
                   )}
                 </form>
               </div>
@@ -723,10 +831,17 @@ export default function JavaCoursePage() {
         </section>
 
         {/* Popular Courses */}
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
+        <section
+          id="popular-courses"
+          className="bg-[#eaf5fd] py-16 px-4"
+          aria-labelledby="popular-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-10">
             {/* H2 — section heading */}
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            <h2
+              id="popular-heading"
+              className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4"
+            >
               Popular Courses
             </h2>
             <p className="text-gray-700 text-lg">
@@ -751,12 +866,16 @@ export default function JavaCoursePage() {
                 </div>
 
                 {/* H3 — card title */}
-                <h3 className="text-md font-bold text-gray-800 text-center">{course.title}</h3>
+                <h3 className="text-md font-bold text-gray-800 text-center">
+                  {course.title}
+                </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
 
                 <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                   <FaUserGraduate className="text-gray-500" />
-                  <span>{Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners</span>
+                  <span>
+                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners
+                  </span>
                 </div>
 
                 <div className="flex justify-center items-center mt-1 text-yellow-500">

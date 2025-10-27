@@ -25,7 +25,6 @@ export default function JavaCoursePage() {
     name: "",
     email: "",
     phone: "",
-
     course: "",
     message: "",
   });
@@ -77,7 +76,6 @@ export default function JavaCoursePage() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -133,7 +131,6 @@ export default function JavaCoursePage() {
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
@@ -159,15 +156,14 @@ export default function JavaCoursePage() {
       return;
     }
 
-    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    // Map to API payload
     const payload = {
-      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      mode: (mode || "class_room").toUpperCase(),
       name: form.name.trim(),
       email: form.email.trim(),
-      mobile: form.phone.trim(), // API key is 'mobile'
+      mobile: form.phone.trim(),
       course: form.course.trim(),
       message: form.message.trim(),
-      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
     try {
@@ -183,7 +179,6 @@ export default function JavaCoursePage() {
         name: "",
         email: "",
         phone: "",
-
         course: "",
         message: "",
       });
@@ -199,7 +194,7 @@ export default function JavaCoursePage() {
       });
     }
   }
-  // ✅ SEO: JSON-LD (updates if mode changes)
+  // ✅ SEO: JSON-LD (Vel -> Vell)
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -208,15 +203,15 @@ export default function JavaCoursePage() {
       "Learn Amazon Web Services (AWS) cloud computing, deployment, and management. Gain hands-on skills to build, secure, and scale cloud applications effectively.",
     provider: {
       "@type": "Organization",
-      name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/aws-training-program",
+      name: "Vell InfoTech",
+      url: "https://www.vellinfotech.com/all-courses/aws-training-program",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
       courseMode: mode === "online" ? "online" : "inPerson",
       location: {
         "@type": "Place",
-        name: "Vel InfoTech — Chennai & Bangalore",
+        name: "Vell InfoTech — Chennai & Bangalore",
         address: "Chennai, Tamil Nadu & Bangalore, Karnataka, India",
       },
     },
@@ -247,7 +242,10 @@ export default function JavaCoursePage() {
         type="article"
         jsonLd={courseJsonLd}
       />
-      <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
+      <section
+        aria-labelledby="course-title"
+        className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20"
+      >
         {/* Toasts */}
         <ToastContainer
           newestOnTop
@@ -261,9 +259,21 @@ export default function JavaCoursePage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">AWS Training Program</span>
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+
+            {/* H1 — Primary keyword */}
+            <h1
+              id="course-title"
+              className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400"
+            >
+              AWS Training Program
+            </h1>
+
+            {/* H2 (visually hidden for semantics/SEO) */}
+            <h2 className="sr-only">
+              Amazon Web Services Certification-Oriented Cloud Training
             </h2>
 
             <ul className="space-y-3 mt-6 text-lg">
@@ -295,7 +305,7 @@ export default function JavaCoursePage() {
               </li>
               <li>
                 ✅ Career support: Live projects, resume preparation, mock
-                interviews & placement assistance.
+                interviews &amp; placement assistance.
               </li>
             </ul>
 
@@ -317,7 +327,7 @@ export default function JavaCoursePage() {
                 </span>
                 ₹3 LPA to ₹8 LPA <br />
                 <span className="text-sm text-gray-300">
-                  | ETL Testing | Duration: 3 Months
+                  | AWS Training | Duration: 3 Months
                 </span>
               </div>
             </button>
@@ -326,9 +336,7 @@ export default function JavaCoursePage() {
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
             <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-            <p className="mb-4 text-lg">
-              Become an AWS Cloud Expert in 3 Months
-            </p>
+            <p className="mb-4 text-lg">Become an AWS Cloud Expert in 3 Months</p>
 
             <button
               type="button"
@@ -357,20 +365,23 @@ export default function JavaCoursePage() {
 
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
+          <h2 className="text-center text-white font-bold text-xl md:text-2xl">
             Offering <strong>Online and Offline AWS Training</strong> in
-            <strong> Chennai & Bangalore</strong>
-          </h3>
+            <strong> Chennai &amp; Bangalore</strong>
+          </h2>
         </div>
 
         {/* Course Partners Section */}
-        <section className="py-16 bg-[#002855]">
+        <section aria-labelledby="partners-heading" className="py-16 bg-[#002855]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+              <h2
+                id="partners-heading"
+                className="text-xl font-semibold uppercase tracking-wide text-white"
+              >
                 <span className="text-purple-400">●</span> Our Course Partners{" "}
                 <span className="text-purple-400">●</span>
-              </h3>
+              </h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -440,10 +451,13 @@ export default function JavaCoursePage() {
         </section>
 
         {/* AWS overview */}
-        <section className="px-0 py-16 bg-">
+        <section aria-labelledby="overview-heading" className="px-0 py-16">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
+              <h2
+                id="overview-heading"
+                className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5"
+              >
                 Overview of AWS Training Program
               </h2>
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
@@ -493,7 +507,7 @@ export default function JavaCoursePage() {
         </section>
 
         {/* AWS Training Section */}
-        <section className="w-full px-6 py-20 bg-gradient-to-b from-[#] to-[#] text-black">
+        <section className="w-full px-6 py-20 bg-gradient-to-b from-[#005BAC] to-[#003c6a] text-black">
           {/* Header */}
           <div className="max-w-7xl mx-auto text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
@@ -534,7 +548,7 @@ export default function JavaCoursePage() {
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>✓ AWS Cloud Practitioner to Architect</li>
                   <li>✓ Real-time project implementation</li>
-                  <li>✓ Resume prep & mock interviews</li>
+                  <li>✓ Resume prep &amp; mock interviews</li>
                   <li>✓ Job-oriented modules with labs</li>
                 </ul>
               </div>
@@ -628,7 +642,7 @@ export default function JavaCoursePage() {
                   Key Skills You’ll Gain
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                  <li>Launch & manage EC2 and S3</li>
+                  <li>Launch &amp; manage EC2 and S3</li>
                   <li>Design scalable cloud architecture</li>
                   <li>Implement VPCs and IAM roles</li>
                   <li>Automate deployments using CloudFormation</li>
@@ -771,8 +785,8 @@ export default function JavaCoursePage() {
                   Is this course suitable for absolute beginners?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from Core Java basics and gradually move to
-                  Spring Boot, REST APIs, and React.
+                  Yes. We begin with cloud fundamentals and the AWS console,
+                  then progress to core services and architectures.
                 </p>
               </details>
 
@@ -801,8 +815,8 @@ export default function JavaCoursePage() {
                   Will I build real projects?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project
-                  covering APIs, DB integration, and a React UI.
+                  Yes. You’ll deploy workloads on AWS, use CI/CD, and implement
+                  monitoring and security best practices.
                 </p>
               </details>
 
@@ -811,32 +825,27 @@ export default function JavaCoursePage() {
                   Do I get a certificate?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project
-                  performance is also highlighted.
+                  Yes, a course completion certificate is provided. We also help
+                  you prepare for AWS certification exams.
                 </p>
               </details>
             </div>
           </div>
         </section>
         {/* ENQUIRY FORM - VALIDATED */}
-        <section className="w-full px-6 py-20 bg-[#] text-white">
+        <section className="w-full px-6 py-20 text-white">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
             {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Comprehensive Curriculum
-                </h4>
-                <p className="text-balck/90">
-                  Master Java Full Stack with structured modules covering Core
-                  Java, Spring Boot, React, MySQL, and more.
+                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+                <p className="text-black/90">
+                  EC2, S3, IAM, VPC, RDS, Lambda, CloudWatch, CloudFormation &amp; more with hands-on labs.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Career-Oriented Training
-                </h4>
+                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
                 <p className="text-black/90">
                   Learn from working professionals. Includes mock interviews,
                   resume prep, and job assistance.
@@ -844,18 +853,16 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">100% Job Guarantee</h4>
+                <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
                 <p className="text-black/90">
-                  We assure placement support post training with strong partner
-                  network and hiring drives.
+                  We assist with interview prep, hiring drives, and referrals through partner networks.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
+                <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
-                  Gain real-world experience with capstone projects and
-                  industry-based assignments included in every module.
+                  Build and deploy real cloud architectures, automate with IaC, and implement monitoring.
                 </p>
               </div>
             </div>
@@ -863,9 +870,9 @@ export default function JavaCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                   Get a Free Training Quote
-                </h3>
+                </h2>
 
                 {/* Mode Toggle */}
                 <div className="flex justify-center gap-3 mb-6">
@@ -898,6 +905,7 @@ export default function JavaCoursePage() {
                   onSubmit={handleSubmit}
                   noValidate
                   className="grid grid-cols-1 gap-2"
+                  ref={formRef}
                 >
                   {/* Name */}
                   <div>
@@ -948,7 +956,6 @@ export default function JavaCoursePage() {
                   </div>
 
                   {/* Phone + Batch */}
-
                   <div>
                     <input
                       type="tel"
@@ -1063,9 +1070,7 @@ export default function JavaCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading"
-                        ? "opacity-70 cursor-not-allowed"
-                        : ""
+                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}

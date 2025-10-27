@@ -14,10 +14,11 @@ import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
 
 export default function JavaCoursePage() {
-  const [mode, setMode] = useState("class_room");
+  const [mode, setMode] = useState("class_room"); // keep normalized key
   const course = SYLLABI.salesforce;
   const dispatch = useDispatch();
   const { status, error } = useSelector((s) => s.enquiry || {});
+
   /* ===========================
      FORM STATE + VALIDATION
      =========================== */
@@ -25,7 +26,6 @@ export default function JavaCoursePage() {
     name: "",
     email: "",
     phone: "",
-
     course: "",
     message: "",
   });
@@ -77,7 +77,6 @@ export default function JavaCoursePage() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -133,7 +132,6 @@ export default function JavaCoursePage() {
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
@@ -159,15 +157,14 @@ export default function JavaCoursePage() {
       return;
     }
 
-    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    // Map to API payload
     const payload = {
-      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "OFFLINE"
       name: form.name.trim(),
       email: form.email.trim(),
-      mobile: form.phone.trim(), // API key is 'mobile'
+      mobile: form.phone.trim(), // backend expects "mobile"
       course: form.course.trim(),
       message: form.message.trim(),
-      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
     try {
@@ -179,14 +176,7 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-
-        course: "",
-        message: "",
-      });
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
     } catch (err) {
@@ -199,6 +189,7 @@ export default function JavaCoursePage() {
       });
     }
   }
+
   // ✅ SEO: JSON-LD (updates if mode changes)
   const courseJsonLd = {
     "@context": "https://schema.org",
@@ -209,7 +200,7 @@ export default function JavaCoursePage() {
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/salesforce-training-program",
+      url: "https://www.vellinfotech.com/all-courses/salesforce-training-program",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -221,6 +212,7 @@ export default function JavaCoursePage() {
       },
     },
   };
+
   const courses = [
     {
       title: "HardwareNetworking",
@@ -229,11 +221,11 @@ export default function JavaCoursePage() {
     {
       title: "EtlTesting",
       image: "https://cdn-icons-png.flaticon.com/512/16813/16813580.png",
-    }, // ← fixed
+    },
     {
       title: "CyberSecurity",
       image: "https://cdn-icons-png.flaticon.com/512/7700/7700417.png",
-    }, // ← fixed
+    },
     {
       title: "BusinessAnalytics",
       image: "https://cdn-icons-png.flaticon.com/512/8955/8955275.png",
@@ -253,54 +245,53 @@ export default function JavaCoursePage() {
       />
 
       <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
+        {/* Toasts — single instance at top */}
+        <ToastContainer
+          newestOnTop
+          limit={2}
+          className="!z-[9999]"
+          toastClassName={() => "rounded-xl shadow-md"}
+          bodyClassName={() => "text-[15px] font-medium"}
+          theme="colored"
+        />
+
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">
-                Salesforce Training Program
-              </span>
-            </h2>
+            {/* Intro line ABOVE H1 */}
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+            {/* H1 for primary keyword */}
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
+              Salesforce Training Program
+            </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
-                ✅ Enroll in the{" "}
-                <strong>Top Salesforce Training Institute</strong> to launch
-                your career in CRM and cloud solutions.
+                ✅ Enroll in the <strong>Top Salesforce Training Institute</strong> to
+                launch your career in CRM and cloud solutions.
               </li>
               <li>
                 ✅ Learn core topics –{" "}
                 <strong>
-                  Salesforce Admin, Apex, Visualforce, Lightning, Flow Builder,
-                  CRM Integration
+                  Salesforce Admin, Apex, Visualforce, Lightning, Flow Builder, CRM Integration
                 </strong>
                 .
               </li>
               <li>
                 ✅ Build practical skills through{" "}
-                <strong>
-                  hands-on projects, sandbox environment, and real-world
-                  business cases
-                </strong>
-                .
+                <strong>hands-on projects, sandbox environment, and real-world business cases</strong>.
               </li>
               <li>
                 ✅ Deep dive into{" "}
-                <strong>
-                  data modeling, automation, reports & dashboards, and
-                  deployment strategies
-                </strong>
-                .
+                <strong>data modeling, automation, reports &amp; dashboards, and deployment strategies</strong>.
               </li>
               <li>
-                ✅ Earn a globally recognized{" "}
-                <strong>Salesforce Certification</strong> (Admin / Developer /
-                App Builder).
+                ✅ Earn a globally recognized <strong>Salesforce Certification</strong> (Admin / Developer / App Builder).
               </li>
               <li>
-                ✅ Career support: Live projects, resume preparation, mock
-                interviews & placement assistance.
+                ✅ Career support: Live projects, resume preparation, mock interviews &amp; placement assistance.
               </li>
             </ul>
 
@@ -328,11 +319,14 @@ export default function JavaCoursePage() {
           </div>
 
           {/* RIGHT: Call to Action */}
-          <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-            <p className="mb-4 text-lg">
-              Become a Salesforce Professional in 3 Months
-            </p>
+          <aside
+            className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md"
+            aria-labelledby="cta-heading"
+          >
+            <h2 id="cta-heading" className="text-2xl font-bold mb-4">
+              Want an IT Job?
+            </h2>
+            <p className="mb-4 text-lg">Become a Salesforce Professional in 3 Months</p>
 
             <button
               type="button"
@@ -352,29 +346,30 @@ export default function JavaCoursePage() {
                   <path
                     d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
                     fill="currentColor"
-                  ></path>
+                  />
                 </svg>
               </span>
             </button>
-          </div>
+          </aside>
         </div>
 
         {/* Info Bar */}
-        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Offline Sales Force Training</strong> in
-            <strong> Chennai & Bangalore</strong>
-          </h3>
+        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md" aria-label="Training Locations">
+          <p className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Salesforce Training</strong> in
+            <strong> Chennai &amp; Bangalore</strong>
+          </p>
         </div>
+
         {/* Course Partners Section */}
-        <section className="py-16 bg-[#002855]">
+        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
-                <span className="text-purple-400">●</span> Our Course Partners{" "}
-                <span className="text-purple-400">●</span>
-              </h3>
-            </div>
+            <h2
+              id="partners-heading"
+              className="text-xl font-semibold uppercase tracking-wide text-white text-center mb-10"
+            >
+              <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
+            </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
               {[
@@ -431,11 +426,7 @@ export default function JavaCoursePage() {
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
                 >
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="h-12 object-contain"
-                  />
+                  <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
                 </motion.a>
               ))}
             </div>
@@ -443,10 +434,13 @@ export default function JavaCoursePage() {
         </section>
 
         {/* Salesforce Overview */}
-        <section className="px-0 py-16">
+        <section className="px-0 py-16" aria-labelledby="overview-heading">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
+              <h2
+                id="overview-heading"
+                className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5"
+              >
                 Overview of Salesforce Training Program
               </h2>
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
@@ -464,19 +458,19 @@ export default function JavaCoursePage() {
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span> Salesforce CRM
-                  fundamentals & cloud architecture.
+                  fundamentals, clouds &amp; platform architecture.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Admin:
-                  objects, relationships, flows, reports & dashboards.
+                  <span className="text-purple-600 mt-1">➤</span> Admin: objects,
+                  relationships, flows, reports &amp; dashboards.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span> Developer:
-                  Apex, Visualforce & Lightning Web Components (LWC).
+                  Apex, Visualforce &amp; Lightning Web Components (LWC).
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Real projects
-                  in sandbox; AppExchange tools & integrations.
+                  <span className="text-purple-600 mt-1">➤</span> Sandbox projects,
+                  AppExchange tools &amp; integrations.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span> Certification
@@ -488,14 +482,19 @@ export default function JavaCoursePage() {
         </section>
 
         {/* Salesforce CTA + Cards */}
-        <section className="w-full px-6 py-20 text-black ">
+        <section
+          className="w-full px-6 py-20 text-black bg-gradient-to-b from-[#005BAC] to-[#003c6a]"
+          aria-labelledby="become-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
+            <h2
+              id="become-heading"
+              className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white"
+            >
               Become a Certified Salesforce Professional
             </h2>
             <p className="text-lg md:text-xl text-white mb-6">
-              Learn Admin, Apex, Lightning, Integration & Deployment with
-              hands-on projects and job-oriented training.
+              Learn Admin, Apex, Lightning, Integration &amp; Deployment with hands-on projects and job-oriented training.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <button
@@ -510,31 +509,31 @@ export default function JavaCoursePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {/* Card 1 */}
-            <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+            <article className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                  alt="Course Highlights"
+                  alt=""
                   className="w-10 h-10 mb-4"
                 />
                 <h3 className="text-lg font-extrabold text-black mb-2">
                   Course Highlights
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                  <li>✓ Admin & Developer tracks</li>
+                  <li>✓ Admin &amp; Developer tracks</li>
                   <li>✓ Real-time CRM projects</li>
-                  <li>✓ Resume prep & mock interviews</li>
+                  <li>✓ Resume prep &amp; mock interviews</li>
                   <li>✓ Certification guidance</li>
                 </ul>
               </div>
-            </div>
+            </article>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+            <article className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
-                  alt="Tools You’ll Master"
+                  alt=""
                   className="w-10 h-10 mb-4"
                 />
                 <h3 className="text-lg font-extrabold text-black mb-2">
@@ -560,14 +559,14 @@ export default function JavaCoursePage() {
                   ))}
                 </div>
               </div>
-            </div>
+            </article>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+            <article className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
-                  alt="Topics Covered"
+                  alt=""
                   className="w-10 h-10 mb-4"
                 />
                 <h3 className="text-lg font-extrabold text-black mb-2">
@@ -591,47 +590,53 @@ export default function JavaCoursePage() {
                   ))}
                 </div>
               </div>
-            </div>
+            </article>
 
             {/* Card 4 */}
-            <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
+            <article className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
-                  alt="Key Skills You’ll Gain"
+                  alt=""
                   className="w-10 h-10 mb-4"
                 />
                 <h3 className="text-lg font-extrabold text-black mb-2">
                   Key Skills You’ll Gain
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                  <li>Build & configure Salesforce apps</li>
+                  <li>Build &amp; configure Salesforce apps</li>
                   <li>Automate business workflows</li>
-                  <li>Develop & deploy Apex/LWC</li>
+                  <li>Develop &amp; deploy Apex/LWC</li>
                   <li>Deliver real-time CRM solutions</li>
                 </ul>
               </div>
-            </div>
+            </article>
           </div>
         </section>
+
         {/* SYLLABUS */}
         <Syllabus
           title={course.title}
           accent={course.accent}
           meta={course.meta}
           preview={course.preview}
-          sections={course.sections} // ← REQUIRED
+          sections={course.sections}
           useExternalForm
-          cardMinH={400} // tweak to visually match your right cards
+          cardMinH={400}
           stickyOffset={110}
         />
+
         {/* === WHY CHOOSE US === */}
         <section
           id="why-choose-us"
           className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
+          aria-labelledby="why-heading"
         >
           <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            <h2
+              id="why-heading"
+              className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12"
+            >
               Why Choose Us
             </h2>
 
@@ -684,9 +689,9 @@ export default function JavaCoursePage() {
         </section>
 
         {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]">
+        <section id="testimonials" className="py-16 bg-[#fafafa]" aria-labelledby="testimonials-heading">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
+            <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
               What Our Students Say
             </h2>
             <p className="text-lg text-gray-600 mb-12">
@@ -694,147 +699,130 @@ export default function JavaCoursePage() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
+              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <blockquote className="text-gray-700 italic">
                   “Good place for job seekers. 💯 placement.”
-                </p>
-                <div className="mt-4">
+                </blockquote>
+                <figcaption className="mt-4">
                   <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
 
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
+              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <blockquote className="text-gray-700 italic">
                   “Good service and trusted organisation.”
-                </p>
-                <div className="mt-4">
+                </blockquote>
+                <figcaption className="mt-4">
                   <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
 
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
+              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <blockquote className="text-gray-700 italic">
                   “Best consultancy for people who seek jobs. 100% placement
                   guaranteed.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">
-                    Sudha Selvarajan
-                  </p>
-                </div>
-              </div>
+                </blockquote>
+                <figcaption className="mt-4">
+                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
+                </figcaption>
+              </figure>
             </div>
 
-            {/* optional internal link */}
-            <a
-              href="/reviews"
-              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-            >
+            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
               View more reviews →
             </a>
           </div>
         </section>
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white">
+        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            <h2
+              id="faq-heading"
+              className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10"
+            >
               Frequently Asked Questions
             </h2>
 
             <div className="space-y-4">
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Is this course suitable for absolute beginners?
+                  <h3 className="inline text-lg">Is this course suitable for absolute beginners?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from Core Java basics and gradually move to
-                  Spring Boot, REST APIs, and React.
+                  Yes. We start with CRM concepts and Salesforce fundamentals, then move into Admin and Developer topics.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do you provide placement assistance?
+                  <h3 className="inline text-lg">Do you provide placement assistance?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement
-                  assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement assistance with hiring partners.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  What are the class modes and timings?
+                  <h3 className="inline text-lg">What are the class modes and timings?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with
-                  weekday/weekend/fast-track options.
+                  Both online and classroom batches with weekday/weekend/fast-track options.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Will I build real projects?
+                  <h3 className="inline text-lg">Will I build real projects?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project
-                  covering APIs, DB integration, and a React UI.
+                  Yes. You’ll build sandbox apps, automation flows, and LWC/Apex features with deployment practice.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do I get a certificate?
+                  <h3 className="inline text-lg">Do I get a certificate?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project
-                  performance is also highlighted.
+                  Yes, a course completion certificate is provided, and we guide you for Salesforce certifications.
                 </p>
               </details>
             </div>
           </div>
         </section>
+
         {/* ENQUIRY FORM */}
-        <section className="w-full px-6 py-20 text-white">
+        <section className="w-full px-6 py-20 text-white" aria-labelledby="quote-heading">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
-            {/* LEFT: Additional Info Boxes (aligned like reference) */}
+            {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Comprehensive Curriculum
-                </h4>
+                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
                 <p className="text-black/90">
-                  Master Salesforce Admin, Apex, Visualforce, LWC, Flows,
-                  Reports & Dashboards with a structured path.
+                  Master Salesforce Admin, Apex, Visualforce, LWC, Flows, Reports &amp; Dashboards with a structured path.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Career-Oriented Training
-                </h4>
+                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
                 <p className="text-black/90">
-                  Learn from working professionals. Includes mock interviews,
-                  resume prep, and job assistance.
+                  Learn from working professionals. Includes mock interviews, resume prep, and job assistance.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Strong Placement Support
-                </h4>
+                <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
                 <p className="text-black/90">
-                  We support your placement journey with partner network and
-                  hiring drives.
+                  We support your placement journey with partner network and hiring drives.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
+                <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
-                  Build end-to-end Salesforce apps, automation flows and
-                  integration mini-projects.
+                  Build end-to-end Salesforce apps, automation flows and integration mini-projects.
                 </p>
               </div>
             </div>
@@ -842,9 +830,9 @@ export default function JavaCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5" id="quote-heading">
                   Get a Free Training Quote
-                </h3>
+                </h2>
 
                 {/* Mode Toggle */}
                 <div className="flex justify-center gap-3 mb-6">
@@ -877,6 +865,7 @@ export default function JavaCoursePage() {
                   onSubmit={handleSubmit}
                   noValidate
                   className="grid grid-cols-1 gap-2"
+                  ref={formRef}
                 >
                   {/* Name */}
                   <div>
@@ -926,8 +915,7 @@ export default function JavaCoursePage() {
                     </div>
                   </div>
 
-                  {/* Phone + Batch */}
-
+                  {/* Phone */}
                   <div>
                     <input
                       type="tel"
@@ -996,9 +984,9 @@ export default function JavaCoursePage() {
                         "Scrum Master",
                         "Business Analyst",
                         "Product Management",
-                      ].map((course) => (
-                        <option key={course} value={course}>
-                          {course}
+                      ].map((c) => (
+                        <option key={c} value={c}>
+                          {c}
                         </option>
                       ))}
                     </select>
@@ -1010,6 +998,7 @@ export default function JavaCoursePage() {
                     </div>
                   </div>
 
+                  {/* Message */}
                   <div>
                     <textarea
                       rows={2}
@@ -1042,9 +1031,7 @@ export default function JavaCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading"
-                        ? "opacity-70 cursor-not-allowed"
-                        : ""
+                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
@@ -1061,9 +1048,14 @@ export default function JavaCoursePage() {
             </div>
           </div>
         </section>
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
+
+        {/* Popular Courses */}
+        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4" aria-labelledby="popular-heading">
           <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            <h2
+              id="popular-heading"
+              className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4"
+            >
               Popular Courses
             </h2>
             <p className="text-gray-700 text-lg">
@@ -1072,35 +1064,35 @@ export default function JavaCoursePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {courses.map((course, index) => (
+            {courses.map((c, index) => (
               <Link
-                to={`/all-courses/${encodeURIComponent(course.title)}`}
+                to={`/all-courses/${encodeURIComponent(c.title)}`}
                 key={index}
                 className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
+                aria-labelledby={`course-${index}-title`}
               >
                 <div className="w-16 h-16 mb-4">
                   <img
-                    src={course.image}
-                    alt={course.title}
+                    src={c.image}
+                    alt={c.title}
                     className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
 
-                <h3 className="text-md font-bold text-gray-800 text-center">
-                  {course.title}
+                <h3 id={`course-${index}-title`} className="text-md font-bold text-gray-800 text-center">
+                  {c.title}
                 </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
 
                 <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                   <FaUserGraduate className="text-gray-500" />
                   <span>
-                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
-                    Learners
+                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners
                   </span>
                 </div>
 
-                <div className="flex justify-center items-center mt-1 text-yellow-500">
+                <div className="flex justify-center items-center mt-1 text-yellow-500" aria-label="5 star rating">
                   {[...Array(5)].map((_, i) => (
                     <AiFillStar key={i} />
                   ))}
@@ -1109,16 +1101,10 @@ export default function JavaCoursePage() {
             ))}
           </div>
         </section>
+
         <FeedbackSection />
-        {/* Toasts */}
-        <ToastContainer
-          newestOnTop
-          limit={2}
-          className="!z-[9999]"
-          toastClassName={() => "rounded-xl shadow-md"}
-          bodyClassName={() => "text-[15px] font-medium"}
-          theme="colored"
-        />
+
+        {/* Auto popup uses same handlers/state */}
         <AutoPopupQuoteForm
           status={status}
           error={error}

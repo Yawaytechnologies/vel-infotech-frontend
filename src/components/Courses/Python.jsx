@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaLaptop, FaChalkboardTeacher,FaUserGraduate } from "react-icons/fa";
+import { FaLaptop, FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
@@ -18,37 +18,38 @@ import Seo from "../../seo/Seo"; // ✅ added
 const pythonCourseJsonLd = {
   "@context": "https://schema.org",
   "@type": "Course",
-  "name": "Python Full Stack Developer Course",
-  "description": "Learn Python, Django, React, and MySQL to build complete web apps. Become a job-ready Python Full Stack Developer with hands-on projects and training.",
-  "provider": {
+  name: "Python Full Stack Developer Course",
+  description:
+    "Learn Python, Django, React, and MySQL to build complete web apps. Become a job-ready Python Full Stack Developer with hands-on projects and training.",
+  provider: {
     "@type": "Organization",
-    "name": "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/python-full-stack-developer-course",
+    name: "Vel InfoTech",
+    url: "https://www.vellinfotech.com/all-courses/python-full-stack-developer-course",
   },
-  "image": "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
-  "hasCourseInstance": [
+  image: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+  hasCourseInstance: [
     {
       "@type": "CourseInstance",
-      "courseMode": "Onsite",
-      "location": { "@type": "Place", "name": "Vel InfoTech — Chennai" },
-      "offers": {
+      courseMode: "Onsite",
+      location: { "@type": "Place", name: "Vel InfoTech — Chennai" },
+      offers: {
         "@type": "Offer",
-        "priceCurrency": "INR",
-        "availability": "https://schema.org/InStock",
-        "url": "https://vellinfotech.com/all-courses/python-full-stack-development"
-      }
+        priceCurrency: "INR",
+        availability: "https://schema.org/InStock",
+        url: "https://www.vellinfotech.com/all-courses/python-full-stack-development",
+      },
     },
     {
       "@type": "CourseInstance",
-      "courseMode": "Online",
-      "offers": {
+      courseMode: "Online",
+      offers: {
         "@type": "Offer",
-        "priceCurrency": "INR",
-        "availability": "https://schema.org/InStock",
-        "url": "https://vellinfotech.com/all-courses/python-full-stack-development"
-      }
-    }
-  ]
+        priceCurrency: "INR",
+        availability: "https://schema.org/InStock",
+        url: "https://www.vellinfotech.com/all-courses/python-full-stack-development",
+      },
+    },
+  ],
 };
 
 export default function PythonCoursePage() {
@@ -230,10 +231,19 @@ export default function PythonCoursePage() {
   }
 
   const courses = [
-    { title: "Java", image: "https://cdn-icons-png.flaticon.com/512/226/226777.png" },
-    { title: "FullStackDevelopement", image: "https://cdn-icons-png.flaticon.com/512/16990/16990193.png" },
+    {
+      title: "Java",
+      image: "https://cdn-icons-png.flaticon.com/512/226/226777.png",
+    },
+    {
+      title: "FullStackDevelopement",
+      image: "https://cdn-icons-png.flaticon.com/512/16990/16990193.png",
+    },
     { title: "SoftwareTesting", image: "https://cdn.simpleicons.org/cypress" },
-    { title: "SeleniumTesting", image: "https://cdn.simpleicons.org/selenium/43B02A" },
+    {
+      title: "SeleniumTesting",
+      image: "https://cdn.simpleicons.org/selenium/43B02A",
+    },
   ];
 
   return (
@@ -248,24 +258,34 @@ export default function PythonCoursePage() {
         jsonLd={pythonCourseJsonLd}
       />
 
-      <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
+      <section
+        className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20"
+        aria-labelledby="course-title"
+      >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
+          {/* LEFT: Content (hero) */}
           <div className="flex-1">
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">
-                Python Full Stack Developer Course
-              </span>
+            {/* Eyebrow line: visually big, not a heading (keeps SEO clean) */}
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+
+            {/* H1 — keyword only, whole line yellow */}
+            <h1
+              id="course-title"
+              className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400"
+            >
+              Python Full Stack Developer Course
             </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
                 ✅ Join the <strong>Best Python Training Institute</strong> to
-                master Core & Advanced Python.
+                master Core &amp; Advanced Python.
               </li>
               <li>
-                ✅ Learn Python Full Stack –{" "}
+                ✅ Learn Python Full Stack —{" "}
                 <strong>Django, Flask, React, Node.js</strong>.
               </li>
               <li>
@@ -273,7 +293,7 @@ export default function PythonCoursePage() {
                 <strong>coding experience</strong>.
               </li>
               <li>
-                ✅ Choose <strong>flexible learning modes</strong> – Weekday /
+                ✅ Choose <strong>flexible learning modes</strong> — Weekday /
                 Weekend / Fast-track.
               </li>
               <li>
@@ -281,20 +301,20 @@ export default function PythonCoursePage() {
                 <strong>Python Developer Certification</strong>.
               </li>
               <li>
-                ✅ Career support: Resume building, mock interviews & job
+                ✅ Career support: Resume building, mock interviews &amp; job
                 referrals.
               </li>
             </ul>
 
             <button
               className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
-                mt-8
-                before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
-                after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
-                hover:decoration-2 hover:text-rose-300
-                duration-500 hover:duration-500 before:duration-500 after:duration-500
-                group-hover:before:duration-500 group-hover:after:duration-500
-                hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
+      mt-8
+      before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
+      after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
+      hover:decoration-2 hover:text-rose-300
+      duration-500 hover:duration-500 before:duration-500 after:duration-500
+      group-hover:before:duration-500 group-hover:after:duration-500
+      hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
               type="button"
               onClick={() => {
                 const formSection = document.getElementById("enquiry-form");
@@ -316,11 +336,17 @@ export default function PythonCoursePage() {
 
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
+            {/* Use H3 here to keep a single H1 on the page */}
             <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
             <p className="mb-4 text-lg">
-              Master <strong>Python Full Stack Development</strong> in just 3 months with 
-              <strong> hands-on coding, real-world projects, and 100% placement assistance </strong> 
-               from Vel InfoTech.
+              Master <strong>Python Full Stack Development</strong> in just 3
+              months with
+              <strong>
+                {" "}
+                hands-on coding, real-world projects, and 100% placement
+                assistance{" "}
+              </strong>
+              from Vel InfoTech.
             </p>
 
             <button
@@ -353,22 +379,25 @@ export default function PythonCoursePage() {
           </div>
         </div>
 
-        {/* Info Bar */}
+        {/* Info Bar (paragraph, not heading, for SEO cleanliness) */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Offline Python Training</strong> in 
-            <strong> Chennai & Bangalore.</strong> 
-          </h3>
+          <p className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Python Training</strong> in
+            <strong> Chennai &amp; Bangalore.</strong>
+          </p>
         </div>
 
         {/* Course Partners */}
-        <section className="py-16 bg-[#002855]">
+        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+              <h2
+                id="partners-heading"
+                className="text-xl font-semibold uppercase tracking-wide text-white"
+              >
                 <span className="text-purple-400">●</span> Our Course Partners{" "}
                 <span className="text-purple-400">●</span>
-              </h3>
+              </h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -438,21 +467,24 @@ export default function PythonCoursePage() {
         </section>
 
         {/* PYTHON overview */}
-        <section className="px-0 py-16">
+        <section className="px-0 py-16" aria-labelledby="overview-heading">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10 text-gray-900">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-5">
+              <h2
+                id="overview-heading"
+                className="text-3xl md:text-4xl font-bold text-center mb-5"
+              >
                 Overview of Python Full Stack Course
               </h2>
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
               <p className="text-base md:text-lg mb-8 leading-relaxed text-center md:text-left">
-                Our Python Full Stack Training program is designed to make you an
-                industry-ready developer with deep understanding of both frontend
-                and backend development. The course covers Python, Django/Flask,
-                REST APIs, MySQL, HTML, CSS, JavaScript, React.js, and more.
-                You’ll build real-world applications, learn deployment practices,
-                and receive comprehensive interview preparation.
+                Our Python Full Stack Training program is designed to make you
+                an industry-ready developer with deep understanding of both
+                frontend and backend development. The course covers Python,
+                Django/Flask, REST APIs, MySQL, HTML, CSS, JavaScript, React.js,
+                and more. You’ll build real-world applications, learn deployment
+                practices, and receive comprehensive interview preparation.
               </p>
 
               <h3 className="text-xl md:text-2xl font-bold mb-5">
@@ -466,8 +498,8 @@ export default function PythonCoursePage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Build robust backends using Django and Flask, and integrate them
-                  with MySQL for data persistence.
+                  Build robust backends using Django and Flask, and integrate
+                  them with MySQL for data persistence.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
@@ -495,14 +527,17 @@ export default function PythonCoursePage() {
         </section>
 
         {/* ======= RETURNED SECTION WITH "KNOW MORE" BUTTON ======= */}
-        <section className="w-full px-6 py-20">
+        <section className="w-full px-6 py-20" aria-labelledby="become-heading">
           <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
+            <h2
+              id="become-heading"
+              className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white"
+            >
               Become a Full Stack Python Developer
             </h2>
             <p className="text-lg md:text-xl text-white/80 mb-6">
-              Master Python, Django, REST APIs, React, and more through practical,
-              expert-led training.
+              Master Python, Django, REST APIs, React, and more through
+              practical, expert-led training.
             </p>
             <div className="flex justify-center">
               <button
@@ -619,54 +654,76 @@ export default function PythonCoursePage() {
           </div>
         </section>
 
-        <Syllabus
-          title={course.title}
-          accent={course.accent}
-          meta={course.meta}
-          preview={course.preview}
-          sections={course.sections} // ← REQUIRED
-          useExternalForm
-          cardMinH={400} // tweak to visually match your right cards
-          stickyOffset={110}
-        />
+        {/* Accessible heading for Syllabus section to keep heading order */}
+        <div id="syllabus" className="scroll-mt-[110px]" aria-labelledby="syllabus-heading">
+          <h2 id="syllabus-heading" className="sr-only">
+            Python Full Stack Course Syllabus
+          </h2>
+          <Syllabus
+            title={course.title}
+            accent={course.accent}
+            meta={course.meta}
+            preview={course.preview}
+            sections={course.sections} // ← REQUIRED
+            useExternalForm
+            cardMinH={400} // tweak to visually match your right cards
+            stickyOffset={110}
+          />
+        </div>
 
         {/* === WHY CHOOSE US === */}
-        <section id="why-choose-us" className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800">
+        <section
+          id="why-choose-us"
+          className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
+          aria-labelledby="why-heading"
+        >
           <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            <h2 id="why-heading" className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
               Why Choose Us
             </h2>
 
             <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Expert Trainers
+                </h3>
                 <p className="text-gray-600">
-                  Our mentors have deep industry experience and share practical, hands-on insights.
+                  Our mentors have deep industry experience and share practical,
+                  hands-on insights.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Flexible Learning Modes</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Flexible Learning Modes
+                </h3>
                 <p className="text-gray-600">
-                  Learn in-person or online with weekday, weekend, and fast-track options.
+                  Learn in-person or online with weekday, weekend, and
+                  fast-track options.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Job-Ready Curriculum</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Job-Ready Curriculum
+                </h3>
                 <p className="text-gray-600">
-                  Real projects, labs, and interview prep aligned to what employers expect.
+                  Real projects, labs, and interview prep aligned to what
+                  employers expect.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Career Support</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Career Support
+                </h3>
                 <p className="text-gray-600">
-                  Resume building, mock interviews, and placement assistance with hiring partners.
+                  Resume building, mock interviews, and placement assistance
+                  with hiring partners.
                 </p>
               </div>
             </div>
@@ -674,23 +731,32 @@ export default function PythonCoursePage() {
         </section>
 
         {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]">
+        <section id="testimonials" className="py-16 bg-[#fafafa]" aria-labelledby="testimonials-heading">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">What Our Students Say</h2>
+            <h2
+              id="testimonials-heading"
+              className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8"
+            >
+              What Our Students Say
+            </h2>
             <p className="text-lg text-gray-600 mb-12">
               Our success is measured by our learners’ success.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good place for job seekers. 💯 placement.”</p>
+                <p className="text-gray-700 italic">
+                  “Good place for job seekers. 💯 placement.”
+                </p>
                 <div className="mt-4">
                   <p className="font-semibold text-gray-900">Thennarasu S</p>
                 </div>
               </div>
 
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good service and trusted organisation.”</p>
+              <div className="bg-white p-8 rounded-XL shadow-lg text-left">
+                <p className="text-gray-700 italic">
+                  “Good service and trusted organisation.”
+                </p>
                 <div className="mt-4">
                   <p className="font-semibold text-gray-900">Benjamin Andrew</p>
                 </div>
@@ -698,71 +764,95 @@ export default function PythonCoursePage() {
 
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
                 <p className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
+                  “Best consultancy for people who seek jobs. 100% placement
+                  guaranteed.”
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
+                  <p className="font-semibold text-gray-900">
+                    Sudha Selvarajan
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* optional internal link */}
-            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
+            <a
+              href="/reviews"
+              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
+            >
               View more reviews →
             </a>
           </div>
         </section>
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white">
+        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            <h2
+              id="faq-heading"
+              className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10"
+            >
               Frequently Asked Questions
             </h2>
 
             <div className="space-y-4">
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Is this course suitable for absolute beginners?
+                  <h3 className="inline text-inherit font-semibold">
+                    Is this course suitable for absolute beginners?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from Core Java basics and gradually move to Spring Boot, REST APIs, and React.
+                  Yes. We start from Python fundamentals and gradually move to
+                  Django/Flask backends, REST APIs, databases, and React.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do you provide placement assistance?
+                  <h3 className="inline text-inherit font-semibold">
+                    Do you provide placement assistance?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement
+                  assistance with hiring partners.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  What are the class modes and timings?
+                  <h3 className="inline text-inherit font-semibold">
+                    What are the class modes and timings?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with weekday/weekend/fast-track options.
+                  Both online and classroom batches with
+                  weekday/weekend/fast-track options.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Will I build real projects?
+                  <h3 className="inline text-inherit font-semibold">
+                    Will I build real projects?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project covering APIs, DB integration, and a React UI.
+                  Yes. You’ll work on guided labs and a capstone project
+                  covering APIs, DB integration, and a React UI.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do I get a certificate?
+                  <h3 className="inline text-inherit font-semibold">
+                    Do I get a certificate?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project performance is also highlighted.
+                  Yes, a course completion certificate is provided. Project
+                  performance is also highlighted.
                 </p>
               </details>
             </div>
@@ -770,37 +860,37 @@ export default function PythonCoursePage() {
         </section>
 
         {/* ENQUIRY FORM (validated + aligned) */}
-        <section className="w-full px-6 py-20 text-white">
+        <section className="w-full px-6 py-20 text-white" aria-labelledby="quote-heading">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-10">
             {/* LEFT boxes */}
             <div className="w-full lg:w-1/2 flex flex-col gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Comprehensive Curriculum
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Master Python Full Stack with structured modules covering
                   Python, Django/Flask, React, MySQL, and more.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Career-Oriented Training
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Learn from working professionals. Includes mock interviews,
                   resume prep, and job assistance.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">100% Job Guarantee</h4>
+                <h3 className="text-xl font-bold mb-2">100% Job Guarantee</h3>
                 <p className="text-black/90">
                   We assure placement support post training with strong partner
                   network and hiring drives.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
+                <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
                   Gain real-world experience with capstone projects and
                   industry-based assignments included in every module.
@@ -811,9 +901,9 @@ export default function PythonCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2 id="quote-heading" className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                   Get a Free Training Quote
-                </h3>
+                </h2>
 
                 {/* Mode Toggle */}
                 <div className="flex justify-center gap-3 mb-6">
@@ -896,7 +986,6 @@ export default function PythonCoursePage() {
                   </div>
 
                   {/* Phone + Batch */}
-
                   <div>
                     <input
                       type="tel"
@@ -1011,7 +1100,9 @@ export default function PythonCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
@@ -1029,9 +1120,12 @@ export default function PythonCoursePage() {
           </div>
         </section>
 
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
+        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4" aria-labelledby="popular-heading">
           <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            <h2
+              id="popular-heading"
+              className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4"
+            >
               Popular Courses
             </h2>
             <p className="text-gray-700 text-lg">
@@ -1055,12 +1149,17 @@ export default function PythonCoursePage() {
                   />
                 </div>
 
-                <h3 className="text-md font-bold text-gray-800 text-center">{course.title}</h3>
+                <h3 className="text-md font-bold text-gray-800 text-center">
+                  {course.title}
+                </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
 
                 <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                   <FaUserGraduate className="text-gray-500" />
-                  <span>{Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners</span>
+                  <span>
+                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                    Learners
+                  </span>
                 </div>
 
                 <div className="flex justify-center items-center mt-1 text-yellow-500">

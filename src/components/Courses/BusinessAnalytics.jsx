@@ -208,7 +208,7 @@ export default function JavaCoursePage() {
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/business-analytics-course",
+      url: "https://www.vellinfotech.com/all-courses/business-analytics-course",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -252,10 +252,14 @@ export default function JavaCoursePage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">Business Analytics</span>
-            </h2>
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+
+            {/* H1 — keyword only, whole line yellow */}
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
+              Business Analytics
+            </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
@@ -313,7 +317,7 @@ export default function JavaCoursePage() {
 
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
+            <h2 className="text-2xl font-bold mb-4">WANT IT JOB?</h2>
             <p className="mb-4 text-lg">
               Become a Business Analytics Expert in 3 Months
             </p>
@@ -345,21 +349,20 @@ export default function JavaCoursePage() {
 
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering{" "}
-            <strong>Online and Offline Business Analytics Training</strong> in
+          <p className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Business Analytics Training</strong> in
             <strong> Chennai & Bangalore</strong>
-          </h3>
+          </p>
         </div>
 
         {/* Course Partners Section */}
         <section className="py-16 bg-[#002855]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+              <h2 className="text-xl font-semibold uppercase tracking-wide text-white">
                 <span className="text-purple-400">●</span> Our Course Partners{" "}
                 <span className="text-purple-400">●</span>
-              </h3>
+              </h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -689,7 +692,7 @@ export default function JavaCoursePage() {
                   “Good place for job seekers. 💯 placement.”
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
+                  <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
                 </div>
               </div>
 
@@ -698,7 +701,7 @@ export default function JavaCoursePage() {
                   “Good service and trusted organisation.”
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
+                  <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
                 </div>
               </div>
 
@@ -708,9 +711,9 @@ export default function JavaCoursePage() {
                   guaranteed.”
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">
+                  <h3 className="font-semibold text-gray-900">
                     Sudha Selvarajan
-                  </p>
+                  </h3>
                 </div>
               </div>
             </div>
@@ -792,9 +795,9 @@ export default function JavaCoursePage() {
             {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Comprehensive Curriculum
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Master Business Analytics with structured modules covering
                   Excel, SQL, Power BI/Tableau, and Statistics.
@@ -802,9 +805,9 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Career-Oriented Training
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Learn from working professionals. Includes mock interviews,
                   resume prep, and job assistance.
@@ -812,9 +815,9 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Strong Placement Support
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Get guidance and referrals via our partner network and hiring
                   drives.
@@ -822,7 +825,7 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
+                <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
                   Gain real-world experience with capstone projects and business
                   case assignments.
@@ -833,9 +836,9 @@ export default function JavaCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                   Get a Free Training Quote
-                </h3>
+                </h2>
 
                 {/* Mode Toggle */}
                 <div className="flex justify-center gap-3 mb-6">
@@ -918,7 +921,6 @@ export default function JavaCoursePage() {
                   </div>
 
                   {/* Phone + Batch */}
-
                   <div>
                     <input
                       type="tel"

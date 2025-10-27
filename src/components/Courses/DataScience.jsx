@@ -186,27 +186,47 @@ export default function DataScienceCoursePage() {
     }
   }
 
-  // ----- SEO JSON-LD -----
+  // ----- SEO JSON-LD (Vel in text, vell only in URLs) -----
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
     name: "Data Science Training Program",
     description:
       "Learn data analysis, Python, machine learning, and visualization. Gain hands-on experience to become a job-ready data scientist with real-world projects.",
+    image: "https://www.vellinfotech.com/images/courses/datascience-og.jpg",
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/data-science-training-program",
+      url: "https://www.vellinfotech.com/all-courses/data-science-training-program",
+      logo: "https://www.vellinfotech.com/logo.png",
     },
-    hasCourseInstance: {
-      "@type": "CourseInstance",
-      courseMode: mode === "online" ? "online" : "inPerson",
-      location: {
-        "@type": "Place",
-        name: "Vel InfoTech — Chennai & Bangalore",
-        address: "Chennai, Tamil Nadu & Bangalore, Karnataka, India",
+    hasCourseInstance: [
+      {
+        "@type": "CourseInstance",
+        courseMode: "Onsite",
+        location: {
+          "@type": "Place",
+          name: "Vel InfoTech — Chennai & Bangalore",
+          address: "Chennai, Tamil Nadu & Bangalore, Karnataka, India",
+        },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: "https://www.vellinfotech.com/all-courses/data-science-training-program",
+        },
       },
-    },
+      {
+        "@type": "CourseInstance",
+        courseMode: "Online",
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: "https://www.vellinfotech.com/all-courses/data-science-training-program",
+        },
+      },
+    ],
   };
 
   const courses = [
@@ -243,12 +263,15 @@ export default function DataScienceCoursePage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">
-                Data Science Training Program
-              </span>
-            </h2>
+            {/* Marketing line (not H1) */}
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+
+            {/* H1 — keyword only, whole line yellow */}
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
+              Data Science Training Program
+            </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
@@ -256,7 +279,7 @@ export default function DataScienceCoursePage() {
                 master analytics and machine learning skills.
               </li>
               <li>
-                ✅ Learn the full stack –{" "}
+                ✅ Learn the full stack —{" "}
                 <strong>Python, Pandas, NumPy, ML, DL, Tableau</strong>.
               </li>
               <li>
@@ -264,16 +287,14 @@ export default function DataScienceCoursePage() {
                 <strong>hands-on model development</strong>.
               </li>
               <li>
-                ✅ Choose <strong>flexible modes</strong> – Weekday / Weekend /
+                ✅ Choose <strong>flexible modes</strong> — Weekday / Weekend /
                 Fast-track.
               </li>
               <li>
-                ✅ Earn a recognized <strong>Data Science Certification</strong>
-                .
+                ✅ Earn a recognized <strong>Data Science Certification</strong>.
               </li>
               <li>
-                ✅ Career support: Resume building, mock interviews & job
-                referrals.
+                ✅ Career support: <strong>resume building, mock interviews & job referrals</strong>.
               </li>
             </ul>
 
@@ -309,7 +330,8 @@ export default function DataScienceCoursePage() {
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
             <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
             <p className="mb-4 text-lg">
-              Become a Data Science Professional in 3 Months
+              Become a Data Science Professional in 3 Months with{" "}
+              <strong>Vel InfoTech</strong>
             </p>
 
             <button
@@ -345,8 +367,7 @@ export default function DataScienceCoursePage() {
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
           <h3 className="text-center text-white font-bold text-xl md:text-2xl">
             Offering <strong>Online and Offline Data Science Training</strong>{" "}
-            in
-            <strong> Chennai & Bangalore</strong>
+            in<strong> Chennai & Bangalore.</strong>
           </h3>
         </div>
 
@@ -394,12 +415,14 @@ export default function DataScienceCoursePage() {
                 },
                 {
                   name: "IBM",
-                  logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                  logo:
+                    "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
                   link: "https://www.ibm.com/",
                 },
                 {
                   name: "Slack",
-                  logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                  logo:
+                    "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
                   link: "https://slack.com/",
                 },
               ].map((partner, index) => (
@@ -483,7 +506,7 @@ export default function DataScienceCoursePage() {
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
             Become a Certified Data Science Professional
           </h2>
-          <p className="text-lg md:text-xl text-white mb-6">
+        <p className="text-lg md:text-xl text-white mb-6">
             Master Data Analysis, Machine Learning, Python, SQL, and more
             through expert-led, project-based learning.
           </p>

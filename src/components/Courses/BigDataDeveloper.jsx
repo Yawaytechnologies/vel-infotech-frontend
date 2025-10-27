@@ -167,7 +167,6 @@ export default function JavaCoursePage() {
       mobile: form.phone.trim(), // API key is 'mobile'
       course: form.course.trim(),
       message: form.message.trim(),
-      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
     try {
@@ -199,6 +198,8 @@ export default function JavaCoursePage() {
       });
     }
   }
+
+  // ✅ SEO: JSON-LD (updates if mode changes)
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -208,7 +209,7 @@ export default function JavaCoursePage() {
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/big-data-developer-program",
+      url: "https://www.vellinfotech.com/all-courses/big-data-developer-program",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -220,6 +221,7 @@ export default function JavaCoursePage() {
       },
     },
   };
+
   const courses = [
     {
       title: "SeleniumTesting",
@@ -239,6 +241,7 @@ export default function JavaCoursePage() {
     },
     ,
   ];
+
   return (
     <>
       {/* ✅ Head-only SEO (no visual change) */}
@@ -250,17 +253,19 @@ export default function JavaCoursePage() {
         type="article"
         jsonLd={courseJsonLd}
       />
+
       <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">
-                Big Data Developer Program
-              </span>
-            </h2>
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
 
+            {/* H1 — keyword only, whole line yellow */}
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
+            Big Data Developer Program
+            </h1>
             <ul className="space-y-3 mt-6 text-lg">
               <li>
                 ✅ Join the <strong>Top Big Data Institute</strong> to become a
@@ -283,8 +288,8 @@ export default function JavaCoursePage() {
                 <strong>Big Data Developer Certification</strong>.
               </li>
               <li>
-                ✅ Career support: Hands-on project experience, resume prep &
-                job interview assistance.
+                ✅ Career support: Hands-on project experience, resume prep & job
+                interview assistance.
               </li>
             </ul>
 
@@ -314,7 +319,7 @@ export default function JavaCoursePage() {
 
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
+            <h2 className="text-2xl font-bold mb-4">WANT IT JOB?</h2>
             <p className="mb-4 text-lg">
               Become a Big Data Developer in 3 Months
             </p>
@@ -343,22 +348,23 @@ export default function JavaCoursePage() {
             </button>
           </div>
         </div>
+
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering{" "}
-            <strong>Online and Offline BigData Developer Training</strong> in
+          <p className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline BigData Developer Training</strong> in
             <strong> Chennai & Bangalore</strong>
-          </h3>
+          </p>
         </div>
+
         {/* Course Partners Section */}
         <section className="py-16 bg-[#002855]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+              <h2 className="text-xl font-semibold uppercase tracking-wide text-white">
                 <span className="text-purple-400">●</span> Our Course Partners{" "}
                 <span className="text-purple-400">●</span>
-              </h3>
+              </h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -426,6 +432,7 @@ export default function JavaCoursePage() {
             </div>
           </div>
         </section>
+
         {/* BIG DATA overview */}
         <section className="px-0 py-16">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
@@ -473,6 +480,7 @@ export default function JavaCoursePage() {
             </div>
           </div>
         </section>
+
         {/* Big Data CTA + Cards */}
         <section className="w-full px-6 py-20 text-black bg-gradient-to-b from-[#005BAC] to-[#003c6a]">
           <div className="max-w-7xl mx-auto text-center mb-16">
@@ -599,6 +607,7 @@ export default function JavaCoursePage() {
             </div>
           </div>
         </section>
+
         {/* SYLLABUS */}
         <Syllabus
           title={course.title}
@@ -610,6 +619,7 @@ export default function JavaCoursePage() {
           cardMinH={400} // tweak to visually match your right cards
           stickyOffset={110}
         />
+
         {/* === WHY CHOOSE US === */}
         <section
           id="why-choose-us"
@@ -667,6 +677,7 @@ export default function JavaCoursePage() {
             </div>
           </div>
         </section>
+
         {/* === TESTIMONIALS === */}
         <section id="testimonials" className="py-16 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto px-6 text-center">
@@ -683,7 +694,7 @@ export default function JavaCoursePage() {
                   “Good place for job seekers. 💯 placement.”
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
+                  <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
                 </div>
               </div>
 
@@ -692,7 +703,7 @@ export default function JavaCoursePage() {
                   “Good service and trusted organisation.”
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
+                  <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
                 </div>
               </div>
 
@@ -702,9 +713,9 @@ export default function JavaCoursePage() {
                   guaranteed.”
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">
+                  <h3 className="font-semibold text-gray-900">
                     Sudha Selvarajan
-                  </p>
+                  </h3>
                 </div>
               </div>
             </div>
@@ -718,6 +729,7 @@ export default function JavaCoursePage() {
             </a>
           </div>
         </section>
+
         {/* === FAQ === */}
         <section id="faq" className="py-16 bg-white">
           <div className="max-w-5xl mx-auto px-6">
@@ -778,15 +790,16 @@ export default function JavaCoursePage() {
             </div>
           </div>
         </section>
+
         {/* ENQUIRY FORM */}
         <section className="w-full px-6 py-20 text-white">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
             {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Comprehensive Curriculum
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Master Big Data with modules covering Hadoop, Spark, Kafka,
                   Hive, NoSQL and real-time streaming.
@@ -794,9 +807,9 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Career-Oriented Training
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Learn from working professionals. Includes mock interviews,
                   resume prep, and job assistance.
@@ -804,9 +817,9 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Strong Placement Support
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   We support your placement journey with partner network and
                   hiring drives.
@@ -814,7 +827,7 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
+                <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
                   Build end-to-end batch & streaming pipelines and domain-based
                   capstones.
@@ -825,9 +838,9 @@ export default function JavaCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                   Get a Free Training Quote
-                </h3>
+                </h2>
 
                 {/* Mode Toggle */}
                 <div className="flex justify-center gap-3 mb-6">
@@ -910,7 +923,6 @@ export default function JavaCoursePage() {
                   </div>
 
                   {/* Phone + Batch */}
-
                   <div>
                     <input
                       type="tel"
@@ -1044,7 +1056,8 @@ export default function JavaCoursePage() {
             </div>
           </div>
         </section>
-        {/* Feedback Section */}{" "}
+
+        {/* Popular Courses */}
         <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
           <div className="max-w-7xl mx-auto text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
@@ -1093,7 +1106,9 @@ export default function JavaCoursePage() {
             ))}
           </div>
         </section>
+
         <FeedbackSection />
+
         {/* Toasts */}
         <ToastContainer
           newestOnTop
@@ -1103,6 +1118,7 @@ export default function JavaCoursePage() {
           bodyClassName={() => "text-[15px] font-medium"}
           theme="colored"
         />
+
         <AutoPopupQuoteForm
           status={status}
           error={error}

@@ -25,7 +25,6 @@ export default function ScrumMaster() {
     name: "",
     email: "",
     phone: "",
-
     course: "",
     message: "",
   });
@@ -77,7 +76,6 @@ export default function ScrumMaster() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -133,7 +131,6 @@ export default function ScrumMaster() {
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
@@ -159,15 +156,13 @@ export default function ScrumMaster() {
       return;
     }
 
-    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
     const payload = {
-      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      mode: (mode || "class_room").toUpperCase(),
       name: form.name.trim(),
       email: form.email.trim(),
-      mobile: form.phone.trim(), // API key is 'mobile'
+      mobile: form.phone.trim(),
       course: form.course.trim(),
       message: form.message.trim(),
-      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
     try {
@@ -183,7 +178,6 @@ export default function ScrumMaster() {
         name: "",
         email: "",
         phone: "",
-
         course: "",
         message: "",
       });
@@ -199,7 +193,8 @@ export default function ScrumMaster() {
       });
     }
   }
-  // ✅ SEO: JSON-LD (updates if mode changes)
+
+  // ✅ SEO: JSON-LD — URL set to www.vellinfotech.com
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -209,7 +204,7 @@ export default function ScrumMaster() {
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      url: "https://www.velinfotech.com/all-courses/scrum-master-program",
+      url: "https://www.vellinfotech.com/all-courses/scrum-master-program",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -221,24 +216,14 @@ export default function ScrumMaster() {
       },
     },
   };
+
   const courses = [
-    {
-      title: "Sql",
-      image: "https://cdn-icons-png.flaticon.com/512/4248/4248449.png",
-    },
-    {
-      title: "DataScienceAi",
-      image: "https://cdn-icons-png.flaticon.com/512/8100/8100831.png",
-    },
-    {
-      title: "BigDataDeveloper",
-      image: "https://cdn-icons-png.flaticon.com/512/4354/4354656.png",
-    },
-    {
-      title: "BusinessAnalytics",
-      image: "https://cdn-icons-png.flaticon.com/512/8955/8955275.png",
-    },
+    { title: "Sql", image: "https://cdn-icons-png.flaticon.com/512/4248/4248449.png" },
+    { title: "DataScienceAi", image: "https://cdn-icons-png.flaticon.com/512/8100/8100831.png" },
+    { title: "BigDataDeveloper", image: "https://cdn-icons-png.flaticon.com/512/4354/4354656.png" },
+    { title: "BusinessAnalytics", image: "https://cdn-icons-png.flaticon.com/512/8955/8955275.png" },
   ];
+
   return (
     <>
       {/* ✅ Head-only SEO (no visual change) */}
@@ -250,49 +235,38 @@ export default function ScrumMaster() {
         type="article"
         jsonLd={courseJsonLd}
       />
+
       <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">Scrum Master Program</span>
-            </h2>
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+
+            {/* H1 — Primary keyword */}
+            <h1
+              id="course-title"
+              className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400"
+            >
+              Scrum Master Program
+            </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
-              <li>
-                ✅ Learn the <strong>Agile & Scrum framework</strong> from
-                industry experts.
-              </li>
+              <li>✅ Learn the <strong>Agile & Scrum framework</strong> from industry experts.</li>
               <li>
                 ✅ Master key practices –{" "}
-                <strong>
-                  Sprint Planning, Daily Stand-ups, Reviews, Retrospectives
-                </strong>
-                .
+                <strong> Sprint Planning, Daily Stand-ups, Reviews, Retrospectives</strong>.
               </li>
-              <li>
-                ✅ Get hands-on with{" "}
-                <strong>Jira, Confluence, Azure DevOps, Miro</strong>.
-              </li>
+              <li>✅ Get hands-on with <strong>Jira, Confluence, Azure DevOps, Miro</strong>.</li>
               <li>
                 ✅ Build real-world skills in{" "}
-                <strong>
-                  team facilitation, backlog grooming & stakeholder management
-                </strong>
-                .
+                <strong>team facilitation, backlog grooming & stakeholder management</strong>.
               </li>
-              <li>
-                ✅ Prepare for global certifications like{" "}
-                <strong>CSM, PSM</strong>.
-              </li>
+              <li>✅ Prepare for global certifications like <strong>CSM, PSM</strong>.</li>
               <li>
                 ✅ Career support:{" "}
-                <strong>
-                  Mock interviews, resume prep, leadership training & placement
-                  assistance
-                </strong>
-                .
+                <strong>Mock interviews, resume prep, leadership training & placement assistance</strong>.
               </li>
             </ul>
 
@@ -300,32 +274,26 @@ export default function ScrumMaster() {
               type="button"
               onClick={scrollToForm}
               className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
-      mt-8
-      before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
-      after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
-      hover:decoration-2 hover:text-rose-300
-      duration-500 hover:duration-500 before:duration-500 after:duration-500
-      group-hover:before:duration-500 group-hover:after:duration-500
-      hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
+              mt-8
+              before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
+              after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
+              hover:decoration-2 hover:text-rose-300
+              duration-500 hover:duration-500 before:duration-500 after:duration-500
+              group-hover:before:duration-500 group-hover:after:duration-500
+              hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
             >
               <div>
-                <span className="text-lg font-extrabold text-violet-400 block">
-                  Freshers Salary:
-                </span>
+                <span className="text-lg font-extrabold text-violet-400 block">Freshers Salary:</span>
                 ₹4 LPA to ₹10 LPA <br />
-                <span className="text-sm text-gray-300">
-                  | Duration: 2 Months
-                </span>
+                <span className="text-sm text-gray-300">| Duration: 2 Months</span>
               </div>
             </button>
           </div>
 
           {/* RIGHT: Call to Action */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-            <p className="mb-4 text-lg">
-              Become a Scrum Master Expert in 3 Months
-            </p>
+            <h2 className="text-2xl font-bold mb-4">WANT IT JOB?</h2>
+            <p className="mb-4 text-lg">Become a Scrum Master Expert in 3 Months</p>
 
             <button
               type="button"
@@ -354,65 +322,32 @@ export default function ScrumMaster() {
 
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Offline Scrum Master Training</strong>{" "}
-            in
+          <p className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Scrum Master Training</strong> in
             <strong> Chennai & Bangalore</strong>
-          </h3>
+          </p>
         </div>
 
         {/* Course Partners Section */}
         <section className="py-16 bg-[#002855]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+              <h2 className="text-xl font-semibold uppercase tracking-wide text-white">
                 <span className="text-purple-400">●</span> Our Course Partners{" "}
                 <span className="text-purple-400">●</span>
-              </h3>
+              </h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
               {[
-                {
-                  name: "HubSpot",
-                  logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
-                  link: "https://www.hubspot.com/",
-                },
-                {
-                  name: "GitLab",
-                  logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
-                  link: "https://about.gitlab.com/",
-                },
-                {
-                  name: "Monday.com",
-                  logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
-                  link: "https://monday.com/",
-                },
-                {
-                  name: "Google Cloud",
-                  logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
-                  link: "https://cloud.google.com/",
-                },
-                {
-                  name: "AWS",
-                  logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
-                  link: "https://aws.amazon.com/",
-                },
-                {
-                  name: "Salesforce",
-                  logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
-                  link: "https://www.salesforce.com/",
-                },
-                {
-                  name: "IBM",
-                  logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-                  link: "https://www.ibm.com/",
-                },
-                {
-                  name: "Slack",
-                  logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
-                  link: "https://slack.com/",
-                },
+                { name: "HubSpot", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg", link: "https://www.hubspot.com/" },
+                { name: "GitLab", logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg", link: "https://about.gitlab.com/" },
+                { name: "Monday.com", logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg", link: "https://monday.com/" },
+                { name: "Google Cloud", logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg", link: "https://cloud.google.com/" },
+                { name: "AWS", logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg", link: "https://aws.amazon.com/" },
+                { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg", link: "https://www.salesforce.com/" },
+                { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", link: "https://www.ibm.com/" },
+                { name: "Slack", logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg", link: "https://slack.com/" },
               ].map((partner, index) => (
                 <motion.a
                   key={index}
@@ -426,11 +361,7 @@ export default function ScrumMaster() {
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
                 >
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="h-12 object-contain"
-                  />
+                  <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
                 </motion.a>
               ))}
             </div>
@@ -447,12 +378,10 @@ export default function ScrumMaster() {
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
               <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-                Become job-ready as a Scrum Master. Learn the Scrum framework,
-                facilitation & coaching, Jira/Confluence workflows, empirical
-                metrics, forecasting, and stakeholder management. Get prepared
-                for industry certifications like{" "}
-                <span className="font-semibold">PSM I / CSM</span>
-                with real-project simulations and hands-on ceremonies practice.
+                Become job-ready as a Scrum Master. Learn the Scrum framework, facilitation & coaching,
+                Jira/Confluence workflows, empirical metrics, forecasting, and stakeholder management. Get prepared
+                for industry certifications like <span className="font-semibold">PSM I / CSM</span> with real-project
+                simulations and hands-on ceremonies practice.
               </p>
 
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
@@ -460,32 +389,24 @@ export default function ScrumMaster() {
               </h3>
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Scrum values,
-                  roles (SM/PO/Developers) & artifacts.
+                  <span className="text-purple-600 mt-1">➤</span> Scrum values, roles (SM/PO/Developers) & artifacts.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Facilitate
-                  Sprint events: Planning, Daily Scrum, Review & Retrospective.
+                  <span className="text-purple-600 mt-1">➤</span> Facilitate Sprint events: Planning, Daily Scrum, Review & Retrospective.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Backlog
-                  management: user stories,{" "}
-                  <span className="font-semibold">INVEST</span>, acceptance
+                  <span className="text-purple-600 mt-1">➤</span> Backlog management: user stories, <span className="font-semibold">INVEST</span>, acceptance
                   criteria & prioritization (MoSCoW/WSJF).
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Estimation &
-                  forecasting: story points, velocity, release planning,
+                  <span className="text-purple-600 mt-1">➤</span> Estimation & forecasting: story points, velocity, release planning,
                   burndown/burnup.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>{" "}
-                  Jira/Confluence: boards, workflows, dashboards & reports.
+                  <span className="text-purple-600 mt-1">➤</span> Jira/Confluence: boards, workflows, dashboards & reports.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Servant
-                  leadership, coaching, impediment removal & stakeholder
-                  communication.
+                  <span className="text-purple-600 mt-1">➤</span> Servant leadership, coaching, impediment removal & stakeholder communication.
                 </li>
               </ul>
             </div>
@@ -499,8 +420,7 @@ export default function ScrumMaster() {
               Become a Certified Scrum Master
             </h2>
             <p className="text-lg md:text-xl text-white mb-6">
-              Master Scrum facilitation, Jira/Confluence, empirical metrics &
-              real-world delivery with hands-on practice.
+              Master Scrum facilitation, Jira/Confluence, empirical metrics & real-world delivery with hands-on practice.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <button
@@ -517,14 +437,8 @@ export default function ScrumMaster() {
             {/* Card 1 - Course Highlights */}
             <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                  alt="Course Highlights"
-                  className="w-10 h-10 mb-4"
-                />
-                <h3 className="text-lg font-extrabold text-black mb-2">
-                  Course Highlights
-                </h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Course Highlights" className="w-10 h-10 mb-4" />
+                <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>✓ Live facilitation of Scrum ceremonies</li>
                   <li>✓ Certification prep: PSM I / CSM</li>
@@ -537,29 +451,11 @@ export default function ScrumMaster() {
             {/* Card 2 - Tools */}
             <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
-                  alt="Tools You’ll Master"
-                  className="w-10 h-10 mb-4"
-                />
-                <h3 className="text-lg font-extrabold text-black mb-2">
-                  Tools You’ll Master
-                </h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Tools You’ll Master" className="w-10 h-10 mb-4" />
+                <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "Jira",
-                    "Confluence",
-                    "Azure DevOps",
-                    "Miro",
-                    "Mural",
-                    "Trello",
-                    "Notion",
-                    "Slack",
-                  ].map((tool) => (
-                    <span
-                      key={tool}
-                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
-                    >
+                  {["Jira","Confluence","Azure DevOps","Miro","Mural","Trello","Notion","Slack"].map((tool) => (
+                    <span key={tool} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
                       {tool}
                     </span>
                   ))}
@@ -570,14 +466,8 @@ export default function ScrumMaster() {
             {/* Card 3 - Topics Covered */}
             <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
-                  alt="Topics Covered"
-                  className="w-10 h-10 mb-4"
-                />
-                <h3 className="text-lg font-extrabold text-black mb-2">
-                  Topics Covered
-                </h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Topics Covered" className="w-10 h-10 mb-4" />
+                <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
                 <div className="flex flex-wrap gap-2">
                   {[
                     "Scrum Roles & Events",
@@ -587,10 +477,7 @@ export default function ScrumMaster() {
                     "Backlog & Roadmapping",
                     "Metrics & Reporting",
                   ].map((topic) => (
-                    <span
-                      key={topic}
-                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
-                    >
+                    <span key={topic} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
                       {topic}
                     </span>
                   ))}
@@ -601,14 +488,8 @@ export default function ScrumMaster() {
             {/* Card 4 - Key Skills */}
             <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
               <div className="mb-4">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
-                  alt="Key Skills You’ll Gain"
-                  className="w-10 h-10 mb-4"
-                />
-                <h3 className="text-lg font-extrabold text-black mb-2">
-                  Key Skills You’ll Gain
-                </h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Key Skills You’ll Gain" className="w-10 h-10 mb-4" />
+                <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>Facilitate Sprint ceremonies confidently</li>
                   <li>Coach teams & Product Owner (servant leadership)</li>
@@ -626,16 +507,14 @@ export default function ScrumMaster() {
           accent={course.accent}
           meta={course.meta}
           preview={course.preview}
-          sections={course.sections} // ← REQUIRED
+          sections={course.sections}
           useExternalForm
-          cardMinH={400} // tweak to visually match your right cards
+          cardMinH={400}
           stickyOffset={110}
         />
+
         {/* === WHY CHOOSE US === */}
-        <section
-          id="why-choose-us"
-          className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
-        >
+        <section id="why-choose-us" className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800">
           <div className="max-w-6xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
               Why Choose Us
@@ -644,45 +523,33 @@ export default function ScrumMaster() {
             <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
-                  Expert Trainers
-                </h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
                 <p className="text-gray-600">
-                  Our mentors have deep industry experience and share practical,
-                  hands-on insights.
+                  Our mentors have deep industry experience and share practical, hands-on insights.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
-                  Flexible Learning Modes
-                </h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Flexible Learning Modes</h3>
                 <p className="text-gray-600">
-                  Learn in-person or online with weekday, weekend, and
-                  fast-track options.
+                  Learn in-person or online with weekday, weekend, and fast-track options.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
-                  Job-Ready Curriculum
-                </h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Job-Ready Curriculum</h3>
                 <p className="text-gray-600">
-                  Real projects, labs, and interview prep aligned to what
-                  employers expect.
+                  Real projects, labs, and interview prep aligned to what employers expect.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
-                  Career Support
-                </h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Career Support</h3>
                 <p className="text-gray-600">
-                  Resume building, mock interviews, and placement assistance
-                  with hiring partners.
+                  Resume building, mock interviews, and placement assistance with hiring partners.
                 </p>
               </div>
             </div>
@@ -692,50 +559,35 @@ export default function ScrumMaster() {
         {/* === TESTIMONIALS === */}
         <section id="testimonials" className="py-16 bg-[#fafafa]">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">What Our Students Say</h2>
+            <p className="text-lg text-gray-600 mb-12">Our success is measured by our learners’ success.</p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Good place for job seekers. 💯 placement.”
-                </p>
+                <p className="text-gray-700 italic">“Good place for job seekers. 💯 placement.”</p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
+                  <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
+                </div>
+              </div>
+
+              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
+                <p className="text-gray-700 italic">“Good service and trusted organisation.”</p>
+                <div className="mt-4">
+                  <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
                 </div>
               </div>
 
               <div className="bg-white p-8 rounded-xl shadow-lg text-left">
                 <p className="text-gray-700 italic">
-                  “Good service and trusted organisation.”
+                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement
-                  guaranteed.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">
-                    Sudha Selvarajan
-                  </p>
+                  <h3 className="font-semibold text-gray-900">Sudha Selvarajan</h3>
                 </div>
               </div>
             </div>
 
-            {/* optional internal link */}
-            <a
-              href="/reviews"
-              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-            >
+            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
               View more reviews →
             </a>
           </div>
@@ -754,8 +606,7 @@ export default function ScrumMaster() {
                   Is this course suitable for absolute beginners?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from Core Java basics and gradually move to
-                  Spring Boot, REST APIs, and React.
+                  Yes. We start from Core Java basics and gradually move to Spring Boot, REST APIs, and React.
                 </p>
               </details>
 
@@ -764,8 +615,7 @@ export default function ScrumMaster() {
                   Do you provide placement assistance?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement
-                  assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement assistance with hiring partners.
                 </p>
               </details>
 
@@ -774,8 +624,7 @@ export default function ScrumMaster() {
                   What are the class modes and timings?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with
-                  weekday/weekend/fast-track options.
+                  Both online and classroom batches with weekday/weekend/fast-track options.
                 </p>
               </details>
 
@@ -784,8 +633,7 @@ export default function ScrumMaster() {
                   Will I build real projects?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project
-                  covering APIs, DB integration, and a React UI.
+                  Yes. You’ll work on guided labs and a capstone project covering APIs, DB integration, and a React UI.
                 </p>
               </details>
 
@@ -794,58 +642,47 @@ export default function ScrumMaster() {
                   Do I get a certificate?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project
-                  performance is also highlighted.
+                  Yes, a course completion certificate is provided. Project performance is also highlighted.
                 </p>
               </details>
             </div>
           </div>
         </section>
+
         {/* ENQUIRY FORM */}
         <section className="w-full px-6 py-20 text-white">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
-            {/* LEFT: Additional Info Boxes (Scrum Master) */}
+            {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Comprehensive Curriculum
-                </h4>
+                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
                 <p className="text-black/90">
-                  Scrum values & principles, roles (SM/PO/Developers), artifacts
-                  & events, user stories & AC, estimation (story points),
-                  velocity, burndown/burnup, release planning & forecasting.
+                  Scrum values & principles, roles (SM/PO/Developers), artifacts & events, user stories & AC,
+                  estimation (story points), velocity, burndown/burnup, release planning & forecasting.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Career-Oriented Training
-                </h4>
+                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
                 <p className="text-black/90">
-                  PSM I / CSM exam prep, mock assessments, scenario-based
-                  questions, resume & LinkedIn polish, stakeholder communication
-                  and leadership narratives.
+                  PSM I / CSM exam prep, mock assessments, scenario-based questions, resume & LinkedIn polish,
+                  stakeholder communication and leadership narratives.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
-                  Strong Placement Support
-                </h4>
+                <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
                 <p className="text-black/90">
-                  Referrals via partner network, interview panels with Agile
-                  leaders, and role targeting for Scrum Master / Agile Coach /
-                  Delivery roles.
+                  Referrals via partner network, interview panels with Agile leaders, and role targeting for Scrum
+                  Master / Agile Coach / Delivery roles.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Simulations</h4>
+                <h3 className="text-xl font-bold mb-2">Hands-On Simulations</h3>
                 <p className="text-black/90">
-                  Run end-to-end Sprints in Jira: backlog refinement, Sprint
-                  Planning, Daily Scrum, Review & Retro; set up
-                  boards/workflows/dashboards, track empirical metrics, and
-                  practice impediment removal.
+                  Run end-to-end Sprints in Jira: backlog refinement, Sprint Planning, Daily Scrum, Review & Retro;
+                  set up boards/workflows/dashboards, track empirical metrics, and practice impediment removal.
                 </p>
               </div>
             </div>
@@ -853,9 +690,9 @@ export default function ScrumMaster() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                   Get a Free Training Quote
-                </h3>
+                </h2>
 
                 {/* Mode Toggle */}
                 <div className="flex justify-center gap-3 mb-6">
@@ -863,9 +700,7 @@ export default function ScrumMaster() {
                     onClick={() => setMode("class_room")}
                     type="button"
                     className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "class_room"
-                        ? "bg-[#003c6a] text-white"
-                        : "bg-white text-[#003c6a] border border-[#003c6a]"
+                      mode === "class_room" ? "bg-[#003c6a] text-white" : "bg-white text-[#003c6a] border border-[#003c6a]"
                     }`}
                   >
                     <FaChalkboardTeacher className="text-base" /> Class Room
@@ -874,21 +709,14 @@ export default function ScrumMaster() {
                     onClick={() => setMode("online")}
                     type="button"
                     className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "online"
-                        ? "bg-[#003c6a] text-white"
-                        : "bg-white text-[#003c6a] border border-[#003c6a]"
+                      mode === "online" ? "bg-[#003c6a] text-white" : "bg-white text-[#003c6a] border border-[#003c6a]"
                     }`}
                   >
                     <FaLaptop className="text-base" /> Online
                   </button>
                 </div>
 
-                <form
-                  id="enquiry-form"
-                  onSubmit={handleSubmit}
-                  noValidate
-                  className="grid grid-cols-1 gap-2"
-                >
+                <form id="enquiry-form" onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-2">
                   {/* Name */}
                   <div>
                     <input
@@ -907,9 +735,7 @@ export default function ScrumMaster() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.name && errors?.name && (
-                        <p className="text-red-600 text-xs">{errors.name}</p>
-                      )}
+                      {touched?.name && errors?.name && <p className="text-red-600 text-xs">{errors.name}</p>}
                     </div>
                   </div>
 
@@ -931,14 +757,11 @@ export default function ScrumMaster() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.email && errors?.email && (
-                        <p className="text-red-600 text-xs">{errors.email}</p>
-                      )}
+                      {touched?.email && errors?.email && <p className="text-red-600 text-xs">{errors.email}</p>}
                     </div>
                   </div>
 
-                  {/* Phone + Batch */}
-
+                  {/* Phone */}
                   <div>
                     <input
                       type="tel"
@@ -958,9 +781,7 @@ export default function ScrumMaster() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && (
-                        <p className="text-red-600 text-xs">{errors.phone}</p>
-                      )}
+                      {touched?.phone && errors?.phone && <p className="text-red-600 text-xs">{errors.phone}</p>}
                     </div>
                   </div>
 
@@ -981,46 +802,23 @@ export default function ScrumMaster() {
                     >
                       <option value="">Select Course</option>
                       {[
-                        "Java",
-                        "Python",
-                        "Full Stack Development",
-                        "PL/SQL",
-                        "SQL",
-                        "Data Science",
-                        "Business Analytics",
-                        "Data Science & AI",
-                        "Big Data Developer",
-                        "Software Testing",
-                        "Selenium Testing",
-                        "ETL Testing",
-                        "AWS Training",
-                        "DevOps",
-                        "Hardware Networking",
-                        "Cyber Security",
-                        "SAP",
-                        "Salesforce",
-                        "ServiceNow",
-                        "RPA (Robotic Process Automation)",
-                        "Production Support",
-                        "Digital Marketing",
-                        "Soft Skill Training",
-                        "Scrum Master",
-                        "Business Analyst",
-                        "Product Management",
-                      ].map((course) => (
-                        <option key={course} value={course}>
-                          {course}
+                        "Java","Python","Full Stack Development","PL/SQL","SQL","Data Science","Business Analytics",
+                        "Data Science & AI","Big Data Developer","Software Testing","Selenium Testing","ETL Testing",
+                        "AWS Training","DevOps","Hardware Networking","Cyber Security","SAP","Salesforce","ServiceNow",
+                        "RPA (Robotic Process Automation)","Production Support","Digital Marketing","Soft Skill Training",
+                        "Scrum Master","Business Analyst","Product Management",
+                      ].map((c) => (
+                        <option key={c} value={c}>
+                          {c}
                         </option>
                       ))}
                     </select>
-
                     <div className="h-3 mt-0.5">
-                      {touched?.course && errors?.course && (
-                        <p className="text-red-600 text-xs">{errors.course}</p>
-                      )}
+                      {touched?.course && errors?.course && <p className="text-red-600 text-xs">{errors.course}</p>}
                     </div>
                   </div>
 
+                  {/* Message */}
                   <div>
                     <textarea
                       rows={2}
@@ -1042,9 +840,7 @@ export default function ScrumMaster() {
                       <span>{form.message.length}/300</span>
                     </div>
                     <div className="h-3 mt-0.5">
-                      {touched?.message && errors?.message && (
-                        <p className="text-red-600 text-xs">{errors.message}</p>
-                      )}
+                      {touched?.message && errors?.message && <p className="text-red-600 text-xs">{errors.message}</p>}
                     </div>
                   </div>
 
@@ -1053,33 +849,25 @@ export default function ScrumMaster() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading"
-                        ? "opacity-70 cursor-not-allowed"
-                        : ""
+                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
                   </button>
 
                   {/* Optional server error */}
-                  {error && (
-                    <p className="text-red-600 text-xs mt-1">
-                      Submission failed: {String(error)}
-                    </p>
-                  )}
+                  {error && <p className="text-red-600 text-xs mt-1">Submission failed: {String(error)}</p>}
                 </form>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Popular Courses */}
         <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
           <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
-              Popular Courses
-            </h2>
-            <p className="text-gray-700 text-lg">
-              We present to you the most popular courses recommended by experts.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">Popular Courses</h2>
+            <p className="text-gray-700 text-lg">We present to you the most popular courses recommended by experts.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
@@ -1090,25 +878,15 @@ export default function ScrumMaster() {
                 className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
               >
                 <div className="w-16 h-16 mb-4">
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-contain"
-                    loading="lazy"
-                  />
+                  <img src={course.image} alt={course.title} className="w-full h-full object-contain" loading="lazy" />
                 </div>
 
-                <h3 className="text-md font-bold text-gray-800 text-center">
-                  {course.title}
-                </h3>
+                <h3 className="text-md font-bold text-gray-800 text-center">{course.title}</h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
 
                 <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                   <FaUserGraduate className="text-gray-500" />
-                  <span>
-                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
-                    Learners
-                  </span>
+                  <span>{Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners</span>
                 </div>
 
                 <div className="flex justify-center items-center mt-1 text-yellow-500">
@@ -1120,7 +898,9 @@ export default function ScrumMaster() {
             ))}
           </div>
         </section>
+
         <FeedbackSection />
+
         {/* Toasts */}
         <ToastContainer
           newestOnTop
