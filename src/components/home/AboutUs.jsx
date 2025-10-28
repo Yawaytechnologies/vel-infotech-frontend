@@ -170,6 +170,8 @@ export default function AboutSection() {
       <ToastContainer newestOnTop position="top-center" autoClose={2200} closeOnClick={false} pauseOnHover={true} />
 
       <section
+        id="about"
+        aria-labelledby="about__heading"
         className="relative py-16 px-4 md:px-8 lg:px-0 bg-white overflow-hidden"
         style={{
           background: `
@@ -180,20 +182,20 @@ export default function AboutSection() {
           backgroundPosition: "0 0, 20px 20px",
         }}
       >
-        {/* ✅ H1 (exact text requested) */}
-        <h1 className="text-[2.2rem] md:text-[1.8rem] font-black text-[#171717] mb-3 text-center leading-tight">
+        {/* ✅ Single page H1 lives here */}
+        <h1 id="about__heading" className="text-[2.2rem] md:text-[1.8rem] font-black text-[#171717] mb-3 text-center leading-tight">
           Vel InfoTech <span className="text-[#171717]">— India’s No.1 IT Training Institute</span>
         </h1>
 
         <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row gap-12 items-stretch z-10">
-          {/* LEFT kept same */}
+          {/* LEFT */}
           <div className="flex-1 flex flex-col justify-center pl-0 md:pl-2 lg:pl-8">
             <p className="text-gray-700 text-xl mb-7 leading-relaxed">
               <span className="font-semibold text-[#005BAC]">Elevate your career with curated training,</span> built by
               650+ industry experts for real-world success. Join thousands of professionals accelerating their future.
             </p>
             <div className="bg-white border border-[#a7f3d0]/30 shadow-lg rounded-2xl p-6 mb-5">
-              {/* 🔽 H3 inside the card */}
+              {/* H3 inside the card */}
               <h3 className="text-lg font-bold text-[#005BAC] mb-2 tracking-wide">About Vel InfoTech</h3>
               <ul className="text-gray-800 text-base space-y-2 mb-3 list-disc list-inside">
                 <li>
@@ -228,7 +230,7 @@ export default function AboutSection() {
           {/* RIGHT: Enquiry Card */}
           <div className="flex-1 w-full max-w-lg mx-auto md:mx-0 flex flex-col justify-center px-0 md:px-4">
             <div className="relative backdrop-blur-[6px] bg-white/70 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
-              {/* 🔽 H2 for the card heading */}
+              {/* H2 for the form block under the page H1 */}
               <h2 className="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
                 Get a Free Training Quote
               </h2>
@@ -259,14 +261,13 @@ export default function AboutSection() {
                 </button>
               </div>
 
-              {/* Form (compact) */}
+              {/* Form */}
               <form
                 id="enquiry-form"
                 onSubmit={handleSubmit}
                 noValidate
                 className="grid grid-cols-1 gap-2"
               >
-                {/* Name */}
                 <div>
                   <input
                     type="text"
@@ -290,7 +291,6 @@ export default function AboutSection() {
                   </div>
                 </div>
 
-                {/* Email */}
                 <div>
                   <input
                     type="email"
@@ -314,7 +314,6 @@ export default function AboutSection() {
                   </div>
                 </div>
 
-                {/* Phone */}
                 <div>
                   <input
                     type="tel"
@@ -340,7 +339,6 @@ export default function AboutSection() {
                   </div>
                 </div>
 
-                {/* Course */}
                 <div>
                   <select
                     name="course"
@@ -357,32 +355,11 @@ export default function AboutSection() {
                   >
                     <option value="">Select Course</option>
                     {[
-                      "Java",
-                      "Python",
-                      "Full Stack Development",
-                      "PL/SQL",
-                      "SQL",
-                      "Data Science",
-                      "Business Analytics",
-                      "Data Science & AI",
-                      "Big Data Developer",
-                      "Software Testing",
-                      "Selenium Testing",
-                      "ETL Testing",
-                      "AWS Training",
-                      "DevOps",
-                      "Hardware Networking",
-                      "Cyber Security",
-                      "SAP",
-                      "Salesforce",
-                      "ServiceNow",
-                      "RPA (Robotic Process Automation)",
-                      "Production Support",
-                      "Digital Marketing",
-                      "Soft Skill Training",
-                      "Scrum Master",
-                      "Business Analyst",
-                      "Product Management",
+                      "Java","Python","Full Stack Development","PL/SQL","SQL","Data Science","Business Analytics",
+                      "Data Science & AI","Big Data Developer","Software Testing","Selenium Testing","ETL Testing",
+                      "AWS Training","DevOps","Hardware Networking","Cyber Security","SAP","Salesforce","ServiceNow",
+                      "RPA (Robotic Process Automation)","Production Support","Digital Marketing","Soft Skill Training",
+                      "Scrum Master","Business Analyst","Product Management",
                     ].map((course) => (
                       <option key={course} value={course}>
                         {course}
@@ -424,7 +401,6 @@ export default function AboutSection() {
                   </div>
                 </div>
 
-                {/* Submit */}
                 <button
                   type="submit"
                   disabled={status === "loading"}
@@ -435,7 +411,6 @@ export default function AboutSection() {
                   {status === "loading" ? "Submitting..." : "Submit"}
                 </button>
 
-                {/* Optional server error */}
                 {error && (
                   <p className="text-red-600 text-xs mt-1">
                     Submission failed: {String(error)}

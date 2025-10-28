@@ -26,7 +26,8 @@ export default function CallAndFormSection() {
   const phoneHref = `tel:${PHONE_PILL}`;
   const callNowHref = `tel:${PHONE_CALL_NOW}`;
 
-  const mailtoHref = `mailto:${EMAIL_TO}` +
+  const mailtoHref =
+    `mailto:${EMAIL_TO}` +
     `?subject=${encodeURIComponent(`Course Enquiry — ${form.course || "Vel InfoTech"}`)}` +
     `&body=${encodeURIComponent(
       `Hi Team,
@@ -39,7 +40,8 @@ Message:
 ${form.message || "-"}
 
 Thanks,
-${form.name || ""}`)}`;
+${form.name || ""}`
+    )}`;
 
   const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
   const lettersSpaces = (s) => s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
@@ -66,7 +68,7 @@ ${form.name || ""}`)}`;
       case "email": {
         if (!val) return "Email is required.";
         const formatOK = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
-        if (!formatOK) return "Email must include letter or also can be with numbers, and allowed symbols before @ ";
+        if (!formatOK) return "Email must be valid (letters/numbers and allowed symbols before @).";
         return null;
       }
       case "phone":
@@ -181,7 +183,9 @@ ${form.name || ""}`)}`;
     <>
       <ToastContainer newestOnTop position="top-center" autoClose={2200} closeOnClick={false} pauseOnHover={true} />
 
-      <section className="w-full py-12 px-4 bg-white">
+      <section id="advisors-contact" aria-labelledby="advisors-contact__heading" className="w-full py-12 px-4 bg-white">
+        <h2 id="advisors-contact__heading" className="sr-only">Talk to a Course Advisor & Get a Free Training Quote</h2>
+
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-start">
           {/* LEFT: Call / Advisor CTA */}
           <div className="relative w-full flex-1 overflow-hidden rounded-3xl p-8 md:p-10 text-white
@@ -189,15 +193,15 @@ ${form.name || ""}`)}`;
             <div className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-cyan-300/20 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-white/10 blur-2xl" />
 
-            {/* header -> H2 */}
+            {/* header -> H2 visual (but global section H2 is sr-only above) */}
             <div className="relative z-10 flex items-start gap-4">
               <div className="h-12 w-12 shrink-0 rounded-2xl bg-white/20 ring-1 ring-white/30 backdrop-blur-sm flex items-center justify-center shadow">
                 <FiPhone className="text-2xl" />
               </div>
               <div>
-                <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">
+                <h3 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">
                   Talk to a <span className="text-cyan-200">Course Advisor</span>
-                </h2>
+                </h3>
                 <p className="mt-2 text-white/90 max-w-xl">
                   Get the right course recommendation and fee details in minutes. We’ll call you back within <span className="font-semibold underline decoration-white/70">24 working hours</span>.
                 </p>
@@ -270,9 +274,8 @@ ${form.name || ""}`)}`;
               <h3 className="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
                 Get a Free Training Quote
               </h3>
-              {/* form unchanged */}
+
               <form className="flex flex-col gap-3" noValidate onSubmit={handleSubmit}>
-                {/* inputs... (unchanged) */}
                 {/* Name */}
                 <div>
                   <input

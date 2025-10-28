@@ -17,6 +17,8 @@ export default function Info() {
 
   return (
     <section
+      id="why-vel-info"
+      aria-labelledby="why-vel-info__heading"
       className="py-16 px-4 bg-gradient-to-br from-[#f5f8ff] to-[#ffffff] relative overflow-hidden"
       style={{
         backgroundImage: `
@@ -30,6 +32,7 @@ export default function Info() {
       {/* Section heading -> H2 */}
       <div className="max-w-7xl mx-auto text-center mb-10 relative z-10">
         <motion.h2
+          id="why-vel-info__heading"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -69,7 +72,7 @@ export default function Info() {
         >
           <img
             src={Logo}
-            alt="Vel InfoTech Logo"
+            alt="Vel InfoTech logo"
             className="w-48 md:w-[220px] max-w-[80%] h-auto object-contain"
           />
         </motion.div>
@@ -111,6 +114,7 @@ const Feature = ({ icon, text, delay = 0 }) => (
     <div className="text-[#1a2650] text-xl flex-shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:text-[#005BAC]">
       {icon}
     </div>
+    {/* Paragraph only (no extra heading) to avoid noisy H3s */}
     <p className="text-base text-gray-800 leading-snug">{text}</p>
   </motion.div>
 );

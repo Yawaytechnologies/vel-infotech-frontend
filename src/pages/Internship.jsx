@@ -149,8 +149,8 @@ const Internship = () => {
     <div className="bg-background pb-10">
       <ToastContainer newestOnTop />
 
-      {/* Hero Banner */}
-      <div
+      {/* HERO — Single H1 for the page */}
+      <header
         className="relative w-full mt-[54px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px] flex items-center justify-start px-4 sm:px-10"
         style={{
           backgroundImage: `url(${background})`,
@@ -159,16 +159,19 @@ const Internship = () => {
           backgroundSize: "100% 100%",
         }}
       >
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-black drop-shadow-lg">
+        <h1 id="page-title" className="text-3xl sm:text-4xl md:text-6xl font-bold text-black drop-shadow-lg">
           Internship
         </h1>
-      </div>
+      </header>
 
-      {/* About Internship Section */}
-      <div className="max-w-6xl mx-auto py-10 px-4 grid md:grid-cols-2 gap-8 items-center">
+      {/* ABOUT — H2 section */}
+      <section
+        className="max-w-6xl mx-auto py-10 px-4 grid md:grid-cols-2 gap-8 items-center"
+        aria-labelledby="about-internship-heading"
+      >
         <div className="bg-white p-6 border border-blue-100 rounded-lg shadow-sm">
-          <h2 className="text-2xl font-bold text-blue-900 mb-3">
-            Best Online Internship Training in Chennai & Bangalore
+          <h2 id="about-internship-heading" className="text-2xl font-bold text-blue-900 mb-3">
+            Best Online Internship Training in Chennai &amp; Bangalore
           </h2>
           <p className="text-gray-700 mb-4">
             At Vel InfoTech, our internship programs are designed to bridge the gap between academic
@@ -185,49 +188,62 @@ const Internship = () => {
         <div className="flex justify-center items-center">
           <img
             src={internshipBg}
-            alt="Internship illustration"
+            alt="Students collaborating during internship"
             className="w-full h-auto rounded-lg shadow"
           />
         </div>
-      </div>
+      </section>
 
-      {/* Domains Grid */}
-      <div className="max-w-6xl mx-auto mt-16 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {[
-          { title: "Dotnet", image: dotnetIcon },
-          { title: "Cyber Security", image: cyberIcon },
-          { title: "Networking", image: networkingIcon },
-          { title: "Java", image: javaIcon },
-          { title: "Artificial Intelligence", image: aiIcon },
-          { title: "Cloud Computing", image: cloudIcon },
-          { title: "Python", image: pythonIcon },
-          { title: "Data Science", image: dataScienceIcon },
-          { title: "Ethical Hacking", image: hackingIcon },
-          { title: "PHP", image: phpIcon },
-          { title: "Machine Learning", image: mlIcon },
-          { title: "Data Analytics", image: analyticsIcon },
-        ].map((item, i) => (
-          <motion.div
-            key={i}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col justify-center items-center text-center min-h-[160px] w-full px-4 py-6 rounded-xl shadow-md bg-white"
-          >
-            <img src={item.image} alt={item.title} className="h-16 w-16 object-contain mb-3" />
-            <h3 className="font-bold text-md text-blue-900">{item.title}</h3>
-            <p className="text-sm text-gray-600">Internship</p>
-          </motion.div>
-        ))}
-      </div>
+      {/* DOMAINS — H2 + cards with H3 */}
+      <section
+        className="max-w-6xl mx-auto mt-10 px-4"
+        aria-labelledby="domains-heading"
+      >
+        <h2 id="domains-heading" className="text-2xl sm:text-3xl font-extrabold text-blue-900 mb-6 text-center">
+          Internship Domains
+        </h2>
 
-      {/* Why Internship Section */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mt-16 items-center px-4">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {[
+            { title: "Dotnet", image: dotnetIcon },
+            { title: "Cyber Security", image: cyberIcon },
+            { title: "Networking", image: networkingIcon },
+            { title: "Java", image: javaIcon },
+            { title: "Artificial Intelligence", image: aiIcon },
+            { title: "Cloud Computing", image: cloudIcon },
+            { title: "Python", image: pythonIcon },
+            { title: "Data Science", image: dataScienceIcon },
+            { title: "Ethical Hacking", image: hackingIcon },
+            { title: "PHP", image: phpIcon },
+            { title: "Machine Learning", image: mlIcon },
+            { title: "Data Analytics", image: analyticsIcon },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+              className="flex flex-col justify-center items-center text-center min-h-[160px] w-full px-4 py-6 rounded-xl shadow-md bg-white"
+            >
+              <img src={item.image} alt={item.title} className="h-16 w-16 object-contain mb-3" />
+              {/* H3 per card */}
+              <h3 className="font-bold text-md text-blue-900">{item.title}</h3>
+              <p className="text-sm text-gray-600">Internship</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* WHY INTERNSHIP — H2 */}
+      <section
+        className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mt-16 items-center px-4"
+        aria-labelledby="why-internship-heading"
+      >
         <div className="flex justify-center">
-          <img src={internshipBg} alt="Internship benefits" className="rounded-lg shadow-md" />
+          <img src={internshipBg} alt="Benefits of internships" className="rounded-lg shadow-md" />
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow text-gray-700">
-          <h2 className="text-xl font-bold text-blue-800 mb-3">
+          <h2 id="why-internship-heading" className="text-xl sm:text-2xl font-bold text-blue-800 mb-3">
             Why Should You Do an Internship?
           </h2>
           <p className="mb-3 text-gray-700">
@@ -263,43 +279,55 @@ const Internship = () => {
             Apply Now
           </a>
         </div>
-      </div>
+      </section>
 
-      {/* Trending Internships */}
-      <h2 className="text-3xl font-bold text-center text-[#005BAC] mt-16 mb-10">
-        Trending Internships in Chennai
-      </h2>
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {[
-          { title: "Data Science", image: dataScienceIcon },
-          { title: "Python", image: pythonIcon },
-          { title: "Artificial Intelligence", image: aiIcon },
-          { title: "Java", image: javaIcon },
-        ].map((item, i) => (
-          <motion.div
-            key={i}
-            whileHover={{ scale: 1.05, y: -8 }}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden"
-          >
-            <div className="p-4 bg-gradient-to-r from-cyan-500 to-cyan-300 text-white text-center">
-              <img src={item.image} alt={item.title} className="h-20 mx-auto mb-4" />
-              <h3 className="font-semibold text-lg">{item.title} Internship</h3>
-            </div>
-            <div className="p-4 text-center">
-              <p className="font-medium text-gray-800">{item.title} Internship</p>
-              <button className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
-                Read More
-              </button>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      {/* TRENDING — H2 + cards with H3 */}
+      <section
+        className="max-w-6xl mx-auto mt-16 px-4"
+        aria-labelledby="trending-heading"
+      >
+        <h2 id="trending-heading" className="text-3xl font-bold text-center text-[#005BAC] mb-10">
+          Trending Internships in Chennai
+        </h2>
 
-      {/* Application Form */}
-      <div id="apply" className="max-w-3xl mx-auto bg-white shadow rounded-lg px-5 py-6 mt-16">
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { title: "Data Science", image: dataScienceIcon },
+            { title: "Python", image: pythonIcon },
+            { title: "Artificial Intelligence", image: aiIcon },
+            { title: "Java", image: javaIcon },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05, y: -8 }}
+              className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            >
+              <div className="p-4 bg-gradient-to-r from-cyan-500 to-cyan-300 text-white text-center">
+                <img src={item.image} alt={`${item.title} internship`} className="h-20 mx-auto mb-4" />
+                {/* H3 per card */}
+                <h3 className="font-semibold text-lg">{item.title} Internship</h3>
+              </div>
+              <div className="p-4 text-center">
+                <p className="font-medium text-gray-800">{item.title} Internship</p>
+                <button className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
+                  Read More
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* APPLICATION FORM — H2 */}
+      <section
+        id="apply"
+        className="max-w-3xl mx-auto bg-white shadow rounded-lg px-5 py-6 mt-16"
+        aria-labelledby="application-form-heading"
+      >
+        <h2 id="application-form-heading" className="text-2xl font-bold mb-6 text-center text-blue-800">
           Internship Application Form
         </h2>
+
         <form className="space-y-4" noValidate onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -386,7 +414,7 @@ const Internship = () => {
             </button>
           </div>
         </form>
-      </div>
+      </section>
     </div>
   );
 };

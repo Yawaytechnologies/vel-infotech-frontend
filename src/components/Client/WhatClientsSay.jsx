@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
@@ -15,7 +15,7 @@ const testimonials = [
 const TestimonialsSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
-  const cardWidth = 340;
+  const cardWidth = 340; // visual width used for translateX
 
   useEffect(() => {
     const updateVisible = () => {
@@ -33,10 +33,16 @@ const TestimonialsSlider = () => {
     setCurrentIndex((p) => Math.min(p + 1, testimonials.length - visibleCount));
 
   return (
-    <section className="bg-white py-16">
+    <section
+      className="bg-white py-16"
+      aria-labelledby="testimonials-heading"
+    >
       <div className="w-full px-6 sm:px-12">
         {/* H2: section heading */}
-        <h2 className="text-4xl font-bold text-[#005BAC] mb-10 text-center">
+        <h2
+          id="testimonials-heading"
+          className="text-4xl font-bold text-[#005BAC] mb-10 text-center"
+        >
           What Our Students Say
         </h2>
 
@@ -46,14 +52,15 @@ const TestimonialsSlider = () => {
             style={{ transform: `translateX(-${currentIndex * cardWidth}px)` }}
           >
             {testimonials.map((t, i) => (
-              <div
+              <article
                 key={i}
                 className="w-[85vw] sm:min-w-[300px] md:min-w-[320px] lg:min-w-[340px] max-w-[340px] bg-gray-50 p-6 rounded-xl shadow-md flex-shrink-0"
               >
                 <p className="text-gray-700 italic mb-4">"{t.feedback}"</p>
+                {/* H3: card title (person) */}
                 <h3 className="text-blue-700 font-semibold">{t.name}</h3>
                 <p className="text-sm text-gray-500">{t.role}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -65,6 +72,7 @@ const TestimonialsSlider = () => {
             className={`p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition ${
               currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
+            aria-label="Previous testimonials"
           >
             <ChevronLeft size={24} className="text-gray-700" />
           </button>
@@ -76,6 +84,7 @@ const TestimonialsSlider = () => {
                 ? "opacity-50 cursor-not-allowed"
                 : ""
             }`}
+            aria-label="Next testimonials"
           >
             <ChevronRight size={24} className="text-gray-700" />
           </button>

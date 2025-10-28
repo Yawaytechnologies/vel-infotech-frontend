@@ -15,42 +15,29 @@ import Background from "../assets/Background1.png";
 import { FaUsers, FaLightbulb, FaHandsHelping, FaAward } from 'react-icons/fa';
 
 const cultureData = [
-  {
-    title: 'Collaboration',
-    description: 'We achieve great things together.',
-    icon: <FaUsers className="text-blue-600 text-6xl" />,
-  },
-  {
-    title: 'Innovation',
-    description: 'Creative solutions are at the heart of our success.',
-    icon: <FaLightbulb className="text-yellow-500 text-6xl" />,
-  },
-  {
-    title: 'Integrity',
-    description: 'We uphold the highest standards of integrity.',
-    icon: <FaHandsHelping className="text-green-600 text-6xl" />,
-  },
-  {
-    title: 'Excellence',
-    description: 'Excellence is our culture, not our goal.',
-    icon: <FaAward className="text-red-600 text-6xl" />,
-  },
+  { title: 'Collaboration', description: 'We achieve great things together.', icon: <FaUsers className="text-blue-600 text-6xl" /> },
+  { title: 'Innovation', description: 'Creative solutions are at the heart of our success.', icon: <FaLightbulb className="text-yellow-500 text-6xl" /> },
+  { title: 'Integrity', description: 'We uphold the highest standards of integrity.', icon: <FaHandsHelping className="text-green-600 text-6xl" /> },
+  { title: 'Excellence', description: 'Excellence is our culture, not our goal.', icon: <FaAward className="text-red-600 text-6xl" /> },
 ];
 
 const About = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Hero Section */}
+      {/* HERO */}
       <section
+        id="about-hero"
+        aria-labelledby="about-hero__heading"
         className="min-h-screen w-full bg-center bg-no-repeat text-white px-8 sm:px-16 md:px-32 py-16 relative overflow-hidden bg-cover sm:bg-contain lg:bg-contain"
         style={{ backgroundImage: `url(${Background})` }}
       >
         <div className="relative z-10 mt-20 p-6 sm:p-8 md:p-12 lg:p-16 rounded-md flex flex-col md:flex-row items-center md:items-start gap-10 -translate-x-8">
-          {/* Text Content */}
           <div className="flex-1 text-center md:text-left">
             <div className="flex-1 ml-6">
-              {/* ✅ single H1 */}
-              <h1 className="text-5xl font-bold mb-6 font-heading">Welcome to Vel InfoTech</h1>
+              {/* ✅ Single page H1 */}
+              <h1 id="about-hero__heading" className="text-5xl font-bold mb-6 font-heading">
+                Welcome to Vel InfoTech
+              </h1>
               <p className="text-lg sm:text-xl mb-8 max-w-2xl">
                 Founded with a vision to bridge the gap between ambition and achievement, Vel InfoTech equips individuals with the skills and confidence to succeed.
               </p>
@@ -59,16 +46,18 @@ const About = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800">
+      {/* WHY CHOOSE US */}
+      <section id="why-choose-us" aria-labelledby="why-choose-us__heading" className="py-20 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800">
         <div className="max-w-6xl mx-auto px-6">
-          {/* ✅ section H2 */}
-          <h2 className="text-4xl font-bold text-center text-[#005BAC] mb-12">Why Choose Us</h2>
+          {/* ✅ Section H2 */}
+          <h2 id="why-choose-us__heading" className="text-4xl font-bold text-center text-[#005BAC] mb-12">
+            Why Choose Us
+          </h2>
 
           <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
             <div className="relative">
               <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-              {/* ✅ subsection H3 */}
+              {/* ✅ Subsection H3 */}
               <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
               <p className="text-gray-600">Our mentors come from real industry backgrounds and bring hands-on insights.</p>
             </div>
@@ -94,11 +83,12 @@ const About = () => {
         </div>
       </section>
 
-      {/* Training Methodology */}
-      <section className="py-24 px-8 sm:px-16 md:px-32 bg-[#e0f7fa]">
+      {/* TRAINING METHODOLOGY */}
+      <section id="training-methodology" aria-labelledby="training-methodology__heading" className="py-24 px-8 sm:px-16 md:px-32 bg-[#e0f7fa]">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          {/* ✅ section H2 (motion) */}
+          {/* ✅ Section H2 */}
           <motion.h2
+            id="training-methodology__heading"
             className="py-10 text-3xl font-semibold text-gray-800 mb-6"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +130,7 @@ const About = () => {
                 className="bg-white rounded-xl shadow-lg p-6 text-gray-700 border-t-4 border-[#0077cc]"
                 variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }}
               >
-                {/* ✅ card title H3 */}
+                {/* ✅ Card title H3 */}
                 {step.icon}
                 <h3 className="text-xl font-semibold mb-2">{step.label}</h3>
                 <p>{step.desc}</p>
@@ -150,8 +140,11 @@ const About = () => {
         </div>
       </section>
 
-      {/* Impact / Stats Timeline */}
-      <section className="relative py-20 bg-gradient-to-br from-[#F0F8FF] to-[#D6E9FF]">
+      {/* IMPACT / STATS TIMELINE */}
+      <section id="our-impact" aria-labelledby="our-impact__heading" className="relative py-20 bg-gradient-to-br from-[#F0F8FF] to-[#D6E9FF]">
+        {/* ✅ Section H2 */}
+        <h2 id="our-impact__heading" className="sr-only">Our Impact</h2>
+
         <div className="hidden lg:block absolute left-24 top-0 h-full border-l-4 border-gradient-to-b from-[#005BAC] via-[#00ACC1] to-[#338DFF]"></div>
 
         <div className="max-w-5xl mx-auto px-6 flex flex-col gap-24">
@@ -161,7 +154,7 @@ const About = () => {
               <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#005BAC] flex items-center justify-center shadow-lg">
                 <Briefcase className="w-8 h-8 text-white" />
               </div>
-              {/* ✅ subsection H3 */}
+              {/* ✅ Subsection H3 */}
               <h3 className="text-2xl font-bold text-[#003366]">Job Placement Rate</h3>
               <p className="mt-2 text-gray-700 max-w-xl">90% of our students secure jobs within 6 months after graduating.</p>
             </div>
@@ -190,7 +183,6 @@ const About = () => {
           </div>
         </div>
 
-        {/* Quote (paragraph) */}
         <div className="mt-28 text-center px-6 max-w-3xl mx-auto">
           <p className="text-xl italic text-[#003366] font-semibold leading-relaxed">
             We go beyond teaching tools—our mission is helping people redesign their tomorrow.
@@ -198,11 +190,13 @@ const About = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-16 bg-[#fafafa]">
+      {/* TESTIMONIALS */}
+      <section id="testimonials" aria-labelledby="testimonials__heading" className="py-16 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          {/* ✅ section H2 */}
-          <h2 className="text-3xl font-semibold text-gray-800 mb-8">What Our Students Say</h2>
+          {/* ✅ Section H2 */}
+          <h2 id="testimonials__heading" className="text-3xl font-semibold text-gray-800 mb-8">
+            What Our Students Say
+          </h2>
           <p className="text-lg text-gray-600 mb-12">
             We measure our impact by the career breakthroughs our learners achieve. Here’s how Vel InfoTech has helped them grow.
           </p>
@@ -211,11 +205,10 @@ const About = () => {
             <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
               <p className="text-lg text-gray-700 italic">"Good place for job seekers. 💯 placement."</p>
               <div className="mt-6 flex items-center">
-                <img src={ts} alt="John Doe" className="h-12 w-12 rounded-full object-cover" />
+                <img src={ts} alt="Thennarasu S" className="h-12 w-12 rounded-full object-cover" />
                 <div className="ml-4">
-                  {/* ✅ card name as H4 is fine; keeping h4 to avoid extra H3 noise */}
-                  <h4 className="text-lg font-semibold text-gray-800">Thennarasu S</h4>
-                  <p className="text-sm text-gray-500"></p>
+                  {/* ✅ Card title as H3 */}
+                  <h3 className="text-lg font-semibold text-gray-800">Thennarasu S</h3>
                 </div>
               </div>
             </div>
@@ -223,10 +216,9 @@ const About = () => {
             <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
               <p className="text-lg text-gray-700 italic">Good service and trusted Organisation</p>
               <div className="mt-6 flex items-center">
-                <img src={ba} alt="benjamin Andrew" className="h-12 w-12 rounded-full object-cover" />
+                <img src={ba} alt="Benjamin Andrew" className="h-12 w-12 rounded-full object-cover" />
                 <div className="ml-4">
-                  <h4 className="text-lg font-semibold text-gray-800">benjamin Andrew</h4>
-                  <p className="text-sm text-gray-500"></p>
+                  <h3 className="text-lg font-semibold text-gray-800">Benjamin Andrew</h3>
                 </div>
               </div>
             </div>
@@ -236,10 +228,9 @@ const About = () => {
                 Best Consultancy for the people who seek jobs.100 percentage placement guaranteed.
               </p>
               <div className="mt-6 flex items-center">
-                <img src={ss} alt="Mark Johnson" className="h-12 w-12 rounded-full object-cover" />
+                <img src={ss} alt="Sudha Selvarajan" className="h-12 w-12 rounded-full object-cover" />
                 <div className="ml-4">
-                  <h4 className="text-lg font-semibold text-gray-800">Sudha Selvarajan</h4>
-                  <p className="text-sm text-gray-500"></p>
+                  <h3 className="text-lg font-semibold text-gray-800">Sudha Selvarajan</h3>
                 </div>
               </div>
             </div>
@@ -247,17 +238,18 @@ const About = () => {
         </div>
       </section>
 
-      {/* Culture */}
-      <div className="bg-gray-50 py-16">
+      {/* CULTURE */}
+      <section id="our-culture" aria-labelledby="our-culture__heading" className="bg-gray-50 py-16">
         <div className="container mx-auto px-6">
-          {/* ✅ section H2 */}
-          <h2 className="text-3xl font-bold mb-10 text-center">Our Culture</h2>
+          {/* ✅ Section H2 */}
+          <h2 id="our-culture__heading" className="text-3xl font-bold mb-10 text-center">Our Culture</h2>
+
           <div className="flex flex-col md:flex-row justify-between items-start relative">
             <div className="w-full md:w-1/2 flex flex-col items-start md:items-center mb-8 md:mb-0">
               {cultureData.slice(0, 2).map((item, index) => (
                 <div key={index} className="text-left mb-16">
                   <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">{item.icon}</div>
-                  {/* ✅ item title H3 */}
+                  {/* ✅ Item title H3 */}
                   <h3 className="text-2xl font-semibold text-gray-800 mt-4">{item.title}</h3>
                   <p className="text-gray-600 mt-2">{item.description}</p>
                 </div>
@@ -277,20 +269,20 @@ const About = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Core Values */}
-      <section className="py-20 bg-gradient-to-br from-[#d0e8ff] via-[#a3cfff] to-[#74b6ff]">
+      {/* CORE VALUES */}
+      <section id="core-values" aria-labelledby="core-values__heading" className="py-20 bg-gradient-to-br from-[#d0e8ff] via-[#a3cfff] to-[#74b6ff]">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          {/* ✅ section H2 */}
-          <h2 className="text-4xl font-bold text-[#002b66] mb-6 tracking-tight">Our Core Values</h2>
+          {/* ✅ Section H2 */}
+          <h2 id="core-values__heading" className="text-4xl font-bold text-[#002b66] mb-6 tracking-tight">Our Core Values</h2>
           <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
             At Vel InfoTech, our values drive our mission and shape the way we work and grow together.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#0d47a1] hover:scale-105 transform">
-              {/* ✅ card title H3 */}
+              {/* ✅ Card title H3 */}
               <h3 className="text-xl font-semibold text-[#0d47a1] mb-3">🔷 Integrity</h3>
               <p className="text-gray-600">We act with honesty and transparency in everything we do—no compromises.</p>
             </div>
@@ -319,10 +311,10 @@ const About = () => {
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 py-16 px-6 sm:px-12 md:px-24 rounded-lg shadow-lg max-w-7xl mx-auto text-center text-white">
-        {/* ✅ section H2 */}
-        <h2 className="text-4xl font-extrabold mb-6 drop-shadow-md">Get in Touch</h2>
+      {/* CONTACT */}
+      <section id="contact" aria-labelledby="contact__heading" className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 py-16 px-6 sm:px-12 md:px-24 rounded-lg shadow-lg max-w-7xl mx-auto text-center text-white">
+        {/* ✅ Section H2 */}
+        <h2 id="contact__heading" className="text-4xl font-extrabold mb-6 drop-shadow-md">Get in Touch</h2>
         <p className="text-lg sm:text-xl mb-8 max-w-3xl mx-auto drop-shadow-sm">
           Have any questions? Want to know more about our courses? We're here to help!
         </p>
