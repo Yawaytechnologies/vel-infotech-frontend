@@ -1,4 +1,5 @@
-// Enhanced Review Page with Professional Design
+// src/pages/Review.jsx
+// Enhanced Review Page with Professional Design (White body under tabs)
 import React, { useEffect, useMemo, useState } from "react";
 
 export default function Review() {
@@ -33,9 +34,9 @@ export default function Review() {
       try {
         setGoogleMeta((m) => ({ ...m, status: "loading", error: null }));
 
-        const key = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY_HERE";
+        const key =
+          import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY_HERE";
         if (!key || key === "YOUR_API_KEY_HERE") {
-          // Use demo data if no API key
           const demoReviews = generateDemoReviews();
           setMasterReviews(demoReviews);
           setGoogleMeta({
@@ -49,13 +50,11 @@ export default function Review() {
           return;
         }
 
-        // Load Google Maps API dynamically
         if (!window.google || !window.google.maps) {
-          const script = document.createElement('script');
+          const script = document.createElement("script");
           script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
           script.async = true;
           script.defer = true;
-          
           await new Promise((resolve, reject) => {
             script.onload = resolve;
             script.onerror = reject;
@@ -95,7 +94,7 @@ export default function Review() {
               snippet: (r.text || "").slice(0, 160),
               detail: r.text || "",
               center: place.name || "",
-              tags: []
+              tags: [],
             }));
 
             setMasterReviews(reviews);
@@ -111,8 +110,11 @@ export default function Review() {
         );
       } catch (e) {
         if (!cancelled) {
-          const msg = (e && e.message) || String(e);
-          setGoogleMeta((m) => ({ ...m, status: "error", error: msg }));
+          setGoogleMeta((m) => ({
+            ...m,
+            status: "error",
+            error: (e && e.message) || String(e),
+          }));
         }
       }
     })();
@@ -124,20 +126,114 @@ export default function Review() {
 
   function generateDemoReviews() {
     const demoData = [
-      { name: "Rajesh Kumar", course: "Full-Stack Development", rating: 5, snippet: "Excellent training program! The instructors are very knowledgeable and the hands-on projects really helped me understand real-world applications.", detail: "Excellent training program! The instructors are very knowledgeable and the hands-on projects really helped me understand real-world applications. Got placed in a great company within 2 months of completion.", center: "Vel InfoTech", tags: ["placement", "projects"] },
-      { name: "Priya Sharma", course: "Java Spring Boot", rating: 5, snippet: "Best institute for Java training in Chennai. The course content is updated and industry-relevant.", detail: "Best institute for Java training in Chennai. The course content is updated and industry-relevant. Mock interviews were very helpful for placement preparation.", center: "Vel InfoTech", tags: ["java", "interview prep"] },
-      { name: "Arun Vijay", course: "Python & Data Science", rating: 4, snippet: "Good learning experience with practical approach. Trainers are experienced professionals.", detail: "Good learning experience with practical approach. Trainers are experienced professionals. Would recommend for anyone wanting to learn Python.", center: "Vel InfoTech", tags: ["python", "practical"] },
-      { name: "Divya Lakshmi", course: "DevOps & Cloud", rating: 5, snippet: "Amazing course structure! Learned AWS, Docker, Kubernetes hands-on. Placement support was excellent.", detail: "Amazing course structure! Learned AWS, Docker, Kubernetes hands-on. Placement support was excellent. Currently working as DevOps Engineer.", center: "Vel InfoTech", tags: ["devops", "cloud", "placement"] },
-      { name: "Karthik Rajan", course: "Full-Stack (MERN)", rating: 5, snippet: "Comprehensive MERN stack training with real projects. Got multiple interview calls after completion.", detail: "Comprehensive MERN stack training with real projects. Got multiple interview calls after completion. The trainers guide you at every step.", center: "Vel InfoTech", tags: ["mern", "projects"] },
-      { name: "Sneha Reddy", course: "Java Testing", rating: 4, snippet: "Very detailed course on testing frameworks. Learned Selenium, TestNG, and automation thoroughly.", detail: "Very detailed course on testing frameworks. Learned Selenium, TestNG, and automation thoroughly. Great practical sessions.", center: "Vel InfoTech", tags: ["testing", "automation"] },
-      { name: "Vikram Singh", course: "Python Development", rating: 5, snippet: "Fantastic learning environment! Instructors are patient and knowledgeable. Highly recommended.", detail: "Fantastic learning environment! Instructors are patient and knowledgeable. Highly recommended for beginners and professionals alike.", center: "Vel InfoTech", tags: ["python", "beginner-friendly"] },
-      { name: "Meera Nair", course: "Cloud Computing", rating: 5, snippet: "Excellent cloud training with AWS and Azure certifications. Placement assistance was top-notch.", detail: "Excellent cloud training with AWS and Azure certifications. Placement assistance was top-notch. Got placed as Cloud Engineer within a month.", center: "Vel InfoTech", tags: ["cloud", "certification"] },
+      {
+        name: "Rajesh Kumar",
+        course: "Full-Stack Development",
+        rating: 5,
+        snippet:
+          "Excellent training program! The instructors are very knowledgeable and the hands-on projects really helped me understand real-world applications.",
+        detail:
+          "Excellent training program! The instructors are very knowledgeable and the hands-on projects really helped me understand real-world applications. Got placed in a great company within 2 months of completion.",
+        center: "Vel InfoTech",
+        tags: ["placement", "projects"],
+      },
+      {
+        name: "Priya Sharma",
+        course: "Java Spring Boot",
+        rating: 5,
+        snippet:
+          "Best institute for Java training in Chennai. The course content is updated and industry-relevant.",
+        detail:
+          "Best institute for Java training in Chennai. The course content is updated and industry-relevant. Mock interviews were very helpful for placement preparation.",
+        center: "Vel InfoTech",
+        tags: ["java", "interview prep"],
+      },
+      {
+        name: "Arun Vijay",
+        course: "Python & Data Science",
+        rating: 4,
+        snippet:
+          "Good learning experience with practical approach. Trainers are experienced professionals.",
+        detail:
+          "Good learning experience with practical approach. Trainers are experienced professionals. Would recommend for anyone wanting to learn Python.",
+        center: "Vel InfoTech",
+        tags: ["python", "practical"],
+      },
+      {
+        name: "Divya Lakshmi",
+        course: "DevOps & Cloud",
+        rating: 5,
+        snippet:
+          "Amazing course structure! Learned AWS, Docker, Kubernetes hands-on. Placement support was excellent.",
+        detail:
+          "Amazing course structure! Learned AWS, Docker, Kubernetes hands-on. Placement support was excellent. Currently working as DevOps Engineer.",
+        center: "Vel InfoTech",
+        tags: ["devops", "cloud", "placement"],
+      },
+      {
+        name: "Karthik Rajan",
+        course: "Full-Stack (MERN)",
+        rating: 5,
+        snippet:
+          "Comprehensive MERN stack training with real projects. Got multiple interview calls after completion.",
+        detail:
+          "Comprehensive MERN stack training with real projects. Got multiple interview calls after completion. The trainers guide you at every step.",
+        center: "Vel InfoTech",
+        tags: ["mern", "projects"],
+      },
+      {
+        name: "Sneha Reddy",
+        course: "Java Testing",
+        rating: 4,
+        snippet:
+          "Very detailed course on testing frameworks. Learned Selenium, TestNG, and automation thoroughly.",
+        detail:
+          "Very detailed course on testing frameworks. Learned Selenium, TestNG, and automation thoroughly. Great practical sessions.",
+        center: "Vel InfoTech",
+        tags: ["testing", "automation"],
+      },
+      {
+        name: "Vikram Singh",
+        course: "Python Development",
+        rating: 5,
+        snippet:
+          "Fantastic learning environment! Instructors are patient and knowledgeable. Highly recommended.",
+        detail:
+          "Fantastic learning environment! Instructors are patient and knowledgeable. Highly recommended for beginners and professionals alike.",
+        center: "Vel InfoTech",
+        tags: ["python", "beginner-friendly"],
+      },
+      {
+        name: "Meera Nair",
+        course: "Cloud Computing",
+        rating: 5,
+        snippet:
+          "Excellent cloud training with AWS and Azure certifications. Placement assistance was top-notch.",
+        detail:
+          "Excellent cloud training with AWS and Azure certifications. Placement assistance was top-notch. Got placed as Cloud Engineer within a month.",
+        center: "Vel InfoTech",
+        tags: ["cloud", "certification"],
+      },
     ];
-
     return demoData.map((review, i) => ({
       ...review,
       id: i + 1,
-      ago: i === 0 ? "2d" : i === 1 ? "1w" : i === 2 ? "2w" : i === 3 ? "3w" : i === 4 ? "1mo" : i === 5 ? "2mo" : i === 6 ? "3mo" : "4mo"
+      ago:
+        i === 0
+          ? "2d"
+          : i === 1
+          ? "1w"
+          : i === 2
+          ? "2w"
+          : i === 3
+          ? "3w"
+          : i === 4
+          ? "1mo"
+          : i === 5
+          ? "2mo"
+          : i === 6
+          ? "3mo"
+          : "4mo",
     }));
   }
 
@@ -188,7 +284,6 @@ export default function Review() {
 
   const feed = useMemo(() => {
     let list = masterReviews.slice();
-
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter(
@@ -204,35 +299,25 @@ export default function Review() {
     if (courseFilter !== "All") list = list.filter((r) => r.course === courseFilter);
     if (centerFilter !== "All") list = list.filter((r) => r.center === centerFilter);
     if (ratingFilter > 0) list = list.filter((r) => r.rating === ratingFilter);
-
     if (sortBy === "rating-desc") list.sort((a, b) => b.rating - a.rating);
     if (sortBy === "rating-asc") list.sort((a, b) => a.rating - b.rating);
-
     return list;
   }, [masterReviews, search, courseFilter, centerFilter, ratingFilter, sortBy]);
 
   const overallRating = googleMeta.rating ?? 4.8;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/20 to-purple-50/20">
-      {/* Animated background orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-gradient-to-br from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-20 right-1/3 w-64 h-64 bg-gradient-to-br from-orange-400/10 to-rose-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
-      </div>
-
-      {/* Hero Section */}
+    <div className="min-h-screen bg-white">
+      {/* HERO with dark gradient */}
       <Hero
-        masterReviews={masterReviews}
         trendingCourses={trendingCourses}
         overallRating={overallRating}
         ratingHistogram={ratingHistogram}
         googleMeta={googleMeta}
       />
 
-      {/* Main Content */}
-      <section className="relative pb-20">
+      {/* ===== Main Content UNDER TABS ON PURE WHITE ===== */}
+      <section className="relative pb-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Tabs & Controls */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
@@ -243,19 +328,26 @@ export default function Review() {
           </div>
 
           {activeTab === "guidelines" && <GuidelinesPanel />}
-          {activeTab === "highlights" && <HighlightsPanel reviews={masterReviews} />}
+          {activeTab === "highlights" && (
+            <HighlightsPanel reviews={masterReviews} />
+          )}
 
           {activeTab === "all" && (
             <div className="grid lg:grid-cols-12 gap-8">
               {/* Main Content */}
               <div className="lg:col-span-8 space-y-6">
-                {masterReviews[0] && <FeaturedReview review={masterReviews[0]} />}
+                {masterReviews[0] && (
+                  <FeaturedReview review={masterReviews[0]} />
+                )}
 
                 {/* Loading State */}
                 {googleMeta.status === "loading" && (
                   <div className="grid sm:grid-cols-2 gap-5">
                     {[...Array(6)].map((_, i) => (
-                      <div key={i} className="rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 animate-pulse">
+                      <div
+                        key={i}
+                        className="rounded-2xl bg-white border border-slate-200 p-6 animate-pulse"
+                      >
                         <div className="h-4 w-32 bg-slate-200 rounded" />
                         <div className="mt-3 h-3 w-24 bg-slate-200 rounded" />
                         <div className="mt-4 space-y-2">
@@ -286,10 +378,14 @@ export default function Review() {
 
                 {/* Empty State */}
                 {feed.length === 0 && googleMeta.status === "success" && (
-                  <div className="rounded-3xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-12 text-center">
+                  <div className="rounded-3xl bg-white border border-slate-200 p-12 text-center">
                     <EmptyIcon />
-                    <p className="mt-4 text-lg font-semibold text-slate-900">No reviews found</p>
-                    <p className="text-slate-600 mt-2">Try adjusting your filters or search terms</p>
+                    <p className="mt-4 text-lg font-semibold text-slate-900">
+                      No reviews found
+                    </p>
+                    <p className="text-slate-600 mt-2">
+                      Try adjusting your filters or search terms
+                    </p>
                   </div>
                 )}
 
@@ -297,7 +393,12 @@ export default function Review() {
                 {googleMeta.status === "success" && googleMeta.url && (
                   <p className="text-center text-sm text-slate-500">
                     Powered by Google Reviews •{" "}
-                    <a href={googleMeta.url} target="_blank" rel="noreferrer" className="text-blue-600 hover:text-blue-700 font-medium">
+                    <a
+                      href={googleMeta.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 hover:text-blue-700 font-medium"
+                    >
                       View on Google Maps
                     </a>
                   </p>
@@ -317,7 +418,9 @@ export default function Review() {
                     ratingFilter={ratingFilter}
                     setRatingFilter={setRatingFilter}
                   />
-                  {topTags.length > 0 && <TagCloud tags={topTags} onPick={(t) => setSearch(t.k)} />}
+                  {topTags.length > 0 && (
+                    <TagCloud tags={topTags} onPick={(t) => setSearch(t.k)} />
+                  )}
                   <WriteReviewCard />
                 </div>
               </aside>
@@ -329,8 +432,13 @@ export default function Review() {
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
             <div className="relative flex flex-col lg:flex-row items-center justify-between gap-6">
               <div className="text-center lg:text-left text-white">
-                <h3 className="text-3xl font-bold mb-2">Share Your Learning Journey</h3>
-                <p className="text-blue-100 text-lg">Help future learners make informed decisions • Your voice matters</p>
+                <h3 className="text-3xl font-bold mb-2">
+                  Share Your Learning Journey
+                </h3>
+                <p className="text-blue-100 text-lg">
+                  Help future learners make informed decisions • Your voice
+                  matters
+                </p>
               </div>
               <button className="group relative px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-blue-50 transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-xl">
                 <span className="relative flex items-center gap-2">
@@ -347,47 +455,54 @@ export default function Review() {
   );
 }
 
-/* ===================== HERO SECTION ===================== */
-function Hero({ masterReviews, trendingCourses, overallRating, ratingHistogram, googleMeta }) {
+/* ===================== HERO (dark gradient) ===================== */
+function Hero({ trendingCourses, overallRating, ratingHistogram, googleMeta }) {
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900" />
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjAzIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-50" />
-      
-      {/* Wave Bottom */}
-      <svg className="absolute bottom-0 left-0 w-full h-24 text-slate-50" viewBox="0 0 1440 120" preserveAspectRatio="none">
-        <path fill="currentColor" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L0,120Z" />
+    <section className="relative pt-24 pb-16 overflow-hidden">
+      {/* Dark gradient background */}
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,#152A6B_0%,#1F3C88_45%,#7C3AED_100%)]" />
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')]" />
+
+      {/* white wave to transition into body */}
+      <svg
+        className="absolute bottom-0 left-0 w-full h-20 text-white"
+        viewBox="0 0 1440 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          fill="currentColor"
+          d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L0,120Z"
+        />
       </svg>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-white">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
-          {/* Left Content */}
+          {/* Left */}
           <div className="lg:col-span-7">
-            {/* Breadcrumb */}
             <nav className="flex items-center gap-2 text-sm text-blue-200 mb-6">
               <span>Home</span>
               <span>→</span>
               <span className="text-white font-semibold">Reviews</span>
             </nav>
 
-            {/* Main Heading */}
-            <div className="relative inline-block mb-6">
+            <div className="relative inline-block mb-4">
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/30 to-purple-500/30 blur-2xl" />
-              <h1 className="relative text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+              <h1 className="relative text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
                 Student Success
                 <br />
-                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
                   Stories
                 </span>
               </h1>
             </div>
 
             <p className="text-lg text-blue-100 max-w-2xl leading-relaxed mb-8">
-              Real experiences from learners who transformed their careers with Vel InfoTech. Read authentic reviews and join our thriving community.
+              Real experiences from learners who transformed their careers with
+              Vel InfoTech. Read authentic reviews and join our thriving
+              community.
             </p>
 
-            {/* Quick Actions */}
             <div className="grid sm:grid-cols-3 gap-4 mb-8">
               <ActionButton
                 icon={<PenIcon />}
@@ -402,7 +517,7 @@ function Hero({ masterReviews, trendingCourses, overallRating, ratingHistogram, 
                 gradient="from-purple-500 to-pink-500"
                 onClick={() => {
                   const tabs = document.querySelectorAll("button");
-                  tabs.forEach(b => {
+                  tabs.forEach((b) => {
                     if (b.textContent?.includes("Highlights")) b.click();
                   });
                 }}
@@ -417,8 +532,7 @@ function Hero({ masterReviews, trendingCourses, overallRating, ratingHistogram, 
               />
             </div>
 
-            {/* Trust Badges */}
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3">
               <TrustBadge icon="⭐" text={`${overallRating} Rating`} />
               <TrustBadge icon="👥" text="15k+ Students" />
               <TrustBadge icon="💼" text="87% Placement" />
@@ -426,76 +540,95 @@ function Hero({ masterReviews, trendingCourses, overallRating, ratingHistogram, 
             </div>
           </div>
 
-          {/* Right Stats Card */}
-          <div className="lg:col-span-5">
-            <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-50" />
-              <div className="relative rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-8 shadow-2xl">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xl font-bold text-white">Institute Overview</h3>
-                  <span className="px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-full">Verified</span>
-                </div>
-
-                {/* Rating Display */}
-                <div className="flex items-end gap-4 mb-6 pb-6 border-b border-white/10">
-                  <div className="text-6xl font-black text-white">{overallRating}</div>
-                  <div>
-                    <div className="flex items-center gap-1 mb-1">
-                      {[...Array(5)].map((_, i) => (
-                        <StarIconFilled key={i} className={i < Math.floor(overallRating) ? "text-yellow-400" : "text-slate-600"} />
-                      ))}
-                    </div>
-                    <p className="text-sm text-blue-200">{googleMeta.total || 100}+ reviews</p>
-                  </div>
-                </div>
-
-                {/* Rating Distribution */}
-                <div className="space-y-3 mb-6">
-                  {[5, 4, 3, 2, 1].map((star) => {
-                    const pct = ratingHistogram[star] || 0;
-                    return (
-                      <div key={star} className="flex items-center gap-3">
-                        <span className="text-white font-semibold w-8">{star}★</span>
-                        <div className="flex-1 h-3 bg-white/10 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full transition-all duration-500"
-                            style={{ width: `${pct}%` }}
-                          />
-                        </div>
-                        <span className="text-blue-200 text-sm w-12 text-right">{pct}%</span>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Top Courses */}
-                <div>
-                  <h4 className="text-sm font-semibold text-white mb-3">Popular Courses</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {trendingCourses.map((course, i) => (
-                      <span
-                        key={i}
-                        className="inline-flex items-center gap-2 px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-sm text-white font-medium hover:bg-white/20 transition-colors"
-                      >
-                        <span>{course.icon}</span>
-                        {course.title}
-                        <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs rounded-full">
-                          {course.tag}
-                        </span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Right stats card */}
+          <HeroStats
+            trendingCourses={trendingCourses}
+            overallRating={overallRating}
+            ratingHistogram={ratingHistogram}
+            googleMeta={googleMeta}
+          />
         </div>
       </div>
     </section>
   );
 }
 
-/* ===================== COMPONENTS ===================== */
+function HeroStats({ trendingCourses, overallRating, ratingHistogram, googleMeta }) {
+  return (
+    <div className="lg:col-span-5">
+      <div className="relative">
+        <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-3xl blur-xl opacity-60" />
+        <div className="relative rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-8 shadow-2xl text-white">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-bold">Institute Overview</h3>
+            <span className="px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-full">
+              Verified
+            </span>
+          </div>
+
+          <div className="flex items-end gap-4 mb-6 pb-6 border-b border-white/20">
+            <div className="text-6xl font-black">{overallRating}</div>
+            <div>
+              <div className="flex items-center gap-1 mb-1">
+                {[...Array(5)].map((_, i) => (
+                  <StarIconFilled
+                    key={i}
+                    className={
+                      i < Math.floor(overallRating)
+                        ? "text-yellow-400"
+                        : "text-white/30"
+                    }
+                  />
+                ))}
+              </div>
+              <p className="text-sm text-blue-100">
+                {googleMeta.total || 100}+ reviews
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-3 mb-6">
+            {[5, 4, 3, 2, 1].map((star) => {
+              const pct = ratingHistogram[star] || 0;
+              return (
+                <div key={star} className="flex items-center gap-3">
+                  <span className="font-semibold w-8">{star}★</span>
+                  <div className="flex-1 h-3 bg-white/20 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full transition-all duration-500"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                  <span className="text-blue-100 text-sm w-12 text-right">
+                    {pct}%
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          <h4 className="text-sm font-semibold mb-3">Popular Courses</h4>
+          <div className="flex flex-wrap gap-2">
+            {trendingCourses.map((course, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-2 px-3 py-2 bg-white/10 border border-white/20 rounded-xl text-sm font-medium"
+              >
+                <span>{course.icon}</span>
+                {course.title}
+                <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs rounded-full">
+                  {course.tag}
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== REUSABLES ===================== */
 function BodyTabs({ active, onChange }) {
   const tabs = [
     { id: "all", label: "All Reviews", icon: "📋" },
@@ -504,7 +637,7 @@ function BodyTabs({ active, onChange }) {
   ];
 
   return (
-    <div className="inline-flex bg-white/80 backdrop-blur-sm border border-slate-200/60 rounded-2xl p-1.5 shadow-lg">
+    <div className="inline-flex bg-white border border-slate-200 rounded-2xl p-1.5 shadow-lg">
       {tabs.map((tab) => (
         <button
           key={tab.id}
@@ -544,7 +677,12 @@ function ActionButton({ icon, title, subtitle, gradient, onClick, href, target }
   );
 
   return href ? (
-    <a href={href} target={target} rel={target ? "noopener noreferrer" : undefined} className={classes}>
+    <a
+      href={href}
+      target={target}
+      rel={target ? "noopener noreferrer" : undefined}
+      className={classes}
+    >
       {inner}
     </a>
   ) : (
@@ -556,7 +694,7 @@ function ActionButton({ icon, title, subtitle, gradient, onClick, href, target }
 
 function TrustBadge({ icon, text }) {
   return (
-    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white font-semibold text-sm">
+    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white font-semibold text-sm">
       <span>{icon}</span>
       {text}
     </div>
@@ -565,11 +703,9 @@ function TrustBadge({ icon, text }) {
 
 function FeaturedReview({ review }) {
   if (!review) return null;
-  
   return (
-    <article className="group relative rounded-3xl bg-gradient-to-br from-blue-50 to-purple-50 border border-slate-200/60 p-8 shadow-xl hover:shadow-2xl transition-all overflow-hidden">
+    <article className="group relative rounded-3xl bg-gradient-to-br from-blue-50 to-purple-50 border border-slate-200 p-8 shadow-xl hover:shadow-2xl transition-all overflow-hidden">
       <div className="absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl" />
-      
       <div className="relative">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
@@ -577,7 +713,9 @@ function FeaturedReview({ review }) {
               {review.name.charAt(0)}
             </div>
             <div>
-              <h3 className="font-bold text-lg text-slate-900">{review.name}</h3>
+              <h3 className="font-bold text-lg text-slate-900">
+                {review.name}
+              </h3>
               <p className="text-slate-600 text-sm">{review.center}</p>
             </div>
           </div>
@@ -592,13 +730,18 @@ function FeaturedReview({ review }) {
           </span>
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
-              <StarIconFilled key={i} className={i < review.rating ? "text-amber-400" : "text-slate-300"} />
+              <StarIconFilled
+                key={i}
+                className={i < review.rating ? "text-amber-400" : "text-slate-300"}
+              />
             ))}
           </div>
           <span className="text-slate-500 text-sm">• {review.ago}</span>
         </div>
 
-        <p className="text-slate-900 text-lg leading-relaxed mb-2">"{review.snippet}"</p>
+        <p className="text-slate-900 text-lg leading-relaxed mb-2">
+          "{review.snippet}"
+        </p>
         {review.detail && review.detail !== review.snippet && (
           <p className="text-slate-700">{review.detail}</p>
         )}
@@ -609,9 +752,8 @@ function FeaturedReview({ review }) {
 
 function ReviewCard({ review }) {
   return (
-    <article className="group relative rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+    <article className="group relative rounded-2xl bg-white border border-slate-200 p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-      
       <div className="relative">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-3">
@@ -632,7 +774,12 @@ function ReviewCard({ review }) {
           </span>
           <div className="flex items-center gap-0.5">
             {[...Array(5)].map((_, i) => (
-              <StarIconFilled key={i} className={`w-3.5 h-3.5 ${i < review.rating ? "text-amber-400" : "text-slate-300"}`} />
+              <StarIconFilled
+                key={i}
+                className={`w-3.5 h-3.5 ${
+                  i < review.rating ? "text-amber-400" : "text-slate-300"
+                }`}
+              />
             ))}
           </div>
         </div>
@@ -645,7 +792,10 @@ function ReviewCard({ review }) {
         {review.tags && review.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-4">
             {review.tags.map((tag) => (
-              <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-700 rounded-md text-xs">
+              <span
+                key={tag}
+                className="px-2 py-1 bg-slate-100 text-slate-700 rounded-md text-xs"
+              >
                 #{tag}
               </span>
             ))}
@@ -667,43 +817,62 @@ function ReviewCard({ review }) {
   );
 }
 
-function FilterCard({ courses, centers, courseFilter, setCourseFilter, centerFilter, setCenterFilter, ratingFilter, setRatingFilter }) {
+function FilterCard({
+  courses,
+  centers,
+  courseFilter,
+  setCourseFilter,
+  centerFilter,
+  setCenterFilter,
+  ratingFilter,
+  setRatingFilter,
+}) {
   return (
-    <div className="rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 shadow-lg">
+    <div className="rounded-2xl bg-white border border-slate-200 p-6 shadow-lg">
       <h3 className="text-lg font-bold text-slate-900 mb-5 flex items-center gap-2">
         <FilterIcon />
         Filters
       </h3>
-      
+
       <div className="space-y-5">
         <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">Course</label>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Course
+          </label>
           <select
             value={courseFilter}
             onChange={(e) => setCourseFilter(e.target.value)}
             className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
           >
             {courses.map((course) => (
-              <option key={course} value={course}>{course}</option>
+              <option key={course} value={course}>
+                {course}
+              </option>
             ))}
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">Center</label>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Center
+          </label>
           <select
             value={centerFilter}
             onChange={(e) => setCenterFilter(e.target.value)}
             className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
           >
             {centers.map((center) => (
-              <option key={center} value={center}>{center}</option>
+              <option key={center} value={center}>
+                {center}
+              </option>
             ))}
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-3">Rating</label>
+          <label className="block text-sm font-semibold text-slate-700 mb-3">
+            Rating
+          </label>
           <div className="flex flex-wrap gap-2">
             {[0, 5, 4, 3, 2, 1].map((rating) => (
               <button
@@ -727,9 +896,9 @@ function FilterCard({ courses, centers, courseFilter, setCourseFilter, centerFil
 
 function TagCloud({ tags, onPick }) {
   if (!tags?.length) return null;
-  
+
   return (
-    <div className="rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 shadow-lg">
+    <div className="rounded-2xl bg-white border border-slate-200 p-6 shadow-lg">
       <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
         <TagIcon />
         Popular Tags
@@ -756,7 +925,6 @@ function WriteReviewCard() {
   return (
     <div className="relative rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600 p-[1px] shadow-xl overflow-hidden">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
-      
       <div className="relative rounded-2xl bg-slate-900 p-6">
         <div className="flex items-start gap-4 mb-4">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
@@ -767,11 +935,9 @@ function WriteReviewCard() {
             <p className="text-blue-200 text-sm">Help others make informed decisions</p>
           </div>
         </div>
-
         <button className="w-full py-3 px-4 bg-white hover:bg-blue-50 text-slate-900 font-bold rounded-xl transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-lg">
           Write a Review
         </button>
-
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">
           <div className="p-2 bg-white/10 rounded-lg">
             <div className="text-white font-bold">2 min</div>
@@ -793,7 +959,7 @@ function WriteReviewCard() {
 
 function SortMenu({ value, onChange }) {
   return (
-    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/60 rounded-xl shadow-md">
+    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-xl shadow-md">
       <span className="text-sm font-semibold text-slate-700">Sort:</span>
       <select
         value={value}
@@ -808,6 +974,78 @@ function SortMenu({ value, onChange }) {
   );
 }
 
+/* ===== Icons ===== */
+function StarIconFilled({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  );
+}
+function PenIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+    </svg>
+  );
+}
+function GoogleIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24">
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+    </svg>
+  );
+}
+function FilterIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+    </svg>
+  );
+}
+function TagIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+      <line x1="7" y1="7" x2="7.01" y2="7" />
+    </svg>
+  );
+}
+function ThumbsUpIcon({ className = "w-4 h-4" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+    </svg>
+  );
+}
+function HeartIcon({ className = "w-4 h-4" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+  );
+}
+function EmptyIcon({ className = "w-24 h-24 mx-auto" }) {
+  return (
+    <svg className={className} viewBox="0 0 200 200" fill="none">
+      <circle cx="100" cy="100" r="80" fill="#E0F2FE" />
+      <path
+        d="M70 90c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zM110 90c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z"
+        fill="#94A3B8"
+      />
+      <path
+        d="M75 125c0-13.807 11.193-25 25-25s25 11.193 25 25"
+        stroke="#94A3B8"
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 function GuidelinesPanel() {
   const guidelines = [
     {
@@ -816,8 +1054,8 @@ function GuidelinesPanel() {
       points: [
         "Mention specific courses, trainers, and projects",
         "Share what worked well and what could improve",
-        "Be constructive and respectful in your feedback"
-      ]
+        "Be constructive and respectful in your feedback",
+      ],
     },
     {
       title: "Share Your Journey",
@@ -825,8 +1063,8 @@ function GuidelinesPanel() {
       points: [
         "Describe your learning experience and outcomes",
         "Mention placement support and interview preparation",
-        "Help others understand the real value"
-      ]
+        "Help others understand the real value",
+      ],
     },
     {
       title: "Stay Professional",
@@ -834,19 +1072,24 @@ function GuidelinesPanel() {
       points: [
         "Avoid sharing personal or sensitive information",
         "Keep language appropriate and constructive",
-        "Focus on your experience, not comparisons"
-      ]
-    }
+        "Focus on your experience, not comparisons",
+      ],
+    },
   ];
 
   return (
     <div className="mt-8 grid md:grid-cols-3 gap-6">
       {guidelines.map((guide, i) => (
-        <div key={i} className="rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-6 shadow-lg hover:shadow-xl transition-all">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl mb-4 shadow-lg">
+        <div
+          key={i}
+          className="rounded-2xl bg-white border border-slate-200 p-6 shadow-lg hover:shadow-xl transition-all"
+        >
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl mb-4 text-white shadow-lg">
             {guide.icon}
           </div>
-          <h3 className="text-xl font-bold text-slate-900 mb-3">{guide.title}</h3>
+          <h3 className="text-xl font-bold text-slate-900 mb-3">
+            {guide.title}
+          </h3>
           <ul className="space-y-2">
             {guide.points.map((point, j) => (
               <li key={j} className="flex items-start gap-2 text-slate-700">
@@ -863,12 +1106,14 @@ function GuidelinesPanel() {
 
 function HighlightsPanel({ reviews }) {
   const top = reviews.filter((r) => r.rating >= 5).slice(0, 6);
-  
+
   if (top.length === 0) {
     return (
-      <div className="mt-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-slate-200/60 p-16 text-center shadow-lg">
+      <div className="mt-8 rounded-3xl bg-white border border-slate-200 p-16 text-center shadow-lg">
         <EmptyIcon />
-        <p className="mt-4 text-xl font-bold text-slate-900">No highlights yet</p>
+        <p className="mt-4 text-xl font-bold text-slate-900">
+          No highlights yet
+        </p>
         <p className="text-slate-600 mt-2">Top-rated reviews will appear here</p>
       </div>
     );
@@ -877,7 +1122,10 @@ function HighlightsPanel({ reviews }) {
   return (
     <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {top.map((review) => (
-        <article key={review.id} className="group rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/60 p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+        <article
+          key={review.id}
+          className="group rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/60 p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+        >
           <div className="flex items-center justify-between mb-4">
             <span className="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full shadow-md">
               ⭐ Top Rated
@@ -905,76 +1153,5 @@ function HighlightsPanel({ reviews }) {
         </article>
       ))}
     </div>
-  );
-}
-
-/* ===================== ICONS ===================== */
-function StarIconFilled({ className = "w-5 h-5" }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  );
-}
-
-function PenIcon({ className = "w-5 h-5" }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-    </svg>
-  );
-}
-
-function GoogleIcon({ className = "w-5 h-5" }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24">
-      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-    </svg>
-  );
-}
-
-function FilterIcon({ className = "w-5 h-5" }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-    </svg>
-  );
-}
-
-function TagIcon({ className = "w-5 h-5" }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-      <line x1="7" y1="7" x2="7.01" y2="7" />
-    </svg>
-  );
-}
-
-function ThumbsUpIcon({ className = "w-4 h-4" }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
-    </svg>
-  );
-}
-
-function HeartIcon({ className = "w-4 h-4" }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-    </svg>
-  );
-}
-
-function EmptyIcon({ className = "w-24 h-24 mx-auto" }) {
-  return (
-    <svg className={className} viewBox="0 0 200 200" fill="none">
-      <circle cx="100" cy="100" r="80" fill="#E0F2FE" />
-      <path d="M70 90c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zM110 90c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z" fill="#94A3B8" />
-      <path d="M75 125c0-13.807 11.193-25 25-25s25 11.193 25 25" stroke="#94A3B8" strokeWidth="4" strokeLinecap="round" />
-    </svg>
   );
 }

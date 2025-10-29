@@ -10,8 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Contact() {
   /* ---------- quick actions/links (unchanged) ---------- */
   const actions = [
-    { label: "Call", href: "tel:+917669100251", icon: PhoneIcon },
-    { label: "WhatsApp", href: "https://wa.me/917669100251", icon: WhatsAppIcon, target: "_blank" },
+    { label: "Call", href: "tel:+919600593838", icon: PhoneIcon },
+    { label: "WhatsApp", href: "https://wa.me/9600383839", icon: WhatsAppIcon, target: "_blank" },
     { label: "Email", href: "mailto:contact@velinfotech.com", icon: MailIcon },
     { label: "Directions", href: "https://maps.google.com/?q=Vel+Infotech+Chennai", icon: PinIcon, target: "_blank" },
   ];
@@ -22,18 +22,17 @@ export default function Contact() {
     { q: "Can I schedule a counselling session?", a: "Yes. Send a message with your preferred time; our team will confirm shortly." },
   ];
 
-  /* ---------- API integration from About page (adapted) ---------- */
+  /* ---------- API integration (unchanged) ---------- */
   const dispatch = useDispatch();
   const { status, error: serverError } = useSelector((s) => s.enquiry || {});
 
-  // Keep your existing mode toggle, but map to API like About page
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    course: "",   // <-- was "interest" visually; we keep UI label the same but send as "course"
+    course: "",
     message: "",
-    mode: "classroom", // UI state; will be mapped to CLASS_ROOM / ONLINE
+    mode: "classroom",
   });
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
@@ -85,7 +84,7 @@ export default function Contact() {
     setErrors((prev) => ({ ...prev, ...(msg ? { [name]: msg } : { [name]: undefined }) }));
   };
 
-  // Validations copied from About page (course rules kept the same)
+  // Validations
   const validateField = (field, value) => {
     const val = (value ?? "").trim();
     switch (field) {
@@ -96,8 +95,8 @@ export default function Contact() {
         return null;
       case "email": {
         if (!val) return "Email is required.";
-        const formatOK = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
-        if (!formatOK) return "Enter a valid email address.";
+        const ok = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
+        if (!ok) return "Enter a valid email address.";
         return null;
       }
       case "phone":
@@ -119,8 +118,6 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // touch all fields first
     setTouched({ name: true, email: true, phone: true, course: true, message: true });
 
     const fields = ["name", "email", "phone", "course", "message"];
@@ -143,13 +140,12 @@ export default function Contact() {
       return;
     }
 
-    // Map to API payload like About page
     const payload = {
-      mode: (form.mode === "classroom" ? "class_room" : "online").toUpperCase(), // CLASS_ROOM | ONLINE
+      mode: (form.mode === "classroom" ? "class_room" : "online").toUpperCase(),
       name: form.name.trim(),
       email: form.email.trim(),
-      mobile: form.phone.trim(),       // backend expects 'mobile'
-      course: form.course.trim(),      // from "Course Interest" field
+      mobile: form.phone.trim(),
+      course: form.course.trim(),
       message: form.message.trim(),
     };
 
@@ -161,14 +157,7 @@ export default function Contact() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: "",
-        mode: "classroom",
-      });
+      setForm({ name: "", email: "", phone: "", course: "", message: "", mode: "classroom" });
       setErrors({});
       setTouched({});
     } catch (err) {
@@ -182,31 +171,31 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50 mt-12 relative overflow-clip">
-      {/* Toasts pinned to top of viewport */}
+    /* CHANGED: solid light base, no dark gradient */
+    <div className="min-h-screen relative overflow-clip bg-[#F7FAFF] dark:bg-[#F7FAFF] mt-12">
       <ToastContainer newestOnTop position="top-center" autoClose={2200} closeOnClick={false} pauseOnHover />
 
-      {/* Animated background (unchanged) */}
+      {/* Ambient blobs (very soft) */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br from-blue-400/20 to-cyan-400/20 blur-3xl animate-pulse" />
-        <div className="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-gradient-to-br from-orange-400/15 to-pink-400/15 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-        <div className="absolute bottom-20 right-1/4 h-64 w-64 rounded-full bg-gradient-to-br from-violet-400/10 to-blue-400/10 blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
+        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-blue-400/10 blur-3xl" />
+        <div className="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-orange-400/10 blur-3xl" />
+        <div className="absolute bottom-20 right-1/4 h-64 w-64 rounded-full bg-violet-400/8 blur-3xl" />
       </div>
 
-      {/* Subtle grid overlay (unchanged) */}
+      {/* Subtle grid overlay (faint) */}
       <div
-        className="absolute inset-0 opacity-[0.03] bg-[length:32px_32px]"
+        className="absolute inset-0 opacity-[0.02] bg-[length:32px_32px]"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M0 31.5H32M31.5 0V32' stroke='%23005BAC' stroke-width='1' stroke-opacity='1'/></svg>\")",
         }}
       />
 
-      {/* ============================== Hero (unchanged) ============================== */}
+      {/* ============================== Hero ============================== */}
       <section className="relative">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            {/* LEFT: same */}
+            {/* LEFT */}
             <div>
               <nav className="flex items-center gap-2 text-sm text-slate-600 mb-8">
                 <a href="/" className="hover:text-[#005BAC] transition-colors font-medium">Home</a>
@@ -215,16 +204,16 @@ export default function Contact() {
               </nav>
 
               <div className="flex flex-wrap items-center gap-3 mb-6">
-                <span className="inline-flex items-center gap-2 rounded-full border border-blue-200/60 bg-white/80 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-blue-700 shadow-sm hover:shadow-md transition-all">
+                <span className="inline-flex items-center gap-2 rounded-full border border-blue-200/60 bg-white/80 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-blue-700 shadow-sm">
                   <SparkIcon /> Response in &lt; 24 hrs
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-white/80 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-emerald-700 shadow-sm hover:shadow-md transition-all">
+                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-white/80 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-emerald-700 shadow-sm">
                   <ShieldIcon /> Verified contact details
                 </span>
               </div>
 
               <div className="relative inline-block">
-                <div className="pointer-events-none absolute -inset-8 bg-gradient-to-r from-[#005BAC]/20 via-[#FF5800]/20 to-[#005BAC]/20 blur-3xl opacity-60" />
+                <div className="pointer-events-none absolute -inset-8 bg-gradient-to-r from-[#005BAC]/15 via-[#FF5800]/15 to-[#005BAC]/15 blur-3xl" />
                 <h1 className="relative text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent">
                   Let's Connect
                 </h1>
@@ -235,7 +224,7 @@ export default function Contact() {
                 Reach out via call, WhatsApp, email, or send us a quick message.
               </p>
 
-              <div className="mt-8 h-1 w-32 rounded-full bg-gradient-to-r from-[#005BAC] via-[#FF5800] to-[#005BAC] shadow-lg shadow-blue-500/50" />
+              <div className="mt-8 h-1 w-32 rounded-full bg-gradient-to-r from-[#005BAC] via-[#FF5800] to-[#005BAC]" />
 
               {/* Desktop quick actions */}
               <div className="hidden md:flex mt-10 flex-wrap items-center gap-3">
@@ -245,12 +234,12 @@ export default function Contact() {
                     href={a.href}
                     target={a.target}
                     rel={a.target ? "noopener noreferrer" : undefined}
-                    className="group relative inline-flex items-center gap-2.5 rounded-2xl border border-slate-200/80 bg-white/90 backdrop-blur-sm px-5 py-3 text-sm font-semibold text-slate-700 hover:text-[#005BAC] hover:border-[#005BAC]/30 hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-md hover:shadow-xl"
+                    className="group relative inline-flex items-center gap-2.5 rounded-2xl border border-slate-200/80 bg-white/90 backdrop-blur-sm px-5 py-3 text-sm font-semibold text-slate-700 hover:text-[#005BAC] hover:border-[#005BAC]/30 transition-all shadow-md hover:shadow-xl"
                     style={{ animationDelay: `${idx * 100}ms` }}
                     aria-label={a.label}
                   >
                     <span className="relative">
-                      <span className="absolute inset-0 bg-gradient-to-br from-[#005BAC]/20 to-[#FF5800]/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <span className="absolute inset-0 bg-gradient-to-br from-[#005BAC]/15 to-[#FF5800]/15 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
                       <span className="relative"><a.icon /></span>
                     </span>
                     {a.label}
@@ -260,11 +249,11 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* RIGHT: illustration (unchanged) */}
+            {/* RIGHT illustration */}
             <div className="relative hidden lg:block">
-              <div className="absolute -inset-6 bg-gradient-to-tr from-[#005BAC]/20 via-transparent to-[#FF5800]/20 blur-3xl" />
+              {/* REMOVED the dark-ish gradient/blur backdrop here */}
               <div className="relative ml-auto max-w-xl">
-                <div className="relative rounded-3xl overflow-hidden ring-1 ring-slate-200 shadow-2xl">
+                <div className="relative rounded-3xl overflow-hidden ring-1 ring-slate-200 shadow-2xl bg-white">
                   <img src={ContactArt} alt="Contact illustration" className="h-auto w-full object-cover" loading="eager" />
                 </div>
                 <div className="absolute -bottom-4 -left-4 rounded-2xl bg-white shadow-xl border border-slate-200 px-4 py-2 flex items-center gap-2">
@@ -282,9 +271,9 @@ export default function Contact() {
       <section className="relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 lg:pb-24">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-            {/* Sidebar (unchanged) */}
+            {/* Sidebar */}
             <aside className="lg:col-span-2 space-y-6">
-              <div className="group relative rounded-3xl bg-gradient-to-br from-white via-white to-slate-50/50 border border-slate-200/60 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
+              <div className="group relative rounded-3xl bg-gradient-to-br from-white via-white to-slate-50/50 border border-slate-200/60 shadow-xl transition-all duration-500 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#005BAC]/5 via-transparent to-[#FF5800]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-transparent rounded-bl-full" />
                 <div className="relative p-6">
@@ -299,16 +288,15 @@ export default function Contact() {
                     </span>
                   </div>
                   <div className="space-y-3">
-                    <Row icon={PhoneIcon} label="Phone" value="+91-7669 100 251" href="tel:+917669100251" />
-                    <Row icon={WhatsAppIcon} label="WhatsApp" value="+91-7669 100 251" href="https://wa.me/917669100251" external />
+                    <Row icon={PhoneIcon} label="Phone" value="+91-9600593838" href="tel:+919600593838" />
+                    <Row icon={WhatsAppIcon} label="WhatsApp" value="+91-9600383839" href="https://wa.me/9600383839" external />
                     <Row icon={MailIcon} label="Email" value="contact@velinfotech.com" href="mailto:contact@velinfotech.com" />
                     <Row icon={PinIcon} label="Location" value="View on Google Map" href="https://maps.google.com/?q=Vel+Infotech+Chennai" external />
                   </div>
                 </div>
               </div>
 
-              <div className="group relative rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-40" />
+              <div className="group relative rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-xl overflow-hidden">
                 <div className="relative p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <ClockIcon className="text-orange-400" />
@@ -328,7 +316,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="group relative rounded-3xl bg-gradient-to-br from-blue-50 to-cyan-50/50 border border-blue-200/60 shadow-xl hover:shadow-2xl transition-all duration-500">
+              <div className="group relative rounded-3xl bg-gradient-to-br from-blue-50 to-cyan-50/50 border border-blue-200/60 shadow-xl transition-all duration-500">
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
                     <StarIcon className="text-[#FF5800]" />
@@ -359,7 +347,7 @@ export default function Contact() {
               </div>
             </aside>
 
-            {/* ================= Form card (design unchanged, logic replaced) ================= */}
+            {/* ================= Form card ================= */}
             <div className="lg:col-span-3 space-y-8">
               <div id="contact-form" className="group relative rounded-3xl bg-white border border-slate-200/60 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#005BAC]/5 via-transparent to-[#FF5800]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -376,15 +364,13 @@ export default function Contact() {
                 </div>
 
                 <form noValidate className="relative p-6 space-y-5" onSubmit={handleSubmit}>
-                  {/* Mode Toggle (unchanged visually) */}
+                  {/* Mode Toggle */}
                   <div className="flex justify-center">
                     <div className="inline-flex items-center rounded-full bg-white border border-slate-200 shadow-sm p-1">
                       <button
                         type="button"
                         onClick={() => setForm((f) => ({ ...f, mode: "classroom" }))}
-                        className={`${toggleBtnCls} ${form.mode === "classroom"
-                          ? "text-white bg-gradient-to-r from-[#005BAC] to-[#FF5800] shadow"
-                          : "text-slate-700 hover:text-slate-900"}`}
+                        className={`${toggleBtnCls} ${form.mode === "classroom" ? "text-white bg-gradient-to-r from-[#005BAC] to-[#FF5800] shadow" : "text-slate-700 hover:text-slate-900"}`}
                         aria-pressed={form.mode === "classroom"}
                       >
                         Class Room
@@ -392,9 +378,7 @@ export default function Contact() {
                       <button
                         type="button"
                         onClick={() => setForm((f) => ({ ...f, mode: "online" }))}
-                        className={`${toggleBtnCls} ${form.mode === "online"
-                          ? "text-white bg-gradient-to-r from-[#005BAC] to-[#FF5800] shadow"
-                          : "text-slate-700 hover:text-slate-900"}`}
+                        className={`${toggleBtnCls} ${form.mode === "online" ? "text-white bg-gradient-to-r from-[#005BAC] to-[#FF5800] shadow" : "text-slate-700 hover:text-slate-900"}`}
                         aria-pressed={form.mode === "online"}
                       >
                         Online
@@ -463,7 +447,7 @@ export default function Contact() {
                         <input
                           className={inputCls + (touched.course && errors.course ? " border-red-500 focus:border-red-500 focus:ring-red-500" : "")}
                           placeholder="Java, Python, Testing..."
-                          name="course"               // mapped to API
+                          name="course"
                           value={form.course}
                           onChange={onChange}
                           onBlur={onBlur}
@@ -512,7 +496,7 @@ export default function Contact() {
                 </form>
               </div>
 
-              {/* FAQ (unchanged) */}
+              {/* FAQ */}
               <div className="rounded-3xl bg-white border border-slate-200/60 shadow-xl overflow-hidden">
                 <div className="px-6 py-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 via-white to-slate-50">
                   <div className="flex items-center gap-3">
@@ -553,7 +537,7 @@ export default function Contact() {
           </div>
 
           <div className="mt-10 group relative rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700 p-8 overflow-hidden shadow-2xl">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-40" />
+            <div className="absolute inset-0 opacity-40" />
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#005BAC]/20 to-transparent rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[#FF5800]/20 to-transparent rounded-full blur-3xl" />
             <div className="relative flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -584,7 +568,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Mobile Action Bar (unchanged) */}
+      {/* Mobile Action Bar */}
       <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden border-t border-slate-200 bg-white/95 backdrop-blur-xl shadow-2xl">
         <div className="flex items-center justify-around px-3 py-3">
           {actions.map((a) => (
@@ -606,7 +590,7 @@ export default function Contact() {
   );
 }
 
-/* ============================== Styles/helpers (unchanged) ============================== */
+/* ============================== Styles/helpers ============================== */
 const toggleBtnCls = "px-4 py-1.5 text-sm font-semibold rounded-full transition-all";
 
 const inputCls =
@@ -682,7 +666,7 @@ function Faq({ q, a }) {
   );
 }
 
-/* ============================== Inline Icons (unchanged) ============================== */
+/* ============================== Inline Icons ============================== */
 function svgP(p){return{width:18,height:18,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:(p?.className||"")};}
 function PhoneIcon(props){return(<svg {...svgP(props)}><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>)}
 function MailIcon(props){return(<svg {...svgP(props)}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>)}
