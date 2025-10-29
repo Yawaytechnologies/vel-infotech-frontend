@@ -35,6 +35,7 @@ import Feedback from "./components/admin/Feedback.jsx";
 
 import Whatsapp from "./components/common/Whatsapp";
 import CourseRouter from "./pages/CourseRouter";
+import NotFound from "./pages/NotFound";
 
 /* Inline scroll-to-top (no extra file). Set to smooth. */
 function ScrollToTopInline({ top = 0, behavior = "smooth" }) {
@@ -51,14 +52,8 @@ function ScrollToTopInline({ top = 0, behavior = "smooth" }) {
 /* ---------- Layout ---------- */
 function Layout({ children }) {
   const location = useLocation();
-  const adminPaths = [
-    "/admin",
-    "/admin/login",
-    "/admin/dashboard",
-    "/admin/course-enquired",
-    "/admin/feedback",
-  ];
-  const isAdmin = adminPaths.includes(location.pathname);
+  // Broaden admin detection so unknown /admin/* also hides public header/footer
+  const isAdmin = location.pathname.startsWith("/admin");
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 md:bg-gradient-to-br md:from-[#0a2d55] md:to-[#051a30]">
@@ -143,11 +138,13 @@ export default function App() {
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="course-enquired" element={<StudentTable />} />
               <Route path="feedback" element={<Feedback />} />
+              {/* Admin 404 */}
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Route>
 
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* Public 404 (fallback) */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </Router>
