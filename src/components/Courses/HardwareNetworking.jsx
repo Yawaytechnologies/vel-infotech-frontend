@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -32,6 +62,13 @@ export default function JavaCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Smooth scroll target
   const formRef = useRef(null);
@@ -177,15 +214,13 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -381,13 +416,20 @@ export default function JavaCoursePage() {
           aria-label="Training Locations"
         >
           <p className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Offline Hardware &amp; Networking Training</strong> in
+            Offering{" "}
+            <strong>
+              Online and Offline Hardware &amp; Networking Training
+            </strong>{" "}
+            in
             <strong> Chennai &amp; Bangalore</strong>
           </p>
         </div>
 
         {/* Course Partners Section */}
-        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
+        <section
+          className="py-16 bg-[#002855]"
+          aria-labelledby="partners-heading"
+        >
           <div className="max-w-7xl mx-auto px-4">
             <h2
               id="partners-heading"
@@ -490,7 +532,8 @@ export default function JavaCoursePage() {
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Understand computer hardware components and system architecture.
+                  Understand computer hardware components and system
+                  architecture.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
@@ -498,19 +541,23 @@ export default function JavaCoursePage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Build, configure, and secure LAN/WAN networks using routers and switches.
+                  Build, configure, and secure LAN/WAN networks using routers
+                  and switches.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Gain expertise in IP addressing, DHCP, DNS, and network troubleshooting.
+                  Gain expertise in IP addressing, DHCP, DNS, and network
+                  troubleshooting.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Learn about firewalls, network security, and antivirus solutions.
+                  Learn about firewalls, network security, and antivirus
+                  solutions.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Get career support with resume building, interview prep, and job placement assistance.
+                  Get career support with resume building, interview prep, and
+                  job placement assistance.
                 </li>
               </ul>
             </div>
@@ -559,7 +606,10 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-highlights" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-highlights"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Course Highlights
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
@@ -584,7 +634,10 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-tools" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-tools"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Tools You’ll Master
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -622,7 +675,10 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-topics" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-topics"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Topics Covered
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -658,7 +714,10 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-skills" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-skills"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Key Skills You’ll Gain
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
@@ -716,7 +775,8 @@ export default function JavaCoursePage() {
                   Flexible Learning Modes
                 </h3>
                 <p className="text-gray-600">
-                  Learn in-person or online with weekday, weekend, and fast-track options.
+                  Learn in-person or online with weekday, weekend, and
+                  fast-track options.
                 </p>
               </div>
 
@@ -726,7 +786,8 @@ export default function JavaCoursePage() {
                   Job-Ready Curriculum
                 </h3>
                 <p className="text-gray-600">
-                  Real projects, labs, and interview prep aligned to what employers expect.
+                  Real projects, labs, and interview prep aligned to what
+                  employers expect.
                 </p>
               </div>
 
@@ -736,70 +797,31 @@ export default function JavaCoursePage() {
                   Career Support
                 </h3>
                 <p className="text-gray-600">
-                  Resume building, mock interviews, and placement assistance with hiring partners.
+                  Resume building, mock interviews, and placement assistance
+                  with hiring partners.
                 </p>
               </div>
             </div>
           </div>
         </section>
-
-        {/* === TESTIMONIALS === */}
-        <section
-          id="testimonials"
-          className="py-16 bg-[#fafafa]"
-          aria-labelledby="testimonials-heading"
-        >
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2
-              id="testimonials-heading"
-              className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8"
-            >
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good place for job seekers. 💯 placement.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good service and trusted organisation.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
-                </figcaption>
-              </figure>
-            </div>
-
-            <a
-              href="/reviews"
-              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-            >
-              View more reviews →
-            </a>
-          </div>
-        </section>
+        {/* Testimonials */}
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
+        <section
+          id="faq"
+          className="py-16 bg-white"
+          aria-labelledby="faq-heading"
+        >
           <div className="max-w-5xl mx-auto px-6">
             <h2
               id="faq-heading"
@@ -816,36 +838,46 @@ export default function JavaCoursePage() {
                   </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from hardware and networking fundamentals, then move to
-                  LAN/WAN, routing/switching, IP configuration and security.
+                  Yes. We start from hardware and networking fundamentals, then
+                  move to LAN/WAN, routing/switching, IP configuration and
+                  security.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Do you provide placement assistance?</h3>
+                  <h3 className="inline text-lg">
+                    Do you provide placement assistance?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement
+                  assistance with hiring partners.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">What are the class modes and timings?</h3>
+                  <h3 className="inline text-lg">
+                    What are the class modes and timings?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with weekday/weekend/fast-track options.
+                  Both online and classroom batches with
+                  weekday/weekend/fast-track options.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Will I build real projects?</h3>
+                  <h3 className="inline text-lg">
+                    Will I build real projects?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs: system assembly, network configuration,
-                  routing/switching practice, and security hardening.
+                  Yes. You’ll work on guided labs: system assembly, network
+                  configuration, routing/switching practice, and security
+                  hardening.
                 </p>
               </details>
 
@@ -854,7 +886,8 @@ export default function JavaCoursePage() {
                   <h3 className="inline text-lg">Do I get a certificate?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project performance is also highlighted.
+                  Yes, a course completion certificate is provided. Project
+                  performance is also highlighted.
                 </p>
               </details>
             </div>
@@ -894,14 +927,16 @@ export default function JavaCoursePage() {
                   Strong Placement Support
                 </h3>
                 <p className="text-black/90">
-                  We support your placement journey with partner network and hiring drives.
+                  We support your placement journey with partner network and
+                  hiring drives.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
-                  Build and troubleshoot real lab networks, configure routers/switches &amp; secure endpoints.
+                  Build and troubleshoot real lab networks, configure
+                  routers/switches &amp; secure endpoints.
                 </p>
               </div>
             </div>
@@ -1112,7 +1147,9 @@ export default function JavaCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}

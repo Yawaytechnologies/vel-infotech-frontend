@@ -13,6 +13,36 @@ import { submitEnquiry } from "../../redux/actions/enquiryAction";
 import FeedbackSection from "../common/Feedback";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo"; // ✅ SEO import
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function PlsqlCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -31,6 +61,13 @@ export default function PlsqlCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Toast defaults
   const toastOpts = {
@@ -168,15 +205,13 @@ export default function PlsqlCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -465,14 +500,14 @@ export default function PlsqlCoursePage() {
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span>Master Oracle
-                SQL basics including SELECT queries, joins, subqueries, and
+                <span className="text-purple-600 mt-1">➤</span>Master Oracle SQL
+                basics including SELECT queries, joins, subqueries, and
                 aggregate functions.
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span>Develop
-                advanced PL/SQL scripts using procedures, functions, packages,
-                and triggers.
+                <span className="text-purple-600 mt-1">➤</span>Develop advanced
+                PL/SQL scripts using procedures, functions, packages, and
+                triggers.
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>Learn exception
@@ -485,8 +520,8 @@ export default function PlsqlCoursePage() {
                 projects.
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span>Gain exposure
-                to performance tuning and query optimization techniques.
+                <span className="text-purple-600 mt-1">➤</span>Gain exposure to
+                performance tuning and query optimization techniques.
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>Receive job
@@ -505,8 +540,8 @@ export default function PlsqlCoursePage() {
             Become a Certified PL/SQL Developer
           </h2>
           <p className="text-lg md:text-xl text-white mb-6">
-            Learn Oracle SQL, PL/SQL procedures, triggers, tuning, and more
-            with expert-led, hands-on training.
+            Learn Oracle SQL, PL/SQL procedures, triggers, tuning, and more with
+            expert-led, hands-on training.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button
@@ -555,16 +590,20 @@ export default function PlsqlCoursePage() {
                 Tools You’ll Master
               </h3>
               <div className="flex flex-wrap gap-2">
-                {["Oracle SQL", "PL/SQL", "Toad", "SQL Developer", "GitHub"].map(
-                  (tool, i) => (
-                    <span
-                      key={i}
-                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
-                    >
-                      {tool}
-                    </span>
-                  )
-                )}
+                {[
+                  "Oracle SQL",
+                  "PL/SQL",
+                  "Toad",
+                  "SQL Developer",
+                  "GitHub",
+                ].map((tool, i) => (
+                  <span
+                    key={i}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                  >
+                    {tool}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -660,8 +699,8 @@ export default function PlsqlCoursePage() {
                 Flexible Learning Modes
               </h3>
               <p className="text-gray-600">
-                Learn in-person or online with weekday, weekend, and
-                fast-track options.
+                Learn in-person or online with weekday, weekend, and fast-track
+                options.
               </p>
             </div>
 
@@ -682,66 +721,25 @@ export default function PlsqlCoursePage() {
                 Career Support
               </h3>
               <p className="text-gray-600">
-                Resume building, mock interviews, and placement assistance
-                with hiring partners.
+                Resume building, mock interviews, and placement assistance with
+                hiring partners.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* === TESTIMONIALS === */}
-      <section id="testimonials" className="py-16 bg-[#fafafa]">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-            What Our Students Say
-          </h2>
-          <p className="text-lg text-gray-600 mb-12">
-            Our success is measured by our learners’ success.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good place for job seekers. 💯 placement.”
-              </p>
-              <div className="mt-4">
-                <p className="font-semibold text-gray-900">Thennarasu S</p>
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good service and trusted organisation.”
-              </p>
-              <div className="mt-4">
-                <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Best consultancy for people who seek jobs. 100% placement
-                guaranteed.”
-              </p>
-              <div className="mt-4">
-                <p className="font-semibold text-gray-900">
-                  Sudha Selvarajan
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* optional internal link */}
-          <a
-            href="/reviews"
-            className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-          >
-            View more reviews →
-          </a>
-        </div>
-      </section>
-
+      {/* Testimonials */}
+      <GoogleStyleReviews
+        title="What Our Students Say"
+        orgName="Vel InfoTech"
+        overallRating={4.8}
+        total={1543}
+        histogram={reviewHistogram}
+        reviews={reviewsData}
+        viewAllHref="/reviews"
+        writeHref="/contact-us#enquiry-form"
+      />
       {/* === FAQ === */}
       <section id="faq" className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-6">
@@ -755,8 +753,8 @@ export default function PlsqlCoursePage() {
                 Is this course suitable for absolute beginners?
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. We start from Core Java basics and gradually move to
-                Spring Boot, REST APIs, and React.
+                Yes. We start from Core Java basics and gradually move to Spring
+                Boot, REST APIs, and React.
               </p>
             </details>
 
@@ -785,8 +783,8 @@ export default function PlsqlCoursePage() {
                 Will I build real projects?
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. You’ll work on guided labs and a capstone project
-                covering APIs, DB integration, and a React UI.
+                Yes. You’ll work on guided labs and a capstone project covering
+                APIs, DB integration, and a React UI.
               </p>
             </details>
 

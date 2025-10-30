@@ -13,6 +13,36 @@ import { submitEnquiry } from "../../redux/actions/enquiryAction";
 import FeedbackSection from "../common/Feedback";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo"; // ✅ SEO import
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function SqlCoursePage() {
   const dispatch = useDispatch();
@@ -32,6 +62,13 @@ export default function SqlCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Toast defaults (colored so our bg shows)
   const toastOpts = {
@@ -167,15 +204,13 @@ export default function SqlCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -188,10 +223,19 @@ export default function SqlCoursePage() {
   }
 
   const courses = [
-    { title: "FullStackDevelopment", image: "https://cdn-icons-png.flaticon.com/512/16990/16990193.png" },
-    { title: "Python", image: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png" },
+    {
+      title: "FullStackDevelopment",
+      image: "https://cdn-icons-png.flaticon.com/512/16990/16990193.png",
+    },
+    {
+      title: "Python",
+      image: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+    },
     { title: "SoftwareTesting", image: "https://cdn.simpleicons.org/cypress" },
-    { title: "Plsql", image: "https://cdn-icons-png.flaticon.com/512/603/603201.png" },
+    {
+      title: "Plsql",
+      image: "https://cdn-icons-png.flaticon.com/512/603/603201.png",
+    },
   ];
 
   // ✅ Structured data for SQL Course (VEL ➜ VELL domain fix + SEO consistency)
@@ -244,7 +288,10 @@ export default function SqlCoursePage() {
         jsonLd={courseJsonLd}
       />
 
-      <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20" aria-labelledby="course-title">
+      <section
+        className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20"
+        aria-labelledby="course-title"
+      >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
           {/* LEFT: Content */}
           <div className="flex-1">
@@ -254,13 +301,17 @@ export default function SqlCoursePage() {
             </p>
 
             {/* H1 — primary keyword */}
-            <h1 id="course-title" className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
+            <h1
+              id="course-title"
+              className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400"
+            >
               SQL Developer Course
             </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
-                ✅ Join the <strong>Top SQL Training Program</strong> to master database querying and design.
+                ✅ Join the <strong>Top SQL Training Program</strong> to master
+                database querying and design.
               </li>
               <li>
                 ✅ Learn{" "}
@@ -274,14 +325,19 @@ export default function SqlCoursePage() {
                 <strong>real-time SQL database projects</strong>.
               </li>
               <li>
-                ✅ Choose <strong>flexible schedules</strong> – Weekday / Weekend / Online options available.
+                ✅ Choose <strong>flexible schedules</strong> – Weekday /
+                Weekend / Online options available.
               </li>
               <li>
-                ✅ Earn an industry-recognized <strong>SQL Developer Certification</strong>.
+                ✅ Earn an industry-recognized{" "}
+                <strong>SQL Developer Certification</strong>.
               </li>
               <li>
                 ✅ Get career support with{" "}
-                <strong>interview preparation, resume reviews, and job referrals</strong>.
+                <strong>
+                  interview preparation, resume reviews, and job referrals
+                </strong>
+                .
               </li>
             </ul>
 
@@ -289,7 +345,8 @@ export default function SqlCoursePage() {
               type="button"
               onClick={() => {
                 const formSection = document.getElementById("enquiry-form");
-                if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
               }}
               className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
               mt-8
@@ -301,9 +358,13 @@ export default function SqlCoursePage() {
               hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
             >
               <div>
-                <span className="text-lg font-extrabold text-violet-400 block">Freshers Salary:</span>
+                <span className="text-lg font-extrabold text-violet-400 block">
+                  Freshers Salary:
+                </span>
                 ₹3 LPA to ₹8 LPA <br />
-                <span className="text-sm text-gray-300">| Duration: 3 Months</span>
+                <span className="text-sm text-gray-300">
+                  | Duration: 3 Months
+                </span>
               </div>
             </button>
           </div>
@@ -313,7 +374,10 @@ export default function SqlCoursePage() {
             <h2 className="text-2xl font-bold mb-4">WANT IT JOB?</h2>
             <p className="mb-4 text-lg">
               Master <strong>SQL</strong> in just 3 months with{" "}
-              <strong>hands-on coding, real-world projects, and 100% placement assistance</strong>{" "}
+              <strong>
+                hands-on coding, real-world projects, and 100% placement
+                assistance
+              </strong>{" "}
               from Vell InfoTech.
             </p>
 
@@ -321,7 +385,8 @@ export default function SqlCoursePage() {
               type="button"
               onClick={() => {
                 const formSection = document.getElementById("enquiry-form");
-                if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
               }}
               className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
             >
@@ -354,10 +419,16 @@ export default function SqlCoursePage() {
         </div>
 
         {/* Course Partners */}
-        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
+        <section
+          className="py-16 bg-[#002855]"
+          aria-labelledby="partners-heading"
+        >
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
-              <h2 id="partners-heading" className="text-xl font-semibold uppercase tracking-wide text-white">
+              <h2
+                id="partners-heading"
+                className="text-xl font-semibold uppercase tracking-wide text-white"
+              >
                 <span className="text-purple-400">●</span> Our Course Partners{" "}
                 <span className="text-purple-400">●</span>
               </h2>
@@ -365,14 +436,46 @@ export default function SqlCoursePage() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
               {[
-                { name: "HubSpot", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg", link: "https://www.hubspot.com/" },
-                { name: "GitLab", logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg", link: "https://about.gitlab.com/" },
-                { name: "Monday.com", logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg", link: "https://monday.com/" },
-                { name: "Google Cloud", logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg", link: "https://cloud.google.com/" },
-                { name: "AWS", logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg", link: "https://aws.amazon.com/" },
-                { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg", link: "https://www.salesforce.com/" },
-                { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", link: "https://www.ibm.com/" },
-                { name: "Slack", logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg", link: "https://slack.com/" },
+                {
+                  name: "HubSpot",
+                  logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
+                  link: "https://www.hubspot.com/",
+                },
+                {
+                  name: "GitLab",
+                  logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
+                  link: "https://about.gitlab.com/",
+                },
+                {
+                  name: "Monday.com",
+                  logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
+                  link: "https://monday.com/",
+                },
+                {
+                  name: "Google Cloud",
+                  logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
+                  link: "https://cloud.google.com/",
+                },
+                {
+                  name: "AWS",
+                  logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
+                  link: "https://aws.amazon.com/",
+                },
+                {
+                  name: "Salesforce",
+                  logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
+                  link: "https://www.salesforce.com/",
+                },
+                {
+                  name: "IBM",
+                  logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                  link: "https://www.ibm.com/",
+                },
+                {
+                  name: "Slack",
+                  logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                  link: "https://slack.com/",
+                },
               ].map((partner, index) => (
                 <motion.a
                   key={index}
@@ -386,7 +489,11 @@ export default function SqlCoursePage() {
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
                 >
-                  <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-12 object-contain"
+                  />
                 </motion.a>
               ))}
             </div>
@@ -397,15 +504,20 @@ export default function SqlCoursePage() {
         <section className="px-0 py-16" aria-labelledby="overview-heading">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
-              <h2 id="overview-heading" className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
+              <h2
+                id="overview-heading"
+                className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5"
+              >
                 Overview of SQL Developer Course
               </h2>
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
               <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-                Our SQL Developer Training program equips you with the skills needed to query, manage, and manipulate
-                relational databases using SQL. This course includes hands-on practice with real-world datasets and
-                queries, from fundamentals to performance tuning.
+                Our SQL Developer Training program equips you with the skills
+                needed to query, manage, and manipulate relational databases
+                using SQL. This course includes hands-on practice with
+                real-world datasets and queries, from fundamentals to
+                performance tuning.
               </p>
 
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
@@ -413,28 +525,31 @@ export default function SqlCoursePage() {
               </h3>
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Understand database concepts and relational models
-                  with real-time examples.
+                  <span className="text-purple-600 mt-1">➤</span> Understand
+                  database concepts and relational models with real-time
+                  examples.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Master SQL commands: SELECT, INSERT, UPDATE, DELETE,
-                  and filtering data.
+                  <span className="text-purple-600 mt-1">➤</span> Master SQL
+                  commands: SELECT, INSERT, UPDATE, DELETE, and filtering data.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Work with joins, subqueries, views, indexes, and
-                  constraints effectively.
+                  <span className="text-purple-600 mt-1">➤</span> Work with
+                  joins, subqueries, views, indexes, and constraints
+                  effectively.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Write complex queries using GROUP BY, HAVING, and
-                  nested queries.
+                  <span className="text-purple-600 mt-1">➤</span> Write complex
+                  queries using GROUP BY, HAVING, and nested queries.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Learn normalization, ER modeling, and real-time
-                  database design.
+                  <span className="text-purple-600 mt-1">➤</span> Learn
+                  normalization, ER modeling, and real-time database design.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Prepare for jobs with resume support, mock interviews,
-                  and SQL assessments.
+                  <span className="text-purple-600 mt-1">➤</span> Prepare for
+                  jobs with resume support, mock interviews, and SQL
+                  assessments.
                 </li>
               </ul>
             </div>
@@ -442,21 +557,28 @@ export default function SqlCoursePage() {
         </section>
 
         {/* SQL CTA + Cards */}
-        <section className="w-full px-6 py-20 text-black" aria-labelledby="become-heading">
+        <section
+          className="w-full px-6 py-20 text-black"
+          aria-labelledby="become-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-16">
-            <h2 id="become-heading" className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
+            <h2
+              id="become-heading"
+              className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white"
+            >
               Become a Certified SQL Developer
             </h2>
             <p className="text-lg md:text-xl text-white mb-6">
-              Learn SQL fundamentals, advanced queries, joins, normalization, and more with hands-on, industry-relevant
-              training.
+              Learn SQL fundamentals, advanced queries, joins, normalization,
+              and more with hands-on, industry-relevant training.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <button
                 type="button"
                 onClick={() => {
                   const formSection = document.getElementById("enquiry-form");
-                  if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+                  if (formSection)
+                    formSection.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all"
               >
@@ -474,7 +596,9 @@ export default function SqlCoursePage() {
                   alt="Course Highlights"
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Course Highlights
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>✓ SQL fundamentals, queries, joins</li>
                   <li>✓ Normalization &amp; ER modeling</li>
@@ -492,10 +616,21 @@ export default function SqlCoursePage() {
                   alt="Tools You’ll Master"
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Tools You’ll Master
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {["MySQL", "PostgreSQL", "SQL Server", "SQL Developer", "GitHub"].map((tool) => (
-                    <span key={tool} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
+                  {[
+                    "MySQL",
+                    "PostgreSQL",
+                    "SQL Server",
+                    "SQL Developer",
+                    "GitHub",
+                  ].map((tool) => (
+                    <span
+                      key={tool}
+                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                    >
                       {tool}
                     </span>
                   ))}
@@ -511,10 +646,22 @@ export default function SqlCoursePage() {
                   alt="Topics Covered"
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Topics Covered
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Joins", "Subqueries", "Views", "Indexes", "Normalization", "Aggregate Functions"].map((topic) => (
-                    <span key={topic} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">
+                  {[
+                    "Joins",
+                    "Subqueries",
+                    "Views",
+                    "Indexes",
+                    "Normalization",
+                    "Aggregate Functions",
+                  ].map((topic) => (
+                    <span
+                      key={topic}
+                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                    >
                       {topic}
                     </span>
                   ))}
@@ -530,7 +677,9 @@ export default function SqlCoursePage() {
                   alt="Key Skills"
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Key Skills You’ll Gain
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>Efficient SQL query writing</li>
                   <li>Data analysis with filtering &amp; joins</li>
@@ -554,88 +703,90 @@ export default function SqlCoursePage() {
         />
 
         {/* === WHY CHOOSE US === */}
-        <section id="why-choose-us" className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800" aria-labelledby="why-heading">
+        <section
+          id="why-choose-us"
+          className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
+          aria-labelledby="why-heading"
+        >
           <div className="max-w-6xl mx-auto px-6">
-            <h2 id="why-heading" className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            <h2
+              id="why-heading"
+              className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12"
+            >
               Why Choose Us
             </h2>
 
             <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Expert Trainers
+                </h3>
                 <p className="text-gray-600">
-                  Our mentors have deep industry experience and share practical, hands-on insights.
+                  Our mentors have deep industry experience and share practical,
+                  hands-on insights.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Flexible Learning Modes</h3>
-                <p className="text-gray-600">Learn in-person or online with weekday, weekend, and fast-track options.</p>
-              </div>
-
-              <div className="relative">
-                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Job-Ready Curriculum</h3>
-                <p className="text-gray-600">Real projects, labs, and interview prep aligned to what employers expect.</p>
-              </div>
-
-              <div className="relative">
-                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Career Support</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Flexible Learning Modes
+                </h3>
                 <p className="text-gray-600">
-                  Resume building, mock interviews, and placement assistance with hiring partners.
+                  Learn in-person or online with weekday, weekend, and
+                  fast-track options.
+                </p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Job-Ready Curriculum
+                </h3>
+                <p className="text-gray-600">
+                  Real projects, labs, and interview prep aligned to what
+                  employers expect.
+                </p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Career Support
+                </h3>
+                <p className="text-gray-600">
+                  Resume building, mock interviews, and placement assistance
+                  with hiring partners.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]" aria-labelledby="testimonials-heading">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">Our success is measured by our learners’ success.</p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good place for job seekers. 💯 placement.”</p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good service and trusted organisation.”</p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
-                </div>
-              </div>
-            </div>
-
-            {/* optional internal link */}
-            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
-              View more reviews →
-            </a>
-          </div>
-        </section>
+        {/* Testimonials */}
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
+        <section
+          id="faq"
+          className="py-16 bg-white"
+          aria-labelledby="faq-heading"
+        >
           <div className="max-w-5xl mx-auto px-6">
-            <h2 id="faq-heading" className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            <h2
+              id="faq-heading"
+              className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10"
+            >
               Frequently Asked Questions
             </h2>
 
@@ -645,8 +796,9 @@ export default function SqlCoursePage() {
                   Is this course suitable for absolute beginners?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from SQL fundamentals and gradually move to advanced topics like performance tuning,
-                  indexing strategies, and database design.
+                  Yes. We start from SQL fundamentals and gradually move to
+                  advanced topics like performance tuning, indexing strategies,
+                  and database design.
                 </p>
               </details>
 
@@ -655,7 +807,8 @@ export default function SqlCoursePage() {
                   Do you provide placement assistance?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement
+                  assistance with hiring partners.
                 </p>
               </details>
 
@@ -664,7 +817,8 @@ export default function SqlCoursePage() {
                   What are the class modes and timings?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with weekday/weekend/fast-track options.
+                  Both online and classroom batches with
+                  weekday/weekend/fast-track options.
                 </p>
               </details>
 
@@ -673,8 +827,8 @@ export default function SqlCoursePage() {
                   Will I build real projects?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project covering complex queries, DB design, and query
-                  optimization.
+                  Yes. You’ll work on guided labs and a capstone project
+                  covering complex queries, DB design, and query optimization.
                 </p>
               </details>
 
@@ -683,7 +837,8 @@ export default function SqlCoursePage() {
                   Do I get a certificate?
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project performance is also highlighted.
+                  Yes, a course completion certificate is provided. Project
+                  performance is also highlighted.
                 </p>
               </details>
             </div>
@@ -691,43 +846,56 @@ export default function SqlCoursePage() {
         </section>
 
         {/* ENQUIRY FORM */}
-        <section className="w-full px-6 py-20 text-white" aria-labelledby="quote-heading">
+        <section
+          className="w-full px-6 py-20 text-white"
+          aria-labelledby="quote-heading"
+        >
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-10">
             {/* LEFT info cards … */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Comprehensive Curriculum
+                </h3>
                 <p className="text-black/90">
-                  Master SQL with structured modules covering RDBMS concepts, MySQL/PostgreSQL/SQL Server, and query
-                  optimization.
+                  Master SQL with structured modules covering RDBMS concepts,
+                  MySQL/PostgreSQL/SQL Server, and query optimization.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Career-Oriented Training
+                </h3>
                 <p className="text-black/90">
-                  Learn from working professionals. Includes mock interviews, resume prep, and job assistance.
+                  Learn from working professionals. Includes mock interviews,
+                  resume prep, and job assistance.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">100% Job Assistance</h3>
                 <p className="text-black/90">
-                  We support your placement journey with a strong partner network and hiring drives.
+                  We support your placement journey with a strong partner
+                  network and hiring drives.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
-                  Gain real-world experience with capstone projects and industry-based SQL assignments in every module.
+                  Gain real-world experience with capstone projects and
+                  industry-based SQL assignments in every module.
                 </p>
               </div>
             </div>
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h2 id="quote-heading" className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2
+                  id="quote-heading"
+                  className="text-2xl font-bold text-center text-[#003c6a] mb-5"
+                >
                   Get a Free Training Quote
                 </h2>
 
@@ -737,7 +905,9 @@ export default function SqlCoursePage() {
                     onClick={() => setMode("class_room")}
                     type="button"
                     className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "class_room" ? "bg-[#003c6a] text-white" : "bg-white text-[#003c6a] border border-[#003c6a]"
+                      mode === "class_room"
+                        ? "bg-[#003c6a] text-white"
+                        : "bg-white text-[#003c6a] border border-[#003c6a]"
                     }`}
                   >
                     <FaChalkboardTeacher className="text-base" /> Class Room
@@ -746,14 +916,21 @@ export default function SqlCoursePage() {
                     onClick={() => setMode("online")}
                     type="button"
                     className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "online" ? "bg-[#003c6a] text-white" : "bg-white text-[#003c6a] border border-[#003c6a]"
+                      mode === "online"
+                        ? "bg-[#003c6a] text-white"
+                        : "bg-white text-[#003c6a] border border-[#003c6a]"
                     }`}
                   >
                     <FaLaptop className="text-base" /> Online
                   </button>
                 </div>
 
-                <form id="enquiry-form" onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-2">
+                <form
+                  id="enquiry-form"
+                  onSubmit={handleSubmit}
+                  noValidate
+                  className="grid grid-cols-1 gap-2"
+                >
                   {/* Name */}
                   <div>
                     <input
@@ -772,7 +949,9 @@ export default function SqlCoursePage() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.name && errors?.name && <p className="text-red-600 text-xs">{errors.name}</p>}
+                      {touched?.name && errors?.name && (
+                        <p className="text-red-600 text-xs">{errors.name}</p>
+                      )}
                     </div>
                   </div>
 
@@ -794,7 +973,9 @@ export default function SqlCoursePage() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.email && errors?.email && <p className="text-red-600 text-xs">{errors.email}</p>}
+                      {touched?.email && errors?.email && (
+                        <p className="text-red-600 text-xs">{errors.email}</p>
+                      )}
                     </div>
                   </div>
 
@@ -818,7 +999,9 @@ export default function SqlCoursePage() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && <p className="text-red-600 text-xs">{errors.phone}</p>}
+                      {touched?.phone && errors?.phone && (
+                        <p className="text-red-600 text-xs">{errors.phone}</p>
+                      )}
                     </div>
                   </div>
 
@@ -873,7 +1056,9 @@ export default function SqlCoursePage() {
                     </select>
 
                     <div className="h-3 mt-0.5">
-                      {touched?.course && errors?.course && <p className="text-red-600 text-xs">{errors.course}</p>}
+                      {touched?.course && errors?.course && (
+                        <p className="text-red-600 text-xs">{errors.course}</p>
+                      )}
                     </div>
                   </div>
 
@@ -898,7 +1083,9 @@ export default function SqlCoursePage() {
                       <span>{form.message.length}/300</span>
                     </div>
                     <div className="h-3 mt-0.5">
-                      {touched?.message && errors?.message && <p className="text-red-600 text-xs">{errors.message}</p>}
+                      {touched?.message && errors?.message && (
+                        <p className="text-red-600 text-xs">{errors.message}</p>
+                      )}
                     </div>
                   </div>
 
@@ -907,7 +1094,9 @@ export default function SqlCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
@@ -915,7 +1104,9 @@ export default function SqlCoursePage() {
 
                   {/* Optional server error */}
                   {error && (
-                    <p className="text-red-600 text-xs mt-1">Submission failed: {String(error)}</p>
+                    <p className="text-red-600 text-xs mt-1">
+                      Submission failed: {String(error)}
+                    </p>
                   )}
                 </form>
               </div>
@@ -923,9 +1114,16 @@ export default function SqlCoursePage() {
           </div>
         </section>
 
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4" aria-labelledby="popular-heading">
+        <section
+          id="popular-courses"
+          className="bg-[#eaf5fd] py-16 px-4"
+          aria-labelledby="popular-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 id="popular-heading" className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            <h2
+              id="popular-heading"
+              className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4"
+            >
               Popular Courses
             </h2>
             <p className="text-gray-700 text-lg">
@@ -941,15 +1139,25 @@ export default function SqlCoursePage() {
                 className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
               >
                 <div className="w-16 h-16 mb-4">
-                  <img src={c.image} alt={c.title} className="w-full h-full object-contain" loading="lazy" />
+                  <img
+                    src={c.image}
+                    alt={c.title}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
 
-                <h3 className="text-md font-bold text-gray-800 text-center">{c.title}</h3>
+                <h3 className="text-md font-bold text-gray-800 text-center">
+                  {c.title}
+                </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
 
                 <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                   <FaUserGraduate className="text-gray-500" />
-                  <span>{Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners</span>
+                  <span>
+                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                    Learners
+                  </span>
                 </div>
 
                 <div className="flex justify-center items-center mt-1 text-yellow-500">
@@ -972,7 +1180,6 @@ export default function SqlCoursePage() {
           bodyClassName={() => "text-[15px] font-medium"}
           theme="colored"
         />
-
         <AutoPopupQuoteForm
           status={status}
           error={error}

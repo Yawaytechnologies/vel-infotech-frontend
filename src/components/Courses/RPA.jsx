@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -31,7 +61,13 @@ export default function JavaCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
 
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
   // Smooth scroll target
   const formRef = useRef(null);
   const scrollToForm = () => {
@@ -176,15 +212,13 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -458,9 +492,9 @@ export default function JavaCoursePage() {
 
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
               Our RPA Training helps you transform manual workflows into
-              scalable bots. Get hands-on with UiPath, Automation Anywhere,
-              and Blue Prism to prepare for industry certifications and
-              real-world roles.
+              scalable bots. Get hands-on with UiPath, Automation Anywhere, and
+              Blue Prism to prepare for industry certifications and real-world
+              roles.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
@@ -623,7 +657,7 @@ export default function JavaCoursePage() {
 
       {/* ==================== SYLLABUS ==================== */}
       <Syllabus
-        title={course.title}            // Rendered inside the component; ensure it uses an H2 internally
+        title={course.title} // Rendered inside the component; ensure it uses an H2 internally
         accent={course.accent}
         meta={course.meta}
         preview={course.preview}
@@ -661,8 +695,8 @@ export default function JavaCoursePage() {
                 Flexible Learning Modes
               </h3>
               <p className="text-gray-600">
-                Learn in-person or online with weekday, weekend, and
-                fast-track options.
+                Learn in-person or online with weekday, weekend, and fast-track
+                options.
               </p>
             </div>
 
@@ -683,65 +717,25 @@ export default function JavaCoursePage() {
                 Career Support
               </h3>
               <p className="text-gray-600">
-                Resume building, mock interviews, and placement assistance
-                with hiring partners.
+                Resume building, mock interviews, and placement assistance with
+                hiring partners.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ==================== TESTIMONIALS ==================== */}
-      <section id="testimonials" className="py-16 bg-[#fafafa]">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-            What Our Students Say
-          </h2>
-          <p className="text-lg text-gray-600 mb-12">
-            Our success is measured by our learners’ success.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good place for job seekers. 💯 placement.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
-              </div>
-            </article>
-
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good service and trusted organisation.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
-              </div>
-            </article>
-
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Best consultancy for people who seek jobs. 100% placement
-                guaranteed.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">
-                  Sudha Selvarajan
-                </h3>
-              </div>
-            </article>
-          </div>
-
-          <a
-            href="/reviews"
-            className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-          >
-            View more reviews →
-          </a>
-        </div>
-      </section>
-
+      {/* Testimonials */}
+      <GoogleStyleReviews
+        title="What Our Students Say"
+        orgName="Vel InfoTech"
+        overallRating={4.8}
+        total={1543}
+        histogram={reviewHistogram}
+        reviews={reviewsData}
+        viewAllHref="/reviews"
+        writeHref="/contact-us#enquiry-form"
+      />
       {/* ==================== FAQ ==================== */}
       <section id="faq" className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-6">
@@ -752,17 +746,21 @@ export default function JavaCoursePage() {
           <div className="space-y-4">
             <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
               <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                <h3 className="inline text-lg">Is this course suitable for absolute beginners?</h3>
+                <h3 className="inline text-lg">
+                  Is this course suitable for absolute beginners?
+                </h3>
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. We start from Core Java basics and gradually move to
-                Spring Boot, REST APIs, and React.
+                Yes. We start from Core Java basics and gradually move to Spring
+                Boot, REST APIs, and React.
               </p>
             </details>
 
             <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
               <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                <h3 className="inline text-lg">Do you provide placement assistance?</h3>
+                <h3 className="inline text-lg">
+                  Do you provide placement assistance?
+                </h3>
               </summary>
               <p className="mt-3 text-gray-700">
                 We offer resume support, mock interviews, and placement
@@ -772,7 +770,9 @@ export default function JavaCoursePage() {
 
             <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
               <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                <h3 className="inline text-lg">What are the class modes and timings?</h3>
+                <h3 className="inline text-lg">
+                  What are the class modes and timings?
+                </h3>
               </summary>
               <p className="mt-3 text-gray-700">
                 Both online and classroom batches with
@@ -785,8 +785,8 @@ export default function JavaCoursePage() {
                 <h3 className="inline text-lg">Will I build real projects?</h3>
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. You’ll work on guided labs and a capstone project
-                covering APIs, DB integration, and a React UI.
+                Yes. You’ll work on guided labs and a capstone project covering
+                APIs, DB integration, and a React UI.
               </p>
             </details>
 
@@ -809,15 +809,19 @@ export default function JavaCoursePage() {
           {/* LEFT: Feature boxes */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Comprehensive Curriculum
+              </h3>
               <p className="text-black/90">
-                Master RPA with structured modules covering UiPath, Blue
-                Prism, Automation Anywhere, Power Automate &amp; Orchestrator.
+                Master RPA with structured modules covering UiPath, Blue Prism,
+                Automation Anywhere, Power Automate &amp; Orchestrator.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Career-Oriented Training
+              </h3>
               <p className="text-black/90">
                 Learn from working professionals. Includes mock interviews,
                 resume prep, and job assistance.
@@ -825,7 +829,9 @@ export default function JavaCoursePage() {
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Strong Placement Support
+              </h3>
               <p className="text-black/90">
                 We support your placement journey with partner network and
                 hiring drives.
@@ -835,8 +841,8 @@ export default function JavaCoursePage() {
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
               <p className="text-black/90">
-                Build end-to-end automation: invoice processing, email
-                parsing, data scraping &amp; attended/unattended bots.
+                Build end-to-end automation: invoice processing, email parsing,
+                data scraping &amp; attended/unattended bots.
               </p>
             </div>
           </div>

@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -31,6 +61,13 @@ export default function JavaCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Smooth scroll target
   const formRef = useRef(null);
@@ -178,16 +215,13 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -264,7 +298,7 @@ export default function JavaCoursePage() {
 
             {/* H1 — keyword only, whole line yellow */}
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
-            Big Data Developer Program
+              Big Data Developer Program
             </h1>
             <ul className="space-y-3 mt-6 text-lg">
               <li>
@@ -288,8 +322,8 @@ export default function JavaCoursePage() {
                 <strong>Big Data Developer Certification</strong>.
               </li>
               <li>
-                ✅ Career support: Hands-on project experience, resume prep & job
-                interview assistance.
+                ✅ Career support: Hands-on project experience, resume prep &
+                job interview assistance.
               </li>
             </ul>
 
@@ -352,7 +386,8 @@ export default function JavaCoursePage() {
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
           <p className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Offline BigData Developer Training</strong> in
+            Offering{" "}
+            <strong>Online and Offline BigData Developer Training</strong> in
             <strong> Chennai & Bangalore</strong>
           </p>
         </div>
@@ -678,58 +713,17 @@ export default function JavaCoursePage() {
           </div>
         </section>
 
-        {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Good place for job seekers. 💯 placement.”
-                </p>
-                <div className="mt-4">
-                  <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Good service and trusted organisation.”
-                </p>
-                <div className="mt-4">
-                  <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement
-                  guaranteed.”
-                </p>
-                <div className="mt-4">
-                  <h3 className="font-semibold text-gray-900">
-                    Sudha Selvarajan
-                  </h3>
-                </div>
-              </div>
-            </div>
-
-            {/* optional internal link */}
-            <a
-              href="/reviews"
-              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-            >
-              View more reviews →
-            </a>
-          </div>
-        </section>
-
+        {/* Testimonials */}
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
         {/* === FAQ === */}
         <section id="faq" className="py-16 bg-white">
           <div className="max-w-5xl mx-auto px-6">

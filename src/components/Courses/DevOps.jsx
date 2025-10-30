@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function DevOpsCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -31,6 +61,13 @@ export default function DevOpsCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Smooth scroll target
   const formRef = useRef(null);
@@ -175,15 +212,13 @@ export default function DevOpsCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -307,11 +342,12 @@ export default function DevOpsCoursePage() {
                 .
               </li>
               <li>
-                ✅ Earn an industry-recognized <strong>DevOps Certification</strong>.
+                ✅ Earn an industry-recognized{" "}
+                <strong>DevOps Certification</strong>.
               </li>
               <li>
-                ✅ Career support: Live projects, resume prep, mock interviews &amp;
-                placement assistance.
+                ✅ Career support: Live projects, resume prep, mock interviews
+                &amp; placement assistance.
               </li>
             </ul>
 
@@ -340,11 +376,16 @@ export default function DevOpsCoursePage() {
           </div>
 
           {/* RIGHT: Call to Action */}
-          <aside className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md" aria-labelledby="cta-heading">
+          <aside
+            className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md"
+            aria-labelledby="cta-heading"
+          >
             <h2 id="cta-heading" className="text-2xl font-bold mb-4">
               Want an IT Job?
             </h2>
-            <p className="mb-4 text-lg">Become a DevOps Engineer in Just 3 Months</p>
+            <p className="mb-4 text-lg">
+              Become a DevOps Engineer in Just 3 Months
+            </p>
 
             <button
               type="button"
@@ -372,7 +413,10 @@ export default function DevOpsCoursePage() {
         </div>
 
         {/* Info Bar */}
-        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md" aria-label="Training Locations">
+        <div
+          className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md"
+          aria-label="Training Locations"
+        >
           <p className="text-center text-white font-bold text-xl md:text-2xl">
             Offering <strong>Online and Offline DevOps Training</strong> in
             <strong> Chennai &amp; Bangalore</strong>
@@ -380,10 +424,17 @@ export default function DevOpsCoursePage() {
         </div>
 
         {/* Course Partners Section */}
-        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
+        <section
+          className="py-16 bg-[#002855]"
+          aria-labelledby="partners-heading"
+        >
           <div className="max-w-7xl mx-auto px-4">
-            <h2 id="partners-heading" className="text-xl font-semibold uppercase tracking-wide text-center text-white mb-10">
-              <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
+            <h2
+              id="partners-heading"
+              className="text-xl font-semibold uppercase tracking-wide text-center text-white mb-10"
+            >
+              <span className="text-purple-400">●</span> Our Course Partners{" "}
+              <span className="text-purple-400">●</span>
             </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -456,15 +507,18 @@ export default function DevOpsCoursePage() {
         <section className="px-0 py-16" aria-labelledby="overview-heading">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
-              <h2 id="overview-heading" className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
+              <h2
+                id="overview-heading"
+                className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5"
+              >
                 Overview of DevOps Training Program
               </h2>
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
               <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
                 Our DevOps Training helps you integrate development and
-                operations using modern tooling and practices. You’ll build CI/CD
-                pipelines, containerize apps, orchestrate with Kubernetes,
+                operations using modern tooling and practices. You’ll build
+                CI/CD pipelines, containerize apps, orchestrate with Kubernetes,
                 automate infrastructure with Terraform/Ansible, and implement
                 monitoring/alerting for production-grade reliability.
               </p>
@@ -483,8 +537,8 @@ export default function DevOpsCoursePage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Docker fundamentals &amp; Kubernetes orchestration (Deployments,
-                  Services, Ingress).
+                  Docker fundamentals &amp; Kubernetes orchestration
+                  (Deployments, Services, Ingress).
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
@@ -493,7 +547,8 @@ export default function DevOpsCoursePage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Observability with Prometheus &amp; Grafana; logging pipelines.
+                  Observability with Prometheus &amp; Grafana; logging
+                  pipelines.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
@@ -505,15 +560,21 @@ export default function DevOpsCoursePage() {
         </section>
 
         {/* DevOps Training Section */}
-        <section className="w-full px-6 py-20 text-black" aria-labelledby="become-heading">
+        <section
+          className="w-full px-6 py-20 text-black"
+          aria-labelledby="become-heading"
+        >
           {/* Header */}
           <div className="max-w-7xl mx-auto text-center mb-16">
-            <h2 id="become-heading" className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
+            <h2
+              id="become-heading"
+              className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white"
+            >
               Become a Certified DevOps Professional
             </h2>
             <p className="text-lg md:text-xl text-white mb-6">
-              Learn CI/CD, Containers, Kubernetes, IaC, Monitoring &amp; Security — 
-              and build job-ready projects.
+              Learn CI/CD, Containers, Kubernetes, IaC, Monitoring &amp;
+              Security — and build job-ready projects.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <button
@@ -541,7 +602,10 @@ export default function DevOpsCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-highlights" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-highlights"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Course Highlights
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
@@ -566,7 +630,10 @@ export default function DevOpsCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-tools" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-tools"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Tools You’ll Master
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -605,7 +672,10 @@ export default function DevOpsCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-topics" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-topics"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Topics Covered
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -641,7 +711,10 @@ export default function DevOpsCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-skills" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-skills"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Key Skills You’ll Gain
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
@@ -674,7 +747,10 @@ export default function DevOpsCoursePage() {
           aria-labelledby="why-heading"
         >
           <div className="max-w-6xl mx-auto px-6">
-            <h2 id="why-heading" className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            <h2
+              id="why-heading"
+              className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12"
+            >
               Why Choose Us
             </h2>
 
@@ -726,68 +802,38 @@ export default function DevOpsCoursePage() {
           </div>
         </section>
 
-        {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]" aria-labelledby="testimonials-heading">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good place for job seekers. 💯 placement.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good service and trusted organisation.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement
-                  guaranteed.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">
-                    Sudha Selvarajan
-                  </p>
-                </figcaption>
-              </figure>
-            </div>
-
-            <a
-              href="/reviews"
-              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-            >
-              View more reviews →
-            </a>
-          </div>
-        </section>
+        {/* Testimonials */}
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
+        <section
+          id="faq"
+          className="py-16 bg-white"
+          aria-labelledby="faq-heading"
+        >
           <div className="max-w-5xl mx-auto px-6">
-            <h2 id="faq-heading" className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            <h2
+              id="faq-heading"
+              className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10"
+            >
               Frequently Asked Questions
             </h2>
 
             <div className="space-y-4">
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Is this course suitable for absolute beginners?</h3>
+                  <h3 className="inline text-lg">
+                    Is this course suitable for absolute beginners?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   Yes. We start with DevOps fundamentals, Linux basics, and Git,
@@ -797,7 +843,9 @@ export default function DevOpsCoursePage() {
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Do you provide placement assistance?</h3>
+                  <h3 className="inline text-lg">
+                    Do you provide placement assistance?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   We offer resume support, mock interviews, and placement
@@ -807,7 +855,9 @@ export default function DevOpsCoursePage() {
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">What are the class modes and timings?</h3>
+                  <h3 className="inline text-lg">
+                    What are the class modes and timings?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   Both online and classroom batches with
@@ -817,7 +867,9 @@ export default function DevOpsCoursePage() {
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Will I build real projects?</h3>
+                  <h3 className="inline text-lg">
+                    Will I build real projects?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   Yes. You’ll build CI/CD pipelines, deploy to Kubernetes, set
@@ -839,19 +891,27 @@ export default function DevOpsCoursePage() {
         </section>
 
         {/* ENQUIRY FORM - VALIDATED */}
-        <section className="w-full px-6 py-20 text-white" aria-labelledby="quote-heading">
+        <section
+          className="w-full px-6 py-20 text-white"
+          aria-labelledby="quote-heading"
+        >
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
             {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Comprehensive Curriculum
+                </h3>
                 <p className="text-black/90">
-                  CI/CD, Docker, Kubernetes, Terraform, Ansible, AWS basics &amp; more with hands-on labs.
+                  CI/CD, Docker, Kubernetes, Terraform, Ansible, AWS basics
+                  &amp; more with hands-on labs.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Career-Oriented Training
+                </h3>
                 <p className="text-black/90">
                   Learn from working professionals. Includes mock interviews,
                   resume prep, and job assistance.
@@ -859,16 +919,20 @@ export default function DevOpsCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Strong Placement Support
+                </h3>
                 <p className="text-black/90">
-                  Assistance with interview prep, hiring drives, and referrals via partner networks.
+                  Assistance with interview prep, hiring drives, and referrals
+                  via partner networks.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
-                  Build production-like pipelines, automate infra, and deploy to Kubernetes with monitoring.
+                  Build production-like pipelines, automate infra, and deploy to
+                  Kubernetes with monitoring.
                 </p>
               </div>
             </div>
@@ -876,7 +940,10 @@ export default function DevOpsCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h2 id="quote-heading" className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2
+                  id="quote-heading"
+                  className="text-2xl font-bold text-center text-[#003c6a] mb-5"
+                >
                   Get a Free Training Quote
                 </h2>
 
@@ -1076,7 +1143,9 @@ export default function DevOpsCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
@@ -1094,9 +1163,16 @@ export default function DevOpsCoursePage() {
           </div>
         </section>
 
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4" aria-labelledby="popular-heading">
+        <section
+          id="popular-courses"
+          className="bg-[#eaf5fd] py-16 px-4"
+          aria-labelledby="popular-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 id="popular-heading" className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            <h2
+              id="popular-heading"
+              className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4"
+            >
               Popular Courses
             </h2>
             <p className="text-gray-700 text-lg">
@@ -1121,7 +1197,10 @@ export default function DevOpsCoursePage() {
                   />
                 </div>
 
-                <h3 id={`course-${index}-title`} className="text-md font-bold text-gray-800 text-center">
+                <h3
+                  id={`course-${index}-title`}
+                  className="text-md font-bold text-gray-800 text-center"
+                >
                   {c.title}
                 </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
@@ -1134,7 +1213,10 @@ export default function DevOpsCoursePage() {
                   </span>
                 </div>
 
-                <div className="flex justify-center items-center mt-1 text-yellow-500" aria-label="5 star rating">
+                <div
+                  className="flex justify-center items-center mt-1 text-yellow-500"
+                  aria-label="5 star rating"
+                >
                   {[...Array(5)].map((_, i) => (
                     <AiFillStar key={i} />
                   ))}

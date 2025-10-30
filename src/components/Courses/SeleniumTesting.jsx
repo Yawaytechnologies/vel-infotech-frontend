@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -31,6 +61,13 @@ export default function JavaCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Smooth scroll target
   const formRef = useRef(null);
@@ -176,15 +213,13 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -273,8 +308,9 @@ export default function JavaCoursePage() {
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
-                ✅ Enroll in the <strong>Top Selenium Training Institute</strong>{" "}
-                to become an automation testing expert.
+                ✅ Enroll in the{" "}
+                <strong>Top Selenium Training Institute</strong> to become an
+                automation testing expert.
               </li>
               <li>
                 ✅ Master essential tools –{" "}
@@ -369,14 +405,18 @@ export default function JavaCoursePage() {
         {/* Info Bar */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
           <h2 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Offline Selenium Testing Training</strong> in
+            Offering{" "}
+            <strong>Online and Offline Selenium Testing Training</strong> in
             <strong> Chennai &amp; Bangalore</strong>
           </h2>
         </div>
       </section>
 
       {/* ===== PARTNERS ===== */}
-      <section aria-labelledby="partners-heading" className="py-16 bg-[#002855]">
+      <section
+        aria-labelledby="partners-heading"
+        className="py-16 bg-[#002855]"
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
             <h2
@@ -467,7 +507,10 @@ export default function JavaCoursePage() {
             <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-              Become job-ready in automation testing with Selenium WebDriver, Java, TestNG and CI/CD tooling (Maven, Jenkins, Git). Design robust frameworks (POM, data-driven) and automate real web apps end-to-end.
+              Become job-ready in automation testing with Selenium WebDriver,
+              Java, TestNG and CI/CD tooling (Maven, Jenkins, Git). Design
+              robust frameworks (POM, data-driven) and automate real web apps
+              end-to-end.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
@@ -475,22 +518,28 @@ export default function JavaCoursePage() {
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span> Selenium Architecture &amp; WebDriver APIs.
+                <span className="text-purple-600 mt-1">➤</span> Selenium
+                Architecture &amp; WebDriver APIs.
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span> Automate UI flows in Java with reliable locators &amp; waits.
+                <span className="text-purple-600 mt-1">➤</span> Automate UI
+                flows in Java with reliable locators &amp; waits.
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span> TestNG: suites, assertions, parallel runs &amp; reports.
+                <span className="text-purple-600 mt-1">➤</span> TestNG: suites,
+                assertions, parallel runs &amp; reports.
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span> Frameworks: Page Object Model, data-driven &amp; reusable utilities.
+                <span className="text-purple-600 mt-1">➤</span> Frameworks: Page
+                Object Model, data-driven &amp; reusable utilities.
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span> CI/CD with Maven, Jenkins &amp; Git; cross-browser strategies.
+                <span className="text-purple-600 mt-1">➤</span> CI/CD with
+                Maven, Jenkins &amp; Git; cross-browser strategies.
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span> Interview prep, resume polish &amp; project portfolio.
+                <span className="text-purple-600 mt-1">➤</span> Interview prep,
+                resume polish &amp; project portfolio.
               </li>
             </ul>
           </div>
@@ -510,7 +559,8 @@ export default function JavaCoursePage() {
             Become a Certified Selenium Automation Tester
           </h2>
           <p className="text-lg md:text-xl text-white mb-6">
-            Master Selenium WebDriver, TestNG, Java, Maven, Git &amp; real-time frameworks with hands-on training.
+            Master Selenium WebDriver, TestNG, Java, Maven, Git &amp; real-time
+            frameworks with hands-on training.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button
@@ -664,7 +714,8 @@ export default function JavaCoursePage() {
                 Expert Trainers
               </h3>
               <p className="text-gray-600">
-                Our mentors have deep industry experience and share practical, hands-on insights.
+                Our mentors have deep industry experience and share practical,
+                hands-on insights.
               </p>
             </div>
 
@@ -674,7 +725,8 @@ export default function JavaCoursePage() {
                 Flexible Learning Modes
               </h3>
               <p className="text-gray-600">
-                Learn in-person or online with weekday, weekend, and fast-track options.
+                Learn in-person or online with weekday, weekend, and fast-track
+                options.
               </p>
             </div>
 
@@ -684,7 +736,8 @@ export default function JavaCoursePage() {
                 Job-Ready Curriculum
               </h3>
               <p className="text-gray-600">
-                Real projects, labs, and interview prep aligned to what employers expect.
+                Real projects, labs, and interview prep aligned to what
+                employers expect.
               </p>
             </div>
 
@@ -694,66 +747,32 @@ export default function JavaCoursePage() {
                 Career Support
               </h3>
               <p className="text-gray-600">
-                Resume building, mock interviews, and placement assistance with hiring partners.
+                Resume building, mock interviews, and placement assistance with
+                hiring partners.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== TESTIMONIALS ===== */}
-      <section id="testimonials" aria-labelledby="testimonials-heading" className="py-16 bg-[#fafafa]">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2
-            id="testimonials-heading"
-            className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8"
-          >
-            What Our Students Say
-          </h2>
-          <p className="text-lg text-gray-600 mb-12">
-            Our success is measured by our learners’ success.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good place for job seekers. 💯 placement.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
-              </div>
-            </article>
-
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good service and trusted organisation.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
-              </div>
-            </article>
-
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Best consultancy for people who seek jobs. 100% placement guaranteed.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Sudha Selvarajan</h3>
-              </div>
-            </article>
-          </div>
-
-          <a
-            href="/reviews"
-            className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-          >
-            View more reviews →
-          </a>
-        </div>
-      </section>
+      {/* Testimonials */}
+      <GoogleStyleReviews
+        title="What Our Students Say"
+        orgName="Vel InfoTech"
+        overallRating={4.8}
+        total={1543}
+        histogram={reviewHistogram}
+        reviews={reviewsData}
+        viewAllHref="/reviews"
+        writeHref="/contact-us#enquiry-form"
+      />
 
       {/* ===== FAQ ===== */}
-      <section id="faq" aria-labelledby="faq-heading" className="py-16 bg-white">
+      <section
+        id="faq"
+        aria-labelledby="faq-heading"
+        className="py-16 bg-white"
+      >
         <div className="max-w-5xl mx-auto px-6">
           <h2
             id="faq-heading"
@@ -768,7 +787,8 @@ export default function JavaCoursePage() {
                 Is this course suitable for absolute beginners?
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. We start from Core Java basics and gradually move to Spring Boot, REST APIs, and React.
+                Yes. We start from Core Java basics and gradually move to Spring
+                Boot, REST APIs, and React.
               </p>
             </details>
 
@@ -777,7 +797,8 @@ export default function JavaCoursePage() {
                 Do you provide placement assistance?
               </summary>
               <p className="mt-3 text-gray-700">
-                We offer resume support, mock interviews, and placement assistance with hiring partners.
+                We offer resume support, mock interviews, and placement
+                assistance with hiring partners.
               </p>
             </details>
 
@@ -786,7 +807,8 @@ export default function JavaCoursePage() {
                 What are the class modes and timings?
               </summary>
               <p className="mt-3 text-gray-700">
-                Both online and classroom batches with weekday/weekend/fast-track options.
+                Both online and classroom batches with
+                weekday/weekend/fast-track options.
               </p>
             </details>
 
@@ -795,7 +817,8 @@ export default function JavaCoursePage() {
                 Will I build real projects?
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. You’ll work on guided labs and a capstone project covering APIs, DB integration, and a React UI.
+                Yes. You’ll work on guided labs and a capstone project covering
+                APIs, DB integration, and a React UI.
               </p>
             </details>
 
@@ -804,7 +827,8 @@ export default function JavaCoursePage() {
                 Do I get a certificate?
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes, a course completion certificate is provided. Project performance is also highlighted.
+                Yes, a course completion certificate is provided. Project
+                performance is also highlighted.
               </p>
             </details>
           </div>
@@ -820,21 +844,29 @@ export default function JavaCoursePage() {
           {/* LEFT: Additional Info Boxes */}
           <aside className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Comprehensive Curriculum
+              </h3>
               <p className="text-black/90">
-                Selenium WebDriver, Java, TestNG, POM, Maven, Jenkins, Git &amp; Cucumber with real projects.
+                Selenium WebDriver, Java, TestNG, POM, Maven, Jenkins, Git &amp;
+                Cucumber with real projects.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Career-Oriented Training
+              </h3>
               <p className="text-black/90">
-                Mock interviews, resume prep, code reviews &amp; interview question banks.
+                Mock interviews, resume prep, code reviews &amp; interview
+                question banks.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Strong Placement Support
+              </h3>
               <p className="text-black/90">
                 Hiring drives via partner network and personalized guidance.
               </p>
@@ -843,7 +875,8 @@ export default function JavaCoursePage() {
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
               <p className="text-black/90">
-                Build end-to-end frameworks, integrate CI pipelines, and test real applications.
+                Build end-to-end frameworks, integrate CI pipelines, and test
+                real applications.
               </p>
             </div>
           </aside>
@@ -1114,7 +1147,8 @@ export default function JavaCoursePage() {
               <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                 <FaUserGraduate className="text-gray-500" />
                 <span>
-                  {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners
+                  {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                  Learners
                 </span>
               </div>
 

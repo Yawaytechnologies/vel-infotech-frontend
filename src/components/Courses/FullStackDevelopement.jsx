@@ -13,7 +13,36 @@ import { submitEnquiry } from "../../redux/actions/enquiryAction";
 import FeedbackSection from "../common/Feedback";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
 
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 /* ===========================
    JSON-LD
    =========================== */
@@ -73,6 +102,13 @@ export default function FullStackCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   const toastOpts = {
     position: "top-center",
@@ -196,14 +232,20 @@ export default function FullStackCoursePage() {
 
     try {
       await dispatch(submitEnquiry(payload)).unwrap();
+
       toast.success("Thanks! Your enquiry has been recorded.", {
         ...toastOpts,
         style: { background: "#16a34a", color: "#fff" },
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
+
+      // reset the form
       setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -295,7 +337,8 @@ export default function FullStackCoursePage() {
               type="button"
               onClick={() => {
                 const formSection = document.getElementById("enquiry-form");
-                if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
               }}
               className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden mt-8
               before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
@@ -308,7 +351,9 @@ export default function FullStackCoursePage() {
                   Freshers Salary:
                 </span>
                 ₹3 LPA to ₹8 LPA <br />
-                <span className="text-sm text-gray-300">| Duration: 3 Months</span>
+                <span className="text-sm text-gray-300">
+                  | Duration: 3 Months
+                </span>
               </div>
             </button>
           </div>
@@ -318,8 +363,12 @@ export default function FullStackCoursePage() {
             {/* H3 inside hero to keep single H1 on page */}
             <h3 className="text-2xl font-bold mb-4">Want an IT Job?</h3>
             <p className="mb-4 text-lg">
-              Master <strong>Full Stack Development</strong> in just 3 months with{" "}
-              <strong>hands-on coding, real-world projects, and 100% placement assistance</strong>{" "}
+              Master <strong>Full Stack Development</strong> in just 3 months
+              with{" "}
+              <strong>
+                hands-on coding, real-world projects, and 100% placement
+                assistance
+              </strong>{" "}
               from Vel InfoTech.
             </p>
 
@@ -327,7 +376,8 @@ export default function FullStackCoursePage() {
               type="button"
               onClick={() => {
                 const formSection = document.getElementById("enquiry-form");
-                if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
               }}
               className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
             >
@@ -360,7 +410,10 @@ export default function FullStackCoursePage() {
         </div>
 
         {/* Partners */}
-        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
+        <section
+          className="py-16 bg-[#002855]"
+          aria-labelledby="partners-heading"
+        >
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
               <h2
@@ -427,7 +480,11 @@ export default function FullStackCoursePage() {
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
                 >
-                  <img src={p.logo} alt={p.name} className="h-12 object-contain" />
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    className="h-12 object-contain"
+                  />
                 </motion.a>
               ))}
             </div>
@@ -447,9 +504,10 @@ export default function FullStackCoursePage() {
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
               <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-                Our Full Stack Development Training equips you with both frontend and backend skills required to build and
-                deploy modern web applications. The course covers HTML, CSS, JavaScript, React.js, Node.js, Express,
-                MongoDB, Git, and cloud deployment.
+                Our Full Stack Development Training equips you with both
+                frontend and backend skills required to build and deploy modern
+                web applications. The course covers HTML, CSS, JavaScript,
+                React.js, Node.js, Express, MongoDB, Git, and cloud deployment.
               </p>
 
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
@@ -457,24 +515,28 @@ export default function FullStackCoursePage() {
               </h3>
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Build dynamic frontends with HTML, CSS, JS, and React.
+                  <span className="text-purple-600 mt-1">➤</span> Build dynamic
+                  frontends with HTML, CSS, JS, and React.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Design REST APIs with Node.js &amp; Express; store data
-                  in MongoDB.
+                  <span className="text-purple-600 mt-1">➤</span> Design REST
+                  APIs with Node.js &amp; Express; store data in MongoDB.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Integrate client &amp; server; handle auth and
-                  validation.
+                  <span className="text-purple-600 mt-1">➤</span> Integrate
+                  client &amp; server; handle auth and validation.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Use Git/GitHub and deploy to cloud providers.
+                  <span className="text-purple-600 mt-1">➤</span> Use Git/GitHub
+                  and deploy to cloud providers.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Capstone projects reflecting real business use-cases.
+                  <span className="text-purple-600 mt-1">➤</span> Capstone
+                  projects reflecting real business use-cases.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Resume help, mock interviews, and placement assistance.
+                  <span className="text-purple-600 mt-1">➤</span> Resume help,
+                  mock interviews, and placement assistance.
                 </li>
               </ul>
             </div>
@@ -482,13 +544,20 @@ export default function FullStackCoursePage() {
         </section>
 
         {/* Become section */}
-        <section className="w-full px-6 py-20 text-white" aria-labelledby="become-heading">
+        <section
+          className="w-full px-6 py-20 text-white"
+          aria-labelledby="become-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-16">
-            <h2 id="become-heading" className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+            <h2
+              id="become-heading"
+              className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight"
+            >
               Become a Full Stack Developer
             </h2>
             <p className="text-lg md:text-xl mb-6">
-              Master HTML, CSS, JavaScript, React, Node.js, and more through practical, expert-led training.
+              Master HTML, CSS, JavaScript, React, Node.js, and more through
+              practical, expert-led training.
             </p>
             <div className="flex justify-center">
               <button
@@ -513,7 +582,9 @@ export default function FullStackCoursePage() {
                   alt="Course Highlights"
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold mb-2">Course Highlights</h3>
+                <h3 className="text-lg font-extrabold mb-2">
+                  Course Highlights
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>✓ HTML, CSS, JavaScript, React, Node.js</li>
                   <li>✓ Placement prep &amp; resume support</li>
@@ -531,16 +602,20 @@ export default function FullStackCoursePage() {
                   alt="Tools You’ll Master"
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold mb-2">Tools You’ll Master</h3>
+                <h3 className="text-lg font-extrabold mb-2">
+                  Tools You’ll Master
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {["React", "Node.js", "MongoDB", "Express", "GitHub"].map((tool) => (
-                    <span
-                      key={tool}
-                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium text-gray-800"
-                    >
-                      {tool}
-                    </span>
-                  ))}
+                  {["React", "Node.js", "MongoDB", "Express", "GitHub"].map(
+                    (tool) => (
+                      <span
+                        key={tool}
+                        className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium text-gray-800"
+                      >
+                        {tool}
+                      </span>
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -553,10 +628,23 @@ export default function FullStackCoursePage() {
                   alt="Frameworks Covered"
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold mb-2">Frameworks Covered</h3>
+                <h3 className="text-lg font-extrabold mb-2">
+                  Frameworks Covered
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {["React", "Express", "Node.js", "MongoDB", "Bootstrap", "Tailwind", "Mongoose"].map((fw) => (
-                    <span key={fw} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium text-gray-800">
+                  {[
+                    "React",
+                    "Express",
+                    "Node.js",
+                    "MongoDB",
+                    "Bootstrap",
+                    "Tailwind",
+                    "Mongoose",
+                  ].map((fw) => (
+                    <span
+                      key={fw}
+                      className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium text-gray-800"
+                    >
                       {fw}
                     </span>
                   ))}
@@ -572,7 +660,9 @@ export default function FullStackCoursePage() {
                   alt="Key Skills You’ll Gain"
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold mb-2">Key Skills You’ll Gain</h3>
+                <h3 className="text-lg font-extrabold mb-2">
+                  Key Skills You’ll Gain
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>Frontend + Backend integration</li>
                   <li>REST API design &amp; testing</li>
@@ -585,7 +675,11 @@ export default function FullStackCoursePage() {
         </section>
 
         {/* Syllabus (with accessible H2 fallback) */}
-        <div id="syllabus" className="scroll-mt-[110px]" aria-labelledby="syllabus-heading">
+        <div
+          id="syllabus"
+          className="scroll-mt-[110px]"
+          aria-labelledby="syllabus-heading"
+        >
           <h2 id="syllabus-heading" className="sr-only">
             Full Stack Development Syllabus
           </h2>
@@ -608,76 +702,79 @@ export default function FullStackCoursePage() {
           aria-labelledby="why-heading"
         >
           <div className="max-w-6xl mx-auto px-6">
-            <h2 id="why-heading" className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            <h2
+              id="why-heading"
+              className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12"
+            >
               Why Choose Us
             </h2>
 
             <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
-                <p className="text-gray-600">Our mentors have deep industry experience and share practical insights.</p>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Expert Trainers
+                </h3>
+                <p className="text-gray-600">
+                  Our mentors have deep industry experience and share practical
+                  insights.
+                </p>
               </div>
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Flexible Learning Modes</h3>
-                <p className="text-gray-600">Weekday, weekend, and fast-track options—in person or online.</p>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Flexible Learning Modes
+                </h3>
+                <p className="text-gray-600">
+                  Weekday, weekend, and fast-track options—in person or online.
+                </p>
               </div>
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Job-Ready Curriculum</h3>
-                <p className="text-gray-600">Real projects, labs, and interview prep aligned to employer needs.</p>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Job-Ready Curriculum
+                </h3>
+                <p className="text-gray-600">
+                  Real projects, labs, and interview prep aligned to employer
+                  needs.
+                </p>
               </div>
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Career Support</h3>
-                <p className="text-gray-600">Resume building, mock interviews, and placement assistance.</p>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Career Support
+                </h3>
+                <p className="text-gray-600">
+                  Resume building, mock interviews, and placement assistance.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]" aria-labelledby="testimonials-heading">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">Our success is measured by our learners’ success.</p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good place for job seekers. 💯 placement.”</p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </div>
-              </div>
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good service and trusted organisation.”</p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </div>
-              </div>
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
-                </div>
-              </div>
-            </div>
-
-            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
-              View more reviews →
-            </a>
-          </div>
-        </section>
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
 
         {/* FAQ */}
-        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
+        <section
+          id="faq"
+          className="py-16 bg-white"
+          aria-labelledby="faq-heading"
+        >
           <div className="max-w-5xl mx-auto px-6">
-            <h2 id="faq-heading" className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            <h2
+              id="faq-heading"
+              className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10"
+            >
               Frequently Asked Questions
             </h2>
 
@@ -689,40 +786,52 @@ export default function FullStackCoursePage() {
                   </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from fundamentals and gradually move through React, Node/Express, databases, and
-                  deployment.
+                  Yes. We start from fundamentals and gradually move through
+                  React, Node/Express, databases, and deployment.
                 </p>
               </details>
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-inherit font-semibold">Do you provide placement assistance?</h3>
+                  <h3 className="inline text-inherit font-semibold">
+                    Do you provide placement assistance?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement
+                  assistance with hiring partners.
                 </p>
               </details>
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-inherit font-semibold">What are the class modes and timings?</h3>
+                  <h3 className="inline text-inherit font-semibold">
+                    What are the class modes and timings?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with weekday/weekend/fast-track options.
+                  Both online and classroom batches with
+                  weekday/weekend/fast-track options.
                 </p>
               </details>
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-inherit font-semibold">Will I build real projects?</h3>
+                  <h3 className="inline text-inherit font-semibold">
+                    Will I build real projects?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project covering APIs, DB integration, and a React UI.
+                  Yes. You’ll work on guided labs and a capstone project
+                  covering APIs, DB integration, and a React UI.
                 </p>
               </details>
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-inherit font-semibold">Do I get a certificate?</h3>
+                  <h3 className="inline text-inherit font-semibold">
+                    Do I get a certificate?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project performance is also highlighted.
+                  Yes, a course completion certificate is provided. Project
+                  performance is also highlighted.
                 </p>
               </details>
             </div>
@@ -730,34 +839,51 @@ export default function FullStackCoursePage() {
         </section>
 
         {/* ENQUIRY FORM */}
-        <section className="w-full px-6 py-20 text-white" aria-labelledby="quote-heading">
+        <section
+          className="w-full px-6 py-20 text-white"
+          aria-labelledby="quote-heading"
+        >
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-10">
             {/* LEFT info boxes */}
             <div className="w-full lg:w-1/2 flex flex-col gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Comprehensive Curriculum
+                </h3>
                 <p className="text-black/90">
-                  Structured modules covering React, Node/Express, MongoDB, Git, and deployment.
+                  Structured modules covering React, Node/Express, MongoDB, Git,
+                  and deployment.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
-                <p className="text-black/90">Mock interviews, resume prep, and job assistance.</p>
+                <h3 className="text-xl font-bold mb-2">
+                  Career-Oriented Training
+                </h3>
+                <p className="text-black/90">
+                  Mock interviews, resume prep, and job assistance.
+                </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">100% Job Assistance</h3>
-                <p className="text-black/90">Strong partner network and hiring drives.</p>
+                <p className="text-black/90">
+                  Strong partner network and hiring drives.
+                </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
-                <p className="text-black/90">Build real apps with auth, DB, APIs, and a responsive UI.</p>
+                <p className="text-black/90">
+                  Build real apps with auth, DB, APIs, and a responsive UI.
+                </p>
               </div>
             </div>
 
             {/* RIGHT: form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h2 id="quote-heading" className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2
+                  id="quote-heading"
+                  className="text-2xl font-bold text-center text-[#003c6a] mb-5"
+                >
                   Get a Free Training Quote
                 </h2>
 
@@ -767,7 +893,9 @@ export default function FullStackCoursePage() {
                     onClick={() => setMode("class_room")}
                     type="button"
                     className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "class_room" ? "bg-[#003c6a] text-white" : "bg-white text-[#003c6a] border border-[#003c6a]"
+                      mode === "class_room"
+                        ? "bg-[#003c6a] text-white"
+                        : "bg-white text-[#003c6a] border border-[#003c6a]"
                     }`}
                   >
                     <FaChalkboardTeacher className="text-base" /> Class Room
@@ -776,14 +904,21 @@ export default function FullStackCoursePage() {
                     onClick={() => setMode("online")}
                     type="button"
                     className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
-                      mode === "online" ? "bg-[#003c6a] text-white" : "bg-white text-[#003c6a] border border-[#003c6a]"
+                      mode === "online"
+                        ? "bg-[#003c6a] text-white"
+                        : "bg-white text-[#003c6a] border border-[#003c6a]"
                     }`}
                   >
                     <FaLaptop className="text-base" /> Online
                   </button>
                 </div>
 
-                <form id="enquiry-form" onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-2">
+                <form
+                  id="enquiry-form"
+                  onSubmit={handleSubmit}
+                  noValidate
+                  className="grid grid-cols-1 gap-2"
+                >
                   <div>
                     <input
                       type="text"
@@ -801,7 +936,9 @@ export default function FullStackCoursePage() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.name && errors?.name && <p className="text-red-600 text-xs">{errors.name}</p>}
+                      {touched?.name && errors?.name && (
+                        <p className="text-red-600 text-xs">{errors.name}</p>
+                      )}
                     </div>
                   </div>
 
@@ -822,7 +959,9 @@ export default function FullStackCoursePage() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.email && errors?.email && <p className="text-red-600 text-xs">{errors.email}</p>}
+                      {touched?.email && errors?.email && (
+                        <p className="text-red-600 text-xs">{errors.email}</p>
+                      )}
                     </div>
                   </div>
 
@@ -845,7 +984,9 @@ export default function FullStackCoursePage() {
                       ].join(" ")}
                     />
                     <div className="h-3 mt-0.5">
-                      {touched?.phone && errors?.phone && <p className="text-red-600 text-xs">{errors.phone}</p>}
+                      {touched?.phone && errors?.phone && (
+                        <p className="text-red-600 text-xs">{errors.phone}</p>
+                      )}
                     </div>
                   </div>
 
@@ -899,7 +1040,9 @@ export default function FullStackCoursePage() {
                     </select>
 
                     <div className="h-3 mt-0.5">
-                      {touched?.course && errors?.course && <p className="text-red-600 text-xs">{errors.course}</p>}
+                      {touched?.course && errors?.course && (
+                        <p className="text-red-600 text-xs">{errors.course}</p>
+                      )}
                     </div>
                   </div>
 
@@ -934,13 +1077,19 @@ export default function FullStackCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
                   </button>
 
-                  {error && <p className="text-red-600 text-xs mt-1">Submission failed: {String(error)}</p>}
+                  {error && (
+                    <p className="text-red-600 text-xs mt-1">
+                      Submission failed: {String(error)}
+                    </p>
+                  )}
                 </form>
               </div>
             </div>
@@ -948,12 +1097,21 @@ export default function FullStackCoursePage() {
         </section>
 
         {/* Popular Courses */}
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4" aria-labelledby="popular-heading">
+        <section
+          id="popular-courses"
+          className="bg-[#eaf5fd] py-16 px-4"
+          aria-labelledby="popular-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 id="popular-heading" className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            <h2
+              id="popular-heading"
+              className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4"
+            >
               Popular Courses
             </h2>
-            <p className="text-gray-700 text-lg">We present to you the most popular courses recommended by experts.</p>
+            <p className="text-gray-700 text-lg">
+              We present to you the most popular courses recommended by experts.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
@@ -964,15 +1122,25 @@ export default function FullStackCoursePage() {
                 className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
               >
                 <div className="w-16 h-16 mb-4">
-                  <img src={c.image} alt={c.title} className="w-full h-full object-contain" loading="lazy" />
+                  <img
+                    src={c.image}
+                    alt={c.title}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
 
-                <h3 className="text-md font-bold text-gray-800 text-center">{c.title}</h3>
+                <h3 className="text-md font-bold text-gray-800 text-center">
+                  {c.title}
+                </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
 
                 <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                   <FaUserGraduate className="text-gray-500" />
-                  <span>{Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners</span>
+                  <span>
+                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                    Learners
+                  </span>
                 </div>
 
                 <div className="flex justify-center items-center mt-1 text-yellow-500">

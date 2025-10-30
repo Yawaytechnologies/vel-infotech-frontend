@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -31,6 +61,13 @@ export default function JavaCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Smooth scroll target
   const formRef = useRef(null);
@@ -175,15 +212,13 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -379,15 +414,22 @@ export default function JavaCoursePage() {
         </div>
 
         {/* Info Bar */}
-        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md" aria-label="Training Locations">
+        <div
+          className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md"
+          aria-label="Training Locations"
+        >
           <p className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Offline Cyber Security Training</strong> in
+            Offering <strong>Online and Offline Cyber Security Training</strong>{" "}
+            in
             <strong> Chennai &amp; Bangalore</strong>
           </p>
         </div>
 
         {/* Course Partners Section */}
-        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
+        <section
+          className="py-16 bg-[#002855]"
+          aria-labelledby="partners-heading"
+        >
           <div className="max-w-7xl mx-auto px-4">
             <h2
               id="partners-heading"
@@ -441,17 +483,17 @@ export default function JavaCoursePage() {
                 },
               ].map((partner, index) => (
                 <motion.a
-                    key={index}
-                    href={partner.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                    className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
-                  >
+                  key={index}
+                  href={partner.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                  className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
+                >
                   <img
                     src={partner.logo}
                     alt={partner.name}
@@ -489,27 +531,33 @@ export default function JavaCoursePage() {
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Understand the fundamentals of information security and threat landscapes.
+                  Understand the fundamentals of information security and threat
+                  landscapes.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Learn ethical hacking, penetration testing, and vulnerability scanning techniques.
+                  Learn ethical hacking, penetration testing, and vulnerability
+                  scanning techniques.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Explore tools like Kali Linux, Wireshark, Metasploit, and Burp Suite.
+                  Explore tools like Kali Linux, Wireshark, Metasploit, and Burp
+                  Suite.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Gain hands-on experience with firewalls, IDS/IPS, and endpoint protection.
+                  Gain hands-on experience with firewalls, IDS/IPS, and endpoint
+                  protection.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Learn about SOC operations, incident response, and digital forensics.
+                  Learn about SOC operations, incident response, and digital
+                  forensics.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 mt-1">➤</span>
-                  Get career support with resume building, certification prep, and placement assistance.
+                  Get career support with resume building, certification prep,
+                  and placement assistance.
                 </li>
               </ul>
             </div>
@@ -558,12 +606,17 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-highlights" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-highlights"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Course Highlights
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>✓ Ethical Hacking &amp; Network Security Training</li>
-                  <li>✓ Real-time practical attack &amp; defense simulations</li>
+                  <li>
+                    ✓ Real-time practical attack &amp; defense simulations
+                  </li>
                   <li>✓ Resume prep &amp; mock interviews</li>
                   <li>✓ Job-oriented modules with certification guidance</li>
                 </ul>
@@ -583,7 +636,10 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-tools" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-tools"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Tools You’ll Master
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -621,7 +677,10 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-topics" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-topics"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Topics Covered
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -657,11 +716,16 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 id="card-skills" className="text-lg font-extrabold text-black mb-2">
+                <h3
+                  id="card-skills"
+                  className="text-lg font-extrabold text-black mb-2"
+                >
                   Key Skills You’ll Gain
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
-                  <li>Identify &amp; mitigate cyber threats and vulnerabilities</li>
+                  <li>
+                    Identify &amp; mitigate cyber threats and vulnerabilities
+                  </li>
                   <li>Conduct penetration testing &amp; ethical hacking</li>
                   <li>Monitor networks &amp; analyze security events</li>
                   <li>Respond to incidents and secure digital assets</li>
@@ -745,64 +809,24 @@ export default function JavaCoursePage() {
           </div>
         </section>
 
-        {/* === TESTIMONIALS === */}
-        <section
-          id="testimonials"
-          className="py-16 bg-[#fafafa]"
-          aria-labelledby="testimonials-heading"
-        >
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2
-              id="testimonials-heading"
-              className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8"
-            >
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good place for job seekers. 💯 placement.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good service and trusted organisation.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
-                </figcaption>
-              </figure>
-            </div>
-
-            {/* optional internal link */}
-            <a
-              href="/reviews"
-              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-            >
-              View more reviews →
-            </a>
-          </div>
-        </section>
+        {/* Testimonials */}
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
+        <section
+          id="faq"
+          className="py-16 bg-white"
+          aria-labelledby="faq-heading"
+        >
           <div className="max-w-5xl mx-auto px-6">
             <h2
               id="faq-heading"
@@ -819,35 +843,45 @@ export default function JavaCoursePage() {
                   </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start with cybersecurity and networking basics, then move into
-                  ethical hacking, SOC workflows, and incident response.
+                  Yes. We start with cybersecurity and networking basics, then
+                  move into ethical hacking, SOC workflows, and incident
+                  response.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Do you provide placement assistance?</h3>
+                  <h3 className="inline text-lg">
+                    Do you provide placement assistance?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement
+                  assistance with hiring partners.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">What are the class modes and timings?</h3>
+                  <h3 className="inline text-lg">
+                    What are the class modes and timings?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with weekday/weekend/fast-track options.
+                  Both online and classroom batches with
+                  weekday/weekend/fast-track options.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Will I build real projects?</h3>
+                  <h3 className="inline text-lg">
+                    Will I build real projects?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll simulate attacks/defense, perform vulnerability scans, analyze logs, and complete a SOC-style capstone.
+                  Yes. You’ll simulate attacks/defense, perform vulnerability
+                  scans, analyze logs, and complete a SOC-style capstone.
                 </p>
               </details>
 
@@ -856,7 +890,8 @@ export default function JavaCoursePage() {
                   <h3 className="inline text-lg">Do I get a certificate?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. We also guide CEH/Security+ prep.
+                  Yes, a course completion certificate is provided. We also
+                  guide CEH/Security+ prep.
                 </p>
               </details>
             </div>
@@ -864,12 +899,17 @@ export default function JavaCoursePage() {
         </section>
 
         {/* ENQUIRY FORM - VALIDATED */}
-        <section className="w-full px-6 py-20 text-white" aria-labelledby="quote-heading">
+        <section
+          className="w-full px-6 py-20 text-white"
+          aria-labelledby="quote-heading"
+        >
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
             {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Comprehensive Curriculum
+                </h3>
                 <p className="text-black/90">
                   Master Cyber Security with modules covering Ethical Hacking,
                   Network Defense, SOC, Incident Response and Cloud Security.
@@ -877,7 +917,9 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Career-Oriented Training
+                </h3>
                 <p className="text-black/90">
                   Learn from working professionals. Includes mock interviews,
                   resume prep, and job assistance.
@@ -885,7 +927,9 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Strong Placement Support
+                </h3>
                 <p className="text-black/90">
                   We support your placement journey with partner network and
                   hiring drives.
@@ -904,7 +948,10 @@ export default function JavaCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5" id="quote-heading">
+                <h2
+                  className="text-2xl font-bold text-center text-[#003c6a] mb-5"
+                  id="quote-heading"
+                >
                   Get a Free Training Quote
                 </h2>
 
@@ -1104,7 +1151,9 @@ export default function JavaCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
@@ -1123,9 +1172,16 @@ export default function JavaCoursePage() {
         </section>
 
         {/* Popular Courses */}
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4" aria-labelledby="popular-heading">
+        <section
+          id="popular-courses"
+          className="bg-[#eaf5fd] py-16 px-4"
+          aria-labelledby="popular-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-10">
-            <h2 id="popular-heading" className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            <h2
+              id="popular-heading"
+              className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4"
+            >
               Popular Courses
             </h2>
             <p className="text-gray-700 text-lg">
@@ -1150,7 +1206,10 @@ export default function JavaCoursePage() {
                   />
                 </div>
 
-                <h3 id={`course-${index}-title`} className="text-md font-bold text-gray-800 text-center">
+                <h3
+                  id={`course-${index}-title`}
+                  className="text-md font-bold text-gray-800 text-center"
+                >
                   {c.title}
                 </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
@@ -1158,11 +1217,15 @@ export default function JavaCoursePage() {
                 <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                   <FaUserGraduate className="text-gray-500" />
                   <span>
-                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners
+                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                    Learners
                   </span>
                 </div>
 
-                <div className="flex justify-center items-center mt-1 text-yellow-500" aria-label="5 star rating">
+                <div
+                  className="flex justify-center items-center mt-1 text-yellow-500"
+                  aria-label="5 star rating"
+                >
                   {[...Array(5)].map((_, i) => (
                     <AiFillStar key={i} />
                   ))}

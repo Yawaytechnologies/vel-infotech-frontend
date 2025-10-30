@@ -3,6 +3,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 
 export default function AutoPopupQuoteForm({
+  /* ---- control (optional) ---- */
+  isOpen,                 // boolean (optional). If provided, component becomes controlled.
+  onOpenChange,           // function(bool) (optional). Used with isOpen.
+
+  /* ---- optional behavior ---- */
+  autoOpenDelay = 5000,   // ms before auto-show (uncontrolled mode)
+
+  /* ---- form + state props from parent ---- */
   status,
   error,
   mode,
@@ -14,28 +22,56 @@ export default function AutoPopupQuoteForm({
   handleBlur,
   handleSubmit,
 }) {
-  const [open, setOpen] = useState(false);
-  const firstFieldRef = useRef(null);
+  /* ============== Controlled vs Uncontrolled ============== */
+  const isControlled =
+    typeof isOpen === "boolean" && typeof onOpenChange === "function";
 
-  // open after 1s
+  // Uncontrolled (fallback) state
+  const [internalOpen, internalSetOpen] = useState(false);
+
+  // In uncontrolled mode, auto-open after delay
   useEffect(() => {
-    const t = setTimeout(() => setOpen(true), 5000);
+    if (isControlled) return;
+    const t = setTimeout(() => internalSetOpen(true), autoOpenDelay);
     return () => clearTimeout(t);
-  }, []);
+  }, [isControlled, autoOpenDelay]);
 
-  // focus first input when opened
+  // Helpers to read/write "open" in either mode
+  const open = isControlled ? isOpen : internalOpen;
+  const setOpen = (next) => {
+    if (isControlled) onOpenChange(next);
+    else internalSetOpen(next);
+  };
+
+  /* ============== Focus first field when opened ============== */
+  const firstFieldRef = useRef(null);
   useEffect(() => {
     if (open) firstFieldRef.current?.focus();
   }, [open]);
 
-  // close on ESC
+  /* ============== Close on ESC ============== */
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    if (open) window.addEventListener("keydown", onKey);
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+
+  /* ============== Lock scroll when open ============== */
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  /* ============== Auto-close when submit succeeds ============== */
+  useEffect(() => {
+    if (!open) return;
+    if (status === "succeeded" || status === "success") setOpen(false);
+  }, [status, open]);
 
   if (!open) return null;
 
@@ -50,7 +86,7 @@ export default function AutoPopupQuoteForm({
       <button
         aria-label="Close quote form"
         onClick={() => setOpen(false)}
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/50 backdrop-blur-[1px]"
       />
 
       {/* Modal card */}
@@ -60,7 +96,18 @@ export default function AutoPopupQuoteForm({
       >
         <div className="animate-in fade-in zoom-in-95 duration-200">
           <div className="w-full max-w-lg mx-auto">
-            <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
+            <div className="relative bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
+              {/* Close button (top-right) */}
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="absolute -right-2 -top-2 h-9 w-9 rounded-full bg-white shadow-md border border-slate-200 text-slate-600 hover:text-slate-900 hover:shadow-lg transition flex items-center justify-center z-[1]"
+                aria-label="Close"
+                title="Close"
+              >
+                ✕
+              </button>
+
               <h3 id="quote-title" className="text-2xl font-bold text-center text-[#003c6a] mb-5">
                 Get a Free Training Quote
               </h3>
@@ -68,6 +115,7 @@ export default function AutoPopupQuoteForm({
               {/* Toggle Buttons */}
               <div className="flex justify-center gap-3 mb-6">
                 <button
+                  type="button"
                   onClick={() => setMode("class_room")}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
                     mode === "class_room"
@@ -78,6 +126,7 @@ export default function AutoPopupQuoteForm({
                   <FaChalkboardTeacher className="text-base" /> Class Room
                 </button>
                 <button
+                  type="button"
                   onClick={() => setMode("online")}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${
                     mode === "online"
@@ -89,7 +138,7 @@ export default function AutoPopupQuoteForm({
                 </button>
               </div>
 
-              {/* Form (your exact form, with the first field ref) */}
+              {/* Form */}
               <form id="enquiry-form" onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-2">
                 {/* Name */}
                 <div>
@@ -208,6 +257,7 @@ export default function AutoPopupQuoteForm({
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.message}
+                    maxLength={300}
                     className={[
                       "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
                       touched?.message && errors?.message
@@ -221,7 +271,7 @@ export default function AutoPopupQuoteForm({
                   </div>
                   <div className="h-3 mt-0.5">
                     {touched?.message && errors?.message && (
-                      <p className="text-red-600 text-xs">{errors.message}</p>
+                      <p className="text-red-600 text-xs">{errors?.message}</p>
                     )}
                   </div>
                 </div>
@@ -239,19 +289,11 @@ export default function AutoPopupQuoteForm({
 
                 {/* Server error */}
                 {error && (
-                  <p className="text-red-600 text-xs mt-1">Submission failed: {String(error)}</p>
+                  <p className="text-red-600 text-xs mt-1">
+                    Submission failed: {String(error)}
+                  </p>
                 )}
               </form>
-
-              {/* Close button (top-right) */}
-              <button
-                onClick={() => setOpen(false)}
-                className="absolute top-3 right-4 text-slate-500 hover:text-slate-800"
-                aria-label="Close"
-                title="Close"
-              >
-                ✕
-              </button>
             </div>
           </div>
         </div>

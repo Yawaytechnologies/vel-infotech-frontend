@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room"); // normalized for consistency
@@ -31,6 +61,13 @@ export default function JavaCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Smooth scroll target
   const formRef = useRef(null);
@@ -175,9 +212,13 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
+      // reset the form
       setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -331,7 +372,9 @@ export default function JavaCoursePage() {
             <h2 id="cta-heading" className="text-2xl font-bold mb-4">
               Want an IT Job?
             </h2>
-            <p className="mb-4 text-lg">Become an SAP Professional in 3 Months</p>
+            <p className="mb-4 text-lg">
+              Become an SAP Professional in 3 Months
+            </p>
 
             <button
               type="button"
@@ -731,68 +774,24 @@ export default function JavaCoursePage() {
           </div>
         </section>
 
-        {/* === TESTIMONIALS === */}
-        <section
-          id="testimonials"
-          className="py-16 bg-[#fafafa]"
-          aria-labelledby="testimonials-heading"
-        >
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2
-              id="testimonials-heading"
-              className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8"
-            >
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good place for job seekers. 💯 placement.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good service and trusted organisation.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">
-                    Benjamin Andrew
-                  </p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement
-                  guaranteed.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">
-                    Sudha Selvarajan
-                  </p>
-                </figcaption>
-              </figure>
-            </div>
-
-            <a
-              href="/reviews"
-              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-            >
-              View more reviews →
-            </a>
-          </div>
-        </section>
+        {/* Testimonials */}
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
+        <section
+          id="faq"
+          className="py-16 bg-white"
+          aria-labelledby="faq-heading"
+        >
           <div className="max-w-5xl mx-auto px-6">
             <h2
               id="faq-heading"
@@ -816,7 +815,9 @@ export default function JavaCoursePage() {
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Do you provide placement assistance?</h3>
+                  <h3 className="inline text-lg">
+                    Do you provide placement assistance?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   We offer resume support, mock interviews, and placement
@@ -826,7 +827,9 @@ export default function JavaCoursePage() {
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">What are the class modes and timings?</h3>
+                  <h3 className="inline text-lg">
+                    What are the class modes and timings?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   Both online and classroom batches with
@@ -836,7 +839,9 @@ export default function JavaCoursePage() {
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Will I build real projects?</h3>
+                  <h3 className="inline text-lg">
+                    Will I build real projects?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
                   Yes. You’ll work on process scenarios, configurations,
@@ -866,7 +871,9 @@ export default function JavaCoursePage() {
             {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Comprehensive Curriculum
+                </h3>
                 <p className="text-black/90">
                   Master SAP with modules covering FICO, MM, SD, HCM, ABAP,
                   BASIS and S/4HANA using real scenarios.
@@ -874,7 +881,9 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Career-Oriented Training
+                </h3>
                 <p className="text-black/90">
                   Learn from working professionals. Includes mock interviews,
                   resume prep, and job assistance.
@@ -882,7 +891,9 @@ export default function JavaCoursePage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Strong Placement Support
+                </h3>
                 <p className="text-black/90">
                   We support your placement journey with partner network and
                   hiring drives.
@@ -1104,7 +1115,9 @@ export default function JavaCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}

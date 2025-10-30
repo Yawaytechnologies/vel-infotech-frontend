@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function SoftSkillPage() {
   const [mode, setMode] = useState("class_room");
@@ -31,6 +61,13 @@ export default function SoftSkillPage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Smooth scroll target
   const formRef = useRef(null);
@@ -176,15 +213,13 @@ export default function SoftSkillPage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "Soft Skill Training",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -266,7 +301,7 @@ export default function SoftSkillPage() {
           <div className="flex-1">
             {/* Lead line above H1 */}
             <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
-               Join Our 100% Job Guaranteed
+              Join Our 100% Job Guaranteed
             </p>
             {/* H1 — primary keyword */}
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
@@ -291,7 +326,9 @@ export default function SoftSkillPage() {
               </li>
               <li>
                 ✅ Get real-world exposure through{" "}
-                <strong>mock interviews, group discussions, and case studies</strong>
+                <strong>
+                  mock interviews, group discussions, and case studies
+                </strong>
                 .
               </li>
               <li>
@@ -325,7 +362,9 @@ export default function SoftSkillPage() {
                   Freshers Salary:
                 </span>
                 ₹3 LPA to ₹8 LPA <br />
-                <span className="text-sm text-gray-300">| Duration: 2 Months</span>
+                <span className="text-sm text-gray-300">
+                  | Duration: 2 Months
+                </span>
               </div>
             </button>
           </div>
@@ -471,7 +510,8 @@ export default function SoftSkillPage() {
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>
-                Effective verbal and written communication for meetings and presentations.
+                Effective verbal and written communication for meetings and
+                presentations.
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>
@@ -487,11 +527,13 @@ export default function SoftSkillPage() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>
-                Interview and GD prep, with mock sessions and individual feedback.
+                Interview and GD prep, with mock sessions and individual
+                feedback.
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>
-                Resume writing, LinkedIn optimization, and career growth guidance.
+                Resume writing, LinkedIn optimization, and career growth
+                guidance.
               </li>
             </ul>
           </div>
@@ -505,7 +547,8 @@ export default function SoftSkillPage() {
             Become a Confident &amp; Effective Professional
           </h2>
           <p className="text-lg md:text-xl mb-6">
-            Master communication, teamwork, leadership, and presentation skills for career growth.
+            Master communication, teamwork, leadership, and presentation skills
+            for career growth.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button
@@ -545,7 +588,9 @@ export default function SoftSkillPage() {
                 alt="Skills You’ll Master"
                 className="w-10 h-10 mb-4"
               />
-              <h3 className="text-lg font-extrabold mb-2">Skills You’ll Master</h3>
+              <h3 className="text-lg font-extrabold mb-2">
+                Skills You’ll Master
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {[
                   "Communication",
@@ -658,7 +703,8 @@ export default function SoftSkillPage() {
                 Flexible Learning Modes
               </h3>
               <p className="text-gray-600">
-                Learn in-person or online with weekday, weekend, and fast-track options.
+                Learn in-person or online with weekday, weekend, and fast-track
+                options.
               </p>
             </div>
 
@@ -668,7 +714,8 @@ export default function SoftSkillPage() {
                 Job-Ready Curriculum
               </h3>
               <p className="text-gray-600">
-                Real activities, role-plays, and interview prep aligned to what employers expect.
+                Real activities, role-plays, and interview prep aligned to what
+                employers expect.
               </p>
             </div>
 
@@ -678,60 +725,25 @@ export default function SoftSkillPage() {
                 Career Support
               </h3>
               <p className="text-gray-600">
-                Resume building, mock interviews, and placement assistance with hiring partners.
+                Resume building, mock interviews, and placement assistance with
+                hiring partners.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* === TESTIMONIALS === */}
-      <section id="testimonials" className="py-16 bg-[#fafafa]">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-            What Our Students Say
-          </h2>
-          <p className="text-lg text-gray-600 mb-12">
-            Our success is measured by our learners’ success.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good place for job seekers. 💯 placement.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
-              </div>
-            </article>
-
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good service and trusted organisation.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
-              </div>
-            </article>
-
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Best consultancy for people who seek jobs. 100% placement guaranteed.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Sudha Selvarajan</h3>
-              </div>
-            </article>
-          </div>
-
-          <a
-            href="/reviews"
-            className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-          >
-            View more reviews →
-          </a>
-        </div>
-      </section>
+      {/* Testimonials */}
+      <GoogleStyleReviews
+        title="What Our Students Say"
+        orgName="Vel InfoTech"
+        overallRating={4.8}
+        total={1543}
+        histogram={reviewHistogram}
+        reviews={reviewsData}
+        viewAllHref="/reviews"
+        writeHref="/contact-us#enquiry-form"
+      />
 
       {/* === FAQ === */}
       <section id="faq" className="py-16 bg-white">
@@ -743,38 +755,50 @@ export default function SoftSkillPage() {
           <div className="space-y-4">
             <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
               <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                <h3 className="inline text-lg">Is this course suitable for absolute beginners?</h3>
+                <h3 className="inline text-lg">
+                  Is this course suitable for absolute beginners?
+                </h3>
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. We start with communication fundamentals and build up to public speaking,
-                teamwork, and leadership through interactive exercises.
+                Yes. We start with communication fundamentals and build up to
+                public speaking, teamwork, and leadership through interactive
+                exercises.
               </p>
             </details>
 
             <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
               <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                <h3 className="inline text-lg">Do you provide placement assistance?</h3>
+                <h3 className="inline text-lg">
+                  Do you provide placement assistance?
+                </h3>
               </summary>
               <p className="mt-3 text-gray-700">
-                We offer resume support, mock interviews, LinkedIn optimization, and job referrals via hiring partners.
+                We offer resume support, mock interviews, LinkedIn optimization,
+                and job referrals via hiring partners.
               </p>
             </details>
 
             <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
               <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                <h3 className="inline text-lg">What are the class modes and timings?</h3>
+                <h3 className="inline text-lg">
+                  What are the class modes and timings?
+                </h3>
               </summary>
               <p className="mt-3 text-gray-700">
-                Both online and classroom batches with weekday/weekend/fast-track options.
+                Both online and classroom batches with
+                weekday/weekend/fast-track options.
               </p>
             </details>
 
             <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
               <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                <h3 className="inline text-lg">Will I work on practical activities?</h3>
+                <h3 className="inline text-lg">
+                  Will I work on practical activities?
+                </h3>
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. Expect role-plays, group discussions, presentations, and interview simulations with feedback.
+                Yes. Expect role-plays, group discussions, presentations, and
+                interview simulations with feedback.
               </p>
             </details>
 
@@ -783,7 +807,8 @@ export default function SoftSkillPage() {
                 <h3 className="inline text-lg">Do I get a certificate?</h3>
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes, a course completion certificate is provided. Your project work and participation are highlighted.
+                Yes, a course completion certificate is provided. Your project
+                work and participation are highlighted.
               </p>
             </details>
           </div>
@@ -796,30 +821,38 @@ export default function SoftSkillPage() {
           {/* LEFT: Additional Info Boxes */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Comprehensive Curriculum
+              </h3>
               <p className="text-black/90">
-                Structured modules: communication, presentation, teamwork, leadership, etiquette, and interview prep.
+                Structured modules: communication, presentation, teamwork,
+                leadership, etiquette, and interview prep.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Career-Oriented Training
+              </h3>
               <p className="text-black/90">
-                Learn from working professionals. Includes mock interviews, resume prep, and job assistance.
+                Learn from working professionals. Includes mock interviews,
+                resume prep, and job assistance.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h3 className="text-xl font-bold mb-2">100% Job Guarantee</h3>
               <p className="text-black/90">
-                We assure placement support post training with strong partner network and hiring drives.
+                We assure placement support post training with strong partner
+                network and hiring drives.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h3 className="text-xl font-bold mb-2">Hands-On Activities</h3>
               <p className="text-black/90">
-                Role-plays, presentations, group tasks, and real interview simulations in every module.
+                Role-plays, presentations, group tasks, and real interview
+                simulations in every module.
               </p>
             </div>
           </div>
@@ -1079,7 +1112,8 @@ export default function SoftSkillPage() {
               <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                 <FaUserGraduate className="text-gray-500" />
                 <span>
-                  {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners
+                  {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                  Learners
                 </span>
               </div>
 
@@ -1092,7 +1126,6 @@ export default function SoftSkillPage() {
           ))}
         </div>
       </section>
-
       <AutoPopupQuoteForm
         status={status}
         error={error}
