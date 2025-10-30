@@ -288,15 +288,15 @@ export default function Footer() {
                 
                 <span className="block text-black-400">
                   4/38, 2nd Main Rd, Kalaimagal Nagar, Ekkatuthangal, Chennai,
-                  Tamil Nadu 600032 9600593838
+                  Tamil Nadu 600032 
                 </span>
               </li>
-              <li>
+              <li>  
                 <a
                   href="mailto:info@velinfotech.com"
                   className="hover:text-[#005BAC] transition "
                 >
-                  contact.velinfo@gmail.com
+                  vellinfotech10@gmail.com
                 </a>
               </li>
               <li>
