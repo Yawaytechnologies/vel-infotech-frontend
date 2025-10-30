@@ -37,6 +37,9 @@ import Whatsapp from "./components/common/Whatsapp";
 import CourseRouter from "./pages/CourseRouter";
 import NotFound from "./pages/NotFound";
 
+/* ===== Fixed header offset used for hash scrolling ===== */
+const HEADER_OFFSET = 110;
+
 /* Inline scroll-to-top (no extra file). Set to smooth. */
 function ScrollToTopInline({ top = 0, behavior = "smooth" }) {
   const { pathname, search, hash } = useLocation();
@@ -49,6 +52,34 @@ function ScrollToTopInline({ top = 0, behavior = "smooth" }) {
   return null;
 }
 
+/* Smoothly scroll to an element if URL has a #hash.
+   Also adjusts for the fixed header by scrolling up HEADER_OFFSET px. */
+function ScrollToHash() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+
+    const id = hash.replace("#", "");
+    const el = document.getElementById(id);
+
+    if (!el) return;
+
+    // Native smooth scroll to the element
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // After the smooth scroll starts, nudge up by header height
+    // (tiny delay lets the browser position first)
+    const t = setTimeout(() => {
+      window.scrollBy({ top: -HEADER_OFFSET, left: 0, behavior: "instant" });
+    }, 250);
+
+    return () => clearTimeout(t);
+  }, [hash]);
+
+  return null;
+}
+
 /* ---------- Layout ---------- */
 function Layout({ children }) {
   const location = useLocation();
@@ -58,7 +89,11 @@ function Layout({ children }) {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 md:bg-gradient-to-br md:from-[#0a2d55] md:to-[#051a30]">
       {!isAdmin && <Header />}
-      <main className={`flex-1 ${!isAdmin ? "pt-[6px] md:pt-[5px]" : ""} bg-transparent`}>
+      <main
+        className={`flex-1 ${
+          !isAdmin ? "pt-[6px] md:pt-[5px]" : ""
+        } bg-transparent`}
+      >
         {children}
       </main>
       {!isAdmin && <Footer />}
@@ -70,39 +105,61 @@ function Layout({ children }) {
 /* ---------- App ---------- */
 export default function App() {
   const LEGACY_COURSE_ALIASES = [
-    ["/all-courses/Java",               "/all-courses/java-full-stack-developer-course"],
-    ["/all-courses/Python",            "/all-courses/python-full-stack-developer-course"],
-    ["/all-courses/FullStackDevelopement", "/all-courses/full-stack-development-course"],
-    ["/all-courses/Plsql",             "/all-courses/pl-sql-developer-course"],
-    ["/all-courses/Sql",               "/all-courses/sql-developer-course"],
-    ["/all-courses/ScrumMaster",       "/all-courses/scrum-master-program"],
-    ["/all-courses/DataScience",       "/all-courses/data-science-training-program"],
-    ["/all-courses/BusinessAnalytics", "/all-courses/business-analytics-course"],
-    ["/all-courses/DataScienceAi",     "/all-courses/data-science-and-ai-program"],
-    ["/all-courses/BigDataDeveloper",  "/all-courses/big-data-developer-program"],
-    ["/all-courses/SoftwareTesting",   "/all-courses/software-testing-program"],
-    ["/all-courses/SeleniumTesting",   "/all-courses/selenium-testing-program"],
-    ["/all-courses/EtlTesting",        "/all-courses/etl-testing-program"],
-    ["/all-courses/AwsTraining",       "/all-courses/aws-training-program"],
-    ["/all-courses/DevOps",            "/all-courses/devops-training-program"],
-    ["/all-courses/ProductManagement", "/all-courses/product-management-program"],
-    ["/all-courses/BusinessAnalyst",   "/all-courses/business-analyst-program"],
-    ["/all-courses/HardwareNetworking","/all-courses/hardware-and-networking-program"],
-    ["/all-courses/CyberSecurity",     "/all-courses/cyber-security-program"],
-    ["/all-courses/Sap",               "/all-courses/sap-training-program"],
-    ["/all-courses/SalesForce",        "/all-courses/salesforce-training-program"],
-    ["/all-courses/ServiceNow",        "/all-courses/servicenow-training-program"],
-    ["/all-courses/RPA",               "/all-courses/rpa-robotic-process-automation-course"],
-    ["/all-courses/ProductionSupport", "/all-courses/production-support-program"],
-    ["/all-courses/DigitalMarketing",  "/all-courses/digital-marketing-program"],
-    ["/all-courses/SoftSkillsTraining","/all-courses/soft-skills-training"],
-    ["/all-courses/big-data-developer-course", "/all-courses/big-data-developer-program"],
+    ["/all-courses/Java", "/all-courses/java-full-stack-developer-course"],
+    ["/all-courses/Python", "/all-courses/python-full-stack-developer-course"],
+    [
+      "/all-courses/FullStackDevelopement",
+      "/all-courses/full-stack-development-course",
+    ],
+    ["/all-courses/Plsql", "/all-courses/pl-sql-developer-course"],
+    ["/all-courses/Sql", "/all-courses/sql-developer-course"],
+    ["/all-courses/ScrumMaster", "/all-courses/scrum-master-program"],
+    ["/all-courses/DataScience", "/all-courses/data-science-training-program"],
+    [
+      "/all-courses/BusinessAnalytics",
+      "/all-courses/business-analytics-course",
+    ],
+    ["/all-courses/DataScienceAi", "/all-courses/data-science-and-ai-program"],
+    [
+      "/all-courses/BigDataDeveloper",
+      "/all-courses/big-data-developer-program",
+    ],
+    ["/all-courses/SoftwareTesting", "/all-courses/software-testing-program"],
+    ["/all-courses/SeleniumTesting", "/all-courses/selenium-testing-program"],
+    ["/all-courses/EtlTesting", "/all-courses/etl-testing-program"],
+    ["/all-courses/AwsTraining", "/all-courses/aws-training-program"],
+    ["/all-courses/DevOps", "/all-courses/devops-training-program"],
+    [
+      "/all-courses/ProductManagement",
+      "/all-courses/product-management-program",
+    ],
+    ["/all-courses/BusinessAnalyst", "/all-courses/business-analyst-program"],
+    [
+      "/all-courses/HardwareNetworking",
+      "/all-courses/hardware-and-networking-program",
+    ],
+    ["/all-courses/CyberSecurity", "/all-courses/cyber-security-program"],
+    ["/all-courses/Sap", "/all-courses/sap-training-program"],
+    ["/all-courses/SalesForce", "/all-courses/salesforce-training-program"],
+    ["/all-courses/ServiceNow", "/all-courses/servicenow-training-program"],
+    ["/all-courses/RPA", "/all-courses/rpa-robotic-process-automation-course"],
+    [
+      "/all-courses/ProductionSupport",
+      "/all-courses/production-support-program",
+    ],
+    ["/all-courses/DigitalMarketing", "/all-courses/digital-marketing-program"],
+    ["/all-courses/SoftSkillsTraining", "/all-courses/soft-skills-training"],
+    [
+      "/all-courses/big-data-developer-course",
+      "/all-courses/big-data-developer-program",
+    ],
   ];
 
   return (
     <Router>
       <Layout>
         <ScrollToTopInline behavior="smooth" />
+        <ScrollToHash />
         <Routes>
           {/* Public pages */}
           <Route path="/" element={<Home />} />
@@ -114,11 +171,18 @@ export default function App() {
           <Route path="/blog/:slug" element={<BlogDetails />} />
           <Route path="/tutorials" element={<Tutorials />} />
           <Route path="/tutorials/:slug" element={<TutorialDetail />} />
-          <Route path="/resources" element={<Navigate to="/tutorials" replace />} />
+          <Route
+            path="/resources"
+            element={<Navigate to="/tutorials" replace />}
+          />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
           <Route path="/internship" element={<Internship />} />
+
+          {/* Contact */}
           <Route path="/contact-us" element={<Contact />} />
+          <Route path="/contact" element={<Navigate to="/contact-us" replace />} />
+
           <Route path="/client" element={<Clientpage />} />
 
           {/* Courses */}

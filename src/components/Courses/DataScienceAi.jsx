@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -31,6 +61,13 @@ export default function JavaCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Smooth scroll target
   const formRef = useRef(null);
@@ -178,16 +215,13 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -353,7 +387,8 @@ export default function JavaCoursePage() {
         {/* Info Bar (supporting text, not a heading) */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
           <p className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Offline Data Science & Ai Training</strong> in
+            Offering{" "}
+            <strong>Online and Offline Data Science & Ai Training</strong> in
             <strong> Chennai & Bangalore</strong>
           </p>
         </div>
@@ -445,10 +480,10 @@ export default function JavaCoursePage() {
             <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-              Build expertise in data analysis, machine learning, deep
-              learning, and AI using Python, Scikit-learn, TensorFlow, Pandas,
-              NumPy and modern visualization tools. Learn by doing with real
-              datasets and production-style projects.
+              Build expertise in data analysis, machine learning, deep learning,
+              and AI using Python, Scikit-learn, TensorFlow, Pandas, NumPy and
+              modern visualization tools. Learn by doing with real datasets and
+              production-style projects.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
@@ -456,20 +491,20 @@ export default function JavaCoursePage() {
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span> Python for
-                data science (Pandas, NumPy, Matplotlib).
+                <span className="text-purple-600 mt-1">➤</span> Python for data
+                science (Pandas, NumPy, Matplotlib).
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span> Build &
-                evaluate ML models with Scikit-learn.
+                <span className="text-purple-600 mt-1">➤</span> Build & evaluate
+                ML models with Scikit-learn.
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span> Deep learning
                 with TensorFlow/Keras for CV & NLP.
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-purple-600 mt-1">➤</span> Apply AI to
-                real business problems across domains.
+                <span className="text-purple-600 mt-1">➤</span> Apply AI to real
+                business problems across domains.
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span> Visualize
@@ -631,7 +666,7 @@ export default function JavaCoursePage() {
             Why Choose Us
           </h2>
 
-        <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
+          <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
             <div className="relative">
               <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
               <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
@@ -649,8 +684,8 @@ export default function JavaCoursePage() {
                 Flexible Learning Modes
               </h3>
               <p className="text-gray-600">
-                Learn in-person or online with weekday, weekend, and
-                fast-track options.
+                Learn in-person or online with weekday, weekend, and fast-track
+                options.
               </p>
             </div>
 
@@ -671,66 +706,25 @@ export default function JavaCoursePage() {
                 Career Support
               </h3>
               <p className="text-gray-600">
-                Resume building, mock interviews, and placement assistance
-                with hiring partners.
+                Resume building, mock interviews, and placement assistance with
+                hiring partners.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* === TESTIMONIALS === */}
-      <section id="testimonials" className="py-16 bg-[#fafafa]">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-            What Our Students Say
-          </h2>
-          <p className="text-lg text-gray-600 mb-12">
-            Our success is measured by our learners’ success.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good place for job seekers. 💯 placement.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good service and trusted organisation.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Best consultancy for people who seek jobs. 100% placement
-                guaranteed.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">
-                  Sudha Selvarajan
-                </h3>
-              </div>
-            </div>
-          </div>
-
-          {/* optional internal link */}
-          <a
-            href="/reviews"
-            className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-          >
-            View more reviews →
-          </a>
-        </div>
-      </section>
-
+      {/* Testimonials */}
+      <GoogleStyleReviews
+        title="What Our Students Say"
+        orgName="Vel InfoTech"
+        overallRating={4.8}
+        total={1543}
+        histogram={reviewHistogram}
+        reviews={reviewsData}
+        viewAllHref="/reviews"
+        writeHref="/contact-us#enquiry-form"
+      />
       {/* === FAQ === */}
       <section id="faq" className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-6">
@@ -744,8 +738,8 @@ export default function JavaCoursePage() {
                 Is this course suitable for absolute beginners?
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. We start from Core Java basics and gradually move to
-                Spring Boot, REST APIs, and React.
+                Yes. We start from Core Java basics and gradually move to Spring
+                Boot, REST APIs, and React.
               </p>
             </details>
 
@@ -774,8 +768,8 @@ export default function JavaCoursePage() {
                 Will I build real projects?
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. You’ll work on guided labs and a capstone project
-                covering APIs, DB integration, and a React UI.
+                Yes. You’ll work on guided labs and a capstone project covering
+                APIs, DB integration, and a React UI.
               </p>
             </details>
 
@@ -1038,9 +1032,7 @@ export default function JavaCoursePage() {
                   type="submit"
                   disabled={status === "loading"}
                   className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                    status === "loading"
-                      ? "opacity-70 cursor-not-allowed"
-                      : ""
+                    status === "loading" ? "opacity-70 cursor-not-allowed" : ""
                   }`}
                 >
                   {status === "loading" ? "Submitting..." : "Submit"}

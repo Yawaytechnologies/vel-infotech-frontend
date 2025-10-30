@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function EtlTesting() {
   const [mode, setMode] = useState("class_room");
@@ -30,6 +60,13 @@ export default function EtlTesting() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Smooth scroll target
   const formRef = useRef(null);
@@ -174,15 +211,13 @@ export default function EtlTesting() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -280,7 +315,9 @@ export default function EtlTesting() {
             </h1>
 
             {/* H2 — supporting keyword for SEO (visually hidden to avoid clutter) */}
-            <h2 className="sr-only">Job-Oriented ETL & Data Warehouse Testing Training</h2>
+            <h2 className="sr-only">
+              Job-Oriented ETL & Data Warehouse Testing Training
+            </h2>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
@@ -388,7 +425,10 @@ export default function EtlTesting() {
       </section>
 
       {/* ===== PARTNERS ===== */}
-      <section aria-labelledby="partners-heading" className="py-16 bg-[#002855]">
+      <section
+        aria-labelledby="partners-heading"
+        className="py-16 bg-[#002855]"
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
             <h2
@@ -481,9 +521,9 @@ export default function EtlTesting() {
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
               Our ETL Testing Training program is designed to make you
               proficient in validating data movement, transformation, and
-              loading processes. You'll learn ETL tools, SQL, and data
-              warehouse concepts while gaining hands-on experience with
-              real-time data testing projects.
+              loading processes. You'll learn ETL tools, SQL, and data warehouse
+              concepts while gaining hands-on experience with real-time data
+              testing projects.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
@@ -496,8 +536,8 @@ export default function EtlTesting() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>
-                Write complex SQL queries for data validation and
-                transformation testing.
+                Write complex SQL queries for data validation and transformation
+                testing.
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-purple-600 mt-1">➤</span>
@@ -702,8 +742,8 @@ export default function EtlTesting() {
                 Flexible Learning Modes
               </h3>
               <p className="text-gray-600">
-                Learn in-person or online with weekday, weekend, and
-                fast-track options.
+                Learn in-person or online with weekday, weekend, and fast-track
+                options.
               </p>
             </div>
 
@@ -724,74 +764,31 @@ export default function EtlTesting() {
                 Career Support
               </h3>
               <p className="text-gray-600">
-                Resume building, mock interviews, and placement assistance
-                with hiring partners.
+                Resume building, mock interviews, and placement assistance with
+                hiring partners.
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      {/* ===== TESTIMONIALS ===== */}
-      <section
-        id="testimonials"
-        aria-labelledby="testimonials-heading"
-        className="py-16 bg-[#fafafa]"
-      >
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2
-            id="testimonials-heading"
-            className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8"
-          >
-            What Our Students Say
-          </h2>
-          <p className="text-lg text-gray-600 mb-12">
-            Our success is measured by our learners’ success.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good place for job seekers. 💯 placement.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Thennarasu S</h3>
-              </div>
-            </article>
-
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Good service and trusted organisation.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">Benjamin Andrew</h3>
-              </div>
-            </article>
-
-            <article className="bg-white p-8 rounded-xl shadow-lg text-left">
-              <p className="text-gray-700 italic">
-                “Best consultancy for people who seek jobs. 100% placement
-                guaranteed.”
-              </p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-gray-900">
-                  Sudha Selvarajan
-                </h3>
-              </div>
-            </article>
-          </div>
-
-          <a
-            href="/reviews"
-            className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-          >
-            View more reviews →
-          </a>
-        </div>
-      </section>
+      {/* Testimonials */}
+      <GoogleStyleReviews
+        title="What Our Students Say"
+        orgName="Vel InfoTech"
+        overallRating={4.8}
+        total={1543}
+        histogram={reviewHistogram}
+        reviews={reviewsData}
+        viewAllHref="/reviews"
+        writeHref="/contact-us#enquiry-form"
+      />
 
       {/* ===== FAQ ===== */}
-      <section id="faq" aria-labelledby="faq-heading" className="py-16 bg-white">
+      <section
+        id="faq"
+        aria-labelledby="faq-heading"
+        className="py-16 bg-white"
+      >
         <div className="max-w-5xl mx-auto px-6">
           <h2
             id="faq-heading"
@@ -806,7 +803,8 @@ export default function EtlTesting() {
                 Is this course suitable for absolute beginners?
               </summary>
               <p className="mt-3 text-gray-700">
-                Yes. We start from fundamentals and move to advanced ETL/DWH validation.
+                Yes. We start from fundamentals and move to advanced ETL/DWH
+                validation.
               </p>
             </details>
 
@@ -859,14 +857,19 @@ export default function EtlTesting() {
           {/* LEFT: Additional Info Boxes */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Comprehensive Curriculum
+              </h3>
               <p className="text-black/90">
-                Master ETL Testing with modules on SQL, DWH, mappings, and tool-based validation.
+                Master ETL Testing with modules on SQL, DWH, mappings, and
+                tool-based validation.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+              <h3 className="text-xl font-bold mb-2">
+                Career-Oriented Training
+              </h3>
               <p className="text-black/90">
                 Learn from working professionals. Includes mock interviews,
                 resume prep, and job assistance.
@@ -876,14 +879,16 @@ export default function EtlTesting() {
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h3 className="text-xl font-bold mb-2">100% Job Support</h3>
               <p className="text-black/90">
-                Strong partner network, hiring drives, and interview preparation.
+                Strong partner network, hiring drives, and interview
+                preparation.
               </p>
             </div>
 
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
               <p className="text-black/90">
-                Validate real ETL pipelines, build test cases, and generate reconciliation reports.
+                Validate real ETL pipelines, build test cases, and generate
+                reconciliation reports.
               </p>
             </div>
           </div>
@@ -1151,7 +1156,8 @@ export default function EtlTesting() {
               <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                 <FaUserGraduate className="text-gray-500" />
                 <span>
-                  {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners
+                  {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                  Learners
                 </span>
               </div>
 

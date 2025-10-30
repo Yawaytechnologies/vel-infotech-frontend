@@ -13,6 +13,37 @@ import FeedbackSection from "../common/Feedback";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import { Link } from "react-router-dom";
 import Seo from "../../seo/Seo"; // ✅ added
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+// put inside the component (top level of the function), or above it
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 // ✅ JSON-LD for Python course SEO (image per your URL)
 const pythonCourseJsonLd = {
@@ -70,7 +101,13 @@ export default function PythonCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
 
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
   // Toast defaults (colored theme so our bg shows)
   const toastOpts = {
     position: "top-center",
@@ -209,16 +246,13 @@ export default function PythonCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -388,7 +422,10 @@ export default function PythonCoursePage() {
         </div>
 
         {/* Course Partners */}
-        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
+        <section
+          className="py-16 bg-[#002855]"
+          aria-labelledby="partners-heading"
+        >
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-10">
               <h2
@@ -655,7 +692,11 @@ export default function PythonCoursePage() {
         </section>
 
         {/* Accessible heading for Syllabus section to keep heading order */}
-        <div id="syllabus" className="scroll-mt-[110px]" aria-labelledby="syllabus-heading">
+        <div
+          id="syllabus"
+          className="scroll-mt-[110px]"
+          aria-labelledby="syllabus-heading"
+        >
           <h2 id="syllabus-heading" className="sr-only">
             Python Full Stack Course Syllabus
           </h2>
@@ -678,7 +719,10 @@ export default function PythonCoursePage() {
           aria-labelledby="why-heading"
         >
           <div className="max-w-6xl mx-auto px-6">
-            <h2 id="why-heading" className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            <h2
+              id="why-heading"
+              className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12"
+            >
               Why Choose Us
             </h2>
 
@@ -730,63 +774,24 @@ export default function PythonCoursePage() {
           </div>
         </section>
 
-        {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]" aria-labelledby="testimonials-heading">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2
-              id="testimonials-heading"
-              className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8"
-            >
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Good place for job seekers. 💯 placement.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-XL shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Good service and trusted organisation.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement
-                  guaranteed.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">
-                    Sudha Selvarajan
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* optional internal link */}
-            <a
-              href="/reviews"
-              className="inline-block mt-10 text-blue-600 font-semibold hover:underline"
-            >
-              View more reviews →
-            </a>
-          </div>
-        </section>
+        {/* Testimonials */}
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
+        <section
+          id="faq"
+          className="py-16 bg-white"
+          aria-labelledby="faq-heading"
+        >
           <div className="max-w-5xl mx-auto px-6">
             <h2
               id="faq-heading"
@@ -860,7 +865,10 @@ export default function PythonCoursePage() {
         </section>
 
         {/* ENQUIRY FORM (validated + aligned) */}
-        <section className="w-full px-6 py-20 text-white" aria-labelledby="quote-heading">
+        <section
+          className="w-full px-6 py-20 text-white"
+          aria-labelledby="quote-heading"
+        >
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-10">
             {/* LEFT boxes */}
             <div className="w-full lg:w-1/2 flex flex-col gap-4">
@@ -901,7 +909,10 @@ export default function PythonCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h2 id="quote-heading" className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+                <h2
+                  id="quote-heading"
+                  className="text-2xl font-bold text-center text-[#003c6a] mb-5"
+                >
                   Get a Free Training Quote
                 </h2>
 
@@ -1120,7 +1131,11 @@ export default function PythonCoursePage() {
           </div>
         </section>
 
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4" aria-labelledby="popular-heading">
+        <section
+          id="popular-courses"
+          className="bg-[#eaf5fd] py-16 px-4"
+          aria-labelledby="popular-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-10">
             <h2
               id="popular-heading"

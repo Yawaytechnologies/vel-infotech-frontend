@@ -12,6 +12,36 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -31,7 +61,13 @@ export default function JavaCoursePage() {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
 
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
   // Smooth scroll target
   const formRef = useRef(null);
   const scrollToForm = () => {
@@ -176,9 +212,13 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
+      // reset the form
       setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -265,26 +305,41 @@ export default function JavaCoursePage() {
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
-                ✅ Enroll in the <strong>Top ServiceNow Training Institute</strong> to
-                kickstart your career in IT Service Management and enterprise automation.
+                ✅ Enroll in the{" "}
+                <strong>Top ServiceNow Training Institute</strong> to kickstart
+                your career in IT Service Management and enterprise automation.
               </li>
               <li>
                 ✅ Learn core topics –{" "}
-                <strong>ServiceNow Admin, ITSM, CMDB, Flow Designer, IntegrationHub, and Scripting</strong>.
+                <strong>
+                  ServiceNow Admin, ITSM, CMDB, Flow Designer, IntegrationHub,
+                  and Scripting
+                </strong>
+                .
               </li>
               <li>
                 ✅ Build practical skills through{" "}
-                <strong>hands-on projects, developer instance, and workflow automations</strong>.
+                <strong>
+                  hands-on projects, developer instance, and workflow
+                  automations
+                </strong>
+                .
               </li>
               <li>
                 ✅ Deep insights into{" "}
-                <strong>incident/change management, catalog items, scripting, and UI policies</strong>.
+                <strong>
+                  incident/change management, catalog items, scripting, and UI
+                  policies
+                </strong>
+                .
               </li>
               <li>
-                ✅ Earn a globally recognized <strong>ServiceNow Certification</strong> like CSA or CIS.
+                ✅ Earn a globally recognized{" "}
+                <strong>ServiceNow Certification</strong> like CSA or CIS.
               </li>
               <li>
-                ✅ Career support: Live projects, resume preparation, mock interviews &amp; placement assistance.
+                ✅ Career support: Live projects, resume preparation, mock
+                interviews &amp; placement assistance.
               </li>
             </ul>
 
@@ -319,7 +374,9 @@ export default function JavaCoursePage() {
             <h2 id="cta-heading" className="text-2xl font-bold mb-4">
               Want an IT Job?
             </h2>
-            <p className="mb-4 text-lg">Become a ServiceNow Professional in Just 3 Months</p>
+            <p className="mb-4 text-lg">
+              Become a ServiceNow Professional in Just 3 Months
+            </p>
 
             <button
               type="button"
@@ -347,7 +404,10 @@ export default function JavaCoursePage() {
         </div>
 
         {/* Info Bar */}
-        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md" aria-label="Training Locations">
+        <div
+          className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md"
+          aria-label="Training Locations"
+        >
           <p className="text-center text-white font-bold text-xl md:text-2xl">
             Offering <strong>Online and Offline ServiceNow Training</strong> in
             <strong> Chennai &amp; Bangalore</strong>
@@ -355,13 +415,17 @@ export default function JavaCoursePage() {
         </div>
 
         {/* Course Partners Section */}
-        <section className="py-16 bg-[#002855]" aria-labelledby="partners-heading">
+        <section
+          className="py-16 bg-[#002855]"
+          aria-labelledby="partners-heading"
+        >
           <div className="max-w-7xl mx-auto px-4">
             <h2
               id="partners-heading"
               className="text-xl font-semibold uppercase tracking-wide text-white text-center mb-10"
             >
-              <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
+              <span className="text-purple-400">●</span> Our Course Partners{" "}
+              <span className="text-purple-400">●</span>
             </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -419,7 +483,11 @@ export default function JavaCoursePage() {
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
                 >
-                  <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-12 object-contain"
+                  />
                 </motion.a>
               ))}
             </div>
@@ -450,19 +518,24 @@ export default function JavaCoursePage() {
               </h3>
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> ITSM fundamentals &amp; platform architecture.
+                  <span className="text-purple-600 mt-1">➤</span> ITSM
+                  fundamentals &amp; platform architecture.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Admin topics: Incident, Change, Problem, Request &amp; Catalog.
+                  <span className="text-purple-600 mt-1">➤</span> Admin topics:
+                  Incident, Change, Problem, Request &amp; Catalog.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Flow Designer, IntegrationHub, UI Policies &amp; Business Rules.
+                  <span className="text-purple-600 mt-1">➤</span> Flow Designer,
+                  IntegrationHub, UI Policies &amp; Business Rules.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> App development in Studio, Glide APIs &amp; Update Sets.
+                  <span className="text-purple-600 mt-1">➤</span> App
+                  development in Studio, Glide APIs &amp; Update Sets.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span> Certification prep: CSA and CIS specializations.
+                  <span className="text-purple-600 mt-1">➤</span> Certification
+                  prep: CSA and CIS specializations.
                 </li>
               </ul>
             </div>
@@ -475,12 +548,15 @@ export default function JavaCoursePage() {
           aria-labelledby="become-heading"
         >
           <div className="max-w-7xl mx-auto text-center mb-16">
-            <h2 id="become-heading" className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white">
+            <h2
+              id="become-heading"
+              className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-white"
+            >
               Become a Certified ServiceNow Professional
             </h2>
             <p className="text-lg md:text-xl text-white mb-6">
-              Learn Administration, ITSM, CMDB, Flow Designer, IntegrationHub &amp; Scripting with hands-on labs and
-              industry-focused training.
+              Learn Administration, ITSM, CMDB, Flow Designer, IntegrationHub
+              &amp; Scripting with hands-on labs and industry-focused training.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <button
@@ -502,7 +578,9 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Course Highlights
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>✓ Admin &amp; Developer tracks included</li>
                   <li>✓ Real-time workflow &amp; ITSM implementation</li>
@@ -520,7 +598,9 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Tools You’ll Master
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {[
                     "ServiceNow Admin",
@@ -532,7 +612,10 @@ export default function JavaCoursePage() {
                     "Catalog Builder",
                     "Update Sets",
                   ].map((tool) => (
-                    <span key={tool} className="bg-gray-100 px-3 py-1 text-black rounded-full text-base font-medium">
+                    <span
+                      key={tool}
+                      className="bg-gray-100 px-3 py-1 text-black rounded-full text-base font-medium"
+                    >
                       {tool}
                     </span>
                   ))}
@@ -548,7 +631,9 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Topics Covered
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {[
                     "ITSM Processes",
@@ -558,7 +643,10 @@ export default function JavaCoursePage() {
                     "Catalog Creation",
                     "Incident/Change Mgmt",
                   ].map((topic) => (
-                    <span key={topic} className="bg-gray-100 px-3 text-black py-1 rounded-full text-base font-medium">
+                    <span
+                      key={topic}
+                      className="bg-gray-100 px-3 text-black py-1 rounded-full text-base font-medium"
+                    >
                       {topic}
                     </span>
                   ))}
@@ -574,7 +662,9 @@ export default function JavaCoursePage() {
                   alt=""
                   className="w-10 h-10 mb-4"
                 />
-                <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
+                <h3 className="text-lg font-extrabold text-black mb-2">
+                  Key Skills You’ll Gain
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                   <li>Configure &amp; manage ServiceNow instances</li>
                   <li>Automate workflows with Flow Designer</li>
@@ -615,86 +705,69 @@ export default function JavaCoursePage() {
             <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Expert Trainers
+                </h3>
                 <p className="text-gray-600">
-                  Our mentors have deep industry experience and share practical, hands-on insights.
+                  Our mentors have deep industry experience and share practical,
+                  hands-on insights.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Flexible Learning Modes</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Flexible Learning Modes
+                </h3>
                 <p className="text-gray-600">
-                  Learn in-person or online with weekday, weekend, and fast-track options.
+                  Learn in-person or online with weekday, weekend, and
+                  fast-track options.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Job-Ready Curriculum</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Job-Ready Curriculum
+                </h3>
                 <p className="text-gray-600">
-                  Real projects, labs, and interview prep aligned to what employers expect.
+                  Real projects, labs, and interview prep aligned to what
+                  employers expect.
                 </p>
               </div>
 
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Career Support</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Career Support
+                </h3>
                 <p className="text-gray-600">
-                  Resume building, mock interviews, and placement assistance with hiring partners.
+                  Resume building, mock interviews, and placement assistance
+                  with hiring partners.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]" aria-labelledby="testimonials-heading">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">
-              What Our Students Say
-            </h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good place for job seekers. 💯 placement.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Good service and trusted organisation.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </figcaption>
-              </figure>
-
-              <figure className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <blockquote className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
-                </blockquote>
-                <figcaption className="mt-4">
-                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
-                </figcaption>
-              </figure>
-            </div>
-
-            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
-              View more reviews →
-            </a>
-          </div>
-        </section>
+        {/* Testimonials */}
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
 
         {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white" aria-labelledby="faq-heading">
+        <section
+          id="faq"
+          className="py-16 bg-white"
+          aria-labelledby="faq-heading"
+        >
           <div className="max-w-5xl mx-auto px-6">
             <h2
               id="faq-heading"
@@ -706,39 +779,51 @@ export default function JavaCoursePage() {
             <div className="space-y-4">
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Is this course suitable for absolute beginners?</h3>
+                  <h3 className="inline text-lg">
+                    Is this course suitable for absolute beginners?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start with ServiceNow basics, ITSM concepts, and platform navigation before advancing to
-                  admin configuration, Flow Designer and scripting.
+                  Yes. We start with ServiceNow basics, ITSM concepts, and
+                  platform navigation before advancing to admin configuration,
+                  Flow Designer and scripting.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Do you provide placement assistance?</h3>
+                  <h3 className="inline text-lg">
+                    Do you provide placement assistance?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement
+                  assistance with hiring partners.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">What are the class modes and timings?</h3>
+                  <h3 className="inline text-lg">
+                    What are the class modes and timings?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with weekday/weekend/fast-track options.
+                  Both online and classroom batches with
+                  weekday/weekend/fast-track options.
                 </p>
               </details>
 
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  <h3 className="inline text-lg">Will I build real projects?</h3>
+                  <h3 className="inline text-lg">
+                    Will I build real projects?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll build service catalogs, automation flows, CMDB integrations and custom apps with
-                  deployment using update sets.
+                  Yes. You’ll build service catalogs, automation flows, CMDB
+                  integrations and custom apps with deployment using update
+                  sets.
                 </p>
               </details>
 
@@ -747,8 +832,8 @@ export default function JavaCoursePage() {
                   <h3 className="inline text-lg">Do I get a certificate?</h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided, and we guide you for ServiceNow CSA/CIS
-                  certifications.
+                  Yes, a course completion certificate is provided, and we guide
+                  you for ServiceNow CSA/CIS certifications.
                 </p>
               </details>
             </div>
@@ -756,36 +841,49 @@ export default function JavaCoursePage() {
         </section>
 
         {/* ENQUIRY FORM */}
-        <section className="w-full px-6 py-20 text-white" aria-labelledby="quote-heading">
+        <section
+          className="w-full px-6 py-20 text-white"
+          aria-labelledby="quote-heading"
+        >
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
             {/* LEFT: Additional Info Boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Comprehensive Curriculum</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Comprehensive Curriculum
+                </h3>
                 <p className="text-black/90">
-                  Master ServiceNow with modules covering Admin, ITSM, CMDB, Flow Designer, IntegrationHub &amp;
-                  scripting on developer instances.
+                  Master ServiceNow with modules covering Admin, ITSM, CMDB,
+                  Flow Designer, IntegrationHub &amp; scripting on developer
+                  instances.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Career-Oriented Training</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Career-Oriented Training
+                </h3>
                 <p className="text-black/90">
-                  Learn from working professionals. Includes mock interviews, resume prep, and job assistance.
+                  Learn from working professionals. Includes mock interviews,
+                  resume prep, and job assistance.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h3 className="text-xl font-bold mb-2">Strong Placement Support</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  Strong Placement Support
+                </h3>
                 <p className="text-black/90">
-                  We support your placement journey with partner network and hiring drives.
+                  We support your placement journey with partner network and
+                  hiring drives.
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
                 <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
-                  Build service catalogs, automation flows, CMDB integrations &amp; custom apps as capstones.
+                  Build service catalogs, automation flows, CMDB integrations
+                  &amp; custom apps as capstones.
                 </p>
               </div>
             </div>
@@ -793,7 +891,10 @@ export default function JavaCoursePage() {
             {/* RIGHT: Form */}
             <div className="w-full max-w-lg">
               <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-                <h2 className="text-2xl font-bold text-center text-[#003c6a] mb-5" id="quote-heading">
+                <h2
+                  className="text-2xl font-bold text-center text-[#003c6a] mb-5"
+                  id="quote-heading"
+                >
                   Get a Free Training Quote
                 </h2>
 
@@ -994,7 +1095,9 @@ export default function JavaCoursePage() {
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
@@ -1013,7 +1116,11 @@ export default function JavaCoursePage() {
         </section>
 
         {/* Popular Courses */}
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4" aria-labelledby="popular-heading">
+        <section
+          id="popular-courses"
+          className="bg-[#eaf5fd] py-16 px-4"
+          aria-labelledby="popular-heading"
+        >
           <div className="max-w-7xl mx-auto text-center mb-10">
             <h2
               id="popular-heading"
@@ -1021,7 +1128,7 @@ export default function JavaCoursePage() {
             >
               Popular Courses
             </h2>
-          <p className="text-gray-700 text-lg">
+            <p className="text-gray-700 text-lg">
               We present to you the most popular courses recommended by experts.
             </p>
           </div>
@@ -1043,7 +1150,10 @@ export default function JavaCoursePage() {
                   />
                 </div>
 
-                <h3 id={`course-${index}-title`} className="text-md font-bold text-gray-800 text-center">
+                <h3
+                  id={`course-${index}-title`}
+                  className="text-md font-bold text-gray-800 text-center"
+                >
                   {c.title}
                 </h3>
                 <p className="text-sm text-gray-500">Online | Offline</p>
@@ -1051,11 +1161,15 @@ export default function JavaCoursePage() {
                 <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
                   <FaUserGraduate className="text-gray-500" />
                   <span>
-                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners
+                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                    Learners
                   </span>
                 </div>
 
-                <div className="flex justify-center items-center mt-1 text-yellow-500" aria-label="5 star rating">
+                <div
+                  className="flex justify-center items-center mt-1 text-yellow-500"
+                  aria-label="5 star rating"
+                >
                   {[...Array(5)].map((_, i) => (
                     <AiFillStar key={i} />
                   ))}
@@ -1067,7 +1181,6 @@ export default function JavaCoursePage() {
 
         <FeedbackSection />
 
-        {/* Auto popup reuses same handlers/state */}
         <AutoPopupQuoteForm
           status={status}
           error={error}
