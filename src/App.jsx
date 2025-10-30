@@ -6,10 +6,8 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-
 import Header from "./components/common/header";
 import Footer from "./components/common/Footer";
-
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Reviews from "./pages/Reviews";
@@ -25,14 +23,12 @@ import Internship from "./pages/Internship";
 import Contact from "./pages/contactUs";
 import Clientpage from "./pages/Clientpage";
 import AllCourses from "./pages/AllCourses";
-
 import AdminLogin from "./components/admin/AdminLogin.jsx";
 import ProtectedRoute from "./components/admin/ProtectedRoute.jsx";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import StudentTable from "./components/admin/CourseEnquired";
 import Feedback from "./components/admin/Feedback.jsx";
-
 import Whatsapp from "./components/common/Whatsapp";
 import CourseRouter from "./pages/CourseRouter";
 import NotFound from "./pages/NotFound";
@@ -181,7 +177,10 @@ export default function App() {
 
           {/* Contact */}
           <Route path="/contact-us" element={<Contact />} />
-          <Route path="/contact" element={<Navigate to="/contact-us" replace />} />
+          <Route
+            path="/contact"
+            element={<Navigate to="/contact-us" replace />}
+          />
 
           <Route path="/client" element={<Clientpage />} />
 
@@ -189,7 +188,11 @@ export default function App() {
           <Route path="/all-courses" element={<AllCourses />} />
           <Route path="/all-courses/:slug" element={<CourseRouter />} />
           {LEGACY_COURSE_ALIASES.map(([from, to]) => (
-            <Route key={from} path={from} element={<Navigate to={to} replace />} />
+            <Route
+              key={from}
+              path={from}
+              element={<Navigate to={to} replace />}
+            />
           ))}
 
           {/* Public login */}
