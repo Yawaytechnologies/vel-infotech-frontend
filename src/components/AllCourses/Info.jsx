@@ -1,6 +1,6 @@
+// src/components/AllCourses/Info.jsx
 import React from "react";
-// eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import Logo from "../../assets/infotech.svg";
 import {
   FaThumbsUp,
@@ -19,8 +19,10 @@ export default function Info() {
     <section
       id="why-vel-info"
       aria-labelledby="why-vel-info__heading"
-      className="py-16 px-4 bg-gradient-to-br from-[#f5f8ff] to-[#ffffff] relative overflow-hidden"
+      className="py-16 px-4 relative overflow-hidden"
+      /* Pure white base + very subtle dots */
       style={{
+        backgroundColor: "#ffffff",
         backgroundImage: `
           radial-gradient(circle at 10% 10%, rgba(0, 91, 172, 0.05) 10%, transparent 11%),
           radial-gradient(circle at 90% 90%, rgba(0, 91, 172, 0.05) 10%, transparent 11%)
@@ -85,7 +87,7 @@ export default function Info() {
         </div>
       </div>
 
-      {/* CTA Button */}
+      {/* CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -114,7 +116,6 @@ const Feature = ({ icon, text, delay = 0 }) => (
     <div className="text-[#1a2650] text-xl flex-shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:text-[#005BAC]">
       {icon}
     </div>
-    {/* Paragraph only (no extra heading) to avoid noisy H3s */}
     <p className="text-base text-gray-800 leading-snug">{text}</p>
   </motion.div>
 );

@@ -36,10 +36,10 @@ const About = () => {
             <div className="flex-1 ml-6">
               {/* ✅ Single page H1 */}
               <h1 id="about-hero__heading" className="text-5xl font-bold mb-6 font-heading">
-                Welcome to Vel InfoTech
+                Welcome to Vell InfoTech
               </h1>
               <p className="text-lg sm:text-xl mb-8 max-w-2xl">
-                Founded with a vision to bridge the gap between ambition and achievement, Vel InfoTech equips individuals with the skills and confidence to succeed.
+                Founded with a vision to bridge the gap between ambition and achievement, Vell InfoTech equips individuals with the skills and confidence to succeed.
               </p>
             </div>
           </div>
@@ -198,7 +198,7 @@ const About = () => {
             What Our Students Say
           </h2>
           <p className="text-lg text-gray-600 mb-12">
-            We measure our impact by the career breakthroughs our learners achieve. Here’s how Vel InfoTech has helped them grow.
+            We measure our impact by the career breakthroughs our learners achieve. Here’s how Vell InfoTech has helped them grow.
           </p>
 
           <div className="flex flex-wrap justify-center gap-12">
@@ -277,7 +277,7 @@ const About = () => {
           {/* ✅ Section H2 */}
           <h2 id="core-values__heading" className="text-4xl font-bold text-[#002b66] mb-6 tracking-tight">Our Core Values</h2>
           <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
-            At Vel InfoTech, our values drive our mission and shape the way we work and grow together.
+            At Vell InfoTech, our values drive our mission and shape the way we work and grow together.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -320,10 +320,10 @@ const About = () => {
         </p>
         <div className="space-y-4">
           <a
-            href="mailto:info@velinfotech.com"
+            href="mailto:vellinfotech10@gmail.com"
             className="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-full shadow-md hover:bg-gray-100 transition"
           >
-            info@velinfotech.com
+            vellinfotech10@gmail.com
           </a>
           <br />
           <a

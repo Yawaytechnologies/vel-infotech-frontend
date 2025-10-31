@@ -136,7 +136,7 @@ const PlacedStudents = () => {
           <article className="bg-white shadow-md rounded-lg p-6 border border-blue-400">
             {/* H2 at section level is fine; these are sibling subsections */}
             <h2 className="text-2xl font-bold text-gray-800 mb-2 border-b-2 border-gray-400 inline-block">
-              List of Students Placed from Vel InfoTech
+              List of Students Placed from Vell InfoTech
             </h2>
             <p className="text-gray-600 mt-5 leading-relaxed">
               Our learners are successfully placed in leading IT and non-IT companies across various domains such as Development, Testing, Cloud, and Analytics.

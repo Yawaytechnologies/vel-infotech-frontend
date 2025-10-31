@@ -1,3 +1,4 @@
+// src/pages/components/home/AboutSection.jsx  (adjust path to where you keep it)
 import React, { useState } from "react";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -167,14 +168,22 @@ export default function AboutSection() {
 
   return (
     <>
-      <ToastContainer newestOnTop position="top-center" autoClose={2200} closeOnClick={false} pauseOnHover={true} />
+      <ToastContainer
+        newestOnTop
+        position="top-center"
+        autoClose={2200}
+        closeOnClick={false}
+        pauseOnHover
+      />
 
+      {/* ---- HARD white (with subtle dots) that cannot be overridden ---- */}
       <section
         id="about"
         aria-labelledby="about__heading"
-        className="relative py-16 px-4 md:px-8 lg:px-0 bg-white overflow-hidden"
+        className="relative isolate overflow-hidden py-16 px-4 md:px-8 lg:px-0"
         style={{
-          background: `
+          backgroundColor: "#ffffff",
+          backgroundImage: `
             radial-gradient(circle, #e0e7ef 2.5px, transparent 2.5px),
             radial-gradient(circle, #e0e7ef 2.5px, transparent 2.5px)
           `,
@@ -182,38 +191,59 @@ export default function AboutSection() {
           backgroundPosition: "0 0, 20px 20px",
         }}
       >
+        {/* neutralize any global ::before/::after that might be attached to #about */}
+        <style>{`
+          #about::before, #about::after {
+            background: none !important;
+            content: none !important;
+          }
+        `}</style>
+
         {/* ✅ Single page H1 lives here */}
-        <h1 id="about__heading" className="text-[2.2rem] md:text-[1.8rem] font-black text-[#171717] mb-3 text-center leading-tight">
-          Vel InfoTech <span className="text-[#171717]">— India’s No.1 IT Training Institute</span>
+        <h1
+          id="about__heading"
+          className="text-[2.2rem] md:text-[1.8rem] font-black text-[#171717] mb-3 text-center leading-tight"
+        >
+          Vell InfoTech <span className="text-[#171717]">— India’s No.1 IT Training Institute</span>
         </h1>
 
         <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row gap-12 items-stretch z-10">
           {/* LEFT */}
           <div className="flex-1 flex flex-col justify-center pl-0 md:pl-2 lg:pl-8">
             <p className="text-gray-700 text-xl mb-7 leading-relaxed">
-              <span className="font-semibold text-[#005BAC]">Elevate your career with curated training,</span> built by
-              650+ industry experts for real-world success. Join thousands of professionals accelerating their future.
+              <span className="font-semibold text-[#005BAC]">
+                Elevate your career with curated training,
+              </span>{" "}
+              built by 650+ industry experts for real-world success. Join thousands of professionals
+              accelerating their future.
             </p>
+
             <div className="bg-white border border-[#a7f3d0]/30 shadow-lg rounded-2xl p-6 mb-5">
               {/* H3 inside the card */}
-              <h3 className="text-lg font-bold text-[#005BAC] mb-2 tracking-wide">About Vel InfoTech</h3>
+              <h3 className="text-lg font-bold text-[#005BAC] mb-2 tracking-wide">
+                About Vell InfoTech
+              </h3>
               <ul className="text-gray-800 text-base space-y-2 mb-3 list-disc list-inside">
                 <li>
-                  <span className="font-bold">Industry Leader:</span> Recognized as a high-impact IT education brand.
+                  <span className="font-bold">Industry Leader:</span> Recognized as a high-impact
+                  IT education brand.
                 </li>
                 <li>
-                  <span className="font-bold">Expert-Led:</span> 650+ world-class trainers & real project mentorship.
+                  <span className="font-bold">Expert-Led:</span> 650+ world-class trainers & real
+                  project mentorship.
                 </li>
                 <li>
-                  <span className="font-bold">Tailored Pathways:</span> Flexible for students, graduates, and working pros.
+                  <span className="font-bold">Tailored Pathways:</span> Flexible for students,
+                  graduates, and working pros.
                 </li>
                 <li>
-                  <span className="font-bold">Proven Outcomes:</span> 10,000+ students placed with top IT MNCs.
+                  <span className="font-bold">Proven Outcomes:</span> 10,000+ students placed with
+                  top IT MNCs.
                 </li>
               </ul>
               <div className="text-gray-600 text-sm mt-2">
-                <span className="font-semibold">Benefits:</span> Faster onboarding, productivity gains, cost-effective
-                upskilling, and global recognition.
+                <span className="font-semibold">Benefits:</span> Faster onboarding, productivity
+                gains, cost-effective upskilling, and global recognition.
               </div>
             </div>
 
@@ -241,9 +271,11 @@ export default function AboutSection() {
                   type="button"
                   onClick={() => setMode("class_room")}
                   className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-sm font-medium shadow
-                    ${mode === "class_room"
-                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                      : "bg-white/60 text-black border border-[#a7f3d0]/40"} transition-all duration-200`}
+                    ${
+                      mode === "class_room"
+                        ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                        : "bg-white/60 text-black border border-[#a7f3d0]/40"
+                    } transition-all duration-200`}
                   aria-pressed={mode === "class_room"}
                 >
                   <FaChalkboardTeacher className="text-base" /> Class Room
@@ -252,9 +284,11 @@ export default function AboutSection() {
                   type="button"
                   onClick={() => setMode("online")}
                   className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-sm font-medium shadow
-                    ${mode === "online"
-                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                      : "bg-white/60 text-black border border-[#a7f3d0]/40"} transition-all duration-200`}
+                    ${
+                      mode === "online"
+                        ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                        : "bg-white/60 text-black border border-[#a7f3d0]/40"
+                    } transition-all duration-200`}
                   aria-pressed={mode === "online"}
                 >
                   <FaLaptop className="text-base" /> Online
@@ -262,12 +296,7 @@ export default function AboutSection() {
               </div>
 
               {/* Form */}
-              <form
-                id="enquiry-form"
-                onSubmit={handleSubmit}
-                noValidate
-                className="grid grid-cols-1 gap-2"
-              >
+              <form id="enquiry-form" onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-2">
                 <div>
                   <input
                     type="text"

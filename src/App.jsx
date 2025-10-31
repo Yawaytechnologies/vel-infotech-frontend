@@ -24,7 +24,7 @@ import Internship from "./pages/Internship";
 import Contact from "./pages/contactUs";
 import Clientpage from "./pages/Clientpage";
 import AllCourses from "./pages/AllCourses";
-
+import Privacy from "./pages/Privacy";
 import AdminLogin from "./components/admin/AdminLogin.jsx";
 import ProtectedRoute from "./components/admin/ProtectedRoute.jsx";
 import AdminLayout from "./components/admin/AdminLayout";
@@ -152,6 +152,7 @@ export default function App() {
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
           <Route path="/internship" element={<Internship />} />
+          <Route path="/privacy" element={<Privacy />} />
 
           {/* Contact */}
           <Route path="/contact-us" element={<Contact />} />
@@ -188,4 +189,3 @@ export default function App() {
     </Router>
   );
 }
-  

@@ -174,7 +174,7 @@ const Internship = () => {
             Best Online Internship Training in Chennai &amp; Bangalore
           </h2>
           <p className="text-gray-700 mb-4">
-            At Vel InfoTech, our internship programs are designed to bridge the gap between academic
+            At Vell InfoTech, our internship programs are designed to bridge the gap between academic
             learning and real-world application. You’ll gain first-hand exposure to how the IT industry
             works, contribute to live projects, and build a portfolio that sets you apart.
           </p>

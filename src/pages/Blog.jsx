@@ -75,7 +75,7 @@ export default function Blog() {
             </motion.h1>
 
             <p className="text-lg text-white/90 mb-6">
-              Fresh research, practical tips, and success stories from Vel
+              Fresh research, practical tips, and success stories from Vell
               InfoTech—curated for learners, career switchers, and hiring teams.
             </p>
 
@@ -216,7 +216,7 @@ export default function Blog() {
           <a
             href="#"
             className="bg-green-700 text-white px-6 py-3 rounded-xl font-semibold shadow hover:opacity-90 transition"
-            aria-label="Subscribe to the Vel InfoTech newsletter"
+            aria-label="Subscribe to the Vell InfoTech newsletter"
           >
             Subscribe Free
           </a>
