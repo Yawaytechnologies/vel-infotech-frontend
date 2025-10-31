@@ -40,7 +40,7 @@ export default function Review() {
           const demoReviews = generateDemoReviews();
           setMasterReviews(demoReviews);
           setGoogleMeta({
-            name: "Vel InfoTech",
+            name: "Vell InfoTech",
             rating: 4.8,
             total: 124,
             url: "https://g.page/r/",
@@ -134,7 +134,7 @@ export default function Review() {
           "Excellent training program! The instructors are very knowledgeable and the hands-on projects really helped me understand real-world applications.",
         detail:
           "Excellent training program! The instructors are very knowledgeable and the hands-on projects really helped me understand real-world applications. Got placed in a great company within 2 months of completion.",
-        center: "Vel InfoTech",
+        center: "Vell InfoTech",
         tags: ["placement", "projects"],
       },
       {
@@ -145,7 +145,7 @@ export default function Review() {
           "Best institute for Java training in Chennai. The course content is updated and industry-relevant.",
         detail:
           "Best institute for Java training in Chennai. The course content is updated and industry-relevant. Mock interviews were very helpful for placement preparation.",
-        center: "Vel InfoTech",
+        center: "Vell InfoTech",
         tags: ["java", "interview prep"],
       },
       {
@@ -156,7 +156,7 @@ export default function Review() {
           "Good learning experience with practical approach. Trainers are experienced professionals.",
         detail:
           "Good learning experience with practical approach. Trainers are experienced professionals. Would recommend for anyone wanting to learn Python.",
-        center: "Vel InfoTech",
+        center: "Vell InfoTech",
         tags: ["python", "practical"],
       },
       {
@@ -167,7 +167,7 @@ export default function Review() {
           "Amazing course structure! Learned AWS, Docker, Kubernetes hands-on. Placement support was excellent.",
         detail:
           "Amazing course structure! Learned AWS, Docker, Kubernetes hands-on. Placement support was excellent. Currently working as DevOps Engineer.",
-        center: "Vel InfoTech",
+        center: "Vell InfoTech",
         tags: ["devops", "cloud", "placement"],
       },
       {
@@ -178,7 +178,7 @@ export default function Review() {
           "Comprehensive MERN stack training with real projects. Got multiple interview calls after completion.",
         detail:
           "Comprehensive MERN stack training with real projects. Got multiple interview calls after completion. The trainers guide you at every step.",
-        center: "Vel InfoTech",
+        center: "Vell InfoTech",
         tags: ["mern", "projects"],
       },
       {
@@ -189,7 +189,7 @@ export default function Review() {
           "Very detailed course on testing frameworks. Learned Selenium, TestNG, and automation thoroughly.",
         detail:
           "Very detailed course on testing frameworks. Learned Selenium, TestNG, and automation thoroughly. Great practical sessions.",
-        center: "Vel InfoTech",
+        center: "Vell InfoTech",
         tags: ["testing", "automation"],
       },
       {
@@ -200,7 +200,7 @@ export default function Review() {
           "Fantastic learning environment! Instructors are patient and knowledgeable. Highly recommended.",
         detail:
           "Fantastic learning environment! Instructors are patient and knowledgeable. Highly recommended for beginners and professionals alike.",
-        center: "Vel InfoTech",
+        center: "Vell InfoTech",
         tags: ["python", "beginner-friendly"],
       },
       {
@@ -211,7 +211,7 @@ export default function Review() {
           "Excellent cloud training with AWS and Azure certifications. Placement assistance was top-notch.",
         detail:
           "Excellent cloud training with AWS and Azure certifications. Placement assistance was top-notch. Got placed as Cloud Engineer within a month.",
-        center: "Vel InfoTech",
+        center: "Vell InfoTech",
         tags: ["cloud", "certification"],
       },
     ];
@@ -499,7 +499,7 @@ function Hero({ trendingCourses, overallRating, ratingHistogram, googleMeta }) {
 
             <p className="text-lg text-blue-100 max-w-2xl leading-relaxed mb-8">
               Real experiences from learners who transformed their careers with
-              Vel InfoTech. Read authentic reviews and join our thriving
+              Vell InfoTech. Read authentic reviews and join our thriving
               community.
             </p>
 

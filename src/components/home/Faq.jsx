@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
 const faqs = [
-  { question: "We Readily Embrace Newness", answer: <>Technology evolves relentlessly—and faster than ever. To stay ahead, learn with Vel Infotech. We offer classroom and live-online programs in AWS, Python, Data Science, AI, Machine Learning, Hadoop, DevOps, Angular, Java, Oracle, SAS, and more. Our syllabus tracks current industry needs so you become job-ready without spending years in a traditional tech school.</> },
-  { question: "We cater to your learning needs, irrespective of your location", answer: <>Vel Infotech provides flexible online options for students and working professionals worldwide. Wherever you are, high-quality training reaches you.</> },
+  { question: "We Readily Embrace Newness", answer: <>Technology evolves relentlessly—and faster than ever. To stay ahead, learn with Vell Infotech. We offer classroom and live-online programs in AWS, Python, Data Science, AI, Machine Learning, Hadoop, DevOps, Angular, Java, Oracle, SAS, and more. Our syllabus tracks current industry needs so you become job-ready without spending years in a traditional tech school.</> },
+  { question: "We cater to your learning needs, irrespective of your location", answer: <>Vell Infotech provides flexible online options for students and working professionals worldwide. Wherever you are, high-quality training reaches you.</> },
   { question: "You receive training from a great faculty", answer: <>Our trainers are seasoned professionals and subject-matter experts who love teaching and mentoring.</> },
   { question: "What kind of learning experience will I get?", answer: <>Enroll to experience cross-disciplinary, project-driven learning with real-world use cases and mentor feedback.</> },
   { question: "Study on your own schedule", answer: <>Learn at your pace with self-study resources and attend live sessions when it suits you. Access materials anytime.</> },
   { question: "Who can benefit?", answer: <>Students, recent graduates, career changers, and working professionals can all gain from our industry-aligned courses.</> },
-  { question: "Why Vel Infotech?", answer: <>We combine a market-driven curriculum, experienced mentors, and hands-on projects to help you advance your IT career.</> },
+  { question: "Why Vell Infotech?", answer: <>We combine a market-driven curriculum, experienced mentors, and hands-on projects to help you advance your IT career.</> },
 ];
 
 export default function FAQSection() {

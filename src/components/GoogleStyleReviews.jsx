@@ -134,7 +134,7 @@ function parseDate(d) {
 
 export default function GoogleStyleReviews({
   title = "What Our Students Say",
-  orgName = "Vel InfoTech",
+  orgName = "Vell InfoTech",
   overallRating = 4.8,
   total = 1543,
   histogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 },
