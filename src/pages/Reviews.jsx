@@ -348,7 +348,7 @@ export default function Review() {
 }
 
 /* ===================== HERO SECTION ===================== */
-function Hero({ masterReviews, trendingCourses, overallRating, ratingHistogram, googleMeta }) {
+function Hero({ trendingCourses, overallRating, ratingHistogram, googleMeta }) {
   return (
     <section className="relative pt-32 pb-20 overflow-hidden">
       {/* Gradient Background */}
