@@ -610,7 +610,7 @@ function Field({ label, required, children }) {
   );
 }
 
-function Row({ icon: Icon, label, value, href, external }) {
+function Row({ label, value, href, external }) {
   const inner = (
     <>
       <span className="flex-shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-xl text-white
