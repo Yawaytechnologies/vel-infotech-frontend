@@ -8,8 +8,6 @@ import {
 } from "react-icons/fa";
 import Logo1 from "../../assets/LL.png";
 
-
-
 export default function Footer() {
   return (
     <footer className="relative bg-[#e9f1fb] text-black-200 pt-10 pb-3 border-t-4 border-[#005BAC]">
@@ -51,6 +49,7 @@ export default function Footer() {
               </a>
             </div>
           </div>
+
           {/* Quick Links */}
           <div>
             <h3 className="text-black font-bold text-lg mb-3 underline">
@@ -196,6 +195,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+
           {/* Company */}
           <div>
             <h3 className="text-black font-bold text-lg mb-3 underline">
@@ -268,6 +268,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+
           {/* Contact */}
           <div>
             <h3 className="text-black font-bold text-lg mb-3 underline">
@@ -276,27 +277,23 @@ export default function Footer() {
             <ul className="text-sm space-y-2 font-bold ">
               <li>
                 <span className="block text-black-400">
-                  Vel Infotech Private Limited 
-                  
-                 
+                  Vell Infotech Private Limited 
                 </span>
-                
                 <span>
-                   Software training & Placement
+                  {" "}Software training & Placement
                 </span>
                 <br/>
-                
                 <span className="block text-black-400">
                   4/38, 2nd Main Rd, Kalaimagal Nagar, Ekkatuthangal, Chennai,
-                  Tamil Nadu 600032 9600593838
+                  Tamil Nadu 600032 
                 </span>
               </li>
-              <li>
+              <li>  
                 <a
-                  href="mailto:info@velinfotech.com"
+                  href="vellinfotech10@gmail.com"
                   className="hover:text-[#005BAC] transition "
                 >
-                  contact.velinfo@gmail.com
+                  vellinfotech10@gmail.com
                 </a>
               </li>
               <li>
@@ -310,14 +307,21 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between mt-6 text-xs text-black-400">
           <span>
             &copy; {new Date().getFullYear()} Vel Infotech. All rights reserved.
           </span>
-          <span className="mt-2 md:mt-0">
-            Designed & Developed by Yaway Technologies
-          </span>
+
+          {/* Added Privacy Policy here */}
+          <div className="mt-2 md:mt-0 flex items-center gap-3">
+            <a href="/privacy" className="hover:text-[#005BAC] transition">
+              Privacy Policy
+            </a>
+            <span className="hidden md:inline-block">|</span>
+            <span>Designed & Developed by Yaway Technologies</span>
+          </div>
         </div>
       </div>
     </footer>

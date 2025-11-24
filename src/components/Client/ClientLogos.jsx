@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
 /** ---- Vell palette ---- */
 const BRAND = {
@@ -125,12 +125,14 @@ export default function HiringPartners() {
           }}
         >
           <span className="inline-block h-2 w-2 rounded-full" style={{ background: BRAND.accent }} />
-           Hiring Partners
+          Hiring Partners
         </span>
 
+        {/* Section H2 */}
         <h2 id="partners-heading" className="mt-4 text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl">
           Our Hiring Partners
         </h2>
+
         <p className="mx-auto mt-3 max-w-3xl text-slate-700">
           We offer lifelong <strong style={{ color: BRAND.primary }}>Placement Support</strong> and tailored interview prep—until you get placed.
         </p>
@@ -139,7 +141,7 @@ export default function HiringPartners() {
       {/* Blue tab bar */}
       <div className="mb-6 rounded-2xl px-3 py-3" style={{ background: BRAND.primary }}>
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter partners">
             {TABS.map((t) => (
               <button
                 key={t.key}
@@ -188,28 +190,28 @@ export default function HiringPartners() {
       <div className="mt-12 rounded-3xl p-1" style={{ background: `linear-gradient(90deg, ${BRAND.primaryDark}, ${BRAND.primary})` }}>
         <div className="flex flex-col items-start justify-between gap-4 rounded-[calc(1.5rem-4px)] bg-white p-6 sm:flex-row sm:items-center">
           <div>
+            {/* Subsection H3 */}
             <h3 className="text-xl font-bold text-slate-900">Recruiters: Hire pre-vetted, job-ready talent</h3>
             <p className="mt-1 text-slate-600">Tailored shortlists, mock-interviewed candidates, quick onboarding.</p>
           </div>
-         <div className="flex gap-3">
-  {/* Jump to Home → Get a Free Training Quote */}
-  <Link
-    to="/contact-us"
-    className="rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
-    style={{ background: BRAND.primary }}
-  >
-    Partner with us
-  </Link>
 
-  <a
-    href="/placed-students"
-    className="rounded-xl border px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-    style={{ borderColor: "#DDE6F6" }}
-  >
-    View placement stats
-  </a>
-</div>
+          <div className="flex gap-3">
+            <Link
+              to="/contact-us"
+              className="rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+              style={{ background: BRAND.primary }}
+            >
+              Partner with us
+            </Link>
 
+            <a
+              href="/placed-students"
+              className="rounded-xl border px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              style={{ borderColor: "#DDE6F6" }}
+            >
+              View placement stats
+            </a>
+          </div>
         </div>
       </div>
 

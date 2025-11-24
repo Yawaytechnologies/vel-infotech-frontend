@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { FaLaptop, FaChalkboardTeacher,FaUserGraduate } from "react-icons/fa";
+import { FaLaptop, FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
@@ -11,10 +11,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { submitEnquiry } from "../../redux/actions/enquiryAction";
 import FeedbackSection from "../common/Feedback";
 import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
-// ✅ SEO (no design change)
 import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
 
-const HEADER_OFFSET = 110; // adjust to your sticky header height
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+  },
+];
+
+const HEADER_OFFSET = 110;
 
 export default function JavaCoursePage() {
   const [mode, setMode] = useState("class_room");
@@ -23,25 +48,25 @@ export default function JavaCoursePage() {
   const dispatch = useDispatch();
   const { status, error } = useSelector((s) => s.enquiry || {});
   const syllabusRef = useRef(null);
+  const formRef = useRef(null);
 
-  /* ===========================
-     FORM STATE + VALIDATION
-     =========================== */
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-
     course: "",
     message: "",
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
 
-  // Smooth scroll target
-  const formRef = useRef(null);
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
-  // Toast options
   const toastOpts = {
     position: "top-center",
     transition: Slide,
@@ -54,9 +79,6 @@ export default function JavaCoursePage() {
     theme: "colored",
   };
 
-  
-
-  // helpers
   const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
   const onlyLettersSpaces = (s) =>
     s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
@@ -79,7 +101,6 @@ export default function JavaCoursePage() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -103,7 +124,6 @@ export default function JavaCoursePage() {
       v = value.length ? value[0].toUpperCase() + value.slice(1) : value;
       v = v.slice(0, 300);
     }
-
     setForm((prev) => ({ ...prev, [name]: v }));
 
     const msg = validateField(name, v);
@@ -130,17 +150,14 @@ export default function JavaCoursePage() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // touch all
     setTouched({
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
 
-    // validate all
     const fields = ["name", "email", "phone", "course", "message"];
     const next = {};
     fields.forEach((f) => {
@@ -161,15 +178,13 @@ export default function JavaCoursePage() {
       return;
     }
 
-    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
     const payload = {
-      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      mode: (mode || "class_room").toUpperCase(),
       name: form.name.trim(),
       email: form.email.trim(),
-      mobile: form.phone.trim(), // API key is 'mobile'
+      mobile: form.phone.trim(),
       course: form.course.trim(),
       message: form.message.trim(),
-      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
     try {
@@ -181,16 +196,13 @@ export default function JavaCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -202,17 +214,17 @@ export default function JavaCoursePage() {
     }
   }
 
-  // ✅ SEO: JSON-LD (updates if mode changes)
+  // SEO JSON-LD
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
     name: "Java Full Stack Developer Course",
     description:
-      "Hands-on Java Full Stack training with Core/Advanced Java, Spring Boot, REST APIs, MySQL, React.js, projects, interview prep and placement assistance.",
+      "Master frontend & backend development with Java, Spring Boot, React, and MySQL. Build real-world projects and become a full stack developer.",
     provider: {
       "@type": "Organization",
       name: "Vel InfoTech",
-      sameAs: "https://YOUR_DOMAIN.com",
+      url: "https://www.vellinfotech.com/all-courses/java-full-stack-developer-course",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
@@ -226,42 +238,60 @@ export default function JavaCoursePage() {
   };
 
   const courses = [
-  { title: "FullStackDevelopement", image: "https://cdn-icons-png.flaticon.com/512/16990/16990193.png" },
-  { title: "Python", image: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png" },
-  { title: "SoftwareTesting", image: "https://cdn.simpleicons.org/cypress" },
-  { title: "SeleniumTesting", image: "https://cdn.simpleicons.org/selenium/43B02A" },
+    {
+      title: "FullStackDevelopement",
+      image: "https://cdn-icons-png.flaticon.com/512/16990/16990193.png",
+    },
+    {
+      title: "Python",
+      image: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+    },
+    { title: "SoftwareTesting", image: "https://cdn.simpleicons.org/cypress" },
+    {
+      title: "SeleniumTesting",
+      image: "https://cdn.simpleicons.org/selenium/43B02A",
+    },
   ];
 
   return (
     <>
-      {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Java Full Stack Developer Course in Chennai & Bangalore — 100% Placement | Vel InfoTech"
-        description="Master Java, Spring Boot, REST APIs, MySQL & React with real projects and placement assistance. Flexible online/classroom Java full stack training in Chennai & Bangalore."
-        canonical="/all-courses/javafullStackDevelopment"
+        title="Java Full Stack Developer Course"
+        description="Master frontend & backend development with Java, Spring Boot, React, and MySQL. Build real-world projects and become a full stack developer."
+        canonical="/all-courses/java-full-stack-developer-course"
         image="/images/courses/java-og.jpg"
         type="article"
         jsonLd={courseJsonLd}
       />
 
-      <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
+      {/* HERO */}
+      <section
+        className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20"
+        aria-labelledby="course-title"
+      >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-          {/* LEFT: Content */}
+          {/* LEFT */}
           <div className="flex-1">
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Join Our 100% Job Guaranteed <br />
-              <span className="text-yellow-400">
-                Java Full Stack Developer Course
-              </span>
+            {/* Marketing line (not a heading) */}
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
+
+            {/* H1 — Primary keyword */}
+            <h1
+              id="course-title"
+              className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400"
+            >
+              Java Full Stack Developer Course
             </h1>
 
             <ul className="space-y-3 mt-6 text-lg">
               <li>
                 ✅ Join the <strong>Best Java Training Institute</strong> to
-                master Core & Advanced Java.
+                master Core &amp; Advanced Java.
               </li>
               <li>
-                ✅ Learn Java Full Stack –{" "}
+                ✅ Learn Java Full Stack —{" "}
                 <strong>Spring Boot, Hibernate, React, Node.js</strong>.
               </li>
               <li>
@@ -269,7 +299,7 @@ export default function JavaCoursePage() {
                 <strong>coding experience</strong>.
               </li>
               <li>
-                ✅ Choose <strong>flexible learning modes</strong> – Weekday /
+                ✅ Choose <strong>flexible learning modes</strong> — Weekday /
                 Weekend / Fast-track.
               </li>
               <li>
@@ -277,85 +307,39 @@ export default function JavaCoursePage() {
                 <strong>Java Developer Certification</strong>.
               </li>
               <li>
-                ✅ Career support: Resume building, mock interviews & job
-                referrals.
-              </li>
-              <li>
-                ✅ Join the <strong>Best Java Training Institute</strong> to
-                master Core & Advanced Java.
-              </li>
-              <li>
-                ✅ Learn Java Full Stack –{" "}
-                <strong>Spring Boot, Hibernate, React, Node.js</strong>.
-              </li>
-              <li>
-                ✅ Build real-world projects with hands-on{" "}
-                <strong>coding experience</strong>.
-              </li>
-              <li>
-                ✅ Choose <strong>flexible learning modes</strong> – Weekday /
-                Weekend / Fast-track.
-              </li>
-              <li>
-                ✅ Earn an industry-accepted{" "}
-                <strong>Java Developer Certification</strong>.
-              </li>
-              <li>
-                ✅ Career support: Resume building, mock interviews & job
+                ✅ Career support: Resume building, mock interviews &amp; job
                 referrals.
               </li>
             </ul>
-
-            <button
-              className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
-                  mt-8
-                  before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
-                  after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
-                  hover:decoration-2 hover:text-rose-300
-                  duration-500 hover:duration-500 before:duration-500 after:duration-500
-                  group-hover:before:duration-500 group-hover:after:duration-500
-                  hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
-            >
-              <div>
-                <span className="text-lg font-extrabold text-violet-400 block">
-                  Freshers Salary:
-                </span>
-                ₹3 LPA to ₹8 LPA <br />
-                <span className="text-sm text-gray-300">
-                  | Duration: 3 Months
-                </span>
-              </div>
-            </button>
           </div>
 
-          {/* RIGHT: Call to Action */}
+          {/* RIGHT: CTA card */}
           <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
+            {/* H3 — secondary message inside hero */}
+            <h3 className="text-2xl font-bold mb-4">Want an IT Job?</h3>
             <p className="mb-4 text-lg">
-              Master <strong>Java Full Stack Development</strong> in just 3 months with 
-              <strong> hands-on coding, real-world projects, and 100% placement assistance </strong> 
-               from Vel InfoTech.
+              Master <strong>Java Full Stack Development</strong> in just 3
+              months with
+              <strong>
+                {" "}
+                hands-on coding, real-world projects, and 100% placement
+                assistance
+              </strong>{" "}
+              from Vel InfoTech.
             </p>
 
             <button
               type="button"
               onClick={() => {
-                const formSection = document.getElementById("enquiry-form");
-                if (formSection) {
-                  formSection.scrollIntoView({ behavior: "smooth" });
-                }
+                const el = document.getElementById("enquiry-form");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
               className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
             >
-              {/* Expanding background on hover */}
               <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
-
-              {/* Text */}
               <span className="relative z-10 group-hover:text-black transition-colors duration-300">
                 Enquire Now
               </span>
-
-              {/* Icon */}
               <span className="relative z-10">
                 <svg
                   className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
@@ -372,26 +356,29 @@ export default function JavaCoursePage() {
           </div>
         </div>
 
-        {/* Info Bar */}
+        {/* INFO BAR (no heading) */}
         <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
-            Offering <strong>Online and Classroom Java Training</strong> in 
-            <strong> Chennai & Bangalore</strong> — learn from industry-certified trainers.
-          </h3>
+          <p className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Java Training</strong> in
+            <strong> Chennai &amp; Bangalore.</strong>
+          </p>
         </div>
 
-        {/* Course Partners Section */}
-        <section className="py-16 bg-[#002855]">
+        {/* Our Course Partners */}
+        <section
+          className="py-16 bg-[#002855]"
+          aria-labelledby="partners-heading"
+        >
           <div className="max-w-7xl mx-auto px-4">
-            {/* Header */}
-            <div className="text-center mb-10">
-              <h2 className="text-xl font-semibold uppercase tracking-wide text-white">
-                <span className="text-purple-400">●</span> Our Course Partners{" "}
-                <span className="text-purple-400">●</span>
-              </h2>
-            </div>
+            {/* H2 — section heading */}
+            <h2
+              id="partners-heading"
+              className="text-xl font-semibold uppercase tracking-wide text-white text-center mb-10"
+            >
+              <span className="text-purple-400">●</span> Our Course Partners{" "}
+              <span className="text-purple-400">●</span>
+            </h2>
 
-            {/* Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
               {[
                 {
@@ -458,250 +445,262 @@ export default function JavaCoursePage() {
           </div>
         </section>
 
-        {/* JAVA overview */}
-        <section className="px-0 py-16 bg-">
+        {/* Overview */}
+        <section className="px-0 py-16" aria-labelledby="overview-heading">
           <div className="max-w-[100%] mx-auto px-4 md:px-10">
             <div className="bg-[#f7f9fb] rounded-3xl shadow-md p-6 md:p-10">
-              {/* Heading */}
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5">
+              {/* H2 — section heading */}
+              <h2
+                id="overview-heading"
+                className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-5"
+              >
                 Overview of Java Full Stack Course
               </h2>
               <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
-              {/* Description */}
               <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
                 Our Java Full Stack Training equips you with the knowledge and
                 hands-on experience required to become an industry-ready
                 developer. This course covers both frontend and backend
                 development using technologies like Core Java, Spring Boot, REST
-                APIs, MySQL, HTML, CSS, JavaScript, React.js, and more. You’ll
-                also participate in real-world projects, learn deployment
-                techniques, and gain interview preparation support.
+                APIs, MySQL, HTML, CSS, JavaScript, React.js, and more.
               </p>
 
-              {/* What You’ll Learn */}
+              {/* H3 — subsection */}
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
                 What You’ll Learn From Java Full Stack Training
               </h3>
               <ul className="space-y-4 text-gray-800 text-base md:text-lg">
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Get a solid foundation in Core Java concepts including OOPs,
-                  collections, exception handling, and multithreading.
+                  <span className="text-purple-600 mt-1">➤</span> Core Java
+                  (OOP, collections, exceptions, threads).
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Build RESTful APIs using Spring Boot and integrate with MySQL
-                  databases for backend logic and persistence.
+                  <span className="text-purple-600 mt-1">➤</span> Spring Boot
+                  REST APIs + MySQL persistence.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Master frontend development with HTML, CSS, JavaScript, and
-                  React.js to create interactive user interfaces.
+                  <span className="text-purple-600 mt-1">➤</span> Frontend:
+                  HTML, CSS, JS, React.js.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Learn deployment strategies using Git, GitHub, and cloud
-                  platforms like Heroku or Render.
+                  <span className="text-purple-600 mt-1">➤</span> Git/GitHub and
+                  basic cloud deployment.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Participate in capstone projects that simulate real business
-                  challenges to strengthen your job-readiness.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-purple-600 mt-1">➤</span>
-                  Get placement support including resume building, mock
-                  interviews, and technical assessments.
+                  <span className="text-purple-600 mt-1">➤</span> Capstone
+                  projects and interview prep.
                 </li>
               </ul>
             </div>
           </div>
         </section>
-        <div ref={syllabusRef} id="syllabus" className="scroll-mt-[110px]">
+
+        {/* Syllabus (ensure a proper H2 exists even if component doesn’t render one) */}
+        <div
+          ref={syllabusRef}
+          id="syllabus"
+          className="scroll-mt-[110px]"
+          aria-labelledby="syllabus-heading"
+        >
+          <h2 id="syllabus-heading" className="sr-only">
+            Java Full Stack Syllabus
+          </h2>
           <Syllabus
             title={course.title}
             accent={course.accent}
             meta={course.meta}
             preview={course.preview}
-            sections={course.sections} // ← REQUIRED
+            sections={course.sections}
             useExternalForm
-            cardMinH={400} // tweak to visually match your right cards
-            stickyOffset={110}
+            cardMinH={400}
+            stickyOffset={HEADER_OFFSET}
           />
         </div>
 
-        {/* === WHY CHOOSE US === */}
-        <section id="why-choose-us" className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800">
+        {/* Why Choose Us */}
+        <section
+          id="why-choose-us"
+          className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
+          aria-labelledby="why-heading"
+        >
           <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            {/* H2 — section heading */}
+            <h2
+              id="why-heading"
+              className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12"
+            >
               Why Choose Us
             </h2>
 
             <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
+              {/* H3 — items */}
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Expert Trainers</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Expert Trainers
+                </h3>
                 <p className="text-gray-600">
-                  Our mentors have deep industry experience and share practical, hands-on insights.
+                  Our mentors have deep industry experience and share practical,
+                  hands-on insights.
                 </p>
               </div>
-
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Flexible Learning Modes</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Flexible Learning Modes
+                </h3>
                 <p className="text-gray-600">
-                  Learn in-person or online with weekday, weekend, and fast-track options.
+                  Weekday, weekend, and fast-track options in-person or online.
                 </p>
               </div>
-
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Job-Ready Curriculum</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Job-Ready Curriculum
+                </h3>
                 <p className="text-gray-600">
-                  Real projects, labs, and interview prep aligned to what employers expect.
+                  Real projects, labs, and interview prep aligned to employer
+                  needs.
                 </p>
               </div>
-
               <div className="relative">
                 <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">Career Support</h3>
+                <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                  Career Support
+                </h3>
                 <p className="text-gray-600">
-                  Resume building, mock interviews, and placement assistance with hiring partners.
+                  Resume building, mock interviews, and placement assistance.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* === TESTIMONIALS === */}
-        <section id="testimonials" className="py-16 bg-[#fafafa]">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-8">What Our Students Say</h2>
-            <p className="text-lg text-gray-600 mb-12">
-              Our success is measured by our learners’ success.
-            </p>
+        {/* Testimonials */}
+        <GoogleStyleReviews
+          title="What Our Students Say"
+          orgName="Vel InfoTech"
+          overallRating={4.8}
+          total={1543}
+          histogram={reviewHistogram}
+          reviews={reviewsData}
+          viewAllHref="/reviews"
+          writeHref="/contact-us#enquiry-form"
+        />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good place for job seekers. 💯 placement.”</p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Thennarasu S</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">“Good service and trusted organisation.”</p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Benjamin Andrew</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg text-left">
-                <p className="text-gray-700 italic">
-                  “Best consultancy for people who seek jobs. 100% placement guaranteed.”
-                </p>
-                <div className="mt-4">
-                  <p className="font-semibold text-gray-900">Sudha Selvarajan</p>
-                </div>
-              </div>
-            </div>
-
-            {/* optional internal link */}
-            <a href="/reviews" className="inline-block mt-10 text-blue-600 font-semibold hover:underline">
-              View more reviews →
-            </a>
-          </div>
-        </section>
-
-        {/* === FAQ === */}
-        <section id="faq" className="py-16 bg-white">
+        {/* FAQ */}
+        <section
+          id="faq"
+          className="py-16 bg-white"
+          aria-labelledby="faq-heading"
+        >
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            {/* H2 — section heading */}
+            <h2
+              id="faq-heading"
+              className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10"
+            >
               Frequently Asked Questions
             </h2>
 
             <div className="space-y-4">
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Is this course suitable for absolute beginners?
+                  <h3 className="inline text-inherit font-semibold">
+                    Is this course suitable for absolute beginners?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. We start from Core Java basics and gradually move to Spring Boot, REST APIs, and React.
+                  Yes. We start from Core Java basics and gradually move to
+                  Spring Boot, REST APIs, and React.
                 </p>
               </details>
-
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do you provide placement assistance?
+                  <h3 className="inline text-inherit font-semibold">
+                    Do you provide placement assistance?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  We offer resume support, mock interviews, and placement assistance with hiring partners.
+                  We offer resume support, mock interviews, and placement
+                  assistance with hiring partners.
                 </p>
               </details>
-
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  What are the class modes and timings?
+                  <h3 className="inline text-inherit font-semibold">
+                    What are the class modes and timings?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Both online and classroom batches with weekday/weekend/fast-track options.
+                  Both online and classroom batches with
+                  weekday/weekend/fast-track options.
                 </p>
               </details>
-
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Will I build real projects?
+                  <h3 className="inline text-inherit font-semibold">
+                    Will I build real projects?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes. You’ll work on guided labs and a capstone project covering APIs, DB integration, and a React UI.
+                  Yes. You’ll work on guided labs and a capstone project
+                  covering APIs, DB integration, and a React UI.
                 </p>
               </details>
-
               <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
                 <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
-                  Do I get a certificate?
+                  <h3 className="inline text-inherit font-semibold">
+                    Do I get a certificate?
+                  </h3>
                 </summary>
                 <p className="mt-3 text-gray-700">
-                  Yes, a course completion certificate is provided. Project performance is also highlighted.
+                  Yes, a course completion certificate is provided. Project
+                  performance is also highlighted.
                 </p>
               </details>
             </div>
           </div>
         </section>
 
-        {/* ENQUIRY FORM - BELOW, moved right and fixed placeholders */}
-        <section ref={formRef} className="w-full px-6 py-20 bg-[#f6f9ff]">
+        {/* ENQUIRY FORM */}
+        <section
+          ref={formRef}
+          className="w-full px-6 py-20 bg-[#f6f9ff]"
+          aria-labelledby="quote-heading"
+        >
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10">
-            {/* LEFT: Info Boxes */}
+            {/* LEFT boxes */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between gap-4">
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                {/* H3 — subheading */}
+                <h3 className="text-xl font-bold mb-2">
                   Comprehensive Curriculum
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Master Java Full Stack with structured modules covering Core
                   Java, Spring Boot, React, MySQL, and more.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">
+                <h3 className="text-xl font-bold mb-2">
                   Career-Oriented Training
-                </h4>
+                </h3>
                 <p className="text-black/90">
                   Learn from working professionals. Includes mock interviews,
                   resume prep, and job assistance.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">100% Job Guarantee</h4>
+                <h3 className="text-xl font-bold mb-2">100% Job Guarantee</h3>
                 <p className="text-black/90">
                   We assure placement support post training with strong partner
                   network and hiring drives.
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-                <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
+                <h3 className="text-xl font-bold mb-2">Hands-On Projects</h3>
                 <p className="text-black/90">
                   Gain real-world experience with capstone projects and
                   industry-based assignments in every module.
@@ -709,14 +708,17 @@ export default function JavaCoursePage() {
               </div>
             </div>
 
-          {/* RIGHT: Enquiry Form */}
-          <div className="w-full max-w-lg">
-            <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
-              <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
-                Get a Free Training Quote
-              </h3>
+            {/* RIGHT: form card */}
+            <div className="w-full max-w-lg">
+              <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
+                {/* H2 — section heading for the form area */}
+                <h2
+                  id="quote-heading"
+                  className="text-2xl font-bold text-center text-[#003c6a] mb-5"
+                >
+                  Get a Free Training Quote
+                </h2>
 
-                {/* Toggle Buttons */}
                 <div className="flex justify-center gap-3 mb-6">
                   <button
                     onClick={() => setMode("class_room")}
@@ -740,14 +742,12 @@ export default function JavaCoursePage() {
                   </button>
                 </div>
 
-                {/* Form */}
                 <form
                   id="enquiry-form"
                   onSubmit={handleSubmit}
                   noValidate
                   className="grid grid-cols-1 gap-2"
                 >
-                  {/* Name */}
                   <div>
                     <input
                       type="text"
@@ -771,7 +771,6 @@ export default function JavaCoursePage() {
                     </div>
                   </div>
 
-                  {/* Email */}
                   <div>
                     <input
                       type="email"
@@ -795,7 +794,6 @@ export default function JavaCoursePage() {
                     </div>
                   </div>
 
-                  {/* Phone + Batch */}
                   <div>
                     <input
                       type="tel"
@@ -821,7 +819,6 @@ export default function JavaCoursePage() {
                     </div>
                   </div>
 
-                  {/* Course (dropdown select) */}
                   <div>
                     <select
                       name="course"
@@ -864,9 +861,9 @@ export default function JavaCoursePage() {
                         "Scrum Master",
                         "Business Analyst",
                         "Product Management",
-                      ].map((course) => (
-                        <option key={course} value={course}>
-                          {course}
+                      ].map((c) => (
+                        <option key={c} value={c}>
+                          {c}
                         </option>
                       ))}
                     </select>
@@ -905,18 +902,18 @@ export default function JavaCoursePage() {
                     </div>
                   </div>
 
-                  {/* Submit */}
                   <button
                     type="submit"
                     disabled={status === "loading"}
                     className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
-                      status === "loading" ? "opacity-70 cursor-not-allowed" : ""
+                      status === "loading"
+                        ? "opacity-70 cursor-not-allowed"
+                        : ""
                     }`}
                   >
                     {status === "loading" ? "Submitting..." : "Submit"}
                   </button>
 
-                  {/* Optional server error */}
                   {error && (
                     <p className="text-red-600 text-xs mt-1">
                       Submission failed: {String(error)}
@@ -926,65 +923,92 @@ export default function JavaCoursePage() {
               </div>
             </div>
           </div>
-        </section>.
+        </section>
 
-        <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
-              <div className="max-w-7xl mx-auto text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
-                  Popular Courses
-                </h2>
-                <p className="text-gray-700 text-lg">
-                  We present to you the most popular courses recommended by experts.
-                </p>
-              </div>
-        
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                {courses.map((course, index) => (
-                  <Link
-                    to={`/all-courses/${encodeURIComponent(course.title)}`}
-                    key={index}
-                    className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
-                  >
-                    <div className="w-16 h-16 mb-4">
-                      <img
-                        src={course.image}
-                        alt={course.title}
-                        className="w-full h-full object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-        
-                    <h3 className="text-md font-bold text-gray-800 text-center">{course.title}</h3>
-                    <p className="text-sm text-gray-500">Online | Offline</p>
-        
-                    <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
-                      <FaUserGraduate className="text-gray-500" />
-                      <span>{Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+ Learners</span>
-                    </div>
-        
-                    <div className="flex justify-center items-center mt-1 text-yellow-500">
-                      {[...Array(5)].map((_, i) => (
-                        <AiFillStar key={i} />
-                      ))}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
+        {/* Popular Courses */}
+        <section
+          id="popular-courses"
+          className="bg-[#eaf5fd] py-16 px-4"
+          aria-labelledby="popular-heading"
+        >
+          <div className="max-w-7xl mx-auto text-center mb-10">
+            {/* H2 — section heading */}
+            <h2
+              id="popular-heading"
+              className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4"
+            >
+              Popular Courses
+            </h2>
+            <p className="text-gray-700 text-lg">
+              We present to you the most popular courses recommended by experts.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {courses.map((course, index) => (
+              <Link
+                to={`/all-courses/${encodeURIComponent(course.title)}`}
+                key={index}
+                className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
+              >
+                <div className="w-16 h-16 mb-4">
+                  <img
+                    src={course.image}
+                    alt={course.title}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* H3 — card title */}
+                <h3 className="text-md font-bold text-gray-800 text-center">
+                  {course.title}
+                </h3>
+                <p className="text-sm text-gray-500">Online | Offline</p>
+
+                <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
+                  <FaUserGraduate className="text-gray-500" />
+                  <span>
+                    {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                    Learners
+                  </span>
+                </div>
+
+                <div className="flex justify-center items-center mt-1 text-yellow-500">
+                  {[...Array(5)].map((_, i) => (
+                    <AiFillStar key={i} />
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         <FeedbackSection />
+
         <AutoPopupQuoteForm
-  status={status}
-  error={error}
-  mode={mode}
-  setMode={setMode}
-  form={form}
-  errors={errors}
-  touched={touched}
-  handleChange={handleChange}
-  handleBlur={handleBlur}
-  handleSubmit={handleSubmit}
-/>
+          status={status}
+          error={error}
+          mode={mode}
+          setMode={setMode}
+          form={form}
+          errors={errors}
+          touched={touched}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          handleSubmit={handleSubmit}
+        />
       </section>
+
+      {/* Toasts */}
+      <ToastContainer
+        newestOnTop
+        limit={2}
+        className="!z-[9999]"
+        toastClassName={() => "rounded-xl shadow-md"}
+        bodyClassName={() => "text-[15px] font-medium"}
+        theme="colored"
+      />
     </>
   );
 }

@@ -1,4 +1,7 @@
+// src/pages/Home.jsx
 import React from "react";
+import Seo from "../seo/Seo"; // <- make sure this exists (shown in earlier message)
+
 import HeroSection from "../components/home/Hero";
 import WhyChooseUs from "../components/home/Whychooseus";
 import LanguageStack from "../components/home/LanguageStack";
@@ -8,16 +11,24 @@ import FAQSection from "../components/home/Faq";
 
 function Home() {
   return (
-  <div className="bg-white pt-[64px] md:pt-[108px]">
-      <HeroSection />
-      <div id="next-section">
-        <AboutUs />
+    <>
+      <Seo
+        title="Vell Infotech — Best Software Training & Placement Support"
+        description="Vell Infotech provides software training and placement support to help students master tech skills and land high-paying jobs in leading companies."
+        canonical="https://www.vellinfotech.com/"
+      />
+
+      <div className="bg-white pt-[64px] md:pt-[108px]">
+        <HeroSection />
+        <div id="next-section">
+          <AboutUs />
+        </div>
+        <WhyChooseUs />
+        <LanguageStack />
+        <PopularCoursesSection />
+        <FAQSection />
       </div>
-      <WhyChooseUs />
-      <LanguageStack />
-      <PopularCoursesSection />
-      <FAQSection />
-    </div>
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
+// src/components/AllCourses/Info.jsx
 import React from "react";
-// eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import Logo from "../../assets/infotech.svg";
 import {
   FaThumbsUp,
@@ -12,15 +12,17 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-
-
 export default function Info() {
   const navigate = useNavigate();
 
   return (
     <section
-      className="py-16 px-4 bg-gradient-to-br from-[#f5f8ff] to-[#ffffff] relative overflow-hidden"
+      id="why-vel-info"
+      aria-labelledby="why-vel-info__heading"
+      className="py-16 px-4 relative overflow-hidden"
+      /* Pure white base + very subtle dots */
       style={{
+        backgroundColor: "#ffffff",
         backgroundImage: `
           radial-gradient(circle at 10% 10%, rgba(0, 91, 172, 0.05) 10%, transparent 11%),
           radial-gradient(circle at 90% 90%, rgba(0, 91, 172, 0.05) 10%, transparent 11%)
@@ -29,9 +31,10 @@ export default function Info() {
         backgroundRepeat: "repeat",
       }}
     >
-      {/* Heading */}
+      {/* Section heading -> H2 */}
       <div className="max-w-7xl mx-auto text-center mb-10 relative z-10">
         <motion.h2
+          id="why-vel-info__heading"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -53,7 +56,11 @@ export default function Info() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 items-start relative z-10">
         {/* Left Features */}
         <div className="flex flex-col gap-4 pl-4 md:pl-12">
-          <Feature icon={<FaThumbsUp />} text="Award Winner for Best Training Institute by Silicon India." delay={0} />
+          <Feature
+            icon={<FaThumbsUp />}
+            text="Silicon India distinction: an award-winning training institute."
+            delay={0}
+          />
           <Feature icon={<FaUniversity />} text="Jain University Certification" delay={0.1} />
           <Feature icon={<FaHandshake />} text="On-Job Training and 100% Placement Support Program" delay={0.2} />
         </div>
@@ -67,7 +74,7 @@ export default function Info() {
         >
           <img
             src={Logo}
-            alt="Vel InfoTech Logo"
+            alt="Vel InfoTech logo"
             className="w-48 md:w-[220px] max-w-[80%] h-auto object-contain"
           />
         </motion.div>
@@ -80,7 +87,7 @@ export default function Info() {
         </div>
       </div>
 
-      {/* CTA Button */}
+      {/* CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -98,7 +105,6 @@ export default function Info() {
   );
 }
 
-// 🔹 Feature Card Component
 const Feature = ({ icon, text, delay = 0 }) => (
   <motion.div
     initial={{ opacity: 0, y: 15 }}

@@ -14,7 +14,7 @@ import careerImg1 from "../assets/career1.jpg";
 const POSTS = {
   "how-to-switch-career-to-data-analytics": {
     title: "How to Switch Career to Data Analytics: Your Practical Roadmap",
-    author: "Vel InfoTech Team",
+    author: "Vell InfoTech Team",
     date: "JULY 31, 2025",
     categories: ["Career", "Data Analytics"],
     image: careerImg,
@@ -92,7 +92,7 @@ LIMIT 10;`}</pre>
 
   "highest-salary-for-data-analyst-fresher": {
     title: "Which company pays the highest salary for a Data Analyst fresher?",
-    author: "Vel InfoTech Team",
+    author: "Vell InfoTech Team",
     date: "JULY 28, 2025",
     categories: ["Career", "Salaries"],
     image: careerImg1,
