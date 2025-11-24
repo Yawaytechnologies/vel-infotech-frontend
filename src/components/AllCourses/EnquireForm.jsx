@@ -19,15 +19,15 @@ export default function CallAndFormSection() {
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
 
-  // --- NEW: phone + mailto helpers (edit numbers if needed) ---
-  const PHONE_PILL = "+919600593838";     // phone shown in the left "pill"
-  const PHONE_CALL_NOW = "+917667663035"; // phone used by big "Call Us Now" CTA
+  const PHONE_PILL = "+919600593838";
+  const PHONE_CALL_NOW = "+917667663035";
   const EMAIL_TO = "contact.velinfo@gmail.com";
 
   const phoneHref = `tel:${PHONE_PILL}`;
   const callNowHref = `tel:${PHONE_CALL_NOW}`;
 
-  const mailtoHref = `mailto:${EMAIL_TO}` +
+  const mailtoHref =
+    `mailto:${EMAIL_TO}` +
     `?subject=${encodeURIComponent(`Course Enquiry — ${form.course || "Vel InfoTech"}`)}` +
     `&body=${encodeURIComponent(
       `Hi Team,
@@ -43,7 +43,6 @@ Thanks,
 ${form.name || ""}`
     )}`;
 
-  // Helpers
   const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
   const lettersSpaces = (s) => s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
 
@@ -58,7 +57,6 @@ ${form.name || ""}`
     });
   };
 
-  // Validations
   const validateField = (field, value) => {
     const val = (value ?? "").trim();
     switch (field) {
@@ -70,7 +68,7 @@ ${form.name || ""}`
       case "email": {
         if (!val) return "Email is required.";
         const formatOK = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
-        if (!formatOK) return "Email must include letter or also can be with numbers, and allowed symbols before @ ";
+        if (!formatOK) return "Email must be valid (letters/numbers and allowed symbols before @).";
         return null;
       }
       case "phone":
@@ -112,7 +110,6 @@ ${form.name || ""}`
     if (name === "message") setField("message", capFirst(value));
   };
 
-  // Inputs handlers
   const handleName = (e) => setField("name", capFirst(lettersSpaces(e.target.value)));
   const handleEmail = (e) => setField("email", e.target.value);
   const handlePhone = (e) => setField("phone", e.target.value.replace(/\D+/g, "").slice(0, 10));
@@ -122,7 +119,6 @@ ${form.name || ""}`
     setField("message", v.length ? v[0].toUpperCase() + v.slice(1) : v);
   };
 
-  // Toast helpers
   const tBase = {
     position: "top-center",
     autoClose: 2200,
@@ -166,7 +162,6 @@ ${form.name || ""}`
 
     try {
       setSubmitting(true);
-      // await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, mode }) });
       notifySuccess("Thanks! Your enquiry has been recorded.");
       setForm({ name: "", email: "", phone: "", batch: "", course: "", message: "" });
       setErrors({});
@@ -178,7 +173,6 @@ ${form.name || ""}`
     }
   };
 
-  // compact controls
   const control =
     "h-9 rounded-xl bg-background px-3 border text-[12px] font-medium focus:ring-2 focus:ring-[#003c6a] outline-none shadow w-full";
   const ok = "border-[#003c6a]/60";
@@ -189,24 +183,25 @@ ${form.name || ""}`
     <>
       <ToastContainer newestOnTop position="top-center" autoClose={2200} closeOnClick={false} pauseOnHover={true} />
 
-      <section className="w-full py-12 px-4 bg-white">
+      <section id="advisors-contact" aria-labelledby="advisors-contact__heading" className="w-full py-12 px-4 bg-white">
+        <h2 id="advisors-contact__heading" className="sr-only">Talk to a Course Advisor & Get a Free Training Quote</h2>
+
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-start">
           {/* LEFT: Call / Advisor CTA */}
           <div className="relative w-full flex-1 overflow-hidden rounded-3xl p-8 md:p-10 text-white
                 bg-gradient-to-br from-[#005BAC] via-[#0a6cc4] to-[#003c6a] shadow-xl">
-
             <div className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-cyan-300/20 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-white/10 blur-2xl" />
 
-            {/* header */}
+            {/* header -> H2 visual (but global section H2 is sr-only above) */}
             <div className="relative z-10 flex items-start gap-4">
               <div className="h-12 w-12 shrink-0 rounded-2xl bg-white/20 ring-1 ring-white/30 backdrop-blur-sm flex items-center justify-center shadow">
                 <FiPhone className="text-2xl" />
               </div>
               <div>
-                <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">
+                <h3 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">
                   Talk to a <span className="text-cyan-200">Course Advisor</span>
-                </h2>
+                </h3>
                 <p className="mt-2 text-white/90 max-w-xl">
                   Get the right course recommendation and fee details in minutes. We’ll call you back within <span className="font-semibold underline decoration-white/70">24 working hours</span>.
                 </p>
@@ -226,7 +221,7 @@ ${form.name || ""}`
               </div>
             </div>
 
-            {/* contact pills (UPDATED hrefs) */}
+            {/* contact pills */}
             <div className="relative z-10 mt-6 grid sm:grid-cols-2 gap-3">
               <a
                 href={mailtoHref}
@@ -249,7 +244,6 @@ ${form.name || ""}`
               </a>
             </div>
 
-            {/* primary actions (UPDATED href) */}
             <div className="relative z-10 mt-6 flex flex-wrap gap-3">
               <a
                 href={callNowHref}
@@ -276,33 +270,11 @@ ${form.name || ""}`
           {/* RIGHT: Enquiry Form */}
           <div className="flex-1 w-full max-w-lg mx-auto lg:mx-0">
             <div className="relative backdrop-blur-[6px] bg-white/70 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
+              {/* H3 for card heading */}
               <h3 className="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
                 Get a Free Training Quote
               </h3>
 
-              {/* Mode Toggle */}
-              <div className="flex justify-center mb-6 gap-2">
-                <button
-                  onClick={() => setMode("classroom")}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-lg font-semibold shadow transition-all duration-200
-                  ${mode === "classroom"
-                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                      : "bg-white/60 text-black border border-[#a7f3d0]/40"}`}
-                >
-                  <FaChalkboardTeacher className="text-xl" /> Class Room
-                </button>
-                <button
-                  onClick={() => setMode("online")}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-lg font-semibold shadow transition-all duration-200
-                  ${mode === "online"
-                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                      : "bg-white/60 text-black border border-[#a7f3d0]/40"}`}
-                >
-                  <FaLaptop className="text-xl" /> Online
-                </button>
-              </div>
-
-              {/* Enquiry Form */}
               <form className="flex flex-col gap-3" noValidate onSubmit={handleSubmit}>
                 {/* Name */}
                 <div>
@@ -321,7 +293,6 @@ ${form.name || ""}`
                     {touched.name && errors.name ? errors.name : "placeholder"}
                   </div>
                 </div>
-
                 {/* Email */}
                 <div>
                   <input
@@ -340,7 +311,6 @@ ${form.name || ""}`
                     {touched.email && errors.email ? errors.email : "placeholder"}
                   </div>
                 </div>
-
                 {/* Phone + Batch */}
                 <div className="grid grid-cols-2 gap-2 items-start">
                   <div>
@@ -361,7 +331,6 @@ ${form.name || ""}`
                       {touched.phone && errors.phone ? errors.phone : "placeholder"}
                     </div>
                   </div>
-
                   <div>
                     <select
                       name="batch"
@@ -372,9 +341,7 @@ ${form.name || ""}`
                       aria-describedby="err-batch"
                       className={`${control} cursor-pointer pr-7 ${touched.batch && errors.batch ? err : ok}`}
                     >
-                      <option value="" disabled>
-                        How & Where
-                      </option>
+                      <option value="" disabled>How & Where</option>
                       <option>Morning Batch</option>
                       <option>Evening Batch</option>
                       <option>Weekend</option>
@@ -384,7 +351,6 @@ ${form.name || ""}`
                     </div>
                   </div>
                 </div>
-
                 {/* Course */}
                 <div>
                   <input
@@ -402,7 +368,6 @@ ${form.name || ""}`
                     {touched.course && errors.course ? errors.course : "placeholder"}
                   </div>
                 </div>
-
                 {/* Message */}
                 <div>
                   <textarea
@@ -426,7 +391,6 @@ ${form.name || ""}`
                     {touched.message && errors.message ? errors.message : "placeholder"}
                   </div>
                 </div>
-
                 <button
                   type="submit"
                   disabled={submitting}
@@ -434,7 +398,6 @@ ${form.name || ""}`
                 >
                   {submitting ? "Submitting..." : "Submit"}
                 </button>
-
                 <input type="hidden" name="mode" value={mode} />
               </form>
             </div>

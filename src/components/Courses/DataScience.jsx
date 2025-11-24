@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
+import { FaLaptop, FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
+import { AiFillStar } from "react-icons/ai";
+import { Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { ToastContainer, toast, Slide } from "react-toastify";
@@ -9,12 +11,45 @@ import { SYLLABI } from "../coursecomponent/Syllabi";
 import { useDispatch, useSelector } from "react-redux";
 import { submitEnquiry } from "../../redux/actions/enquiryAction";
 import FeedbackSection from "../common/Feedback";
+import AutoPopupQuoteForm from "../../components/AutoPopupQuoteForm";
+import Seo from "../../seo/Seo";
+import GoogleStyleReviews from "../../components/GoogleStyleReviews";
+
+const reviewHistogram = { 5: 76, 4: 18, 3: 4, 2: 1, 1: 1 };
+
+const reviewsData = [
+  {
+    id: "r1",
+    name: "Thennarasu S",
+    rating: 5,
+    date: "2025-09-20",
+    text: "Good place for job seekers. 💯 placement.",
+    hasPhoto: false,
+  },
+  {
+    id: "r2",
+    name: "Benjamin Andrew",
+    rating: 5,
+    date: "2025-09-12",
+    text: "Good service and trusted organisation.",
+    hasPhoto: true,
+  },
+  {
+    id: "r3",
+    name: "Sudha Selvarajan",
+    rating: 5,
+    date: "2025-08-30",
+    text: "Best consultancy for people who seek jobs. 100% placement guaranteed.",
+    hasPhoto: false,
+  },
+];
 
 export default function DataScienceCoursePage() {
   const [mode, setMode] = useState("class_room");
   const course = SYLLABI.datascience;
   const dispatch = useDispatch();
   const { status, error } = useSelector((s) => s.enquiry || {});
+
   /* ===========================
      FORM STATE + VALIDATION
      =========================== */
@@ -22,12 +57,18 @@ export default function DataScienceCoursePage() {
     name: "",
     email: "",
     phone: "",
-   
     course: "",
     message: "",
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [isQuoteOpen, setIsQuoteOpen] = useState(true);
+
+  React.useEffect(() => {
+    if (status === "succeeded" || status === "success") {
+      setIsQuoteOpen(false);
+    }
+  }, [status]);
 
   // Toast defaults
   const toastOpts = {
@@ -64,7 +105,6 @@ export default function DataScienceCoursePage() {
         if (!v) return "Mobile number is required.";
         if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit mobile number.";
         return null;
-      
       case "course":
         if (!v) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
@@ -111,7 +151,7 @@ export default function DataScienceCoursePage() {
     }));
   };
 
- async function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     // touch all
@@ -119,7 +159,6 @@ export default function DataScienceCoursePage() {
       name: true,
       email: true,
       phone: true,
-
       course: true,
       message: true,
     });
@@ -145,15 +184,14 @@ export default function DataScienceCoursePage() {
       return;
     }
 
-    // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
+    // Map to API payload
     const payload = {
-      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
+      mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "OFFLINE"
       name: form.name.trim(),
       email: form.email.trim(),
       mobile: form.phone.trim(), // API key is 'mobile'
       course: form.course.trim(),
       message: form.message.trim(),
-      // batch is kept for UI; not sent since your sample payload doesn't include it
     };
 
     try {
@@ -165,16 +203,13 @@ export default function DataScienceCoursePage() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-
-        course: "",
-        message: "",
-      });
+      // reset the form
+      setForm({ name: "", email: "", phone: "", course: "", message: "" });
       setErrors({});
       setTouched({});
+
+      // ✅ close the popup immediately on success
+      setIsQuoteOpen(false);
     } catch (err) {
       console.error(err);
       const msg = typeof err === "string" ? err : "Submission failed.";
@@ -186,32 +221,131 @@ export default function DataScienceCoursePage() {
     }
   }
 
+  // ----- SEO JSON-LD (Vel in text, vell only in URLs) -----
+  const courseJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: "Data Science Training Program",
+    description:
+      "Learn data analysis, Python, machine learning, and visualization. Gain hands-on experience to become a job-ready data scientist with real-world projects.",
+    image: "https://www.vellinfotech.com/images/courses/datascience-og.jpg",
+    provider: {
+      "@type": "Organization",
+      name: "Vel InfoTech",
+      url: "https://www.vellinfotech.com/all-courses/data-science-training-program",
+      logo: "https://www.vellinfotech.com/logo.png",
+    },
+    hasCourseInstance: [
+      {
+        "@type": "CourseInstance",
+        courseMode: "Onsite",
+        location: {
+          "@type": "Place",
+          name: "Vel InfoTech — Chennai & Bangalore",
+          address: "Chennai, Tamil Nadu & Bangalore, Karnataka, India",
+        },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: "https://www.vellinfotech.com/all-courses/data-science-training-program",
+        },
+      },
+      {
+        "@type": "CourseInstance",
+        courseMode: "Online",
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: "https://www.vellinfotech.com/all-courses/data-science-training-program",
+        },
+      },
+    ],
+  };
+
+  const courses = [
+    {
+      title: "Java",
+      image: "https://cdn-icons-png.flaticon.com/512/226/226777.png",
+    },
+    {
+      title: "DataScienceAi",
+      image: "https://cdn-icons-png.flaticon.com/512/8100/8100831.png",
+    },
+    {
+      title: "BigDataDeveloper",
+      image: "https://cdn-icons-png.flaticon.com/512/4354/4354656.png",
+    },
+    {
+      title: "BusinessAnalytics",
+      image: "https://cdn-icons-png.flaticon.com/512/8955/8955275.png",
+    },
+  ];
+
   return (
-    <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-        {/* LEFT: Content */}
-        <div className="flex-1">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Join Our 100% Job Guaranteed <br />
-            <span className="text-yellow-400">Data Science Training Program</span>
-          </h2>
+    <>
+      <Seo
+        title="Data Science Training Program"
+        description="Learn data analysis, Python, machine learning, and visualization. Gain hands-on experience to become a job-ready data scientist with real-world projects."
+        canonical="/all-courses/data-science-training-program"
+        image="/images/courses/datascience-og.jpg"
+        type="article"
+        jsonLd={courseJsonLd}
+      />
 
-          <ul className="space-y-3 mt-6 text-lg">
-            <li>✅ Join the <strong>Best Data Science Institute</strong> to master analytics and machine learning skills.</li>
-            <li>✅ Learn the full stack – <strong>Python, Pandas, NumPy, ML, DL, Tableau</strong>.</li>
-            <li>✅ Build real-world projects with <strong>hands-on model development</strong>.</li>
-            <li>✅ Choose <strong>flexible modes</strong> – Weekday / Weekend / Fast-track.</li>
-            <li>✅ Earn a recognized <strong>Data Science Certification</strong>.</li>
-            <li>✅ Career support: Resume building, mock interviews & job referrals.</li>
-          </ul>
+      <section className="w-full pt-32 bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white px-4 py-20">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+          {/* LEFT: Content */}
+          <div className="flex-1">
+            {/* Marketing line (not H1) */}
+            <p className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+              Join Our 100% Job Guaranteed
+            </p>
 
-          <button
-            type="button"
-            onClick={() => {
-              const formSection = document.getElementById("enquiry-form");
-              if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
+            {/* H1 — keyword only, whole line yellow */}
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400">
+              Data Science Training Program
+            </h1>
+
+            <ul className="space-y-3 mt-6 text-lg">
+              <li>
+                ✅ Join the <strong>Best Data Science Institute</strong> to
+                master analytics and machine learning skills.
+              </li>
+              <li>
+                ✅ Learn the full stack —{" "}
+                <strong>Python, Pandas, NumPy, ML, DL, Tableau</strong>.
+              </li>
+              <li>
+                ✅ Build real-world projects with{" "}
+                <strong>hands-on model development</strong>.
+              </li>
+              <li>
+                ✅ Choose <strong>flexible modes</strong> — Weekday / Weekend /
+                Fast-track.
+              </li>
+              <li>
+                ✅ Earn a recognized <strong>Data Science Certification</strong>
+                .
+              </li>
+              <li>
+                ✅ Career support:{" "}
+                <strong>
+                  resume building, mock interviews & job referrals
+                </strong>
+                .
+              </li>
+            </ul>
+
+            <button
+              type="button"
+              onClick={() => {
+                const formSection = document.getElementById("enquiry-form");
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="group relative bg-neutral-800 h-auto min-h-[64px] w-full sm:w-80 border border-white text-left p-4 text-gray-50 text-base font-bold rounded-lg overflow-hidden
               mt-8
               before:absolute before:w-12 before:h-12 before:content-[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg
               after:absolute after:z-10 after:w-20 after:h-20 after:content-[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg
@@ -219,94 +353,139 @@ export default function DataScienceCoursePage() {
               duration-500 hover:duration-500 before:duration-500 after:duration-500
               group-hover:before:duration-500 group-hover:after:duration-500
               hover:border-rose-300 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:after:-right-8"
-          >
-            <div>
-              <span className="text-lg font-extrabold text-violet-400 block">
-                Freshers Salary:
+            >
+              <div>
+                <span className="text-lg font-extrabold text-violet-400 block">
+                  Freshers Salary:
+                </span>
+                ₹3 LPA to ₹8 LPA <br />
+                <span className="text-sm text-gray-300">
+                  | Duration: 3 Months
+                </span>
+              </div>
+            </button>
+          </div>
+
+          {/* RIGHT: Call to Action */}
+          <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
+            <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
+            <p className="mb-4 text-lg">
+              Become a Data Science Professional in 3 Months with{" "}
+              <strong>Vel InfoTech</strong>
+            </p>
+
+            <button
+              type="button"
+              onClick={() => {
+                const formSection = document.getElementById("enquiry-form");
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
+            >
+              <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
+              <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+                Enquire Now
               </span>
-              ₹3 LPA to ₹8 LPA <br />
-              <span className="text-sm text-gray-300">| Duration: 3 Months</span>
+              <span className="relative z-10">
+                <svg
+                  className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
+                  viewBox="0 0 16 19"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Info Bar */}
+        <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
+          <h3 className="text-center text-white font-bold text-xl md:text-2xl">
+            Offering <strong>Online and Offline Data Science Training</strong>{" "}
+            in<strong> Chennai & Bangalore.</strong>
+          </h3>
+        </div>
+
+        {/* Course Partners Section */}
+        <section className="py-16 bg-[#002855]">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
+                <span className="text-purple-400">●</span> Our Course Partners{" "}
+                <span className="text-purple-400">●</span>
+              </h3>
             </div>
-          </button>
-        </div>
 
-        {/* RIGHT: Call to Action */}
-        <div className="flex-1 bg-white text-black p-6 rounded-xl shadow-lg max-w-md">
-          <h3 className="text-2xl font-bold mb-4">WANT IT JOB?</h3>
-          <p className="mb-4 text-lg">Become a Data Science Professional in 3 Months</p>
-
-          <button
-            type="button"
-            onClick={() => {
-              const formSection = document.getElementById("enquiry-form");
-              if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="relative mt-6 px-6 py-3 overflow-hidden rounded-full border-2 border-black bg-black text-white font-semibold text-base shadow-xl flex items-center justify-center gap-2 group transition-all duration-300 w-fit"
-          >
-            <span className="absolute inset-0 z-0 before:absolute before:w-full before:aspect-square before:-left-full before:-top-1/2 before:bg-emerald-500 before:rounded-full before:transition-all before:duration-700 before:ease-in-out group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
-            <span className="relative z-10 group-hover:text-black transition-colors duration-300">
-              Enquire Now
-            </span>
-            <span className="relative z-10">
-              <svg
-                className="w-8 h-8 p-2 rounded-full border border-white text-white transform rotate-45 transition-all duration-300 ease-linear group-hover:rotate-90 group-hover:bg-white group-hover:text-emerald-500 group-hover:border-white"
-                viewBox="0 0 16 19"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </span>
-          </button>
-        </div>
-      </div>
-
-      {/* Info Bar */}
-      <div className="w-full mt-12 bg-[#1e88e5] py-5 rounded-md shadow-md">
-        <h4 className="text-center text-white font-bold text-xl md:text-2xl">
-          We Offer Both Online and Classroom Training in Chennai & Bangalore.
-        </h4>
-      </div>
-
-      {/* Course Partners Section */}
-      <section className="py-16 bg-[#002855]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <h3 className="text-xl font-semibold uppercase tracking-wide text-white">
-              <span className="text-purple-400">●</span> Our Course Partners <span className="text-purple-400">●</span>
-            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              {[
+                {
+                  name: "HubSpot",
+                  logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg",
+                  link: "https://www.hubspot.com/",
+                },
+                {
+                  name: "GitLab",
+                  logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg",
+                  link: "https://about.gitlab.com/",
+                },
+                {
+                  name: "Monday.com",
+                  logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg",
+                  link: "https://monday.com/",
+                },
+                {
+                  name: "Google Cloud",
+                  logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg",
+                  link: "https://cloud.google.com/",
+                },
+                {
+                  name: "AWS",
+                  logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
+                  link: "https://aws.amazon.com/",
+                },
+                {
+                  name: "Salesforce",
+                  logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg",
+                  link: "https://www.salesforce.com/",
+                },
+                {
+                  name: "IBM",
+                  logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+                  link: "https://www.ibm.com/",
+                },
+                {
+                  name: "Slack",
+                  logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
+                  link: "https://slack.com/",
+                },
+              ].map((partner, index) => (
+                <motion.a
+                  key={index}
+                  href={partner.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                  className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-12 object-contain"
+                  />
+                </motion.a>
+              ))}
+            </div>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {[
-              { name: "HubSpot", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg", link: "https://www.hubspot.com/" },
-              { name: "GitLab", logo: "https://cdn.worldvectorlogo.com/logos/gitlab.svg", link: "https://about.gitlab.com/" },
-              { name: "Monday.com", logo: "https://cdn.worldvectorlogo.com/logos/monday-1.svg", link: "https://monday.com/" },
-              { name: "Google Cloud", logo: "https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg", link: "https://cloud.google.com/" },
-              { name: "AWS", logo: "https://cdn.worldvectorlogo.com/logos/aws-2.svg", link: "https://aws.amazon.com/" },
-              { name: "Salesforce", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg", link: "https://www.salesforce.com/" },
-              { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", link: "https://www.ibm.com/" },
-              { name: "Slack", logo: "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg", link: "https://slack.com/" },
-            ].map((partner, index) => (
-              <motion.a
-                key={index}
-                href={partner.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="bg-white rounded-xl p-4 flex items-center justify-center shadow-md"
-              >
-                <img src={partner.logo} alt={partner.name} className="h-12 object-contain" />
-              </motion.a>
-            ))}
-          </div>
-        </div>
+        </section>
       </section>
 
       {/* DATA SCIENCE Overview */}
@@ -319,21 +498,41 @@ export default function DataScienceCoursePage() {
             <div className="w-28 h-1 bg-blue-600 mx-auto mb-8 rounded-full"></div>
 
             <p className="text-base md:text-lg text-gray-800 mb-8 leading-relaxed text-center md:text-left">
-              Our Data Science Training equips you with in-demand skills across data analysis, machine learning, and statistical
-              modeling. You’ll master Python, Pandas, NumPy, scikit-learn, and visualization tools like Tableau/Power BI, while
-              completing industry-focused projects that prepare you for data roles.
+              Our Data Science Training equips you with in-demand skills across
+              data analysis, machine learning, and statistical modeling. You’ll
+              master Python, Pandas, NumPy, scikit-learn, and visualization
+              tools like Tableau/Power BI, while completing industry-focused
+              projects that prepare you for data roles.
             </p>
 
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
               What You’ll Learn From Data Science Training
             </h3>
             <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Python for data analysis: Pandas, NumPy, Matplotlib.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> ML workflows with scikit-learn: preprocessing, modeling, evaluation.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Data cleaning, feature engineering, and pipelines.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Visualization with Seaborn and BI tools (Tableau/Power BI).</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Capstone projects on real datasets across domains.</li>
-              <li className="flex items-start gap-3"><span className="text-purple-600 mt-1">➤</span> Career prep: resume, mock interviews & case studies.</li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Python for data
+                analysis: Pandas, NumPy, Matplotlib.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> ML workflows
+                with scikit-learn: preprocessing, modeling, evaluation.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Data cleaning,
+                feature engineering, and pipelines.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Visualization
+                with Seaborn and BI tools (Tableau/Power BI).
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Capstone
+                projects on real datasets across domains.
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-purple-600 mt-1">➤</span> Career prep:
+                resume, mock interviews & case studies.
+              </li>
             </ul>
           </div>
         </div>
@@ -346,14 +545,16 @@ export default function DataScienceCoursePage() {
             Become a Certified Data Science Professional
           </h2>
           <p className="text-lg md:text-xl text-white mb-6">
-            Master Data Analysis, Machine Learning, Python, SQL, and more through expert-led, project-based learning.
+            Master Data Analysis, Machine Learning, Python, SQL, and more
+            through expert-led, project-based learning.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <button
               type="button"
               onClick={() => {
                 const formSection = document.getElementById("enquiry-form");
-                if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+                if (formSection)
+                  formSection.scrollIntoView({ behavior: "smooth" });
               }}
               className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all"
             >
@@ -366,8 +567,14 @@ export default function DataScienceCoursePage() {
           {/* Card 1 - Course Highlights */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Course Highlights" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Course Highlights</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                alt="Course Highlights"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Course Highlights
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                 <li>✓ Python, ML, Data Analysis, SQL</li>
                 <li>✓ Hands-on projects & real datasets</li>
@@ -380,11 +587,29 @@ export default function DataScienceCoursePage() {
           {/* Card 2 - Tools */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Tools" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Tools You’ll Master</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
+                alt="Tools"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Tools You’ll Master
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {["Python", "Pandas", "NumPy", "scikit-learn", "Tableau", "Power BI"].map((tool) => (
-                  <span key={tool} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{tool}</span>
+                {[
+                  "Python",
+                  "Pandas",
+                  "NumPy",
+                  "scikit-learn",
+                  "Tableau",
+                  "Power BI",
+                ].map((tool) => (
+                  <span
+                    key={tool}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                  >
+                    {tool}
+                  </span>
                 ))}
               </div>
             </div>
@@ -393,11 +618,29 @@ export default function DataScienceCoursePage() {
           {/* Card 3 - Topics Covered */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" alt="Topics Covered" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Topics Covered</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/906/906343.png"
+                alt="Topics Covered"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Topics Covered
+              </h3>
               <div className="flex flex-wrap gap-2">
-                {["EDA", "ML Algorithms", "Feature Engineering", "SQL", "Statistics", "Model Evaluation"].map((topic) => (
-                  <span key={topic} className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium">{topic}</span>
+                {[
+                  "EDA",
+                  "ML Algorithms",
+                  "Feature Engineering",
+                  "SQL",
+                  "Statistics",
+                  "Model Evaluation",
+                ].map((topic) => (
+                  <span
+                    key={topic}
+                    className="bg-gray-100 px-3 py-1 rounded-full text-base font-medium"
+                  >
+                    {topic}
+                  </span>
                 ))}
               </div>
             </div>
@@ -406,8 +649,14 @@ export default function DataScienceCoursePage() {
           {/* Card 4 - Key Skills */}
           <div className="bg-white rounded-3xl shadow-md p-6 text-left hover:shadow-xl hover:scale-[1.02] transition duration-300">
             <div className="mb-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png" alt="Key Skills" className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-extrabold text-black mb-2">Key Skills You’ll Gain</h3>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3135/3135710.png"
+                alt="Key Skills"
+                className="w-10 h-10 mb-4"
+              />
+              <h3 className="text-lg font-extrabold text-black mb-2">
+                Key Skills You’ll Gain
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
                 <li>Data wrangling & cleaning</li>
                 <li>Statistical analysis & ML modeling</li>
@@ -418,49 +667,192 @@ export default function DataScienceCoursePage() {
           </div>
         </div>
       </section>
+
       {/* SYLLABUS */}
       <Syllabus
-                    title={course.title}
-                    accent={course.accent}
-                    meta={course.meta}
-                    preview={course.preview}
-                    sections={course.sections} // ← REQUIRED
-                    useExternalForm
-                    cardMinH={400} // tweak to visually match your right cards
-                    stickyOffset={110}
-                  />
+        title={course.title}
+        accent={course.accent}
+        meta={course.meta}
+        preview={course.preview}
+        sections={course.sections} // ← REQUIRED
+        useExternalForm
+        cardMinH={400}
+        stickyOffset={110}
+      />
+
+      {/* === WHY CHOOSE US === */}
+      <section
+        id="why-choose-us"
+        className="py-16 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-[#005BAC] mb-12">
+            Why Choose Us
+          </h2>
+
+          <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
+            <div className="relative">
+              <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+              <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                Expert Trainers
+              </h3>
+              <p className="text-gray-600">
+                Our mentors have deep industry experience and share practical,
+                hands-on insights.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+              <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                Flexible Learning Modes
+              </h3>
+              <p className="text-gray-600">
+                Learn in-person or online with weekday, weekend, and fast-track
+                options.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+              <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                Job-Ready Curriculum
+              </h3>
+              <p className="text-gray-600">
+                Real projects, labs, and interview prep aligned to what
+                employers expect.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
+              <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
+                Career Support
+              </h3>
+              <p className="text-gray-600">
+                Resume building, mock interviews, and placement assistance with
+                hiring partners.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <GoogleStyleReviews
+        title="What Our Students Say"
+        orgName="Vel InfoTech"
+        overallRating={4.8}
+        total={1543}
+        histogram={reviewHistogram}
+        reviews={reviewsData}
+        viewAllHref="/reviews"
+        writeHref="/contact-us#enquiry-form"
+      />
+
+      {/* === FAQ === */}
+      <section id="faq" className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#003c6a] text-center mb-10">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-4">
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                Is this course suitable for absolute beginners?
+              </summary>
+              <p className="mt-3 text-gray-700">
+                Yes. We start from Python basics and gradually move to Data
+                Analysis, SQL, and Machine Learning.
+              </p>
+            </details>
+
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                Do you provide placement assistance?
+              </summary>
+              <p className="mt-3 text-gray-700">
+                We offer resume support, mock interviews, and placement
+                assistance with hiring partners.
+              </p>
+            </details>
+
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                What are the class modes and timings?
+              </summary>
+              <p className="mt-3 text-gray-700">
+                Both online and classroom batches with
+                weekday/weekend/fast-track options.
+              </p>
+            </details>
+
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                Will I build real projects?
+              </summary>
+              <p className="mt-3 text-gray-700">
+                Yes. You’ll work on guided labs and a capstone project covering
+                EDA, modeling, and BI dashboards.
+              </p>
+            </details>
+
+            <details className="group border border-gray-200 rounded-xl bg-[#f9fbff] p-5">
+              <summary className="cursor-pointer font-semibold text-[#003c6a] list-none">
+                Do I get a certificate?
+              </summary>
+              <p className="mt-3 text-gray-700">
+                Yes, a course completion certificate is provided. Project
+                performance is also highlighted.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
       {/* ENQUIRY FORM (compact spacing + validation) */}
       <section className="w-full px-6 py-20 text-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-10">
           {/* LEFT Info Boxes */}
           <div className="w-full lg:w-1/2 flex flex-col gap-4">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Comprehensive Curriculum</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Comprehensive Curriculum
+              </h4>
               <p className="text-black/90">
-                Structured modules covering Python, Data Analysis, ML, SQL, Visualization and Deployment.
+                Structured modules covering Python, Data Analysis, ML, SQL,
+                Visualization and Deployment.
               </p>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Career-Oriented Training</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Career-Oriented Training
+              </h4>
               <p className="text-black/90">
-                Learn from working data scientists. Includes mock interviews, resume prep, and job assistance.
+                Learn from working data scientists. Includes mock interviews,
+                resume prep, and job assistance.
               </p>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
-              <h4 className="text-xl font-bold mb-2">Strong Placement Support</h4>
+              <h4 className="text-xl font-bold mb-2">
+                Strong Placement Support
+              </h4>
               <p className="text-black/90">
-                Get guidance and referrals through our hiring partner network and drives.
+                Get guidance and referrals through our hiring partner network
+                and drives.
               </p>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-lg text-gray-900">
               <h4 className="text-xl font-bold mb-2">Hands-On Projects</h4>
               <p className="text-black/90">
-                Build capstone projects and case studies on real-world datasets across domains.
+                Build capstone projects and case studies on real-world datasets
+                across domains.
               </p>
             </div>
           </div>
 
-           {/* RIGHT: Form */}
+          {/* RIGHT: Form */}
           <div className="w-full max-w-lg">
             <div className="bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
               <h3 className="text-2xl font-bold text-center text-[#003c6a] mb-5">
@@ -547,8 +939,7 @@ export default function DataScienceCoursePage() {
                   </div>
                 </div>
 
-                {/* Phone + Batch */}
-
+                {/* Phone */}
                 <div>
                   <input
                     type="tel"
@@ -680,7 +1071,58 @@ export default function DataScienceCoursePage() {
           </div>
         </div>
       </section>
+
+      <section id="popular-courses" className="bg-[#eaf5fd] py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#003c6a] mb-4">
+            Popular Courses
+          </h2>
+          <p className="text-gray-700 text-lg">
+            We present to you the most popular courses recommended by experts.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {courses.map((course, index) => (
+            <Link
+              to={`/all-courses/${encodeURIComponent(course.title)}`}
+              key={index}
+              className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-lg transition-all cursor-pointer"
+            >
+              <div className="w-16 h-16 mb-4">
+                <img
+                  src={course.image}
+                  alt={course.title}
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+
+              <h3 className="text-md font-bold text-gray-800 text-center">
+                {course.title}
+              </h3>
+              <p className="text-sm text-gray-500">Online | Offline</p>
+
+              <div className="flex items-center justify-center gap-1 text-sm mt-2 text-gray-600">
+                <FaUserGraduate className="text-gray-500" />
+                <span>
+                  {Math.floor(Math.random() * 5000 + 10000).toLocaleString()}+
+                  Learners
+                </span>
+              </div>
+
+              <div className="flex justify-center items-center mt-1 text-yellow-500">
+                {[...Array(5)].map((_, i) => (
+                  <AiFillStar key={i} />
+                ))}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <FeedbackSection />
+
       {/* Toast container */}
       <ToastContainer
         newestOnTop
@@ -690,6 +1132,19 @@ export default function DataScienceCoursePage() {
         bodyClassName={() => "text-[15px] font-medium"}
         theme="colored"
       />
-    </section>
+
+      <AutoPopupQuoteForm
+        status={status}
+        error={error}
+        mode={mode}
+        setMode={setMode}
+        form={form}
+        errors={errors}
+        touched={touched}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        handleSubmit={handleSubmit}
+      />
+    </>
   );
 }

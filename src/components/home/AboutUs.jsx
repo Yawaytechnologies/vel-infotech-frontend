@@ -1,3 +1,4 @@
+// src/pages/components/home/AboutSection.jsx  (adjust path to where you keep it)
 import React, { useState } from "react";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -15,15 +16,12 @@ export default function AboutSection() {
     name: "",
     email: "",
     phone: "",
-    
     course: "",
     message: "",
   });
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
-  
 
- // ✅ define toastOpts (you were using it but not defining it)
   const toastOpts = {
     position: "top-center",
     autoClose: 2200,
@@ -48,7 +46,6 @@ export default function AboutSection() {
     },
   };
 
-
   const setField = (field, value) => {
     setForm((f) => ({ ...f, [field]: value }));
     setErrors((prev) => {
@@ -60,7 +57,7 @@ export default function AboutSection() {
     });
   };
   const handleChange = (e) => setField(e.target.name, e.target.value);
-    const handleBlur = (e) => {
+  const handleBlur = (e) => {
     const { name } = e.target;
     setTouched((t) => ({ ...t, [name]: true }));
     const msg = validateField(name, form[name]);
@@ -69,7 +66,7 @@ export default function AboutSection() {
       ...(msg ? { [name]: msg } : { [name]: undefined }),
     }));
   };
-  // validations
+
   const validateField = (field, value) => {
     const val = (value ?? "").trim();
     switch (field) {
@@ -80,16 +77,14 @@ export default function AboutSection() {
         return null;
       case "email": {
         if (!val) return "Email is required.";
-        // Adjusted regex for email validation with domain check
         const formatOK = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
-        if (!formatOK) return "Email must include letters and number or without number  allowed symbols before @";
+        if (!formatOK) return "Enter a valid email address.";
         return null;
       }
       case "phone":
         if (!val) return "Mobile number is required.";
         if (!/^\d{10}$/.test(val)) return "Enter a valid 10-digit mobile number.";
         return null;
-      
       case "course":
         if (!val) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(val)) return "Only letters and spaces are allowed.";
@@ -103,101 +98,92 @@ export default function AboutSection() {
     }
   };
 
- 
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  
+    setTouched({
+      name: true,
+      email: true,
+      phone: true,
+      course: true,
+      message: true,
+    });
 
- 
+    const fields = ["name", "email", "phone", "course", "message"];
+    const next = {};
+    fields.forEach((f) => {
+      const er = validateField(f, form[f]);
+      if (er) next[f] = er;
+    });
+    setErrors(next);
 
-
-
-   async function handleSubmit(e) {
-      e.preventDefault();
-  
-      // touch all
-      setTouched({
-        name: true,
-        email: true,
-        phone: true,
-  
-        course: true,
-        message: true,
+    if (Object.keys(next).length) {
+      const first = fields.find((f) => next[f]);
+      const el = document.querySelector(`[name="${first}"]`);
+      if (el) el.focus();
+      toast.error(next[first] || "Please fix the highlighted errors.", {
+        ...toastOpts,
+        style: { background: "#ef4444", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
-  
-      // validate all
-      const fields = ["name", "email", "phone", "course", "message"];
-      const next = {};
-      fields.forEach((f) => {
-        const er = validateField(f, form[f]);
-        if (er) next[f] = er;
-      });
-      setErrors(next);
-  
-      if (Object.keys(next).length) {
-        const first = fields.find((f) => next[f]);
-        const el = document.querySelector(`[name="${first}"]`);
-        if (el) el.focus();
-        toast.error(next[first] || "Please fix the highlighted errors.", {
-          ...toastOpts,
-          style: { background: "#ef4444", color: "#fff" },
-          className: "rounded-xl shadow-md text-[15px] px-4 py-3",
-        });
-        return;
-      }
-  
-      // Map to API payload (your backend expects: mode, name, email, mobile, course, message)
-      const payload = {
-        mode: (mode || "class_room").toUpperCase(), // "ONLINE" | "Offline"
-        name: form.name.trim(),
-        email: form.email.trim(),
-        mobile: form.phone.trim(), // API key is 'mobile'
-        course: form.course.trim(),
-        message: form.message.trim(),
-        // batch is kept for UI; not sent since your sample payload doesn't include it
-      };
-  
-      try {
-        await dispatch(submitEnquiry(payload)).unwrap();
-  
-        toast.success("Thanks! Your enquiry has been recorded.", {
-          ...toastOpts,
-          style: { background: "#16a34a", color: "#fff" },
-          className: "rounded-xl shadow-md text-[15px] px-4 py-3",
-        });
-  
-        setForm({
-          name: "",
-          email: "",
-          phone: "",
-  
-          course: "",
-          message: "",
-        });
-        setErrors({});
-        setTouched({});
-      } catch (err) {
-        console.error(err);
-        const msg = typeof err === "string" ? err : "Submission failed.";
-        toast.error(msg, {
-          ...toastOpts,
-          style: { background: "#ef4444", color: "#fff" },
-          className: "rounded-xl shadow-md text-[15px] px-4 py-3",
-        });
-      }
+      return;
     }
-  
 
- 
+    const payload = {
+      mode: (mode || "class_room").toUpperCase(),
+      name: form.name.trim(),
+      email: form.email.trim(),
+      mobile: form.phone.trim(),
+      course: form.course.trim(),
+      message: form.message.trim(),
+    };
+
+    try {
+      await dispatch(submitEnquiry(payload)).unwrap();
+
+      toast.success("Thanks! Your enquiry has been recorded.", {
+        ...toastOpts,
+        style: { background: "#16a34a", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        course: "",
+        message: "",
+      });
+      setErrors({});
+      setTouched({});
+    } catch (err) {
+      const msg = typeof err === "string" ? err : "Submission failed.";
+      toast.error(msg, {
+        ...toastOpts,
+        style: { background: "#ef4444", color: "#fff" },
+        className: "rounded-xl shadow-md text-[15px] px-4 py-3",
+      });
+    }
+  }
 
   return (
     <>
-      {/* Toasts pinned to top of viewport */}
-      <ToastContainer newestOnTop position="top-center" autoClose={2200} closeOnClick={false} pauseOnHover={true} />
+      <ToastContainer
+        newestOnTop
+        position="top-center"
+        autoClose={2200}
+        closeOnClick={false}
+        pauseOnHover
+      />
 
+      {/* ---- HARD white (with subtle dots) that cannot be overridden ---- */}
       <section
-        className="relative py-16 px-4 md:px-8 lg:px-0 bg-white overflow-hidden"
+        id="about"
+        aria-labelledby="about__heading"
+        className="relative isolate overflow-hidden py-16 px-4 md:px-8 lg:px-0"
         style={{
-          background: `
+          backgroundColor: "#ffffff",
+          backgroundImage: `
             radial-gradient(circle, #e0e7ef 2.5px, transparent 2.5px),
             radial-gradient(circle, #e0e7ef 2.5px, transparent 2.5px)
           `,
@@ -205,40 +191,59 @@ export default function AboutSection() {
           backgroundPosition: "0 0, 20px 20px",
         }}
       >
-        <div
-          className="pointer-events-none absolute top-0 left-0 w-full h-16 z-10"
-          style={{ background: "linear-gradient(to bottom, #f4f7fd 60%, #fff0 100%)" }}
-        />
+        {/* neutralize any global ::before/::after that might be attached to #about */}
+        <style>{`
+          #about::before, #about::after {
+            background: none !important;
+            content: none !important;
+          }
+        `}</style>
+
+        {/* ✅ Single page H1 lives here */}
+        <h1
+          id="about__heading"
+          className="text-[2.2rem] md:text-[1.8rem] font-black text-[#171717] mb-3 text-center leading-tight"
+        >
+          Vell InfoTech <span className="text-[#171717]">— India’s No.1 IT Training Institute</span>
+        </h1>
+
         <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row gap-12 items-stretch z-10">
-          {/* LEFT kept same */}
+          {/* LEFT */}
           <div className="flex-1 flex flex-col justify-center pl-0 md:pl-2 lg:pl-8">
-            <h2 className="text-[2.2rem] md:text-[1.8rem] font-black text-[#171717] mb-3 text-center leading-tight">
-              Vel InfoTech <span className="text-[#171717]">— India’s No.1 IT Training Institute</span>
-            </h2>
             <p className="text-gray-700 text-xl mb-7 leading-relaxed">
-              <span className="font-semibold text-[#005BAC]">Elevate your career with curated training,</span> built by
-              650+ industry experts for real-world success. Join thousands of professionals accelerating their future.
+              <span className="font-semibold text-[#005BAC]">
+                Elevate your career with curated training,
+              </span>{" "}
+              built by 650+ industry experts for real-world success. Join thousands of professionals
+              accelerating their future.
             </p>
+
             <div className="bg-white border border-[#a7f3d0]/30 shadow-lg rounded-2xl p-6 mb-5">
-              <h3 className="text-lg font-bold text-[#005BAC] mb-2 tracking-wide">About Vel InfoTech</h3>
+              {/* H3 inside the card */}
+              <h3 className="text-lg font-bold text-[#005BAC] mb-2 tracking-wide">
+                About Vell InfoTech
+              </h3>
               <ul className="text-gray-800 text-base space-y-2 mb-3 list-disc list-inside">
                 <li>
-                  <span className="font-bold">Industry Leader:</span> Recognized by LinkedIn as India’s most influential
+                  <span className="font-bold">Industry Leader:</span> Recognized as a high-impact
                   IT education brand.
                 </li>
                 <li>
-                  <span className="font-bold">Expert-Led:</span> 650+ world-class trainers & real project mentorship.
+                  <span className="font-bold">Expert-Led:</span> 650+ world-class trainers & real
+                  project mentorship.
                 </li>
                 <li>
-                  <span className="font-bold">Tailored Pathways:</span> Flexible for students, graduates, and working pros.
+                  <span className="font-bold">Tailored Pathways:</span> Flexible for students,
+                  graduates, and working pros.
                 </li>
                 <li>
-                  <span className="font-bold">Proven Outcomes:</span> 10,000+ students placed with top IT MNCs.
+                  <span className="font-bold">Proven Outcomes:</span> 10,000+ students placed with
+                  top IT MNCs.
                 </li>
               </ul>
               <div className="text-gray-600 text-sm mt-2">
-                <span className="font-semibold">Benefits:</span> Faster onboarding, productivity gains, cost-effective
-                upskilling, and global recognition.
+                <span className="font-semibold">Benefits:</span> Faster onboarding, productivity
+                gains, cost-effective upskilling, and global recognition.
               </div>
             </div>
 
@@ -255,9 +260,10 @@ export default function AboutSection() {
           {/* RIGHT: Enquiry Card */}
           <div className="flex-1 w-full max-w-lg mx-auto md:mx-0 flex flex-col justify-center px-0 md:px-4">
             <div className="relative backdrop-blur-[6px] bg-white/70 border border-white/60 shadow-2xl rounded-3xl p-8 transition-all hover:scale-[1.015] hover:shadow-2xl duration-300">
-              <h3 className="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
+              {/* H2 for the form block under the page H1 */}
+              <h2 className="text-2xl font-bold mb-5 text-center bg-gradient-to-r from-[#005BAC] to-[#003c6a] bg-clip-text text-transparent tracking-tight">
                 Get a Free Training Quote
-              </h3>
+              </h2>
 
               {/* Mode Toggle */}
               <div className="flex justify-center mb-6 gap-2">
@@ -265,9 +271,11 @@ export default function AboutSection() {
                   type="button"
                   onClick={() => setMode("class_room")}
                   className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-sm font-medium shadow
-                    ${mode === "class_room"
-                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                      : "bg-white/60 text-black border border-[#a7f3d0]/40"} transition-all duration-200`}
+                    ${
+                      mode === "class_room"
+                        ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                        : "bg-white/60 text-black border border-[#a7f3d0]/40"
+                    } transition-all duration-200`}
                   aria-pressed={mode === "class_room"}
                 >
                   <FaChalkboardTeacher className="text-base" /> Class Room
@@ -276,23 +284,19 @@ export default function AboutSection() {
                   type="button"
                   onClick={() => setMode("online")}
                   className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-full text-sm font-medium shadow
-                    ${mode === "online"
-                      ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
-                      : "bg-white/60 text-black border border-[#a7f3d0]/40"} transition-all duration-200`}
+                    ${
+                      mode === "online"
+                        ? "bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white shadow-lg"
+                        : "bg-white/60 text-black border border-[#a7f3d0]/40"
+                    } transition-all duration-200`}
                   aria-pressed={mode === "online"}
                 >
                   <FaLaptop className="text-base" /> Online
                 </button>
               </div>
 
-              {/* Form (compact) */}
-                <form
-                id="enquiry-form"
-                onSubmit={handleSubmit}
-                noValidate
-                className="grid grid-cols-1 gap-2"
-              >
-                {/* Name */}
+              {/* Form */}
+              <form id="enquiry-form" onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-2">
                 <div>
                   <input
                     type="text"
@@ -316,7 +320,6 @@ export default function AboutSection() {
                   </div>
                 </div>
 
-                {/* Email */}
                 <div>
                   <input
                     type="email"
@@ -339,8 +342,6 @@ export default function AboutSection() {
                     )}
                   </div>
                 </div>
-
-                {/* Phone + Batch */}
 
                 <div>
                   <input
@@ -367,7 +368,6 @@ export default function AboutSection() {
                   </div>
                 </div>
 
-                {/* Course (dropdown select) */}
                 <div>
                   <select
                     name="course"
@@ -384,32 +384,11 @@ export default function AboutSection() {
                   >
                     <option value="">Select Course</option>
                     {[
-                      "Java",
-                      "Python",
-                      "Full Stack Development",
-                      "PL/SQL",
-                      "SQL",
-                      "Data Science",
-                      "Business Analytics",
-                      "Data Science & AI",
-                      "Big Data Developer",
-                      "Software Testing",
-                      "Selenium Testing",
-                      "ETL Testing",
-                      "AWS Training",
-                      "DevOps",
-                      "Hardware Networking",
-                      "Cyber Security",
-                      "SAP",
-                      "Salesforce",
-                      "ServiceNow",
-                      "RPA (Robotic Process Automation)",
-                      "Production Support",
-                      "Digital Marketing",
-                      "Soft Skill Training",
-                      "Scrum Master",
-                      "Business Analyst",
-                      "Product Management",
+                      "Java","Python","Full Stack Development","PL/SQL","SQL","Data Science","Business Analytics",
+                      "Data Science & AI","Big Data Developer","Software Testing","Selenium Testing","ETL Testing",
+                      "AWS Training","DevOps","Hardware Networking","Cyber Security","SAP","Salesforce","ServiceNow",
+                      "RPA (Robotic Process Automation)","Production Support","Digital Marketing","Soft Skill Training",
+                      "Scrum Master","Business Analyst","Product Management",
                     ].map((course) => (
                       <option key={course} value={course}>
                         {course}
@@ -451,7 +430,6 @@ export default function AboutSection() {
                   </div>
                 </div>
 
-                {/* Submit */}
                 <button
                   type="submit"
                   disabled={status === "loading"}
@@ -462,7 +440,6 @@ export default function AboutSection() {
                   {status === "loading" ? "Submitting..." : "Submit"}
                 </button>
 
-                {/* Optional server error */}
                 {error && (
                   <p className="text-red-600 text-xs mt-1">
                     Submission failed: {String(error)}

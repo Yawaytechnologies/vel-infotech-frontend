@@ -101,14 +101,17 @@ const CONTENT = {
         id: "project-structure",
         h: "Project Structure",
         body: (
-          <pre className="mt-3 overflow-x-auto rounded-xl bg-slate-900 p-4 text-slate-100 text-sm">{`mysite/
-├─ manage.py
-├─ mysite/               ← project settings (settings.py, urls.py, wsgi.py, asgi.py)
-└─ core/                 ← your app (create with "python manage.py startapp core")
-   ├─ models.py
-   ├─ views.py
-   ├─ urls.py            ← optional: app-level routing
-   └─ templates/         ← HTML templates`}</pre>
+          <pre className="mt-3 overflow-x-auto rounded-xl bg-slate-900 p-4 text-slate-100 text-sm">{`Project layout (human-friendly)
+
+mysite/
+├── manage.py
+├── mysite/              # Django config package: settings.py / urls.py / wsgi.py / asgi.py
+└── core/                # app package (run: python manage.py startapp core)
+    ├── models.py        # DB schema & ORM models
+    ├── views.py         # Request handlers / controller logic
+    ├── urls.py          # (optional) app-level route map
+    └── templates/       # HTML templates used by this app
+`}</pre>
         ),
       },
       {
@@ -182,7 +185,8 @@ urlpatterns = [
               "BI/Serving: dashboards (Looker, Power BI), APIs, ML features.",
             ].map((t, i) => (
               <li key={i} className="flex gap-2">
-                <FiCheckCircle className="mt-1 text-blue-700" /> <span>{t}</span>
+                <FiCheckCircle className="mt-1 text-blue-700" />{" "}
+                <span>{t}</span>
               </li>
             ))}
           </ul>
@@ -222,9 +226,9 @@ CREATE TABLE analytics.marts.fact_orders (
         body: (
           <>
             <p className="text-slate-800">
-              Land raw data daily, transform with SQL models, then publish marts.
-              Tools: Airbyte/Fivetran (ingest), dbt (transform), Airflow/Cloud
-              Composer (orchestration).
+              Land raw data daily, transform with SQL models, then publish
+              marts. Tools: Airbyte/Fivetran (ingest), dbt (transform),
+              Airflow/Cloud Composer (orchestration).
             </p>
             <pre className="mt-3 overflow-x-auto rounded-xl bg-slate-900 p-4 text-slate-100 text-sm">{`-- dbt-style model (orders_clean.sql)
 SELECT
@@ -248,7 +252,8 @@ FROM analytics.staging.orders_raw;`}</pre>
               "Cost: schedule off-hours downscaling, cache results, materialize incremental models.",
             ].map((t, i) => (
               <li key={i} className="flex gap-2">
-                <FiCheckCircle className="mt-1 text-blue-700" /> <span>{t}</span>
+                <FiCheckCircle className="mt-1 text-blue-700" />{" "}
+                <span>{t}</span>
               </li>
             ))}
           </ul>
@@ -460,7 +465,8 @@ const inc = () => setCount(c => c + 1);`}</pre>
               "Split effects by concern (subscription vs data fetch).",
             ].map((t, i) => (
               <li key={i} className="flex gap-2">
-                <FiCheckCircle className="mt-1 text-blue-700" /> <span>{t}</span>
+                <FiCheckCircle className="mt-1 text-blue-700" />{" "}
+                <span>{t}</span>
               </li>
             ))}
           </ul>
@@ -533,7 +539,8 @@ FULL OUTER JOIN orders o ON o.customer_id = c.id;`}</pre>
               "Prefer INNER join when appropriate for better optimizer plans.",
             ].map((t, i) => (
               <li key={i} className="flex gap-2">
-                <FiCheckCircle className="mt-1 text-blue-700" /> <span>{t}</span>
+                <FiCheckCircle className="mt-1 text-blue-700" />{" "}
+                <span>{t}</span>
               </li>
             ))}
           </ul>
