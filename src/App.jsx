@@ -12,6 +12,7 @@ import Footer from "./components/common/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Reviews from "./pages/Reviews";
+import JobPosting from "./pages/jobposting";
 import SampleResume from "./pages/SampleResume";
 import PlacedStudents from "./pages/placedStudents";
 import Blog from "./pages/Blog";
@@ -142,6 +143,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/jobposting" element={<JobPosting />} />
           <Route path="/sample-resume" element={<SampleResume />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<Blog />} />

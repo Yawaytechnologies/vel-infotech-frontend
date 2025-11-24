@@ -248,6 +248,9 @@ export default function Header() {
             <Link to="/reviews" className="transition">
               Reviews
             </Link>
+            <Link to="/jobposting" className="transition">
+              Job Posting
+            </Link>
             <Link to="/blog" className="transition">
               Blog
             </Link>
