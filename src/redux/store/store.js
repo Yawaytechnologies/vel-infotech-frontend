@@ -2,9 +2,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import enquiryReducer from '../reducer/enquirySlice';
 import feedbackReducer from '../reducer/feedbackSlice';
+import blogReducer from "../reducer/blogSlice";
 export const store = configureStore({
   reducer: {
     enquiry: enquiryReducer,
     feedback:     feedbackReducer,
+    blog: blogReducer,
   },
 });

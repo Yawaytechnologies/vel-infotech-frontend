@@ -1,54 +1,12 @@
-import React, { useState } from "react";
+// src/pages/Blog.jsx
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiCalendar, FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
-import blogSvg from "../assets/blog.svg";
-import careerImg from "../assets/career.jpg";
-import careerImg1 from "../assets/career1.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBlogPosts } from "../redux/actions/blogAction";
 
-/** Demo posts (replace with API/Redux later) */
-const posts = [
-  {
-    id: 1,
-    title: "Switching to Data Analytics: A Step-by-Step Starter Plan",
-    excerpt:
-      "Moving from non-tech or testing into analytics? Use this roadmap to pick tools, structure your learning, and build a portfolio that actually gets callbacks.",
-    date: "JULY 31, 2025",
-    iso: "2025-07-31",
-    image: careerImg,
-    slug: "switch-to-data-analytics-starter-plan",
-  },
-  {
-    id: 2,
-    title: "Entry-Level Data Analyst Pay in 2025: Who’s Paying the Most?",
-    excerpt:
-      "We break down salaries across product companies, MNCs, and startups so you know what a fair first offer looks like in 2025.",
-    date: "JULY 28, 2025",
-    iso: "2025-07-28",
-    image: careerImg1,
-    slug: "entry-level-data-analyst-salary-2025",
-  },
-  {
-    id: 3,
-    title: "Your First 90 Days in Analytics: Skills to Learn Fast",
-    excerpt:
-      "Day-by-day focus areas for SQL, Excel, and dashboards to survive your probation and impress your manager at the same time.",
-    date: "JULY 22, 2025",
-    iso: "2025-07-22",
-    image: careerImg1,
-    slug: "first-90-days-in-analytics",
-  },
-  {
-    id: 4,
-    title: "Portfolio Ideas for New Analysts: 6 Projects That Stand Out",
-    excerpt:
-      "Six project ideas using public datasets, plus how to explain your work in interviews so hiring managers actually remember you.",
-    date: "JULY 18, 2025",
-    iso: "2025-07-18",
-    image: careerImg,
-    slug: "data-analytics-portfolio-ideas",
-  },
-];
+import blogSvg from "../assets/blog.svg";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30, scale: 0.97 },
@@ -66,6 +24,13 @@ const cardVariants = {
 
 export default function Blog() {
   const [expandedId, setExpandedId] = useState(null);
+
+  const dispatch = useDispatch();
+  const { items: posts, status, fromApi } = useSelector((state) => state.blog);
+
+  useEffect(() => {
+    dispatch(fetchBlogPosts());
+  }, [dispatch]);
 
   return (
     <main className="bg-[#021733] min-h-screen">
@@ -190,16 +155,25 @@ export default function Blog() {
               Deep-dive guides, salary insights, and beginner-friendly templates
               you can actually use in your next career move or hiring plan.
             </p>
+
+            <p className="mt-1 text-[11px] text-slate-500">
+              {status === "loading" && "Fetching posts..."}
+              {status === "succeeded" &&
+                (fromApi ? "Loaded from API" : "Loaded from fallback data")}
+              {status === "failed" &&
+                "Showing fallback posts due to API error"}
+              {status === "idle" && posts?.length > 0 && "Ready to read"}
+            </p>
           </header>
 
-          {/* wider cards with center gap */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10">
-            {posts.map((post, index) => {
+            {posts?.map((post, index) => {
               const isExpanded = expandedId === post.id;
+              const excerptText = post?.excerpt || "";
               const shortExcerpt =
-                post.excerpt.length > 110
-                  ? post.excerpt.slice(0, 110) + "..."
-                  : post.excerpt;
+                excerptText.length > 110
+                  ? excerptText.slice(0, 110) + "..."
+                  : excerptText;
 
               return (
                 <motion.article
@@ -267,8 +241,8 @@ export default function Blog() {
                       className="text-[13px] text-slate-600 leading-relaxed"
                       itemProp="description"
                     >
-                      {isExpanded ? post.excerpt : shortExcerpt}{" "}
-                      {post.excerpt.length > 110 && (
+                      {isExpanded ? excerptText : shortExcerpt}{" "}
+                      {excerptText.length > 110 && (
                         <button
                           type="button"
                           onClick={() =>
@@ -354,7 +328,7 @@ export default function Blog() {
                   Recognized as a high-impact IT education brand.
                 </li>
                 <li>
-                  <span className="font-semibold">Expert-Led:</span> 650+
+                  <span className="font-semibold">Expert-Led:</span> 650+ 
                   world-class trainers &amp; real project mentorship.
                 </li>
                 <li>
