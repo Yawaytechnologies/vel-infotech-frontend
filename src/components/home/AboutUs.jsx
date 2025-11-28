@@ -204,7 +204,6 @@ export default function AboutSection() {
           id="about__heading"
           className="text-[2.2rem] md:text-[1.8rem] font-black text-[#171717] mb-3 text-center leading-tight"
         >
-          Vell InfoTech <span className="text-[#171717]">— India’s No.1 IT Training Institute</span>
         </h1>
 
         <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row gap-12 items-stretch z-10">
