@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiCalendar, FiArrowRight } from "react-icons/fi";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion"; // <─ renamed to Motion
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogPosts } from "../redux/actions/blogAction";
 
@@ -35,7 +35,7 @@ export default function Blog() {
   return (
     <main className="bg-[#021733] min-h-screen">
       {/* ================== HERO (H1) ================== */}
-      <motion.section
+      <Motion.section
         className="relative w-full bg-gradient-to-br from-[#00448f] via-[#003369] to-[#010b22] py-24 px-4 text-white overflow-hidden mt-12 shadow-[0_-10px_30px_rgba(0,0,0,0.45)]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -56,7 +56,7 @@ export default function Blog() {
           {/* LEFT: Text */}
           <div className="w-full md:w-1/2 text-center md:text-left pl-3 md:pl-10 flex flex-col justify-center">
             {/* LIVE badge */}
-            <motion.div
+            <Motion.div
               className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 pl-3 pr-4 py-1 text-[10px] md:text-xs font-semibold tracking-wide uppercase mb-3"
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -67,9 +67,9 @@ export default function Blog() {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
               </span>
               Vell InfoTech Blog · Careers · Training · Hiring
-            </motion.div>
+            </Motion.div>
 
-            <motion.h1
+            <Motion.h1
               id="blog-page-title"
               className="text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight mb-3 max-w-xl"
               initial={{ x: -40, opacity: 0 }}
@@ -78,9 +78,9 @@ export default function Blog() {
             >
               <span className="block">Insights on Tech</span>
               <span className="block">Careers, Training &amp; Hiring</span>
-            </motion.h1>
+            </Motion.h1>
 
-            <motion.p
+            <Motion.p
               className="text-base md:text-lg text-white/90 mb-6 max-w-xl mx-auto md:mx-0"
               initial={{ x: -30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -89,9 +89,9 @@ export default function Blog() {
               No fluff. Just real stories, salary breakdowns, and step-by-step
               playbooks for learners, career switchers, and hiring teams who
               actually care about outcomes.
-            </motion.p>
+            </Motion.p>
 
-            <motion.div
+            <Motion.div
               className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -111,11 +111,11 @@ export default function Blog() {
               <p className="text-xs text-white/70">
                 Updated frequently with fresh, industry-relevant topics.
               </p>
-            </motion.div>
+            </Motion.div>
           </div>
 
           {/* RIGHT: Illustration */}
-          <motion.div
+          <Motion.div
             className="w-full md:w-1/2 flex justify-center"
             initial={{ x: 40, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -133,9 +133,9 @@ export default function Blog() {
                 loading="eager"
               />
             </div>
-          </motion.div>
+          </Motion.div>
         </div>
-      </motion.section>
+      </Motion.section>
 
       {/* ================== POSTS LIST ================== */}
       <section
@@ -176,7 +176,7 @@ export default function Blog() {
                   : excerptText;
 
               return (
-                <motion.article
+                <Motion.article
                   key={post.id}
                   className="group w-full bg-white backdrop-blur border border-slate-200 rounded-2xl shadow-md hover:shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-1"
                   custom={index}
@@ -269,7 +269,7 @@ export default function Blog() {
                       </span>
                     </div>
                   </div>
-                </motion.article>
+                </Motion.article>
               );
             })}
           </div>
