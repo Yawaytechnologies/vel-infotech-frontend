@@ -8,21 +8,40 @@ import "react-toastify/dist/ReactToastify.css";
 
 /* ============================== Contact Page ============================== */
 export default function Contact() {
-  /* ---------- quick actions/links (unchanged) ---------- */
+  /* ---------- quick actions/links ---------- */
   const actions = [
     { label: "Call", href: "tel:+919600593838", icon: PhoneIcon },
-    { label: "WhatsApp", href: "https://wa.me/9600383839", icon: WhatsAppIcon, target: "_blank" },
+    {
+      label: "WhatsApp",
+      href: "https://wa.me/9600383839",
+      icon: WhatsAppIcon,
+      target: "_blank",
+    },
     { label: "Email", href: "mailto:contact@velinfotech.com", icon: MailIcon },
-    { label: "Directions", href: "https://maps.google.com/?q=Vel+Infotech+Chennai", icon: PinIcon, target: "_blank" },
+    {
+      label: "Directions",
+      href: "https://maps.google.com/?q=Vel+Infotech+Chennai",
+      icon: PinIcon,
+      target: "_blank",
+    },
   ];
 
   const faqs = [
-    { q: "How do I reach Vell Infotech quickly?", a: "Tap Call or WhatsApp on mobile; for visits, use Directions to open Google Maps." },
-    { q: "Do you offer placement assistance?", a: "Yes. We align training with industry needs and provide interview prep & placement support." },
-    { q: "Can I schedule a counselling session?", a: "Yes. Send a message with your preferred time; our team will confirm shortly." },
+    {
+      q: "How do I reach Vell Infotech quickly?",
+      a: "Tap Call or WhatsApp on mobile; for visits, use Directions to open Google Maps.",
+    },
+    {
+      q: "Do you offer placement assistance?",
+      a: "Yes. We align training with industry needs and provide interview prep & placement support.",
+    },
+    {
+      q: "Can I schedule a counselling session?",
+      a: "Yes. Send a message with your preferred time; our team will confirm shortly.",
+    },
   ];
 
-  /* ---------- API integration (unchanged) ---------- */
+  /* ---------- API integration ---------- */
   const dispatch = useDispatch();
   const { status, error: serverError } = useSelector((s) => s.enquiry || {});
 
@@ -81,7 +100,10 @@ export default function Contact() {
     const { name } = e.target;
     setTouched((t) => ({ ...t, [name]: true }));
     const msg = validateField(name, form[name]);
-    setErrors((prev) => ({ ...prev, ...(msg ? { [name]: msg } : { [name]: undefined }) }));
+    setErrors((prev) => ({
+      ...prev,
+      ...(msg ? { [name]: msg } : { [name]: undefined }),
+    }));
   };
 
   // Validations
@@ -90,22 +112,26 @@ export default function Contact() {
     switch (field) {
       case "name":
         if (!val) return "Name is required.";
-        if (!/^[A-Za-z ]+$/.test(val)) return "Only letters and spaces are allowed.";
+        if (!/^[A-Za-z ]+$/.test(val))
+          return "Only letters and spaces are allowed.";
         if (val.length < 2) return "Enter at least 2 characters.";
         return null;
       case "email": {
         if (!val) return "Email is required.";
-        const ok = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
+        const ok =
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
         if (!ok) return "Enter a valid email address.";
         return null;
       }
       case "phone":
         if (!val) return "Mobile number is required.";
-        if (!/^\d{10}$/.test(val)) return "Enter a valid 10-digit mobile number.";
+        if (!/^\d{10}$/.test(val))
+          return "Enter a valid 10-digit mobile number.";
         return null;
       case "course":
         if (!val) return "Course name is required.";
-        if (!/^[A-Za-z ]+$/.test(val)) return "Only letters and spaces are allowed.";
+        if (!/^[A-Za-z ]+$/.test(val))
+          return "Only letters and spaces are allowed.";
         if (val.length < 2) return "Enter at least 2 characters.";
         return null;
       case "message":
@@ -118,7 +144,13 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setTouched({ name: true, email: true, phone: true, course: true, message: true });
+    setTouched({
+      name: true,
+      email: true,
+      phone: true,
+      course: true,
+      message: true,
+    });
 
     const fields = ["name", "email", "phone", "course", "message"];
     const next = {};
@@ -157,7 +189,14 @@ export default function Contact() {
         className: "rounded-xl shadow-md text-[15px] px-4 py-3",
       });
 
-      setForm({ name: "", email: "", phone: "", course: "", message: "", mode: "classroom" });
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        course: "",
+        message: "",
+        mode: "classroom",
+      });
       setErrors({});
       setTouched({});
     } catch (err) {
@@ -171,18 +210,23 @@ export default function Contact() {
   };
 
   return (
-    /* CHANGED: solid light base, no dark gradient */
     <div className="min-h-screen relative overflow-clip bg-[#F7FAFF] dark:bg-[#F7FAFF] mt-12">
-      <ToastContainer newestOnTop position="top-center" autoClose={2200} closeOnClick={false} pauseOnHover />
+      <ToastContainer
+        newestOnTop
+        position="top-center"
+        autoClose={2200}
+        closeOnClick={false}
+        pauseOnHover
+      />
 
-      {/* Ambient blobs (very soft) */}
+      {/* Ambient blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-blue-400/10 blur-3xl" />
         <div className="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-orange-400/10 blur-3xl" />
         <div className="absolute bottom-20 right-1/4 h-64 w-64 rounded-full bg-violet-400/8 blur-3xl" />
       </div>
 
-      {/* Subtle grid overlay (faint) */}
+      {/* Subtle grid overlay */}
       <div
         className="absolute inset-0 opacity-[0.02] bg-[length:32px_32px]"
         style={{
@@ -198,7 +242,12 @@ export default function Contact() {
             {/* LEFT */}
             <div>
               <nav className="flex items-center gap-2 text-sm text-slate-600 mb-8">
-                <a href="/" className="hover:text-[#005BAC] transition-colors font-medium">Home</a>
+                <a
+                  href="/"
+                  className="hover:text-[#005BAC] transition-colors font-medium"
+                >
+                  Home
+                </a>
                 <span className="text-slate-400">→</span>
                 <span className="text-[#005BAC] font-semibold">Contact Us</span>
               </nav>
@@ -220,8 +269,9 @@ export default function Contact() {
               </div>
 
               <p className="mt-6 max-w-2xl text-lg text-slate-600 leading-relaxed">
-                Whether you're looking to upskill, start a new career, or explore our courses — we're here to help.
-                Reach out via call, WhatsApp, email, or send us a quick message.
+                Whether you're looking to upskill, start a new career, or
+                explore our courses — we're here to help. Reach out via call,
+                WhatsApp, email, or send us a quick message.
               </p>
 
               <div className="mt-8 h-1 w-32 rounded-full bg-gradient-to-r from-[#005BAC] via-[#FF5800] to-[#005BAC]" />
@@ -240,7 +290,9 @@ export default function Contact() {
                   >
                     <span className="relative">
                       <span className="absolute inset-0 bg-gradient-to-br from-[#005BAC]/15 to-[#FF5800]/15 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <span className="relative"><a.icon /></span>
+                      <span className="relative">
+                        <a.icon />
+                      </span>
                     </span>
                     {a.label}
                     <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#005BAC]/5 via-transparent to-[#FF5800]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -251,18 +303,23 @@ export default function Contact() {
 
             {/* RIGHT illustration */}
             <div className="relative hidden lg:block">
-              {/* REMOVED the dark-ish gradient/blur backdrop here */}
               <div className="relative ml-auto max-w-xl">
                 <div className="relative rounded-3xl overflow-hidden ring-1 ring-slate-200 shadow-2xl bg-white">
-                  <img src={ContactArt} alt="Contact illustration" className="h-auto w-full object-cover" loading="eager" />
+                  <img
+                    src={ContactArt}
+                    alt="Contact illustration"
+                    className="h-auto w-full object-cover"
+                    loading="eager"
+                  />
                 </div>
                 <div className="absolute -bottom-4 -left-4 rounded-2xl bg-white shadow-xl border border-slate-200 px-4 py-2 flex items-center gap-2">
                   <PhoneIcon />
-                  <span className="text-sm font-semibold text-slate-700">We’re just a call away</span>
+                  <span className="text-sm font-semibold text-slate-700">
+                    We’re just a call away
+                  </span>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -279,8 +336,12 @@ export default function Contact() {
                 <div className="relative p-6">
                   <div className="flex items-start justify-between mb-6">
                     <div>
-                      <h3 className="text-xl font-bold text-slate-900">Reach Us Directly</h3>
-                      <p className="mt-1.5 text-sm text-slate-600">Quick response guaranteed</p>
+                      <h3 className="text-xl font-bold text-slate-900">
+                        Reach Us Directly
+                      </h3>
+                      <p className="mt-1.5 text-sm text-slate-600">
+                        Quick response guaranteed
+                      </p>
                     </div>
                     <span className="relative flex h-3 w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -288,10 +349,32 @@ export default function Contact() {
                     </span>
                   </div>
                   <div className="space-y-3">
-                    <Row icon={PhoneIcon} label="Phone" value="+91-9600593838" href="tel:+919600593838" />
-                    <Row icon={WhatsAppIcon} label="WhatsApp" value="+91-9600383839" href="https://wa.me/9600383839" external />
-                    <Row icon={MailIcon} label="Email" value="contact@velinfotech.com" href="mailto:contact@velinfotech.com" />
-                    <Row icon={PinIcon} label="Location" value="View on Google Map" href="https://maps.google.com/?q=Vel+Infotech+Chennai" external />
+                    <Row
+                      icon={PhoneIcon}
+                      label="Phone"
+                      value="+91-9600593838"
+                      href="tel:+919600593838"
+                    />
+                    <Row
+                      icon={WhatsAppIcon}
+                      label="WhatsApp"
+                      value="+91-9600383839"
+                      href="https://wa.me/9600383839"
+                      external
+                    />
+                    <Row
+                      icon={MailIcon}
+                      label="Email"
+                      value="contact@velinfotech.com"
+                      href="mailto:contact@velinfotech.com"
+                    />
+                    <Row
+                      icon={PinIcon}
+                      label="Location"
+                      value="View on Google Map"
+                      href="https://maps.google.com/?q=Vel+Infotech+Chennai"
+                      external
+                    />
                   </div>
                 </div>
               </div>
@@ -300,17 +383,29 @@ export default function Contact() {
                 <div className="relative p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <ClockIcon className="text-orange-400" />
-                    <h3 className="text-xl font-bold text-white">Office Hours</h3>
+                    <h3 className="text-xl font-bold text-white">
+                      Office Hours
+                    </h3>
                   </div>
-                  <p className="text-sm text-slate-300 mb-4">Walk-ins welcome during working hours</p>
+                  <p className="text-sm text-slate-300 mb-4">
+                    Walk-ins welcome during working hours
+                  </p>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
-                      <span className="text-sm font-medium text-white">Monday – Saturday</span>
-                      <span className="text-sm font-semibold text-orange-400">9:30 AM – 6:30 PM</span>
+                      <span className="text-sm font-medium text-white">
+                        Monday – Saturday
+                      </span>
+                      <span className="text-sm font-semibold text-orange-400">
+                        9:30 AM – 6:30 PM
+                      </span>
                     </div>
                     <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
-                      <span className="text-sm font-medium text-white">Sunday</span>
-                      <span className="text-sm font-semibold text-slate-400">Closed</span>
+                      <span className="text-sm font-medium text-white">
+                        Sunday
+                      </span>
+                      <span className="text-sm font-semibold text-slate-400">
+                        Closed
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -320,27 +415,37 @@ export default function Contact() {
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
                     <StarIcon className="text-[#FF5800]" />
-                    <h3 className="text-xl font-bold text-slate-900">Why Choose Us</h3>
+                    <h3 className="text-xl font-bold text-slate-900">
+                      Why Choose Us
+                    </h3>
                   </div>
-                  <p className="text-sm text-slate-600 mb-5">Industry-aligned curriculum with real-world experience</p>
+                  <p className="text-sm text-slate-600 mb-5">
+                    Industry-aligned curriculum with real-world experience
+                  </p>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3 group/item">
                       <span className="mt-0.5 flex-shrink-0 h-6 w-6 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
                         <TickIcon className="text-white w-4 h-4" />
                       </span>
-                      <span className="text-sm text-slate-700 font-medium group-hover/item:text-slate-900 transition-colors">Hands-on training by industry practitioners</span>
+                      <span className="text-sm text-slate-700 font-medium group-hover/item:text-slate-900 transition-colors">
+                        Hands-on training by industry practitioners
+                      </span>
                     </li>
                     <li className="flex items-start gap-3 group/item">
                       <span className="mt-0.5 flex-shrink-0 h-6 w-6 rounded-lg bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center">
                         <TickIcon className="text-white w-4 h-4" />
                       </span>
-                      <span className="text-sm text-slate-700 font-medium group-hover/item:text-slate-900 transition-colors">Real projects & comprehensive interview prep</span>
+                      <span className="text-sm text-slate-700 font-medium group-hover/item:text-slate-900 transition-colors">
+                        Real projects & comprehensive interview prep
+                      </span>
                     </li>
                     <li className="flex items-start gap-3 group/item">
                       <span className="mt-0.5 flex-shrink-0 h-6 w-6 rounded-lg bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center">
                         <TickIcon className="text-white w-4 h-4" />
                       </span>
-                      <span className="text-sm text-slate-700 font-medium group-hover/item:text-slate-900 transition-colors">Dedicated placement assistance & career support</span>
+                      <span className="text-sm text-slate-700 font-medium group-hover/item:text-slate-900 transition-colors">
+                        Dedicated placement assistance & career support
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -349,7 +454,10 @@ export default function Contact() {
 
             {/* ================= Form card ================= */}
             <div className="lg:col-span-3 space-y-8">
-              <div id="contact-form" className="group relative rounded-3xl bg-white border border-slate-200/60 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden">
+              <div
+                id="contact-form"
+                className="group relative rounded-3xl bg-white border border-slate-200/60 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden"
+              >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#005BAC]/5 via-transparent to-[#FF5800]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative px-6 py-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 via-white to-slate-50">
                   <div className="flex items-center gap-3">
@@ -357,28 +465,48 @@ export default function Contact() {
                       <SendIcon className="text-white" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-slate-900">Send us a message</h2>
-                      <p className="text-sm text-slate-600">We'll get back to you within 24 hours</p>
+                      <h2 className="text-2xl font-bold text-slate-900">
+                        Send us a message
+                      </h2>
+                      <p className="text-sm text-slate-600">
+                        We'll get back to you within 24 hours
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                <form noValidate className="relative p-6 space-y-5" onSubmit={handleSubmit}>
+                <form
+                  noValidate
+                  className="relative p-6 space-y-5"
+                  onSubmit={handleSubmit}
+                >
                   {/* Mode Toggle */}
                   <div className="flex justify-center">
                     <div className="inline-flex items-center rounded-full bg-white border border-slate-200 shadow-sm p-1">
                       <button
                         type="button"
-                        onClick={() => setForm((f) => ({ ...f, mode: "classroom" }))}
-                        className={`${toggleBtnCls} ${form.mode === "classroom" ? "text-white bg-gradient-to-r from-[#005BAC] to-[#FF5800] shadow" : "text-slate-700 hover:text-slate-900"}`}
+                        onClick={() =>
+                          setForm((f) => ({ ...f, mode: "classroom" }))
+                        }
+                        className={`${toggleBtnCls} ${
+                          form.mode === "classroom"
+                            ? "text-white bg-gradient-to-r from-[#005BAC] to-[#FF5800] shadow"
+                            : "text-slate-700 hover:text-slate-900"
+                        }`}
                         aria-pressed={form.mode === "classroom"}
                       >
                         Class Room
                       </button>
                       <button
                         type="button"
-                        onClick={() => setForm((f) => ({ ...f, mode: "online" }))}
-                        className={`${toggleBtnCls} ${form.mode === "online" ? "text-white bg-gradient-to-r from-[#005BAC] to-[#FF5800] shadow" : "text-slate-700 hover:text-slate-900"}`}
+                        onClick={() =>
+                          setForm((f) => ({ ...f, mode: "online" }))
+                        }
+                        className={`${toggleBtnCls} ${
+                          form.mode === "online"
+                            ? "text-white bg-gradient-to-r from-[#005BAC] to-[#FF5800] shadow"
+                            : "text-slate-700 hover:text-slate-900"
+                        }`}
                         aria-pressed={form.mode === "online"}
                       >
                         Online
@@ -390,7 +518,12 @@ export default function Contact() {
                     <Field label="Full name" required>
                       <div>
                         <input
-                          className={inputCls + (touched.name && errors.name ? " border-red-500 focus:border-red-500 focus:ring-red-500" : "")}
+                          className={
+                            inputCls +
+                            (touched.name && errors.name
+                              ? " border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : "")
+                          }
                           placeholder="John Doe"
                           name="name"
                           value={form.name}
@@ -399,16 +532,27 @@ export default function Contact() {
                           required
                           aria-invalid={!!(touched.name && errors.name)}
                         />
-                        {touched.name && errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+                        {touched.name && errors.name && (
+                          <p className="mt-1 text-xs text-red-600">
+                            {errors.name}
+                          </p>
+                        )}
                       </div>
                     </Field>
 
                     <Field label="Email" required>
                       <div className="relative">
-                        <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><MailIcon /></span>
+                        <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
+                          <MailIcon />
+                        </span>
                         <input
                           type="email"
-                          className={`${inputCls} pl-11` + (touched.email && errors.email ? " border-red-500 focus:border-red-500 focus:ring-red-500" : "")}
+                          className={
+                            `${inputCls} pl-11` +
+                            (touched.email && errors.email
+                              ? " border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : "")
+                          }
                           placeholder="you@example.com"
                           name="email"
                           value={form.email}
@@ -417,19 +561,30 @@ export default function Contact() {
                           required
                           aria-invalid={!!(touched.email && errors.email)}
                         />
-                        {touched.email && errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+                        {touched.email && errors.email && (
+                          <p className="mt-1 text-xs text-red-600">
+                            {errors.email}
+                          </p>
+                        )}
                       </div>
                     </Field>
 
                     <Field label="Phone" required>
                       <div className="relative">
-                        <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><PhoneIcon /></span>
+                        <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
+                          <PhoneIcon />
+                        </span>
                         <input
                           type="tel"
                           inputMode="numeric"
                           pattern="^\d{10}$"
                           title="Enter a valid 10-digit mobile number"
-                          className={`${inputCls} pl-11` + (touched.phone && errors.phone ? " border-red-500 focus:border-red-500 focus:ring-red-500" : "")}
+                          className={
+                            `${inputCls} pl-11` +
+                            (touched.phone && errors.phone
+                              ? " border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : "")
+                          }
                           placeholder="10-digit mobile number"
                           name="phone"
                           value={form.phone}
@@ -438,14 +593,23 @@ export default function Contact() {
                           required
                           aria-invalid={!!(touched.phone && errors.phone)}
                         />
-                        {touched.phone && errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
+                        {touched.phone && errors.phone && (
+                          <p className="mt-1 text-xs text-red-600">
+                            {errors.phone}
+                          </p>
+                        )}
                       </div>
                     </Field>
 
                     <Field label="Course Interest">
                       <div>
                         <input
-                          className={inputCls + (touched.course && errors.course ? " border-red-500 focus:border-red-500 focus:ring-red-500" : "")}
+                          className={
+                            inputCls +
+                            (touched.course && errors.course
+                              ? " border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : "")
+                          }
                           placeholder="Java, Python, Testing..."
                           name="course"
                           value={form.course}
@@ -453,7 +617,11 @@ export default function Contact() {
                           onBlur={onBlur}
                           aria-invalid={!!(touched.course && errors.course)}
                         />
-                        {touched.course && errors.course && <p className="mt-1 text-xs text-red-600">{errors.course}</p>}
+                        {touched.course && errors.course && (
+                          <p className="mt-1 text-xs text-red-600">
+                            {errors.course}
+                          </p>
+                        )}
                       </div>
                     </Field>
                   </div>
@@ -461,7 +629,12 @@ export default function Contact() {
                   <Field label="Your Message">
                     <div>
                       <textarea
-                        className={`${inputCls} min-h-[140px] resize-y` + (touched.message && errors.message ? " border-red-500 focus:border-red-500 focus:ring-red-500" : "")}
+                        className={
+                          `${inputCls} min-h-[140px] resize-y` +
+                          (touched.message && errors.message
+                            ? " border-red-500 focus:border-red-500 focus:ring-red-500"
+                            : "")
+                        }
                         placeholder="Tell us how we can help you..."
                         name="message"
                         value={form.message}
@@ -469,8 +642,14 @@ export default function Contact() {
                         onBlur={onBlur}
                         aria-invalid={!!(touched.message && errors.message)}
                       />
-                      <div className="flex justify-end text-xs text-slate-500 mt-1">{form.message.length}/300</div>
-                      {touched.message && errors.message && <p className="mt-1 text-xs text-red-600">{errors.message}</p>}
+                      <div className="flex justify-end text-xs text-slate-500 mt-1">
+                        {form.message.length}/300
+                      </div>
+                      {touched.message && errors.message && (
+                        <p className="mt-1 text-xs text-red-600">
+                          {errors.message}
+                        </p>
+                      )}
                     </div>
                   </Field>
 
@@ -485,13 +664,17 @@ export default function Contact() {
                       <span className="absolute inset-0 bg-gradient-to-r from-[#FF5800] to-[#005BAC] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
                       <span className="relative flex items-center gap-2">
                         <SendIcon />
-                        {status === "loading" ? "Submitting..." : "Submit Message"}
+                        {status === "loading"
+                          ? "Submitting..."
+                          : "Submit Message"}
                       </span>
                     </button>
                   </div>
 
                   {serverError && (
-                    <p className="mt-2 text-sm text-red-600">Submission failed: {String(serverError)}</p>
+                    <p className="mt-2 text-sm text-red-600">
+                      Submission failed: {String(serverError)}
+                    </p>
                   )}
                 </form>
               </div>
@@ -504,26 +687,34 @@ export default function Contact() {
                       <QuestionIcon className="text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-slate-900">Frequently Asked Questions</h3>
-                      <p className="text-sm text-slate-600">Quick answers to common queries</p>
+                      <h3 className="text-xl font-bold text-slate-900">
+                        Frequently Asked Questions
+                      </h3>
+                      <p className="text-sm text-slate-600">
+                        Quick answers to common queries
+                      </p>
                     </div>
                   </div>
                 </div>
                 <div className="divide-y divide-slate-100">
-                  {faqs.map((f, i) => <Faq key={i} {...f} />)}
+                  {faqs.map((f, i) => (
+                    <Faq key={i} {...f} />
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Map + CTA (unchanged) */}
+          {/* Map + CTA */}
           <div className="mt-12 group relative rounded-3xl overflow-hidden border border-slate-200/60 shadow-2xl hover:shadow-3xl transition-all duration-500">
             <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-slate-900/80 to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-900/80 to-transparent z-10 pointer-events-none" />
             <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-2 shadow-lg border border-slate-200">
               <div className="flex items-center gap-2">
                 <PinIcon className="text-[#005BAC]" />
-                <span className="text-sm font-semibold text-slate-900">Vell Infotech, Chennai</span>
+                <span className="text-sm font-semibold text-slate-900">
+                  Vell Infotech, Chennai
+                </span>
               </div>
             </div>
             <div className="relative w-full h-[400px]">
@@ -542,8 +733,12 @@ export default function Contact() {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[#FF5800]/20 to-transparent rounded-full blur-3xl" />
             <div className="relative flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="text-center sm:text-left">
-                <h3 className="text-2xl font-bold text-white mb-2">Need Immediate Assistance?</h3>
-                <p className="text-slate-300">Choose your preferred method below — we're here to help!</p>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Need Immediate Assistance?
+                </h3>
+                <p className="text-slate-300">
+                  Choose your preferred method below — we're here to help!
+                </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 {actions.map((a) => (
@@ -591,7 +786,8 @@ export default function Contact() {
 }
 
 /* ============================== Styles/helpers ============================== */
-const toggleBtnCls = "px-4 py-1.5 text-sm font-semibold rounded-full transition-all";
+const toggleBtnCls =
+  "px-4 py-1.5 text-sm font-semibold rounded-full transition-all";
 
 const inputCls =
   "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-[15px] outline-none " +
@@ -610,16 +806,21 @@ function Field({ label, required, children }) {
   );
 }
 
-function Row({ label, value, href, external }) {
+function Row({ icon, label, value, href, external }) {
+  const IconComp = icon || PhoneIcon;
+
   const inner = (
     <>
-      <span className="flex-shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-xl text-white
-                       bg-gradient-to-br from-[#005BAC] to-[#FF5800] shadow-lg">
-        <Icon />
+      <span className="flex-shrink-0 inline-flex items-center justify-center w-11 h-11 rounded-xl text-white bg-gradient-to-br from-[#005BAC] to-[#FF5800] shadow-lg">
+        <IconComp />
       </span>
       <div className="flex-1 min-w-0">
-        <div className="text-[11px] uppercase tracking-wider text-slate-500 font-bold mb-0.5">{label}</div>
-        <div className="text-slate-900 font-semibold text-sm truncate">{value}</div>
+        <div className="text-[11px] uppercase tracking-wider text-slate-500 font-bold mb-0.5">
+          {label}
+        </div>
+        <div className="text-slate-900 font-semibold text-sm truncate">
+          {value}
+        </div>
       </div>
     </>
   );
@@ -630,11 +831,25 @@ function Row({ label, value, href, external }) {
     "shadow-sm hover:shadow-lg relative overflow-hidden";
 
   return href ? (
-    <a className={cls} href={href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined}>
+    <a
+      className={cls}
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+    >
       {inner}
       <span className="ml-auto flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 text-slate-400 group-hover:text-[#005BAC] group-hover:border-[#005BAC]/30 transition-all">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M7 17L17 7M17 7H7M17 7V17" />
         </svg>
       </span>
       <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-[#005BAC]/5 via-transparent to-[#FF5800]/5" />
@@ -652,30 +867,131 @@ function Faq({ q, a }) {
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center justify-between px-6 py-5 text-left group"
       >
-        <span className="font-semibold text-slate-900 pr-4 group-hover:text-[#005BAC] transition-colors">{q}</span>
+        <span className="font-semibold text-slate-900 pr-4 group-hover:text-[#005BAC] transition-colors">
+          {q}
+        </span>
         <span
-          className={`flex-shrink-0 w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 group-hover:border-[#005BAC]/30 group-hover:text-[#005BAC] transition-all ${open ? "rotate-180 bg-[#005BAC] text-white border-[#005BAC]" : ""}`}
+          className={`flex-shrink-0 w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 group-hover:border-[#005BAC]/30 group-hover:text-[#005BAC] transition-all ${
+            open ? "rotate-180 bg-[#005BAC] text-white border-[#005BAC]" : ""
+          }`}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 9l6 6 6-6"/>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M6 9l6 6 6-6" />
           </svg>
         </span>
       </button>
-      {open && <div className="px-6 pb-5 text-slate-600 text-[15px] leading-relaxed animate-fadeIn">{a}</div>}
+      {open && (
+        <div className="px-6 pb-5 text-slate-600 text-[15px] leading-relaxed animate-fadeIn">
+          {a}
+        </div>
+      )}
     </div>
   );
 }
 
 /* ============================== Inline Icons ============================== */
-function svgP(p){return{width:18,height:18,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:(p?.className||"")};}
-function PhoneIcon(props){return(<svg {...svgP(props)}><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>)}
-function MailIcon(props){return(<svg {...svgP(props)}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>)}
-function PinIcon(props){return(<svg {...svgP(props)}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>)}
-function SendIcon(props){return(<svg {...svgP(props)}><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>)}
-function TickIcon(props){return(<svg {...svgP(props)}><polyline points="20 6 9 17 4 12"/></svg>)}
-function WhatsAppIcon(props){return(<svg {...svgP(props)} viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>)}
-function SparkIcon(props){return(<svg {...svgP(props)}><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg>)}
-function ShieldIcon(props){return(<svg {...svgP(props)}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>)}
-function ClockIcon(props){return(<svg {...svgP(props)}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>)}
-function StarIcon(props){return(<svg {...svgP(props)}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
-function QuestionIcon(props){return(<svg {...svgP(props)}><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>)}
+function svgP(p) {
+  return {
+    width: 18,
+    height: 18,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 2,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: p?.className || "",
+  };
+}
+function PhoneIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+    </svg>
+  );
+}
+function MailIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+      <polyline points="22,6 12,13 2,6" />
+    </svg>
+  );
+}
+function PinIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+function SendIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <line x1="22" y1="2" x2="11" y2="13" />
+      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+    </svg>
+  );
+}
+function TickIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+function WhatsAppIcon(props) {
+  return (
+    <svg {...svgP(props)} viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  );
+}
+function SparkIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" />
+    </svg>
+  );
+}
+function ShieldIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  );
+}
+function ClockIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+  );
+}
+function StarIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+function QuestionIcon(props) {
+  return (
+    <svg {...svgP(props)}>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+  );
+}
