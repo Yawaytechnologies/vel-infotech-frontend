@@ -37,6 +37,8 @@ import Whatsapp from "./components/common/Whatsapp";
 import CourseRouter from "./pages/CourseRouter";
 import NotFound from "./pages/NotFound";
 
+import JobOverview from "./pages/JobOverview";
+
 // 🔔 GTM listener
 import GTMRouteListener from "./analytics/GTMRouteListener";
 
@@ -143,7 +145,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/reviews" element={<Reviews />} />
-          <Route path="/jobposting" element={<JobPosting />} />
+          <Route path="/careers" element={<JobPosting />} />
+           <Route path="/careers/:jobId" element={<JobOverview />} />
           <Route path="/sample-resume" element={<SampleResume />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<Blog />} />
