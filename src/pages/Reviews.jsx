@@ -454,8 +454,6 @@ export default function Review() {
     </div>
   );
 }
-
-/* ===================== HERO (dark gradient) ===================== */
 function Hero({ trendingCourses, overallRating, ratingHistogram, googleMeta }) {
   return (
     <section className="relative pt-24 pb-16 overflow-hidden">
