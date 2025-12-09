@@ -145,7 +145,7 @@ export default function App() {
           <Route path="/sample-resume" element={<SampleResume />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogDetails />} />
+          <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/tutorials" element={<Tutorials />} />
           <Route path="/tutorials/:slug" element={<TutorialDetail />} />
           <Route path="/resources" element={<Navigate to="/tutorials" replace />} />

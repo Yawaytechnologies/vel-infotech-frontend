@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiCalendar, FiArrowRight } from "react-icons/fi";
-import { motion as Motion } from "framer-motion"; // <─ renamed to Motion
+import { motion as Motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogPosts } from "../redux/actions/blogAction";
-
-import blogSvg from "../assets/blog.svg";
+// import blogSvg from "../assets/blog.svg";
+import career from "../assets/career.jpg";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30, scale: 0.97 },
@@ -32,9 +32,12 @@ export default function Blog() {
     dispatch(fetchBlogPosts());
   }, [dispatch]);
 
+  // For debugging if needed:
+  // console.log("BLOG STATE:", { posts, status, fromApi });
+
   return (
     <main className="bg-[#021733] min-h-screen">
-      {/* ================== HERO (H1) ================== */}
+      {/* ================== HERO ================== */}
       <Motion.section
         className="relative w-full bg-gradient-to-br from-[#00448f] via-[#003369] to-[#010b22] py-24 px-4 text-white overflow-hidden mt-12 shadow-[0_-10px_30px_rgba(0,0,0,0.45)]"
         initial={{ opacity: 0 }}
@@ -42,7 +45,6 @@ export default function Blog() {
         transition={{ duration: 0.9 }}
         aria-labelledby="blog-page-title"
       >
-        {/* glow blobs */}
         <div
           className="pointer-events-none absolute -top-10 -left-10 h-56 w-56 rounded-full bg-white/10 blur-3xl"
           aria-hidden="true"
@@ -55,7 +57,6 @@ export default function Blog() {
         <div className="relative max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12">
           {/* LEFT: Text */}
           <div className="w-full md:w-1/2 text-center md:text-left pl-3 md:pl-10 flex flex-col justify-center">
-            {/* LIVE badge */}
             <Motion.div
               className="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 pl-3 pr-4 py-1 text-[10px] md:text-xs font-semibold tracking-wide uppercase mb-3"
               initial={{ y: -10, opacity: 0 }}
@@ -100,7 +101,6 @@ export default function Blog() {
               <a
                 href="#latest-articles"
                 className="group inline-flex items-center justify-between gap-2 bg-black text-white font-semibold pl-5 pr-3 py-2.5 rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.3)] whitespace-nowrap border border-black transition-all duration-300 ease-out hover:bg-emerald-500 hover:text-black hover:shadow-[0_10px_26px_rgba(0,0,0,0.45)]"
-                aria-label="Skip to latest blog posts"
               >
                 <span>Browse Latest Posts</span>
                 <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:scale-105 group-hover:text-emerald-600">
@@ -127,7 +127,7 @@ export default function Blog() {
                 aria-hidden="true"
               />
               <img
-                src={blogSvg}
+                src={career}
                 alt="People reading tech blog articles online"
                 className="relative w-[80%] max-w-md h-auto drop-shadow-2xl rounded-3xl"
                 loading="eager"
@@ -163,6 +163,7 @@ export default function Blog() {
               {status === "failed" &&
                 "Showing fallback posts due to API error"}
               {status === "idle" && posts?.length > 0 && "Ready to read"}
+              {status === "idle" && (!posts || posts.length === 0) && ""}
             </p>
           </header>
 
@@ -175,6 +176,13 @@ export default function Blog() {
                   ? excerptText.slice(0, 110) + "..."
                   : excerptText;
 
+              const imageSrc = post.image || career;
+              const dateText =
+                post.date ||
+                (post.createdAt && typeof post.createdAt === "string"
+                  ? post.createdAt.slice(0, 10)
+                  : "");
+
               return (
                 <Motion.article
                   key={post.id}
@@ -184,23 +192,15 @@ export default function Blog() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: false, amount: 0.35 }}
-                  itemScope
-                  itemType="https://schema.org/BlogPosting"
-                  aria-labelledby={`post-${post.id}-title`}
                 >
                   {/* IMAGE */}
-                  <Link
-                    to={`/blog/${post.slug}`}
-                    className="block"
-                    itemProp="url"
-                  >
+                  <Link to={`/blog/${post.slug}`}>
                     <div className="relative overflow-hidden">
                       <img
-                        src={post.image}
+                        src={imageSrc}
                         alt={post.title}
                         className="w-full h-32 object-cover transform transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
-                        itemProp="image"
                       />
                       <div
                         className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -217,30 +217,19 @@ export default function Blog() {
                       </span>
                       <span className="inline-flex items-center gap-1">
                         <FiCalendar aria-hidden="true" />
-                        <time
-                          className="uppercase tracking-wide"
-                          dateTime={post.iso}
-                          itemProp="datePublished"
-                        >
-                          {post.date}
+                        <time className="uppercase tracking-wide">
+                          {dateText}
                         </time>
                       </span>
                     </div>
 
-                    <Link to={`/blog/${post.slug}`} itemProp="url">
-                      <h3
-                        id={`post-${post.id}-title`}
-                        className="text-[14px] md:text-[15px] font-semibold text-[#0B3D6E] group-hover:text-[#005BAC] leading-snug line-clamp-2"
-                        itemProp="headline"
-                      >
+                    <Link to={`/blog/${post.slug}`}>
+                      <h3 className="text-[14px] md:text-[15px] font-semibold text-[#0B3D6E] group-hover:text-[#005BAC] leading-snug line-clamp-2">
                         {post.title}
                       </h3>
                     </Link>
 
-                    <p
-                      className="text-[13px] text-slate-600 leading-relaxed"
-                      itemProp="description"
-                    >
+                    <p className="text-[13px] text-slate-600 leading-relaxed">
                       {isExpanded ? excerptText : shortExcerpt}{" "}
                       {excerptText.length > 110 && (
                         <button
@@ -256,10 +245,8 @@ export default function Blog() {
                     </p>
 
                     <div className="mt-2 flex items-center justify-between">
-                      <Link
-                        to={`/blog/${post.slug}`}
+                      <Link to={`/blog/${post.id}`}
                         className="inline-flex items-center gap-1 text-xs text-white bg-[#005BAC] hover:bg-[#004b8d] px-3 py-1.5 rounded-lg font-medium whitespace-nowrap"
-                        aria-label={`Read article: ${post.title}`}
                       >
                         Read the article
                         <FiArrowRight className="text-[11px]" />
@@ -276,80 +263,7 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* ================== NEWSLETTER + ABOUT STRIP (NO FORM) ================== */}
-      <section
-        className="w-full bg-gradient-to-r from-[#00448f] via-[#003369] to-[#010b22] py-10"
-        aria-labelledby="subscribe-cta-heading"
-      >
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="grid gap-6 md:grid-cols-2 items-stretch">
-            {/* JOIN OUR NEWSLETTER */}
-            <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-5 md:p-6 flex flex-col gap-4">
-              <div>
-                <h2
-                  id="subscribe-cta-heading"
-                  className="text-lg md:text-xl font-bold text-slate-900 mb-2"
-                >
-                  Join Our Newsletter
-                </h2>
-
-                <p className="text-[13px] md:text-sm text-slate-600">
-                  Get weekly updates on courses, interview trends, and tech
-                  career tips—straight to your inbox. No spam, only things worth
-                  forwarding.
-                </p>
-
-                <p className="mt-3 text-[11px] md:text-xs text-slate-500">
-                  Expect 1–2 emails a week with practical guides, salary
-                  insights, and hiring trends curated by the Vell InfoTech team.
-                  You can unsubscribe anytime in a single click.
-                </p>
-              </div>
-
-              <div className="flex justify-center mt-1">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-full font-semibold text-xs md:text-sm shadow text-center"
-                >
-                  Subscribe Free
-                </Link>
-              </div>
-            </div>
-
-            {/* ABOUT VELL INFOTECH */}
-            <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-5 md:p-6">
-              <h3 className="text-lg md:text-xl font-bold text-[#005BAC] mb-3">
-                About Vell InfoTech
-              </h3>
-
-              <ul className="space-y-2 text-sm md:text-[15px] text-slate-800">
-                <li>
-                  <span className="font-semibold">Industry Leader:</span>{" "}
-                  Recognized as a high-impact IT education brand.
-                </li>
-                <li>
-                  <span className="font-semibold">Expert-Led:</span> 650+ 
-                  world-class trainers &amp; real project mentorship.
-                </li>
-                <li>
-                  <span className="font-semibold">Tailored Pathways:</span>{" "}
-                  Flexible for students, graduates, and working pros.
-                </li>
-                <li>
-                  <span className="font-semibold">Proven Outcomes:</span>{" "}
-                  10,000+ students placed with top IT MNCs.
-                </li>
-              </ul>
-
-              <p className="mt-3 text-xs md:text-[13px] text-slate-600">
-                <span className="font-semibold">Benefits:</span> Faster
-                onboarding, productivity gains, cost-effective upskilling, and
-                global recognition.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* You can keep your Newsletter / About strip below this if you already had one */}
     </main>
   );
 }
