@@ -275,9 +275,9 @@ export default function EtlTesting() {
     <>
       {/* ✅ Head-only SEO */}
       <Seo
-        title="ETL Testing Program"
-        description="Learn ETL testing techniques, data validation, and quality assurance. Gain hands-on skills to ensure accurate data migration and reliable business intelligence."
-        canonical="/all-courses/etl-testing-program"
+        title="ETL Testing Program | Vellinfotech"
+        description="Learn ETL testing, data validation, and quality assurance with hands-on skills to ensure accurate data migration and reliable business intelligence"
+        canonical="https://www.vellinfotech.com/all-courses/etl-testing-program"
         image="/images/courses/etl-testing-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

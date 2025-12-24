@@ -270,9 +270,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="AWS Training Program"
-        description="Learn Amazon Web Services (AWS) cloud computing, deployment, and management. Gain hands-on skills to build, secure, and scale cloud applications effectively."
-        canonical="/all-courses/aws-training-program"
+        title="AWS Training Program |  Vellinfotech"
+        description="Learn AWS cloud computing, deployment, and management with hands-on skills to build, secure, and scale cloud applications effectively."
+        canonical="https://www.vellinfotech.com/all-courses/aws-training-program"
         image="/images/courses/aws-training-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

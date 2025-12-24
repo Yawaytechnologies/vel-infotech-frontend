@@ -276,9 +276,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="SAP Training Program"
+        title="SAP Training Program | Vellinfotech"
         description="Learn SAP modules, ERP processes, and business workflows. Gain hands-on skills to manage enterprise operations and boost career opportunities in SAP."
-        canonical="/all-courses/sap-training-program"
+        canonical="https://www.vellinfotech.com/all-courses/sap-training-program"
         image="/images/courses/sap-training-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

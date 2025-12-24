@@ -286,7 +286,7 @@ export default function PythonCoursePage() {
       <Seo
         title="Python Full Stack Developer Course"
         description="Learn Python, Django, React, and MySQL to build complete web apps. Become a job-ready Python Full Stack Developer with hands-on projects and training."
-        canonical="/all-courses/python-full-stack-developer-course"
+        canonical="https://www.vellinfotech.com/all-courses/python-full-stack-developer-course"
         image="https://cdn-icons-png.flaticon.com/512/5968/5968350.png"
         type="article"
         jsonLd={pythonCourseJsonLd}

@@ -275,9 +275,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Business Analytics course"
+        title="Business Analytics course | Vellinfotech"
         description="Learn data analysis, Excel, SQL, and visualization tools. Gain skills to make data-driven business decisions and excel in analytics roles."
-        canonical="/all-courses/business-analytics-course"
+        canonical="https://www.vellinfotech.com/all-courses/business-analytics-course"
         image="/images/courses/business-analytics-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

@@ -277,9 +277,9 @@ export default function FullStackCoursePage() {
     <>
       {/* SEO */}
       <Seo
-        title="Full Stack Development Course"
+        title="Full Stack Development Course | Vellinfotech"
         description="Learn to build dynamic web apps using frontend and backend technologies. Master HTML, CSS, JavaScript, React, Node.js, and databases with real projects."
-        canonical="/all-courses/full-stack-development"
+        canonical="https://www.vellinfotech.com/all-courses/full-stack-development-course"
         image="https://cdn-icons-png.flaticon.com/512/16990/16990193.png"
         type="article"
         jsonLd={courseJsonLd}

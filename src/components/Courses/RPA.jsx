@@ -276,9 +276,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="RPA (Robotic Process Automation) course"
-        description="Learn RPA from industry experts and automate business processes with UiPath, Blue Prism & Automation Anywhere. Build a high-demand career in automation today!"
-        canonical="/all-courses/rpa-robotic-process-automation-course"
+        title="RPA (Robotic Process Automation) course |  Vellinfotech"
+        description="Learn RPA from industry experts. Automate processes using UiPath, Blue Prism & Automation Anywhere, and build a high-demand automation career."
+        canonical="https://www.vellinfotech.com/all-courses/rpa-robotic-process-automation-course"
         image="/images/courses/rpa-og.jpg"
         type="article"
         jsonLd={courseJsonLd}
