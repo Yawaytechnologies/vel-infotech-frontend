@@ -281,9 +281,9 @@ export default function PlsqlCoursePage() {
     <>
       {/* ✅ SEO (no visual changes) */}
       <Seo
-        title="PL/SQL Developer Course"
+        title="PL/SQL Developer Course | Vellinfotech"
         description="Master PL/SQL programming, queries, and database management. Learn to write efficient code, create stored procedures, and optimize performance."
-        canonical="/all-courses/pl-sql-developer-course"
+        canonical="https://www.vellinfotech.com/all-courses/pl-sql-developer-course"
         image="https://cdn-icons-png.flaticon.com/512/16990/16990193.png"
         type="article"
         jsonLd={courseJsonLd}

@@ -87,6 +87,7 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Courses", href: "/all-courses" },
+  { name: "Careers", href: "/careers" },
   { name: "Clients", href: "/client" },
   { name: "Contact", href: "/contact-us" },
 ];
@@ -116,7 +117,7 @@ export default function Header() {
   return (
     <>
       <header className="fixed top-0 w-full z-50 bg-background border-b border-white/20">
-        <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[78px]">
+        <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[83px]">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/">
@@ -136,7 +137,7 @@ export default function Header() {
                 to={link.href}
                 onClick={() => setCurrent(link.name)}
                 onMouseEnter={() => setCurrent(link.name)}
-                className={`relative font-medium text-base transition-all duration-200 ${
+                className={`relative font-medium text-sm transition-all duration-200 ${
                   current === link.name
                     ? "text-[#005BAC]"
                     : "text-gray-800/90 hover:text-[#005BAC]"
@@ -189,7 +190,7 @@ export default function Header() {
         </div>
 
         {/* Desktop Subheader */}
-        <div className="hidden md:flex w-full bg-[#005BAC] min-h-[54px] items-center px-6 z-40 fixed top-[64px] left-0">
+        <div className="hidden md:flex w-full bg-[#005BAC] min-h-[54px] items-center px-6 z-40 fixed top-[83px] left-0">
           <nav className="w-full flex justify-center gap-10 text-white font-semibold text-md relative">
             {/* All Courses dropdown */}
             <div className="relative group">

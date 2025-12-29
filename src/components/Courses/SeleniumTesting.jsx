@@ -274,9 +274,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Selenium Testing Program"
-        description="Learn Selenium automation testing, test scripts, and frameworks. Gain hands-on experience to automate web applications and ensure high-quality software delivery."
-        canonical="/all-courses/selenium-testing-program"
+        title="Selenium Testing Program | Vellinfotech"
+        description="Learn Selenium automation testing, write test scripts, use frameworks, and gain hands-on experience to automate web apps and ensure high-quality software"
+        canonical="https://www.vellinfotech.com/all-courses/selenium-testing-program"
         image="/images/courses/selenium-testing-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

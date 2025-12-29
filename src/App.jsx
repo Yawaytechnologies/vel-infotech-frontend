@@ -12,6 +12,7 @@ import Footer from "./components/common/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Reviews from "./pages/Reviews";
+import JobPosting from "./pages/jobposting";
 import SampleResume from "./pages/SampleResume";
 import PlacedStudents from "./pages/placedStudents";
 import Blog from "./pages/Blog";
@@ -35,18 +36,20 @@ import Feedback from "./components/admin/Feedback.jsx";
 import Whatsapp from "./components/common/Whatsapp";
 import CourseRouter from "./pages/CourseRouter";
 import NotFound from "./pages/NotFound";
+import JobOverview from "./pages/JobOverview";
 
-// 🔔 GTM listener
 import GTMRouteListener from "./analytics/GTMRouteListener";
 
-/* ===== Fixed header offset used for hash scrolling ===== */
-const HEADER_OFFSET = 110;
+/** ✅ Must match Header heights */
+const HEADER_H = 83;
+const SUBHEADER_H = 54;
+const DESKTOP_OFFSET = HEADER_H + SUBHEADER_H; // 137
+const MOBILE_OFFSET = HEADER_H; // 83
 
-/* Inline scroll-to-top (no extra file). Set to smooth. */
 function ScrollToTopInline({ top = 0, behavior = "smooth" }) {
   const { pathname, search, hash } = useLocation();
   useEffect(() => {
-    if (hash) return; // keep in-page anchor behavior
+    if (hash) return;
     requestAnimationFrame(() => {
       window.scrollTo({ top, left: 0, behavior });
     });
@@ -54,8 +57,6 @@ function ScrollToTopInline({ top = 0, behavior = "smooth" }) {
   return null;
 }
 
-/* Smoothly scroll to an element if URL has a #hash.
-   Also adjusts for the fixed header by scrolling up HEADER_OFFSET px. */
 function ScrollToHash() {
   const { hash } = useLocation();
 
@@ -64,13 +65,14 @@ function ScrollToHash() {
 
     const id = hash.replace("#", "");
     const el = document.getElementById(id);
-
     if (!el) return;
 
     el.scrollIntoView({ behavior: "smooth", block: "start" });
 
     const t = setTimeout(() => {
-      window.scrollBy({ top: -HEADER_OFFSET, left: 0, behavior: "instant" });
+      // ✅ adjust for fixed header+subheader on desktop
+      const offset = window.innerWidth >= 768 ? DESKTOP_OFFSET : MOBILE_OFFSET;
+      window.scrollBy({ top: -offset, left: 0, behavior: "instant" });
     }, 250);
 
     return () => clearTimeout(t);
@@ -79,7 +81,6 @@ function ScrollToHash() {
   return null;
 }
 
-/* ---------- Layout ---------- */
 function Layout({ children }) {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
@@ -87,16 +88,22 @@ function Layout({ children }) {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 md:bg-gradient-to-br md:from-[#0a2d55] md:to-[#051a30]">
       {!isAdmin && <Header />}
-      <main className={`flex-1 ${!isAdmin ? "pt-[6px] md:pt-[5px]" : ""} bg-transparent`}>
+
+      {/* ✅ Reserve exact space for fixed header */}
+      <main
+        className={`flex-1 bg-transparent ${
+          !isAdmin ? `pt-[${MOBILE_OFFSET}px] md:pt-[${DESKTOP_OFFSET}px]` : ""
+        }`}
+      >
         {children}
       </main>
+
       {!isAdmin && <Footer />}
       {!isAdmin && <Whatsapp phone="+91 9600593838" variant="float" />}
     </div>
   );
 }
 
-/* ---------- App ---------- */
 export default function App() {
   const LEGACY_COURSE_ALIASES = [
     ["/all-courses/Java", "/all-courses/java-full-stack-developer-course"],
@@ -130,7 +137,6 @@ export default function App() {
 
   return (
     <Router>
-      {/* 🔔 Mount the GTM listener here (inside Router) */}
       <GTMRouteListener />
 
       <Layout>
@@ -138,14 +144,18 @@ export default function App() {
         <ScrollToHash />
 
         <Routes>
-          {/* Public pages */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/reviews" element={<Reviews />} />
+
+          {/* ✅ Careers kept */}
+          <Route path="/careers" element={<JobPosting />} />
+          <Route path="/careers/:jobId" element={<JobOverview />} />
+
           <Route path="/sample-resume" element={<SampleResume />} />
           <Route path="/placed-students" element={<PlacedStudents />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogDetails />} />
+          <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/tutorials" element={<Tutorials />} />
           <Route path="/tutorials/:slug" element={<TutorialDetail />} />
           <Route path="/resources" element={<Navigate to="/tutorials" replace />} />
@@ -154,35 +164,28 @@ export default function App() {
           <Route path="/internship" element={<Internship />} />
           <Route path="/privacy" element={<Privacy />} />
 
-          {/* Contact */}
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/contact" element={<Navigate to="/contact-us" replace />} />
-
           <Route path="/client" element={<Clientpage />} />
 
-          {/* Courses */}
           <Route path="/all-courses" element={<AllCourses />} />
           <Route path="/all-courses/:slug" element={<CourseRouter />} />
           {LEGACY_COURSE_ALIASES.map(([from, to]) => (
             <Route key={from} path={from} element={<Navigate to={to} replace />} />
           ))}
 
-          {/* Public login */}
           <Route path="/admin/login" element={<AdminLogin />} />
 
-          {/* Protected admin */}
           <Route element={<ProtectedRoute />}>
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="course-enquired" element={<StudentTable />} />
               <Route path="feedback" element={<Feedback />} />
-              {/* Admin 404 */}
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>
 
-          {/* Public 404 (fallback) */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

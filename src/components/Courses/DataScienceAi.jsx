@@ -278,9 +278,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Data Science & AI Program"
-        description="Learn Data Science and AI with Python, machine learning, and deep learning. Gain hands-on experience to solve real-world problems and build smart solutions."
-        canonical="/all-courses/data-science-and-ai-program"
+        title="Data Science & AI Program | Vellinfotech"
+        description="Learn Data Science & AI using Python, machine learning, and deep learning. Gain hands-on skills to solve real-world problems and build smart solutions."
+        canonical="https://www.vellinfotech.com/all-courses/data-science-and-ai-program"
         image="/images/courses/data-science-ai-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

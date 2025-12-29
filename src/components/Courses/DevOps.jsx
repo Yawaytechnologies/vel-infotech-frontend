@@ -276,9 +276,9 @@ export default function DevOpsCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="DevOps Training Program"
+        title="DevOps Training Program | Vellinfotech"
         description="Learn DevOps practices, CI/CD, Docker, Kubernetes, and automation. Gain hands-on skills to streamline development and deploy applications efficiently."
-        canonical="/all-courses/devops-training-program"
+        canonical="https://www.vellinfotech.com/all-courses/devops-training-program"
         image="/images/courses/devops-training-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

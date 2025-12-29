@@ -277,9 +277,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Salesforce Training Program"
+        title="Salesforce Training Program | Vellinfotech"
         description="Learn Salesforce CRM, automation, and cloud solutions. Gain hands-on skills to manage customer relationships and enhance business productivity effectively."
-        canonical="/all-courses/salesforce-training-program"
+        canonical="https://www.vellinfotech.com/all-courses/salesforce-training-program"
         image="/images/courses/salesforce-training-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

@@ -119,9 +119,9 @@ export default function FeedbackSection({ hideHeader = false }) {
       {!hideHeader && (
         <div className="w-full bg-gradient-to-r from-[#005BAC] via-[#0073CE] to-[#00AEEF]">
           <div className="mx-auto max-w-6xl px-4 py-16 text-center text-white">
-            <h1 className="text-3xl sm:text-4xl font-bold drop-shadow-sm">
+            <h2 className="text-3xl sm:text-4xl font-bold drop-shadow-sm">
               We value your feedback
-            </h1>
+            </h2>
             <p className="mt-2 opacity-90">
               Share quick thoughts about the course and trainer.
             </p>

@@ -224,10 +224,10 @@ export default function DataScienceCoursePage() {
   // ----- SEO JSON-LD (Vel in text, vell only in URLs) -----
   const courseJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Course",
+    "@type": "Course",  
     name: "Data Science Training Program",
     description:
-      "Learn data analysis, Python, machine learning, and visualization. Gain hands-on experience to become a job-ready data scientist with real-world projects.",
+      "Learn AWS cloud computing, deployment, and management with hands-on skills to build, secure, and scale cloud applications effectively",
     image: "https://www.vellinfotech.com/images/courses/datascience-og.jpg",
     provider: {
       "@type": "Organization",
@@ -286,9 +286,9 @@ export default function DataScienceCoursePage() {
   return (
     <>
       <Seo
-        title="Data Science Training Program"
-        description="Learn data analysis, Python, machine learning, and visualization. Gain hands-on experience to become a job-ready data scientist with real-world projects."
-        canonical="/all-courses/data-science-training-program"
+        title="Data Science Training Program |  Vellinfotech"
+        description="Learn AWS cloud computing, deployment, and management with hands-on skills to build, secure, and scale cloud applications effectively."
+        canonical="https://www.vellinfotech.com/all-courses/data-science-training-program"
         image="/images/courses/datascience-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

@@ -273,9 +273,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="ServiceNow Training Program"
+        title="ServiceNow Training Program | Vellinfotech"
         description="Learn ServiceNow platform, ITSM, and workflow automation. Gain hands-on skills to manage IT services and streamline business operations efficiently."
-        canonical="/all-courses/servicenow-training-program"
+        canonical="https://www.vellinfotech.com/all-courses/servicenow-training-program"
         image="/images/courses/servicenow-training-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

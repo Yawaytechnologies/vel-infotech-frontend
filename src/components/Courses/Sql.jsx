@@ -280,9 +280,9 @@ export default function SqlCoursePage() {
     <>
       {/* ✅ SEO (no visual change) */}
       <Seo
-        title="SQL Developer Course"
-        description="Learn SQL programming, database management, and query optimization. Gain skills to create, manage, and analyze data efficiently for real-world applications."
-        canonical="/all-courses/sql-developer"
+        title="SQL Developer Course | Vellinfotech"
+        description="Learn SQL programming, database management, and query optimization. Gain skills to create, manage, and analyze data efficiently for real-world use "
+        canonical="https://www.vellinfotech.com/all-courses/sql-developer"
         image="https://cdn-icons-png.flaticon.com/512/603/603201.png"
         type="article"
         jsonLd={courseJsonLd}

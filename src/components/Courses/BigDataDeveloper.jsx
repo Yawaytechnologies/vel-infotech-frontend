@@ -280,9 +280,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Big Data Developer Program"
+        title="Big Data Developer Program | Vellinfotech"
         description="Learn Big Data tools like Hadoop, Spark, and Kafka. Gain hands-on experience in data processing, analytics, and building scalable big data solutions."
-        canonical="/all-courses/big-data-developer-program"
+        canonical="https://www.vellinfotech.com/all-courses/big-data-developer-program"
         image="/images/courses/big-data-developer-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

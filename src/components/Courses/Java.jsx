@@ -258,7 +258,7 @@ export default function JavaCoursePage() {
       <Seo
         title="Java Full Stack Developer Course"
         description="Master frontend & backend development with Java, Spring Boot, React, and MySQL. Build real-world projects and become a full stack developer."
-        canonical="/all-courses/java-full-stack-developer-course"
+        canonical="https://www.vellinfotech.com/all-courses/java-full-stack-developer-course"
         image="/images/courses/java-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

@@ -276,9 +276,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Cyber Security Program"
+        title="Cyber Security Program | Vellinfotech"
         description="Learn cybersecurity fundamentals, ethical hacking, and threat protection. Gain hands-on skills to secure networks, systems, and data from cyber threats."
-        canonical="/all-courses/cyber-security-program"
+        canonical="https://www.vellinfotech.com/all-courses/cyber-security-program"
         image="/images/courses/cyber-security-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

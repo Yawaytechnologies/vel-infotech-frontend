@@ -276,9 +276,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO */}
       <Seo
-        title="Hardware & Networking Program"
+        title="Hardware & Networking Program | Vellinfotech"
         description="Learn computer hardware, networking concepts, and troubleshooting. Gain hands-on skills to set up, maintain, and manage IT infrastructure effectively."
-        canonical="/all-courses/hardware-and-networking-program"
+        canonical="https://www.vellinfotech.com /all-courses/hardware-and-networking-program"
         image="/images/courses/hardware-networking-og.jpg"
         type="article"
         jsonLd={courseJsonLd}
