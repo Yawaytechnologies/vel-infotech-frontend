@@ -270,7 +270,7 @@ export default function SqlCoursePage() {
           "@type": "Offer",
           priceCurrency: "INR",
           availability: "https://schema.org/InStock",
-          url: "https://www.vellinfotech.com/all-courses/sql-developer",
+          url: "https://www.vellinfotech.com/all-courses/sql-developer-course",
         },
       },
     ],
@@ -282,7 +282,7 @@ export default function SqlCoursePage() {
       <Seo
         title="SQL Developer Course | Vellinfotech"
         description="Learn SQL programming, database management, and query optimization. Gain skills to create, manage, and analyze data efficiently for real-world use "
-        canonical="https://www.vellinfotech.com/all-courses/sql-developer"
+        canonical="https://www.vellinfotech.com/all-courses/sql-developer-course"
         image="https://cdn-icons-png.flaticon.com/512/603/603201.png"
         type="article"
         jsonLd={courseJsonLd}
