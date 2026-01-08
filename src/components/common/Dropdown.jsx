@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom"; // ✅ NEW
 import { FiChevronRight } from "react-icons/fi";
 
@@ -6,6 +6,19 @@ import { FiChevronRight } from "react-icons/fi";
  * Maps course display names → correct slug in /all-courses/:slug
  * Keep in sync with CourseRouter.jsx ROUTES.
  */
+
+const ref = useRef(null);
+
+useEffect(() => {
+  const handler = (e) => {
+    if (!ref.current) return;
+    if (!ref.current.contains(e.target)) setOpen(false);
+  };
+  document.addEventListener("mousedown", handler);
+  return () => document.removeEventListener("mousedown", handler);
+}, []);
+
+
 const COURSE_GROUPS = [
   {
     label: "Cloud Computing Training",
@@ -61,12 +74,20 @@ export default function AllCoursesDropdown() {
   const [open, setOpen] = useState(false); // ✅ controls dropdown
 
   return (
-    <div
-      className="relative group"
+    <div ref={ref} className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <button className="transition">All Courses ▾</button>
+      <button
+  type="button"
+  onClick={() => setOpen((v) => !v)}
+  className="transition flex items-center gap-1 focus:outline-none"
+>
+  All Courses <span className="text-xs">▾</span>
+</button>
+
+
+
 
       {/* Dropdown Panel */}
       {open && (

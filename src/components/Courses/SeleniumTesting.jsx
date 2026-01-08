@@ -300,7 +300,7 @@ export default function JavaCoursePage() {
               id="course-title"
               className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-yellow-400"
             >
-              Scrum Master Program
+              Selenium Testing Program
             </h1>
 
             {/* H2 — supporting/variant keyword */}
