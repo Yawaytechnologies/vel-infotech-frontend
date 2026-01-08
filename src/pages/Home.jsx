@@ -18,7 +18,7 @@ function Home() {
         canonical="https://www.vellinfotech.com/"
       />
 
-      <div className="bg-white pt-[64px] md:pt-[108px]">
+      <div className="bg-white pt-10 md:pt-26 lg:pt-28">
         <HeroSection />
         <div id="next-section">
           <AboutUs />
