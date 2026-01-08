@@ -210,14 +210,7 @@ export default function Footer() {
                   Dev Ops
                 </a>
               </li>
-              <li>
-                <a
-                  href="/all-courses/AwaTraining"
-                  className="hover:text-[#005BAC] font-bold "
-                >
-                  AWS Training
-                </a>
-              </li>
+
               <li>
                 <a
                   href="/all-courses/BusinessAnalytics"

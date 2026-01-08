@@ -60,26 +60,23 @@ const groupedCourses = [
       { name: "SAP", slug: "sap-training-program" },
       { name: "Salesforce", slug: "salesforce-training-program" },
       { name: "ServiceNow", slug: "servicenow-training-program" },
-      { name: "RPA (Robotic Process Automation)", slug: "rpa-robotic-process-automation-course" },
+      {
+        name: "RPA (Robotic Process Automation)",
+        slug: "rpa-robotic-process-automation-course",
+      },
     ],
   },
   {
     category: "IT Operations",
-    items: [
-      { name: "Production Support", slug: "production-support-program" },
-    ],
+    items: [{ name: "Production Support", slug: "production-support-program" }],
   },
   {
     category: "Business & Marketing",
-    items: [
-      { name: "Digital Marketing", slug: "digital-marketing-program" },
-    ],
+    items: [{ name: "Digital Marketing", slug: "digital-marketing-program" }],
   },
   {
     category: "Professional Development",
-    items: [
-      { name: "Soft Skill Training", slug: "soft-skills-training" },
-    ],
+    items: [{ name: "Soft Skill Training", slug: "soft-skills-training" }],
   },
 ];
 
@@ -97,6 +94,9 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sidebarMenus, setSidebarMenus] = useState({});
   const [activeCategory, setActiveCategory] = useState(null);
+  const [desktopCoursesOpen, setDesktopCoursesOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+
   const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   const [mobileCategory, setMobileCategory] = useState(null);
 
@@ -116,21 +116,22 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-background border-b border-white/20">
-        <div className="flex w-full items-center justify-between px-3 lg:px-8 h-[83px]">
+      <header className="fixed top-0 w-full z-[99999] bg-background border-b border-white/20">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-3 md:px-6 lg:px-8 h-16 md:h-[83px]">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/">
               <img
                 src={Logo1}
                 alt="Logo"
-                className="h-28 w-auto object-contain md:h-30 lg:h-43 md:pt-1 md:pb-2 cursor-pointer"
+                className="h-14 md:h-16 lg:h-20 w-auto object-contain cursor-pointer"
+
               />
             </Link>
           </div>
 
           {/* Top Nav */}
-          <nav className="hidden md:flex items-center gap-2 lg:gap-10 lg:ml-30 h-full">
+          <nav className="hidden md:flex flex-1 items-center justify-center gap-4 lg:gap-8 h-full">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -155,20 +156,26 @@ export default function Header() {
           </nav>
 
           {/* Contact Numbers */}
-          <div className="hidden md:flex flex-row items-center lg:ml-25 gap-15 ml-12">
-            <div className="flex flex-col items-center">
-              <span className="font-semibold text-base text-gray-800">
+          <div className="hidden md:flex items-center justify-end gap-6 lg:gap-10">
+
+
+           <div className="flex flex-col items-end leading-tight">
+
+              <span className="font-semibold text-xs md:text-sm text-gray-800">
+
                 Enquiry:
               </span>
               <a
                 href="tel:+919600593838"
-                className="text-[#005BAC] hover:underline text-base font-semibold"
+                className="text-[#005BAC] hover:underline text-sm md:text-base font-semibold"
+
               >
                 +91 9600593838
               </a>
             </div>
             <div className="flex flex-col items-center">
-              <span className="font-semibold text-base text-gray-800">
+              <span className="font-semibold text-xs md:text-sm text-gray-800">
+
                 Support:
               </span>
               <a
@@ -190,53 +197,64 @@ export default function Header() {
         </div>
 
         {/* Desktop Subheader */}
-        <div className="hidden md:flex w-full bg-[#005BAC] min-h-[54px] items-center px-6 z-40 fixed top-[83px] left-0">
+        <div className="hidden md:flex w-full bg-[#005BAC] min-h-[54px] items-center px-6 z-[99999] fixed top-[83px] left-0">
           <nav className="w-full flex justify-center gap-10 text-white font-semibold text-md relative">
             {/* All Courses dropdown */}
-            <div className="relative group">
-              <button className="transition flex items-center gap-1 focus:outline-none">
-                All Courses ▾
-              </button>
-              <div
-                className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-50 hidden group-hover:flex flex-row overflow-visible"
-                onMouseLeave={() => setActiveCategory(null)}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setDesktopCoursesOpen((v) => !v)}
+                className="transition flex items-center gap-1 focus:outline-none"
               >
-                <div className="flex flex-col w-64 rounded-l-lg">
-                  {groupedCourses.map((cat, idx) => (
-                    <div
-                      key={cat.category}
-                      className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
-                        activeCategory === idx
-                          ? "bg-[#f0f4fa] text-[#005BAC]"
-                          : "hover:bg-gray-100 text-gray-800"
-                      }`}
-                      onMouseEnter={() => setActiveCategory(idx)}
-                    >
-                      <span>{cat.category}</span>
-                      <FiChevronRight
-                        className={`text-gray-400 transition-transform duration-200 ${
-                          activeCategory === idx ? "translate-x-1" : ""
-                        }`}
-                        size={18}
-                      />
-                    </div>
-                  ))}
-                </div>
+                All Courses <span className="text-xs">▾</span>
+              </button>
 
-                {activeCategory !== null && (
-                  <div className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto bg-white rounded-r-lg">
-                    {groupedCourses[activeCategory].items.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={`/all-courses/${item.slug}`} // ✅ proper slug
-                        className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
+              {desktopCoursesOpen && (
+                <div
+                  className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-[99999] flex flex-row overflow-visible"
+                  // onMouseLeave={() => setActiveCategory(null)}
+                >
+                  <div className="flex flex-col w-64 rounded-l-lg">
+                    {groupedCourses.map((cat, idx) => (
+                      <div
+                        key={cat.category}
+                        className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
+                          activeCategory === idx
+                            ? "bg-[#f0f4fa] text-[#005BAC]"
+                            : "hover:bg-gray-100 text-gray-800"
+                        }`}
+                        onMouseEnter={() => setActiveCategory(idx)}
                       >
-                        {item.name}
-                      </Link>
+                        <span>{cat.category}</span>
+                        <FiChevronRight
+                          className={`text-gray-400 transition-transform duration-200 ${
+                            activeCategory === idx ? "translate-x-1" : ""
+                          }`}
+                          size={18}
+                        />
+                      </div>
                     ))}
                   </div>
-                )}
-              </div>
+
+                  {activeCategory !== null && (
+                    <div className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto bg-white rounded-r-lg">
+                      {groupedCourses[activeCategory].items.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={`/all-courses/${item.slug}`}
+                          onClick={() => {
+                            setDesktopCoursesOpen(false);
+                            setActiveCategory(null);
+                          }}
+                          className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Other top menu links */}
@@ -254,20 +272,43 @@ export default function Header() {
             </Link>
 
             {/* More dropdown */}
-            <div className="relative group">
-              <button className="transition">More ▾</button>
-              <div className="absolute left-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-50 hidden group-hover:flex flex-col">
-                <Link to="/interview-questions" className="px-4 py-2 hover:bg-gray-100">
-                  Interview Questions
-                </Link>
-                <Link to="/resources" className="px-4 py-2 hover:bg-gray-100">
-                  Tutorials
-                </Link>
-                <Link to="/sample-resume" className="px-4 py-2 hover:bg-gray-100">
-                  Sample Resume
-                </Link>
-              </div>
-            </div>
+            <div className="relative">
+  <button
+    type="button"
+    onClick={() => setMoreOpen((v) => !v)}
+    className="transition flex items-center gap-1"
+  >
+    More <span className="text-xs">▾</span>
+  </button>
+
+  {moreOpen && (
+    <div className="absolute right-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-[99999] flex flex-col">
+
+      <Link
+        to="/interview-questions"
+        onClick={() => setMoreOpen(false)}
+        className="px-4 py-2 hover:bg-gray-100"
+      >
+        Interview Questions
+      </Link>
+      <Link
+        to="/resources"
+        onClick={() => setMoreOpen(false)}
+        className="px-4 py-2 hover:bg-gray-100"
+      >
+        Tutorials
+      </Link>
+      <Link
+        to="/sample-resume"
+        onClick={() => setMoreOpen(false)}
+        className="px-4 py-2 hover:bg-gray-100"
+      >
+        Sample Resume
+      </Link>
+    </div>
+  )}
+</div>
+
           </nav>
         </div>
 
@@ -328,7 +369,9 @@ export default function Header() {
                         <span>{cat.category}</span>
                         <FiChevronRight
                           className={`ml-2 transition-transform ${
-                            mobileCategory === idx ? "rotate-90 text-[#005BAC]" : ""
+                            mobileCategory === idx
+                              ? "rotate-90 text-[#005BAC]"
+                              : ""
                           }`}
                         />
                       </button>

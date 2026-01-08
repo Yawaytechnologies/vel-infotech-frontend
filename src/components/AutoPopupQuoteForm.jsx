@@ -4,11 +4,11 @@ import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 
 export default function AutoPopupQuoteForm({
   /* ---- control (optional) ---- */
-  isOpen,                 // boolean (optional). If provided, component becomes controlled.
-  onOpenChange,           // function(bool) (optional). Used with isOpen.
+  isOpen, // boolean (optional). If provided, component becomes controlled.
+  onOpenChange, // function(bool) (optional). Used with isOpen.
 
   /* ---- optional behavior ---- */
-  autoOpenDelay = 5000,   // ms before auto-show (uncontrolled mode)
+  autoOpenDelay = 5000, // ms before auto-show (uncontrolled mode)
 
   /* ---- form + state props from parent ---- */
   status,
@@ -77,7 +77,7 @@ export default function AutoPopupQuoteForm({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center"
+      className="fixed inset-0 z-[100] flex justify-center items-start pt-6 md:pt-10 lg:pt-0 lg:items-center"
       aria-modal="true"
       role="dialog"
       aria-labelledby="quote-title"
@@ -91,29 +91,32 @@ export default function AutoPopupQuoteForm({
 
       {/* Modal card */}
       <div
-        className="relative w-[92%] sm:w-[85%] md:w-[680px] max-w-xl"
+        className="relative w-full max-w-[560px] sm:max-w-[620px] mx-3 sm:mx-6 mt-12 md:mt-25 lg:mt-38 max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="animate-in fade-in zoom-in-95 duration-200">
-          <div className="w-full max-w-lg mx-auto">
-            <div className="relative bg-white p-8 rounded-[30px] shadow-2xl border border-gray-100">
+        <div className="animate-in fade-in zoom-in-65 duration-200">
+          <div className="w-full max-w-xl mx-auto">
+            <div className="relative bg-white p-6 sm:p-6 md:p-8 rounded-2xl sm:rounded-[30px] shadow-xl border border-gray-100 max-h-[90vh] overflow-y-auto">
               {/* Close button (top-right) */}
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="absolute -right-2 -top-2 h-9 w-9 rounded-full bg-white shadow-md border border-slate-200 text-slate-600 hover:text-slate-900 hover:shadow-lg transition flex items-center justify-center z-[1]"
+                className="absolute right-3 top-3 h-9 w-9 rounded-full bg-white shadow-md border border-slate-200 text-slate-600 hover:text-slate-900 hover:shadow-lg transition flex items-center justify-center z-[2]"
                 aria-label="Close"
                 title="Close"
               >
                 ✕
               </button>
 
-              <h3 id="quote-title" className="text-2xl font-bold text-center text-[#003c6a] mb-5">
+              <h3
+                id="quote-title"
+                className="text-lg sm:text-sm font-bold text-center text-[#003c6a] mb-3"
+              >
                 Get a Free Training Quote
               </h3>
 
               {/* Toggle Buttons */}
-              <div className="flex justify-center gap-3 mb-6">
+              <div className="flex justify-center gap-2 mt-2 mb-3">
                 <button
                   type="button"
                   onClick={() => setMode("class_room")}
@@ -139,7 +142,12 @@ export default function AutoPopupQuoteForm({
               </div>
 
               {/* Form */}
-              <form id="enquiry-form" onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-2">
+              <form
+                id="enquiry-form"
+                onSubmit={handleSubmit}
+                noValidate
+                className="grid grid-cols-1 gap-1.5 sm:gap-3"
+              >
                 {/* Name */}
                 <div>
                   <input
@@ -152,13 +160,13 @@ export default function AutoPopupQuoteForm({
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.name}
                     className={[
-                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
                       touched?.name && errors?.name
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
-                  <div className="h-3 mt-0.5">
+                  <div className="h-3 mt-0">
                     {touched?.name && errors?.name && (
                       <p className="text-red-600 text-xs">{errors.name}</p>
                     )}
@@ -176,13 +184,13 @@ export default function AutoPopupQuoteForm({
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.email}
                     className={[
-                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
                       touched?.email && errors?.email
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
-                  <div className="h-3 mt-0.5">
+                  <div className="h-3 mt-0">
                     {touched?.email && errors?.email && (
                       <p className="text-red-600 text-xs">{errors.email}</p>
                     )}
@@ -202,13 +210,13 @@ export default function AutoPopupQuoteForm({
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.phone}
                     className={[
-                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
                       touched?.phone && errors?.phone
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
-                  <div className="h-3 mt-0.5">
+                  <div className="h-3 mt-0">
                     {touched?.phone && errors?.phone && (
                       <p className="text-red-600 text-xs">{errors.phone}</p>
                     )}
@@ -224,7 +232,7 @@ export default function AutoPopupQuoteForm({
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.course}
                     className={[
-                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
+                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
                       touched?.course && errors?.course
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
@@ -232,15 +240,39 @@ export default function AutoPopupQuoteForm({
                   >
                     <option value="">Select Course</option>
                     {[
-                      "Java","Python","Full Stack Development","PL/SQL","SQL","Data Science","Business Analytics","Data Science & AI",
-                      "Big Data Developer","Software Testing","Selenium Testing","ETL Testing","AWS Training","DevOps","Hardware Networking",
-                      "Cyber Security","SAP","Salesforce","ServiceNow","RPA (Robotic Process Automation)","Production Support",
-                      "Digital Marketing","Soft Skill Training","Scrum Master","Business Analyst","Product Management",
+                      "Java",
+                      "Python",
+                      "Full Stack Development",
+                      "PL/SQL",
+                      "SQL",
+                      "Data Science",
+                      "Business Analytics",
+                      "Data Science & AI",
+                      "Big Data Developer",
+                      "Software Testing",
+                      "Selenium Testing",
+                      "ETL Testing",
+                      "AWS Training",
+                      "DevOps",
+                      "Hardware Networking",
+                      "Cyber Security",
+                      "SAP",
+                      "Salesforce",
+                      "ServiceNow",
+                      "RPA (Robotic Process Automation)",
+                      "Production Support",
+                      "Digital Marketing",
+                      "Soft Skill Training",
+                      "Scrum Master",
+                      "Business Analyst",
+                      "Product Management",
                     ].map((course) => (
-                      <option key={course} value={course}>{course}</option>
+                      <option key={course} value={course}>
+                        {course}
+                      </option>
                     ))}
                   </select>
-                  <div className="h-3 mt-0.5">
+                  <div className="h-3 mt-0">
                     {touched?.course && errors?.course && (
                       <p className="text-red-600 text-xs">{errors.course}</p>
                     )}
@@ -250,7 +282,7 @@ export default function AutoPopupQuoteForm({
                 {/* Message */}
                 <div>
                   <textarea
-                    rows={2}
+                    rows={1}
                     name="message"
                     placeholder="Your Message"
                     value={form.message}
@@ -259,17 +291,16 @@ export default function AutoPopupQuoteForm({
                     aria-invalid={!!errors?.message}
                     maxLength={300}
                     className={[
-                      "w-full rounded-xl px-4 py-2.5 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
                       touched?.message && errors?.message
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
                   <div className="flex justify-between text-xs text-gray-500 mt-0.5">
-                    <span>First letter auto-caps</span>
                     <span>{form.message.length}/300</span>
                   </div>
-                  <div className="h-3 mt-0.5">
+                  <div className="h-3 mt-0">
                     {touched?.message && errors?.message && (
                       <p className="text-red-600 text-xs">{errors?.message}</p>
                     )}

@@ -41,8 +41,8 @@ import JobOverview from "./pages/JobOverview";
 import GTMRouteListener from "./analytics/GTMRouteListener";
 
 /** ✅ Must match Header heights */
-const HEADER_H = 83;
-const SUBHEADER_H = 54;
+const HEADER_H = 53;
+const SUBHEADER_H = 34;
 const DESKTOP_OFFSET = HEADER_H + SUBHEADER_H; // 137
 const MOBILE_OFFSET = HEADER_H; // 83
 
@@ -108,31 +108,52 @@ export default function App() {
   const LEGACY_COURSE_ALIASES = [
     ["/all-courses/Java", "/all-courses/java-full-stack-developer-course"],
     ["/all-courses/Python", "/all-courses/python-full-stack-developer-course"],
-    ["/all-courses/FullStackDevelopement", "/all-courses/full-stack-development-course"],
+    [
+      "/all-courses/FullStackDevelopement",
+      "/all-courses/full-stack-development-course",
+    ],
     ["/all-courses/Plsql", "/all-courses/pl-sql-developer-course"],
     ["/all-courses/Sql", "/all-courses/sql-developer-course"],
     ["/all-courses/ScrumMaster", "/all-courses/scrum-master-program"],
     ["/all-courses/DataScience", "/all-courses/data-science-training-program"],
-    ["/all-courses/BusinessAnalytics", "/all-courses/business-analytics-course"],
+    [
+      "/all-courses/BusinessAnalytics",
+      "/all-courses/business-analytics-course",
+    ],
     ["/all-courses/DataScienceAi", "/all-courses/data-science-and-ai-program"],
-    ["/all-courses/BigDataDeveloper", "/all-courses/big-data-developer-program"],
+    [
+      "/all-courses/BigDataDeveloper",
+      "/all-courses/big-data-developer-program",
+    ],
     ["/all-courses/SoftwareTesting", "/all-courses/software-testing-program"],
     ["/all-courses/SeleniumTesting", "/all-courses/selenium-testing-program"],
     ["/all-courses/EtlTesting", "/all-courses/etl-testing-program"],
     ["/all-courses/AwsTraining", "/all-courses/aws-training-program"],
     ["/all-courses/DevOps", "/all-courses/devops-training-program"],
-    ["/all-courses/ProductManagement", "/all-courses/product-management-program"],
+    [
+      "/all-courses/ProductManagement",
+      "/all-courses/product-management-program",
+    ],
     ["/all-courses/BusinessAnalyst", "/all-courses/business-analyst-program"],
-    ["/all-courses/HardwareNetworking", "/all-courses/hardware-and-networking-program"],
+    [
+      "/all-courses/HardwareNetworking",
+      "/all-courses/hardware-and-networking-program",
+    ],
     ["/all-courses/CyberSecurity", "/all-courses/cyber-security-program"],
     ["/all-courses/Sap", "/all-courses/sap-training-program"],
     ["/all-courses/SalesForce", "/all-courses/salesforce-training-program"],
     ["/all-courses/ServiceNow", "/all-courses/servicenow-training-program"],
     ["/all-courses/RPA", "/all-courses/rpa-robotic-process-automation-course"],
-    ["/all-courses/ProductionSupport", "/all-courses/production-support-program"],
+    [
+      "/all-courses/ProductionSupport",
+      "/all-courses/production-support-program",
+    ],
     ["/all-courses/DigitalMarketing", "/all-courses/digital-marketing-program"],
     ["/all-courses/SoftSkillsTraining", "/all-courses/soft-skills-training"],
-    ["/all-courses/big-data-developer-course", "/all-courses/big-data-developer-program"],
+    [
+      "/all-courses/big-data-developer-course",
+      "/all-courses/big-data-developer-program",
+    ],
   ];
 
   return (
@@ -158,20 +179,30 @@ export default function App() {
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/tutorials" element={<Tutorials />} />
           <Route path="/tutorials/:slug" element={<TutorialDetail />} />
-          <Route path="/resources" element={<Navigate to="/tutorials" replace />} />
+          <Route
+            path="/resources"
+            element={<Navigate to="/tutorials" replace />}
+          />
           <Route path="/interview-questions" element={<Interview />} />
           <Route path="/interview/:id" element={<InterviewDetail />} />
           <Route path="/internship" element={<Internship />} />
           <Route path="/privacy" element={<Privacy />} />
 
           <Route path="/contact-us" element={<Contact />} />
-          <Route path="/contact" element={<Navigate to="/contact-us" replace />} />
+          <Route
+            path="/contact"
+            element={<Navigate to="/contact-us" replace />}
+          />
           <Route path="/client" element={<Clientpage />} />
 
           <Route path="/all-courses" element={<AllCourses />} />
           <Route path="/all-courses/:slug" element={<CourseRouter />} />
           {LEGACY_COURSE_ALIASES.map(([from, to]) => (
-            <Route key={from} path={from} element={<Navigate to={to} replace />} />
+            <Route
+              key={from}
+              path={from}
+              element={<Navigate to={to} replace />}
+            />
           ))}
 
           <Route path="/admin/login" element={<AdminLogin />} />

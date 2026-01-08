@@ -32,7 +32,35 @@ const Internship = () => {
 
   const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
   const onlyLettersSpaces = (s) => s.replace(/[^A-Za-z ]+/g, "").replace(/\s{2,}/g, " ");
-  const digits10 = (s) => s.replace(/\D+/g, "").slice(0, 10);
+const digits10 = (s) => {
+  const d = String(s).replace(/\D+/g, "").slice(0, 10);
+  // if first digit is not 6-9, clear it (forces correct start)
+  return d && !/^[6-9]/.test(d) ? "" : d;
+};
+
+const VALID_COURSES = new Set([
+  "Dotnet",
+  "Cyber Security",
+  "Networking",
+  "Java",
+  "Artificial Intelligence",
+  "Cloud Computing",
+  "Python",
+  "Data Science",
+  "Ethical Hacking",
+  "PHP",
+  "Machine Learning",
+  "Data Analytics",
+  "Data Science And Ai",
+  "Full Stack Development",
+  "Java Full Stack Developer",  
+  "Python Full Stack Developer",
+  "Pl Sql Developer",
+  "Sql Developer",
+  "Scrum Master",
+  "Business Analytics", 
+]);
+
 
   const validateField = (name, value) => {
     const v = (value ?? "").trim();
@@ -49,12 +77,21 @@ const Internship = () => {
         return null;
       case "phone":
         if (!v) return "Phone number is required.";
-        if (!/^\d{10}$/.test(v)) return "Enter a valid 10-digit number.";
+       if (!/^[6-9]\d{9}$/.test(v)) return "Enter a valid";
+
         return null;
-      case "course":
-        if (!v) return "Course / Domain is required.";
-        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
-        return null;
+     case "course": {
+  if (!v) return "Course / Domain is required.";
+  if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
+
+  const normalized = v.replace(/\s+/g, " ").trim();
+  if (!VALID_COURSES.has(normalized))
+    return "Please enter a valid Course/Domain from the list.";
+
+  return null;
+}
+
+
       case "message":
         if (!v) return "Message is required.";
         if (v.length > 300) return "Max 300 characters.";
@@ -104,7 +141,8 @@ const Internship = () => {
     const { name, value } = e.target;
     let v = value;
     if (name === "fullName") v = capFirst(onlyLettersSpaces(value));
-    if (name === "course") v = capFirst(onlyLettersSpaces(value));
+    if (name === "course") v = value.replace(/\s{2,}/g, " ");
+
     if (name === "phone") v = digits10(value);
     if (name === "message") v = capFirst(value.slice(0, 300));
     setForm((f) => ({ ...f, [name]: v }));
@@ -146,12 +184,17 @@ const Internship = () => {
   const help = "mt-1 text-[12px] text-red-600";
 
   return (
-    <div className="bg-background pb-10">
+   <div className="bg-background pb-10 pt-[3px] md:pt-[2px]">
+
+
       <ToastContainer newestOnTop />
 
       {/* HERO — Single H1 for the page */}
       <header
-        className="relative w-full mt-[54px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px] flex items-center justify-start px-4 sm:px-10"
+  className="relative w-full mt-10 md:mt-27 lg:mt-25 xl:mt-12 2xl:mt-14 h-[220px] sm:h-[280px] md:h-[340px] lg:h-[390px] xl:h-[420px] 2xl:h-[460px] flex items-center justify-start px-4 sm:px-10 lg:px-16 2xl:px-24"
+
+
+
         style={{
           backgroundImage: `url(${background})`,
           backgroundRepeat: "no-repeat",
@@ -166,30 +209,43 @@ const Internship = () => {
 
       {/* ABOUT — H2 section */}
       <section
-        className="max-w-6xl mx-auto py-10 px-4 grid md:grid-cols-2 gap-8 items-center"
+       className="max-w-6xl mx-auto py-10 px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
+
+
+
         aria-labelledby="about-internship-heading"
       >
-        <div className="bg-white p-6 border border-blue-100 rounded-lg shadow-sm">
-          <h2 id="about-internship-heading" className="text-2xl font-bold text-blue-900 mb-3">
+        <div className="bg-white p-4 border border-blue-100 rounded-lg shadow-sm h-full">
+
+          <h6
+  id="about-internship-heading"
+  className="text-base sm:text-lg md:text-xl font-bold text-blue-900 mb-2 md:mb-3 leading-snug"
+>
+
             Best Online Internship Training in Chennai &amp; Bangalore
-          </h2>
-          <p className="text-gray-700 mb-4">
+          </h6>
+          <p className="text-gray-700 mb-2">
             At Vell InfoTech, our internship programs are designed to bridge the gap between academic
             learning and real-world application. You’ll gain first-hand exposure to how the IT industry
             works, contribute to live projects, and build a portfolio that sets you apart.
           </p>
-          <p className="text-gray-700 mb-4">
+          <p className="text-gray-700 mb-2">
             Think of it as your professional starting point — a place where you apply what you’ve
             learned, develop confidence, and build the habits that make you employable. Whether it’s
             onsite or remote, our internships prepare you for the corporate world ahead.
           </p>
         </div>
 
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-stretch md:order-2 h-full">
+
+
           <img
             src={internshipBg}
             alt="Students collaborating during internship"
-            className="w-full h-auto rounded-lg shadow"
+            className="w-full max-w-[720px] lg:max-w-none h-[200px] sm:h-[260px] lg:h-[340px] object-cover rounded-lg shadow"
+
+
+
           />
         </div>
       </section>
@@ -234,26 +290,38 @@ const Internship = () => {
       </section>
 
       {/* WHY INTERNSHIP — H2 */}
-      <section
-        className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mt-16 items-center px-4"
-        aria-labelledby="why-internship-heading"
-      >
-        <div className="flex justify-center">
-          <img src={internshipBg} alt="Benefits of internships" className="rounded-lg shadow-md" />
+  <section
+  className="max-w-6xl mx-auto py-10 px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
+  aria-labelledby="why-internship-heading"
+>
+
+        <div className="flex justify-center items-center">
+
+
+          <img
+  src={internshipBg}
+  alt="Benefits of internships"
+  className="w-full max-w-[720px] lg:max-w-none h-[200px] sm:h-[260px] lg:h-[340px] object-cover rounded-lg shadow"
+
+
+/>
+
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow text-gray-700">
-          <h2 id="why-internship-heading" className="text-xl sm:text-2xl font-bold text-blue-800 mb-3">
+        <div className="bg-white p-6 rounded-lg shadow text-gray-700 h-full">
+
+          <h6
+  id="why-internship-heading"
+  className="text-lg sm:text-xl md:text-xl font-bold text-blue-800 mb-1 whitespace-nowrap"
+>
+
             Why Should You Do an Internship?
-          </h2>
-          <p className="mb-3 text-gray-700">
-            Internships are a stepping stone to professional success. Here are five reasons why they
-            matter:
-          </p>
-          <ol className="list-decimal pl-5 space-y-2 text-gray-700">
+          </h6>
+          
+          <ol className="list-decimal pl-2 space-y-1 text-gray-700">
             <li>
               <strong>Gain real experience:</strong> Employers value practical exposure as much as
-              classroom knowledge. Internships help you apply concepts to real projects.
+              classroom knowledge. 
             </li>
             <li>
               <strong>Strengthen your skills:</strong> You’ll learn how teams operate, solve real
@@ -292,11 +360,28 @@ const Internship = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { title: "Data Science", image: dataScienceIcon },
-            { title: "Python", image: pythonIcon },
-            { title: "Artificial Intelligence", image: aiIcon },
-            { title: "Java", image: javaIcon },
-          ].map((item, i) => (
+  {
+    title: "Data Science",
+    image: dataScienceIcon,
+    desc: "Work with real datasets, build dashboards, learn cleaning, visualization, and basic ML workflows.",
+  },
+  {
+    title: "Python",
+    image: pythonIcon,
+    desc: "Build backend APIs, automation scripts, and mini projects using real-world coding practices.",
+  },
+  {
+    title: "Artificial Intelligence",
+    image: aiIcon,
+    desc: "Learn AI fundamentals, model training basics, prompt engineering, and real project implementations.",
+  },
+  {
+    title: "Java",
+    image: javaIcon,
+    desc: "Develop backend apps using Core Java + JDBC + Spring basics with industry-style project structure.",
+  },
+]
+.map((item, i) => (
             <motion.div
               key={i}
               whileHover={{ scale: 1.05, y: -8 }}
@@ -305,14 +390,18 @@ const Internship = () => {
               <div className="p-4 bg-gradient-to-r from-cyan-500 to-cyan-300 text-white text-center">
                 <img src={item.image} alt={`${item.title} internship`} className="h-20 mx-auto mb-4" />
                 {/* H3 per card */}
-                <h3 className="font-semibold text-lg">{item.title} Internship</h3>
+                
               </div>
-              <div className="p-4 text-center">
-                <p className="font-medium text-gray-800">{item.title} Internship</p>
-                <button className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
-                  Read More
-                </button>
-              </div>
+           <div className="p-4 text-center">
+  <p className="font-semibold text-gray-900">{item.title} Internship</p>
+
+  <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+    {item.desc}
+  </p>
+
+ 
+</div>
+
             </motion.div>
           ))}
         </div>
