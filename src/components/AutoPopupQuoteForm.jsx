@@ -77,7 +77,9 @@ export default function AutoPopupQuoteForm({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex justify-center items-start pt-6 md:pt-10 lg:pt-0 lg:items-center"
+      className="fixed inset-0 z-[100] mt-14 sm:mt-2 md:mt-4 lg:mt-6 flex justify-center items-start
+           pt-3 sm:pt-8 md:pt-[100px] lg:pt-[120px]
+           px-2"
       aria-modal="true"
       role="dialog"
       aria-labelledby="quote-title"
@@ -91,12 +93,12 @@ export default function AutoPopupQuoteForm({
 
       {/* Modal card */}
       <div
-        className="relative w-full max-w-[560px] sm:max-w-[620px] mx-3 sm:mx-6 mt-12 md:mt-25 lg:mt-38 max-h-[90vh]"
+        className="relative w-full max-w-[520px] mx-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="animate-in fade-in zoom-in-65 duration-200">
           <div className="w-full max-w-xl mx-auto">
-            <div className="relative bg-white p-6 sm:p-6 md:p-8 rounded-2xl sm:rounded-[30px] shadow-xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+            <div className="relative bg-white p-5 sm:p-6 rounded-2xl shadow-xl border border-slate-200">
               {/* Close button (top-right) */}
               <button
                 type="button"
@@ -110,7 +112,7 @@ export default function AutoPopupQuoteForm({
 
               <h3
                 id="quote-title"
-                className="text-lg sm:text-sm font-bold text-center text-[#003c6a] mb-3"
+                className="text-base sm:text-lg font-bold text-center text-[#003c6a] mb-3"
               >
                 Get a Free Training Quote
               </h3>
@@ -146,7 +148,7 @@ export default function AutoPopupQuoteForm({
                 id="enquiry-form"
                 onSubmit={handleSubmit}
                 noValidate
-                className="grid grid-cols-1 gap-1.5 sm:gap-3"
+                className="grid grid-cols-1 gap-1 sm:gap-1"
               >
                 {/* Name */}
                 <div>
@@ -166,7 +168,7 @@ export default function AutoPopupQuoteForm({
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
-                  <div className="h-3 mt-0">
+                  <div className="min-h-[6px]">
                     {touched?.name && errors?.name && (
                       <p className="text-red-600 text-xs">{errors.name}</p>
                     )}
@@ -190,7 +192,7 @@ export default function AutoPopupQuoteForm({
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
-                  <div className="h-3 mt-0">
+                  <div className="min-h-[6px]">
                     {touched?.email && errors?.email && (
                       <p className="text-red-600 text-xs">{errors.email}</p>
                     )}
@@ -216,7 +218,7 @@ export default function AutoPopupQuoteForm({
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
-                  <div className="h-3 mt-0">
+                  <div className="min-h-[6px]">
                     {touched?.phone && errors?.phone && (
                       <p className="text-red-600 text-xs">{errors.phone}</p>
                     )}
@@ -272,7 +274,7 @@ export default function AutoPopupQuoteForm({
                       </option>
                     ))}
                   </select>
-                  <div className="h-3 mt-0">
+                  <div className="min-h-[6px]">
                     {touched?.course && errors?.course && (
                       <p className="text-red-600 text-xs">{errors.course}</p>
                     )}
@@ -300,7 +302,7 @@ export default function AutoPopupQuoteForm({
                   <div className="flex justify-between text-xs text-gray-500 mt-0.5">
                     <span>{form.message.length}/300</span>
                   </div>
-                  <div className="h-3 mt-0">
+                  <div className="min-h-[6px] ">
                     {touched?.message && errors?.message && (
                       <p className="text-red-600 text-xs">{errors?.message}</p>
                     )}

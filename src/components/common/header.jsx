@@ -125,7 +125,6 @@ export default function Header() {
                 src={Logo1}
                 alt="Logo"
                 className="h-14 md:h-16 lg:h-20 w-auto object-contain cursor-pointer"
-
               />
             </Link>
           </div>
@@ -157,25 +156,19 @@ export default function Header() {
 
           {/* Contact Numbers */}
           <div className="hidden md:flex items-center justify-end gap-6 lg:gap-10">
-
-
-           <div className="flex flex-col items-end leading-tight">
-
+            <div className="flex flex-col items-end leading-tight">
               <span className="font-semibold text-xs md:text-sm text-gray-800">
-
                 Enquiry:
               </span>
               <a
                 href="tel:+919600593838"
                 className="text-[#005BAC] hover:underline text-sm md:text-base font-semibold"
-
               >
                 +91 9600593838
               </a>
             </div>
             <div className="flex flex-col items-center">
               <span className="font-semibold text-xs md:text-sm text-gray-800">
-
                 Support:
               </span>
               <a
@@ -200,62 +193,68 @@ export default function Header() {
         <div className="hidden md:flex w-full bg-[#005BAC] min-h-[54px] items-center px-6 z-[99999] fixed top-[83px] left-0">
           <nav className="w-full flex justify-center gap-10 text-white font-semibold text-md relative">
             {/* All Courses dropdown */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setDesktopCoursesOpen((v) => !v)}
-                className="transition flex items-center gap-1 focus:outline-none"
-              >
-                All Courses <span className="text-xs">▾</span>
-              </button>
+   <div
+  className="relative"
+  onMouseEnter={() => setDesktopCoursesOpen(true)}
+  onMouseLeave={() => {
+    setDesktopCoursesOpen(false);
+    setActiveCategory(null);
+  }}
+>
+  <button
+    type="button"
+    className="transition flex items-center gap-1 focus:outline-none hover:text-white/90"
+  >
+    All Courses <span className="text-xs">▾</span>
+  </button>
 
-              {desktopCoursesOpen && (
-                <div
-                  className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-[99999] flex flex-row overflow-visible"
-                  // onMouseLeave={() => setActiveCategory(null)}
-                >
-                  <div className="flex flex-col w-64 rounded-l-lg">
-                    {groupedCourses.map((cat, idx) => (
-                      <div
-                        key={cat.category}
-                        className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
-                          activeCategory === idx
-                            ? "bg-[#f0f4fa] text-[#005BAC]"
-                            : "hover:bg-gray-100 text-gray-800"
-                        }`}
-                        onMouseEnter={() => setActiveCategory(idx)}
-                      >
-                        <span>{cat.category}</span>
-                        <FiChevronRight
-                          className={`text-gray-400 transition-transform duration-200 ${
-                            activeCategory === idx ? "translate-x-1" : ""
-                          }`}
-                          size={18}
-                        />
-                      </div>
-                    ))}
-                  </div>
+  {desktopCoursesOpen && (
+    <div
+      className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-[99999] flex flex-row overflow-visible"
+    >
+      <div className="flex flex-col w-64 rounded-l-lg">
+        {groupedCourses.map((cat, idx) => (
+          <div
+            key={cat.category}
+            className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
+              activeCategory === idx
+                ? "bg-[#f0f4fa] text-[#005BAC]"
+                : "hover:bg-gray-100 text-gray-800"
+            }`}
+            onMouseEnter={() => setActiveCategory(idx)}
+          >
+            <span>{cat.category}</span>
+            <FiChevronRight
+              className={`text-gray-400 transition-transform duration-200 ${
+                activeCategory === idx ? "translate-x-1" : ""
+              }`}
+              size={18}
+            />
+          </div>
+        ))}
+      </div>
 
-                  {activeCategory !== null && (
-                    <div className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto bg-white rounded-r-lg">
-                      {groupedCourses[activeCategory].items.map((item) => (
-                        <Link
-                          key={item.name}
-                          to={`/all-courses/${item.slug}`}
-                          onClick={() => {
-                            setDesktopCoursesOpen(false);
-                            setActiveCategory(null);
-                          }}
-                          className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+      {activeCategory !== null && (
+        <div className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto bg-white rounded-r-lg">
+          {groupedCourses[activeCategory].items.map((item) => (
+            <Link
+              key={item.name}
+              to={`/all-courses/${item.slug}`}
+              onClick={() => {
+                setDesktopCoursesOpen(false);
+                setActiveCategory(null);
+              }}
+              className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  )}
+</div>
+
 
             {/* Other top menu links */}
             <Link to="/internship" className="transition">
@@ -272,18 +271,20 @@ export default function Header() {
             </Link>
 
             {/* More dropdown */}
-            <div className="relative">
+       <div
+  className="relative"
+  onMouseEnter={() => setMoreOpen(true)}
+  onMouseLeave={() => setMoreOpen(false)}
+>
   <button
     type="button"
-    onClick={() => setMoreOpen((v) => !v)}
-    className="transition flex items-center gap-1"
+    className="transition flex items-center gap-1 hover:text-white/90"
   >
     More <span className="text-xs">▾</span>
   </button>
 
   {moreOpen && (
     <div className="absolute right-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-[99999] flex flex-col">
-
       <Link
         to="/interview-questions"
         onClick={() => setMoreOpen(false)}

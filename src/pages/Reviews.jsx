@@ -165,7 +165,7 @@ if (
         tags: ["placement", "projects"],
       },
       {
-        name: "Priya Sharma",
+        name: "Priya S",
         course: "Java Spring Boot",
         rating: 5,
         snippet:
@@ -209,7 +209,7 @@ if (
         tags: ["mern", "projects"],
       },
       {
-        name: "Sneha Reddy",
+        name: "Sneha R",
         course: "Java Testing",
         rating: 4,
         snippet:
@@ -220,7 +220,7 @@ if (
         tags: ["testing", "automation"],
       },
       {
-        name: "Vikram Singh",
+        name: "Vikram S",
         course: "Python Development",
         rating: 5,
         snippet:
@@ -231,7 +231,7 @@ if (
         tags: ["python", "beginner-friendly"],
       },
       {
-        name: "Meera Nair",
+        name: "Meera N",
         course: "Cloud Computing",
         rating: 5,
         snippet:
