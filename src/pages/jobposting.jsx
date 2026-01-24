@@ -78,7 +78,7 @@ function JobPosting() {
       : jobs.filter(
           (job) =>
             job.workMode &&
-            job.workMode.toLowerCase() === modeFilter.toLowerCase()
+            job.workMode.toLowerCase() === modeFilter.toLowerCase(),
         );
 
   const pageTitle = "Careers at Vell Infotech | Current Job Openings";
@@ -136,7 +136,7 @@ function JobPosting() {
         )}
       </Helmet>
 
-      <section className="relative min-h-screen w-full overflow-hidden bg-slate-950 pt-28 pb-16 text-slate-100">
+      <section className="relative min-h-screen w-full overflow-hidden bg-slate-950 pt-12 sm:pt-28 pl-4 pb-16 text-slate-100">
         {/* Decorative animated background */}
         <div className="pointer-events-none absolute inset-0">
           <motion.div
@@ -175,7 +175,7 @@ function JobPosting() {
         </div>
 
         <motion.div
-          className="relative mx-auto flex max-w-5xl flex-col gap-8 px-4 lg:px-0"
+          className="relative mx-auto flex max-w-5xl flex-col gap-4 px-4 lg:px-0"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -411,7 +411,8 @@ function JobPosting() {
                     <div className="flex flex-col items-end gap-1 text-right">
                       {job.updatedAt && (
                         <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-300">
-                         Posted : {new Date(job.updatedAt).toLocaleDateString("en-GB")}
+                          Posted :{" "}
+                          {new Date(job.updatedAt).toLocaleDateString("en-GB")}
                         </span>
                       )}
 

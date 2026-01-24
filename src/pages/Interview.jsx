@@ -16,7 +16,7 @@ const Interview = () => {
     >
       {/* 🌟 Hero Section */}
       <section
-        className="relative w-full mt-[54px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px]
+        className="relative w-full mt-[43px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px]
                    flex items-center justify-start px-3 sm:px-4 md:px-10 lg:px-10"
         style={{
           backgroundImage: `url(${interviewImg})`,
@@ -33,7 +33,7 @@ const Interview = () => {
                      max-w-[90%] sm:max-w-[75%] md:max-w-[600px]
                      tracking-wide text-left drop-shadow-md"
         >
-         Explore Interview Guides
+          Explore Interview Guides
         </h1>
       </section>
 
@@ -46,15 +46,12 @@ const Interview = () => {
           id="interview-guides-heading"
           className="text-2xl sm:text-3xl font-bold text-[#005BAC] mb-8 text-center"
         >
-           Interview Questions & Preparation Guides
+          Interview Questions & Preparation Guides
         </h2>
 
         {/* ✅ AWS Interview */}
         <article className="mb-10" aria-labelledby="aws-heading">
-          <h2
-            id="aws-heading"
-            className="sr-only"
-          >
+          <h2 id="aws-heading" className="sr-only">
             AWS Interview Questions
           </h2>
           <InterviewCard
@@ -68,10 +65,7 @@ const Interview = () => {
 
         {/* ✅ Selenium Interview */}
         <article className="mb-10" aria-labelledby="selenium-heading">
-          <h2
-            id="selenium-heading"
-            className="sr-only"
-          >
+          <h2 id="selenium-heading" className="sr-only">
             Selenium Interview Questions
           </h2>
           <InterviewCard
@@ -85,10 +79,7 @@ const Interview = () => {
 
         {/* ✅ Python Interview */}
         <article className="mb-10" aria-labelledby="python-heading">
-          <h2
-            id="python-heading"
-            className="sr-only"
-          >
+          <h2 id="python-heading" className="sr-only">
             Python Interview Questions
           </h2>
           <InterviewCard
@@ -102,10 +93,7 @@ const Interview = () => {
 
         {/* ✅ Java Interview */}
         <article aria-labelledby="java-heading">
-          <h2
-            id="java-heading"
-            className="sr-only"
-          >
+          <h2 id="java-heading" className="sr-only">
             Java Interview Questions
           </h2>
           <InterviewCard

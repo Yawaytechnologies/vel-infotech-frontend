@@ -61,10 +61,12 @@ export default function AboutSection() {
     const { name } = e.target;
     setTouched((t) => ({ ...t, [name]: true }));
     const msg = validateField(name, form[name]);
-    setErrors((prev) => ({
-      ...prev,
-      ...(msg ? { [name]: msg } : { [name]: undefined }),
-    }));
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (msg) next[name] = msg;
+      else delete next[name];
+      return next;
+    });
   };
 
   const validateField = (field, value) => {
@@ -72,22 +74,51 @@ export default function AboutSection() {
     switch (field) {
       case "name":
         if (!val) return "Name is required.";
-        if (!/^[A-Za-z ]+$/.test(val)) return "Only letters and spaces are allowed.";
+        if (!/^[A-Za-z ]+$/.test(val))
+          return "Only letters and spaces are allowed.";
         if (val.length < 2) return "Enter at least 2 characters.";
         return null;
       case "email": {
         if (!val) return "Email is required.";
-        const formatOK = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
-        if (!formatOK) return "Enter a valid email address.";
+        if (/[,\s]/.test(val)) return "Enter a valid email address.";
+
+        const emailOk = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(
+          val,
+        );
+        if (!emailOk || /\.\./.test(val)) return "Enter a valid email address.";
+
+        const [, domainRaw] = val.split("@");
+        const domain = (domainRaw || "").toLowerCase();
+        if (!domain || domain.startsWith(".") || domain.endsWith("."))
+          return "Enter a valid email address.";
+
+        const allowedDomains = [
+          "gmail.com",
+          "yahoo.com",
+          "yahoo.in",
+          "outlook.com",
+          "hotmail.com",
+          "live.com",
+          "icloud.com",
+          "proton.me",
+          "protonmail.com",
+        ];
+        if (!allowedDomains.includes(domain)) {
+          return "Please use a valid email (Gmail/Yahoo/Outlook etc).";
+        }
+
         return null;
       }
+
       case "phone":
         if (!val) return "Mobile number is required.";
-        if (!/^\d{10}$/.test(val)) return "Enter a valid 10-digit mobile number.";
+        if (!/^[6-9]\d{9}$/.test(val))
+          return "Enter a valid 10-digit mobile number (starts with 6-9).";
         return null;
       case "course":
         if (!val) return "Course name is required.";
-        if (!/^[A-Za-z ]+$/.test(val)) return "Only letters and spaces are allowed.";
+        if (!/^[A-Za-z ]+$/.test(val))
+          return "Only letters and spaces are allowed.";
         if (val.length < 2) return "Enter at least 2 characters.";
         return null;
       case "message":
@@ -203,8 +234,7 @@ export default function AboutSection() {
         <h1
           id="about__heading"
           className="text-[2.2rem] md:text-[1.8rem] font-black text-[#171717] mb-3 text-center leading-tight"
-        >
-        </h1>
+        ></h1>
 
         <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row gap-12 items-stretch z-10">
           {/* LEFT */}
@@ -213,8 +243,8 @@ export default function AboutSection() {
               <span className="font-semibold text-[#005BAC]">
                 Elevate your career with curated training,
               </span>{" "}
-              built by 650+ industry experts for real-world success. Join thousands of professionals
-              accelerating their future.
+              built by 650+ industry experts for real-world success. Join
+              thousands of professionals accelerating their future.
             </p>
 
             <div className="bg-white border border-[#a7f3d0]/30 shadow-lg rounded-2xl p-6 mb-5">
@@ -224,25 +254,26 @@ export default function AboutSection() {
               </h3>
               <ul className="text-gray-800 text-base space-y-2 mb-3 list-disc list-inside">
                 <li>
-                  <span className="font-bold">Industry Leader:</span> Recognized as a high-impact
-                  IT education brand.
+                  <span className="font-bold">Industry Leader:</span> Recognized
+                  as a high-impact IT education brand.
                 </li>
                 <li>
-                  <span className="font-bold">Expert-Led:</span> 650+ world-class trainers & real
-                  project mentorship.
+                  <span className="font-bold">Expert-Led:</span> 650+
+                  world-class trainers & real project mentorship.
                 </li>
                 <li>
-                  <span className="font-bold">Tailored Pathways:</span> Flexible for students,
-                  graduates, and working pros.
+                  <span className="font-bold">Tailored Pathways:</span> Flexible
+                  for students, graduates, and working pros.
                 </li>
                 <li>
-                  <span className="font-bold">Proven Outcomes:</span> 10,000+ students placed with
-                  top IT MNCs.
+                  <span className="font-bold">Proven Outcomes:</span> 10,000+
+                  students placed with top IT MNCs.
                 </li>
               </ul>
               <div className="text-gray-600 text-sm mt-2">
-                <span className="font-semibold">Benefits:</span> Faster onboarding, productivity
-                gains, cost-effective upskilling, and global recognition.
+                <span className="font-semibold">Benefits:</span> Faster
+                onboarding, productivity gains, cost-effective upskilling, and
+                global recognition.
               </div>
             </div>
 
@@ -295,14 +326,22 @@ export default function AboutSection() {
               </div>
 
               {/* Form */}
-              <form id="enquiry-form" onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-2">
+              <form
+                id="enquiry-form"
+                onSubmit={handleSubmit}
+                noValidate
+                className="grid grid-cols-1 gap-2"
+              >
                 <div>
                   <input
                     type="text"
                     name="name"
                     placeholder="Your Name"
                     value={form.name}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      const cleaned = e.target.value.replace(/[^A-Za-z ]/g, "");
+                      setField("name", cleaned);
+                    }}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.name}
                     className={[
@@ -325,7 +364,10 @@ export default function AboutSection() {
                     name="email"
                     placeholder="Your Email"
                     value={form.email}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      setField("email", e.target.value);
+                      setTouched((t) => ({ ...t, email: true })); // ✅ show validation immediately
+                    }}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.email}
                     className={[
@@ -347,10 +389,25 @@ export default function AboutSection() {
                     type="tel"
                     name="phone"
                     inputMode="numeric"
-                    pattern="\d*"
+                    maxLength={10}
                     placeholder="Mobile Number"
                     value={form.phone}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      // keep only digits and limit to 10
+                      let onlyDigits = e.target.value
+                        .replace(/\D/g, "")
+                        .slice(0, 10);
+
+                      // 🔥 force first digit 6-9
+                      if (
+                        onlyDigits.length === 1 &&
+                        !/^[6-9]$/.test(onlyDigits)
+                      ) {
+                        onlyDigits = ""; // don't allow starting 0-5
+                      }
+
+                      setField("phone", onlyDigits);
+                    }}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.phone}
                     className={[
@@ -383,11 +440,32 @@ export default function AboutSection() {
                   >
                     <option value="">Select Course</option>
                     {[
-                      "Java","Python","Full Stack Development","PL/SQL","SQL","Data Science","Business Analytics",
-                      "Data Science & AI","Big Data Developer","Software Testing","Selenium Testing","ETL Testing",
-                      "AWS Training","DevOps","Hardware Networking","Cyber Security","SAP","Salesforce","ServiceNow",
-                      "RPA (Robotic Process Automation)","Production Support","Digital Marketing","Soft Skill Training",
-                      "Scrum Master","Business Analyst","Product Management",
+                      "Java",
+                      "Python",
+                      "Full Stack Development",
+                      "PL/SQL",
+                      "SQL",
+                      "Data Science",
+                      "Business Analytics",
+                      "Data Science & AI",
+                      "Big Data Developer",
+                      "Software Testing",
+                      "Selenium Testing",
+                      "ETL Testing",
+                      "AWS Training",
+                      "DevOps",
+                      "Hardware Networking",
+                      "Cyber Security",
+                      "SAP",
+                      "Salesforce",
+                      "ServiceNow",
+                      "RPA (Robotic Process Automation)",
+                      "Production Support",
+                      "Digital Marketing",
+                      "Soft Skill Training",
+                      "Scrum Master",
+                      "Business Analyst",
+                      "Product Management",
                     ].map((course) => (
                       <option key={course} value={course}>
                         {course}

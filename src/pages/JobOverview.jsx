@@ -109,10 +109,20 @@ function JobOverview() {
     if (!selectedJob) return;
 
     // Basic validation
-    if (!candidateName || !candidateEmail) {
-      alert("Name and Email are required.");
+    const emailOk =
+      /^[a-zA-Z0-9._%+-]+@(?:gmail\.com|yahoo\.com|outlook\.com|hotmail\.com|icloud\.com)$/.test(
+        candidateEmail.trim().toLowerCase(),
+      );
+
+    if (!candidateName.trim()) {
+      alert("Name is required.");
       return;
     }
+    if (!candidateEmail.trim() || !emailOk) {
+      alert("Enter a valid Email ID.");
+      return;
+    }
+
     if (!qualification || !passingYear || !skills) {
       alert("Qualification, Passing Year and Skills are required.");
       return;
@@ -126,7 +136,7 @@ function JobOverview() {
         !currentCtc
       ) {
         alert(
-          "For experienced candidates, Total Experience, Relevant Experience, Notice Period and Current CTC are required."
+          "For experienced candidates, Total Experience, Relevant Experience, Notice Period and Current CTC are required.",
         );
         return;
       }
@@ -147,8 +157,7 @@ function JobOverview() {
         candidateType === "Fresher" ? 0 : Number(relevantExperience || 0),
       noticePeriod:
         candidateType === "Fresher" ? "Not Applicable" : noticePeriod,
-      currentCtc:
-        candidateType === "Fresher" ? 0 : Number(currentCtc || 0),
+      currentCtc: candidateType === "Fresher" ? 0 : Number(currentCtc || 0),
       // coverMessage is *not* sent to backend since it's not in the Swagger schema
     };
 
@@ -220,7 +229,7 @@ function JobOverview() {
         )}
       </Helmet>
 
-      <section className="relative min-h-screen w-full overflow-hidden bg-slate-950 pt-28 pb-16 text-slate-100">
+      <section className="relative min-h-screen w-full overflow-hidden bg-slate-950 pl-4 pt-16 sm:pt-20 md:pt-28 pb-16 text-slate-100">
         {/* Decorative animated background */}
         <div className="pointer-events-none absolute inset-0">
           <motion.div
@@ -365,8 +374,10 @@ function JobOverview() {
                     </div>
                     {selectedJob.updatedAt && (
                       <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-[11px] font-medium text-emerald-200">
-                        Posted: {new Date(selectedJob.updatedAt).toLocaleDateString("en-GB")}
-
+                        Posted:{" "}
+                        {new Date(selectedJob.updatedAt).toLocaleDateString(
+                          "en-GB",
+                        )}
                       </span>
                     )}
                   </div>
@@ -531,9 +542,18 @@ function JobOverview() {
                     </label>
                     <input
                       type="text"
+                      required
                       className="h-9 w-full rounded-md border border-slate-700 bg-slate-900 px-2.5 text-sm text-slate-50 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-500"
                       value={candidateName}
-                      onChange={(e) => setCandidateName(e.target.value)}
+                      onChange={(e) => {
+                        // ✅ allow only letters + space
+                        const v = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                        setCandidateName(v);
+                      }}
+                      onBlur={() =>
+                        setCandidateName((p) => p.trim().replace(/\s+/g, " "))
+                      }
+                      placeholder="Your full name"
                     />
                   </div>
 
@@ -556,7 +576,7 @@ function JobOverview() {
                   {/* Phone */}
                   <div className="space-y-1">
                     <label className="block text-xs font-medium text-slate-200">
-                      Phone
+                      Phone *
                     </label>
                     <div className="flex items-center gap-2 rounded-md border border-slate-700 bg-slate-900 px-2.5">
                       <Phone className="h-4 w-4 text-slate-400" />
@@ -564,11 +584,19 @@ function JobOverview() {
                         type="tel"
                         inputMode="numeric"
                         maxLength={10}
+                        pattern="[6-9][0-9]{9}"
                         className="h-8 w-full border-none bg-transparent text-sm text-slate-50 outline-none"
                         value={candidatePhone}
                         onChange={(e) => {
-                          const onlyNumbers = e.target.value.replace(/\D/g, "");
-                          setCandidatePhone(onlyNumbers);
+                          // keep only digits + max 10
+                          let v = e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, 10);
+
+                          // first digit must be 6-9
+                          if (v.length === 1 && !/^[6-9]$/.test(v)) v = "";
+
+                          setCandidatePhone(v);
                         }}
                       />
                     </div>
@@ -630,9 +658,7 @@ function JobOverview() {
                             step="0.5"
                             className="h-9 w-full rounded-md border border-slate-700 bg-slate-900 px-2.5 text-sm text-slate-50 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-500"
                             value={totalExperience}
-                            onChange={(e) =>
-                              setTotalExperience(e.target.value)
-                            }
+                            onChange={(e) => setTotalExperience(e.target.value)}
                           />
                         </div>
 
