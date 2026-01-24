@@ -270,21 +270,20 @@ export default function Footer() {
             <ul className="text-sm space-y-2 font-bold ">
               <li>
                 <span className="block text-black-400">
-                  Vell Infotech Private Limited 
+                  Vell Infotech Private Limited
                 </span>
-                <span>
-                  {" "}Software training & Placement
-                </span>
-                <br/>
+                <span> Software training & Placement</span>
+                <br />
                 <span className="block text-black-400">
                   4/38, 2nd Main Rd, Kalaimagal Nagar, Ekkatuthangal, Chennai,
-                  Tamil Nadu 600032 
+                  Tamil Nadu 600032
                 </span>
               </li>
-              <li>  
+              <li>
                 <a
-                  href="vellinfotech10@gmail.com"
-                  className="hover:text-[#005BAC] transition "
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=vellinfotech10@gmail.com&su=Course%20Enquiry"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   vellinfotech10@gmail.com
                 </a>

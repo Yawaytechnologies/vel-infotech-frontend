@@ -118,16 +118,27 @@ export default function Contact() {
         return null;
       case "email": {
         if (!val) return "Email is required.";
-        const ok =
-          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
-        if (!ok) return "Enter a valid email address.";
+        if (/[,\s]/.test(val)) return "Enter a valid email address.";
+
+        const emailOk = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(
+          val,
+        );
+        if (!emailOk || /\.\./.test(val)) return "Enter a valid email address.";
+
+        const [, domainRaw] = val.split("@");
+        const domain = (domainRaw || "").toLowerCase();
+        if (!domain || domain.startsWith(".") || domain.endsWith("."))
+          return "Enter a valid email address.";
+
         return null;
       }
+
       case "phone":
         if (!val) return "Mobile number is required.";
-        if (!/^\d{10}$/.test(val))
-          return "Enter a valid 10-digit mobile number.";
+        if (!/^[6-9]\d{9}$/.test(val))
+          return "Enter valid 10-digit mobile number (starts with 6-9).";
         return null;
+
       case "course":
         if (!val) return "Course name is required.";
         if (!/^[A-Za-z ]+$/.test(val))
@@ -210,7 +221,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-clip bg-[#F7FAFF] dark:bg-[#F7FAFF] mt-12">
+    <div className="min-h-screen relative overflow-clip bg-[#F7FAFF] dark:bg-[#F7FAFF] mt-0 md:mt-12">
       <ToastContainer
         newestOnTop
         position="top-center"
@@ -527,7 +538,13 @@ export default function Contact() {
                           placeholder="John Doe"
                           name="name"
                           value={form.name}
-                          onChange={onChange}
+                          onChange={(e) => {
+                            const cleaned = e.target.value.replace(
+                              /[^A-Za-z ]/g,
+                              "",
+                            );
+                            setField("name", cleaned);
+                          }}
                           onBlur={onBlur}
                           required
                           aria-invalid={!!(touched.name && errors.name)}
@@ -588,7 +605,17 @@ export default function Contact() {
                           placeholder="10-digit mobile number"
                           name="phone"
                           value={form.phone}
-                          onChange={onChange}
+                          onChange={(e) => {
+                            let digits = e.target.value
+                              .replace(/\D/g, "")
+                              .slice(0, 10);
+
+                            // first digit must be 6-9
+                            if (digits.length === 1 && !/^[6-9]$/.test(digits))
+                              digits = "";
+
+                            setField("phone", digits);
+                          }}
                           onBlur={onBlur}
                           required
                           aria-invalid={!!(touched.phone && errors.phone)}

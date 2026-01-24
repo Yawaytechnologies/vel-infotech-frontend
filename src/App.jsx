@@ -39,6 +39,8 @@ import NotFound from "./pages/NotFound";
 import JobOverview from "./pages/JobOverview";
 
 import GTMRouteListener from "./analytics/GTMRouteListener";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 /** ✅ Must match Header heights */
 const HEADER_H = 53;
@@ -158,6 +160,20 @@ export default function App() {
 
   return (
     <Router>
+      <style>{`
+  .vell-toast-container{
+    top: 90px !important;
+    width: 100% !important;
+    padding: 0 12px !important;
+    z-index: 999999 !important;
+  }
+  .vell-toast{
+    border-radius: 12px !important;
+  }
+  @media (max-width: 767px){
+    .vell-toast-container{ top: 60px !important; }
+  }
+`}</style>
       <GTMRouteListener />
 
       <Layout>
@@ -220,6 +236,17 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
+      <ToastContainer
+        position="top-center"
+        autoClose={2500}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="colored"
+        className="vell-toast-container"
+        toastClassName="vell-toast"
+      />
     </Router>
   );
 }

@@ -14,16 +14,17 @@ export default function Review() {
   const ratingHistogram = { 5: 62, 4: 25, 3: 8, 2: 3, 1: 2 };
 
   /* -------------------- Google Reviews (live) -------------------- */
-const [masterReviews, setMasterReviews] = useState(() => generateDemoReviews());
-const [googleMeta, setGoogleMeta] = useState({
-  name: "Vell InfoTech",
-  rating: 4.8,
-  total: 124,
-  url: "https://share.google/t27FPzRNT3WXGrilY",
-  status: "success",
-  error: null,
-});
-
+  const [masterReviews, setMasterReviews] = useState(() =>
+    generateDemoReviews(),
+  );
+  const [googleMeta, setGoogleMeta] = useState({
+    name: "Vell InfoTech",
+    rating: 4.8,
+    total: 124,
+    url: "https://share.google/t27FPzRNT3WXGrilY",
+    status: "success",
+    error: null,
+  });
 
   const PLACE_ID = "ChIJqXVXO3xnUjoRSMMIWwz_R8o";
 
@@ -35,18 +36,17 @@ const [googleMeta, setGoogleMeta] = useState({
       try {
         setGoogleMeta((m) => ({ ...m, status: "loading", error: null }));
         const t = setTimeout(() => {
-  if (cancelled) return;
-  setMasterReviews(generateDemoReviews());
-  setGoogleMeta({
-    name: "Vell InfoTech",
-    rating: 4.8,
-    total: 124,
-    url: "https://share.google/t27FPzRNT3WXGrilY",
-    status: "success",
-    error: null,
-  });
-}, 4000);
-
+          if (cancelled) return;
+          setMasterReviews(generateDemoReviews());
+          setGoogleMeta({
+            name: "Vell InfoTech",
+            rating: 4.8,
+            total: 124,
+            url: "https://share.google/t27FPzRNT3WXGrilY",
+            status: "success",
+            error: null,
+          });
+        }, 4000);
 
         const key =
           import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY_HERE";
@@ -87,24 +87,23 @@ const [googleMeta, setGoogleMeta] = useState({
           (place, status) => {
             if (cancelled) return;
 
-if (
-  status !== window.google.maps.places.PlacesServiceStatus.OK ||
-  !place
-) {
-  // ✅ fallback so page still shows reviews
-  const demoReviews = generateDemoReviews();
-  setMasterReviews(demoReviews);
-  setGoogleMeta({
-    name: "Vell InfoTech",
-    rating: 4.8,
-    total: 124,
-    url: "https://share.google/t27FPzRNT3WXGrilY",
-    status: "success",
-    error: null,
-  });
-  return;
-}
-
+            if (
+              status !== window.google.maps.places.PlacesServiceStatus.OK ||
+              !place
+            ) {
+              // ✅ fallback so page still shows reviews
+              const demoReviews = generateDemoReviews();
+              setMasterReviews(demoReviews);
+              setGoogleMeta({
+                name: "Vell InfoTech",
+                rating: 4.8,
+                total: 124,
+                url: "https://share.google/t27FPzRNT3WXGrilY",
+                status: "success",
+                error: null,
+              });
+              return;
+            }
 
             const reviews = (place.reviews || []).map((r, i) => ({
               id: i + 1,
@@ -127,23 +126,22 @@ if (
               status: "success",
               error: null,
             });
-          }
+          },
         );
-} catch (e) {
-  if (!cancelled) {
-    const demoReviews = generateDemoReviews();
-    setMasterReviews(demoReviews);
-    setGoogleMeta({
-      name: "Vell InfoTech",
-      rating: 4.8,
-      total: 124,
-      url: "https://share.google/t27FPzRNT3WXGrilY",
-      status: "success",
-      error: null,
-    });
-  }
-}
-
+      } catch (e) {
+        if (!cancelled) {
+          const demoReviews = generateDemoReviews();
+          setMasterReviews(demoReviews);
+          setGoogleMeta({
+            name: "Vell InfoTech",
+            rating: 4.8,
+            total: 124,
+            url: "https://share.google/t27FPzRNT3WXGrilY",
+            status: "success",
+            error: null,
+          });
+        }
+      }
     })();
 
     return () => {
@@ -249,18 +247,18 @@ if (
         i === 0
           ? "2d"
           : i === 1
-          ? "1w"
-          : i === 2
-          ? "2w"
-          : i === 3
-          ? "3w"
-          : i === 4
-          ? "1mo"
-          : i === 5
-          ? "2mo"
-          : i === 6
-          ? "3mo"
-          : "4mo",
+            ? "1w"
+            : i === 2
+              ? "2w"
+              : i === 3
+                ? "3w"
+                : i === 4
+                  ? "1mo"
+                  : i === 5
+                    ? "2mo"
+                    : i === 6
+                      ? "3mo"
+                      : "4mo",
     }));
   }
 
@@ -291,17 +289,17 @@ if (
   /* -------------------- derived -------------------- */
   const courses = useMemo(
     () => ["All", ...Array.from(new Set(masterReviews.map((r) => r.course)))],
-    [masterReviews]
+    [masterReviews],
   );
   const centers = useMemo(
     () => ["All", ...Array.from(new Set(masterReviews.map((r) => r.center)))],
-    [masterReviews]
+    [masterReviews],
   );
 
   const topTags = useMemo(() => {
     const m = new Map();
     masterReviews.forEach((r) =>
-      (r.tags || []).forEach((t) => m.set(t, (m.get(t) || 0) + 1))
+      (r.tags || []).forEach((t) => m.set(t, (m.get(t) || 0) + 1)),
     );
     return [...m.entries()]
       .sort((a, b) => b[1] - a[1])
@@ -320,11 +318,13 @@ if (
           r.center.toLowerCase().includes(q) ||
           r.snippet.toLowerCase().includes(q) ||
           r.detail.toLowerCase().includes(q) ||
-          (r.tags || []).some((t) => t.includes(q))
+          (r.tags || []).some((t) => t.includes(q)),
       );
     }
-    if (courseFilter !== "All") list = list.filter((r) => r.course === courseFilter);
-    if (centerFilter !== "All") list = list.filter((r) => r.center === centerFilter);
+    if (courseFilter !== "All")
+      list = list.filter((r) => r.course === courseFilter);
+    if (centerFilter !== "All")
+      list = list.filter((r) => r.center === centerFilter);
     if (ratingFilter > 0) list = list.filter((r) => r.rating === ratingFilter);
     if (sortBy === "rating-desc") list.sort((a, b) => b.rating - a.rating);
     if (sortBy === "rating-asc") list.sort((a, b) => a.rating - b.rating);
@@ -334,7 +334,7 @@ if (
   const overallRating = googleMeta.rating ?? 4.8;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       {/* HERO with dark gradient */}
       <Hero
         trendingCourses={trendingCourses}
@@ -467,13 +467,6 @@ if (
                   matters
                 </p>
               </div>
-              <button className="group relative px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-blue-50 transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-xl">
-                <span className="relative flex items-center gap-2">
-                  <PenIcon />
-                  Write a Review
-                </span>
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </button>
             </div>
           </div>
         </div>
@@ -552,7 +545,9 @@ function Hero({ trendingCourses, overallRating, ratingHistogram, googleMeta }) {
                 title="Google Reviews"
                 subtitle={`${googleMeta.total || 100}+ reviews`}
                 gradient="from-orange-500 to-red-500"
-                href={googleMeta.url || "https://share.google/t27FPzRNT3WXGrilY"}
+                href={
+                  googleMeta.url || "https://share.google/t27FPzRNT3WXGrilY"
+                }
                 target="_blank"
               />
             </div>
@@ -578,7 +573,12 @@ function Hero({ trendingCourses, overallRating, ratingHistogram, googleMeta }) {
   );
 }
 
-function HeroStats({ trendingCourses, overallRating, ratingHistogram, googleMeta }) {
+function HeroStats({
+  trendingCourses,
+  overallRating,
+  ratingHistogram,
+  googleMeta,
+}) {
   return (
     <div className="lg:col-span-5">
       <div className="relative">
@@ -686,7 +686,15 @@ function BodyTabs({ active, onChange }) {
   );
 }
 
-function ActionButton({ icon, title, subtitle, gradient, onClick, href, target }) {
+function ActionButton({
+  icon,
+  title,
+  subtitle,
+  gradient,
+  onClick,
+  href,
+  target,
+}) {
   const classes = `group relative rounded-2xl bg-gradient-to-r ${gradient} p-[1px] hover:-translate-y-1 transition-all active:translate-y-0`;
   const inner = (
     <>
@@ -757,7 +765,9 @@ function FeaturedReview({ review }) {
             {[...Array(5)].map((_, i) => (
               <StarIconFilled
                 key={i}
-                className={i < review.rating ? "text-amber-400" : "text-slate-300"}
+                className={
+                  i < review.rating ? "text-amber-400" : "text-slate-300"
+                }
               />
             ))}
           </div>
@@ -956,8 +966,12 @@ function WriteReviewCard() {
             <PenIcon className="text-white" />
           </div>
           <div>
-            <h3 className="text-white font-bold text-lg">Share Your Experience</h3>
-            <p className="text-blue-200 text-sm">Help others make informed decisions</p>
+            <h3 className="text-white font-bold text-lg">
+              Share Your Experience
+            </h3>
+            <p className="text-blue-200 text-sm">
+              Help others make informed decisions
+            </p>
           </div>
         </div>
         <button className="w-full py-3 px-4 bg-white hover:bg-blue-50 text-slate-900 font-bold rounded-xl transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-lg">
@@ -1009,7 +1023,13 @@ function StarIconFilled({ className = "w-5 h-5" }) {
 }
 function PenIcon({ className = "w-5 h-5" }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
     </svg>
   );
@@ -1017,23 +1037,47 @@ function PenIcon({ className = "w-5 h-5" }) {
 function GoogleIcon({ className = "w-5 h-5" }) {
   return (
     <svg className={className} viewBox="0 0 24 24">
-      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+      <path
+        fill="#4285F4"
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+      />
     </svg>
   );
 }
 function FilterIcon({ className = "w-5 h-5" }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
     </svg>
   );
 }
 function TagIcon({ className = "w-5 h-5" }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
       <line x1="7" y1="7" x2="7.01" y2="7" />
     </svg>
@@ -1041,14 +1085,26 @@ function TagIcon({ className = "w-5 h-5" }) {
 }
 function ThumbsUpIcon({ className = "w-4 h-4" }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
     </svg>
   );
 }
 function HeartIcon({ className = "w-4 h-4" }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
     </svg>
   );
@@ -1139,7 +1195,9 @@ function HighlightsPanel({ reviews }) {
         <p className="mt-4 text-xl font-bold text-slate-900">
           No highlights yet
         </p>
-        <p className="text-slate-600 mt-2">Top-rated reviews will appear here</p>
+        <p className="text-slate-600 mt-2">
+          Top-rated reviews will appear here
+        </p>
       </div>
     );
   }
