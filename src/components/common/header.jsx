@@ -99,6 +99,7 @@ export default function Header() {
 
   const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   const [mobileCategory, setMobileCategory] = useState(null);
+  const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -116,28 +117,30 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 w-full z-[99999] bg-background border-b border-white/20">
+      <header className="fixed top-0 w-full z-[99999] bg-background">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-3 md:px-6 lg:px-8 h-16 md:h-[83px]">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/">
-              <img
-                src={Logo1}
-                alt="Logo"
-                className="h-14 md:h-16 lg:h-20 w-auto object-contain cursor-pointer"
-              />
+              <div className="overflow-hidden">
+                <img
+                  src={Logo1}
+                  alt="Logo"
+                  className="h-20 md:h-22 lg:h-35 w-auto object-contain cursor-pointer scale-[1.06] -m-[2px] block"
+                />
+              </div>
             </Link>
           </div>
 
           {/* Top Nav */}
-          <nav className="hidden md:flex flex-1 items-center justify-center gap-4 lg:gap-8 h-full">
+          <nav className="hidden md:flex flex-1 items-center justify-center gap-3 lg:gap-8 h-full">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.href}
                 onClick={() => setCurrent(link.name)}
                 onMouseEnter={() => setCurrent(link.name)}
-                className={`relative font-medium text-sm transition-all duration-200 ${
+                className={`relative font-semibold text-base transition-all duration-200 ${
                   current === link.name
                     ? "text-[#005BAC]"
                     : "text-gray-800/90 hover:text-[#005BAC]"
@@ -155,25 +158,25 @@ export default function Header() {
           </nav>
 
           {/* Contact Numbers */}
-          <div className="hidden md:flex items-center justify-end gap-6 lg:gap-10">
+          <div className="hidden md:flex items-center justify-end gap-2 lg:gap-6">
             <div className="flex flex-col items-end leading-tight">
-              <span className="font-semibold text-xs md:text-sm text-gray-800">
+              <span className="font-semibold text-sm md:text-md text-gray-800">
                 Enquiry:
               </span>
               <a
                 href="tel:+919600593838"
-                className="text-[#005BAC] hover:underline text-sm md:text-base font-semibold"
+                className="text-[#005BAC] hover:underline text-sm md:text-md font-semibold"
               >
                 +91 9600593838
               </a>
             </div>
             <div className="flex flex-col items-center">
-              <span className="font-semibold text-xs md:text-sm text-gray-800">
+              <span className="font-semibold text-sm md:text-md text-gray-800">
                 Support:
               </span>
               <a
                 href="tel:+919600383839"
-                className="text-[#005BAC] hover:underline text-base font-semibold"
+                className="text-[#005BAC] hover:underline text-sm md:text-md font-semibold"
               >
                 +91 9600383839
               </a>
@@ -191,125 +194,127 @@ export default function Header() {
 
         {/* Desktop Subheader */}
         <div className="hidden md:flex w-full bg-[#005BAC] min-h-[54px] items-center px-6 z-[99999] fixed top-[83px] left-0">
-          <nav className="w-full flex justify-center gap-10 text-white font-semibold text-md relative">
+          <nav className="w-full flex justify-center gap-10 text-white font-semibold text-base relative">
             {/* All Courses dropdown */}
-   <div
-  className="relative"
-  onMouseEnter={() => setDesktopCoursesOpen(true)}
-  onMouseLeave={() => {
-    setDesktopCoursesOpen(false);
-    setActiveCategory(null);
-  }}
->
-  <button
-    type="button"
-    className="transition flex items-center gap-1 focus:outline-none hover:text-white/90"
-  >
-    All Courses <span className="text-xs">▾</span>
-  </button>
-
-  {desktopCoursesOpen && (
-    <div
-      className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-[99999] flex flex-row overflow-visible"
-    >
-      <div className="flex flex-col w-64 rounded-l-lg">
-        {groupedCourses.map((cat, idx) => (
-          <div
-            key={cat.category}
-            className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
-              activeCategory === idx
-                ? "bg-[#f0f4fa] text-[#005BAC]"
-                : "hover:bg-gray-100 text-gray-800"
-            }`}
-            onMouseEnter={() => setActiveCategory(idx)}
-          >
-            <span>{cat.category}</span>
-            <FiChevronRight
-              className={`text-gray-400 transition-transform duration-200 ${
-                activeCategory === idx ? "translate-x-1" : ""
-              }`}
-              size={18}
-            />
-          </div>
-        ))}
-      </div>
-
-      {activeCategory !== null && (
-        <div className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto bg-white rounded-r-lg">
-          {groupedCourses[activeCategory].items.map((item) => (
-            <Link
-              key={item.name}
-              to={`/all-courses/${item.slug}`}
-              onClick={() => {
+            <div
+              className="relative"
+              onMouseEnter={() => setDesktopCoursesOpen(true)}
+              onMouseLeave={() => {
                 setDesktopCoursesOpen(false);
                 setActiveCategory(null);
               }}
-              className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
             >
-              {item.name}
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
-  )}
-</div>
+              <button
+                type="button"
+                className="transition flex items-center gap-1 focus:outline-none hover:text-white/90"
+              >
+                All Courses <span className="text-xs">▾</span>
+              </button>
 
+              {desktopCoursesOpen && (
+                <div className="absolute left-0 top-full mt-0 bg-white text-black rounded-lg shadow-lg min-w-[260px] z-[99999] flex flex-row overflow-visible">
+                  <div className="flex flex-col w-64 rounded-l-lg">
+                    {groupedCourses.map((cat, idx) => (
+                      <div
+                        key={cat.category}
+                        className={`px-5 py-3 text-[15px] font-medium cursor-pointer transition-all whitespace-nowrap flex items-center justify-between ${
+                          activeCategory === idx
+                            ? "bg-[#f0f4fa] text-[#005BAC]"
+                            : "hover:bg-gray-100 text-gray-800"
+                        }`}
+                        onMouseEnter={() => setActiveCategory(idx)}
+                      >
+                        <span>{cat.category}</span>
+                        <FiChevronRight
+                          className={`text-gray-400 transition-transform duration-200 ${
+                            activeCategory === idx ? "translate-x-1" : ""
+                          }`}
+                          size={18}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  {activeCategory !== null && (
+                    <div className="flex flex-col min-w-[220px] max-h-[60vh] overflow-y-auto bg-white rounded-r-lg">
+                      {groupedCourses[activeCategory].items.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={`/all-courses/${item.slug}`}
+                          onClick={() => {
+                            setDesktopCoursesOpen(false);
+                            setActiveCategory(null);
+                          }}
+                          className="px-7 py-3 text-gray-800 hover:bg-[#f3f8fe] hover:text-[#005BAC] rounded-r-lg transition-all text-[15px] font-normal whitespace-nowrap"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
             {/* Other top menu links */}
-            <Link to="/internship" className="transition">
+            <Link
+              to="/internship"
+              className="transition text-base font-semibold"
+            >
               Internship
             </Link>
-            <Link to="/placed-students" className="transition">
+            <Link
+              to="/placed-students"
+              className="transition text-base font-semibold"
+            >
               Placed Students List
             </Link>
-            <Link to="/reviews" className="transition">
+            <Link to="/reviews" className="transition text-base font-semibold">
               Reviews
             </Link>
-            <Link to="/blog" className="transition">
+            <Link to="/blog" className="transition text-base font-semibold">
               Blog
             </Link>
 
             {/* More dropdown */}
-       <div
-  className="relative"
-  onMouseEnter={() => setMoreOpen(true)}
-  onMouseLeave={() => setMoreOpen(false)}
->
-  <button
-    type="button"
-    className="transition flex items-center gap-1 hover:text-white/90"
-  >
-    More <span className="text-xs">▾</span>
-  </button>
+            <div
+              className="relative"
+              onMouseEnter={() => setMoreOpen(true)}
+              onMouseLeave={() => setMoreOpen(false)}
+            >
+              <button
+                type="button"
+                className="transition flex items-center gap-1 hover:text-white/90"
+              >
+                More <span className="text-xs">▾</span>
+              </button>
 
-  {moreOpen && (
-    <div className="absolute right-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-[99999] flex flex-col">
-      <Link
-        to="/interview-questions"
-        onClick={() => setMoreOpen(false)}
-        className="px-4 py-2 hover:bg-gray-100"
-      >
-        Interview Questions
-      </Link>
-      <Link
-        to="/resources"
-        onClick={() => setMoreOpen(false)}
-        className="px-4 py-2 hover:bg-gray-100"
-      >
-        Tutorials
-      </Link>
-      <Link
-        to="/sample-resume"
-        onClick={() => setMoreOpen(false)}
-        className="px-4 py-2 hover:bg-gray-100"
-      >
-        Sample Resume
-      </Link>
-    </div>
-  )}
-</div>
-
+              {moreOpen && (
+                <div className="absolute right-0 top-full mt-0 bg-white text-black rounded shadow-lg min-w-[180px] z-[99999] flex flex-col">
+                  <Link
+                    to="/interview-questions"
+                    onClick={() => setMoreOpen(false)}
+                    className="px-4 py-2 hover:bg-gray-100"
+                  >
+                    Interview Questions
+                  </Link>
+                  <Link
+                    to="/resources"
+                    onClick={() => setMoreOpen(false)}
+                    className="px-4 py-2 hover:bg-gray-100"
+                  >
+                    Tutorials
+                  </Link>
+                  <Link
+                    to="/sample-resume"
+                    onClick={() => setMoreOpen(false)}
+                    className="px-4 py-2 hover:bg-gray-100"
+                  >
+                    Sample Resume
+                  </Link>
+                </div>
+              )}
+            </div>
           </nav>
         </div>
 
@@ -329,20 +334,21 @@ export default function Header() {
             menuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between px-6 py-6 border-b border-black/20">
+          <div className="flex items-center justify-between px-6 py-0.5">
             <img src={Logo1} alt="Logo" className="h-29 w-auto mb-1" />
             <button onClick={() => setMenuOpen(false)}>
               <FiX className="w-8 h-8 text-text-secondary" />
             </button>
           </div>
 
+          {/* ✅ This nav keeps your "always need this part" */}
           <nav className="flex flex-col mt-4 px-6 gap-2 overflow-y-auto flex-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-medium font-base py-2 text-gray-700 hover:text-[#005BAC]"
+                className="text-base font-semibold py-2 text-gray-700 hover:text-[#005BAC]"
               >
                 {link.name}
               </Link>
@@ -351,12 +357,14 @@ export default function Header() {
             {/* Mobile All Courses */}
             <div>
               <button
-                className="w-full flex items-center justify-between py-2 text-gray-700 text-md hover:text-[#005BAC]"
+                className="w-full flex items-center justify-between py-2 text-gray-700 text-md font-semibold hover:text-[#005BAC]"
                 onClick={() => setMobileCoursesOpen((prev) => !prev)}
+                type="button"
               >
                 <span>All Courses</span>
                 {mobileCoursesOpen ? <FiChevronDown /> : <FiChevronRight />}
               </button>
+
               {mobileCoursesOpen && (
                 <div className="ml-2 pb-2">
                   {groupedCourses.map((cat, idx) => (
@@ -366,6 +374,7 @@ export default function Header() {
                         onClick={() =>
                           setMobileCategory(mobileCategory === idx ? null : idx)
                         }
+                        type="button"
                       >
                         <span>{cat.category}</span>
                         <FiChevronRight
@@ -393,6 +402,79 @@ export default function Header() {
                       )}
                     </div>
                   ))}
+                </div>
+              )}
+            </div>
+
+            {/* ✅ Extra links below All Courses */}
+            <div className="mt-0 pt-0">
+              <Link
+                to="/internship"
+                onClick={() => setMenuOpen(false)}
+                className="text-base font-semibold py-2 text-gray-700 hover:text-[#005BAC] block"
+              >
+                Internship
+              </Link>
+
+              <Link
+                to="/placed-students"
+                onClick={() => setMenuOpen(false)}
+                className="text-base font-semibold py-2 text-gray-700 hover:text-[#005BAC] block"
+              >
+                Placed Students List
+              </Link>
+
+              <Link
+                to="/reviews"
+                onClick={() => setMenuOpen(false)}
+                className="text-base font-semibold py-2 text-gray-700 hover:text-[#005BAC] block"
+              >
+                Reviews
+              </Link>
+
+              <Link
+                to="/blog"
+                onClick={() => setMenuOpen(false)}
+                className="text-base font-semibold py-2 text-gray-700 hover:text-[#005BAC] block"
+              >
+                Blog
+              </Link>
+
+              {/* Mobile More (accordion) */}
+              <button
+                className="w-full flex items-center justify-between py-2 text-gray-700 text-md hover:text-[#005BAC] font-semibold"
+                onClick={() => setMobileMoreOpen((p) => !p)}
+                type="button"
+              >
+                <span>More</span>
+                {mobileMoreOpen ? <FiChevronDown /> : <FiChevronRight />}
+              </button>
+
+              {mobileMoreOpen && (
+                <div className="pl-4 pb-2 flex flex-col">
+                  <Link
+                    to="/interview-questions"
+                    onClick={() => setMenuOpen(false)}
+                    className="py-1 text-gray-800 hover:text-[#005BAC]"
+                  >
+                    Interview Questions
+                  </Link>
+
+                  <Link
+                    to="/resources"
+                    onClick={() => setMenuOpen(false)}
+                    className="py-1 text-gray-800 hover:text-[#005BAC]"
+                  >
+                    Tutorials
+                  </Link>
+
+                  <Link
+                    to="/sample-resume"
+                    onClick={() => setMenuOpen(false)}
+                    className="py-1 text-gray-800 hover:text-[#005BAC]"
+                  >
+                    Sample Resume
+                  </Link>
                 </div>
               )}
             </div>

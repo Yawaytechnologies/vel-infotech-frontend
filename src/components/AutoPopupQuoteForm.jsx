@@ -1,6 +1,7 @@
 // AutoPopupQuoteForm.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function AutoPopupQuoteForm({
   /* ---- control (optional) ---- */
@@ -70,16 +71,29 @@ export default function AutoPopupQuoteForm({
   /* ============== Auto-close when submit succeeds ============== */
   useEffect(() => {
     if (!open) return;
-    if (status === "succeeded" || status === "success") setOpen(false);
-  }, [status, open]);
 
+    if (status === "succeeded" || status === "success") {
+      toast.dismiss();
+      toast.success(
+        "Submitted successfully!\nThanks! We will contact you soon.",
+      );
+
+      setOpen(false);
+      return;
+    }
+
+    if (status === "failed" || status === "error") {
+      toast.error(error ? String(error) : "Submission failed. Try again.");
+    }
+  }, [status, open, error]);
   if (!open) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[100] mt-14 sm:mt-2 md:mt-4 lg:mt-6 flex justify-center items-start
-           pt-3 sm:pt-8 md:pt-[100px] lg:pt-[120px]
-           px-2"
+      className="fixed inset-0 z-[100] flex justify-center items-start px-2
+mt-14 sm:mt-6 md:mt-26 lg:mt-35  
+pt-4 sm:pt-7 lg:pt-2 pb-1
+lg:items-center lg:justify-center"
       aria-modal="true"
       role="dialog"
       aria-labelledby="quote-title"
@@ -93,12 +107,12 @@ export default function AutoPopupQuoteForm({
 
       {/* Modal card */}
       <div
-        className="relative w-full max-w-[520px] mx-auto"
+        className="relative w-[min(92vw,480px)]  lg:w-[480px] h-auto max-h-[90vh] overflow-y-auto mx-auto my-3"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="animate-in fade-in zoom-in-65 duration-200">
           <div className="w-full max-w-xl mx-auto">
-            <div className="relative bg-white p-5 sm:p-6 rounded-2xl shadow-xl border border-slate-200">
+            <div className="relative bg-white p-2 sm:p-4 lg:p-6 rounded-xl shadow-xl border border-slate-200 flex flex-col max-h-[calc(100vh-120px)] overflow-y-auto">
               {/* Close button (top-right) */}
               <button
                 type="button"
@@ -112,13 +126,13 @@ export default function AutoPopupQuoteForm({
 
               <h3
                 id="quote-title"
-                className="text-base sm:text-lg font-bold text-center text-[#003c6a] mb-3"
+                className="text-base sm:text-lg font-bold text-center text-[#003c6a] mb-0"
               >
                 Get a Free Training Quote
               </h3>
 
               {/* Toggle Buttons */}
-              <div className="flex justify-center gap-2 mt-2 mb-3">
+              <div className="flex justify-center gap-2 mt-1 mb-2">
                 <button
                   type="button"
                   onClick={() => setMode("class_room")}
@@ -148,7 +162,7 @@ export default function AutoPopupQuoteForm({
                 id="enquiry-form"
                 onSubmit={handleSubmit}
                 noValidate
-                className="grid grid-cols-1 gap-1 sm:gap-1"
+                className="grid grid-cols-1 gap-0.5 sm:gap-1"
               >
                 {/* Name */}
                 <div>
@@ -158,17 +172,23 @@ export default function AutoPopupQuoteForm({
                     name="name"
                     placeholder="Your Name"
                     value={form.name}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      const cleaned = e.target.value.replace(/[^A-Za-z ]/g, "");
+                      // call parent handler with cleaned value
+                      handleChange({
+                        target: { name: "name", value: cleaned },
+                      });
+                    }}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.name}
                     className={[
-                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      "w-full rounded-xl px-2 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
                       touched?.name && errors?.name
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
-                  <div className="min-h-[6px]">
+                  <div className="min-h-[3px]">
                     {touched?.name && errors?.name && (
                       <p className="text-red-600 text-xs">{errors.name}</p>
                     )}
@@ -182,17 +202,25 @@ export default function AutoPopupQuoteForm({
                     name="email"
                     placeholder="Your Email"
                     value={form.email}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      handleChange({ target: { name: "email", value: v } });
+
+                      // force error show while typing (only if parent uses touched)
+                      if (typeof handleBlur === "function") {
+                        // fake blur trigger not good
+                      }
+                    }}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.email}
                     className={[
-                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      "w-full rounded-xl px-2 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
                       touched?.email && errors?.email
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
-                  <div className="min-h-[6px]">
+                  <div className="min-h-[3px]">
                     {touched?.email && errors?.email && (
                       <p className="text-red-600 text-xs">{errors.email}</p>
                     )}
@@ -204,21 +232,34 @@ export default function AutoPopupQuoteForm({
                   <input
                     type="tel"
                     name="phone"
+                    maxLength={10}
                     inputMode="numeric"
-                    pattern="\d*"
+                    pattern="[6-9][0-9]{9}"
                     placeholder="Mobile Number"
                     value={form.phone}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      let digits = e.target.value
+                        .replace(/\D/g, "")
+                        .slice(0, 10);
+
+                      // force first digit 6-9
+                      if (digits.length === 1 && !/^[6-9]$/.test(digits))
+                        digits = "";
+
+                      handleChange({
+                        target: { name: "phone", value: digits },
+                      });
+                    }}
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.phone}
                     className={[
-                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      "w-full rounded-xl px-2 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
                       touched?.phone && errors?.phone
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
                     ].join(" ")}
                   />
-                  <div className="min-h-[6px]">
+                  <div className="min-h-[3px]">
                     {touched?.phone && errors?.phone && (
                       <p className="text-red-600 text-xs">{errors.phone}</p>
                     )}
@@ -234,7 +275,7 @@ export default function AutoPopupQuoteForm({
                     onBlur={handleBlur}
                     aria-invalid={!!errors?.course}
                     className={[
-                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
+                      "w-full rounded-xl px-2 py-2 bg-[#edf2f7] border text-sm focus:ring-2 outline-none text-gray-900",
                       touched?.course && errors?.course
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
@@ -274,7 +315,7 @@ export default function AutoPopupQuoteForm({
                       </option>
                     ))}
                   </select>
-                  <div className="min-h-[6px]">
+                  <div className="min-h-[3px]">
                     {touched?.course && errors?.course && (
                       <p className="text-red-600 text-xs">{errors.course}</p>
                     )}
@@ -293,7 +334,7 @@ export default function AutoPopupQuoteForm({
                     aria-invalid={!!errors?.message}
                     maxLength={300}
                     className={[
-                      "w-full rounded-xl px-3 py-2 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
+                      "w-full rounded-xl px-2 py-2 bg-[#edf2f7] border text-sm resize-none focus:ring-2 outline-none text-gray-900 placeholder:text-gray-500",
                       touched?.message && errors?.message
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                         : "border-[#b6c3d1] focus:border-[#003c6a] focus:ring-[#003c6a]",
@@ -302,7 +343,7 @@ export default function AutoPopupQuoteForm({
                   <div className="flex justify-between text-xs text-gray-500 mt-0.5">
                     <span>{form.message.length}/300</span>
                   </div>
-                  <div className="min-h-[6px] ">
+                  <div className="min-h-[3px]">
                     {touched?.message && errors?.message && (
                       <p className="text-red-600 text-xs">{errors?.message}</p>
                     )}
@@ -313,7 +354,7 @@ export default function AutoPopupQuoteForm({
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className={`w-full mt-1.5 py-2.5 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
+                  className={`w-full mt-1 py-2 rounded-xl bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-semibold text-sm hover:from-[#0891b2] hover:to-[#16bca7] transition ${
                     status === "loading" ? "opacity-70 cursor-not-allowed" : ""
                   }`}
                 >

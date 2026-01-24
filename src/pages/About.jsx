@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
 import Background from "../assets/Background1.png";
 import { FaUsers, FaLightbulb, FaHandsHelping, FaAward } from "react-icons/fa";
 
@@ -45,33 +46,108 @@ const cultureData = [
 ];
 
 const About = () => {
+  // ✅ Smooth scroll helper (no routing, no page reload)
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* HERO */}
       <header
         id="about-hero"
         aria-labelledby="about-hero__heading"
-        className="relative w-full mt-10 md:mt-24 h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[580px]
-  flex items-center justify-center sm:justify-start px-4 sm:px-10 lg:px-16 2xl:px-24 overflow-hidden"
-        style={{
-          backgroundImage: `url(${Background})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "100% 100%",
-        }}
+        className="relative w-full mt-10 md:mt-24
+         min-h-[240px] sm:min-h-[320px] md:min-h-[340px] lg:min-h-[440px]
+         overflow-hidden bg-no-repeat bg-cover bg-center md:bg-right lg:bg-right"
+        style={{ backgroundImage: `url(${Background})` }}
       >
-        {/* ✅ Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/45" />
+        {/* overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-black/10" />
 
-        {/* ✅ Content */}
-        <div className="relative z-10 w-full max-w-xl">
-          <h4
-            id="about-hero__heading"
-            className="text-white text-3xl sm:text-4xl md:text-6xl font-bold leading-tight
-      text-center sm:text-left drop-shadow-lg"
-          >
-            Welcome to Vell InfoTech
-          </h4>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-14 lg:px-16 py-10 md:py-12">
+          <div className="grid grid-cols-1 md:grid-cols-[8.55fr_1.95fr] lg:grid-cols-2 gap-10 items-center justify-items-center md:justify-items-start">
+            {/* LEFT CONTENT */}
+            <div className="text-white text-center md:text-left md:pr-4 lg:pr-16 lg:pt-6 lg:text-center">
+              {/* ✅ removed bg behind title */}
+              <h1
+                id="about-hero__heading"
+                className="text-3xl sm:text-3xl md:text-3xl font-extrabold tracking-tight drop-shadow-xl"
+              >
+                Vell InfoTech
+              </h1>
+
+              <p className="mt-5 text-base sm:text-lg md:text-md text-white/90 max-w-xl leading-relaxed">
+                Industry-ready training with real projects, expert mentors, and
+                career support. Learn faster, build stronger, and get job-ready
+                with confidence.
+              </p>
+
+              {/* ✅ Quick highlights (added one more chip) */}
+              <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center md:justify-start lg:justify-center">
+                <span
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold text-white
+  bg-white/10 border border-white/25 backdrop-blur-md
+  shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]
+  hover:bg-white/15 hover:border-white/40 transition"
+                >
+                  ✅ 100+ Hiring Partners
+                </span>
+                <span
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold text-white
+  bg-white/10 border border-white/25 backdrop-blur-md
+  shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]
+  hover:bg-white/15 hover:border-white/40 transition"
+                >
+                  ✅ Project-based Training
+                </span>
+                <span
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold text-white
+  bg-white/10 border border-white/25 backdrop-blur-md
+  shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]
+  hover:bg-white/15 hover:border-white/40 transition"
+                >
+                  ✅ Mock Interviews
+                </span>
+                <span
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold text-white
+  bg-white/10 border border-white/25 backdrop-blur-md
+  shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]
+  hover:bg-white/15 hover:border-white/40 transition"
+                >
+                  ✅ Placement Support
+                </span>
+              </div>
+
+              {/* ✅ CTA buttons (scroll to section ids) */}
+              <div className="mt-8 flex flex-col sm:flex-row gap-4 lg:justify-center">
+                <button
+                  type="button"
+                  onClick={() => scrollToId("contact")}
+                  className="group inline-flex items-center justify-center rounded-xl px-7 py-3 font-semibold
+  bg-white text-[#003366] shadow-[0_14px_30px_rgba(0,0,0,0.25)] ring-1 ring-white/30
+  transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.30)] active:translate-y-0"
+                >
+                  Enquire Now
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => scrollToId("training-methodology")}
+                  className="group inline-flex items-center justify-center rounded-xl px-7 py-3 font-semibold
+  border border-white/35 bg-white/5 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]
+  backdrop-blur-md transition hover:bg-white/10 hover:border-white/55 hover:-translate-y-0.5
+  active:translate-y-0"
+                >
+                  View Methodology
+                </button>
+              </div>
+            </div>
+
+            {/* END RIGHT */}
+          </div>
         </div>
       </header>
 
@@ -82,7 +158,6 @@ const About = () => {
         className="py-20 bg-gradient-to-r from-[#e0f7fa] to-[#f0fcff] text-gray-800"
       >
         <div className="max-w-6xl mx-auto px-6">
-          {/* ✅ Section H2 */}
           <h2
             id="why-choose-us__heading"
             className="text-4xl font-bold text-center text-[#005BAC] mb-12"
@@ -93,7 +168,6 @@ const About = () => {
           <div className="relative border-l-4 border-[#00acc1] pl-8 space-y-14">
             <div className="relative">
               <div className="absolute -left-5 top-1.5 w-4 h-4 bg-[#00acc1] rounded-full border-4 border-white"></div>
-              {/* ✅ Subsection H3 */}
               <h3 className="text-xl font-semibold text-[#005BAC] mb-1">
                 Expert Trainers
               </h3>
@@ -145,7 +219,6 @@ const About = () => {
         className="py-24 px-8 sm:px-16 md:px-32 bg-[#e0f7fa]"
       >
         <div className="max-w-7xl mx-auto px-6 text-center">
-          {/* ✅ Section H2 */}
           <motion.h2
             id="training-methodology__heading"
             className="py-10 text-3xl font-semibold text-gray-800 mb-6"
@@ -202,7 +275,6 @@ const About = () => {
                   visible: { opacity: 1, y: 0 },
                 }}
               >
-                {/* ✅ Card title H3 */}
                 {step.icon}
                 <h3 className="text-xl font-semibold mb-2">{step.label}</h3>
                 <p>{step.desc}</p>
@@ -218,7 +290,6 @@ const About = () => {
         aria-labelledby="our-impact__heading"
         className="relative py-20 bg-gradient-to-br from-[#F0F8FF] to-[#D6E9FF]"
       >
-        {/* ✅ Section H2 */}
         <h2 id="our-impact__heading" className="sr-only">
           Our Impact
         </h2>
@@ -227,12 +298,11 @@ const About = () => {
 
         <div className="max-w-5xl mx-auto px-6 flex flex-col gap-24">
           <div className="flex items-center gap-8 relative">
-            <div className="flex-shrink-0 w-16 h-40 rounded-l-xl bg-gradient-to-b from-[#005BAC] to-[#003366] flex items-center justify-center"></div>
+            <div className="flex-shrink-0 w-16 h-40 rounded-l-xl bg-gradient-to-b from-[#005BAC] to-[#003366]"></div>
             <div className="flex-1 bg-white rounded-xl shadow-lg px-8 py-6 relative">
               <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#005BAC] flex items-center justify-center shadow-lg">
                 <Briefcase className="w-8 h-8 text-white" />
               </div>
-              {/* ✅ Subsection H3 */}
               <h3 className="text-2xl font-bold text-[#003366]">
                 Job Placement Rate
               </h3>
@@ -244,7 +314,7 @@ const About = () => {
           </div>
 
           <div className="flex items-center gap-8 relative">
-            <div className="flex-shrink-0 w-16 h-40 rounded-l-xl bg-gradient-to-b from-[#00ACC1] to-[#007B8A] flex items-center justify-center"></div>
+            <div className="flex-shrink-0 w-16 h-40 rounded-l-xl bg-gradient-to-b from-[#00ACC1] to-[#007B8A]"></div>
             <div className="flex-1 bg-white rounded-xl shadow-lg px-8 py-6 relative">
               <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#00ACC1] flex items-center justify-center shadow-lg">
                 <TrendingUp className="w-8 h-8 text-white" />
@@ -260,7 +330,7 @@ const About = () => {
           </div>
 
           <div className="flex items-center gap-8 relative">
-            <div className="flex-shrink-0 w-16 h-40 rounded-l-xl bg-gradient-to-b from-[#338DFF] to-[#004C99] flex items-center justify-center"></div>
+            <div className="flex-shrink-0 w-16 h-40 rounded-l-xl bg-gradient-to-b from-[#338DFF] to-[#004C99]"></div>
             <div className="flex-1 bg-white rounded-xl shadow-lg px-8 py-6 relative">
               <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-16 h-16 rounded-full bg-[#338DFF] flex items-center justify-center shadow-lg">
                 <Users className="w-8 h-8 text-white" />
@@ -290,7 +360,6 @@ const About = () => {
         className="py-16 bg-[#fafafa]"
       >
         <div className="max-w-7xl mx-auto px-6 text-center">
-          {/* ✅ Section H2 */}
           <h2
             id="testimonials__heading"
             className="text-3xl font-semibold text-gray-800 mb-8"
@@ -314,7 +383,6 @@ const About = () => {
                   className="h-12 w-12 rounded-full object-cover"
                 />
                 <div className="ml-4">
-                  {/* ✅ Card title as H3 */}
                   <h3 className="text-lg font-semibold text-gray-800">
                     Thennarasu S
                   </h3>
@@ -369,7 +437,6 @@ const About = () => {
         className="bg-gray-50 py-16"
       >
         <div className="container mx-auto px-6">
-          {/* ✅ Section H2 */}
           <h2
             id="our-culture__heading"
             className="text-3xl font-bold mb-10 text-center"
@@ -384,7 +451,6 @@ const About = () => {
                   <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
                     {item.icon}
                   </div>
-                  {/* ✅ Item title H3 */}
                   <h3 className="text-2xl font-semibold text-gray-800 mt-4">
                     {item.title}
                   </h3>
@@ -419,7 +485,6 @@ const About = () => {
         className="py-20 bg-gradient-to-br from-[#d0e8ff] via-[#a3cfff] to-[#74b6ff]"
       >
         <div className="max-w-7xl mx-auto px-6 text-center">
-          {/* ✅ Section H2 */}
           <h2
             id="core-values__heading"
             className="text-4xl font-bold text-[#002b66] mb-6 tracking-tight"
@@ -433,7 +498,6 @@ const About = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-[#0d47a1] hover:scale-105 transform">
-              {/* ✅ Card title H3 */}
               <h3 className="text-xl font-semibold text-[#0d47a1] mb-3">
                 🔷 Integrity
               </h3>
@@ -489,7 +553,6 @@ const About = () => {
         aria-labelledby="contact__heading"
         className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 py-16 px-6 sm:px-12 md:px-24 rounded-lg shadow-lg max-w-7xl mx-auto text-center text-white"
       >
-        {/* ✅ Section H2 */}
         <h2
           id="contact__heading"
           className="text-4xl font-extrabold mb-6 drop-shadow-md"

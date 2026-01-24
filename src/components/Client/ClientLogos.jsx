@@ -9,34 +9,51 @@ const BRAND = {
   accent: "#FFC107",
 };
 
-/** ---- Logo data (use /clientlogo/* for Vite public assets) ---- */
+/** ✅ Load logos from src/assets/clientlogo (Vite bundling)
+ * Make sure your files are here:
+ * src/assets/clientlogo/capgemini.png
+ * src/assets/clientlogo/google.png
+ * ...etc
+ */
+const clientLogoModules = import.meta.glob(
+  "/src/assets/clientlogo/*.{png,jpg,jpeg,svg}",
+  { eager: true, import: "default" },
+);
+
+const getLogo = (fileName) =>
+  clientLogoModules[`/src/assets/clientlogo/${fileName}`];
+
+/** ---- Logo data (now from src/assets/clientlogo) ---- */
 const ENTERPRISE_LOGOS = [
-  { src: "/clientlogo/capgemini.png", alt: "Capgemini" },
-  { src: "/clientlogo/accenture-logo.png", alt: "Accenture" },
-  { src: "/clientlogo/cognizant-logo_brandlogos.net_u6t45.png", alt: "Cognizant" },
-  { src: "/clientlogo/intel_2006-logo_brandlogos.net_vatnn.png", alt: "Intel" },
-  { src: "/clientlogo/hcl-technologies-vector-logo.png", alt: "HCL" },
-  { src: "/clientlogo/zoho-logo_brandlogos.net_kduhg.png", alt: "Zoho" },
-  { src: "/clientlogo/encore-cs6-vector-logo.png", alt: "Encore IT" },
-  { src: "/clientlogo/wily.png", alt: "Wily IT Services" },
-  { src: "/clientlogo/transworld.png", alt: "Transworld" },
-  { src: "/clientlogo/dmi-digital-management-seeklogo.png", alt: "DMI" },
-  { src: "/clientlogo/astra--eps--vector-logo.png", alt: "Adastra" },
-  { src: "/clientlogo/datamatics.png", alt: "Data Matics" },
+  { src: getLogo("capgemini.png"), alt: "Capgemini" },
+  { src: getLogo("accenture-logo.png"), alt: "Accenture" },
+  {
+    src: getLogo("cognizant-logo_brandlogos.net_u6t45.png"),
+    alt: "Cognizant",
+  },
+  { src: getLogo("intel_2006-logo_brandlogos.net_vatnn.png"), alt: "Intel" },
+  { src: getLogo("hcl-technologies-vector-logo.png"), alt: "HCL" },
+  { src: getLogo("zoho-logo_brandlogos.net_kduhg.png"), alt: "Zoho" },
+  { src: getLogo("encore-cs6-vector-logo.png"), alt: "Encore IT" },
+  { src: getLogo("wily.png"), alt: "Wily IT Services" },
+  { src: getLogo("transworld.png"), alt: "Transworld" },
+  { src: getLogo("dmi-digital-management-seeklogo.png"), alt: "DMI" },
+  { src: getLogo("astra--eps--vector-logo.png"), alt: "Adastra" },
+  { src: getLogo("datamatics.png"), alt: "Data Matics" },
 ];
 
 const FEATURED_LOGOS = [
-  { src: "/clientlogo/google.png", alt: "Google" },
-  { src: "/clientlogo/microsoft.png", alt: "Microsoft" },
-  { src: "/clientlogo/amazon.png", alt: "Amazon" },
-  { src: "/clientlogo/meta.png", alt: "Meta" },
+  { src: getLogo("google.png"), alt: "Google" },
+  { src: getLogo("microsoft.png"), alt: "Microsoft" },
+  { src: getLogo("amazon.png"), alt: "Amazon" },
+  { src: getLogo("meta.png"), alt: "Meta" },
 ];
 
 const STARTUP_LOGOS = [
-  { src: "/clientlogo/freshworks-seeklogo.png", alt: "Freshworks" },
-  { src: "/clientlogo/chargebee.png", alt: "Chargebee" },
-  { src: "/clientlogo/zoho-logo_brandlogos.net_kduhg.png", alt: "Zoho" },
-  { src: "/clientlogo/grayorane.png", alt: "GreyOrange" },
+  { src: getLogo("freshworks-seeklogo.png"), alt: "Freshworks" },
+  { src: getLogo("chargebee.png"), alt: "Chargebee" },
+  { src: getLogo("zoho-logo_brandlogos.net_kduhg.png"), alt: "Zoho" },
+  { src: getLogo("grayorane.png"), alt: "GreyOrange" },
 ];
 
 const TABS = [
@@ -46,11 +63,16 @@ const TABS = [
   { key: "startup", label: "Startups" },
 ];
 
-const uniqByAlt = (arr) => Array.from(new Map(arr.map(o => [o.alt, o])).values());
+const uniqByAlt = (arr) =>
+  Array.from(new Map(arr.map((o) => [o.alt, o])).values());
 const cn = (...a) => a.filter(Boolean).join(" ");
 
 function LogoCard({ src, alt }) {
   const [err, setErr] = useState(false);
+
+  // ✅ Put this file in src/assets/clientlogo/_placeholder.svg
+  const placeholder = getLogo("_placeholder.svg");
+
   return (
     <div
       className="group relative flex items-center justify-center rounded-2xl border bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
@@ -60,7 +82,7 @@ function LogoCard({ src, alt }) {
       title={alt}
     >
       <img
-        src={err ? "/clientlogo/_placeholder.svg" : src}
+        src={err || !src ? placeholder : src}
         alt={alt}
         loading="lazy"
         decoding="async"
@@ -89,7 +111,11 @@ export default function HiringPartners() {
   const [active, setActive] = useState("all");
   const [q, setQ] = useState("");
 
-  const all = useMemo(() => uniqByAlt([...FEATURED_LOGOS, ...ENTERPRISE_LOGOS, ...STARTUP_LOGOS]), []);
+  const all = useMemo(
+    () => uniqByAlt([...FEATURED_LOGOS, ...ENTERPRISE_LOGOS, ...STARTUP_LOGOS]),
+    [],
+  );
+
   const counts = {
     all: all.length,
     featured: FEATURED_LOGOS.length,
@@ -99,9 +125,13 @@ export default function HiringPartners() {
 
   const filtered = useMemo(() => {
     const pool =
-      active === "all" ? all :
-      active === "featured" ? FEATURED_LOGOS :
-      active === "enterprise" ? ENTERPRISE_LOGOS : STARTUP_LOGOS;
+      active === "all"
+        ? all
+        : active === "featured"
+          ? FEATURED_LOGOS
+          : active === "enterprise"
+            ? ENTERPRISE_LOGOS
+            : STARTUP_LOGOS;
 
     if (!q.trim()) return pool;
     const k = q.toLowerCase();
@@ -124,31 +154,47 @@ export default function HiringPartners() {
             border: "1px solid #DDE6F6",
           }}
         >
-          <span className="inline-block h-2 w-2 rounded-full" style={{ background: BRAND.accent }} />
+          <span
+            className="inline-block h-2 w-2 rounded-full"
+            style={{ background: BRAND.accent }}
+          />
           Hiring Partners
         </span>
 
-        {/* Section H2 */}
-        <h2 id="partners-heading" className="mt-4 text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl">
+        <h2
+          id="partners-heading"
+          className="mt-4 text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl"
+        >
           Our Hiring Partners
         </h2>
 
         <p className="mx-auto mt-3 max-w-3xl text-slate-700">
-          We offer lifelong <strong style={{ color: BRAND.primary }}>Placement Support</strong> and tailored interview prep—until you get placed.
+          We offer lifelong{" "}
+          <strong style={{ color: BRAND.primary }}>Placement Support</strong>{" "}
+          and tailored interview prep—until you get placed.
         </p>
       </header>
 
       {/* Blue tab bar */}
-      <div className="mb-6 rounded-2xl px-3 py-3" style={{ background: BRAND.primary }}>
+      <div
+        className="mb-6 rounded-2xl px-3 py-3"
+        style={{ background: BRAND.primary }}
+      >
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-          <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter partners">
+          <div
+            className="flex flex-wrap items-center gap-2"
+            role="tablist"
+            aria-label="Filter partners"
+          >
             {TABS.map((t) => (
               <button
                 key={t.key}
                 onClick={() => setActive(t.key)}
                 className={cn(
                   "rounded-full px-4 py-2 text-sm font-medium transition",
-                  active === t.key ? "bg-white text-slate-900" : "bg-white/10 text-white hover:bg-white/20"
+                  active === t.key
+                    ? "bg-white text-slate-900"
+                    : "bg-white/10 text-white hover:bg-white/20",
                 )}
                 aria-pressed={active === t.key}
               >
@@ -156,7 +202,9 @@ export default function HiringPartners() {
                 <span
                   className={cn(
                     "ml-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px]",
-                    active === t.key ? "bg-white/70 text-slate-900" : "bg-black/20 text-white"
+                    active === t.key
+                      ? "bg-white/70 text-slate-900"
+                      : "bg-black/20 text-white",
                   )}
                 >
                   {counts[t.key]}
@@ -166,7 +214,9 @@ export default function HiringPartners() {
           </div>
 
           <div className="w-full sm:w-72">
-            <label htmlFor="partner-search" className="sr-only">Search partners</label>
+            <label htmlFor="partner-search" className="sr-only">
+              Search partners
+            </label>
             <div className="relative">
               <input
                 id="partner-search"
@@ -177,7 +227,9 @@ export default function HiringPartners() {
                 className="w-full rounded-xl border bg-white px-4 py-2.5 text-sm outline-none transition focus:ring-2"
                 style={{ borderColor: "#DDE6F6" }}
               />
-              <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-slate-400">⌘K</div>
+              <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-slate-400">
+                ⌘K
+              </div>
             </div>
           </div>
         </div>
@@ -187,12 +239,21 @@ export default function HiringPartners() {
       <LogoGrid items={filtered} />
 
       {/* CTA */}
-      <div className="mt-12 rounded-3xl p-1" style={{ background: `linear-gradient(90deg, ${BRAND.primaryDark}, ${BRAND.primary})` }}>
+      <div
+        className="mt-12 rounded-3xl p-1"
+        style={{
+          background: `linear-gradient(90deg, ${BRAND.primaryDark}, ${BRAND.primary})`,
+        }}
+      >
         <div className="flex flex-col items-start justify-between gap-4 rounded-[calc(1.5rem-4px)] bg-white p-6 sm:flex-row sm:items-center">
           <div>
-            {/* Subsection H3 */}
-            <h3 className="text-xl font-bold text-slate-900">Recruiters: Hire pre-vetted, job-ready talent</h3>
-            <p className="mt-1 text-slate-600">Tailored shortlists, mock-interviewed candidates, quick onboarding.</p>
+            <h3 className="text-xl font-bold text-slate-900">
+              Recruiters: Hire pre-vetted, job-ready talent
+            </h3>
+            <p className="mt-1 text-slate-600">
+              Tailored shortlists, mock-interviewed candidates, quick
+              onboarding.
+            </p>
           </div>
 
           <div className="flex gap-3">
@@ -215,22 +276,27 @@ export default function HiringPartners() {
         </div>
       </div>
 
-      {/* Marquee — color logos (no grayscale) */}
-      <div className="mt-10 overflow-hidden rounded-2xl border bg-white py-4" style={{ borderColor: "#DDE6F6" }}>
+      {/* Marquee */}
+      <div
+        className="mt-10 overflow-hidden rounded-2xl border bg-white py-4"
+        style={{ borderColor: "#DDE6F6" }}
+      >
         <div className="flex animate-[scroll_35s_linear_infinite] gap-10 hover:opacity-100">
-          {[...FEATURED_LOGOS, ...ENTERPRISE_LOGOS].concat(FEATURED_LOGOS).map((l, i) => (
-            <div key={`mq-${l.alt}-${i}`} className="shrink-0">
-              <img
-                src={l.src}
-                alt={l.alt}
-                loading="lazy"
-                decoding="async"
-                width="140"
-                height="44"
-                className="mx-6 h-11 w-auto object-contain"
-              />
-            </div>
-          ))}
+          {[...FEATURED_LOGOS, ...ENTERPRISE_LOGOS]
+            .concat(FEATURED_LOGOS)
+            .map((l, i) => (
+              <div key={`mq-${l.alt}-${i}`} className="shrink-0">
+                <img
+                  src={l.src}
+                  alt={l.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width="140"
+                  height="44"
+                  className="mx-6 h-11 w-auto object-contain"
+                />
+              </div>
+            ))}
         </div>
       </div>
 
