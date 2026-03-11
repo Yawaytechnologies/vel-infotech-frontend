@@ -1,0 +1,9 @@
+BUG REPORT
+=====================================
+Test Case     : tc15_FileUploadField
+Date/Time     : 20260311_100558
+URL           : https://www.vellinfotech.com/careers
+Expected      : Test should pass as per business rule.
+Actual        : Test failed. Check screenshot and error message.
+Error Message : java.lang.AssertionError: No resume upload field found — candidates cannot attach CV
+Screenshot    : C:\Users\LENOVO\eclipse-workspace\SeleniumFrameWork\screenshots\tc15_FileUploadField_20260311_100557.png

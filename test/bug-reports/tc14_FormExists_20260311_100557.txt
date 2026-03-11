@@ -1,0 +1,9 @@
+BUG REPORT
+=====================================
+Test Case     : tc14_FormExists
+Date/Time     : 20260311_100557
+URL           : https://www.vellinfotech.com/careers
+Expected      : Test should pass as per business rule.
+Actual        : Test failed. Check screenshot and error message.
+Error Message : java.lang.AssertionError: No application form on Careers page — check TC-14 field list above
+Screenshot    : C:\Users\LENOVO\eclipse-workspace\SeleniumFrameWork\screenshots\tc14_FormExists_20260311_100556.png
