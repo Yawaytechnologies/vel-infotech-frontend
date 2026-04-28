@@ -2,6 +2,10 @@ import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import bgPlacement from "../assets/bgplacement.jpg";
 import { FiSearch } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { submitEnquiry } from "../redux/actions/enquiryAction";
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 /* =========================
    DATA SECTION
@@ -262,6 +266,42 @@ const PlacedStudents = () => {
   const [company, setCompany] = useState("All");
   const [role, setRole] = useState("All");
   const [sort, setSort] = useState("recent");
+  const dispatch = useDispatch();
+  const [quoteForm, setQuoteForm] = useState({
+    name: "", email: "", phone: "", batch: "", course: "", message: "",
+  });
+  const [quoteSubmitting, setQuoteSubmitting] = useState(false);
+
+  const handleQuoteSubmit = async (e) => {
+    e.preventDefault();
+    if (!quoteForm.name.trim() || !quoteForm.email.trim() || !quoteForm.phone.trim()) {
+      toast.error("Name, email and mobile are required.", { position: "top-center", theme: "colored" });
+      return;
+    }
+    if (!/^[6-9]\d{9}$/.test(quoteForm.phone.trim())) {
+      toast.error("Enter a valid 10-digit mobile number starting with 6–9.", { position: "top-center", theme: "colored" });
+      return;
+    }
+    try {
+      setQuoteSubmitting(true);
+      await dispatch(
+        submitEnquiry({
+          mode: mode === "classroom" ? "CLASS_ROOM" : "ONLINE",
+          name: quoteForm.name,
+          email: quoteForm.email,
+          mobile: quoteForm.phone,
+          course: quoteForm.course,
+          message: quoteForm.message,
+        })
+      ).unwrap();
+      toast.success("Thanks! We'll call you back soon.", { position: "top-center", theme: "colored" });
+      setQuoteForm({ name: "", email: "", phone: "", batch: "", course: "", message: "" });
+    } catch (err) {
+      toast.error(typeof err === "string" ? err : "Something went wrong.", { position: "top-center", theme: "colored" });
+    } finally {
+      setQuoteSubmitting(false);
+    }
+  };
 
   const companies = useMemo(
     () => [
@@ -299,6 +339,7 @@ const PlacedStudents = () => {
 
   return (
     <div className="bg-background pb-10">
+      <ToastContainer />
       {/* HERO — Single page-level H1 */}
       <header
         className="relative w-full mt-[54px] sm:mt-[100px] md:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px] flex items-center justify-start px-3 sm:px-8 md:px-10"
@@ -643,75 +684,84 @@ const PlacedStudents = () => {
           <form
             className="flex flex-col gap-4"
             aria-label="Training quote form"
+            onSubmit={handleQuoteSubmit}
           >
-            <label className="sr-only" htmlFor="q-name">
-              Your name
-            </label>
+            <label className="sr-only" htmlFor="q-name">Your name</label>
             <input
               id="q-name"
               type="text"
               placeholder="Your Name"
+              value={quoteForm.name}
+              onChange={(e) => setQuoteForm((f) => ({ ...f, name: e.target.value }))}
               className="rounded-xl bg-background px-3 py-2 border focus:ring-2 focus:ring-[#003c6a]"
             />
-            <label className="sr-only" htmlFor="q-email">
-              Your email
-            </label>
+            <label className="sr-only" htmlFor="q-email">Your email</label>
             <input
               id="q-email"
               type="email"
               placeholder="Your Email"
+              value={quoteForm.email}
+              onChange={(e) => setQuoteForm((f) => ({ ...f, email: e.target.value }))}
               className="rounded-xl bg-background px-3 py-2 border focus:ring-2 focus:ring-[#003c6a]"
             />
             <div className="flex gap-3">
               <div className="flex-1">
-                <label className="sr-only" htmlFor="q-phone">
-                  Mobile number
-                </label>
+                <label className="sr-only" htmlFor="q-phone">Mobile number</label>
                 <input
                   id="q-phone"
                   type="tel"
+                  inputMode="numeric"
+                  maxLength={10}
                   placeholder="Mobile Number"
+                  value={quoteForm.phone}
+                  onChange={(e) =>
+                    setQuoteForm((f) => ({
+                      ...f,
+                      phone: e.target.value.replace(/\D/g, "").slice(0, 10),
+                    }))
+                  }
                   className="rounded-xl bg-background px-3 py-2 border w-full focus:ring-2 focus:ring-[#003c6a]"
                 />
               </div>
               <div className="flex-1">
-                <label className="sr-only" htmlFor="q-batch">
-                  Batch preference
-                </label>
+                <label className="sr-only" htmlFor="q-batch">Batch preference</label>
                 <select
                   id="q-batch"
-                  defaultValue=""
+                  value={quoteForm.batch}
+                  onChange={(e) => setQuoteForm((f) => ({ ...f, batch: e.target.value }))}
                   className="rounded-xl bg-background px-3 py-2 border w-full focus:ring-2 focus:ring-[#003c6a]"
                 >
-                  <option value="" disabled>
-                    How & Where
-                  </option>
+                  <option value="" disabled>How &amp; Where</option>
                   <option>Morning Batch</option>
                   <option>Evening Batch</option>
                   <option>Weekend</option>
                 </select>
               </div>
             </div>
-            <label className="sr-only" htmlFor="q-course">
-              Course
-            </label>
+            <label className="sr-only" htmlFor="q-course">Course</label>
             <input
               id="q-course"
               type="text"
               placeholder="Type Course"
+              value={quoteForm.course}
+              onChange={(e) => setQuoteForm((f) => ({ ...f, course: e.target.value }))}
               className="rounded-xl bg-background px-3 py-2 border focus:ring-2 focus:ring-[#003c6a]"
             />
-            <label className="sr-only" htmlFor="q-message">
-              Your message
-            </label>
+            <label className="sr-only" htmlFor="q-message">Your message</label>
             <textarea
               id="q-message"
               placeholder="Your Message"
               rows={1}
+              value={quoteForm.message}
+              onChange={(e) => setQuoteForm((f) => ({ ...f, message: e.target.value }))}
               className="rounded-xl bg-background px-3 py-2 border focus:ring-2 focus:ring-[#003c6a]"
             />
-            <button className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-bold px-3 py-2 rounded-xl shadow-lg">
-              Submit
+            <button
+              type="submit"
+              disabled={quoteSubmitting}
+              className="bg-gradient-to-r from-[#005BAC] to-[#003c6a] text-white font-bold px-3 py-2 rounded-xl shadow-lg disabled:opacity-70"
+            >
+              {quoteSubmitting ? "Submitting..." : "Submit"}
             </button>
           </form>
         </aside>

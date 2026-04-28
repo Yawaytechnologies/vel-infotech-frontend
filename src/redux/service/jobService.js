@@ -2,8 +2,9 @@
 import axios from "axios";
 
 // Adjust this to match your backend
-const API_BASE =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:8080"; // fallback
+const API_BASE = (
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8000"
+).replace(/\/$/, "");
 
 /* -------------------- Dummy Data Fallback -------------------- */
 
@@ -80,7 +81,7 @@ export const DUMMY_JOBS = [
 export const fetchJobsApi = async () => {
   try {
     // NOTE: added "/" before api
-    const res = await axios.get(`${API_BASE}api/job-posts`);
+    const res = await axios.get(`${API_BASE}/api/job-posts`);
     console.log("Jobs API Response:", res.data);
 
     if (Array.isArray(res.data) && res.data.length > 0) {
@@ -101,7 +102,7 @@ export const fetchJobsApi = async () => {
 export const applyJobApi = async (jobId, payload) => {
   // Backend expects JSON body like in your Swagger screenshot
   const res = await axios.post(
-    `${API_BASE}api/jobs/${jobId}/apply`,
+    `${API_BASE}/api/jobs/${jobId}/apply`,
     payload // axios sends application/json by default
   );
   return res.data;

@@ -110,8 +110,8 @@ function JobOverview() {
 
     // Basic validation
     const emailOk =
-      /^[a-zA-Z0-9._%+-]+@(?:gmail\.com|yahoo\.com|outlook\.com|hotmail\.com|icloud\.com)$/.test(
-        candidateEmail.trim().toLowerCase(),
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+        candidateEmail.trim(),
       );
 
     if (!candidateName.trim()) {
@@ -120,6 +120,15 @@ function JobOverview() {
     }
     if (!candidateEmail.trim() || !emailOk) {
       alert("Enter a valid Email ID.");
+      return;
+    }
+
+    if (!candidatePhone.trim()) {
+      alert("Phone number is required.");
+      return;
+    }
+    if (!/^[6-9]\d{9}$/.test(candidatePhone.trim())) {
+      alert("Enter a valid 10-digit mobile number starting with 6–9.");
       return;
     }
 
@@ -229,7 +238,7 @@ function JobOverview() {
         )}
       </Helmet>
 
-      <section className="relative min-h-screen w-full overflow-hidden bg-slate-950 pl-4 pt-16 sm:pt-20 md:pt-28 pb-16 text-slate-100">
+      <section className="relative min-h-screen w-full overflow-hidden bg-slate-950 px-4 pt-16 sm:pt-20 md:pt-28 pb-16 text-slate-100">
         {/* Decorative animated background */}
         <div className="pointer-events-none absolute inset-0">
           <motion.div

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { submitEnquiry } from "../../redux/actions/enquiryAction";
 import { FaLaptop, FaChalkboardTeacher } from "react-icons/fa";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,6 +8,7 @@ import { FiPhone, FiClock, FiStar, FiShield, FiCheckCircle } from "react-icons/f
 
 export default function CallAndFormSection() {
   const [mode, setMode] = useState("classroom");
+  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     name: "",
@@ -162,12 +165,26 @@ ${form.name || ""}`
 
     try {
       setSubmitting(true);
+      await dispatch(
+        submitEnquiry({
+          mode: mode === "classroom" ? "CLASS_ROOM" : "ONLINE",
+          name: form.name,
+          email: form.email,
+          mobile: form.phone,
+          course: form.course,
+          message: form.message,
+        })
+      ).unwrap();
       notifySuccess("Thanks! Your enquiry has been recorded.");
       setForm({ name: "", email: "", phone: "", batch: "", course: "", message: "" });
       setErrors({});
       setTouched({});
-    } catch {
-      notifyError("Something went wrong. Please try again.");
+    } catch (err) {
+      notifyError(
+        typeof err === "string"
+          ? err
+          : "Something went wrong. Please try again."
+      );
     } finally {
       setSubmitting(false);
     }
@@ -312,7 +329,7 @@ ${form.name || ""}`
                   </div>
                 </div>
                 {/* Phone + Batch */}
-                <div className="grid grid-cols-2 gap-2 items-start">
+                <div className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-2 items-start">
                   <div>
                     <input
                       name="phone"

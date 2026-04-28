@@ -34,20 +34,6 @@ export default function Review() {
 
     (async () => {
       try {
-        setGoogleMeta((m) => ({ ...m, status: "loading", error: null }));
-        const t = setTimeout(() => {
-          if (cancelled) return;
-          setMasterReviews(generateDemoReviews());
-          setGoogleMeta({
-            name: "Vell InfoTech",
-            rating: 4.8,
-            total: 124,
-            url: "https://share.google/t27FPzRNT3WXGrilY",
-            status: "success",
-            error: null,
-          });
-        }, 4000);
-
         const key =
           import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY_HERE";
         if (!key || key === "YOUR_API_KEY_HERE") {
@@ -57,7 +43,7 @@ export default function Review() {
             name: "Vell InfoTech",
             rating: 4.8,
             total: 124,
-            url: "https://g.page/r/",
+            url: "https://share.google/t27FPzRNT3WXGrilY",
             status: "success",
             error: null,
           });
@@ -448,7 +434,7 @@ export default function Review() {
                   {topTags.length > 0 && (
                     <TagCloud tags={topTags} onPick={(t) => setSearch(t.k)} />
                   )}
-                  <WriteReviewCard />
+                  <WriteReviewCard url={googleMeta.url} />
                 </div>
               </aside>
             </div>
@@ -527,6 +513,10 @@ function Hero({ trendingCourses, overallRating, ratingHistogram, googleMeta }) {
                 title="Write Review"
                 subtitle="Share your story"
                 gradient="from-blue-500 to-cyan-500"
+                href={
+                  googleMeta.url || "https://share.google/t27FPzRNT3WXGrilY"
+                }
+                target="_blank"
               />
               <ActionButton
                 icon={<StarIconFilled />}
@@ -956,7 +946,8 @@ function TagCloud({ tags, onPick }) {
   );
 }
 
-function WriteReviewCard() {
+function WriteReviewCard({ url }) {
+  const reviewUrl = url || "https://share.google/t27FPzRNT3WXGrilY";
   return (
     <div className="relative rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600 p-[1px] shadow-xl overflow-hidden">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
@@ -974,9 +965,14 @@ function WriteReviewCard() {
             </p>
           </div>
         </div>
-        <button className="w-full py-3 px-4 bg-white hover:bg-blue-50 text-slate-900 font-bold rounded-xl transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-lg">
+        <a
+          href={reviewUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 bg-white hover:bg-blue-50 text-slate-900 font-bold rounded-xl transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-lg"
+        >
           Write a Review
-        </button>
+        </a>
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">
           <div className="p-2 bg-white/10 rounded-lg">
             <div className="text-white font-bold">2 min</div>

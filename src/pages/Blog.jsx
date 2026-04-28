@@ -245,7 +245,7 @@ export default function Blog() {
                     </p>
 
                     <div className="mt-2 flex items-center justify-between">
-                      <Link to={`/blog/${post.id}`}
+                      <Link to={`/blog/${post.slug}`}
                         className="inline-flex items-center gap-1 text-xs text-white bg-[#005BAC] hover:bg-[#004b8d] px-3 py-1.5 rounded-lg font-medium whitespace-nowrap"
                       >
                         Read the article

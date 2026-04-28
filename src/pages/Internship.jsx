@@ -18,6 +18,8 @@ import analyticsIcon from "../assets/analytics.png";
 
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { submitInternship } from "../redux/actions/internshipAction";
 
 const Internship = () => {
   const [form, setForm] = useState({
@@ -29,6 +31,8 @@ const Internship = () => {
   });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+
+  const dispatch = useDispatch();
 
   const capFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
   const onlyLettersSpaces = (s) =>
@@ -77,17 +81,14 @@ const Internship = () => {
         return null;
       case "phone":
         if (!v) return "Phone number is required.";
-        if (!/^[6-9]\d{9}$/.test(v)) return "Enter a valid";
+        if (!/^[6-9]\d{9}$/.test(v)) return "Enter a valid 10-digit mobile number starting with 6–9.";
 
         return null;
       case "course": {
         if (!v) return "Course / Domain is required.";
-        if (!/^[A-Za-z ]+$/.test(v)) return "Use letters and spaces only.";
-
         const normalized = v.replace(/\s+/g, " ").trim();
         if (!VALID_COURSES.has(normalized))
-          return "Please enter a valid Course/Domain from the list.";
-
+          return "Please select a valid Course/Domain from the list.";
         return null;
       }
 
@@ -167,7 +168,7 @@ const Internship = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setTouched({
       fullName: true,
@@ -184,10 +185,25 @@ const Internship = () => {
       toastError(errs[first] || "Please fix the highlighted fields.");
       return;
     }
-    toastSuccess("Thanks! Your application has been submitted.");
-    setForm({ fullName: "", email: "", phone: "", course: "", message: "" });
-    setErrors({});
-    setTouched({});
+    try {
+      await dispatch(
+        submitInternship({
+          fullName: form.fullName,
+          email: form.email,
+          phoneNumber: form.phone,
+          course: form.course,
+          message: form.message,
+        })
+      ).unwrap();
+      toastSuccess("Thanks! Your application has been submitted.");
+      setForm({ fullName: "", email: "", phone: "", course: "", message: "" });
+      setErrors({});
+      setTouched({});
+    } catch (err) {
+      toastError(
+        typeof err === "string" ? err : "Something went wrong. Please try again."
+      );
+    }
   };
 
   const inputBase =
@@ -534,16 +550,36 @@ hover:bg-white/15 hover:border-white/40 transition"
               )}
             </div>
             <div>
-              <input
+              <select
                 name="course"
-                type="text"
-                placeholder="Interested Course / Domain"
                 value={form.course}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 aria-invalid={!!errors.course}
-                className={`${inputBase} ${touched.course && errors.course ? bad : ok}`}
-              />
+                className={`${inputBase} ${touched.course && errors.course ? bad : ok} cursor-pointer`}
+              >
+                <option value="">Select Course / Domain</option>
+                <option>Dotnet</option>
+                <option>Cyber Security</option>
+                <option>Networking</option>
+                <option>Java</option>
+                <option>Artificial Intelligence</option>
+                <option>Cloud Computing</option>
+                <option>Python</option>
+                <option>Data Science</option>
+                <option>Ethical Hacking</option>
+                <option>PHP</option>
+                <option>Machine Learning</option>
+                <option>Data Analytics</option>
+                <option>Data Science And Ai</option>
+                <option>Full Stack Development</option>
+                <option>Java Full Stack Developer</option>
+                <option>Python Full Stack Developer</option>
+                <option>Pl Sql Developer</option>
+                <option>Sql Developer</option>
+                <option>Scrum Master</option>
+                <option>Business Analytics</option>
+              </select>
               {touched.course && errors.course && (
                 <p className={help}>{errors.course}</p>
               )}
