@@ -71,13 +71,9 @@ export default function SampleResume() {
               <p className="text-gray-600 mb-4">{resume.title}</p>
 
               {/* Download Button */}
-              <a
-                href={resume.file}
-                download
-                className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold"
-              >
-                Download Resume
-              </a>
+              <span className="px-6 py-3 bg-gray-300 text-gray-500 rounded-lg font-semibold cursor-not-allowed">
+                Coming Soon
+              </span>
             </div>
           ))
         ) : (

@@ -583,7 +583,7 @@ export default function TutorialDetail() {
   const { meta, sections } = page;
 
   return (
-    <article className="pb-20">
+    <article className="pb-20 pt-16 md:pt-24 lg:pt-28">
       {/* Hero / banner */}
       <div className="relative">
         <img

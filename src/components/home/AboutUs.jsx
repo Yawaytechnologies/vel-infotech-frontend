@@ -250,7 +250,7 @@ export default function AboutSection() {
             <div className="bg-white border border-[#a7f3d0]/30 shadow-lg rounded-2xl p-6 mb-5">
               {/* H3 inside the card */}
               <h3 className="text-lg font-bold text-[#005BAC] mb-2 tracking-wide">
-                About Vell InfoTech
+                About Vel InfoTech
               </h3>
               <ul className="text-gray-800 text-base space-y-2 mb-3 list-disc list-inside">
                 <li>

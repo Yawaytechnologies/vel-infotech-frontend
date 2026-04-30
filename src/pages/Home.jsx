@@ -13,8 +13,8 @@ function Home() {
   return (
     <>
       <Seo
-        title="Vell Infotech — Best Software Training & Placement Support"
-        description="Vell Infotech provides software training and placement support to help students master tech skills and land high-paying jobs in leading companies."
+        title="Vel InfoTech — Best Software Training & Placement Support"
+        description="Vel InfoTech provides software training and placement support to help students master tech skills and land high-paying jobs in leading companies."
         canonical="https://www.vellinfotech.com/"
       />
 
