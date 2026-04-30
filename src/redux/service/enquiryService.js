@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// In Vite projects (default with React + Vite):
-const BASE_URL ="https://api.34.201.106.137.nip.io/api";
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8000").replace(/\/$/, "");
+const BASE_URL = `${API_BASE}/api`;
 
 
 const client = axios.create({
