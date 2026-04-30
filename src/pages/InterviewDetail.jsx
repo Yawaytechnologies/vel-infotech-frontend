@@ -609,7 +609,7 @@ const InterviewDetail = () => {
   const selected = data[id];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f4ff] to-white pt-[140px] px-4 pb-12 text-center">
+    <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f4ff] to-white pt-20 md:pt-28 px-4 pb-12 text-center">
       <div className="max-w-5xl mx-auto">
         {/* Title */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-6 underline decoration-blue-700 underline-offset-4">

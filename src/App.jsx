@@ -32,6 +32,8 @@ import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import StudentTable from "./components/admin/CourseEnquired";
 import Feedback from "./components/admin/Feedback.jsx";
+import JobPosts from "./components/admin/JobPosts.jsx";
+import BlogPosts from "./components/admin/BlogPosts.jsx";
 
 import Whatsapp from "./components/common/Whatsapp";
 import CourseRouter from "./pages/CourseRouter";
@@ -229,6 +231,8 @@ export default function App() {
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="course-enquired" element={<StudentTable />} />
               <Route path="feedback" element={<Feedback />} />
+              <Route path="job-posts" element={<JobPosts />} />
+              <Route path="blog-posts" element={<BlogPosts />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>

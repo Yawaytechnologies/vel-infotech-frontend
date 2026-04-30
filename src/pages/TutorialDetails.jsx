@@ -583,13 +583,13 @@ export default function TutorialDetail() {
   const { meta, sections } = page;
 
   return (
-    <article className="pb-20 pt-16 md:pt-24 lg:pt-28">
+    <article className="bg-slate-50 pb-20 pt-16 md:pt-24 lg:pt-28">
       {/* Hero / banner */}
       <div className="relative">
         <img
           src={meta.image}
           alt={meta.title}
-          className="w-full sm:h-40 md:h-72 lg:h-80 object-cover"
+          className="w-full h-44 sm:h-56 md:h-72 lg:h-80 object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
         <div className="absolute left-6 right-6 bottom-6 max-w-5xl mx-auto">
@@ -624,15 +624,15 @@ export default function TutorialDetail() {
 
           {sections.map((s) => (
             <section key={s.id} id={s.id} className="mt-10 scroll-mt-24">
-              <h2 className="text-xl sm:text-2xl font-bold mt-6">{s.h}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mt-6 text-[#0B3D6E] border-l-4 border-[#005BAC] pl-3">{s.h}</h2>
               <div className="mt-3">{s.body}</div>
             </section>
           ))}
 
           <div className="mt-12">
             <Link
-              to="/resources"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded border"
+              to="/tutorials"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#005BAC] text-[#005BAC] hover:bg-[#005BAC] hover:text-white transition-colors font-medium text-sm"
             >
               <FiChevronLeft /> Back to Tutorials
             </Link>

@@ -147,10 +147,12 @@ export default function Tutorials() {
                   decoding="async"
                   className="w-full h-[160px] sm:h-[200px] md:h-[240px] lg:h-[260px] object-cover"
                 />
-                <div className="absolute top-3 left-3 bg-black/45 px-3 py-1 rounded">
-                  <h2 className="text-white text-sm sm:text-base font-semibold line-clamp-2">
-                    {t.title}
-                  </h2>
+                <div className="absolute top-3 left-3 flex flex-wrap gap-1">
+                  {t.categories.map((c) => (
+                    <span key={c} className="bg-black/50 text-white text-[11px] px-2 py-0.5 rounded font-medium">
+                      {c}
+                    </span>
+                  ))}
                 </div>
               </div>
 
