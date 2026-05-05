@@ -35,6 +35,7 @@ import Feedback from "./components/admin/Feedback.jsx";
 import JobPosts from "./components/admin/JobPosts.jsx";
 import BlogPosts from "./components/admin/BlogPosts.jsx";
 import Internships from "./components/admin/Internships.jsx";
+import JobApplications from "./components/admin/JobApplications.jsx";
 
 import Whatsapp from "./components/common/Whatsapp";
 import CourseRouter from "./pages/CourseRouter";
@@ -235,6 +236,7 @@ export default function App() {
               <Route path="job-posts" element={<JobPosts />} />
               <Route path="blog-posts" element={<BlogPosts />} />
               <Route path="internships" element={<Internships />} />
+              <Route path="job-applications" element={<JobApplications />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>

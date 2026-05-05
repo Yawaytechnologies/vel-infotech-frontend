@@ -10,6 +10,7 @@ const menu = [
   { name: "Job Posts", icon: FiBriefcase, to: "/admin/job-posts" },
   { name: "Blog Posts", icon: FiFileText, to: "/admin/blog-posts" },
   { name: "Internships", icon: FiClipboard, to: "/admin/internships" },
+  { name: "Job Applications", icon: FiBriefcase, to: "/admin/job-applications" },
 ];
 
 export default function AdminSidebar({
