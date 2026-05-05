@@ -1,7 +1,6 @@
 import React from "react";
 import {
   FaFacebook,
-  FaTwitter,
   FaLinkedin,
   FaYoutube,
   FaInstagram,
@@ -32,19 +31,16 @@ export default function Footer() {
             </p>
             {/* Social Icons */}
             <div className="flex gap-3 mt-4">
-              <a href="#" className="hover:text-blue-400">
+              <a href="https://www.facebook.com/profile.php?id=100092270702066" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400">
                 <FaFacebook size={22} />
               </a>
-              <a href="#" className="hover:text-blue-300">
-                <FaTwitter size={22} />
-              </a>
-              <a href="#" className="hover:text-blue-500">
+              <a href="https://www.linkedin.com/in/vell-infotech-software-training-and-placement-institute/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500">
                 <FaLinkedin size={22} />
               </a>
-              <a href="#" className="hover:text-pink-400">
+              <a href="https://www.instagram.com/velinfo_tech?igsh=MW1uZWxyOHI0NTRqOA==" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400">
                 <FaInstagram size={22} />
               </a>
-              <a href="#" className="hover:text-red-500">
+              <a href="https://www.youtube.com/@vell_infotech" target="_blank" rel="noopener noreferrer" className="hover:text-red-500">
                 <FaYoutube size={22} />
               </a>
             </div>
