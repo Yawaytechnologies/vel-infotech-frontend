@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiHome, FiUser, FiBriefcase, FiFileText } from "react-icons/fi";
+import { FiHome, FiUser, FiBriefcase, FiFileText, FiClipboard } from "react-icons/fi";
 import { MdArrowRight } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 
@@ -9,6 +9,7 @@ const menu = [
   { name: "Feedback", icon: FiHome, to: "/admin/feedback" },
   { name: "Job Posts", icon: FiBriefcase, to: "/admin/job-posts" },
   { name: "Blog Posts", icon: FiFileText, to: "/admin/blog-posts" },
+  { name: "Internships", icon: FiClipboard, to: "/admin/internships" },
 ];
 
 export default function AdminSidebar({
