@@ -1,4 +1,5 @@
 import React from "react";
+import Seo from "../seo/Seo";
 
 import ts from "../assets/Thennarasu S.png";
 import ba from "../assets/benjamin Andrew.png";
@@ -55,6 +56,12 @@ const About = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      <Seo
+        title="About Vell InfoTech | Software Training Institute"
+        description="Learn about Vell InfoTech- our mission to provide quality education, experienced faculty, proven track record, and commitment to student success and development."
+        keywords="Best IT training institute in Chennai, IT training institute near me, Job oriented courses in Chennai, Placement training institute, Software training institute, IT courses with placement, Career training institute Tamil Nadu, course with placement"
+        canonical="https://www.vellinfotech.com/about"
+      />
       {/* HERO */}
       <header
         id="about-hero"

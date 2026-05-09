@@ -276,8 +276,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO */}
       <Seo
-        title="Hardware & Networking Program | Vellinfotech"
-        description="Learn computer hardware, networking concepts, and troubleshooting. Gain hands-on skills to set up, maintain, and manage IT infrastructure effectively."
+        title="Hardware & Networking Course in Chennai | Vell Infotech"
+        description="Learn Hardware & Networking in Chennai with practical training in networking, system support, troubleshooting & IT infrastructure."
+        keywords="Hardware and Networking Course Chennai, Hardware course, Hardware Networking Training, Networking Course Chennai, Computer Hardware Course, IT Infrastructure Training, Network Engineer Course, CCNA Training Chennai, Hardware Networking Institute, System Administration Course, Desktop Support Training, Hardware with networking course, Advanced networking course, Network automation course"
         canonical="https://www.vellinfotech.com/all-courses/hardware-and-networking-program"
         image="/images/courses/hardware-networking-og.jpg"
         type="article"

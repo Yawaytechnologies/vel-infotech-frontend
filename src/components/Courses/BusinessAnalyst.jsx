@@ -277,9 +277,10 @@ export default function ScrumMaster() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Business Analyst Program | Learn Data & Process Analysis"
-        description="Join our Business Analyst Program to master data analysis, documentation, and tools like Excel, SQL & Power BI. Get certified and become job-ready in 3 months!"
-        canonical="/all-courses/business-analyst-program"
+        title="Business Analyst Course in Chennai | Vell InfoTech"
+        description="Join Vell InfoTech's Business Analyst Program in Chennai. Master SQL, Tableau, Agile, BRD & requirement gathering. CBAP guidance & 100% placement support. Enroll now!"
+        keywords="business analyst course in chennai, Business analyst training, Business analyst online course in Ekkatuthangal, Business analyst certification course, Learn business analyst, Best business analyst course, Business analyst course online, Business analyst training online"
+        canonical="https://www.vellinfotech.com/all-courses/business-analyst-program"
         image="/images/courses/business-analyst-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

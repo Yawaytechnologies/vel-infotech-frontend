@@ -284,8 +284,9 @@ export default function PythonCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Python Full Stack Developer Course"
-        description="Learn Python, Django, React, and MySQL to build complete web apps. Become a job-ready Python Full Stack Developer with hands-on projects and training."
+        title="Python Full Stack Developer Course with Job Placement | Chennai"
+        description="Master Python full stack development with Django, Flask & React. 100% job placement. Hands-on training in Chennai. Enroll now!"
+        keywords="python full stack developer course in chennai, python full stack course with placement, python full stack training institute, full stack developer course Chennai, python django course in chennai, python full stack course fees in Ekkatuthangal, full stack developer course for beginners in Tamil Nadu, python full stack course with job, best python full stack institute in Chennai, python django react full stack course"
         canonical="https://www.vellinfotech.com/all-courses/python-full-stack-developer-course"
         image="https://cdn-icons-png.flaticon.com/512/5968/5968350.png"
         type="article"

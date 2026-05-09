@@ -277,8 +277,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Salesforce Training Program | Vellinfotech"
-        description="Learn Salesforce CRM, automation, and cloud solutions. Gain hands-on skills to manage customer relationships and enhance business productivity effectively."
+        title="Salesforce Training in Chennai | Vell Infotech"
+        description="Learn Salesforce in Chennai with hands-on training in CRM, Apex, Lightning, Admin & Development with real-time projects."
+        keywords="Salesforce Training Chennai, Salesforce, Salesforce CRM Training, Salesforce Developer Course, Salesforce Admin Training, Salesforce Lightning Training, Salesforce Certification Course, CRM Training Chennai, Apex Developer Training, Best Salesforce Institute Chennai, Salesforce classes near me, Salesforce developer certification, Salesforce course for beginners, Salesforce course in Chennai"
         canonical="https://www.vellinfotech.com/all-courses/salesforce-training-program"
         image="/images/courses/salesforce-training-og.jpg"
         type="article"

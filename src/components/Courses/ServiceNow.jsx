@@ -273,8 +273,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="ServiceNow Training Program | Vellinfotech"
-        description="Learn ServiceNow platform, ITSM, and workflow automation. Gain hands-on skills to manage IT services and streamline business operations efficiently."
+        title="ServiceNow Training in Chennai | Vell Infotech"
+        description="Learn ServiceNow in Chennai with hands-on training in ITSM, workflows, scripting, automation & real-time projects."
+        keywords="ServiceNow Training Chennai, ServiceNow training, ServiceNow Developer Course, ITSM Training Chennai, ServiceNow Certification Course, ServiceNow Online Training, Workflow Automation Training, ServiceNow Institute Chennai, Best ServiceNow Course Chennai, ServiceNow admin certification, ServiceNow training for freshers, Best ServiceNow institute in Chennai"
         canonical="https://www.vellinfotech.com/all-courses/servicenow-training-program"
         image="/images/courses/servicenow-training-og.jpg"
         type="article"

@@ -276,8 +276,9 @@ export default function DevOpsCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="DevOps Training Program | Vellinfotech"
-        description="Learn DevOps practices, CI/CD, Docker, Kubernetes, and automation. Gain hands-on skills to streamline development and deploy applications efficiently."
+        title="DevOps Training Program in Chennai | Vell Infotech"
+        description="Join DevOps Training in Chennai at Vell Infotech. Learn AWS, Docker, Jenkins, Kubernetes & CI/CD with real-time projects."
+        keywords="DevOps Training Chennai, devops training institute in Chennai, besant technologies devops course, best devops training institute in Chennai, DevOps training, DevOps engineer course"
         canonical="https://www.vellinfotech.com/all-courses/devops-training-program"
         image="/images/courses/devops-training-og.jpg"
         type="article"

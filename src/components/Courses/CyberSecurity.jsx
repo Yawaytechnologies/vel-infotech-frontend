@@ -276,8 +276,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Cyber Security Program | Vellinfotech"
-        description="Learn cybersecurity fundamentals, ethical hacking, and threat protection. Gain hands-on skills to secure networks, systems, and data from cyber threats."
+        title="Cyber Security Course in Chennai | Vell Infotech"
+        description="Learn Cyber Security in Chennai with hands-on training in ethical hacking, network security, SOC, SIEM & penetration testing."
+        keywords="Cyber Security Course Chennai, Ethical Hacking Training, Cyber Security Training Institute, Network Security Course, Penetration Testing Course, SOC Analyst Training, Ethical Hacking Course Chennai, Cyber Security Certification, Information Security Training, SIEM Training Chennai, Cybersecurity course, Information security course, Cybersecurity course with placement, Web application security course"
         canonical="https://www.vellinfotech.com/all-courses/cyber-security-program"
         image="/images/courses/cyber-security-og.jpg"
         type="article"

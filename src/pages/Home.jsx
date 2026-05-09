@@ -13,8 +13,9 @@ function Home() {
   return (
     <>
       <Seo
-        title="Vel InfoTech — Best Software Training & Placement Support"
-        description="Vel InfoTech provides software training and placement support to help students master tech skills and land high-paying jobs in leading companies."
+        title="Vell InfoTech | Best Software Training & Placement Chennai"
+        description="Vell InfoTech Chennai | Offers best software training & IT courses with 100% placement support | Learn Java, Python, Full Stack, AI, Data Science & get high-paying IT jobs."
+        keywords="IT training institute in Chennai, Best IT training institute, Software training institute, IT courses with placement, Placement training institute, Software developer training, IT job training and placement, Java training in Chennai, Python course in Chennai, Full stack developer training, Software development courses, Software testing course with placement, Data science course with placement"
         canonical="https://www.vellinfotech.com/"
       />
 

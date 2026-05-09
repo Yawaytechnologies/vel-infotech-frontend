@@ -276,8 +276,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="RPA (Robotic Process Automation) course |  Vellinfotech"
-        description="Learn RPA from industry experts. Automate processes using UiPath, Blue Prism & Automation Anywhere, and build a high-demand automation career."
+        title="RPA Training in Chennai | Vell Infotech"
+        description="Learn RPA in Chennai with hands-on UiPath, Automation Anywhere & workflow automation training using real-time projects."
+        keywords="RPA Training Chennai, Robotic Process Automation, Automation Anywhere Training, RPA Certification Course, UiPath Certification Training, Workflow Automation Course, RPA Developer Training, Best RPA Institute Chennai, Intelligent Automation Training, RPA course, RPA course in Chennai, RPA with AI, best RPA training institute in Chennai with placement"
         canonical="https://www.vellinfotech.com/all-courses/rpa-robotic-process-automation-course"
         image="/images/courses/rpa-og.jpg"
         type="article"

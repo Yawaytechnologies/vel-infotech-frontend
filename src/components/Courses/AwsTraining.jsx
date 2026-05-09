@@ -270,8 +270,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="AWS Training Program |  Vellinfotech"
-        description="Learn AWS cloud computing, deployment, and management with hands-on skills to build, secure, and scale cloud applications effectively."
+        title="AWS Training Course in Chennai | Vell InfoTech"
+        description="Join Vell InfoTech's AWS Training Program in Chennai. Master EC2, S3, Lambda, IAM, VPC & cloud architecture with live projects. AWS certification & 100% placement support."
+        keywords="aws training with placement in chennai, aws solutions architect course Chennai, cloud computing course in Chennai, aws cloud engineer salary in india, aws training in chennai with placement, best aws training in Chennai, AWS online course, Learn AWS from scratch"
         canonical="https://www.vellinfotech.com/all-courses/aws-training-program"
         image="/images/courses/aws-training-og.jpg"
         type="article"

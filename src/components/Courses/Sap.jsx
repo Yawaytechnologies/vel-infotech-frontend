@@ -276,8 +276,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="SAP Training Program | Vellinfotech"
-        description="Learn SAP modules, ERP processes, and business workflows. Gain hands-on skills to manage enterprise operations and boost career opportunities in SAP."
+        title="SAP Training Course in Chennai | Vell Infotech"
+        description="Learn SAP training in Chennai with hands-on projects in SAP FICO, MM, SD & S/4HANA. Get practical and placement-focused training."
+        keywords="SAP Training Chennai, SAP Course Chennai, SAP FICO Training, SAP MM Training, SAP SD Course, SAP S/4HANA Training, SAP Certification Course, ERP Training Chennai, SAP Training Institute, Best SAP Course Chennai, Best SAP training institute in Chennai, SAP FICO training for beginners, SAP MM course with real time project, online SAP course with certificate and placement, SAP training institute in Chennai fees"
         canonical="https://www.vellinfotech.com/all-courses/sap-training-program"
         image="/images/courses/sap-training-og.jpg"
         type="article"

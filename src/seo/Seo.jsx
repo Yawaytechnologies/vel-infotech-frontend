@@ -1,28 +1,17 @@
 import React from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 
-/**
- * Usage:
- * <Seo
- *   title="Java Full-Stack Developer Course — Vel InfoTech"
- *   description="Learn Core & Advanced Java, Spring Boot, REST APIs, React.js and more."
- *   canonical="/courses/java-fullstack"
- *   image="/images/courses/java-og.jpg"
- *   type="article"
- *   noindex={false}
- *   jsonLd={{ "@context":"https://schema.org", "@type":"Course", name:"Java Full-Stack" }}
- * />
- */
 export default function Seo({
   title,
   description,
+  keywords,
   canonical,
   image,
   type = "website",
   noindex = false,
   jsonLd = null,
 }) {
-  const site = "https://YOUR_DOMAIN.com"; // ← change to your domain
+  const site = "https://www.vellinfotech.com";
   const fullCanonical = canonical
     ? canonical.startsWith("http")
       ? canonical
@@ -36,37 +25,33 @@ export default function Seo({
     : `${site}/og-default.jpg`;
 
   return (
-    <HelmetProvider>
-      <Helmet>
-        {/* Basic */}
-        {title && <title>{title}</title>}
-        {description && <meta name="description" content={description} />}
-        {fullCanonical && <link rel="canonical" href={fullCanonical} />}
-        {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <Helmet>
+      {title && <title>{title}</title>}
+      {description && <meta name="description" content={description} />}
+      {keywords && <meta name="keywords" content={keywords} />}
+      {fullCanonical && <link rel="canonical" href={fullCanonical} />}
+      {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-        {/* Open Graph */}
-        {title && <meta property="og:title" content={title} />}
-        {description && <meta property="og:description" content={description} />}
-        <meta property="og:type" content={type} />
-        <meta property="og:url" content={fullCanonical} />
-        <meta property="og:image" content={ogImage} />
+      {title && <meta property="og:title" content={title} />}
+      {description && <meta property="og:description" content={description} />}
+      <meta property="og:type" content={type} />
+      <meta property="og:url" content={fullCanonical} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:site_name" content="Vell InfoTech" />
 
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        {title && <meta name="twitter:title" content={title} />}
-        {description && <meta name="twitter:description" content={description} />}
-        <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:card" content="summary_large_image" />
+      {title && <meta name="twitter:title" content={title} />}
+      {description && <meta name="twitter:description" content={description} />}
+      <meta name="twitter:image" content={ogImage} />
 
-        {/* JSON-LD */}
-        {jsonLd &&
-          (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((obj, i) => (
-            <script
-              key={i}
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }}
-            />
-          ))}
-      </Helmet>
-    </HelmetProvider>
+      {jsonLd &&
+        (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((obj, i) => (
+          <script
+            key={i}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }}
+          />
+        ))}
+    </Helmet>
   );
 }

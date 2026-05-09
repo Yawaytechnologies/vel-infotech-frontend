@@ -273,9 +273,10 @@ export default function ProductionSupportPage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Production Support Program | Learn IT Support Skills"
-        description="Join our Production Support Program to master real-time IT support, incident management, and monitoring tools. Get job-ready in just 3 months!"
-        canonical="/all-courses/production-support-program"
+        title="Production Support Training Chennai | Vell Infotech"
+        description="Learn Production Support in Chennai with real-time training in SQL, IT support, incident management & ticketing tools."
+        keywords="Production Support Training Chennai, IT support course, SQL Production Support Training, IT Support Training Chennai, Application Support Course, Production Support Jobs Training, Incident Management Training, L1 L2 Support Training, Ticketing Tool Training, Production Support Institute Chennai, IT support course in Chennai, best IT support course in Chennai with placement, No coding IT course with job"
+        canonical="https://www.vellinfotech.com/all-courses/production-support-program"
         image="/images/courses/production-support-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

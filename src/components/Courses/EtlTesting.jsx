@@ -275,8 +275,9 @@ export default function EtlTesting() {
     <>
       {/* ✅ Head-only SEO */}
       <Seo
-        title="ETL Testing Program | Vellinfotech"
-        description="Learn ETL testing, data validation, and quality assurance with hands-on skills to ensure accurate data migration and reliable business intelligence"
+        title="ETL Testing Course in Chennai | Vell InfoTech"
+        description="Join Vell InfoTech's ETL Testing Program in Chennai. Master data warehousing, Informatica, Talend, SQL & data validation with live projects. Certification & 100% placement support."
+        keywords="etl testing course in chennai, Best ETL testing course in chennai, ETL testing for beginners, Advanced ETL testing course, Best price ETL training"
         canonical="https://www.vellinfotech.com/all-courses/etl-testing-program"
         image="/images/courses/etl-testing-og.jpg"
         type="article"

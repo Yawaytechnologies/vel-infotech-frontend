@@ -278,9 +278,10 @@ export default function DigitalMarketingPage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Digital Marketing Program | Learn SEO, Ads & Social Media"
-        description="Join our Digital Marketing Program and master SEO, Google Ads, Social Media Marketing & Analytics. Get certified and start your digital career in 3 months!"
-        canonical="/all-courses/digital-marketing-program"
+        title="Digital Marketing Course in Chennai | Vell Infotech"
+        description="Learn Digital Marketing in Chennai with SEO, Google Ads, Social Media, PPC & real-time projects at Vell Infotech."
+        keywords="Digital Marketing Course Chennai, Digital marketing course, SEO Training Chennai, Digital Marketing Training, Google Ads Course Chennai, Social Media Marketing Course, PPC Training Chennai, SEO Course Chennai, Online Marketing Course, Best Digital Marketing Institute Chennai, Digital Marketing Certification, Digital marketing course with placement, Digital marketing training for freshers, Digital marketing course in Chennai"
+        canonical="https://www.vellinfotech.com/all-courses/digital-marketing-program"
         image="/images/courses/digital-marketing-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

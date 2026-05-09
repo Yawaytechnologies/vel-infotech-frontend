@@ -1,132 +1,272 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
- 
-  <url>
-<loc>https://www.vellinfotech.com/</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>1.0</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/java-full-stack-developer-course</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/python-full-stack-developer-course</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/software-testing-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/selenium-testing-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/full-stack-development-course</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/data-science-training-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/aws-training-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/devops-training-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/hardware-and-networking-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/etl-testing-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/cyber-security-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/business-analytics-course</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/sap-training-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/salesforce-training-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/servicenow-training-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/data-science-and-ai-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/pl-sql-developer-course</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/sql-developer-course</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/big-data-developer-program</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-  <url>
-<loc>https://www.vellinfotech.com/all-courses/rpa-robotic-process-automation-course</loc>
-<lastmod>2025-12-31</lastmod>
-<priority>0.8</priority>
-</url>
- 
-</urlset>
 
- 
+  <!-- Main pages -->
+  <url>
+    <loc>https://www.vellinfotech.com/</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/about</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/careers</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/blog</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/internship</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/interview-questions</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/tutorials</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/sample-resume</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/placed-students</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/contact-us</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/client</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Course pages -->
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/java-full-stack-developer-course</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/python-full-stack-developer-course</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/full-stack-development-course</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/software-testing-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/selenium-testing-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/etl-testing-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/data-science-training-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/data-science-and-ai-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/business-analytics-course</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/business-analyst-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/aws-training-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/devops-training-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/hardware-and-networking-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/cyber-security-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/sap-training-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/salesforce-training-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/servicenow-training-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/pl-sql-developer-course</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/sql-developer-course</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/big-data-developer-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/rpa-robotic-process-automation-course</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/scrum-master-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/product-management-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/digital-marketing-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/soft-skills-training</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.vellinfotech.com/all-courses/production-support-program</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

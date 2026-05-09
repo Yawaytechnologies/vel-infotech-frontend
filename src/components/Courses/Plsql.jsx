@@ -281,8 +281,9 @@ export default function PlsqlCoursePage() {
     <>
       {/* ✅ SEO (no visual changes) */}
       <Seo
-        title="PL/SQL Developer Course | Vellinfotech"
-        description="Master PL/SQL programming, queries, and database management. Learn to write efficient code, create stored procedures, and optimize performance."
+        title="PL/SQL Developer Course in Chennai with Placement | Vell InfoTech"
+        description="Join Vell InfoTech's PL/SQL Developer Course in Chennai. Master Oracle PL/SQL, stored procedures, triggers & more with hands-on projects. Oracle certification guidance & 100% placement support included."
+        keywords="PL SQL course in Chennai, Oracle PL SQL Training In Chennai, PL SQL Developer Course With Placement, Oracle PLSQL Certification Course, PL SQL Training Institute In Chennai, Oracle SQL And PLSQL Course In Chennai, PL SQL Course Fees In Ekkatuthangal, PL SQL Course For Beginners, Oracle PL SQL Online Course With Certificate, PL SQL Developer Jobs In Tamil Nadu"
         canonical="https://www.vellinfotech.com/all-courses/pl-sql-developer-course"
         image="https://cdn-icons-png.flaticon.com/512/16990/16990193.png"
         type="article"

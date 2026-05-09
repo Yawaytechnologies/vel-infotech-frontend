@@ -280,8 +280,9 @@ export default function SqlCoursePage() {
     <>
       {/* ✅ SEO (no visual change) */}
       <Seo
-        title="SQL Developer Course | Vellinfotech"
-        description="Learn SQL programming, database management, and query optimization. Gain skills to create, manage, and analyze data efficiently for real-world use "
+        title="SQL Developer Course in Chennai with Placement | Vell InfoTech"
+        description="Enroll in Vell InfoTech's SQL Developer Course in Chennai. Master SQL queries, stored procedures, joins & database management with real-time projects. Placement support for freshers & professionals."
+        keywords="SQL developer course in Chennai, SQL training in Chennai, SQL course with placement in koyamedu, SQL server training in Chennai, SQL training institute in Tamil Nadu, SQL developer course for beginners, SQL course fees in Chennai, SQL training in Ekkatuthangal, SQL certification course in Chennai, SQL developer jobs in chennai, SQL training, Learn SQL, SQL online course in Ekkatuthangal, SQL for beginners, SQL tutorial, Best SQL course"
         canonical="https://www.vellinfotech.com/all-courses/sql-developer-course"
         image="https://cdn-icons-png.flaticon.com/512/603/603201.png"
         type="article"

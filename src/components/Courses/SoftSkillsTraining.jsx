@@ -277,9 +277,10 @@ export default function SoftSkillPage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Soft Skills Training | Improve Communication & Confidence"
-        description="Boost your career with our Soft Skills Training. Learn communication, teamwork, leadership & presentation skills to succeed in any professional role!"
-        canonical="/all-courses/soft-skills-training"
+        title="Soft Skills Training in Chennai | Vell Infotech"
+        description="Improve communication, leadership, teamwork & interview skills with Soft Skills Training in Chennai at Vell Infotech."
+        keywords="Soft Skills Training Chennai, Personality Development Course, Interview Skills Training, Corporate Soft Skills Training, Spoken English and Soft Skills, Leadership Training Chennai, Employability Skills Course, Professional Development Training, Soft Skills Certification Course, Soft skills training course, best soft skills training institute in Chennai with placement, Interview skills training for freshers"
+        canonical="https://www.vellinfotech.com/all-courses/soft-skills-training"
         image="/images/courses/soft-skills-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

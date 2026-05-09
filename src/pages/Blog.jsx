@@ -1,5 +1,6 @@
 // src/pages/Blog.jsx
 import React from "react";
+import Seo from "../seo/Seo";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import { motion as Motion } from "framer-motion";
@@ -34,6 +35,12 @@ export default function Blog() {
 
   return (
     <main className="bg-[#021733] min-h-screen">
+      <Seo
+        title="IT Training & Career Blogs | Vell Infotech"
+        description="Explore IT career blogs, tech tutorials, training tips, interview guides & industry updates from Vell Infotech experts."
+        keywords="IT Career Blogs, Technology Training Blogs, Software Training Articles, IT Courses Blog, Career Guidance for IT Jobs, Programming Tutorials Blog, Digital Skills Training, Interview Tips for IT Jobs, Latest Technology Trends, IT Certification Guide"
+        canonical="https://www.vellinfotech.com/blog"
+      />
       {/* ── Hero ── */}
       <Motion.section
         className="relative w-full bg-gradient-to-br from-[#00448f] via-[#003369] to-[#010b22] py-24 px-4 text-white overflow-hidden mt-12 shadow-[0_-10px_30px_rgba(0,0,0,0.45)]"

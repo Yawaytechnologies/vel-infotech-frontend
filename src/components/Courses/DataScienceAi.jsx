@@ -278,8 +278,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Data Science & AI Program | Vellinfotech"
-        description="Learn Data Science & AI using Python, machine learning, and deep learning. Gain hands-on skills to solve real-world problems and build smart solutions."
+        title="Data Science and AI Course in Chennai | Vell InfoTech"
+        description="Learn Data Science & AI in Chennai at Vell InfoTech. Master ML, Deep Learning & GenAI with real projects. Certification & 100% placement support. Enroll now!"
+        keywords="data science and ai course in Chennai, artificial intelligence course in Chennai, data science ai course with placement, generative ai course in Chennai, deep learning course in Chennai, data scientist salary in india 2026, machine learning course in chennai, data scientist course chennai, artificial intelligence course, ai certification programs, data scientist course with placement"
         canonical="https://www.vellinfotech.com/all-courses/data-science-and-ai-program"
         image="/images/courses/data-science-ai-og.jpg"
         type="article"

@@ -276,8 +276,9 @@ export default function SoftwareTesting() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Software Testing Program | Vellinfotech"
-        description="Learn software testing techniques, manual and automation tools, and quality assurance practices. Gain hands-on experience to ensure bug-free, reliable software."
+        title="Software Testing Course in Chennai | Vell InfoTech"
+        description="Join Vell InfoTech's Software Testing Program in Chennai. Master manual testing, Selenium automation, JIRA & API testing with live projects. Certification & 100% placement support."
+        keywords="software testing course in chennai, software testing training institute in Chennai, qa engineer salary in india, manual testing course in Chennai, software testing course with placement, Software testing course in chennai, Software testing course with placement, Software testing course India, Software testing for beginners"
         canonical="https://www.vellinfotech.com/all-courses/software-testing-program"
         image="/images/courses/software-testing-og.jpg"
         type="article"

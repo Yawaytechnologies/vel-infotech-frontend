@@ -275,9 +275,10 @@ export default function ScrumMaster() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Scrum Master Program"
-        description="Become a certified Scrum Master. Learn agile principles, Scrum framework, and team management skills to lead projects efficiently and deliver value."
-        canonical="/all-courses/scrum-master-program"
+        title="Scrum Master Training in Chennai | Vell InfoTech"
+        description="Join Vell InfoTech's Scrum Master Program in Chennai. Learn Agile, Scrum framework & sprint planning. CSM certification guidance & 100% placement support. Enroll now!"
+        keywords="scrum master course in chennai, scrum master certification, certified scrum master certification, scrum master class near me, scrum master training and placement in Chennai, csm certification training Chennai, agile scrum master course in Chennai, scrum master salary in india"
+        canonical="https://www.vellinfotech.com/all-courses/scrum-master-program"
         image="/images/courses/scrum-master-og.jpg"
         type="article"
         jsonLd={courseJsonLd}

@@ -277,8 +277,9 @@ export default function FullStackCoursePage() {
     <>
       {/* SEO */}
       <Seo
-        title="Full Stack Development Course | Vellinfotech"
-        description="Learn to build dynamic web apps using frontend and backend technologies. Master HTML, CSS, JavaScript, React, Node.js, and databases with real projects."
+        title="Full Stack Development Course in Chennai with Placement | Vell InfoTech"
+        description="Learn Full Stack Development in Chennai at Vell InfoTech. Master React, Node.js, Django & more through hands-on projects. 100% placement support for freshers & professionals. Enroll today!"
+        keywords="full stack development course in Chennai, full stack developer course with placement, full stack developer training in Chennai, mern stack course in Chennai, full stack course for freshers in Chennai, full stack developer course fees in Chennai, full stack developer certification course, full stack web development course online, best full stack institute in Chennai, full stack course with job guarantee chennai"
         canonical="https://www.vellinfotech.com/all-courses/full-stack-development-course"
         image="https://cdn-icons-png.flaticon.com/512/16990/16990193.png"
         type="article"

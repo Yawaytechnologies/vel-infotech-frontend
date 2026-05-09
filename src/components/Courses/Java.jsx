@@ -256,8 +256,9 @@ export default function JavaCoursePage() {
   return (
     <>
       <Seo
-        title="Java Full Stack Developer Course"
-        description="Master frontend & backend development with Java, Spring Boot, React, and MySQL. Build real-world projects and become a full stack developer."
+        title="Java Full Stack Developer Course with Job Placement in Chennai"
+        description="Learn Java full stack development with 100% job placement. MERN, Spring Boot, React training in Chennai. Enroll now & start your tech career"
+        keywords="Java full stack developer course with job placement, Java full stack developer course, Spring Boot course, React JavaScript course, Java web development, MERN stack course, Full stack developer training, Java certification course, Full stack bootcamp Chennai, Java developer job placement, Web development course"
         canonical="https://www.vellinfotech.com/all-courses/java-full-stack-developer-course"
         image="/images/courses/java-og.jpg"
         type="article"

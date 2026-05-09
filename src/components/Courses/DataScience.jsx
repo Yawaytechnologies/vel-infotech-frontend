@@ -286,8 +286,9 @@ export default function DataScienceCoursePage() {
   return (
     <>
       <Seo
-        title="Data Science Training Program |  Vellinfotech"
-        description="Learn AWS cloud computing, deployment, and management with hands-on skills to build, secure, and scale cloud applications effectively."
+        title="Data Science Training Program in Chennai with Placement | Vell InfoTech"
+        description="Enroll in Vell InfoTech's Data Science Training in Chennai. Learn Python, ML, Tableau & AI with live projects. Certification & 100% placement support included."
+        keywords="data science course with placement in Chennai, Data Science Course In Chennai, Data Science Training In Tamil Nadu, Data Science Training Institute In India, Data Science Course For Beginners In Ekkatuthangal, Data Science Course Fees, Python And Machine Learning Course in Vell InfoTech, Data Science Certification Course In Chennai, Data Science Online Course With Certificate, Data Scientist Salary In India"
         canonical="https://www.vellinfotech.com/all-courses/data-science-training-program"
         image="/images/courses/datascience-og.jpg"
         type="article"

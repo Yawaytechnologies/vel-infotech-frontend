@@ -274,8 +274,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Selenium Testing Program | Vellinfotech"
-        description="Learn Selenium automation testing, write test scripts, use frameworks, and gain hands-on experience to automate web apps and ensure high-quality software"
+        title="Selenium Testing Course in Chennai | Vell InfoTech"
+        description="Join Vell InfoTech's Selenium Testing Program in Chennai. Master Selenium WebDriver, TestNG, Java, Jenkins & CI/CD with live projects. Certification & 100% placement support."
+        keywords="selenium automation testing course in Chennai, selenium training in Chennai, selenium course fees in chennai, Selenium automation training, Selenium courses online free, Advanced Selenium course in Chennai"
         canonical="https://www.vellinfotech.com/all-courses/selenium-testing-program"
         image="/images/courses/selenium-testing-og.jpg"
         type="article"

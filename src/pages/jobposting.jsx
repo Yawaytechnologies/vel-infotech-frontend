@@ -81,9 +81,9 @@ function JobPosting() {
             job.workMode.toLowerCase() === modeFilter.toLowerCase(),
         );
 
-  const pageTitle = "Careers at Vell Infotech | Current Job Openings";
+  const pageTitle = "Careers at Vell InfoTech | Software Training & Placement Jobs";
   const pageDescription =
-    "Explore trainer and IT career opportunities at Vell Infotech in Chennai. Apply for Java, Python, Data Science, AWS, DevOps and Software Testing trainer roles.";
+    "Join Vell InfoTech's growing team. We're hiring trainers, placement officers & support staff. Work with aspiring tech professionals. Apply now & grow your career";
 
   const orgJsonLd = {
     "@context": "https://schema.org",
@@ -127,6 +127,7 @@ function JobPosting() {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
+        <meta name="keywords" content="Software developer jobs Chennai, IT jobs in Chennai for freshers, Data science jobs, DevOps engineer jobs, AWS jobs in Chennai, Data analytics jobs, Web developer jobs Chennai, Fresher jobs in IT, Full stack developer jobs, Cloud computing jobs Chennai" />
         <link rel="canonical" href="https://www.vellinfotech.com/careers" />
         <script type="application/ld+json">{JSON.stringify(orgJsonLd)}</script>
         {jobs.length > 0 && (

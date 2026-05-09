@@ -275,8 +275,9 @@ export default function JavaCoursePage() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Business Analytics course | Vellinfotech"
-        description="Learn data analysis, Excel, SQL, and visualization tools. Gain skills to make data-driven business decisions and excel in analytics roles."
+        title="Business Analytics Course in Chennai | Vell InfoTech"
+        description="Join Vell InfoTech's Business Analytics Course in Chennai. Learn Tableau, Power BI, SQL & Python with live projects. Certification & 100% placement support."
+        keywords="Business Analytics Course In Chennai, Business analytics training in Chennai, Business analytics course with placement, Data analytics course in Chennai, Business analyst training institute in Ekkatuthangal, Business analytics course fees in Tamil Nadu, Best business analysis institutes, Business analyst course with placement India, Business analyst training near me, Business analysis for beginners in Chennai"
         canonical="https://www.vellinfotech.com/all-courses/business-analytics-course"
         image="/images/courses/business-analytics-og.jpg"
         type="article"

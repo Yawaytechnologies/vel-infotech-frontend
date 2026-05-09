@@ -276,9 +276,10 @@ export default function ScrumMaster() {
     <>
       {/* ✅ Head-only SEO (no visual change) */}
       <Seo
-        title="Product Management Program"
-        description="Learn product strategy, roadmap planning, and market research. Gain skills to manage products from ideation to launch and drive business growth effectively."
-        canonical="/all-courses/product-management-program"
+        title="Product Management Course in Chennai | Vell InfoTech"
+        description="Join Vell InfoTech's Product Management Program in Chennai. Master product strategy, roadmapping, Agile & user research. Certification & 100% placement support. Enroll now!"
+        keywords="product management course in chennai, Product management course with placement in chennai, Product manager certification training in Ekkatuthangal, Online product management training in tamilnadu, Product management course for beginners, product manager salary in india, agile product management course Chennai, product management training institute in Chennai"
+        canonical="https://www.vellinfotech.com/all-courses/product-management-program"
         image="/images/courses/product-management-og.jpg"
         type="article"
         jsonLd={courseJsonLd}
