@@ -1,5 +1,6 @@
 // src/pages/SampleResume.jsx
 import React, { useState } from "react";
+import Seo from "../seo/Seo";
 
 // Sample resumes data
 const resumes = [
@@ -40,6 +41,12 @@ export default function SampleResume() {
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4">
+      <Seo
+        title="Sample IT Resume Templates | Java, Python, DevOps | Vell InfoTech"
+        description="Download free sample resume templates for Java, Python, DevOps, Data Science & more IT roles. Crafted by Vell InfoTech placement experts to help freshers land IT jobs."
+        keywords="IT resume templates, fresher resume format, Java developer resume, Python developer resume, DevOps engineer resume, software engineer resume sample"
+        canonical="https://www.vellinfotech.com/sample-resume"
+      />
       <h1 className="text-4xl font-bold text-center mb-10">Sample Resumes</h1>
 
       {/* Category Filter */}

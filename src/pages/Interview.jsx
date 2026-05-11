@@ -1,5 +1,6 @@
 // ✅ Interview.jsx — SEO-Optimized with Correct Heading Hierarchy
 import React from "react";
+import Seo from "../seo/Seo";
 import InterviewCard from "../components/common/InterviewCard";
 import interviewImg from "../assets/interview.png";
 import interviewImg1 from "../assets/interview1.png";
@@ -14,6 +15,12 @@ const Interview = () => {
       transition={{ duration: 0.6 }}
       className="bg-background min-h-screen"
     >
+      <Seo
+        title="IT Interview Questions & Answers | Java, Python, SQL | Vell InfoTech"
+        description="Prepare for IT job interviews with curated questions and answers for Java, Python, SQL, Data Science, DevOps and more from Vell InfoTech placement experts."
+        keywords="IT interview questions, Java interview questions, Python interview questions, SQL interview questions, Data Science interview, software engineer interview prep"
+        canonical="https://www.vellinfotech.com/interview-questions"
+      />
       {/* 🌟 Hero Section */}
       <section
         className="relative w-full mt-[43px] sm:mt-[100px] h-[250px] sm:h-[320px] md:h-[390px]

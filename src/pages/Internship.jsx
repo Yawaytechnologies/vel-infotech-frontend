@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Seo from "../seo/Seo";
 import internshipBg from "../assets/internship.jpg";
 import background from "../assets/background.jpg";
 import { motion } from "framer-motion";
@@ -214,6 +215,12 @@ const Internship = () => {
 
   return (
     <div className="bg-background pb-10 pt-[0px] md:pt-[30px] overflow-x-hidden">
+      <Seo
+        title="IT Internship Program in Chennai | Vell InfoTech"
+        description="Apply for IT internships at Vell InfoTech Chennai. Gain hands-on experience in Java, Python, Data Science, DevOps & more with internship certificate."
+        keywords="IT internship Chennai, software internship, Java internship, Python internship, data science internship, internship with certificate Chennai"
+        canonical="https://www.vellinfotech.com/internship"
+      />
       <ToastContainer newestOnTop />
 
       {/* HERO — Banner like screenshot */}

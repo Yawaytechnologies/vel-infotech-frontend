@@ -1,6 +1,7 @@
 // src/pages/Privacy.jsx
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Seo from "../seo/Seo";
 
 export default function Privacy() {
   const bottomRef = useRef(null);
@@ -24,6 +25,12 @@ export default function Privacy() {
       id="privacy-page"
       className="relative isolate min-h-screen bg-white text-gray-800"
     >
+      <Seo
+        title="Privacy Policy | Vell InfoTech"
+        description="Read Vell InfoTech's privacy policy to understand how we collect, use and protect your personal information."
+        canonical="https://www.vellinfotech.com/privacy"
+        noindex={true}
+      />
       {/* Kill any global overlays or dotted backgrounds */}
       <style>{`
         #privacy-page, #privacy-page::before, #privacy-page::after {

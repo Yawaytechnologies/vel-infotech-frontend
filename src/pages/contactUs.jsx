@@ -1,5 +1,6 @@
 // src/pages/Contact.jsx
 import React, { useState } from "react";
+import Seo from "../seo/Seo";
 import ContactArt from "../assets/contact-us.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { submitEnquiry } from "../redux/actions/enquiryAction";
@@ -222,6 +223,12 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen relative overflow-clip bg-[#F7FAFF] dark:bg-[#F7FAFF] mt-0 md:mt-12">
+      <Seo
+        title="Contact Vell InfoTech | IT Training Institute Chennai"
+        description="Get in touch with Vell InfoTech for IT course enquiries, placement support or internship programs. Call, WhatsApp or visit our Chennai training centre."
+        keywords="contact Vell InfoTech, IT training enquiry Chennai, software course admission, IT institute contact number"
+        canonical="https://www.vellinfotech.com/contact-us"
+      />
       <ToastContainer
         newestOnTop
         position="top-center"

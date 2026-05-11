@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import Seo from "../seo/Seo";
 
 export default function NotFound() {
   const navigate = useNavigate();
@@ -7,6 +8,7 @@ export default function NotFound() {
 
   return (
     <main className="min-h-[90vh] flex flex-col items-center justify-center text-center bg-gradient-to-br from-[#0a2d55] to-[#051a30] text-white px-6">
+      <Seo title="404 Not Found | Vell InfoTech" noindex={true} />
       <h1 className="text-7xl md:text-8xl font-extrabold tracking-tight text-white/90">
         404
       </h1>

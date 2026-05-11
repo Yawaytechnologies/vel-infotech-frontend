@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import Seo from "../seo/Seo";
 import { Link } from "react-router-dom";
 import { FiUser, FiCalendar, FiFolder, FiSearch } from "react-icons/fi";
 import tutorialsImg from "../assets/tutorials.jpg";
@@ -89,6 +90,12 @@ export default function Tutorials() {
 
   return (
     <section className="bg-background min-h-screen">
+      <Seo
+        title="IT Programming Tutorials | Java, Python, Django & More | Vell InfoTech"
+        description="Free programming tutorials for beginners and professionals. Learn Java, Python, Django, DevOps and more with step-by-step guides from Vell InfoTech experts."
+        keywords="IT tutorials, programming tutorials, Java tutorial, Python tutorial, Django tutorial, DevOps tutorial, software development tutorials Chennai"
+        canonical="https://www.vellinfotech.com/tutorials"
+      />
       {/* Hero */}
       <div
         className="relative w-full mt-[54px] sm:mt-[100px] h-[220px] sm:h-[300px] md:h-[380px] lg:h-[420px]

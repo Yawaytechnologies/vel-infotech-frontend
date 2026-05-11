@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import Seo from "../seo/Seo";
 import { motion } from "framer-motion";
 import bgPlacement from "../assets/bgplacement.jpg";
 import { FiSearch } from "react-icons/fi";
@@ -339,6 +340,12 @@ const PlacedStudents = () => {
 
   return (
     <div className="bg-background pb-10">
+      <Seo
+        title="Placed Students | IT Placement Success Stories | Vell InfoTech"
+        description="See real placement success stories from Vell InfoTech students hired at top IT companies in Chennai. 100% placement support with verified results."
+        keywords="placed students, IT placement Chennai, software training placement results, IT fresher placement, job placement proof"
+        canonical="https://www.vellinfotech.com/placed-students"
+      />
       <ToastContainer />
       {/* HERO — Single page-level H1 */}
       <header
