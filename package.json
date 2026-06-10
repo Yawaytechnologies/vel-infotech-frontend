@@ -6,8 +6,63 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "react-snap",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "destination": "dist",
+    "include": [
+      "/",
+      "/about",
+      "/all-courses",
+      "/careers",
+      "/blog",
+      "/internship",
+      "/interview-questions",
+      "/tutorials",
+      "/sample-resume",
+      "/placed-students",
+      "/all-courses/java-full-stack-developer-course",
+      "/all-courses/python-full-stack-developer-course",
+      "/all-courses/full-stack-development-course",
+      "/all-courses/data-science-training-program",
+      "/all-courses/data-science-and-ai-program",
+      "/all-courses/business-analytics-course",
+      "/all-courses/business-analyst-program",
+      "/all-courses/big-data-developer-program",
+      "/all-courses/sql-developer-course",
+      "/all-courses/pl-sql-developer-course",
+      "/all-courses/software-testing-program",
+      "/all-courses/selenium-testing-program",
+      "/all-courses/etl-testing-program",
+      "/all-courses/aws-training-program",
+      "/all-courses/devops-training-program",
+      "/all-courses/servicenow-training-program",
+      "/all-courses/salesforce-training-program",
+      "/all-courses/sap-training-program",
+      "/all-courses/cyber-security-program",
+      "/all-courses/hardware-and-networking-program",
+      "/all-courses/product-management-program",
+      "/all-courses/scrum-master-program",
+      "/all-courses/rpa-robotic-process-automation-course",
+      "/all-courses/digital-marketing-program",
+      "/all-courses/soft-skills-training",
+      "/all-courses/production-support-program",
+      "/client",
+      "/contact-us"
+    ],
+    "minifyHtml": {
+      "collapseWhitespace": false,
+      "removeComments": false
+    },
+    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+    "headless": true,
+    "concurrency": 1,
+    "timeout": 10000,
+    "crawl": false,
+    "skipThirdPartyRequests": true
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^2.0.1",
@@ -41,6 +96,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "react-snap": "^1.23.0",
     "vite": "^7.0.4"
   }
 }
